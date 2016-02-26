@@ -5,7 +5,6 @@ cocosstudio/
 bubbleDragonSecondLua.ccs
 bubbleDragonSecondLua.cfg
 bubbleDragonSecondLua.udf
-config.json
 frameworks/cocos2d-x/
 frameworks/CMakeLists.txt
 frameworks/runtime-src/proj.android/

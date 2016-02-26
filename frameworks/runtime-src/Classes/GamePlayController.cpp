@@ -154,7 +154,7 @@ namespace bubble_second {
             assert(name_to_contact_handle_[sprite_1->getName()][sprite_2->getName()]);
             //auto contact_handle = name_to_contact_handle_[sprite_1->getName()][sprite_2->getName()];
 			//contact_handle(sprite_1, sprite_2);
-			name_to_contact_handle_[sprite_1->getName()][sprite_2->getName()]();
+			name_to_contact_handle_[sprite_1->getName()][sprite_2->getName()](sprite_1, sprite_2);
         }
         return true;
     }
