@@ -16,7 +16,7 @@ local function main()
     --local hello = bs.LoadingScene:createScene()
     --sceneGame:addChild(hello)
     --release_print(bubble_second);
-    local sceneGame = bubble_second.LoadingScene:createScene();
+    local sceneGame = bs.LoadingScene:createScene();
     cc.Director:getInstance():runWithScene(sceneGame);
 end
 

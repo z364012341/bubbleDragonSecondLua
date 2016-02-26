@@ -278,8 +278,8 @@ TOLUA_API int register_all_LoadingScene(lua_State* tolua_S)
 {
 	tolua_open(tolua_S);
 	
-	tolua_module(tolua_S,"bubble_second",0);
-	tolua_beginmodule(tolua_S,"bubble_second");
+	tolua_module(tolua_S,"bs",0);
+	tolua_beginmodule(tolua_S,"bs");
 
 	lua_register_LoadingScene_LoadingScene(tolua_S);
 

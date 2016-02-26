@@ -57,45 +57,51 @@ namespace bubble_second {
         key_to_handle_map_[kBubbleMutipleSeal] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleWindmill] = &GamePlayController::disposeContactWithColorBubble;
 
-        name_to_contact_handle_[PREPARE_BUBBLE_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeA, nodeB); };
-        name_to_contact_handle_[MAP_BUBBLE_NAME][PREPARE_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeB, nodeA); };
-       
-        name_to_contact_handle_[BARREL_BOTTOM_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBarrelBottom(nodeA, nodeB); };
-        name_to_contact_handle_[MAP_BUBBLE_NAME][BARREL_BOTTOM_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBarrelBottom(nodeB, nodeA); };
-       
-        name_to_contact_handle_[SCORE_WIDGET_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithScoreWidget(nodeA, nodeB); };
-        name_to_contact_handle_[MAP_BUBBLE_NAME][SCORE_WIDGET_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithScoreWidget(nodeB, nodeA); };
-        
-        name_to_contact_handle_[COLOR_BOMB_BUBBLE_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeA, nodeB); };
-        name_to_contact_handle_[MAP_BUBBLE_NAME][COLOR_BOMB_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeB, nodeA); };
+        //name_to_contact_handle_[PREPARE_BUBBLE_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeA, nodeB); };
+        //name_to_contact_handle_[MAP_BUBBLE_NAME][PREPARE_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeB, nodeA); };
+		name_to_contact_handle_[PREPARE_BUBBLE_NAME][MAP_BUBBLE_NAME] = std::bind(&GamePlayController::disposeContactWithBubble, this, std::placeholders::_1, std::placeholders::_2);
+		name_to_contact_handle_[MAP_BUBBLE_NAME][PREPARE_BUBBLE_NAME] = std::bind(&GamePlayController::disposeContactWithBubble, this, std::placeholders::_2, std::placeholders::_1);
+		
+        //name_to_contact_handle_[BARREL_BOTTOM_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBarrelBottom(nodeA, nodeB); };
+        //name_to_contact_handle_[MAP_BUBBLE_NAME][BARREL_BOTTOM_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBarrelBottom(nodeB, nodeA); };
+		name_to_contact_handle_[BARREL_BOTTOM_NAME][MAP_BUBBLE_NAME] = std::bind(&GamePlayController::disposeContactWithBarrelBottom, this, std::placeholders::_1, std::placeholders::_2);
+		name_to_contact_handle_[MAP_BUBBLE_NAME][BARREL_BOTTOM_NAME] = std::bind(&GamePlayController::disposeContactWithBarrelBottom, this, std::placeholders::_2, std::placeholders::_1);
+
+        //name_to_contact_handle_[SCORE_WIDGET_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithScoreWidget(nodeA, nodeB); };
+        //name_to_contact_handle_[MAP_BUBBLE_NAME][SCORE_WIDGET_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithScoreWidget(nodeB, nodeA); };
+		name_to_contact_handle_[SCORE_WIDGET_NAME][MAP_BUBBLE_NAME] = std::bind(&GamePlayController::disposeContactWithScoreWidget, this, std::placeholders::_1, std::placeholders::_2);
+		name_to_contact_handle_[MAP_BUBBLE_NAME][SCORE_WIDGET_NAME] = std::bind(&GamePlayController::disposeContactWithScoreWidget, this, std::placeholders::_2, std::placeholders::_1);
+
+        //name_to_contact_handle_[COLOR_BOMB_BUBBLE_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeA, nodeB); };
+        //name_to_contact_handle_[MAP_BUBBLE_NAME][COLOR_BOMB_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeB, nodeA); };
     
-        name_to_contact_handle_[PROPS_BOMB_BOMB_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeA, nodeB); };
-        name_to_contact_handle_[MAP_BUBBLE_NAME][PROPS_BOMB_BOMB_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeB, nodeA); };
+        //name_to_contact_handle_[PROPS_BOMB_BOMB_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeA, nodeB); };
+        //name_to_contact_handle_[MAP_BUBBLE_NAME][PROPS_BOMB_BOMB_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeContactWithBubble(nodeB, nodeA); };
     
-        name_to_contact_handle_[WOODEN_HAMMER_CAST_NODE_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeBubbleCast(nodeA, nodeB); };
-        name_to_contact_handle_[MAP_BUBBLE_NAME][WOODEN_HAMMER_CAST_NODE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeBubbleCast(nodeB, nodeA); };
+        //name_to_contact_handle_[WOODEN_HAMMER_CAST_NODE_NAME][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeBubbleCast(nodeA, nodeB); };
+        //name_to_contact_handle_[MAP_BUBBLE_NAME][WOODEN_HAMMER_CAST_NODE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeBubbleCast(nodeB, nodeA); };
 
-        name_to_contact_handle_[NAME_BUBBLE_SIGHTING_POINT][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeSightingPointContactBubble(nodeA, nodeB); };
-        name_to_contact_handle_[MAP_BUBBLE_NAME][NAME_BUBBLE_SIGHTING_POINT] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeSightingPointContactBubble(nodeB, nodeA); };
+        //name_to_contact_handle_[NAME_BUBBLE_SIGHTING_POINT][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeSightingPointContactBubble(nodeA, nodeB); };
+        //name_to_contact_handle_[MAP_BUBBLE_NAME][NAME_BUBBLE_SIGHTING_POINT] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeSightingPointContactBubble(nodeB, nodeA); };
 
-        name_to_contact_handle_[NAME_BUBBLE_SIGHTING_POINT][MAP_PHYSICS_BORDER_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeSightingPointContactBorder(nodeA, nodeB); };
-        name_to_contact_handle_[MAP_PHYSICS_BORDER_NAME][NAME_BUBBLE_SIGHTING_POINT] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeSightingPointContactBorder(nodeB, nodeA); };
+        //name_to_contact_handle_[NAME_BUBBLE_SIGHTING_POINT][MAP_PHYSICS_BORDER_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeSightingPointContactBorder(nodeA, nodeB); };
+        //name_to_contact_handle_[MAP_PHYSICS_BORDER_NAME][NAME_BUBBLE_SIGHTING_POINT] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeSightingPointContactBorder(nodeB, nodeA); };
 
-        name_to_contact_handle_[UI_NAME_WINDMILL_BORDER][PREPARE_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeWindmillBubbleBorder(nodeA, nodeB); };
-        name_to_contact_handle_[PREPARE_BUBBLE_NAME][UI_NAME_WINDMILL_BORDER] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeWindmillBubbleBorder(nodeB, nodeA); };
+        //name_to_contact_handle_[UI_NAME_WINDMILL_BORDER][PREPARE_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeWindmillBubbleBorder(nodeA, nodeB); };
+        //name_to_contact_handle_[PREPARE_BUBBLE_NAME][UI_NAME_WINDMILL_BORDER] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeWindmillBubbleBorder(nodeB, nodeA); };
     
-        name_to_contact_handle_[UI_NAME_WINDMILL_BORDER][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeWindmillBubbleBorder(nodeA, nodeB); };
-        name_to_contact_handle_[MAP_BUBBLE_NAME][UI_NAME_WINDMILL_BORDER] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeWindmillBubbleBorder(nodeB, nodeA); };
+        //name_to_contact_handle_[UI_NAME_WINDMILL_BORDER][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeWindmillBubbleBorder(nodeA, nodeB); };
+        //name_to_contact_handle_[MAP_BUBBLE_NAME][UI_NAME_WINDMILL_BORDER] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeWindmillBubbleBorder(nodeB, nodeA); };
 
-        name_to_contact_handle_[UI_NAME_WINDMILL_BORDER][PROPS_BOMB_BOMB_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {nodeB->removeFromParent(); };
-        name_to_contact_handle_[PROPS_BOMB_BOMB_NAME][UI_NAME_WINDMILL_BORDER] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {nodeA->removeFromParent();  };
+        //name_to_contact_handle_[UI_NAME_WINDMILL_BORDER][PROPS_BOMB_BOMB_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {nodeB->removeFromParent(); };
+        //name_to_contact_handle_[PROPS_BOMB_BOMB_NAME][UI_NAME_WINDMILL_BORDER] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {nodeA->removeFromParent();  };
 
-        name_to_contact_handle_[UI_NAME_WINDMILL_BORDER][COLOR_BOMB_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {nodeB->removeFromParent(); };
-        name_to_contact_handle_[COLOR_BOMB_BUBBLE_NAME][UI_NAME_WINDMILL_BORDER] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {nodeA->removeFromParent(); };
+        //name_to_contact_handle_[UI_NAME_WINDMILL_BORDER][COLOR_BOMB_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {nodeB->removeFromParent(); };
+        //name_to_contact_handle_[COLOR_BOMB_BUBBLE_NAME][UI_NAME_WINDMILL_BORDER] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {nodeA->removeFromParent(); };
 
 
-        name_to_contact_handle_[UI_NAME_FALL_BOTTOM_BORDER][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeFallBubbleBorder(nodeA, nodeB); };
-        name_to_contact_handle_[MAP_BUBBLE_NAME][UI_NAME_FALL_BOTTOM_BORDER] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeFallBubbleBorder(nodeB, nodeA); };
+        //name_to_contact_handle_[UI_NAME_FALL_BOTTOM_BORDER][MAP_BUBBLE_NAME] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeFallBubbleBorder(nodeA, nodeB); };
+        //name_to_contact_handle_[MAP_BUBBLE_NAME][UI_NAME_FALL_BOTTOM_BORDER] = [=](cocos2d::Node* nodeA, cocos2d::Node* nodeB) {this->disposeFallBubbleBorder(nodeB, nodeA); };
 
     }
 
@@ -146,8 +152,9 @@ namespace bubble_second {
         if (sprite_1 && sprite_2 && sprite_1->getPhysicsBody() && sprite_2->getPhysicsBody())
         {
             assert(name_to_contact_handle_[sprite_1->getName()][sprite_2->getName()]);
-            auto contact_handle = name_to_contact_handle_[sprite_1->getName()][sprite_2->getName()];
-            contact_handle(sprite_1, sprite_2);
+            //auto contact_handle = name_to_contact_handle_[sprite_1->getName()][sprite_2->getName()];
+			//contact_handle(sprite_1, sprite_2);
+			name_to_contact_handle_[sprite_1->getName()][sprite_2->getName()]();
         }
         return true;
     }
