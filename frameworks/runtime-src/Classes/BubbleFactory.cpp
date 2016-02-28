@@ -32,7 +32,7 @@ namespace bubble_second {
         //key_to_handle_map_[kBubbleOrange] = &ColorBubble::createWithType;
         //key_to_handle_map_[kBubblePink] = &ColorBubble::createWithType;
 
-        key_to_handle_map_[kBubbleNull] = [=](int type, int cloud) {return NullBubble::create(); };
+        key_to_handle_map_[kBubbleNull] = [=](int, int) {return NullBubble::create(); };
         key_to_handle_map_[kBubbleYellow] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
         key_to_handle_map_[kBubblePurple] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
         key_to_handle_map_[kBubbleBlue] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
