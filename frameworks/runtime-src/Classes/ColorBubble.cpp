@@ -99,6 +99,10 @@ namespace bubble_second {
         body->setCategoryBitmask(BITMASK_BUBBLE_DYNAMIC_CATEGORY);
         body->setCollisionBitmask(BITMASK_BUBBLE_DYNAMIC_COLLISION);
         body->setContactTestBitmask(BITMASK_BUBBLE_DYNAMIC_CONTACTTEST);
+        if (cocos2d::PhysicsBody* body = this->getPhysicsBody())
+        {
+            this->removeComponent(body);
+        }
         this->setPhysicsBody(body); 
         this->delayNotCollision();
     }

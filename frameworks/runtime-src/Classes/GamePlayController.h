@@ -130,6 +130,8 @@ namespace bubble_second {
     private://碰撞相关的成员函数
         GamePlayController();
         void initHandleMap();
+        typedef void(GamePlayController::*contactHandle)(cocos2d::Node*, cocos2d::Node*);
+        void addContactHandleWithTwoNames(contactHandle handle, const std::string& name_1, const std::string& name_2);
         //碰到彩色的普通小球
         void disposeContactWithColorBubble(BaseBubble* flying_bubble, BaseBubble* contacted_bubble);
         //处理碰撞到小球的事件
@@ -155,6 +157,7 @@ namespace bubble_second {
         void disposeSightingPointContactBorder(cocos2d::Node* sight_node, cocos2d::Node* other_node);
         //处理风车转转小球碰到边界
         void disposeWindmillBubbleBorder(cocos2d::Node* border_node, cocos2d::Node* other_node);
+        void disposeContactWindmillBorder(cocos2d::Node* node_1, cocos2d::Node* node_2);
         //处理下落模式碰到边界
         void disposeFallBubbleBorder(cocos2d::Node* border_node, cocos2d::Node* other_node);
     private:
