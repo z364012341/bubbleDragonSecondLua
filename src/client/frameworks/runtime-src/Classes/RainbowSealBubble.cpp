@@ -23,7 +23,7 @@ namespace bubble_second {
         }
         this->addStandbyAnimation();
         this->setBubbleType(kBubbleRainbowSeal);
-        this->setRainbowColor(kBubbleNull);
+        this->setRainbowColor(kBubbleTransparent);
         this->setSupensionPoint(true);
         this->setBubbleComponentNumble(BUBBLE_REABOW_SEAL_COMPONENT_NUMBLE);
         this->addGameTaskNumble();

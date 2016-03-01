@@ -23,16 +23,7 @@ namespace bubble_second {
 
     void BubbleFactory::initHandleMap()
     {
-        //key_to_handle_map_[kBubbleNull] = &ColorBubble::createWithType;
-        //key_to_handle_map_[kBubbleYellow] = &ColorBubble::createWithType;
-        //key_to_handle_map_[kBubblePurple] = &ColorBubble::createWithType;
-        //key_to_handle_map_[kBubbleBlue] = &ColorBubble::createWithType;
-        //key_to_handle_map_[kBubbleRed] = &ColorBubble::createWithType;
-        //key_to_handle_map_[kBubbleGreen] = &ColorBubble::createWithType;
-        //key_to_handle_map_[kBubbleOrange] = &ColorBubble::createWithType;
-        //key_to_handle_map_[kBubblePink] = &ColorBubble::createWithType;
-
-        key_to_handle_map_[kBubbleNull] = [=](int, int) {return NullBubble::create(); };
+        key_to_handle_map_[kBubbleTransparent] = [=](int, int) {return NullBubble::create(); };
         key_to_handle_map_[kBubbleYellow] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
         key_to_handle_map_[kBubblePurple] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
         key_to_handle_map_[kBubbleBlue] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
@@ -56,7 +47,7 @@ namespace bubble_second {
 
     void bubble_second::BubbleFactory::initBubblePath()
     {
-        key_to_path[kBubbleNull] = BUBBLE_NO_COLOR_PATH;
+        key_to_path[kBubbleTransparent] = BUBBLE_NO_COLOR_PATH;
         key_to_path[kBubbleYellow] = BUBBLE_YELLOW_PATH;
         key_to_path[kBubblePurple] = BUBBLE_PURPLE_PATH;
         key_to_path[kBubbleBlue] = BUBBLE_BLUE_PATH;
@@ -83,10 +74,9 @@ namespace bubble_second {
     BaseBubble* BubbleFactory::createBubbleWithType(int type, int cloud)
     {
         BaseBubble* bubble = nullptr;
-        auto temp = key_to_handle_map_[type];
-        if (temp)
+		if (auto create_handle = key_to_handle_map_[type])
         {
-            bubble = temp(type, cloud);
+			bubble = create_handle(type, cloud);
         }
         return bubble;
     }

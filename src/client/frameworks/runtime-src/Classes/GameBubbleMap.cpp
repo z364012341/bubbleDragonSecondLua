@@ -224,7 +224,7 @@ namespace bubble_second {
         float time = 1;
         for (auto iter = same_bubbles->begin(); iter != same_bubbles->end();)
         {
-            if ((*iter)->isEqualType(kBubbleNull))
+            if ((*iter)->isEqualType(kBubbleTransparent))
             {
                 iter = same_bubbles->erase(iter);
             }

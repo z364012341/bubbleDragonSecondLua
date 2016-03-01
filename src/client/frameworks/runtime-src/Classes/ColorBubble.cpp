@@ -39,6 +39,7 @@ namespace bubble_second {
 
     bool ColorBubble::initWithTypeAndCloud(int type, int cloud)
     {
+		auto a = BubbleFactory::getInstance()->createBubbleWithType(cloud);
         cloud_bubble_ = dynamic_cast<DarkCloudBubble*>(BubbleFactory::getInstance()->createBubbleWithType(cloud));
         if (!this->initWithType(type))
         {

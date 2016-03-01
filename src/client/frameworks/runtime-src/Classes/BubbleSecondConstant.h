@@ -866,7 +866,7 @@ namespace bubble_second {
 
 enum BubbleType
 {//颜色泡泡的颜色数字
-    kBubbleNull = -9, //空类型的泡泡
+    kBubbleTransparent = -9, //空类型的泡泡
     kBubbleNoCloud = -1,
     kBubbleYellow = 0,
     kNormalColorFirst = kBubbleYellow,

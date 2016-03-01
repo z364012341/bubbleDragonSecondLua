@@ -25,7 +25,7 @@ namespace bubble_second {
         GameBubbleMapImple();
         ~GameBubbleMapImple();
     public:
-        //TODO根据关卡数来初始化泡泡容器,参数需要输入string类型
+        //根据关卡数来初始化泡泡容器,参数需要输入string类型
         BubbleSpriteMap initBubbleSpriteVetctor(BubbleColorRender* render, const BubblesData& stage_info, const StageType& stage_type);
         //碰撞后获取颜色相同的小球, 参数是附着后的发射小球的索引
         BubbleVector getSametypeBubbleWithIndex(const cocos2d::Vec2& index);
@@ -89,9 +89,6 @@ namespace bubble_second {
         //是否是下落类型
         void setFallFlag(bool flag);
         bool isFallStage();
-    private:
-        //获取一关的关卡信息
-        //BubblesData getStageInfoByStageNum(int numble);
     private:
         //获取一个索引的四周索引
         BubbleIndexVector getAroundIndexWithIndex(const cocos2d::Vec2& index);

@@ -317,7 +317,7 @@ namespace bubble_second {
         props_name_to_handle_[COLOR_BOMB_BUBBLE_NAME] = [=](BaseProperty* property) {this->haveShootPropsBubble(property); };
         props_name_to_color_[PROPS_COLOR_BOMB_NAME] = kBubbleColorBomb;
         props_name_to_color_[PROPS_BOMB_BOMB_NAME] = kBubbleBombBombProperty;
-        bubblecolor_to_swirl_[kBubbleNull] = "";
+        bubblecolor_to_swirl_[kBubbleTransparent] = "";
         bubblecolor_to_swirl_[kBubbleRed] = GUNSIGHT_SWIRL_RED_PATH;
         bubblecolor_to_swirl_[kBubbleYellow] = GUNSIGHT_SWIRL_YELLOW_PATH;
         bubblecolor_to_swirl_[kBubbleOrange] = GUNSIGHT_SWIRL_ORANGE_PATH;

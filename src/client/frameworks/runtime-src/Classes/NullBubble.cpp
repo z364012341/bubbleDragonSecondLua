@@ -24,7 +24,7 @@ namespace bubble_second {
         {
             return false;
         }
-        this->setBubbleType(kBubbleNull);
+        this->setBubbleType(kBubbleTransparent);
         this->setSupensionPoint(true);
         return true;
     }

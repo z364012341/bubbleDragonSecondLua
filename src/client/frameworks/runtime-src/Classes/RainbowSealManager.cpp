@@ -12,7 +12,7 @@ namespace bubble_second {
         bubblecolor_to_color3b_[kBubbleGreen] = cocos2d::Color3B::GREEN;
         bubblecolor_to_color3b_[kBubbleOrange] = cocos2d::Color3B::ORANGE;
         bubblecolor_to_color3b_[kBubblePink] = cocos2d::Color3B(253, 123, 234);
-        bubblecolor_to_color3b_[kBubbleNull] = cocos2d::Color3B::WHITE;
+        bubblecolor_to_color3b_[kBubbleTransparent] = cocos2d::Color3B::WHITE;
 
     }
 

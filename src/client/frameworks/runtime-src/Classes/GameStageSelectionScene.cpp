@@ -13,6 +13,7 @@ namespace bubble_second {
     cocos2d::Vec2 GameStageSelectionScene::scrollview_offset_ = cocos2d::Vec2::ZERO;
     GameStageSelectionScene::GameStageSelectionScene()
     {
+		scale_zoom_ = 1.0f;
     }
     GameStageSelectionScene::~GameStageSelectionScene()
     {
@@ -80,14 +81,11 @@ namespace bubble_second {
 
     void GameStageSelectionScene::addStageCell()
     {
-        int stage_numble = GAME_STAGE_NUMBLE_BEGIN;
-        //int cell_numbel = GAME_STAGE_SELECTION_CELL_NUMBLE_BEGIN;
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         float cell_x = visibleSize.width / 2;
         float cell_y = GAME_STAGE_SCROLLVIEW_CELL_HEIGHT /2;
         float scrollview_height = 0.0;
         cocos2d::Layer *slayer = cocos2d::Layer::create();
-        //StageNumble::getInstance()->clear();
         GameStageSelectionCell *cell = nullptr;
         while (true)
         {
@@ -96,8 +94,8 @@ namespace bubble_second {
             {
                 break;
             }
-            cell->setPosition(cell_x, cell_y*scale_zoom_);
-            cell->setScale(scale_zoom_);
+            cell->setPosition(cell_x, cell_y/*scale_zoom_*/);
+            //cell->setScale(scale_zoom_);
             slayer->addChild(cell);
             //++cell_numbel;
             cell_y += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
@@ -105,28 +103,50 @@ namespace bubble_second {
             cell_vector_.pushBack(cell);
         }
         cocos2d::Sprite* bottom_sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SCROLLVIEW_BOTTOM_PATH);
-        bottom_sp->setScale(scale_zoom_);
         scrollview_bottom_height_ = bottom_sp->getBoundingBox().size.height;
         bottom_sp->setPosition(cell_x, scrollview_bottom_height_/-2);
         slayer->addChild(bottom_sp);
-
-        scrollview_ = ScrollView::create(visibleSize, slayer);
+		scrollview_ = ScrollView::create(cocos2d::Director::getInstance()->getVisibleSize(), slayer);
         this->adjustingScrollviewPosition();
-        //false自己写touch事件  
-        //scrollview_->setTouchEnabled(true);
         scrollview_->setDelegate(this);
         //滚动方向  
         scrollview_->setDirection(ScrollView::Direction::VERTICAL);
         scrollview_->setBounceable(true);
-        scrollview_->setContentSize(cocos2d::Size(visibleSize.width, scrollview_height*scale_zoom_));
-        //scrollview_->setPosition(0,0);
+		scrollview_->setContentSize(cocos2d::Size(cocos2d::Director::getInstance()->getVisibleSize().width, scrollview_height/*scale_zoom_*/));
         this->addChild(scrollview_);
         scrollViewDidScroll(scrollview_);
     }
-    cocos2d::Layer * bubble_second::GameStageSelectionScene::createScrollViewContentLayer()
-    {
-        return nullptr;
-    }
+  //  cocos2d::Layer * bubble_second::GameStageSelectionScene::createScrollViewContentLayer()
+  //  {
+		////cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+		//float cell_x = cocos2d::Director::getInstance()->getVisibleSize().width / 2;
+		//float cell_y = GAME_STAGE_SCROLLVIEW_CELL_HEIGHT / 2;
+		//float scrollview_height = 0.0;
+		//cocos2d::Layer *slayer = cocos2d::Layer::create();
+		////StageNumble::getInstance()->clear();
+		//GameStageSelectionCell *cell = nullptr;
+		//while (true)
+		//{
+		//	cell = GameStageSelectionCell::create();
+		//	if (!cell)
+		//	{
+		//		break;
+		//	}
+		//	cell->setPosition(cell_x, cell_y/*scale_zoom_*/);
+		//	//cell->setScale(scale_zoom_);
+		//	slayer->addChild(cell);
+		//	//++cell_numbel;
+		//	cell_y += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
+		//	scrollview_height += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
+		//	cell_vector_.pushBack(cell);
+		//}
+		//cocos2d::Sprite* bottom_sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SCROLLVIEW_BOTTOM_PATH);
+		//bottom_sp->setScale(scale_zoom_);
+		//scrollview_bottom_height_ = bottom_sp->getBoundingBox().size.height;
+		//bottom_sp->setPosition(cell_x, scrollview_bottom_height_ / -2);
+		//slayer->addChild(bottom_sp);
+		//return slayer;
+  //  }
     void GameStageSelectionScene::addEventListenerCustom()
     {
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();

@@ -33,7 +33,7 @@ namespace bubble_second {
 
         this->addCharactorArmature();
         {
-            auto bubble = BubbleFactory::getInstance()->createBubbleWithType(kBubbleNull);
+            auto bubble = BubbleFactory::getInstance()->createBubbleWithType(kBubbleTransparent);
             bubble->setScale(BUBBLE_IN_RAINBOW_BUBBLE_SCALE);
             bubble->setPosition(BUBBLE_IN_RAINBOW_BUBBLE_POS);
             this->addChild(bubble, 1);

@@ -48,13 +48,13 @@ namespace bubble_second {
         //进入场景调整滚动视图位置
         void adjustingScrollviewPosition();
         //创建滚动内容
-        cocos2d::Layer* createScrollViewContentLayer();
+        //cocos2d::Layer* createScrollViewContentLayer();
     private:
         float scrollview_bottom_height_ = 0.0f;
         cocos2d::Vector<GameStageSelectionCell*> cell_vector_;
         //记录滚动条的位置
         static cocos2d::Vec2 scrollview_offset_;
-        float scale_zoom_ = 1.0f;
+        float scale_zoom_;
         ScrollView* scrollview_ = nullptr;
     };
 }

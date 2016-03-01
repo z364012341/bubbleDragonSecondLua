@@ -15,7 +15,7 @@ namespace bubble_second{
             cocos2d::Map<int, BaseBubble*> sprite_map;
             for (int i = 0; i != MAP_ODD_ROW_MAX; i++)
             {
-                BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(kBubbleNull,
+                BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(kBubbleTransparent,
                     cocos2d::Vec2(MAP_TOP_ROW_INDEX, i),
                     this->convertIndexToPoint(cocos2d::Vec2(MAP_TOP_ROW_INDEX, i)));
                 sprite_map.insert(i, bubble);
@@ -498,7 +498,7 @@ namespace bubble_second{
         {
             for (auto col_var : row_var.second)
             {
-                if (col_var.second->getBubbleType() != kBubbleNull)
+                if (col_var.second->getBubbleType() != kBubbleTransparent)
                 {
                     vector.pushBack(col_var.second);
                 }
