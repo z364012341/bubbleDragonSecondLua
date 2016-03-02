@@ -38,7 +38,7 @@ namespace bubble_second {
     cocos2d::Sprite* SpriteTextureController::createGameSpriteWithPath(const std::string& path)
     {
         cocos2d::Sprite*sp = cocos2d::Sprite::create(path);
-        if (!sp)
+		if (!sp)
         {
             sp = cocos2d::Sprite::createWithSpriteFrameName(path);
         }

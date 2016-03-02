@@ -91,12 +91,15 @@ namespace bubble_second {
         this->initHandle();
         this->addKeyboardEventListener();
         GamePlayController::getInstance()->setGameSceneDelegate(this);
+
+		//char a = '1';
+		//char& b = a;
+		//char* c = &a;
         return true;
     }
 
     GameScene::GameScene()
     {
-
     }
     GameScene::~GameScene()
     {
