@@ -7,12 +7,8 @@ cc.FileUtils:getInstance():addSearchPath("res/ui/daochu/", false);
 cc.FileUtils:getInstance():addSearchPath("res/puzzle_ui/", false);
 require "config"
 require "cocos.init"
-
-
---print("111111111111111111111111111111111111111111111111111111111111")
-
+require("app.PuzzleGlobal")
 local function main()
-	print("111111111111111111111111111111111111111111111111111111111111")
     --local sceneGame = require("app.views.PuzzlePlayScene"):create()
     --local hello = bs.LoadingScene:createScene()
     --sceneGame:addChild(hello)
