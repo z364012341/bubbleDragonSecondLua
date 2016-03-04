@@ -2,8 +2,10 @@ cc.exports.setSpriteTexture = function (sp, path)
 	sp:setTexture(path);
 end
 
-cc.exports.PUZZLE_STENCIL_COMPONENT_PATH = "app.views.PuzzleStencilComponent";
-cc.exports.PUZZLE_STENCIL_PATH = "app.views.PuzzleStencil";
+cc.exports.PUZZLE_STENCIL_COMPONENT_PATH = "app.modules.PuzzleStencilComponent";
+cc.exports.PUZZLE_STENCIL_PATH = "app.modules.PuzzleStencil";
+cc.exports.PUZZLE_BOTTOM_PLATE_PATH = "app.modules.PuzzleBottomPlate";
+cc.exports.PUZZLE_PIECE_PATH = "app.modules.PuzzlePiece";
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
 cc.exports.PUZZLE_COMPONENT_PATH = "puzzleStencil_2.png";
