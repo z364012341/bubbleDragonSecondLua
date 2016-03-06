@@ -9,16 +9,13 @@ end)
 
 function PuzzlePlayScene:ctor()
     printf("PuzzlePlayScene");
-
-    -- local stencil_1 = cc.Sprite:create("puzzleStencil_1.png");
-    -- local PuzzleStencilComponent = require(PUZZLE_STENCIL_COMPONENT_PATH);
-    -- local stencil_2 = PuzzleStencilComponent:create(PUZZLE_COMPONENT_LEFT);
-    -- local stencil_node = require(PUZZLE_STENCIL_PATH):create(PUZZLE_STENCIL_COMPONENT_INSIDE, 
-    --     PUZZLE_STENCIL_COMPONENT_OUTSIDE, PUZZLE_STENCIL_COMPONENT_PLAIN, PUZZLE_STENCIL_COMPONENT_PLAIN);
-----[[
+    local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create("puzzle_1.png");
+    collection:setPosition(300, 300);
+    self:addChild(collection);
+--[[
     local clippingNode = require(PUZZLE_PIECE_PATH):create({
-        index_x = 0, --拼图碎片的x索引
-        index_y = 1, --拼图碎片的y索引
+        index_x = 1, --拼图碎片的x索引
+        index_y = 2, --拼图碎片的y索引
         path = "puzzle_1.png",    --底板的资源路径
         left = PUZZLE_STENCIL_COMPONENT_INSIDE,    --左边凹凸方向
         right = PUZZLE_STENCIL_COMPONENT_OUTSIDE,   --右边凹凸方向

@@ -13,7 +13,6 @@ function PuzzleStencil:ctor(left, right, top, bottom)
     printf("PuzzleStencil");
     self:initHandle();
     self:initPuzzleComponent(left, right, top, bottom);
-    --self:initPuzzleComponent(PUZZLE_STENCIL_COMPONENT_INSIDE, PUZZLE_STENCIL_COMPONENT_OUTSIDE, PUZZLE_STENCIL_COMPONENT_PLAIN, PUZZLE_STENCIL_COMPONENT_PLAIN);
 end
 
 function PuzzleStencil:initHandle()
@@ -25,8 +24,7 @@ function PuzzleStencil:initHandle()
 end
 
 function PuzzleStencil:initPuzzleComponent(left, right, top, bottom)
-    self:addChild(cc.Sprite:create(PUZZLE_STENCIL_MAINBODY_PATH));
-    --self:addOutsideComponent(PUZZLE_COMPONENT_LEFT); 
+    self:addChild(GlobalFunction.createGameSpriteWithPath(PUZZLE_STENCIL_MAINBODY_PATH));
     self.componentInsideOrOutsideToHandle[left](self, PUZZLE_COMPONENT_LEFT);
     self.componentInsideOrOutsideToHandle[right](self, PUZZLE_COMPONENT_RIGHT);
     self.componentInsideOrOutsideToHandle[top](self, PUZZLE_COMPONENT_TOP);

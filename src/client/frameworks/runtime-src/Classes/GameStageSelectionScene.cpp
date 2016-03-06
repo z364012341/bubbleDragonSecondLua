@@ -7,7 +7,7 @@
 #include "EnterGameAlert.h"
 #include "GameSettingAlert.h"
 #include "cocostudio\CocoStudio.h"
-//#include "cocos-ext.h"
+#include "CCLuaEngine.h"
 #include "StageNumble.h"
 namespace bubble_second {
     cocos2d::Vec2 GameStageSelectionScene::scrollview_offset_ = cocos2d::Vec2::ZERO;
@@ -76,6 +76,7 @@ namespace bubble_second {
         this->setName(GAME_STAGE_SELECTION_SCENE_NAME);
         this->addStageCell();
         this->addSettingMenu();
+        this->addPuzzleMenu();
         return true;
     }
 
@@ -156,11 +157,13 @@ namespace bubble_second {
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
     }
+
     void GameStageSelectionScene::removeEventListenerCustom()
     {
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         dispatcher->removeCustomEventListeners(EVENT_POP_ENTER_GAME_ALERT);
     }
+
     void GameStageSelectionScene::addMouseEventListener()
     {
         // ´´½¨¼àÌýÆ÷
@@ -172,6 +175,7 @@ namespace bubble_second {
         };
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(mouseListener, this);
     }
+
     void GameStageSelectionScene::addKeyboardEventListener()
     {
         auto listener = cocos2d::EventListenerKeyboard::create();
@@ -190,6 +194,7 @@ namespace bubble_second {
         };
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
     }
+
     void GameStageSelectionScene::popEnterGameAlert(StageData data)
     {
         if (!StageDataManager::getInstance()->isInStageNumbleRange(data.level_numble))
@@ -203,6 +208,7 @@ namespace bubble_second {
         alert->setScale(scale_zoom_);
         this->addChild(alert, UI_ZORDER_MENU);
     }
+
     void GameStageSelectionScene::enterNextStage(StageData data)
     {
         StageData next_data;
@@ -217,6 +223,7 @@ namespace bubble_second {
         next_data.level_numble = data.level_numble + 1;
         this->popEnterGameAlert(next_data);
     }
+
     void GameStageSelectionScene::addSettingMenu()
     {
         cocos2d::Sprite* item_select = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_PLAYING_MENU_NORMAL_PATH);
@@ -233,6 +240,34 @@ namespace bubble_second {
         menu->setPosition(cocos2d::Vec2::ZERO);
         this->addChild(menu, UI_ZORDER_MENU);
     }
+
+    void bubble_second::GameStageSelectionScene::addPuzzleMenu()
+    {
+        cocos2d::Sprite* item_select = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_PLAYING_MENU_NORMAL_PATH);
+        item_select->setScale(GAME_MENU_SELECT_SCALE);
+        cocos2d::Sprite* item_normal = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_PLAYING_MENU_NORMAL_PATH);
+        cocos2d::MenuItemSprite* item = cocos2d::MenuItemSprite::create(item_normal, item_select, [=](cocos2d::Ref*) {
+#if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
+            // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
+            auto runtimeEngine = RuntimeEngine::getInstance();
+            runtimeEngine->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
+            runtimeEngine->start();
+#else
+            if (cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua"))
+            {
+                return false;
+            }
+#endif
+        });
+        item->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+        cocos2d::Menu* menu = cocos2d::Menu::createWithItem(item);
+        menu->setName(UI_NAME_GAME_PLAYING_MENU);
+        menu->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+        menu->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+        menu->setPosition(0.0f, 200.0f);
+        this->addChild(menu, UI_ZORDER_MENU);
+    }
+
     void GameStageSelectionScene::popSettingAlert()
     {
         GameSettingAlert* alert = GameSettingAlert::create();
@@ -241,6 +276,7 @@ namespace bubble_second {
         alert->setScale(scale_zoom_);
         this->addChild(alert, UI_ZORDER_MENU);
     }
+
     void GameStageSelectionScene::adjustingScrollviewPosition()
     {
         static bool fire_flag = true;

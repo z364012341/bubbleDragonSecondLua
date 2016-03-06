@@ -1,11 +1,15 @@
-cc.exports.setSpriteTexture = function (sp, path)
-	sp:setTexture(path);
-end
+cc.exports.GlobalFunction = {
+	createGameSpriteWithPath = function (path)
+		return cc.Sprite:create(path);
+	end
+}
 
 cc.exports.PUZZLE_STENCIL_COMPONENT_PATH = "app.modules.PuzzleStencilComponent";
 cc.exports.PUZZLE_STENCIL_PATH = "app.modules.PuzzleStencil";
 cc.exports.PUZZLE_BOTTOM_PLATE_PATH = "app.modules.PuzzleBottomPlate";
 cc.exports.PUZZLE_PIECE_PATH = "app.modules.PuzzlePiece";
+cc.exports.PUZZLE_PIECES_COLLECTION_PATH = "app.modules.PuzzlePiecesCollection";
+cc.exports.PUZZLE_PLAY_SCENE_PATH = "app.views.PuzzlePlayScene";
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
 cc.exports.PUZZLE_COMPONENT_PATH = "puzzleStencil_2.png";
@@ -30,3 +34,4 @@ cc.exports.PUZZLE_COMPONENT_ANCHOR = {x = 0, y = 0.5};
 cc.exports.PUZZLE_STENCIL_COMPONENT_INSIDE = "component_inside";
 cc.exports.PUZZLE_STENCIL_COMPONENT_OUTSIDE = "component_outside";
 cc.exports.PUZZLE_STENCIL_COMPONENT_PLAIN = "component_plain";
+cc.exports.PUZZLE_PIECES_COLLECTION_INDEX_START = 1;

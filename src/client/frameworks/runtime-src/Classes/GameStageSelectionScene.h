@@ -44,6 +44,8 @@ namespace bubble_second {
         void enterNextStage(StageData data);
         //设置按钮
         void addSettingMenu();
+        //拼图按钮
+        void addPuzzleMenu();
         void popSettingAlert();
         //进入场景调整滚动视图位置
         void adjustingScrollviewPosition();

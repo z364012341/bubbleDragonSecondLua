@@ -22,7 +22,8 @@ end
 function PuzzleStencilComponent:addPuzzleComponent(direction, insideOrOutside)
     local spData = self.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction];
     assert(spData);
-    local sp = cc.Sprite:create(PUZZLE_COMPONENT_PATH);
+    --local sp = cc.Sprite:create(PUZZLE_COMPONENT_PATH);
+    local sp = GlobalFunction.createGameSpriteWithPath(PUZZLE_COMPONENT_PATH);
     sp:setAnchorPoint(PUZZLE_COMPONENT_ANCHOR);
 
     if insideOrOutside == PUZZLE_COMPONENT_ROTATION_OUTSIDE then

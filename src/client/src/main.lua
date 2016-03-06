@@ -18,9 +18,10 @@ local function main()
 	--require("app.MyApp"):run("PuzzlePlayScene");
 
     --ccui.Button:create();
+    math.randomseed(os.time());
+    cc.Director:getInstance():runWithScene(bs.LoadingScene:createScene());
 
-    --cc.Director:getInstance():runWithScene(bs.LoadingScene:createScene());
-    cc.Director:getInstance():runWithScene(require("app.views.PuzzlePlayScene"):createScene());
+    --cc.Director:getInstance():runWithScene(require("app.views.PuzzlePlayScene"):createScene());
 end
 
 local status, msg = xpcall(main, __G__TRACKBACK__)
