@@ -7,12 +7,12 @@ local PuzzleStencilComponent = class("PuzzleStencilComponent", function (directi
     return cc.Node:create();
 end)
 
-PuzzleStencilComponent.PUZZLE_COMPONENT_DIRECTION_TO_DATA = {
-    [PUZZLE_COMPONENT_LEFT] = {[PUZZLE_COMPONENT_ROTATION] = 0, [PUZZLE_COMPONENT_POSITION] = {x = PUZZLE_STENCIL_WIDTH/-2, y = 0}},
-    [PUZZLE_COMPONENT_RIGHT] = {[PUZZLE_COMPONENT_ROTATION] = 180, [PUZZLE_COMPONENT_POSITION] = {x = PUZZLE_STENCIL_WIDTH/2, y = 0}},
-    [PUZZLE_COMPONENT_TOP] = {[PUZZLE_COMPONENT_ROTATION] = 90, [PUZZLE_COMPONENT_POSITION] = {x = 0, y = PUZZLE_STENCIL_HEIGHT/2}},
-    [PUZZLE_COMPONENT_BOTTOM] = {[PUZZLE_COMPONENT_ROTATION] = -90, [PUZZLE_COMPONENT_POSITION] = {x = 0, y = PUZZLE_STENCIL_HEIGHT/-2}}
-};
+-- PuzzleStencilComponent.PUZZLE_COMPONENT_DIRECTION_TO_DATA = {
+--     [PUZZLE_COMPONENT_LEFT] = {[PUZZLE_COMPONENT_ROTATION] = 0, [PUZZLE_COMPONENT_POSITION] = {x = PUZZLE_STENCIL_WIDTH/-2, y = 0}},
+--     [PUZZLE_COMPONENT_RIGHT] = {[PUZZLE_COMPONENT_ROTATION] = 180, [PUZZLE_COMPONENT_POSITION] = {x = PUZZLE_STENCIL_WIDTH/2, y = 0}},
+--     [PUZZLE_COMPONENT_TOP] = {[PUZZLE_COMPONENT_ROTATION] = 90, [PUZZLE_COMPONENT_POSITION] = {x = 0, y = PUZZLE_STENCIL_HEIGHT/2}},
+--     [PUZZLE_COMPONENT_BOTTOM] = {[PUZZLE_COMPONENT_ROTATION] = -90, [PUZZLE_COMPONENT_POSITION] = {x = 0, y = PUZZLE_STENCIL_HEIGHT/-2}}
+-- };
 
 function PuzzleStencilComponent:ctor(direction, insideOrOutside)
     printf("PuzzleStencilComponent");
@@ -20,7 +20,7 @@ function PuzzleStencilComponent:ctor(direction, insideOrOutside)
 end
 
 function PuzzleStencilComponent:addPuzzleComponent(direction, insideOrOutside)
-    local spData = self.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction];
+    local spData = puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction];
     assert(spData);
     --local sp = cc.Sprite:create(PUZZLE_COMPONENT_PATH);
     local sp = GlobalFunction.createGameSpriteWithPath(PUZZLE_COMPONENT_PATH);

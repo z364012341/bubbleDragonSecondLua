@@ -5,16 +5,16 @@
 local PuzzlePiecesCollection = class("PuzzlePiecesCollection", function (puzzlePath)
     return cc.Node:create();
 end)
-PuzzlePiecesCollection.PUZZLE_DIRECTIOIN_RANDOM = {
-	PUZZLE_STENCIL_COMPONENT_INSIDE,
-	PUZZLE_STENCIL_COMPONENT_OUTSIDE,
-	PUZZLE_STENCIL_COMPONENT_PLAIN
-}
-PuzzlePiecesCollection.PUZZLE_DIRECTIOIN_TO_RELATIVE = {
-	[PUZZLE_STENCIL_COMPONENT_INSIDE] = PUZZLE_STENCIL_COMPONENT_OUTSIDE,
-	[PUZZLE_STENCIL_COMPONENT_OUTSIDE] = PUZZLE_STENCIL_COMPONENT_INSIDE,
-	[PUZZLE_STENCIL_COMPONENT_PLAIN] = PUZZLE_STENCIL_COMPONENT_PLAIN
-}
+-- PuzzlePiecesCollection.PUZZLE_DIRECTIOIN_RANDOM = {
+-- 	PUZZLE_STENCIL_COMPONENT_INSIDE,
+-- 	PUZZLE_STENCIL_COMPONENT_OUTSIDE,
+-- 	PUZZLE_STENCIL_COMPONENT_PLAIN
+-- }
+-- PuzzlePiecesCollection.PUZZLE_DIRECTIOIN_TO_RELATIVE = {
+-- 	[PUZZLE_STENCIL_COMPONENT_INSIDE] = PUZZLE_STENCIL_COMPONENT_OUTSIDE,
+-- 	[PUZZLE_STENCIL_COMPONENT_OUTSIDE] = PUZZLE_STENCIL_COMPONENT_INSIDE,
+-- 	[PUZZLE_STENCIL_COMPONENT_PLAIN] = PUZZLE_STENCIL_COMPONENT_PLAIN
+-- }
 function PuzzlePiecesCollection:ctor(puzzlePath)
     printf("PuzzlePiecesCollection");
     self._relativeDirection = {};
@@ -83,10 +83,10 @@ function PuzzlePiecesCollection:calculateBottomDirection(indexX, indexY)
 end
 
 function PuzzlePiecesCollection:getRandomDirection()
-	return self.PUZZLE_DIRECTIOIN_RANDOM[math.random(1, #self.PUZZLE_DIRECTIOIN_RANDOM)];
+	return puzzle.PUZZLE_DIRECTIOIN_RANDOM[math.random(1, #puzzle.PUZZLE_DIRECTIOIN_RANDOM)];
 end
 
 function PuzzlePiecesCollection:getRelativeDirection(relativeDirection)
-	return self.PUZZLE_DIRECTIOIN_TO_RELATIVE[relativeDirection];
+	return puzzle.PUZZLE_DIRECTIOIN_TO_RELATIVE[relativeDirection];
 end
 return PuzzlePiecesCollection

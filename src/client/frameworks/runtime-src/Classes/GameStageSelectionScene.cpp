@@ -149,7 +149,7 @@ namespace bubble_second {
 		//return slayer;
   //  }
     void GameStageSelectionScene::addEventListenerCustom()
-    {
+    {       
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         auto listener = cocos2d::EventListenerCustom::create(EVENT_POP_ENTER_GAME_ALERT, [=](cocos2d::EventCustom* event) {
             StageData data = *static_cast<StageData*>(event->getUserData());
