@@ -4,3 +4,7 @@
 /src/client/simulator/android
 /src/client/frameworks/runtime-src/proj.win32/Debug.win32
 /src/client/frameworks/runtime-src/proj.android/obj/local
+/src/client/frameworks/runtime-src/proj.win32/.vs
+/src/client/frameworks/runtime-src/proj.win32/bubbleDragonSecondLua.sdf
+/src/client/frameworks/runtime-src/proj.win32/bubbleDragonSecondLua.VC.opendb
+/src/client/frameworks/runtime-src/proj.android/libs
