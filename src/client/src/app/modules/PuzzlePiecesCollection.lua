@@ -15,15 +15,19 @@ end)
 -- 	[PUZZLE_STENCIL_COMPONENT_OUTSIDE] = PUZZLE_STENCIL_COMPONENT_INSIDE,
 -- 	[PUZZLE_STENCIL_COMPONENT_PLAIN] = PUZZLE_STENCIL_COMPONENT_PLAIN
 -- }
+local PuzzlePieceAnswer = require(PUZZLE_PIECE_ANSWER_PATH);
+local PuzzlePiece = require(PUZZLE_PIECE_PATH);
 function PuzzlePiecesCollection:ctor(puzzlePath)
     printf("PuzzlePiecesCollection");
     self._relativeDirection = {};
     self:initIndexMax(GlobalFunction.createGameSpriteWithPath(puzzlePath):getContentSize());
     --printf(indexMaxX);
     --printf(indexMaxY);
-    for indexY = 1, self._indexMaxX do
-    	for indexX = 1, self._indexMaxY do
-		    local clippingNode = require(PUZZLE_PIECE_PATH):create({
+    self._puzzleNode = cc.Node:create();
+    self._answerNode = cc.Node:create();
+    for indexY = 1, self._indexMaxY do
+    	for indexX = 1, self._indexMaxX do
+    		local params = {
 		        index_x = indexX, --拼图碎片的x索引
 		        index_y = indexY, --拼图碎片的y索引
 		        path = puzzlePath,    --底板的资源路径
@@ -31,8 +35,12 @@ function PuzzlePiecesCollection:ctor(puzzlePath)
 		        right = self:calculateRightDirection(indexX),   --右边凹凸方向
 		        top = self:calculateTopDirection(indexX, indexY),    --上边凹凸方向
 		        bottom = self:calculateBottomDirection(indexX, indexY),  --下边凹凸方向
-		    });
-		    self:addChild(clippingNode);
+		    };
+		    local clippingNode = PuzzlePiece:create(params);
+		    self._puzzleNode:addChild(clippingNode);
+		    local answer = PuzzlePieceAnswer:create(params);
+		    clippingNode:setPuzzlePieceAnswer(answer);
+		    self._answerNode:addChild(answer);
     	end
     end
 end
@@ -88,5 +96,13 @@ end
 
 function PuzzlePiecesCollection:getRelativeDirection(relativeDirection)
 	return puzzle.PUZZLE_DIRECTIOIN_TO_RELATIVE[relativeDirection];
+end
+
+function PuzzlePiecesCollection:getAnswerNode()
+	return self._answerNode;
+end
+
+function PuzzlePiecesCollection:getPuzzleNode()
+	return self._puzzleNode;
 end
 return PuzzlePiecesCollection

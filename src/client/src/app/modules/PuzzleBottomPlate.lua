@@ -12,6 +12,7 @@ function PuzzleBottomPlate:ctor(index_x, index_y)
     assert(type(index_x) == "number")
     assert(type(index_y) == "number")
     self:setAnchorPoint(0, 0);
+    --self:setScale(0.43);
     self:setPosition(self:getPosWithIndex(index_x, index_y));
 end
 

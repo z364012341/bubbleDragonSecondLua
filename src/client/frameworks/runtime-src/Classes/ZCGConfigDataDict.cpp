@@ -30,7 +30,7 @@ ZCGConfigDataDict::~ZCGConfigDataDict(void)
 {
 }
 
-int ZCGConfigDataDict::loadInfos()
+void ZCGConfigDataDict::loadInfos()
 {
 
 
@@ -40,19 +40,19 @@ int ZCGConfigDataDict::loadInfos()
     if (size <= 0)
     {
         //MyGame::getInstance()->m_mainLog->printlogs(Logging::LOG_LEVEL_WARN, "load xml file:%s. error size:%d", fileName, size);
-        return NULL;
+        return;
     }
     tinyxml2::XMLDocument *doc = new tinyxml2::XMLDocument;
     tinyxml2::XMLError error = doc->Parse(reinterpret_cast<char*>(pBytes), size);
     if (tinyxml2::XML_NO_ERROR != error)
     {
         //MyGame::getInstance()->m_mainLog->printlogs(Logging::LOG_LEVEL_WARN, "load xml file:%s. error:%d", fileName, error);
-        return NULL;
+        return;
     }
     tinyxml2::XMLElement * rootNode = doc->RootElement();
 
     if(!rootNode){
-        return 1;
+        return;
     }
     tinyxml2::XMLElement * curNode = rootNode->FirstChildElement("data");
     while(curNode){
@@ -63,7 +63,6 @@ int ZCGConfigDataDict::loadInfos()
     }
     delete doc;
     doc = nullptr;
-    return 0;
 }
 
 const std::string ZCGConfigDataDict::getStringData(int key) const{

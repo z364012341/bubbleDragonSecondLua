@@ -16,7 +16,7 @@ public:
 protected:
 	ZCGConfigDataDict(void);
 	~ZCGConfigDataDict(void);
-    int loadInfos();
+    void loadInfos();
 	//static ZCGConfigDataDict* m_dict;
     std::map<int, std::string> m_datasMap;
 };

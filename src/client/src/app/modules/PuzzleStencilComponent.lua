@@ -31,8 +31,9 @@ function PuzzleStencilComponent:addPuzzleComponent(direction, insideOrOutside)
     else
         sp:setRotation(spData[PUZZLE_COMPONENT_ROTATION]);
     end
-
+    sp:getTexture():setAntiAliasTexParameters();
     sp:setPosition(spData[PUZZLE_COMPONENT_POSITION]);
+    --sp:setScale(1.05);
     self:addChild(sp);
 end
 

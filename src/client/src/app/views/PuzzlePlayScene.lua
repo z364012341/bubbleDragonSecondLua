@@ -9,9 +9,15 @@ end)
 
 function PuzzlePlayScene:ctor()
     printf("PuzzlePlayScene");
-    local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create("puzzle_1.png");
-    collection:setPosition(300, 300);
-    self:addChild(collection);
+    local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create("puzzle_1.png")
+    local puzzleNode = collection:getPuzzleNode();
+    puzzleNode:setPosition(300, 300);
+    self:addChild(puzzleNode);
+
+    local answerNode = collection:getAnswerNode();
+    answerNode:setPosition(0, 300);
+    self:addChild(answerNode, -1);
+
 --[[
     local clippingNode = require(PUZZLE_PIECE_PATH):create({
         index_x = 1, --拼图碎片的x索引

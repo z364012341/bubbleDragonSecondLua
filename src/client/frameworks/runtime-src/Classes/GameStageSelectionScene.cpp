@@ -253,10 +253,11 @@ namespace bubble_second {
             runtimeEngine->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
             runtimeEngine->start();
 #else
-            if (cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua"))
-            {
-                return false;
-            }
+            //if (cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua"))
+            //{
+            //    return false;
+            //}
+			cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua");
 #endif
         });
         item->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
