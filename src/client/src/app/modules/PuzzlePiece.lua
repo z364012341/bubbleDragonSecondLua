@@ -15,22 +15,20 @@
 ]]
 local PuzzlePiece = class("PuzzlePiece", function (params)
     --dump(params);
-    return cc.ClippingNode:create(require(PUZZLE_STENCIL_PATH):create(params.left, 
-    	params.right, params.top, params.bottom));
+    return cc.Node:create();
 end)
 local PuzzleBottomPlate = require(PUZZLE_BOTTOM_PLATE_PATH);
--- local PuzzlePieceAnswer = require(PUZZLE_PIECE_ANSWER_PATH);
+local PuzzleStencil = require(PUZZLE_STENCIL_PATH);
+local PuzzlePieceEdges = require(PUZZLE_PIECE_EDGES_PATH);
+local PuzzlePieceShadow = require(PUZZLE_PIECE_SHADOW_PATH);
 
 function PuzzlePiece:ctor(params)
     printf("PuzzlePiece");
-    self:setAlphaThreshold(0.1);
     self:addTouchEvent();
-
-    local plate = PuzzleBottomPlate:create(params.index_x, params.index_y, params.path); 
-    self:addChild(plate);
-    self:setScale(0.25);
-    -- self._answer = PuzzlePieceAnswer:create(params.left, params.right, params.top, params.bottom);
-    -- self._answer:setPosition(-plate:getPositionX(), -plate:getPositionY());
+    self:addClippingNode(params);
+    self:addPuzzlePieceEdges(params)
+    self:addPuzzlePieceShadow(params);
+    --self:setScale(0.5);
 end
 
 function PuzzlePiece:addTouchEvent()
@@ -48,9 +46,16 @@ function PuzzlePiece.onTouchBegan(touch, event)
 end
 
 function PuzzlePiece.onTouchMoved(touch, event)
-    --printf("PuzzlePiece onTouchMoved");
+    printf("PuzzlePiece onTouchMoved");
+    local pPos = touch:getPreviousLocation();
+    local pos = touch:getLocation();
+    local offX = pos.x - pPos.x;
+    local offY = pos.y - pPos.y ;
+
     local node = event:getCurrentTarget();
-    node:setPosition(node:getParent():convertTouchToNodeSpace(touch));
+    --node:setPosition(node:getParent():convertTouchToNodeSpace(touch));
+    node:setPositionX(node:getPositionX() + offX);
+    node:setPositionY(node:getPositionY() + offY);
 end
 
 function PuzzlePiece.onTouchEnded(touch, event)
@@ -59,7 +64,7 @@ end
 
 function PuzzlePiece.isTouchOnPuzzle(touch, event)
     local node = event:getCurrentTarget();
-    return cc.pGetDistance(node:convertTouchToNodeSpace(touch), cc.p(0, 0)) < PUZZLE_STENCIL_WIDTH/2;
+    return cc.pGetDistance(node:convertTouchToNodeSpace(touch), cc.p(0, 0)) < PUZZLE_STENCIL_WIDTH / 2;
 end
 
 function PuzzlePiece:setPuzzlePieceAnswer(answer)
@@ -70,4 +75,18 @@ function PuzzlePiece:getPuzzlePieceAnswer()
     return self._answer;
 end
 
+function PuzzlePiece:addClippingNode(params)
+    local clippingNode = cc.ClippingNode:create(PuzzleStencil:create(params.left, params.right, params.top, params.bottom));
+    clippingNode:addChild(PuzzleBottomPlate:create(params.index_x, params.index_y, params.path));
+    clippingNode:setAlphaThreshold(0.0);
+    self:addChild(clippingNode);
+end
+
+function PuzzlePiece:addPuzzlePieceEdges(params)
+    self:addChild(PuzzlePieceEdges:create(params.left, params.right, params.top, params.bottom));
+end
+
+function PuzzlePiece:addPuzzlePieceShadow(params)
+    self:addChild(PuzzlePieceShadow:create(params.left, params.right, params.top, params.bottom), -1);
+end
 return PuzzlePiece

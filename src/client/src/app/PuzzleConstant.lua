@@ -1,6 +1,12 @@
 cc.exports.GlobalFunction = {
 	createGameSpriteWithPath = function (path)
 		return cc.Sprite:create(path);
+	end,
+	getPuzzlePiecePositionWithDirection = function (direction)
+		return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_POSITION];
+	end,
+	getPuzzlePiecePositionWithRotation = function (direction)
+		return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_ROTATION];
 	end
 }
 
@@ -11,9 +17,18 @@ cc.exports.PUZZLE_PIECE_PATH = "app.modules.PuzzlePiece";
 cc.exports.PUZZLE_PIECES_COLLECTION_PATH = "app.modules.PuzzlePiecesCollection";
 cc.exports.PUZZLE_PLAY_SCENE_PATH = "app.views.PuzzlePlayScene";
 cc.exports.PUZZLE_PIECE_ANSWER_PATH = "app.modules.PuzzlePieceAnswer";
+cc.exports.PUZZLE_PIECE_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceSingleEdges";
+cc.exports.PUZZLE_PIECE_EDGES_PATH = "app.modules.PuzzlePieceEdges";
+cc.exports.PUZZLE_PIECE_SHADOW_PATH = "app.modules.PuzzlePieceShadow";
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
 cc.exports.PUZZLE_COMPONENT_PATH = "puzzleStencil_2.png";
+cc.exports.PUZZLE_PLAIN_EDGES_PATH = "puzzle_edges_2.png";
+cc.exports.PUZZLE_NOT_PLAIN_EDGES_PATH = "puzzle_edges_1.png";
+cc.exports.PUZZLE_PIECE_SHADOW_FULL_PATH = "puzzle_shadow_1.png"; 
+cc.exports.PUZZLE_PIECE_SHADOW_LACK_PATH = "puzzle_shadow_2.png"; 
+cc.exports.PUZZLE_PIECE_SHADOW_COMPONENT_PATH = "puzzle_shadow_3.png"; 
+
 cc.exports.PUZZLE_COMPONENT_LEFT = "component_left";
 cc.exports.PUZZLE_COMPONENT_RIGHT = "component_right";
 cc.exports.PUZZLE_COMPONENT_TOP = "component_top";
@@ -27,12 +42,8 @@ cc.exports.PUZZLE_STENCIL_WIDTH = 240;
 cc.exports.PUZZLE_STENCIL_HEIGHT = 240;
 cc.exports.PUZZLE_STENCIL_LENGTH = 588;
 cc.exports.PUZZLE_COMPONENT_ANCHOR = {x = 0, y = 0.5};
--- cc.exports.PUZZLE_COMPONENT_DIRECTION_TO_DATA = {
---         [PUZZLE_COMPONENT_LEFT] = {[PUZZLE_COMPONENT_ANCHOR] = {x = 0, y = 0.5},[PUZZLE_COMPONENT_ROTATION] = 0, [PUZZLE_COMPONENT_POSITION] = {x = PUZZLE_STENCIL_WIDTH/-2, y = 0}},
---         [PUZZLE_COMPONENT_RIGHT] = {[PUZZLE_COMPONENT_ANCHOR] = {x = 1, y = 0.5}, [PUZZLE_COMPONENT_ROTATION] = 180, [PUZZLE_COMPONENT_POSITION] = {x = PUZZLE_STENCIL_WIDTH/2, y = 0}},
---         [PUZZLE_COMPONENT_TOP] = {[PUZZLE_COMPONENT_ANCHOR] = {x = 0.5, y = 1}, [PUZZLE_COMPONENT_ROTATION] = 90, [PUZZLE_COMPONENT_POSITION] = {x = 0, y = PUZZLE_STENCIL_HEIGHT/2}},
---         [PUZZLE_COMPONENT_BOTTOM] = {[PUZZLE_COMPONENT_ANCHOR] = {x = 0.5, y = 0}, [PUZZLE_COMPONENT_ROTATION] = -90, [PUZZLE_COMPONENT_POSITION] = {x = 0, y = PUZZLE_STENCIL_HEIGHT/-2}}
---     };
+cc.exports.PUZZLE_PIECE_SHADOW_ANCHOR = {x = 0.5, y = 1};
+
 cc.exports.PUZZLE_STENCIL_COMPONENT_INSIDE = "component_inside";
 cc.exports.PUZZLE_STENCIL_COMPONENT_OUTSIDE = "component_outside";
 cc.exports.PUZZLE_STENCIL_COMPONENT_PLAIN = "component_plain";
@@ -55,6 +66,13 @@ cc.exports.puzzle = {
 	    [PUZZLE_COMPONENT_RIGHT] = {[PUZZLE_COMPONENT_ROTATION] = 180, [PUZZLE_COMPONENT_POSITION] = {x = PUZZLE_STENCIL_LENGTH/2, y = 0}},
 	    [PUZZLE_COMPONENT_TOP] = {[PUZZLE_COMPONENT_ROTATION] = 90, [PUZZLE_COMPONENT_POSITION] = {x = 0, y = PUZZLE_STENCIL_LENGTH/2}},
 	    [PUZZLE_COMPONENT_BOTTOM] = {[PUZZLE_COMPONENT_ROTATION] = -90, [PUZZLE_COMPONENT_POSITION] = {x = 0, y = PUZZLE_STENCIL_LENGTH/-2}}
+	},
+	PUZZLE_PIECE_SHADOW_DIRECTION_TO_DATA = {
+        [PUZZLE_COMPONENT_LEFT] =  90, [PUZZLE_COMPONENT_RIGHT] = -90, [PUZZLE_COMPONENT_TOP] = 180, [PUZZLE_COMPONENT_BOTTOM] = 0
+	},
+	PUZZLE_PIECE_SHADOW_DIRECTION_TO_PATH = {
+	   [PUZZLE_STENCIL_COMPONENT_PLAIN] = PUZZLE_PIECE_SHADOW_FULL_PATH,
+	   [PUZZLE_STENCIL_COMPONENT_OUTSIDE] = PUZZLE_PIECE_SHADOW_FULL_PATH,
+	   [PUZZLE_STENCIL_COMPONENT_INSIDE] = PUZZLE_PIECE_SHADOW_LACK_PATH  
 	}
-	
 }

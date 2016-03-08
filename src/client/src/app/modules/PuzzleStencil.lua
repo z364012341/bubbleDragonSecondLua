@@ -26,7 +26,10 @@ function PuzzleStencil:initHandle()
 end
 
 function PuzzleStencil:initPuzzleComponent(left, right, top, bottom)
-    self:addChild(GlobalFunction.createGameSpriteWithPath(PUZZLE_STENCIL_MAINBODY_PATH));
+    local bodySprite = GlobalFunction.createGameSpriteWithPath(PUZZLE_STENCIL_MAINBODY_PATH);
+    --bodySprite:setScale(0.99);
+    self:addChild(bodySprite);
+
     self.componentInsideOrOutsideToHandle[left](self, PUZZLE_COMPONENT_LEFT);
     self.componentInsideOrOutsideToHandle[right](self, PUZZLE_COMPONENT_RIGHT);
     self.componentInsideOrOutsideToHandle[top](self, PUZZLE_COMPONENT_TOP);

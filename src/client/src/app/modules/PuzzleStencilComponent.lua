@@ -20,20 +20,15 @@ function PuzzleStencilComponent:ctor(direction, insideOrOutside)
 end
 
 function PuzzleStencilComponent:addPuzzleComponent(direction, insideOrOutside)
-    local spData = puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction];
-    assert(spData);
-    --local sp = cc.Sprite:create(PUZZLE_COMPONENT_PATH);
     local sp = GlobalFunction.createGameSpriteWithPath(PUZZLE_COMPONENT_PATH);
     sp:setAnchorPoint(PUZZLE_COMPONENT_ANCHOR);
 
     if insideOrOutside == PUZZLE_COMPONENT_ROTATION_OUTSIDE then
-        sp:setRotation(spData[PUZZLE_COMPONENT_ROTATION]+180);
+        sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction)+180);
     else
-        sp:setRotation(spData[PUZZLE_COMPONENT_ROTATION]);
+        sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction));
     end
-    sp:getTexture():setAntiAliasTexParameters();
-    sp:setPosition(spData[PUZZLE_COMPONENT_POSITION]);
-    --sp:setScale(1.05);
+    sp:setPosition(GlobalFunction.getPuzzlePiecePositionWithDirection(direction));
     self:addChild(sp);
 end
 
