@@ -12,7 +12,7 @@ function PuzzlePieceShadow:ctor(left, right, top, bottom)
     printf("PuzzlePieceShadow");
     self:initBody(left, right, top, bottom);
     self:setScale(PUZZLE_STENCIL_WIDTH / PUZZLE_STENCIL_LENGTH);
-    self:setPosition(20, -20);
+    self:setPosition(PUZZLE_PIECE_SHADOW_OFFSET_POSITION);
 end
 
 function PuzzlePieceShadow:initBody(left, right, top, bottom)
@@ -40,5 +40,15 @@ function PuzzlePieceShadow:addShadowSprite(path, direction)
     sp:setRotation(puzzle.PUZZLE_PIECE_SHADOW_DIRECTION_TO_DATA[direction]);
     self:addChild(sp);
     return sp;
+end
+
+function PuzzlePieceShadow:shadowGo()
+    local moveTo = cc.MoveTo:create(0.2, cc.p(20, -40));
+    self:runAction(moveTo);
+end
+
+function PuzzlePieceShadow:shadowBack()
+    local moveTo = cc.MoveTo:create(0.2, cc.p(20, -20));
+    self:runAction(moveTo);
 end
 return PuzzlePieceShadow

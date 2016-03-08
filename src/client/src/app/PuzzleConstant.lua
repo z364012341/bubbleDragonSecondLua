@@ -48,6 +48,7 @@ cc.exports.PUZZLE_STENCIL_HEIGHT = 240;
 cc.exports.PUZZLE_STENCIL_LENGTH = 588;
 cc.exports.PUZZLE_COMPONENT_ANCHOR = {x = 0, y = 0.5};
 cc.exports.PUZZLE_PIECE_SHADOW_ANCHOR = {x = 0.5, y = 1};
+cc.exports.PUZZLE_PIECE_SHADOW_OFFSET_POSITION = {x = 20, y = -20};
 
 cc.exports.PUZZLE_STENCIL_COMPONENT_INSIDE = "component_inside";
 cc.exports.PUZZLE_STENCIL_COMPONENT_OUTSIDE = "component_outside";

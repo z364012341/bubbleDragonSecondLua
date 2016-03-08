@@ -42,7 +42,12 @@ end
 
 function PuzzlePiece.onTouchBegan(touch, event)
     --printf("PuzzlePiece onTouchBegan");
-    return PuzzlePiece.isTouchOnPuzzle(touch, event);
+
+    if PuzzlePiece.isTouchOnPuzzle(touch, event) then
+        event:getCurrentTarget()._shadow:shadowGo();
+        return true;
+    end
+    return false;
 end
 
 function PuzzlePiece.onTouchMoved(touch, event)
@@ -60,8 +65,7 @@ end
 
 function PuzzlePiece.onTouchEnded(touch, event)
     --printf("PuzzlePiece onTouchEnded");
-    local rect = event:getCurrentTarget():getBoundingBox();
-    dump(rect);
+    event:getCurrentTarget()._shadow:shadowBack();
 end
 
 function PuzzlePiece.isTouchOnPuzzle(touch, event)
@@ -89,6 +93,8 @@ function PuzzlePiece:addPuzzlePieceEdges(params)
 end
 
 function PuzzlePiece:addPuzzlePieceShadow(params)
-    self:addChild(PuzzlePieceShadow:create(params.left, params.right, params.top, params.bottom), -1);
+    self._shadow = PuzzlePieceShadow:create(params.left, params.right, params.top, params.bottom);
+    self:addChild(self._shadow, -1);
 end
+
 return PuzzlePiece
