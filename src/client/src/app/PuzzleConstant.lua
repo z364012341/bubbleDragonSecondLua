@@ -5,8 +5,13 @@ cc.exports.GlobalFunction = {
 	getPuzzlePiecePositionWithDirection = function (direction)
 		return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_POSITION];
 	end,
-	getPuzzlePiecePositionWithRotation = function (direction)
-		return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_ROTATION];
+	getPuzzlePiecePositionWithRotation = function (direction, insideOrOutside)
+		--assert(direction and insideOrOutside);
+	    if insideOrOutside == PUZZLE_STENCIL_COMPONENT_OUTSIDE then
+	        return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_ROTATION]+180;
+	    else
+	        return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_ROTATION];
+	    end
 	end
 }
 
@@ -36,8 +41,8 @@ cc.exports.PUZZLE_COMPONENT_BOTTOM = "component_bottom";
 cc.exports.PUZZLE_COMPONENT_ANCHOR = "component_anchor";
 cc.exports.PUZZLE_COMPONENT_ROTATION = "component_rotation";
 cc.exports.PUZZLE_COMPONENT_POSITION = "component_position";
-cc.exports.PUZZLE_COMPONENT_ROTATION_INSIDE = "component_rotation_inside";
-cc.exports.PUZZLE_COMPONENT_ROTATION_OUTSIDE = "component_rotation_outside";
+--cc.exports.PUZZLE_COMPONENT_ROTATION_INSIDE = "component_rotation_inside";
+--cc.exports.PUZZLE_COMPONENT_ROTATION_OUTSIDE = "component_rotation_outside";
 cc.exports.PUZZLE_STENCIL_WIDTH = 240;
 cc.exports.PUZZLE_STENCIL_HEIGHT = 240;
 cc.exports.PUZZLE_STENCIL_LENGTH = 588;

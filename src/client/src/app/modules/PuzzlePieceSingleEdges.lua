@@ -9,7 +9,7 @@ end)
 -- local PuzzleBottomPlate = require(PUZZLE_BOTTOM_PLATE_PATH);
 -- local PuzzlePieceSingleEdgesAnswer = require(PUZZLE_PIECE_ANSWER_PATH);
 
-PuzzlePieceSingleEdges.LING_ANCHOR_POINT = PUZZLE_COMPONENT_ANCHOR; 
+-- PuzzlePieceSingleEdges.LING_ANCHOR_POINT = PUZZLE_COMPONENT_ANCHOR; 
 function PuzzlePieceSingleEdges:ctor(direction, insideOrOutside)
     printf("PuzzlePieceSingleEdges");
     local sp = {};
@@ -18,14 +18,15 @@ function PuzzlePieceSingleEdges:ctor(direction, insideOrOutside)
     else
     	sp = GlobalFunction.createGameSpriteWithPath(PUZZLE_NOT_PLAIN_EDGES_PATH);
     end
-    sp:setAnchorPoint(self.LING_ANCHOR_POINT);
+    sp:setAnchorPoint(PUZZLE_COMPONENT_ANCHOR);
     sp:getTexture():setAntiAliasTexParameters();
 
-    if insideOrOutside == PUZZLE_STENCIL_COMPONENT_OUTSIDE then
-        sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction) + 180);
-    else
-        sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction));
-    end
+    -- if insideOrOutside == PUZZLE_STENCIL_COMPONENT_OUTSIDE then
+    --     sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction) + 180);
+    -- else
+    --     sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction));
+    -- end
+    sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction, insideOrOutside));
     self:addChild(sp);
     self:setPosition(GlobalFunction.getPuzzlePiecePositionWithDirection(direction));
 

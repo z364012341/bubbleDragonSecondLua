@@ -23,11 +23,12 @@ function PuzzleStencilComponent:addPuzzleComponent(direction, insideOrOutside)
     local sp = GlobalFunction.createGameSpriteWithPath(PUZZLE_COMPONENT_PATH);
     sp:setAnchorPoint(PUZZLE_COMPONENT_ANCHOR);
 
-    if insideOrOutside == PUZZLE_COMPONENT_ROTATION_OUTSIDE then
-        sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction)+180);
-    else
-        sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction));
-    end
+    -- if insideOrOutside == PUZZLE_STENCIL_COMPONENT_OUTSIDE then
+    --     sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction)+180);
+    -- else
+    --     sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction));
+    -- end
+    sp:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction, insideOrOutside));
     sp:setPosition(GlobalFunction.getPuzzlePiecePositionWithDirection(direction));
     self:addChild(sp);
 end

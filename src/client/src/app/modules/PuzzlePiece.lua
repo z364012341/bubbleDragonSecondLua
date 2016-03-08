@@ -60,6 +60,8 @@ end
 
 function PuzzlePiece.onTouchEnded(touch, event)
     --printf("PuzzlePiece onTouchEnded");
+    local rect = event:getCurrentTarget():getBoundingBox();
+    dump(rect);
 end
 
 function PuzzlePiece.isTouchOnPuzzle(touch, event)

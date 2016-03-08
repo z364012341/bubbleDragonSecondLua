@@ -37,7 +37,7 @@ function PuzzleStencil:initPuzzleComponent(left, right, top, bottom)
 end
 
 function PuzzleStencil:addOutsideComponent(componentDirection)
-    self:addChild(PuzzleStencilComponent:create(componentDirection, PUZZLE_COMPONENT_ROTATION_OUTSIDE))
+    self:addChild(PuzzleStencilComponent:create(componentDirection, PUZZLE_STENCIL_COMPONENT_OUTSIDE))
     self:addPlainComponent(componentDirection)
 end
 
