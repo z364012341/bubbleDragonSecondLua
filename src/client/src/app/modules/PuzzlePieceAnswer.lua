@@ -7,24 +7,31 @@ local PuzzlePieceAnswer = class("PuzzlePieceAnswer", function (params)
     return cc.Node:create();
 end)
 
-local PuzzleStencil = require(PUZZLE_STENCIL_PATH);
-local PuzzleBottomPlate = require(PUZZLE_BOTTOM_PLATE_PATH);
+local PuzzlePieceSingleEdges = require(PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PATH);
+-- local PuzzleBottomPlate = require(PUZZLE_BOTTOM_PLATE_PATH);
 
 function PuzzlePieceAnswer:ctor(params)
     printf("PuzzlePieceAnswer");
-    self:addTexture(params.left, params.right, params.top, params.bottom);
+    self:addAnswerEdges(params.left, params.right, params.top, params.bottom);
     self:initPosition(params.index_x, params.index_y, params.path);
-    --self:setScale(0.8);
+    self:setScale(PUZZLE_PIECE_SCALE);
 end
 
-function PuzzlePieceAnswer:addTexture(left, right, top, bottom)
-	local stencilNode = PuzzleStencil:create(left, right, top, bottom);
-	self:addChild(stencilNode);
+function PuzzlePieceAnswer:addAnswerEdges(left, right, top, bottom)
+    self:addSingleEdges(PUZZLE_COMPONENT_LEFT, left);
+    self:addSingleEdges(PUZZLE_COMPONENT_RIGHT, right);
+    self:addSingleEdges(PUZZLE_COMPONENT_TOP, top);
+    self:addSingleEdges(PUZZLE_COMPONENT_BOTTOM, bottom);
 end
 
-function PuzzlePieceAnswer:initPosition(index_x, index_y, path)
-	local plate = PuzzleBottomPlate:create(index_x, index_y, path); 
-	self:setPositionX(plate:getPositionX()*-1);
-	self:setPositionY(plate:getPositionY()*-1);
+function PuzzlePieceAnswer:addSingleEdges(direction, insideOrOutside)
+	local node = PuzzlePieceSingleEdges:create(direction, insideOrOutside);
+	self:addChild(node);
+end
+
+function PuzzlePieceAnswer:initPosition(index_x, index_y)
+	local posX = PUZZLE_STENCIL_WIDTH * (-0.5 + index_x);
+	local posY = PUZZLE_STENCIL_HEIGHT * (-0.5 + index_y);
+	self:setPosition(posX, posY);
 end
 return PuzzlePieceAnswer

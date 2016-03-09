@@ -11,7 +11,7 @@ end)
 function PuzzlePieceShadow:ctor(left, right, top, bottom)
     printf("PuzzlePieceShadow");
     self:initBody(left, right, top, bottom);
-    self:setScale(PUZZLE_STENCIL_WIDTH / PUZZLE_STENCIL_LENGTH*0.95);
+    self:setScale(PUZZLE_PIECE_SCALE*0.95);
     self:setPosition(PUZZLE_PIECE_SHADOW_OFFSET_POSITION);
 end
 

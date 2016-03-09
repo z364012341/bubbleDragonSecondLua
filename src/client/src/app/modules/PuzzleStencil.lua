@@ -13,7 +13,7 @@ function PuzzleStencil:ctor(left, right, top, bottom)
     printf("PuzzleStencil");
     self:initHandle();
     self:initPuzzleComponent(left, right, top, bottom);
-    self:setScale(PUZZLE_STENCIL_WIDTH / PUZZLE_STENCIL_LENGTH);
+    self:setScale(PUZZLE_PIECE_SCALE);
 end
 
 function PuzzleStencil:initHandle()

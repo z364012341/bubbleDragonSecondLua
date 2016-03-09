@@ -11,17 +11,17 @@ local PuzzlePieceSingleEdges = require(PUZZLE_PIECE_SINGLE_EDGES_PATH);
 function PuzzlePieceEdges:ctor(left, right, top, bottom)
     printf("PuzzlePieceEdges");
     self:addEdged(left, right, top, bottom);
-    self:setScale(PUZZLE_STENCIL_WIDTH / PUZZLE_STENCIL_LENGTH);
+    self:setScale(PUZZLE_PIECE_SCALE);
 end
 
 function PuzzlePieceEdges:addEdged(left, right, top, bottom)
-    self:addSingleEdged(PUZZLE_COMPONENT_LEFT, left);
-    self:addSingleEdged(PUZZLE_COMPONENT_RIGHT, right);
-    self:addSingleEdged(PUZZLE_COMPONENT_TOP, top);
-    self:addSingleEdged(PUZZLE_COMPONENT_BOTTOM, bottom);
+    self:addSingleEdges(PUZZLE_COMPONENT_LEFT, left);
+    self:addSingleEdges(PUZZLE_COMPONENT_RIGHT, right);
+    self:addSingleEdges(PUZZLE_COMPONENT_TOP, top);
+    self:addSingleEdges(PUZZLE_COMPONENT_BOTTOM, bottom);
 end
 
-function PuzzlePieceEdges:addSingleEdged(direction, insideOrOutside)
+function PuzzlePieceEdges:addSingleEdges(direction, insideOrOutside)
     self:addChild(PuzzlePieceSingleEdges:create(direction, insideOrOutside));
 end
 

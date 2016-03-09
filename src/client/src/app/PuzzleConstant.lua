@@ -2,6 +2,9 @@ cc.exports.GlobalFunction = {
 	createGameSpriteWithPath = function (path)
 		return cc.Sprite:create(path);
 	end,
+	setGameSpriteTextureWithPath = function (path, sprite)
+		sprite:setTexture(path);
+	end,
 	getPuzzlePiecePositionWithDirection = function (direction)
 		return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_POSITION];
 	end,
@@ -25,6 +28,7 @@ cc.exports.PUZZLE_PIECE_ANSWER_PATH = "app.modules.PuzzlePieceAnswer";
 cc.exports.PUZZLE_PIECE_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceSingleEdges";
 cc.exports.PUZZLE_PIECE_EDGES_PATH = "app.modules.PuzzlePieceEdges";
 cc.exports.PUZZLE_PIECE_SHADOW_PATH = "app.modules.PuzzlePieceShadow";
+cc.exports.PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceAnswerSingleEdges";
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
 cc.exports.PUZZLE_COMPONENT_PATH = "puzzleStencil_2.png";
@@ -33,6 +37,8 @@ cc.exports.PUZZLE_NOT_PLAIN_EDGES_PATH = "puzzle_edges_1.png";
 cc.exports.PUZZLE_PIECE_SHADOW_FULL_PATH = "puzzle_shadow_1.png"; 
 cc.exports.PUZZLE_PIECE_SHADOW_LACK_PATH = "puzzle_shadow_2.png"; 
 cc.exports.PUZZLE_PIECE_SHADOW_COMPONENT_PATH = "puzzle_shadow_3.png"; 
+cc.exports.PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PLAIN_PATH = "edges_2.png";
+cc.exports.PUZZLE_PIECE_ANSWER_SINGLE_EDGES_NOT_PLAIN_PATH = "edges_1.png";
 
 cc.exports.PUZZLE_COMPONENT_LEFT = "component_left";
 cc.exports.PUZZLE_COMPONENT_RIGHT = "component_right";
@@ -49,6 +55,7 @@ cc.exports.PUZZLE_STENCIL_LENGTH = 588;
 cc.exports.PUZZLE_COMPONENT_ANCHOR = {x = 0, y = 0.5};
 cc.exports.PUZZLE_PIECE_SHADOW_ANCHOR = {x = 0.5, y = 1};
 cc.exports.PUZZLE_PIECE_SHADOW_OFFSET_POSITION = {x = 20, y = -20};
+cc.exports.PUZZLE_PIECE_SCALE = PUZZLE_STENCIL_WIDTH / PUZZLE_STENCIL_LENGTH;
 
 cc.exports.PUZZLE_STENCIL_COMPONENT_INSIDE = "component_inside";
 cc.exports.PUZZLE_STENCIL_COMPONENT_OUTSIDE = "component_outside";
