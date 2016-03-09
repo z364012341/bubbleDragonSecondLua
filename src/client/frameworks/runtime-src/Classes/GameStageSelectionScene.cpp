@@ -9,6 +9,7 @@
 #include "cocostudio\CocoStudio.h"
 #include "CCLuaEngine.h"
 #include "StageNumble.h"
+//#include "extensions\cocos-ext.h"
 namespace bubble_second {
     cocos2d::Vec2 GameStageSelectionScene::scrollview_offset_ = cocos2d::Vec2::ZERO;
     GameStageSelectionScene::GameStageSelectionScene()
@@ -19,20 +20,20 @@ namespace bubble_second {
     {
     }
 
-    void GameStageSelectionScene::scrollViewDidScroll(ScrollView * view)
-    {
-        auto layout = view->getContainer();    
-        float currentY = layout->getPositionY();     
-        if (currentY > scrollview_bottom_height_) 
-        { 
-            view->setContentOffset(cocos2d::Vec2(0.0f, scrollview_bottom_height_)); 
-        }
-        if (-currentY > layout->getContentSize().height - view->getViewSize().height) 
-        {
-            view->setContentOffset(cocos2d::Vec2(0, -layout->getContentSize().height + view->getViewSize().height));
-        }
-        scrollview_offset_ = view->getContentOffset();
-    }
+    //void GameStageSelectionScene::scrollViewDidScroll(ScrollView * view)
+    //{
+    //    auto layout = view->getContainer();    
+    //    float currentY = layout->getPositionY();     
+    //    if (currentY > scrollview_bottom_height_) 
+    //    { 
+    //        view->setContentOffset(cocos2d::Vec2(0.0f, scrollview_bottom_height_)); 
+    //    }
+    //    if (-currentY > layout->getContentSize().height - view->getViewSize().height) 
+    //    {
+    //        view->setContentOffset(cocos2d::Vec2(0, -layout->getContentSize().height + view->getViewSize().height));
+    //    }
+    //    scrollview_offset_ = view->getContentOffset();
+    //}
 
     cocos2d::Vec2 GameStageSelectionScene::getScorllViewOffset(int cell_numble)
     {
@@ -82,12 +83,14 @@ namespace bubble_second {
 
     void GameStageSelectionScene::addStageCell()
     {
+		//using cocos2d::ui::ScrollView;
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         float cell_x = visibleSize.width / 2;
         float cell_y = GAME_STAGE_SCROLLVIEW_CELL_HEIGHT /2;
         float scrollview_height = 0.0;
         cocos2d::Layer *slayer = cocos2d::Layer::create();
         GameStageSelectionCell *cell = nullptr;
+		scrollview_ = ScrollView::create();
         while (true)
         {
             cell = GameStageSelectionCell::create();
@@ -97,7 +100,7 @@ namespace bubble_second {
             }
             cell->setPosition(cell_x, cell_y/*scale_zoom_*/);
             //cell->setScale(scale_zoom_);
-            slayer->addChild(cell);
+			scrollview_->addChild(cell);
             //++cell_numbel;
             cell_y += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
             scrollview_height += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
@@ -107,16 +110,36 @@ namespace bubble_second {
         scrollview_bottom_height_ = bottom_sp->getBoundingBox().size.height;
         bottom_sp->setPosition(cell_x, scrollview_bottom_height_/-2);
         slayer->addChild(bottom_sp);
-		scrollview_ = ScrollView::create(cocos2d::Director::getInstance()->getVisibleSize(), slayer);
-        this->adjustingScrollviewPosition();
-        scrollview_->setDelegate(this);
+		//scrollview_ = ScrollView::create(/*cocos2d::Director::getInstance()->getVisibleSize(), slayer*/);
+		scrollview_->setInnerContainerSize(cocos2d::Size(750, scrollview_height));
+		scrollview_->addChild(slayer);
+        //scrollview_->setDelegate(this);
         //滚动方向  
         scrollview_->setDirection(ScrollView::Direction::VERTICAL);
-        scrollview_->setBounceable(true);
-		scrollview_->setContentSize(cocos2d::Size(cocos2d::Director::getInstance()->getVisibleSize().width, scrollview_height/*scale_zoom_*/));
+        scrollview_->setBounceEnabled(true);
+		//scrollview_->setContentSize(cocos2d::Size(cocos2d::Director::getInstance()->getVisibleSize().width, scrollview_height/*scale_zoom_*/));
+		scrollview_->setContentSize(cocos2d::Size(cocos2d::Director::getInstance()->getVisibleSize()));
         this->addChild(scrollview_);
-        scrollViewDidScroll(scrollview_);
+        //scrollViewDidScroll(scrollview_);
+		scrollview_->addEventListener(CC_CALLBACK_2(GameStageSelectionScene::scrollViewMoveCallback, this));
+		this->adjustingScrollviewPosition();
     }
+
+	void GameStageSelectionScene::scrollViewMoveCallback(cocos2d::Ref *pSender, cocos2d::ui::ScrollView::EventType eventType)
+	{
+		ScrollView* view = dynamic_cast<ScrollView*>(pSender);
+	    auto layout = view->getInnerContainer();    
+	    float currentY = layout->getPositionY();     
+	    if (currentY > scrollview_bottom_height_) 
+	    { 
+			layout->setPosition(cocos2d::Vec2(0.0f, scrollview_bottom_height_));
+	    }
+		if (-currentY > layout->getContentSize().height - view->getContentSize().height)
+	    {
+			layout->setPosition(cocos2d::Vec2(0, -layout->getContentSize().height + view->getContentSize().height));
+	    }
+		scrollview_offset_ = layout->getPosition();
+	}
   //  cocos2d::Layer * bubble_second::GameStageSelectionScene::createScrollViewContentLayer()
   //  {
 		////cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -170,8 +193,8 @@ namespace bubble_second {
         auto mouseListener = cocos2d::EventListenerMouse::create();
         mouseListener->onMouseScroll = [=](cocos2d::Event *event){
             cocos2d::EventMouse* event_mouse = (cocos2d::EventMouse*)event;
-            float offs_y = MIN(0.0f, scrollview_->getContentOffset().y + event_mouse->getScrollY()*MOUSE_SCROLL_Y_SENSITIVITY);
-            scrollview_->setContentOffset(cocos2d::Vec2(0.0f, offs_y));
+			float offs_y = MIN(0.0f, scrollview_->getInnerContainerPosition().y + event_mouse->getScrollY()*MOUSE_SCROLL_Y_SENSITIVITY);
+            scrollview_->setInnerContainerPosition(cocos2d::Vec2(0.0f, offs_y));
         };
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(mouseListener, this);
     }
@@ -243,9 +266,9 @@ namespace bubble_second {
 
     void bubble_second::GameStageSelectionScene::addPuzzleMenu()
     {
-        cocos2d::Sprite* item_select = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_PLAYING_MENU_NORMAL_PATH);
+		cocos2d::Sprite* item_select = SpriteTextureController::getInstance()->createGameSpriteWithPath("001.png");
         item_select->setScale(GAME_MENU_SELECT_SCALE);
-        cocos2d::Sprite* item_normal = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_PLAYING_MENU_NORMAL_PATH);
+		cocos2d::Sprite* item_normal = SpriteTextureController::getInstance()->createGameSpriteWithPath("001.png");
         cocos2d::MenuItemSprite* item = cocos2d::MenuItemSprite::create(item_normal, item_select, [=](cocos2d::Ref*) {
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
             // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
@@ -283,12 +306,12 @@ namespace bubble_second {
         static bool fire_flag = true;
         if (fire_flag)
         {//第一次要移动到最新的关卡
-            scrollview_->setContentOffset(getScorllViewOffset(UserDataManager::getInstance()->getPresentCell()));
+			scrollview_->setInnerContainerPosition(getScorllViewOffset(UserDataManager::getInstance()->getPresentCell()));
             fire_flag = false;
         }
         else
         {
-            scrollview_->setContentOffset(scrollview_offset_);
+			scrollview_->setInnerContainerPosition(scrollview_offset_);
         }
     }
 }

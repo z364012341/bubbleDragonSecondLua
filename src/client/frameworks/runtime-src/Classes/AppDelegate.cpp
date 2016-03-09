@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "lua_module_register.h"
 #include "lua_LoadingScene_auto.hpp"
+#include "lua_GameStageSelectionScene_auto.hpp"
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
 #include "ide-support/CodeIDESupport.h"
 #endif
@@ -71,6 +72,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     //LuaStack* stack = engine->getLuaStack();
     //register_custom_function(stack->getLuaState());
 	register_all_LoadingScene(engine->getLuaStack()->getLuaState());
+	register_all_GameStageSelectionScene(engine->getLuaStack()->getLuaState());
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
     auto runtimeEngine = RuntimeEngine::getInstance();

@@ -2,6 +2,7 @@
 #include "GameCharacterFactory.h"
 #include "SpriteTextureController.h"
 #include "GamePlayController.h"
+
 namespace bubble_second {
     GameCharacter::GameCharacter()
     {
@@ -75,14 +76,16 @@ namespace bubble_second {
     }
     void GameCharacter::addCharacterArmature()
     {
-        charactor_armature_ = cocostudio::Armature::create(GAME_CHARACTER_ARMATURE_NAME);
+		charactor_armature_ = cocostudio::Armature::create(GAME_CHARACTER_ARMATURE_LAOHU_NAME);
+		charactor_armature_->setScale(0.4);
+		//charactor_armature_->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
         this->addChild(charactor_armature_);
     }
     void GameCharacter::playStandbyAnimation()
     {
-        //auto armature = this->getCharactorArmature();
-        //armature->getAnimation()->play(GAME_CHARACTER_ANIMATION_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-        this->playLoopAnimationWithName(GAME_CHARACTER_ANIMATION_STANDBY_NAME);
+        auto armature = this->getCharactorArmature();
+        armature->getAnimation()->play(GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+        //this->playLoopAnimationWithName(GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME);
     }
     void GameCharacter::playShootBubbleAnimation()
     {
@@ -98,10 +101,10 @@ namespace bubble_second {
     }
     void GameCharacter::playDefeatAnimation()
     {
-        auto armature = this->getCharactorArmature();
-        armature->getAnimation()->stop();
-        this->setDefeatFlag(true);
-        armature->getAnimation()->play(GAME_CHARACTER_ANIMATION_DEFEAT_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        //auto armature = this->getCharactorArmature();
+        //armature->getAnimation()->stop();
+        //this->setDefeatFlag(true);
+        //armature->getAnimation()->play(GAME_CHARACTER_ANIMATION_DEFEAT_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
     }
     cocostudio::Armature * GameCharacter::getCharactorArmature()
     {
@@ -109,21 +112,21 @@ namespace bubble_second {
     }
     void GameCharacter::playNotLoopAnimationWithName(const std::string& name)
     {
-        auto armature = this->getCharactorArmature();
-        armature->getAnimation()->stop();
-        armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-        armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-            if (movementType == cocostudio::COMPLETE && !isDefeat())
-            {
-                this->playStandbyAnimation();
-            }
-        });
+        //auto armature = this->getCharactorArmature();
+        //armature->getAnimation()->stop();
+        //armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        //armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+        //    if (movementType == cocostudio::COMPLETE && !isDefeat())
+        //    {
+        //        this->playStandbyAnimation();
+        //    }
+        //});
     }
     void GameCharacter::playLoopAnimationWithName(const std::string & name)
     {
-        auto armature = this->getCharactorArmature();
-        armature->getAnimation()->stop();
-        armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+        //auto armature = this->getCharactorArmature();
+        //armature->getAnimation()->stop();
+        //armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, true);
     }
 
     void GameCharacter::setDefeatFlag(bool flag)

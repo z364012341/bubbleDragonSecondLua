@@ -74,8 +74,8 @@ namespace bubble_second {
         //移除换球的监听
         //void removeExchangeBubbleListener();
         //加载特效文件
-        void addArmatureFile();
-        void removeArmatureFile();
+        //void addArmatureFile();
+        //void removeArmatureFile();
         //加入瞄准器
         void addBubbleSightingDevice();
         //清理控制和管理类
@@ -170,6 +170,8 @@ namespace bubble_second {
         void  recentbubbleCast();
         //改变旋风的颜色
         void changeSwirlColor();
+		//准备小球待机动画
+		void playPrepareBubbleStanbyAction();
         //播放泡泡的动画返回动画的最长时间
         float playBubblesEffects(BubbleVector bubbles);
         //设置武器的位置

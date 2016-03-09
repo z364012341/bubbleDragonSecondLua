@@ -17,7 +17,7 @@ function PuzzlePlayScene:ctor()
     local answerNode = collection:getAnswerNode();
     answerNode:setPosition(0, 300);
     self:addChild(answerNode, -1);
-
+    self:addBackMenu();
 --[[
     local clippingNode = require(PUZZLE_PIECE_PATH):create({
         index_x = 1, --拼图碎片的x索引
@@ -40,4 +40,14 @@ function PuzzlePlayScene:createScene()
     return scene
 end
 
+function PuzzlePlayScene:addBackMenu()
+    local item = cc.MenuItemSprite:create(cc.Sprite:create("001.png"), cc.Sprite:create("001.png"));
+    item:registerScriptTapHandler(function (event)
+       cc.Director:getInstance():replaceScene(bs.GameStageSelectionScene:createScene());
+    end);
+    local menu = cc.Menu:create();
+    menu:addChild(item);
+    menu:setPosition(0, 0);
+    self:addChild(menu);
+end
 return PuzzlePlayScene

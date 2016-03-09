@@ -7,6 +7,9 @@
 #include "GameScoreController.h"
 #include "StageDataManager.h"
 #include "GameScene.h"
+const int STANBY_ACTION_TAG = 121;
+const int STANBY_ACTION_TIME = 0.5;
+const int STANBY_ACTION_RANGE = 3;
 namespace bubble_second {
     ColorBubble::~ColorBubble()
     {
@@ -129,8 +132,9 @@ namespace bubble_second {
     }
 
     void ColorBubble::shootAfterVictory()
-    {
+    {	
         this->addBubbleDynamicBody();
+
         this->setLocalZOrder(UI_ZORDER_DOWN_AIR_BUBBLE);
         int x = cocos2d::random(-BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_X, BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_X);
         float angular_v = x >= 0 ? BUBBLE_DOWN_FROM_AIR_ANGULAR_VELOCITY : -BUBBLE_DOWN_FROM_AIR_ANGULAR_VELOCITY;
@@ -277,4 +281,19 @@ namespace bubble_second {
         }
         return cocos2d::Vec2(cos(angle) * BUBBLE_IMPULSE, sin(angle) * BUBBLE_IMPULSE)*GamePlayController::getInstance()->getTouchDirection();
     }
+
+	void ColorBubble::playStanbyAnimation()
+	{
+		cocos2d::MoveBy* move_1 = cocos2d::MoveBy::create(STANBY_ACTION_TIME, cocos2d::Vec2(0.0f, -STANBY_ACTION_RANGE));
+		cocos2d::MoveBy* move_2 = cocos2d::MoveBy::create(STANBY_ACTION_TIME, cocos2d::Vec2(0.0f, STANBY_ACTION_RANGE));
+		cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move_1, move_2);
+		cocos2d::RepeatForever* repeat = cocos2d::RepeatForever::create(seq);
+		repeat->setTag(STANBY_ACTION_TAG);
+		this->runAction(repeat);
+	}
+
+	void ColorBubble::stopStanbyAnimation()
+	{
+		this->stopActionByTag(STANBY_ACTION_TAG);
+	}
 }

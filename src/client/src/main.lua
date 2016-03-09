@@ -5,6 +5,7 @@ cc.FileUtils:getInstance():addSearchPath("res/")
 cc.FileUtils:getInstance():addSearchPath("res/ui/", false);
 cc.FileUtils:getInstance():addSearchPath("res/ui/daochu/", false);
 cc.FileUtils:getInstance():addSearchPath("res/puzzle_ui/", false);
+cc.FileUtils:getInstance():addSearchPath("res/animation/", false);
 require "config"
 require "cocos.init"
 require("app.PuzzleConstant")
@@ -19,9 +20,9 @@ local function main()
 
     --ccui.Button:create();
     math.randomseed(os.time());
-    --cc.Director:getInstance():runWithScene(bs.LoadingScene:createScene());
+    cc.Director:getInstance():runWithScene(bs.LoadingScene:createScene());
 
-    cc.Director:getInstance():runWithScene(require(PUZZLE_PLAY_SCENE_PATH):createScene());
+    --cc.Director:getInstance():runWithScene(require(PUZZLE_PLAY_SCENE_PATH):createScene());
 end
 
 local status, msg = xpcall(main, __G__TRACKBACK__)

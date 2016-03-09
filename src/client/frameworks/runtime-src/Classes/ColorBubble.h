@@ -55,6 +55,9 @@ namespace bubble_second {
         void delayNotCollision();
         //变成随机特殊泡泡
         void changeRandomSpecialBubble(const cocos2d::Vec2& point, StageType stage_type);
+		//待机动画
+		void playStanbyAnimation();
+		void stopStanbyAnimation();
     protected:
         ColorBubble();
         bool initWithTypeAndCloud(int type, int cloud = kBubbleNoCloud);

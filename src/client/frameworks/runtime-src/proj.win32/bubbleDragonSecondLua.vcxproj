@@ -249,6 +249,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\LayerManager.h" />
     <ClInclude Include="..\Classes\LightningBubble.h" />
     <ClInclude Include="..\Classes\LoadingScene.h" />
+    <ClInclude Include="..\Classes\lua_GameStageSelectionScene_auto.hpp" />
     <ClInclude Include="..\Classes\lua_LoadingScene_auto.hpp" />
     <ClInclude Include="..\Classes\lua_module_register.h" />
     <ClInclude Include="..\Classes\MutipleSealBubble.h" />
@@ -343,6 +344,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\LayerManager.cpp" />
     <ClCompile Include="..\Classes\LightningBubble.cpp" />
     <ClCompile Include="..\Classes\LoadingScene.cpp" />
+    <ClCompile Include="..\Classes\lua_GameStageSelectionScene_auto.cpp" />
     <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp" />
     <ClCompile Include="..\Classes\MutipleSealBubble.cpp" />
     <ClCompile Include="..\Classes\NullBubble.cpp" />

@@ -10,19 +10,20 @@
 #ifndef _GAME_STAGE_SELECTION_SCENE_H_
 #define _GAME_STAGE_SELECTION_SCENE_H_
 #include "BubbleSecondConstant.h"
-#include "cocos-ext.h"
-#include "GUI\CCScrollView\CCScrollView.h"
+//#include "extensions\cocos-ext.h"
+//#include "GUI\CCScrollView\CCScrollView.h"
+#include "ui\UIScrollView.h"
 namespace bubble_second {
-    using cocos2d::extension::ScrollView;
+	using cocos2d::ui::ScrollView;
     class GameStageSelectionCell;
-    class GameStageSelectionScene : public cocos2d::Layer, public cocos2d::extension::ScrollViewDelegate
+	class GameStageSelectionScene : public cocos2d::Layer
     {
     public:
         static cocos2d::Scene* createScene();
         static cocos2d::Scene* createSceneWithStageData(StageData data);
         CREATE_FUNC(GameStageSelectionScene);
         ~GameStageSelectionScene();
-        void scrollViewDidScroll(ScrollView* view) override;
+        //void scrollViewDidScroll(ScrollView* view);
         cocos2d::Vec2 getScorllViewOffset(int cell_numble);
         void onEnter() override;
         void onExit() override;
@@ -51,6 +52,7 @@ namespace bubble_second {
         void adjustingScrollviewPosition();
         //创建滚动内容
         //cocos2d::Layer* createScrollViewContentLayer();
+		void scrollViewMoveCallback(cocos2d::Ref *pSender, cocos2d::ui::ScrollView::EventType eventType);
     private:
         float scrollview_bottom_height_ = 0.0f;
         cocos2d::Vector<GameStageSelectionCell*> cell_vector_;
