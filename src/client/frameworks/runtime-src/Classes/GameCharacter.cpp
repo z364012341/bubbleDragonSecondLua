@@ -120,21 +120,24 @@ namespace bubble_second {
 	}
 	void GameCharacter::playShootBubbleAnimation(cocos2d::EventCustom* event)
 	{
-		float angle = *static_cast<float*>(event->getUserData());
-		//CCLOG("angle: %f", angle);
-		if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1)
-		{
-			this->playShootAnimation1();
-		}
-		else if (angle >= -10.0f)
-		{
-			this->playShootAnimation2();
-		}
-		else
-		{
-			this->playShootAnimation3();
-		}
-		GamePlayController::getInstance()->shootPrepareBubble();
+        GamePlayController::getInstance()->shootPrepareBubble();
+        float angle = *static_cast<float*>(event->getUserData());
+        cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(CHARACTER_SHOOT_BUBBLE_DELAYTIME), cocos2d::CallFunc::create([=]() {
+            //CCLOG("angle: %f", angle);
+            if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1)
+            {
+                this->playShootAnimation1();
+            }
+            else if (angle >= -10.0f)
+            {
+                this->playShootAnimation2();
+            }
+            else
+            {
+                this->playShootAnimation3();
+            }
+        }));
+        this->runAction(seq);
 	}
 
 	void GameCharacter::playShootAnimation1()
@@ -167,10 +170,12 @@ namespace bubble_second {
     {
         //this->playNotLoopAnimationWithName(GAME_CHARACTER_ANIMATION_LEGENDARY_NAME);
     }
+
     void GameCharacter::playVictoryAnimation()
     {
         this->playLoopAnimationWithName(GAME_CHARACTER_ANIMATION_VICTORY_NAME);
     }
+
     void GameCharacter::playDefeatAnimation()
     {
         //auto armature = this->getCharactorArmature();
@@ -178,6 +183,7 @@ namespace bubble_second {
         //this->setDefeatFlag(true);
         //armature->getAnimation()->play(GAME_CHARACTER_ANIMATION_DEFEAT_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
     }
+
     cocostudio::Armature * GameCharacter::getCharactorArmature()
     {
         return charactor_armature_1_;
@@ -200,6 +206,7 @@ namespace bubble_second {
             }
         });
     }
+
     void GameCharacter::playLoopAnimationWithName(const std::string & name)
     {
         //auto armature = this->getCharactorArmature();

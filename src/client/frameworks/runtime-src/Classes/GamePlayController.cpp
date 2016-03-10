@@ -104,7 +104,7 @@ namespace bubble_second {
         const cocos2d::Vec2 touch_location = this->convertGLToNodeSpace(touch->getLocation(), event->getCurrentTarget()->getChildByName(UI_NAME_GAME_PLAY_AREA_NODE));
         if (this->canShootingBubble(touch_location))
         { 
-            this->shootPrepareBubble(touch_location);
+            this->dispatchShootEvent(touch_location);
         }
         this->turnOffSightingDevice();
     }
@@ -230,9 +230,9 @@ namespace bubble_second {
 
 	void GamePlayController::dispatchShootEvent(const cocos2d::Vec2& touch_location)
 	{
-		float angle = this->getTouchAngleForPrepareBubble(touch_location);
+        dynamic_cast<ColorBubble*>(prepare_bubble_)->setShootImpulse(touch_location);
+        float angle = this->getTouchAngleForPrepareBubble(touch_location);
 		cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHOOT_PREPARE_BUBBLE, &angle);
-		//dynamic_cast<ColorBubble*>(prepare_bubble_)->shoot(touch_location);
 		this->setBubbleShootEnabled(false);
 	}
 

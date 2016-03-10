@@ -20,6 +20,7 @@ const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2 = "rengqiu-02";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_3 = "rengqiu-03";
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1 = 40.0f;
 const float CHARACTER_ARMATURE_SCALE = 0.37f;
+const float CHARACTER_SHOOT_BUBBLE_DELAYTIME = 0.05f;
 namespace bubble_second {
     class GameCharacter : public cocos2d::Node
     {
