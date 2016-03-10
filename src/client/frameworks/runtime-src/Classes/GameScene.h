@@ -50,6 +50,8 @@ namespace bubble_second {
         //游戏暂停开始
         void gamePause();
         void gameResume();
+		//获取准备小球的发射位置
+		cocos2d::Vec2 getPrepareBubbleOrigin();
     private:
         //初始化地图数据,参数是关卡
         void initBubbleMap(int stage_numble);

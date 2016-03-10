@@ -41,7 +41,7 @@ namespace bubble_second {
         virtual void addBubblePrepareBody();
         void addBubbleStaticBody() override;
         //发射小球
-        void shoot(const cocos2d::Vec2& touch_location);
+        void shoot();
         //发射小球后发送自定义事件
         virtual void dispatchEventAfterShooted();
         void bubbleEliminate(int combo) override;
@@ -58,6 +58,8 @@ namespace bubble_second {
 		//待机动画
 		void playStanbyAnimation();
 		void stopStanbyAnimation();
+		//设置发射冲量
+		void setShootImpulse(const cocos2d::Vec2& touch_location);
     protected:
         ColorBubble();
         bool initWithTypeAndCloud(int type, int cloud = kBubbleNoCloud);
@@ -75,6 +77,7 @@ namespace bubble_second {
         cocos2d::Vec2 getImpulseByTouchlocation(cocos2d::Vec2 touch_location);
     private:
         DarkCloudBubble* cloud_bubble_;
+		cocos2d::Vec2 shoot_impulse_;
     };
 }
 #endif //_COLOR_BUBBLE_H_

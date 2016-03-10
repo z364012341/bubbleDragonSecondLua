@@ -94,11 +94,13 @@ namespace bubble_second {
 
         void setTouchDirection(TouchDirection direction);
         TouchDirection getTouchDirection();
-
+		//设置代理
         void setGameSceneDelegate(GameScene* scene_delegate);
+		//发射小球
+		void shootPrepareBubble();
     private:
         //把准备的小球发射出去
-        void shootPrepareBubble(const cocos2d::Vec2& touch_location);
+		void dispatchShootEvent(const cocos2d::Vec2& touch_location);
         //根据输入的参数来分离两个node
         cocos2d::Vector<cocos2d::Node*> separateContactNodeWithName(const std::string& name, 
             cocos2d::Node* node_a, cocos2d::Node* node_b);
@@ -119,7 +121,7 @@ namespace bubble_second {
         //获取一个点跟发射小球的角度
         float getPrepareBubbleAngle(const cocos2d::Vec2& point);
         //获取喵准器的旋转角度
-        float getSightingDeviceAngle(const cocos2d::Vec2& touch_location);
+        float getTouchAngleForPrepareBubble(const cocos2d::Vec2& touch_location);
         bool isTouchUnderside();
         //设置方向
         void setTouchDirection(const cocos2d::Vec2& touch_point);

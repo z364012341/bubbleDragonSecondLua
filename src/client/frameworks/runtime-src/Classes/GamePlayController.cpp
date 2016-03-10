@@ -175,7 +175,7 @@ namespace bubble_second {
 
     float GamePlayController::getPrepareBubbleAngle(const cocos2d::Vec2& point)
     {
-        return this->getAngleWithVectors(prepare_bubble_->getPosition(), point);
+		return this->getAngleWithVectors(game_scene_delegate_->getPrepareBubbleOrigin(), point);
     }
 
     void GamePlayController::disposeContactWithBubble(cocos2d::Node* flying_node, cocos2d::Node * contact_node)
@@ -228,9 +228,19 @@ namespace bubble_second {
         return prepare_bubble_;
     }
 
-    void GamePlayController::shootPrepareBubble(const cocos2d::Vec2& touch_location)
+	void GamePlayController::dispatchShootEvent(const cocos2d::Vec2& touch_location)
+	{
+		float angle = this->getTouchAngleForPrepareBubble(touch_location);
+		cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHOOT_PREPARE_BUBBLE, &angle);
+		//dynamic_cast<ColorBubble*>(prepare_bubble_)->shoot(touch_location);
+		this->setBubbleShootEnabled(false);
+	}
+
+    void GamePlayController::shootPrepareBubble()
     {
-        dynamic_cast<ColorBubble*>(prepare_bubble_)->shoot(touch_location);
+		//float angle = this->getTouchAngleForPrepareBubble(touch_location);
+		//cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHOOT_PREPARE_BUBBLE, &angle);
+		dynamic_cast<ColorBubble*>(prepare_bubble_)->shoot();
     }
 
     void GamePlayController::loadStageMap(int numble)
@@ -383,7 +393,7 @@ namespace bubble_second {
 
     cocos2d::Vec2 GamePlayController::convertGLToNodeSpace(const cocos2d::Vec2& touch_location, cocos2d::Node* node)
     {
-        return node->convertToNodeSpace(touch_location);
+		return node->convertToNodeSpace(touch_location);
     }
 
     void GamePlayController::disposeContactWithBlackHoleBubble(BaseBubble* flying_node, BaseBubble* blackhole_node)
@@ -521,7 +531,7 @@ namespace bubble_second {
         numble = 0;
         if (this->canShootingBubble(touch_point))
         {
-            float angle = this->getSightingDeviceAngle(this->convertGLToNodeSpace(touch_point, prepare_bubble_->getParent()));
+            float angle = this->getTouchAngleForPrepareBubble(this->convertGLToNodeSpace(touch_point, prepare_bubble_->getParent()));
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ROTATE_SIGHTING_DEVICE, &angle);
             this->turnOnSightingDevice();
         }
@@ -547,10 +557,10 @@ namespace bubble_second {
         bubble_map_->disposeUsedAddSpecialBubbleProps();
     }
 
-    float GamePlayController::getSightingDeviceAngle(const cocos2d::Vec2& touch_location)
+    float GamePlayController::getTouchAngleForPrepareBubble(const cocos2d::Vec2& touch_location)
     {
         float angle = this->getPrepareBubbleAngle(touch_location);
-        cocos2d::Vec2 pre_point = prepare_bubble_->getPosition();
+		cocos2d::Vec2 pre_point = game_scene_delegate_->getPrepareBubbleOrigin();
         int direction = touch_location.x > pre_point.x? 1: -1;
         float device_angle = (90 - angle)*direction;
         if (this->isTouchUnderside())

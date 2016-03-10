@@ -11,6 +11,7 @@
 #define _GAME_DEFEAT_BUY_PROPS_ALERT_H_
 #include "cocos2d.h"
 #include "GameBaseAlert.h"
+const std::string GAME_DEFEAT_BUY_PROPS_ALERT_NAME = "GameDefeatBuyPropsAlert";
 namespace bubble_second {
     class GameDefeatBuyPropsAlert : public GameBaseAlert
     {

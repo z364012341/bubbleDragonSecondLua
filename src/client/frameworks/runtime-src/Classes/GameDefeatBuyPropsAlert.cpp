@@ -23,6 +23,7 @@ namespace bubble_second {
         {
             return false;
         }
+		this->setName(GAME_DEFEAT_BUY_PROPS_ALERT_NAME);
         this->addTopLabel();
         this->addButtonItem();
         this->addPropsItem();
