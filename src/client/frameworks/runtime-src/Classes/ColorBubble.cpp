@@ -8,8 +8,8 @@
 #include "StageDataManager.h"
 #include "GameScene.h"
 const int STANBY_ACTION_TAG = 121;
-const int STANBY_ACTION_TIME = 0.5;
-const int STANBY_ACTION_RANGE = 3;
+const float STANBY_ACTION_TIME = 0.5f;
+const float STANBY_ACTION_RANGE = 3.0f;
 namespace bubble_second {
     ColorBubble::~ColorBubble()
     {
@@ -250,7 +250,7 @@ namespace bubble_second {
         }
     }
 
-    void ColorBubble::shoot(const cocos2d::Vec2& touch_location)
+    void ColorBubble::shoot()
     {
         this->getPhysicsBody()->setEnabled(true);
         if (this->isColorBubbleType())
@@ -259,15 +259,19 @@ namespace bubble_second {
         }
         //auto a = SmartScaleController::getInstance()->getPlayAreaZoom();
         //auto i = this->getImpulseByTouchlocation(touch_location);
-        this->getPhysicsBody()->applyImpulse(this->getImpulseByTouchlocation(touch_location)*SmartScaleController::getInstance()->getPlayAreaZoom());
-        auto controller = GamePlayController::getInstance();
-        controller->setBubbleShootEnabled(false);
-        controller->setPrepareBubble(nullptr);
+		this->getPhysicsBody()->applyImpulse(shoot_impulse_);
+        //auto controller = GamePlayController::getInstance();
+        //controller->setBubbleShootEnabled(false);
+		GamePlayController::getInstance()->setPrepareBubble(nullptr);
         this->dispatchEventAfterShooted();
 
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHOOT_PREPARE_BUBBLE);
+        //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHOOT_PREPARE_BUBBLE);
     }
 
+	void ColorBubble::setShootImpulse(const cocos2d::Vec2& touch_location)
+	{
+		shoot_impulse_ = this->getImpulseByTouchlocation(touch_location)*SmartScaleController::getInstance()->getPlayAreaZoom();
+	}
 
     cocos2d::Vec2 ColorBubble::getImpulseByTouchlocation(cocos2d::Vec2 touch_location)
     {
@@ -284,6 +288,10 @@ namespace bubble_second {
 
 	void ColorBubble::playStanbyAnimation()
 	{
+		if (this->getActionByTag(STANBY_ACTION_TAG))
+		{
+			return;
+		}
 		cocos2d::MoveBy* move_1 = cocos2d::MoveBy::create(STANBY_ACTION_TIME, cocos2d::Vec2(0.0f, -STANBY_ACTION_RANGE));
 		cocos2d::MoveBy* move_2 = cocos2d::MoveBy::create(STANBY_ACTION_TIME, cocos2d::Vec2(0.0f, STANBY_ACTION_RANGE));
 		cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move_1, move_2);

@@ -602,10 +602,10 @@ namespace bubble_second {
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_UPDATE_COMPLETED_TASK_LABEL, CC_CALLBACK_1(GameScene::updateCompletedTaskLabel, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        listener = cocos2d::EventListenerCustom::create(EVENT_SHOOT_PREPARE_BUBBLE, [=](cocos2d::EventCustom*) {
-            this->getGameCharacter()->playShootBubbleAnimation();
-        });
-        dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        //listener = cocos2d::EventListenerCustom::create(EVENT_SHOOT_PREPARE_BUBBLE, [=](cocos2d::EventCustom*) {
+        //    this->getGameCharacter()->playShootBubbleAnimation();
+        //});
+        //dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_UPDATE_BUBBLE_USE_COUNT_LABEL, CC_CALLBACK_1(GameScene::updateBubbleUseCountLabel, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_ADD_AIR_BUBBLE_NUMBLE, CC_CALLBACK_1(GameScene::addOneAirBubblesNumble, this));
@@ -678,7 +678,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_TURN_OFF_SIGHTING_DEVICE);
         dispatcher->removeCustomEventListeners(EVENT_UPDATE_COMPLETED_TASK_LABEL);
         dispatcher->removeCustomEventListeners(EVENT_SELECT_BUBBLE);
-        dispatcher->removeCustomEventListeners(EVENT_SHOOT_PREPARE_BUBBLE);
+        //dispatcher->removeCustomEventListeners(EVENT_SHOOT_PREPARE_BUBBLE);
         dispatcher->removeCustomEventListeners(EVENT_UPDATE_BUBBLE_USE_COUNT_LABEL);
         dispatcher->removeCustomEventListeners(EVENT_ADD_AIR_BUBBLE_NUMBLE);
         dispatcher->removeCustomEventListeners(EVENT_CUT_AIR_BUBBLE_NUMBLE);
@@ -824,6 +824,11 @@ namespace bubble_second {
     {
         return this->getGunsight()->getPosition();
     }
+
+	cocos2d::Vec2 GameScene::getPrepareBubbleOrigin()
+	{
+		return this->getGunsightPosition();
+	}
 
     cocos2d::Vec2 GameScene::getGrassPosition()
     {
@@ -1951,6 +1956,10 @@ namespace bubble_second {
 
     void GameScene::popDefeatBuyAlert()
     {
+		if (this->getChildByName(GAME_DEFEAT_BUY_PROPS_ALERT_NAME))
+		{
+			return;
+		}
         GameDefeatBuyPropsAlert* buy_alert = GameDefeatBuyPropsAlert::create();
         buy_alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
