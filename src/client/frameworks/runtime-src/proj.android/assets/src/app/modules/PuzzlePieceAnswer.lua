@@ -14,7 +14,7 @@ function PuzzlePieceAnswer:ctor(params)
     printf("PuzzlePieceAnswer");
     self:addTexture(params.left, params.right, params.top, params.bottom);
     self:initPosition(params.index_x, params.index_y, params.path);
-    self:setScale(0.8);
+    --self:setScale(0.8);
 end
 
 function PuzzlePieceAnswer:addTexture(left, right, top, bottom)
