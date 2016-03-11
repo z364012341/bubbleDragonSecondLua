@@ -1190,6 +1190,7 @@ namespace bubble_second {
 
     void GameScene::haveShootPropsBubble(BaseProperty* property)
     {
+
         property->actionBegan();
         auto controller = GamePlayController::getInstance();
         controller->setBubbleShootEnabled(false);
@@ -1860,8 +1861,8 @@ namespace bubble_second {
     void GameScene::victory()
     {
         //this->getGameCharacter()->playVictoryAnimation();
+		this->setPropertyTouchEnabled(false);
         GamePlayController::getInstance()->disposeVictory();
-        this->setPropertyTouchEnabled(false);
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME*2), cocos2d::CallFunc::create([=]() {
             this->shootBubblesAfterVictory();
 			this->getGameCharacter()->playVictoryAnimation();
