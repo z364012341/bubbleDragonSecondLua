@@ -302,6 +302,9 @@ namespace bubble_second {
 
 	void ColorBubble::stopStanbyAnimation()
 	{
-		this->stopActionByTag(STANBY_ACTION_TAG);
+		if (this->getActionByTag(STANBY_ACTION_TAG))
+		{
+			this->stopActionByTag(STANBY_ACTION_TAG);
+		}
 	}
 }

@@ -3,8 +3,8 @@
     "isLandscape": false,
     "isWindowTop": false,
     "name": "bubbleDragonSecondLua",
-    "width": 500,
-    "height": 400,
+    "width": 889,
+    "height": 500,
     "entry": "src/main.lua",
     "consolePort": 6050,
     "uploadPort": 6060

@@ -302,8 +302,8 @@ namespace bubble_second {
     void bubble_second::GameScene::addGameBackground(int cell_numble)
     {
         cocos2d::Sprite* game_bg = SpriteTextureController::getInstance()->createGameBackgroundSprite(cell_numble);
-        game_bg->setScaleX(SmartScaleController::getInstance()->getFixedHeightZoom()*1.06f);
-        game_bg->setScaleY(SmartScaleController::getInstance()->getFixedHeightZoom()*1.3f);
+        //game_bg->setScaleX(SmartScaleController::getInstance()->getFixedHeightZoom()*1.06f);
+        //game_bg->setScaleY(SmartScaleController::getInstance()->getFixedHeightZoom()*1.3f);
         cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
         game_bg->setPosition(cocos2d::Vec2(visible_size.width / 2, visible_size.height / 2));
         this->addChild(game_bg, UI_ZORDER_BACKGROUND);
@@ -1859,11 +1859,12 @@ namespace bubble_second {
 
     void GameScene::victory()
     {
-        this->getGameCharacter()->playVictoryAnimation();
+        //this->getGameCharacter()->playVictoryAnimation();
         GamePlayController::getInstance()->disposeVictory();
         this->setPropertyTouchEnabled(false);
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME*2), cocos2d::CallFunc::create([=]() {
             this->shootBubblesAfterVictory();
+			this->getGameCharacter()->playVictoryAnimation();
         })));
         bubble_map_node_->stopAllActions();
     }
@@ -1901,7 +1902,7 @@ namespace bubble_second {
         });
         cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(call_func, cocos2d::DelayTime::create(AFTER_VECTORY_PREPARE_REPEAT_DELAY_TIME));
         int count = GameScoreController::getInstance()->getBubbleUseCount();
-        this->runAction(cocos2d::Repeat::create(seq, count));
+		this->runAction(cocos2d::Repeat::create(seq, count));
         //开个定时器预防万一不弹出胜利面板
         this->schedule([=](float) {
             this->popVictoryAlert();
@@ -1949,7 +1950,7 @@ namespace bubble_second {
         GamePlayController::getInstance()->disposeDefeat();
         this->getGameCharacter()->playDefeatAnimation();
         this->setPropertyTouchEnabled(false);
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(1.0f), cocos2d::CallFunc::create([=]() {
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(2.0f), cocos2d::CallFunc::create([=]() {
             this->popDefeatBuyAlert();
         })));
     }

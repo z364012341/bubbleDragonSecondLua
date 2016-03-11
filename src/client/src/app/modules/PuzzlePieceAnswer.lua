@@ -34,4 +34,5 @@ function PuzzlePieceAnswer:initPosition(index_x, index_y)
 	local posY = PUZZLE_STENCIL_HEIGHT * (-0.5 + index_y);
 	self:setPosition(posX, posY);
 end
+
 return PuzzlePieceAnswer

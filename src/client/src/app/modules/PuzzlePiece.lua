@@ -66,11 +66,29 @@ end
 function PuzzlePiece.onTouchEnded(touch, event)
     --printf("PuzzlePiece onTouchEnded");
     event:getCurrentTarget()._shadow:shadowBack();
+    if event:getCurrentTarget():isToucnOnAnswer() then
+        event:getCurrentTarget():moveToAnswer();
+    end
 end
 
 function PuzzlePiece.isTouchOnPuzzle(touch, event)
     local node = event:getCurrentTarget();
     return cc.pGetDistance(node:convertTouchToNodeSpace(touch), cc.p(0, 0)) < PUZZLE_STENCIL_WIDTH / 2;
+end
+
+function PuzzlePiece:isToucnOnAnswer()
+    local puzzlePoint = self:getParent():convertToWorldSpace(cc.p(self:getPosition()));
+    local answer = self:getPuzzlePieceAnswer();
+    local answerPoint = answer:getParent():convertToWorldSpace(cc.p(answer:getPosition()));
+    return cc.pGetDistance(puzzlePoint, answerPoint) < PUZZLE_STENCIL_WIDTH / 2;
+end
+
+function PuzzlePiece:moveToAnswer()
+    local answer = self:getPuzzlePieceAnswer();
+    local answerPoint = answer:getParent():convertToWorldSpace(cc.p(answer:getPosition()));
+    self:setPosition(self:getParent():convertToNodeSpace(answerPoint));
+    self._shadow:removeFromParent();
+    cc.Director:getInstance():getEventDispatcher():removeEventListenersForTarget(self);
 end
 
 function PuzzlePiece:setPuzzlePieceAnswer(answer)

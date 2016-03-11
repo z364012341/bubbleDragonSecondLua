@@ -12,15 +12,7 @@
 #define _GAME_CHARACTOR_H_
 #include "cocos2d.h"
 #include "cocostudio\CocoStudio.h"
-const std::string GAME_CHARACTER_ARMATURE_LAOHU_NAME = "laohu";
-const std::string GAME_CHARACTER_ARMATURE_LAOHU2_NAME = "laohu2";
-const std::string GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME = "daiji-01-1";
-const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_1 = "rengqiu01";
-const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2 = "rengqiu-02";
-const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_3 = "rengqiu-03";
-const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1 = 40.0f;
-const float CHARACTER_ARMATURE_SCALE = 0.37f;
-const float CHARACTER_SHOOT_BUBBLE_DELAYTIME = 0.05f;
+
 namespace bubble_second {
     class GameCharacter : public cocos2d::Node
     {
@@ -56,9 +48,11 @@ namespace bubble_second {
 		void addEventListenerCustom();
 		void removeEventListenerCustom();
         void addCharacterArmature();
+		void addCharacterArmatureInvisibleWithName(const std::string& name);
         void playStandbyAnimation();
         cocostudio::Armature* getCharactorArmature();
 		cocostudio::Armature* getCharactorArmature2();
+		//cocostudio::Armature* getCharactorArmatureVictory();
         void playNotLoopAnimationWithName(const std::string& name);
         void playLoopAnimationWithName(const std::string& name);
         void setDefeatFlag(bool flag);
@@ -67,9 +61,12 @@ namespace bubble_second {
 		void playShootAnimation1();
 		void playShootAnimation2();
 		void playShootAnimation3();
+		void charactorVictorChange();
+		void playCharactorVictorChangeAnimation();
+		//设置其他动画不可见
+		void setOtherArmatureInvisible(cocostudio::Armature* armature);
     private:
-        cocostudio::Armature* charactor_armature_1_;
-		cocostudio::Armature* charactor_armature_2_;
+		cocos2d::Map<std::string, cocostudio::Armature*> armature_vector_;
         bool defeat_flag_ = false;
     };
 }

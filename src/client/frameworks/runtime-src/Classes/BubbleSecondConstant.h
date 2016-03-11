@@ -399,13 +399,10 @@ const std::string SCOREWIDGET_ARMATURE_BLUE_PATH = "L-H-TX/L-H-TX.ExportJson"; /
 const std::string SCOREWIDGET_ARMATURE_BLUE_NAME = "L-H-TX";
 const std::string SCOREWIDGET_ANIMATION_FLYING_NAME = "tanchu"; //飞的动画
 const std::string SCOREWIDGET_ANIMATION_CONTACT_NAME = "tanchu_Copy1"; //碰到的动画
-
 //const std::string GAME_CHARACTER_ARMATURE_LAOHU_NAME = "laohu";
 //const std::string GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME = "daiji-01-1";
 //const std::string GAME_CHARACTER_LAOHU_ANIMATION_SHOOT_BUBBLE_NAME = "rengqiu01";
 const std::string GAME_CHARACTER_ANIMATION_LEGENDARY_NAME = "liulianji";
-const std::string GAME_CHARACTER_ANIMATION_VICTORY_NAME = "shengli";
-const std::string GAME_CHARACTER_ANIMATION_DEFEAT_NAME = "shibai";
 const std::string WINDMILL_BUBBLE_DEMON_ARMATURE_PATH = "xiaoyao/xiaoyao.ExportJson"; //风车妖精的动画
 const std::string WINDMILL_BUBBLE_DEMON_ARMATURE_NAME = "xiaoyao";
 //小球刚体
