@@ -532,9 +532,9 @@ namespace bubble_second {
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_MAP_LOADED, CC_CALLBACK_1(GameScene::addBubbleMapUI, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        listener = cocos2d::EventListenerCustom::create(EVENT_SHUT_BUBBLE, CC_CALLBACK_1(GameScene::reloadPrepareBubble, this));
+        listener = cocos2d::EventListenerCustom::create(EVENT_SHOOT_BUBBLE, CC_CALLBACK_1(GameScene::reloadPrepareBubble, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        listener = cocos2d::EventListenerCustom::create(EVENT_SHUT_BUBBLE, [=](cocos2d::EventCustom*) {
+        listener = cocos2d::EventListenerCustom::create(EVENT_SHOOT_BUBBLE, [=](cocos2d::EventCustom*) {
             this->setPropertyTouchEnabled(false);
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
@@ -653,7 +653,7 @@ namespace bubble_second {
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_ELIMINATED);
         dispatcher->removeCustomEventListeners(EVENT_MAP_LOADED);
-        dispatcher->removeCustomEventListeners(EVENT_SHUT_BUBBLE);
+        dispatcher->removeCustomEventListeners(EVENT_SHOOT_BUBBLE);
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_CLING);
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_Air);
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_RUN_EFFECT);
@@ -1212,10 +1212,12 @@ namespace bubble_second {
 
     void GameScene::setPropertyTouchEnabled(bool flag)
     {
-        color_bomb_property_->setPropertyEnabled(flag);
-        bomb_bomb_property_->setPropertyEnabled(flag);
-        wooden_hammer_property_->setPropertyEnabled(flag);
-        staves_property_->setPropertyEnabled(flag);
+        bool game_result = GameScoreController::getInstance()->gameVictory() || GameScoreController::getInstance()->gameDefeat();
+        bool enabledFlag = !game_result && flag;
+        color_bomb_property_->setPropertyEnabled(enabledFlag);
+        bomb_bomb_property_->setPropertyEnabled(enabledFlag);
+        wooden_hammer_property_->setPropertyEnabled(enabledFlag);
+        staves_property_->setPropertyEnabled(enabledFlag);
     }
 
     void GameScene::setMenuTouchEnabled(bool flag)
@@ -1413,7 +1415,10 @@ namespace bubble_second {
 	void GameScene::playPrepareBubbleStanbyAction()
 	{
 		dynamic_cast<ColorBubble*>(GamePlayController::getInstance()->getPrepareBubble())->playStanbyAnimation();
-		dynamic_cast<ColorBubble*>(this->getSecondPrepareBubble())->stopStanbyAnimation();
+        if (ColorBubble* bubble = dynamic_cast<ColorBubble*>(this->getSecondPrepareBubble()))
+        {
+            bubble->stopStanbyAnimation();
+        }
 	}
 
     float GameScene::playBubblesEffects(BubbleVector bubbles)

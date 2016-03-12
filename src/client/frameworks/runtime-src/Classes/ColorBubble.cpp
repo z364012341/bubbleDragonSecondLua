@@ -218,7 +218,7 @@ namespace bubble_second {
 
     void ColorBubble::dispatchEventAfterShooted()
     {
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHUT_BUBBLE);
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHOOT_BUBBLE);
     }
 
     void ColorBubble::bubbleEliminate(int combo)

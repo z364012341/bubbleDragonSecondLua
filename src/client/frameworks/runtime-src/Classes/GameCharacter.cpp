@@ -100,8 +100,8 @@ namespace bubble_second {
 
 	void GameCharacter::onExit()
 	{
-		cocos2d::Node::onExit();
 		this->removeEventListenerCustom();
+        cocos2d::Node::onExit();
 	}
 
 	void GameCharacter::addEventListenerCustom()
