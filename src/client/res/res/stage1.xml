@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <include>
     <bubbles>
-        <data type="7" row="0" col="0" cloud="0" path=""/>
+        <data type="3" row="0" col="0" cloud="0" path=""/>
         <data type="0" row="0" col="1" cloud="0" path=""/>
         <data type="0" row="0" col="2" cloud="0" path=""/>
         <data type="0" row="0" col="3" cloud="0" path=""/>

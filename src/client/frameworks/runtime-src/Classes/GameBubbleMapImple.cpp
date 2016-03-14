@@ -13,7 +13,7 @@ namespace bubble_second{
     {
         auto top_suspension_func = [=]() {
             cocos2d::Map<int, BaseBubble*> sprite_map;
-            for (int i = 0; i != MAP_ODD_ROW_MAX; i++)
+            for (int i = -1; i != MAP_EVEN_ROW_MAX; i++)
             {
                 BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(kBubbleTransparent,
                     cocos2d::Vec2(MAP_TOP_ROW_INDEX, i),

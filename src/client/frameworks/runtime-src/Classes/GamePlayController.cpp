@@ -164,6 +164,7 @@ namespace bubble_second {
     bool GamePlayController::isInShootArea(const cocos2d::Vec2& touch_location)
     {
         float angle = this->getPrepareBubbleAngle(touch_location);
+        //CCLOG("ssssss%f", angle);
         //分别看方向是在上面还是在下面
         return (getTouchDirection() == kUpside && angle > SHOOT_BUBBLE_ENABLED_DEGREE) || (getTouchDirection() == kUnderside && angle<SHOOT_BUBBLE_ENABLED_DEGREE*kUnderside);
     }
@@ -529,9 +530,11 @@ namespace bubble_second {
             return;
         }
         numble = 0;
-        if (this->canShootingBubble(touch_point))
+        const cocos2d::Vec2 touch_location = this->convertGLToNodeSpace(touch_point, prepare_bubble_->getParent());
+        if (this->canShootingBubble(touch_location))
         {
             float angle = this->getTouchAngleForPrepareBubble(this->convertGLToNodeSpace(touch_point, prepare_bubble_->getParent()));
+            //CCLOG("ssssss%f", angle);
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ROTATE_SIGHTING_DEVICE, &angle);
             this->turnOnSightingDevice();
         }

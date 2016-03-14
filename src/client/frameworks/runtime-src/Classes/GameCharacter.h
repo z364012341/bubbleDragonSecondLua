@@ -52,15 +52,21 @@ namespace bubble_second {
         void playStandbyAnimation();
         cocostudio::Armature* getCharactorArmature();
 		cocostudio::Armature* getCharactorArmature2();
+        cocostudio::Armature* getCharactorArmature3();
 		//cocostudio::Armature* getCharactorArmatureVictory();
         void playNotLoopAnimationWithName(const std::string& name);
         void playLoopAnimationWithName(const std::string& name);
         void setDefeatFlag(bool flag);
         bool isDefeat();
 		//根据角度播放发射动画
+        void playShootAnimationWithBackName(const std::string & name, const std::string& backName);
+        void playShootAnimationAloneWithNameAndDelaytime(const std::string& name, float delaytime);
+        void playAnimationWithNameAndCallfunc(const std::string& name, const std::function<void()>& callfunc);
+        void playAnimationWithNamesAndCallfunc(const std::vector<std::string>& names, const std::function<void()>& callfunc);
 		void playShootAnimation1();
 		void playShootAnimation2();
 		void playShootAnimation3();
+        void playShootAnimation4();
 		void charactorVictorChange();
 		void playCharactorVictorChangeAnimation();
 		//设置其他动画不可见
