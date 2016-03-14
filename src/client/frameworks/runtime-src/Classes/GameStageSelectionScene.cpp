@@ -78,6 +78,7 @@ namespace bubble_second {
         this->addStageCell();
         this->addSettingMenu();
         this->addPuzzleMenu();
+        cocos2d::Director::getInstance()->setDisplayStats(true);
         return true;
     }
 
