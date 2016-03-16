@@ -165,6 +165,7 @@ const int BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_X = 30000; //Ê¤Àûºó·¢ÉäÐ¡ÇòµÄ³åÁ¿Ë
 const int BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_Y_MIN = 80000;
 const int BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_Y_MAX = 100000;
 const float GAME_MENU_SELECT_SCALE = 0.8f;    //²Ëµ¥µã»÷Ê±µÄ·Å´ó±ÈÀý
+const float GAME_BUTTON_ZOOM_SCALE = -0.2f;    //BUTTONµã»÷Ê±µÄ·Å´ó±ÈÀý
 const float PI = 3.14f; //Ô²ÖÜÂÊ
 const float SQRT3 = 1.732f;//¸ùºÅ3
 const int MAP_MAX_ROW_IN_SCREEN = 10; //ÆÁÄ»ÄÚµÄÐ¡ÇòµÄÐÐÊý

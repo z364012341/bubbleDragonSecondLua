@@ -40,9 +40,9 @@ namespace bubble_second {
         //把csb的坐标转成map的
         cocos2d::Vec2 convertCsbToMapSpace(const cocos2d::Vec2& point);
         //获取发射台
-        cocos2d::Sprite* getGunsight();
+        cocos2d::Node* getGunsight();
         //获取小草
-        cocos2d::Sprite* getGrass();
+        cocos2d::Node* getGrass();
         int getPresentStageNumble();
         void setPresentStageData(StageData numble);
         int getPresentStageCellNumble();

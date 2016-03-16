@@ -2,6 +2,8 @@
 #include "SpriteTextureController.h"
 #include "GamePropsNumbleView.h"
 #include "GameTextInfo.h"
+#include "cocostudio\CocoStudio.h"
+const std::string ENTER_GAME_PROPS_CSB = "EnterGameProps.csb";
 namespace bubble_second {
     EnterGamePropsView * EnterGamePropsView::create(cocos2d::Sprite * props)
     {
@@ -47,6 +49,8 @@ namespace bubble_second {
         cocos2d::Menu* menu = cocos2d::Menu::createWithItem(background_);
         menu->setPosition(cocos2d::Vec2::ZERO);
         this->addChild(menu);
+
+        this->addChild(cocos2d::CSLoader::createNode(ENTER_GAME_PROPS_CSB));
     }
 
     void EnterGamePropsView::addPropsTexture(cocos2d::Sprite * props)

@@ -340,14 +340,14 @@ namespace bubble_second {
         this->handleBarrelScoreLabel(pos_func);
     }
 
-    cocos2d::Sprite* GameScene::getGunsight()
+    cocos2d::Node* GameScene::getGunsight()
     {
-        return dynamic_cast<cocos2d::Sprite*>(csb_node_->getChildByName(UI_NAME_GUNSIGHT));
+        return csb_node_->getChildByName(UI_NAME_GUNSIGHT);
     }
 
-    cocos2d::Sprite* GameScene::getGrass()
+    cocos2d::Node* GameScene::getGrass()
     {
-        return dynamic_cast<cocos2d::Sprite*>(csb_node_->getChildByName(UI_NAME_GRASS));
+        return csb_node_->getChildByName(UI_NAME_GRASS);
     }
 
     int GameScene::getPresentStageNumble()
@@ -429,7 +429,7 @@ namespace bubble_second {
     void GameScene::initUIZOrder()
     {
         this->setUIZOrderWithNameAndNumber(UI_NAME_GUNSIGHT, UI_ZORDER_GUNSIGHT);
-        this->setUIZOrderWithNameAndNumber(UI_NAME_PAD, UI_ZORDER_PAD);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_PAD, UI_ZORDER_PAD);
         this->setUIZOrderWithNameAndNumber(UI_NAME_GRASS, UI_ZORDER_GRASS);
         this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_FIRST, UI_ZORDER_BARRELHEAD_FIRST);
         this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_SECOND, UI_ZORDER_BARRELHEAD_SECOND);

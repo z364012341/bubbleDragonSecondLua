@@ -29,15 +29,17 @@ namespace bubble_second {
 
     void SpriteTextureController::setSpriteTexture(const std::string& path, cocos2d::Sprite* sprite)
     {
-        if (path == "")
-        {
-            sprite->setTexture(path);
-        }
-        else
-        {
-            auto frame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(path);
-            sprite->setSpriteFrame(frame);
-        }
+        sprite->setTexture(path);
+        //更换纹理设置方法
+        //if (path == "")
+        //{
+        //    sprite->setTexture(path);
+        //}
+        //else
+        //{
+        //    auto frame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(path);
+        //    sprite->setSpriteFrame(frame);
+        //}
     }
 
     cocos2d::Sprite* SpriteTextureController::createGameSpriteWithPath(const std::string& path)
@@ -73,74 +75,9 @@ namespace bubble_second {
     }
 
     void SpriteTextureController::addResourcesTexture()
-    {
-        /*static int numble = 0;
-        auto callback = [=](cocos2d::Texture2D* texture) {
-            ++numble;
-            CCLOG("%d", numble);
-        };
-        auto cache = cocos2d::Director::getInstance()->getTextureCache();
-        cache->addImageAsync(ADD_BUBBLE_NUMBLE_BUBBLE_PATH, callback);
-        cache->addImageAsync(GAME_PLAYING_MENU_NORMAL_PATH, callback);
-        cache->addImageAsync(PROPS_SELECT_ALERT_CONFIRM, callback);
-        cache->addImageAsync(PROPS_SELECT_ALERT_CANCEL, callback);
-        cache->addImageAsync(PROPS_NUMBLE_DISABLED_PATH, callback);
-        cache->addImageAsync(PROPS_NUMBLE_ENABLED_PATH, callback);
-        cache->addImageAsync(SIGHT_POINT_COLORFUL_PATH, callback);
-        cache->addImageAsync(SIGHT_POINT_ORANGE_PATH, callback);
-        cache->addImageAsync(BIG_COMBO_EFFECT_POINT_PATH, callback);
-        cache->addImageAsync(PROPS_COLOR_BOMB_PATH, callback);
-        cache->addImageAsync(PROPS_STAVES_PATH, callback);
-        cache->addImageAsync(PROPS_WOODEN_HAMMER_PATH, callback);
-        cache->addImageAsync(PROPS_BOMB_BOMB_PATH, callback);
-        cache->addImageAsync(BUBBLE_SIGHTING_POINT_PATH, callback);
-        cache->addImageAsync(UI_NAME_GUNSIGHT, callback);
-        cache->addImageAsync(UI_NAME_PAD, callback);
-        cache->addImageAsync(SIGHT_POINT_PINK_PATH, callback);
-        cache->addImageAsync(SIGHT_POINT_YELLOW_PATH, callback);
-        cache->addImageAsync(PROPS_ITEM_BACKGROUND_PATH, callback);
-        cache->addImageAsync(BUBBLE_RAINBOW_SEAL_PATH, callback);
-        cache->addImageAsync(PROPS_SELECT_ALERT_BACKGROUND, callback);
-        cache->addImageAsync(SIGHT_POINT_BLUE_PATH, callback);
-        cache->addImageAsync(SIGHT_POINT_GREEN_PATH, callback);
-        cache->addImageAsync(BUBBLE_ORANGE_PATH, callback);
-        cache->addImageAsync(BUBBLE_PINK_PATH, callback);
-        cache->addImageAsync(BUBBLE_BLACKHOLE_PATH, callback);
-        cache->addImageAsync(BUBBLE_RED_PATH, callback);
-        cache->addImageAsync(BUBBLE_YELLOW_PATH, callback);
-        cache->addImageAsync(BUBBLE_BLUE_PATH, callback);
-        cache->addImageAsync(BUBBLE_GREEN_PATH, callback);
-        cache->addImageAsync(BUBBLE_LIGHTNING_PATH, callback);
-        cache->addImageAsync(BUBBLE_MUTIPLE_SEAL_1_PATH, callback);
-        cache->addImageAsync(BUBBLE_MUTIPLE_SEAL_3_PATH, callback);
-        cache->addImageAsync(BUBBLE_DARKCLOUD_PATH, callback);
-        cache->addImageAsync(BUBBLE_BOMB_BOMB_PATH, callback);
-        cache->addImageAsync(BUBBLE_PURPLE_PATH, callback);
-        cache->addImageAsync(BIG_BLUE_BACKGROUND_EFFECT_POINT_PATH, callback);
-        cache->addImageAsync(RAINBOW_CHARACTOR_BG_PATH, callback);
-        cache->addImageAsync(RAINBOW_CHARACTOR_SWIRL_PATH, callback);
-        cache->addImageAsync(BUBBLE_WINDMILL_PATH, callback);
-        cache->addImageAsync(GUNSIGHT_SWIRL_ORANGE_PATH, callback);
-        cache->addImageAsync(GUNSIGHT_SWIRL_PINK_PATH, callback);
-        cache->addImageAsync(GUNSIGHT_SWIRL_RED_PATH, callback);
-        cache->addImageAsync(GUNSIGHT_SWIRL_YELLOW_PATH, callback);
-        cache->addImageAsync(UI_NAME_WINDMILL_BUBBLE_FLYING_BODY_PATH, callback);
-        cache->addImageAsync(UI_NAME_WINDMILL_BUBBLE_FLYING_MOTIONSTREAK_PATH, callback);
-        cache->addImageAsync(UI_NAME_WINDMILL_BUBBLE_FLYING_HEAD_PATH, callback);
-        cache->addImageAsync(SCORE_PROGRESS_START_PATH, callback);
-        cache->addImageAsync(GUNSIGHT_SWIRL_BLUE_PATH, callback);
-        cache->addImageAsync(GUNSIGHT_SWIRL_GREEN_PATH, callback);
-        cache->addImageAsync(GUNSIGHT_SWIRL_PURPLE_PATH, callback);                    
-        cache->addImageAsync(SIGHT_POINT_PURPLE_PATH, callback); */
-
-        //auto cache = cocos2d::Director::getInstance()->getTextureCache();
-        //for (auto var : cell_to_path_)
-        //{
-        //    cache->addImage(var.second.asString());
-        //}
-        
-        cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("StudioResPlist.plist");
-        cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("gameRes.plist");
+    {    
+        //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("StudioResPlist.plist");
+        //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("gameRes.plist");
         this->addArmatureFile();
     }
 

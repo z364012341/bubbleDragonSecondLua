@@ -119,9 +119,6 @@
     <ClInclude Include="..\Classes\EnterGameAlert.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\EnterGamePropsView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\EnterPropsViewManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -293,6 +290,10 @@
     <ClInclude Include="..\Classes\lua_GameStageSelectionScene_auto.hpp">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\EnterGamePropsView.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameAlertMask.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -390,9 +391,6 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\EnterGameAlert.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EnterGamePropsView.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\EnterPropsViewManager.cpp">
@@ -563,6 +561,10 @@
     <ClCompile Include="..\Classes\lua_GameStageSelectionScene_auto.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EnterGamePropsView.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameAlertMask.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

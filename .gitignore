@@ -1,10 +1,17 @@
 /UI
+*.obj
+*.lib
+*.dll
 /src/client/frameworks/cocos2d-x
 /src/client/simulator/win32
+/src/client/publish
 /src/client/simulator/android
 /src/client/frameworks/runtime-src/proj.win32/Debug.win32
 /src/client/frameworks/runtime-src/proj.android/obj/local
+/src/client/frameworks/runtime-src/proj.android/assets
+/src/client/frameworks/runtime-src/proj.android/bin
 /src/client/frameworks/runtime-src/proj.win32/.vs
 /src/client/frameworks/runtime-src/proj.win32/*.sdf
+/src/client/frameworks/runtime-src/proj.win32/Release.win32
 /src/client/frameworks/runtime-src/proj.win32/*.VC.opendb
 /src/client/frameworks/runtime-src/proj.android/libs

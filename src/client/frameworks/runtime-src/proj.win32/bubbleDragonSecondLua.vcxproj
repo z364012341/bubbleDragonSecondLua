@@ -222,6 +222,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\EnterGameAlert.h" />
     <ClInclude Include="..\Classes\EnterGamePropsView.h" />
     <ClInclude Include="..\Classes\EnterPropsViewManager.h" />
+    <ClInclude Include="..\Classes\GameAlertMask.h" />
     <ClInclude Include="..\Classes\GameBaseAlert.h" />
     <ClInclude Include="..\Classes\GameBubbleMap.h" />
     <ClInclude Include="..\Classes\GameBubbleMapImple.h" />
@@ -318,6 +319,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\EnterGameAlert.cpp" />
     <ClCompile Include="..\Classes\EnterGamePropsView.cpp" />
     <ClCompile Include="..\Classes\EnterPropsViewManager.cpp" />
+    <ClCompile Include="..\Classes\GameAlertMask.cpp" />
     <ClCompile Include="..\Classes\GameBaseAlert.cpp" />
     <ClCompile Include="..\Classes\GameBubbleMap.cpp" />
     <ClCompile Include="..\Classes\GameBubbleMapImple.cpp" />

@@ -1,1 +1,0 @@
-cc.Director:getInstance():replaceScene(require(PUZZLE_PLAY_SCENE_PATH):createScene());
