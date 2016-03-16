@@ -37,6 +37,7 @@ E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.androi
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\TX-yanwu\TX-yanwu0.plist \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\TX-yanwu\TX-yanwu0.png \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\fonts\popscore.png \
+E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\fonts\shuzi.png \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\fonts\stageTypeface-export.fnt \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\fonts\stageTypeface-export.png \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\fonts\typeface-export.fnt \
@@ -77,6 +78,9 @@ E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.androi
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\res\zh.plist \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\6L-tx \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\6L-TX01 \
+E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\AddBubbleNumbleCommodity.csb \
+E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\AddSpecialCommodity.csb \
+E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\AimingLineCommodity.csb \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\AlertRope.csb \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\CharactorShow.csb \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\DaGou \

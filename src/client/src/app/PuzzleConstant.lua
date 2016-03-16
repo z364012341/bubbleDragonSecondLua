@@ -61,7 +61,9 @@ cc.exports.PUZZLE_STENCIL_COMPONENT_INSIDE = "component_inside";
 cc.exports.PUZZLE_STENCIL_COMPONENT_OUTSIDE = "component_outside";
 cc.exports.PUZZLE_STENCIL_COMPONENT_PLAIN = "component_plain";
 cc.exports.PUZZLE_PIECES_COLLECTION_INDEX_START = 1;
-
+cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_MIN = 0.3;
+cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_MAX = 1.7;
+cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE = 0.05;
 
 cc.exports.puzzle = {
 	PUZZLE_DIRECTIOIN_RANDOM = {

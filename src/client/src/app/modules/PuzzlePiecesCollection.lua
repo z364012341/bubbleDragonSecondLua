@@ -17,9 +17,11 @@ end)
 -- }
 local PuzzlePieceAnswer = require(PUZZLE_PIECE_ANSWER_PATH);
 local PuzzlePiece = require(PUZZLE_PIECE_PATH);
+PuzzlePiecesCollection._ZOrderNumble = 1;
 function PuzzlePiecesCollection:ctor(puzzlePath)
     printf("PuzzlePiecesCollection");
     self._relativeDirection = {};
+    PuzzlePiecesCollection._ZOrderNumble = 1;
     self:initIndexMax(GlobalFunction.createGameSpriteWithPath(puzzlePath):getContentSize());
     --printf(indexMaxX);
     --printf(indexMaxY);
@@ -45,6 +47,10 @@ function PuzzlePiecesCollection:ctor(puzzlePath)
     end
 end
 
+function PuzzlePiecesCollection:getZOrderNumble()
+	self._ZOrderNumble = self._ZOrderNumble + 1;
+	return self._ZOrderNumble;
+end
 function PuzzlePiecesCollection:initIndexMax(size)
     self._indexMaxX = math.floor(size.width/PUZZLE_STENCIL_WIDTH);
     self._indexMaxY = math.floor(size.height/PUZZLE_STENCIL_HEIGHT);

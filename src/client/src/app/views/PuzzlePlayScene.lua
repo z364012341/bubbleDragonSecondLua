@@ -18,6 +18,7 @@ function PuzzlePlayScene:ctor()
     answerNode:setPosition(0, 300);
     self:addChild(answerNode, -1);
     self:addBackMenu();
+    self:addTouchesListerner();
 --[[
     local clippingNode = require(PUZZLE_PIECE_PATH):create({
         index_x = 1, --拼图碎片的x索引
@@ -49,5 +50,50 @@ function PuzzlePlayScene:addBackMenu()
     menu:addChild(item);
     menu:setPosition(0, 0);
     self:addChild(menu);
+    self:setScale(0.6);
+end
+
+function PuzzlePlayScene:addTouchesListerner()
+    local listener = cc.EventListenerTouchAllAtOnce:create();
+    --listener:setSwallowTouches(true);
+    listener:registerScriptHandler(self.onTouchBegan,cc.Handler.EVENT_TOUCHES_BEGAN);
+    listener:registerScriptHandler(self.onTouchMoved,cc.Handler.EVENT_TOUCHES_MOVED);
+    --listener:registerScriptHandler(self.onTouchEnded,cc.Handler.EVENT_TOUCHES_ENDED);
+    cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self);
+end
+
+function PuzzlePlayScene.onTouchBegan(touches, event)
+    printf("PuzzlePlayScene onTouchBegan");
+    -- printf(#touches);
+    -- if #touches > 1 then
+        return true;
+    -- end
+    -- return false;
+end
+
+function PuzzlePlayScene.onTouchMoved(touches, event)
+    if #touches == 1 then
+        return;
+    end 
+    local dis1 = cc.pGetDistance(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
+    local dis2 = cc.pGetDistance(touches[1]:getLocation(), touches[2]:getLocation());
+    local target = event:getCurrentTarget();
+    target:setScale(target:calculateZoomScale(dis1, dis2));
+end
+
+function PuzzlePlayScene.onTouchEnded(touches, event)
+    --printf("PuzzlePiece onTouchEnded");
+end
+
+function PuzzlePlayScene:calculateZoomScale(preDistance, locDistance)
+    local scale = self:getScale();
+    if locDistance>preDistance then
+        scale = scale + PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE;
+    else
+        scale = scale - PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE;
+    end 
+    scale = math.min(scale, PUZZLE_PLAY_SCENE_ZOOM_SCALE_MAX);
+    scale = math.max(scale, PUZZLE_PLAY_SCENE_ZOOM_SCALE_MIN);
+    return scale;
 end
 return PuzzlePlayScene

@@ -21,7 +21,7 @@ local PuzzleBottomPlate = require(PUZZLE_BOTTOM_PLATE_PATH);
 local PuzzleStencil = require(PUZZLE_STENCIL_PATH);
 local PuzzlePieceEdges = require(PUZZLE_PIECE_EDGES_PATH);
 local PuzzlePieceShadow = require(PUZZLE_PIECE_SHADOW_PATH);
-
+local PuzzlePiecesCollection = require(PUZZLE_PIECES_COLLECTION_PATH);
 function PuzzlePiece:ctor(params)
     printf("PuzzlePiece");
     self:addTouchEvent();
@@ -42,9 +42,10 @@ end
 
 function PuzzlePiece.onTouchBegan(touch, event)
     --printf("PuzzlePiece onTouchBegan");
-
     if PuzzlePiece.isTouchOnPuzzle(touch, event) then
-        event:getCurrentTarget()._shadow:shadowGo();
+        local node = event:getCurrentTarget();
+        node._shadow:shadowGo();
+        node:setLocalZOrder(PuzzlePiecesCollection:getZOrderNumble());
         return true;
     end
     return false;
@@ -52,15 +53,11 @@ end
 
 function PuzzlePiece.onTouchMoved(touch, event)
     printf("PuzzlePiece onTouchMoved");
-    local pPos = touch:getPreviousLocation();
-    local pos = touch:getLocation();
-    local offX = pos.x - pPos.x;
-    local offY = pos.y - pPos.y ;
-
     local node = event:getCurrentTarget();
-    --node:setPosition(node:getParent():convertTouchToNodeSpace(touch));
-    node:setPositionX(node:getPositionX() + offX);
-    node:setPositionY(node:getPositionY() + offY);
+    local dis = touch:getDelta()
+    local zoomScale = node:getParent():getParent():getScale();
+    node:setPositionX(node:getPositionX() + dis.x/zoomScale);
+    node:setPositionY(node:getPositionY() + dis.y/zoomScale);
 end
 
 function PuzzlePiece.onTouchEnded(touch, event)

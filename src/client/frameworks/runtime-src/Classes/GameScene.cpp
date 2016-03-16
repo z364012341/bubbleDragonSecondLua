@@ -523,6 +523,7 @@ namespace bubble_second {
         //listener->onTouchMoved = CC_CALLBACK_2(GamePlayController::exchangePrepareBubbleOnTouchMoved, game_controller);
         //listener->onTouchEnded = CC_CALLBACK_2(GamePlayController::exchangePrepareBubbleOnTouchEnded, game_controller);
         //dispatcher->addEventListenerWithSceneGraphPriority(listener, this->getGrass());
+
     }
 
     void GameScene::addEventListenerCustom()
