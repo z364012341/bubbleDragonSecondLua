@@ -2,8 +2,14 @@
 #include "cocostudio\CocoStudio.h"
 #include "ui\UIImageView.h"
 #include "ScoreProgressStart.h"
+#include "SpriteTextureController.h"
+const std::string PROGRESS_TIMER_PATH = "jindutiao.png";//进度条
+const std::string PROGRESS_TIMER_BACKGROUND_PATH = "jindutiaokuang.png";//进度条背景
+float PROGRESS_TIMER_MIN = 25.0f;
+float PROGRESS_TIMER_MAX = 75.0f;
+float PROGRESS_TIMER_DISTANCE = PROGRESS_TIMER_MAX - PROGRESS_TIMER_MIN;
 namespace bubble_second {
-    ScoreProgressMenu::ScoreProgressMenu()
+    ScoreProgressMenu::ScoreProgressMenu():percent_(PROGRESS_TIMER_MIN)
     {
     }
 
@@ -19,13 +25,26 @@ namespace bubble_second {
         }
         this->initScoreMenu();
         this->setName(GAME_TOP_INFO_NAME);
-        this->getScoreProgressTimer()->setPercent(percent_);
+        this->getScoreProgressTimer()->setPercentage(percent_);
         return true;
     }
     void ScoreProgressMenu::initScoreMenu()
     {
-        score_progress_node_ = cocos2d::CSLoader::createNode(GAME_TOP_INFO_CSB);
-        this->addChild(score_progress_node_);
+        //score_progress_node_ = cocos2d::CSLoader::createNode(GAME_TOP_INFO_CSB);
+        cocos2d::Sprite* bg = SpriteTextureController::getInstance()->createGameSpriteWithPath(PROGRESS_TIMER_BACKGROUND_PATH);
+        bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_TOP);
+        this->addChild(bg);
+
+        cocos2d::Sprite* timerSprite = SpriteTextureController::getInstance()->createGameSpriteWithPath(PROGRESS_TIMER_PATH);
+        //timerSprite->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_TOP);
+        score_progress_timer_ = cocos2d::ProgressTimer::create(timerSprite);
+        score_progress_timer_->setReverseDirection(true);
+        //score_progress_timer_->setMidpoint(cocos2d::Vec2(0.5, 1.0));
+        //score_progress_timer_->setBarChangeRate(cocos2d::Vec2(0.5, 1));
+        //score_progress_timer_->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_TOP);
+        score_progress_timer_->setType(cocos2d::ProgressTimer::Type::RADIAL);
+
+        this->addChild(score_progress_timer_);
     }
 
     void ScoreProgressMenu::initStartSprite()
@@ -41,10 +60,10 @@ namespace bubble_second {
 
     cocos2d::Vec2 ScoreProgressMenu::getStartPositionWithPercent(float percent)
     {
-        auto image = dynamic_cast<cocos2d::ui::ImageView*>(score_progress_node_->getChildByName(SCORE_PROGRESS_BORDER_NAME));
-        assert(image);
-        cocos2d::Rect rect = image->getBoundingBox();
-        return cocos2d::Vec2(rect.size.width * percent - rect.size.width /2 + image->getPositionX(), image->getPositionY());
+        //auto image = dynamic_cast<cocos2d::ui::ImageView*>(score_progress_node_->getChildByName(SCORE_PROGRESS_BORDER_NAME));
+        //(image);
+        cocos2d::Rect rect = this->getScoreProgressTimer()->getBoundingBox();
+        return cocos2d::Vec2(rect.size.width * percent - rect.size.width /2, -rect.size.height * percent);
     }
 
     void ScoreProgressMenu::initialStartNumble(StartNumbleModule start_numble)
@@ -53,9 +72,9 @@ namespace bubble_second {
         this->initStartSprite();
     }
 
-    cocos2d::ui::LoadingBar* ScoreProgressMenu::getScoreProgressTimer()
+    cocos2d::ProgressTimer* ScoreProgressMenu::getScoreProgressTimer()
     {
-        return dynamic_cast<cocos2d::ui::LoadingBar*>(score_progress_node_->getChildByName(UI_NAME_SCORE_PROGRESS_TIMER));
+        return score_progress_timer_;
     }
 
     void ScoreProgressMenu::increaseProgressTimer()
@@ -65,12 +84,17 @@ namespace bubble_second {
         {
             return;
         }
-        float percent = getScoreProgressTimer()->getPercent();
-        direction = getScoreProgressTimer()->getPercent() == 0.0f?1.0f:-1.0f;
+        //float percent = getScoreProgressTimer()->getPercentage();
+        float percent = this->getPercentage();
+        //direction = getScoreProgressTimer()->getPercentage() == 0.0f?1.0f:-1.0f;
+        direction = percent == 0.0f ? 1.0f : -1.0f;
         this->schedule([=](float) {
-            getScoreProgressTimer()->setPercent(getScoreProgressTimer()->getPercent() + GAME_SCORE_PROGRESS_TIMER_PER_INCREASE_PERCENT*direction);
-            this->controlStartLight(getScoreProgressTimer()->getPercent());
-            if (this->isCompletedGoalPercent(getScoreProgressTimer()->getPercent()))
+            //this->getScoreProgressTimer()->setPercentage(percentage);
+            this->setPercentage(this->getPercentage() + GAME_SCORE_PROGRESS_TIMER_PER_INCREASE_PERCENT*direction);
+            //this->controlStartLight(getScoreProgressTimer()->getPercentage());
+            this->controlStartLight(this->getPercentage());
+            //if (this->isCompletedGoalPercent(getScoreProgressTimer()->getPercentage()))
+            if (this->isCompletedGoalPercent(this->getPercentage()))
             {
                 this->unschedule(GAME_SCORE_PROGRESS_SCHEDULE_KEY);
             }
@@ -113,7 +137,8 @@ namespace bubble_second {
 
     bool ScoreProgressMenu::isCompletedBack(float percent)
     {
-        return getScoreProgressTimer()->getPercent() <= percent || getScoreProgressTimer()->getPercent() <= 0.0f;
+        //return getScoreProgressTimer()->getPercentage() <= percent || getScoreProgressTimer()->getPercentage() <= 0.0f;
+        return this->getPercentage() <= percent || this->getPercentage() <= 0.0f;
     }
 
     StartNumbleModule ScoreProgressMenu::getStartNumbleModule()
@@ -127,6 +152,16 @@ namespace bubble_second {
         {
             var.second->controlLightWithPercent(percent/100);
         }
+    }
+
+    void ScoreProgressMenu::setPercentage(float percent)
+    {
+        this->getScoreProgressTimer()->setPercentage(PROGRESS_TIMER_DISTANCE / 100 * percent + PROGRESS_TIMER_MIN);
+    }
+
+    float ScoreProgressMenu::getPercentage()
+    {
+        return (this->getScoreProgressTimer()->getPercentage() - PROGRESS_TIMER_MIN)/ PROGRESS_TIMER_DISTANCE * 100;
     }
 
     void ScoreProgressMenu::setScoreProgressTimerPercent(float score)

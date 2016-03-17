@@ -23,6 +23,7 @@ namespace bubble_second {
         //std::string addGameSearchPath(const std::string& path);
         CenteredMenuItemSprite* createMenuItemSprite(const std::string& path, const cocos2d::ccMenuCallback& callback = nullptr);
         cocos2d::Sprite* createStageTypeSprite(const StageType& type);
+        void setStageTypeSprite(cocos2d::Sprite* sp, const StageType& type);
         cocos2d::Sprite* createGameBackgroundSprite(int cell_numble);
         //º”‘ÿŒ∆¿Ì
         void addResourcesTexture();

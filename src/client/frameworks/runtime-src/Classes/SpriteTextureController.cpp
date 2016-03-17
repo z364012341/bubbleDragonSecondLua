@@ -67,6 +67,11 @@ namespace bubble_second {
         return this->createGameSpriteWithPath(stagetype_to_path_[type]);
     }
 
+    void SpriteTextureController::setStageTypeSprite(cocos2d::Sprite* sp, const StageType& type)
+    {
+        this->setSpriteTexture(stagetype_to_path_[type], sp);
+    }
+
     cocos2d::Sprite * SpriteTextureController::createGameBackgroundSprite(int cell_numble)
     {
         char str[10];

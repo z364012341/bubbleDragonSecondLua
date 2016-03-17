@@ -58,7 +58,7 @@ namespace bubble_second {
         cocos2d::Vector<GameStageSelectionCell*> cell_vector_;
         //记录滚动条的位置
         static cocos2d::Vec2 scrollview_offset_;
-        float scale_zoom_;
+        //float scale_zoom_;
         ScrollView* scrollview_ = nullptr;
     };
 }

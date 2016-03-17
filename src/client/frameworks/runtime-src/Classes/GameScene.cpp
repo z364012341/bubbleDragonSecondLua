@@ -31,6 +31,15 @@
 #include "UserDataManager.h"
 #include "EnterPropsViewManager.h"
 #include "StageDataManager.h"
+
+const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
+const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
+const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
+const std::string GAME_STAGE_TYPE_SPRITE_NAME = "stageTypeSprite";
+const std::string UI_NAME_GAME_PLAYING_MENU = "gamePlayMenu";      //游戏场景的菜单
+const std::string UI_NAME_COMPLETED_TASK = "completedNumble";//已完成目标的label
+const std::string UI_NAME_GAME_TASK = "taskNumble";//胜利任务目标的label
+const float GAME_SCORE_PERCENT_X = 0.1647f; //得分的label的x坐标百分比
 namespace bubble_second {
     cocos2d::Scene* GameScene::createScene(int cell_numble, int numble)
     {
@@ -92,9 +101,17 @@ namespace bubble_second {
         this->addKeyboardEventListener();
         GamePlayController::getInstance()->setGameSceneDelegate(this);
 
-		//char a = '1';
-		//char& b = a;
-		//char* c = &a;
+        //char a[8][16];
+        //int e1 = &a[4][1] - &a[3][4];
+
+        //char *p = "Gameloft rainbow sss";
+        //char e2 = *(char*)(((short*)&p[5]) + 4);
+        //int e3 = -1 >> 5;
+        //int e4 = (15 ^ 0x10) << (7 & ~3);
+        //char * p2;
+        //int e5 = sizeof(p2);
+        //char * p3[20];
+        //int e6 = sizeof(p3);
         return true;
     }
 
@@ -256,13 +273,11 @@ namespace bubble_second {
             this->addChild(score_progress, UI_ZORDER_MENU_INFO);
 
             //左边分数的label
-            cocos2d::LabelAtlas* score_label = cocos2d::LabelAtlas::create(
-                "0", POP_SCORE_CHARMAP_PATH, POP_SCORE_CHARMAP_ITEMWIDTH, POP_SCORE_CHARMAP_ITEMHEIGHT, '.');
-            score_label->setName(UI_NAME_SCORE_TEXT);
-            score_label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.6f));
-            score_label->setScale(zoom);
-            score_label->setPosition(cocos2d::Vec2(visible_size.width*GAME_SCORE_PERCENT_X, pos_y));
-            this->addChild(score_label, UI_ZORDER_MENU_INFO);
+            cocos2d::Node* score_node = cocos2d::CSLoader::createNode(GAME_SCORE_INFO_CSB);
+            score_node->setName(UI_NAME_SCORE_TEXT);
+            score_node->setScale(zoom);
+            score_node->setPosition(cocos2d::Vec2(visible_size.width*GAME_SCORE_PERCENT_X, pos_y));
+            this->addChild(score_node, UI_ZORDER_MENU_INFO);
             //顶部右边的胜利条件数字
             cocos2d::Node* top_right_ui = cocos2d::CSLoader::createNode(GAME_RIGHT_INFO_CSB);
             top_right_ui->setScale(zoom);
@@ -270,24 +285,26 @@ namespace bubble_second {
             top_right_ui->setPosition(cocos2d::Vec2(visible_size.width*GAME_RIGHT_LABEL_PERCENT_X, pos_y));
             this->addChild(top_right_ui, UI_ZORDER_MENU_INFO);
             //关卡类型图标
-            cocos2d::Sprite* stage_sp = SpriteTextureController::getInstance()->createStageTypeSprite(this->getStageType());
-            stage_sp->setPositionX(GAME_RIGHT_STAGE_SPRITE_POS_X);
-            top_right_ui->addChild(stage_sp);
-        }
-        {//左下角菜单按钮
-            cocos2d::Sprite* item_select = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_PLAYING_MENU_NORMAL_PATH);
-            item_select->setScale(GAME_MENU_SELECT_SCALE);
-            cocos2d::Sprite* item_normal = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_PLAYING_MENU_NORMAL_PATH);
-            cocos2d::MenuItemSprite* item = cocos2d::MenuItemSprite::create(item_normal, item_select, [=](cocos2d::Ref*) {
-                this->popPauseAlert();
+            SpriteTextureController::getInstance()->setStageTypeSprite(
+                dynamic_cast<cocos2d::Sprite*>(top_right_ui->getChildByName(GAME_STAGE_TYPE_SPRITE_NAME)), 
+                this->getStageType());
+            //菜单按钮
+            pause_button_ = dynamic_cast<cocos2d::ui::Button*>(top_right_ui->getChildByName(UI_NAME_GAME_PLAYING_MENU));
+            pause_button_->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
+            pause_button_->addTouchEventListener([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
+                if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+                {
+                    this->popPauseAlert();
+                }
             });
-            item->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-            cocos2d::Menu* menu = cocos2d::Menu::createWithItem(item);
-            menu->setName(UI_NAME_GAME_PLAYING_MENU);
-            menu->setScale(zoom);
-            menu->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-            menu->setPosition(cocos2d::Vec2::ZERO);
-            this->addChild(menu, UI_ZORDER_MENU);
+            //技能秃瓢
+            {
+                cocos2d::Sprite* skillSprite = SpriteTextureController::getInstance()->createGameSpriteWithPath("jineng.PNG");
+                skillSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
+                skillSprite->setScale(zoom);
+                this->addChild(skillSprite, UI_ZORDER_MENU_INFO);
+            }
+
         }
         {   //发射台上的漩涡
             cocos2d::Sprite* swirl = SpriteTextureController::getInstance()->createGameSpriteWithPath(GUNSIGHT_SWIRL_RED_PATH);
@@ -302,8 +319,7 @@ namespace bubble_second {
     void bubble_second::GameScene::addGameBackground(int cell_numble)
     {
         cocos2d::Sprite* game_bg = SpriteTextureController::getInstance()->createGameBackgroundSprite(cell_numble);
-        //game_bg->setScaleX(SmartScaleController::getInstance()->getFixedHeightZoom()*1.06f);
-        //game_bg->setScaleY(SmartScaleController::getInstance()->getFixedHeightZoom()*1.3f);
+        game_bg->setScale(SmartScaleController::getInstance()->getFixedHeightZoom());
         cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
         game_bg->setPosition(cocos2d::Vec2(visible_size.width / 2, visible_size.height / 2));
         this->addChild(game_bg, UI_ZORDER_BACKGROUND);
@@ -370,9 +386,9 @@ namespace bubble_second {
         return stage_data_;
     }
 
-    cocos2d::Node* GameScene::getScoreUI()
+    cocos2d::ui::TextBMFont* GameScene::getScoreUI()
     {
-        return this->getChildByName(UI_NAME_SCORE_TEXT);
+        return dynamic_cast<cocos2d::ui::TextBMFont*>(this->getChildByName(UI_NAME_SCORE_TEXT)->getChildByName(GAME_SCORE_LABEL_NAME));
     }
 
     void GameScene::setPhysicsWorldBody()
@@ -847,14 +863,14 @@ namespace bubble_second {
         return dynamic_cast<BubbleSightingDevice*>(csb_node_->getChildByName(NAME_BUBBLE_SIGHTING_DEVICE));
     }
 
-    cocos2d::ui::TextAtlas* GameScene::getCompletedTaskLabel()
+    cocos2d::ui::TextBMFont* GameScene::getCompletedTaskLabel()
     {
-        return dynamic_cast<cocos2d::ui::TextAtlas*>(this->getChildByName(GAME_RIGHT_INFO_NAME)->getChildByName(UI_NAME_COMPLETED_TASK));
+        return dynamic_cast<cocos2d::ui::TextBMFont*>(this->getChildByName(GAME_RIGHT_INFO_NAME)->getChildByName(UI_NAME_COMPLETED_TASK));
     }
 
-    cocos2d::ui::TextAtlas* GameScene::getGameTaskLabel()
+    cocos2d::ui::TextBMFont* GameScene::getGameTaskLabel()
     {
-        return dynamic_cast<cocos2d::ui::TextAtlas*>(this->getChildByName(GAME_RIGHT_INFO_NAME)->getChildByName(UI_NAME_GAME_TASK));
+        return dynamic_cast<cocos2d::ui::TextBMFont*>(this->getChildByName(GAME_RIGHT_INFO_NAME)->getChildByName(UI_NAME_GAME_TASK));
     }
 
     cocos2d::ui::TextAtlas * GameScene::getBubbleUseCountLabel()
@@ -1224,7 +1240,7 @@ namespace bubble_second {
     void GameScene::setMenuTouchEnabled(bool flag)
     {
         setPropertyTouchEnabled(flag);
-        dynamic_cast<cocos2d::Menu*>(this->getChildByName(UI_NAME_GAME_PLAYING_MENU))->setEnabled(flag);
+        pause_button_->setEnabled(flag);
     }
 
     void GameScene::haveUsedProps(cocos2d::EventCustom* event)
@@ -1645,14 +1661,12 @@ namespace bubble_second {
 
     void GameScene::scoreTextUpdate(cocos2d::EventCustom * event)
     {
-        cocos2d::LabelAtlas* score_text = dynamic_cast<cocos2d::LabelAtlas*>(this->getScoreUI());
+        cocos2d::ui::TextBMFont* score_text = this->getScoreUI();
+        assert(score_text);
         char text[10];
         int score = *static_cast<int*>(event->getUserData());
         sprintf(text, "%d", score);
-        if (score_text)
-        {
-            score_text->setString(text);
-        }
+        score_text->setString(text);
         this->getScoreProgressMenu()->setScoreProgressTimerPercent(score);
     }
 

@@ -12,6 +12,8 @@
 #include "cocos2d.h"
 #include "BaseBubble.h"
 #include "ui\UITextAtlas.h"
+#include "ui\UITextBMFont.h"
+#include "ui\UIButton.h"
 namespace bubble_second {
     class BaseProperty;
     class BaseWeapon;
@@ -92,7 +94,7 @@ namespace bubble_second {
         void addKeyboardEventListener();
     private:
         //获取分数子控件
-        cocos2d::Node* getScoreUI();
+        cocos2d::ui::TextBMFont* getScoreUI();
         //获取最下位置的小球的y坐标
         float getBubbleMinPositionY();
         //计算地图面板调整的位置
@@ -120,9 +122,9 @@ namespace bubble_second {
         //获取瞄准设备
         BubbleSightingDevice* getBubbleSightingDevice();
         //获取已完成任务的label
-        cocos2d::ui::TextAtlas* getCompletedTaskLabel();
+        cocos2d::ui::TextBMFont* getCompletedTaskLabel();
         //获取胜利任务数
-        cocos2d::ui::TextAtlas* getGameTaskLabel();
+        cocos2d::ui::TextBMFont* getGameTaskLabel();
         //获取小球发射数
         cocos2d::ui::TextAtlas* getBubbleUseCountLabel();
         //获取人物
@@ -333,6 +335,7 @@ namespace bubble_second {
         int total_air_bubbles_numble_ = 0;
         StageType stage_type_;
         bool is_fall_stage_ = false;
+        cocos2d::ui::Button* pause_button_ = nullptr;
     };
 }
 #endif //_GAME_SCENE_H_

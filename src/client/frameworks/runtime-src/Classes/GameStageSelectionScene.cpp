@@ -14,7 +14,7 @@ namespace bubble_second {
     cocos2d::Vec2 GameStageSelectionScene::scrollview_offset_ = cocos2d::Vec2::ZERO;
     GameStageSelectionScene::GameStageSelectionScene()
     {
-		scale_zoom_ = 1.0f;
+		//scale_zoom_ = 1.0f;
     }
     GameStageSelectionScene::~GameStageSelectionScene()
     {
@@ -37,7 +37,7 @@ namespace bubble_second {
 
     cocos2d::Vec2 GameStageSelectionScene::getScorllViewOffset(int cell_numble)
     {
-        float pos_y = (-cell_vector_.at(cell_numble)->getPositionY() + GAME_STAGE_SCROLLVIEW_CELL_OFFSET_OFFSET)*scale_zoom_;
+        float pos_y = (-cell_vector_.at(cell_numble)->getPositionY() + GAME_STAGE_SCROLLVIEW_CELL_OFFSET_OFFSET)/*scale_zoom_*/;
         cocos2d::Vec2 point = cocos2d::Vec2(0.0f, pos_y);
         return point;
     }
@@ -73,7 +73,7 @@ namespace bubble_second {
     }
     bool GameStageSelectionScene::init()
     {
-        scale_zoom_ = SmartScaleController::getInstance()->getFixedWidthZoom();
+        //scale_zoom_ = SmartScaleController::getInstance()->getFixedWidthZoom();
         this->setName(GAME_STAGE_SELECTION_SCENE_NAME);
         this->addStageCell();
         this->addSettingMenu();
@@ -229,7 +229,7 @@ namespace bubble_second {
         EnterGameAlert* alert = EnterGameAlert::create(data.cell_numble, data.level_numble, type);
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-        alert->setScale(scale_zoom_);
+        alert->setScale(SmartScaleController::getInstance()->getFixedHeightZoom());
         this->addChild(alert, UI_ZORDER_MENU);
     }
 
@@ -258,7 +258,7 @@ namespace bubble_second {
         });
         item->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
         cocos2d::Menu* menu = cocos2d::Menu::createWithItem(item);
-        menu->setName(UI_NAME_GAME_PLAYING_MENU);
+        //menu->setName(UI_NAME_GAME_PLAYING_MENU);
         menu->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         menu->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
         menu->setPosition(cocos2d::Vec2::ZERO);
@@ -286,7 +286,7 @@ namespace bubble_second {
         });
         item->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
         cocos2d::Menu* menu = cocos2d::Menu::createWithItem(item);
-        menu->setName(UI_NAME_GAME_PLAYING_MENU);
+        //menu->setName(UI_NAME_GAME_PLAYING_MENU);
         menu->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         menu->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
         menu->setPosition(0.0f, 200.0f);
@@ -298,7 +298,7 @@ namespace bubble_second {
         GameSettingAlert* alert = GameSettingAlert::create();
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-        alert->setScale(scale_zoom_);
+        //alert->setScale(scale_zoom_);
         this->addChild(alert, UI_ZORDER_MENU);
     }
 

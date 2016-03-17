@@ -13,6 +13,7 @@
 #include "StageDataModule.h"
 #include "ui\UILoadingBar.h"
 #include "StartNumbleModule.h"
+
 namespace bubble_second {
     class ScoreProgressStart;
     class ScoreProgressMenu : public cocos2d::Node
@@ -31,7 +32,7 @@ namespace bubble_second {
         cocos2d::Vec2 getStartPositionWithPercent(float percent);
         //void lightenStartSpriteWithKey(const std::string& key);
         //void lightenStartSpriteWithPercent(float percent);
-        cocos2d::ui::LoadingBar* getScoreProgressTimer();
+        cocos2d::ProgressTimer* getScoreProgressTimer();
         //增长进度条
         void increaseProgressTimer();
         //设置目标百分比, 到达了计时器就会停
@@ -46,10 +47,13 @@ namespace bubble_second {
         bool isCompletedBack(float percent);
         StartNumbleModule getStartNumbleModule();
         void controlStartLight(float percent);
+        //设置进度条实际的进度
+        void setPercentage(float percent);
+        float getPercentage();
     private:
-        cocos2d::Node* score_progress_node_ = nullptr;
+        cocos2d::ProgressTimer* score_progress_timer_ = nullptr;
         StartNumbleModule start_numble_;
-        float percent_ = 0.0f;
+        float percent_;
         int last_score_ = 0;
         //星星容器
         cocos2d::Map<std::string, ScoreProgressStart*> start_sprite_map_;

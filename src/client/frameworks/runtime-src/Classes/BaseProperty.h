@@ -62,6 +62,7 @@ namespace bubble_second {
         void haveUsedProperty(cocos2d::EventCustom*);
     private:
         void addNumbleButton();
+        void addNumbleLabel(cocos2d::Sprite* bgSprite);
         void initHandle();
         void addTouchEventListener();
         void removeTouchEventListener();
@@ -72,6 +73,7 @@ namespace bubble_second {
         TouchEnabled touch_flag_;
         cocos2d::Menu* menu_;
         bool touch_enable_ = true;
+        cocos2d::LabelAtlas* props_numble_label_ = nullptr;
     };
 }
 #endif //_BASE_PROPERTY_H_
