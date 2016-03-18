@@ -30,6 +30,8 @@ namespace bubble_second {
     private:
         GameStageSelectionScene();
         bool init();
+        void loadView();
+        void layout();
         //增加关卡单元
         void addStageCell();
         //增加自定义事件
@@ -44,9 +46,9 @@ namespace bubble_second {
         //过关后进入下一关的接口
         void enterNextStage(StageData data);
         //设置按钮
-        void addSettingMenu();
+        //void addSettingMenu();
         //拼图按钮
-        void addPuzzleMenu();
+        void gotoPuzzleGame();
         void popSettingAlert();
         //进入场景调整滚动视图位置
         void adjustingScrollviewPosition();
@@ -60,6 +62,8 @@ namespace bubble_second {
         static cocos2d::Vec2 scrollview_offset_;
         //float scale_zoom_;
         ScrollView* scrollview_ = nullptr;
+        cocos2d::Node* csb_node_ = nullptr;
+
     };
 }
 #endif //_GAME_STAGE_SELECTION_SCENE_H_

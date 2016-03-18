@@ -54,7 +54,7 @@ namespace bubble_second {
             return false;
         }
         background_node_ = cocos2d::CSLoader::createNode(path);
-        background_node_->setScale(GAME_STAGE_SELECTION_CELL_SCALE);
+        //background_node_->setScale(GAME_STAGE_SELECTION_CELL_SCALE);
         this->addChild(background_node_);
         return true;
     }
@@ -71,6 +71,7 @@ namespace bubble_second {
             if (node && !StageNumble::getInstance()->moreThanStageTotal())
             {
                 menu = StageSelectionMenu::create(cell_numble, stage_numble, StageDataManager::getInstance()->getStageTypeWithNumble(stage_numble));
+                menu->setScale(0.5);
                 node->addChild(menu);
                 StageNumble::getInstance()->nextStageNumble();
                 ++tag;

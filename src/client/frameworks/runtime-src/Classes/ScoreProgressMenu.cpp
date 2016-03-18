@@ -8,6 +8,10 @@ const std::string PROGRESS_TIMER_BACKGROUND_PATH = "jindutiaokuang.png";//½ø¶ÈÌõ
 float PROGRESS_TIMER_MIN = 25.0f;
 float PROGRESS_TIMER_MAX = 75.0f;
 float PROGRESS_TIMER_DISTANCE = PROGRESS_TIMER_MAX - PROGRESS_TIMER_MIN;
+float PROGRESS_TIMER_OVAL_A = 111.0f;
+float PROGRESS_TIMER_OVAL_POW_A = 12321.0f;
+//float PROGRESS_TIMER_OVAL_B = 77.0f;
+float PROGRESS_TIMER_OVAL_POW_B = 5929.0f;
 namespace bubble_second {
     ScoreProgressMenu::ScoreProgressMenu():percent_(PROGRESS_TIMER_MIN)
     {
@@ -62,8 +66,12 @@ namespace bubble_second {
     {
         //auto image = dynamic_cast<cocos2d::ui::ImageView*>(score_progress_node_->getChildByName(SCORE_PROGRESS_BORDER_NAME));
         //(image);
+
+
         cocos2d::Rect rect = this->getScoreProgressTimer()->getBoundingBox();
-        return cocos2d::Vec2(rect.size.width * percent - rect.size.width /2, -rect.size.height * percent);
+        float x = PROGRESS_TIMER_OVAL_A*1.9 * percent - PROGRESS_TIMER_OVAL_A;
+        float y = sqrt((1 - pow(x, 2)/ PROGRESS_TIMER_OVAL_POW_A)*PROGRESS_TIMER_OVAL_POW_B);
+        return cocos2d::Vec2(x, -y);
     }
 
     void ScoreProgressMenu::initialStartNumble(StartNumbleModule start_numble)

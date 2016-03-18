@@ -21,7 +21,7 @@ local PuzzleBottomPlate = require(PUZZLE_BOTTOM_PLATE_PATH);
 local PuzzleStencil = require(PUZZLE_STENCIL_PATH);
 local PuzzlePieceEdges = require(PUZZLE_PIECE_EDGES_PATH);
 local PuzzlePieceShadow = require(PUZZLE_PIECE_SHADOW_PATH);
-local PuzzlePiecesCollection = require(PUZZLE_PIECES_COLLECTION_PATH);
+--local PuzzlePiecesCollection = require(PUZZLE_PIECES_COLLECTION_PATH);
 function PuzzlePiece:ctor(params)
     printf("PuzzlePiece");
     self:addTouchEvent();
@@ -45,7 +45,7 @@ function PuzzlePiece.onTouchBegan(touch, event)
     if PuzzlePiece.isTouchOnPuzzle(touch, event) then
         local node = event:getCurrentTarget();
         node._shadow:shadowGo();
-        node:setLocalZOrder(PuzzlePiecesCollection:getZOrderNumble());
+        node:setLocalZOrder(require(PUZZLE_PIECES_COLLECTION_PATH):getZOrderNumble());
         return true;
     end
     return false;

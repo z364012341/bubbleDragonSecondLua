@@ -39,7 +39,19 @@ const std::string GAME_STAGE_TYPE_SPRITE_NAME = "stageTypeSprite";
 const std::string UI_NAME_GAME_PLAYING_MENU = "gamePlayMenu";      //游戏场景的菜单
 const std::string UI_NAME_COMPLETED_TASK = "completedNumble";//已完成目标的label
 const std::string UI_NAME_GAME_TASK = "taskNumble";//胜利任务目标的label
+const std::string BUBBLE_MAP_LINE_PATH = "xian.PNG";
 const float GAME_SCORE_PERCENT_X = 0.1647f; //得分的label的x坐标百分比
+const float GAME_RIGHT_LABEL_PERCENT_X = 0.8353f; //右边的胜利条件的label的x坐标百分比
+const float GAME_TOP_INFO_POS_Y_PERCENT = 0.85f; //y的位置百分比
+const float GAME_PLAY_HEIGHT = 1130.0f;//除去上下菜单的高度
+const float BOTTOM_UI_BACKGROUND_HEIGHT = 90.0f; //游戏场景下面ui的背景图需要的高度
+const float GAME_PROPS_BACKGROUND_PERCENT_Y = 0.0525f;  //道具item背景的y坐标百分比                        
+const float PROPS_BACKGROUND_PERCENT_X_FIRST = 0.3468f;//道具item_1背景的X坐标百分比
+const float PROPS_BACKGROUND_PERCENT_X_FOURTH = 0.8931f; //道具item_1背景的X坐标百分比
+const float PROPS_BACKGROUND_PERCENT_PER_DISTANCE = (PROPS_BACKGROUND_PERCENT_X_FOURTH - PROPS_BACKGROUND_PERCENT_X_FIRST)/3;
+const float PROPS_BACKGROUND_PERCENT_X_SECOND = PROPS_BACKGROUND_PERCENT_X_FIRST+PROPS_BACKGROUND_PERCENT_PER_DISTANCE; //道具item_1背景的X坐标百分比
+const float PROPS_BACKGROUND_PERCENT_X_THIRD = PROPS_BACKGROUND_PERCENT_X_FIRST + PROPS_BACKGROUND_PERCENT_PER_DISTANCE*2; //道具item_1背景的X坐标百分比
+
 namespace bubble_second {
     cocos2d::Scene* GameScene::createScene(int cell_numble, int numble)
     {
@@ -210,7 +222,8 @@ namespace bubble_second {
             csb_node_ = cocos2d::CSLoader::createNode(GAME_LAYER_CSB);
             csb_node_->setName(UI_NAME_GAME_PLAY_AREA_NODE);
             csb_node_->setScale(zoom);
-            csb_node_->setPosition(cocos2d::Vec2(getPosFunc(visible_size.width, GAME_DESIGN_RESOLUTION_WIDTH), getPosFunc(visible_size.height, GAME_PLAY_HEIGHT)));
+            float x = (visible_size.width - GAME_DESIGN_RESOLUTION_WIDTH*zoom) / 2;
+            csb_node_->setPosition(x, visible_size.height*BOTTOM_UI_BACKGROUND_HEIGHT/ GAME_DESIGN_RESOLUTION_HEIGHT);
             this->addChild(csb_node_);
             this->addExchangeBubbleListener();
             this->initUIZOrder();
@@ -257,10 +270,6 @@ namespace bubble_second {
             top_ui_bg->setPosition(cocos2d::Vec2(0, visible_size.height));
             top_ui_bg->setName(UI_NAME_TOP_UI_BACKGROUND);
             top_ui_bg->setAnchorPoint(cocos2d::Vec2(0.0f, 1.0f));
-            top_ui_bg->setScaleX(smart_scale->getFixedWidthZoom());
-            cocos2d::Rect top_ui_bg_rect = top_ui_bg->getBoundingBox();
-            float scale_y = (visible_size.height - csb_node_->getPositionY() - GAME_PLAY_HEIGHT*zoom) / top_ui_bg_rect.size.height;
-            top_ui_bg->setScaleY(scale_y);
             this->addChild(top_ui_bg, UI_ZORDER_MENU_INFO);
         }
 
@@ -268,19 +277,17 @@ namespace bubble_second {
             cocos2d::Rect rect = this->getChildByName(UI_NAME_TOP_UI_BACKGROUND)->getBoundingBox();
             float pos_y = visible_size.height - rect.size.height*GAME_TOP_INFO_POS_Y_PERCENT / 2;
             ScoreProgressMenu* score_progress = ScoreProgressMenu::create();
-            score_progress->setPosition(cocos2d::Vec2(visible_size.width / 2, pos_y));
-            score_progress->setScale(zoom*GAME_TOP_INFO_SCALE);
+            score_progress->setPosition(cocos2d::Vec2(visible_size.width / 2, visible_size.height));
+            score_progress->setScale(zoom);
             this->addChild(score_progress, UI_ZORDER_MENU_INFO);
 
             //左边分数的label
             cocos2d::Node* score_node = cocos2d::CSLoader::createNode(GAME_SCORE_INFO_CSB);
             score_node->setName(UI_NAME_SCORE_TEXT);
-            score_node->setScale(zoom);
             score_node->setPosition(cocos2d::Vec2(visible_size.width*GAME_SCORE_PERCENT_X, pos_y));
             this->addChild(score_node, UI_ZORDER_MENU_INFO);
             //顶部右边的胜利条件数字
             cocos2d::Node* top_right_ui = cocos2d::CSLoader::createNode(GAME_RIGHT_INFO_CSB);
-            top_right_ui->setScale(zoom);
             top_right_ui->setName(GAME_RIGHT_INFO_NAME);
             top_right_ui->setPosition(cocos2d::Vec2(visible_size.width*GAME_RIGHT_LABEL_PERCENT_X, pos_y));
             this->addChild(top_right_ui, UI_ZORDER_MENU_INFO);
@@ -309,7 +316,6 @@ namespace bubble_second {
         {   //发射台上的漩涡
             cocos2d::Sprite* swirl = SpriteTextureController::getInstance()->createGameSpriteWithPath(GUNSIGHT_SWIRL_RED_PATH);
             swirl->setPosition(this->getGunsightPosition());
-            //swirl->setOpacity(UI_SWIRL_OPACITY);
             csb_node_->addChild(swirl, UI_ZORDER_GUNSIGHT_SWIRL);
             swirl->runAction(cocos2d::RepeatForever::create(cocos2d::RotateBy::create(UI_SWIRL_ROTATIEBY_TIME, UI_SWIRL_ROTATIEBY_DEGREE)));
         }
@@ -395,7 +401,6 @@ namespace bubble_second {
     {
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         //创建一个物理世界, 大小和屏幕的尺寸相同, 使用默认材质, debug框的宽度为3个像素
-        //cocos2d::Size world_size = cocos2d::Size(visibleSize.width, bubble_map_node_->getPositionY()+BUBBLE_RADIUS);
         float zoom = SmartScaleController::getInstance()->getPlayAreaZoom();
         cocos2d::Size world_size = cocos2d::Size(GAME_DESIGN_RESOLUTION_WIDTH, bubble_map_node_->getPositionY() + BUBBLE_RADIUS)*zoom;
         auto body = cocos2d::PhysicsBody::createEdgeBox(world_size,
@@ -436,6 +441,9 @@ namespace bubble_second {
     {
         bubble_map_node_ = cocos2d::Node::create();
         bubble_map_node_->setName(BUBBLE_MAP_NODE_NAME);
+        cocos2d::Sprite* line = SpriteTextureController::getInstance()->createGameSpriteWithPath(BUBBLE_MAP_LINE_PATH);
+        line->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
+        bubble_map_node_->addChild(line);
         bubble_map_node_->setPosition(this->getBubbleMapOrigin());
         csb_node_->addChild(bubble_map_node_, UI_ZORDER_MAP_BUBBLE);
         GamePlayController::getInstance()->loadStageMap(stage_numble);

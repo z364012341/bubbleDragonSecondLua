@@ -26,8 +26,6 @@
 const std::string GAME_SCENE = "GameScene";
 const std::string GAME_LAYER_CSB = "GameLayer.csb";
 const std::string GAME_TOP_INFO_NAME = "TopUINode"; 
-const float GAME_TOP_INFO_SCALE = 0.8f; //初始的放大倍率
-const float GAME_TOP_INFO_POS_Y_PERCENT = 0.75f; //y的位置百分比
 const std::string GAME_TOP_INFO_CSB = "TopUINode.csb";
 const std::string GAME_RIGHT_INFO_NAME = "right_UI_node";
 const float GAME_RIGHT_STAGE_SPRITE_POS_X = -90.0f; //关卡类型图标位置
@@ -145,14 +143,6 @@ const float GAME_DESIGN_RESOLUTION_WIDTH = 750.0f;//设计分辨率宽
 const float GAME_DESIGN_RESOLUTION_HEIGHT = 1334.0f;//设计分辨率高
 const float GAME_ALERT_MASK_WIDTH = GAME_DESIGN_RESOLUTION_WIDTH*2;//alert后面的屏蔽宽
 const float GAME_ALERT_MASK_HEIGHT = GAME_DESIGN_RESOLUTION_HEIGHT*2;//高
-const float GAME_PLAY_HEIGHT = 1140.0f;//除去上下菜单的高度
-const float BOTTOM_UI_BACKGROUND_HEIGHT = 105.0f; //游戏场景下面ui的背景图需要的高度
-const float GAME_PROPS_BACKGROUND_PERCENT_Y = 0.0525f;  //道具item背景的y坐标百分比                        
-const float PROPS_BACKGROUND_PERCENT_X_FIRST = 0.3158f;//道具item_1背景的X坐标百分比
-const float PROPS_BACKGROUND_PERCENT_X_SECOND = 0.5076f; //道具item_1背景的X坐标百分比
-const float PROPS_BACKGROUND_PERCENT_X_THIRD = 0.6994f; //道具item_1背景的X坐标百分比
-const float PROPS_BACKGROUND_PERCENT_X_FOURTH = 0.8931f; //道具item_1背景的X坐标百分比
-const float GAME_RIGHT_LABEL_PERCENT_X = 0.8636f; //右边的胜利条件的label的x坐标百分比
 //常量参数
 const cocos2d::Vec2 RECENT_BUBBLE_CAST_SHAPE[] = { cocos2d::Vec2(0.0f, 100.0f),
 cocos2d::Vec2(GAME_DESIGN_RESOLUTION_WIDTH / 2, 0.0f), cocos2d::Vec2(GAME_DESIGN_RESOLUTION_WIDTH / -2, 0.0f) };
