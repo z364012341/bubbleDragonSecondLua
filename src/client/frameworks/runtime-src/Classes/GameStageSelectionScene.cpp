@@ -14,6 +14,17 @@ const std::string GAME_STAGE_SELECTION_CSB_PATH = "GameStageSelectionLayer.csb";
 const std::string STAGE_SCROLLVIEW_NAME = "StageScrollView";
 const std::string SETTING_BUTTON_NAME = "SettingButton";
 const std::string PUZZLE_BUTTON_NAME = "Puzzle";
+const std::string STRENGTH_INFO = "StrengthInfo";
+const std::string COIN_INFO = "CoinInfo";
+const std::string DIAMOND_INFO = "DiamondInfo";
+const std::string RANKINGLIST_BUTTON = "RankingList";
+const std::string GIFT_BUTTON = "Gift";
+const std::string CHECKIN_BUTTON = "CheckIn";
+const std::string CHALLENGEMODE_BUTTON = "ChallengeMode";
+const float TOP_INFO_POS_Y_PERCENT = 0.9564f;
+const float BUTTON_POS_Y_PERCENT_1 = 0.8343f;
+const float BUTTON_POS_Y_PERCENT_2 = 0.6988f;
+const float BUTTON_POS_Y_PERCENT_3 = 0.6988f;
 namespace bubble_second {
     cocos2d::Vec2 GameStageSelectionScene::scrollview_offset_ = cocos2d::Vec2::ZERO;
     GameStageSelectionScene::GameStageSelectionScene()
@@ -23,21 +34,6 @@ namespace bubble_second {
     GameStageSelectionScene::~GameStageSelectionScene()
     {
     }
-
-    //void GameStageSelectionScene::scrollViewDidScroll(ScrollView * view)
-    //{
-    //    auto layout = view->getContainer();    
-    //    float currentY = layout->getPositionY();     
-    //    if (currentY > scrollview_bottom_height_) 
-    //    { 
-    //        view->setContentOffset(cocos2d::Vec2(0.0f, scrollview_bottom_height_)); 
-    //    }
-    //    if (-currentY > layout->getContentSize().height - view->getViewSize().height) 
-    //    {
-    //        view->setContentOffset(cocos2d::Vec2(0, -layout->getContentSize().height + view->getViewSize().height));
-    //    }
-    //    scrollview_offset_ = view->getContentOffset();
-    //}
 
     cocos2d::Vec2 GameStageSelectionScene::getScorllViewOffset(int cell_numble)
     {
@@ -77,7 +73,6 @@ namespace bubble_second {
     }
     bool GameStageSelectionScene::init()
     {
-        //scale_zoom_ = SmartScaleController::getInstance()->getFixedWidthZoom();
         if (!cocos2d::Layer::init())
         {
             return false;
@@ -85,8 +80,6 @@ namespace bubble_second {
         this->setName(GAME_STAGE_SELECTION_SCENE_NAME);
         this->loadView();
         this->addStageCell();
-        //this->addSettingMenu();
-
         cocos2d::Director::getInstance()->setDisplayStats(false);
         return true;
     }
@@ -119,30 +112,28 @@ namespace bubble_second {
     void GameStageSelectionScene::layout()
     {
         float visibleHeight = cocos2d::Director::getInstance()->getVisibleSize().height;
-        csb_node_->getChildByName("StrengthInfo")->setPositionY(visibleHeight*0.9564);
-        csb_node_->getChildByName("CoinInfo")->setPositionY(visibleHeight*0.9564);
-        csb_node_->getChildByName("DiamondInfo")->setPositionY(visibleHeight*0.9564);
+        csb_node_->getChildByName(STRENGTH_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
+        csb_node_->getChildByName(COIN_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
+        csb_node_->getChildByName(DIAMOND_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
 
-        csb_node_->getChildByName("RankingList")->setPositionY(visibleHeight*0.8343);
-        csb_node_->getChildByName("Gift")->setPositionY(visibleHeight*0.8343);
+        csb_node_->getChildByName(RANKINGLIST_BUTTON)->setPositionY(visibleHeight*BUTTON_POS_Y_PERCENT_1);
+        csb_node_->getChildByName(GIFT_BUTTON)->setPositionY(visibleHeight*BUTTON_POS_Y_PERCENT_1);
 
-        csb_node_->getChildByName("CheckIn")->setPositionY(visibleHeight*0.6988);
-        csb_node_->getChildByName(PUZZLE_BUTTON_NAME)->setPositionY(visibleHeight*0.6988);
+        csb_node_->getChildByName(CHECKIN_BUTTON)->setPositionY(visibleHeight*BUTTON_POS_Y_PERCENT_2);
+        csb_node_->getChildByName(PUZZLE_BUTTON_NAME)->setPositionY(visibleHeight*BUTTON_POS_Y_PERCENT_2);
 
-        csb_node_->getChildByName("ChallengeMode")->setPositionY(visibleHeight*0.3545);
+        csb_node_->getChildByName(CHALLENGEMODE_BUTTON)->setPositionY(visibleHeight*BUTTON_POS_Y_PERCENT_3);
 
     }
 
     void GameStageSelectionScene::addStageCell()
     {
-        //using cocos2d::ui::ScrollView;
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         float cell_x = visibleSize.width / 2;
         float cell_y = GAME_STAGE_SCROLLVIEW_CELL_HEIGHT / 2;
         float scrollview_height = 0.0;
         cocos2d::Layer *slayer = cocos2d::Layer::create();
         GameStageSelectionCell *cell = nullptr;
-        //scrollview_ = ScrollView::create();
         while (true)
         {
             cell = GameStageSelectionCell::create();
@@ -150,10 +141,8 @@ namespace bubble_second {
             {
                 break;
             }
-            cell->setPosition(cell_x, cell_y/*scale_zoom_*/);
-            //cell->setScale(scale_zoom_);
+            cell->setPosition(cell_x, cell_y);
             scrollview_->addChild(cell);
-            //++cell_numbel;
             cell_y += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
             scrollview_height += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
             cell_vector_.pushBack(cell);
@@ -162,17 +151,12 @@ namespace bubble_second {
         scrollview_bottom_height_ = bottom_sp->getBoundingBox().size.height;
         bottom_sp->setPosition(cell_x, scrollview_bottom_height_ / -2);
         slayer->addChild(bottom_sp);
-        //scrollview_ = ScrollView::create(/*cocos2d::Director::getInstance()->getVisibleSize(), slayer*/);
         scrollview_->setInnerContainerSize(cocos2d::Size(750, scrollview_height));
         scrollview_->addChild(slayer);
-        //scrollview_->setDelegate(this);
         //¹ö¶¯·½Ïò  
         scrollview_->setDirection(ScrollView::Direction::VERTICAL);
         scrollview_->setBounceEnabled(true);
-        //scrollview_->setContentSize(cocos2d::Size(cocos2d::Director::getInstance()->getVisibleSize().width, scrollview_height/*scale_zoom_*/));
         scrollview_->setContentSize(cocos2d::Size(cocos2d::Director::getInstance()->getVisibleSize()));
-        //this->addChild(scrollview_);
-        //scrollViewDidScroll(scrollview_);
         scrollview_->addEventListener(CC_CALLBACK_2(GameStageSelectionScene::scrollViewMoveCallback, this));
         this->adjustingScrollviewPosition();
     }
@@ -192,37 +176,7 @@ namespace bubble_second {
         }
         scrollview_offset_ = layout->getPosition();
     }
-    //  cocos2d::Layer * bubble_second::GameStageSelectionScene::createScrollViewContentLayer()
-    //  {
-          ////cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-          //float cell_x = cocos2d::Director::getInstance()->getVisibleSize().width / 2;
-          //float cell_y = GAME_STAGE_SCROLLVIEW_CELL_HEIGHT / 2;
-          //float scrollview_height = 0.0;
-          //cocos2d::Layer *slayer = cocos2d::Layer::create();
-          ////StageNumble::getInstance()->clear();
-          //GameStageSelectionCell *cell = nullptr;
-          //while (true)
-          //{
-          //	cell = GameStageSelectionCell::create();
-          //	if (!cell)
-          //	{
-          //		break;
-          //	}
-          //	cell->setPosition(cell_x, cell_y/*scale_zoom_*/);
-          //	//cell->setScale(scale_zoom_);
-          //	slayer->addChild(cell);
-          //	//++cell_numbel;
-          //	cell_y += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
-          //	scrollview_height += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
-          //	cell_vector_.pushBack(cell);
-          //}
-          //cocos2d::Sprite* bottom_sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SCROLLVIEW_BOTTOM_PATH);
-          //bottom_sp->setScale(scale_zoom_);
-          //scrollview_bottom_height_ = bottom_sp->getBoundingBox().size.height;
-          //bottom_sp->setPosition(cell_x, scrollview_bottom_height_ / -2);
-          //slayer->addChild(bottom_sp);
-          //return slayer;
-    //  }
+
     void GameStageSelectionScene::addEventListenerCustom()
     {
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
@@ -299,23 +253,6 @@ namespace bubble_second {
         this->popEnterGameAlert(next_data);
     }
 
-    //void GameStageSelectionScene::addSettingMenu()
-    //{
-    //    cocos2d::Sprite* item_select = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_PLAYING_MENU_NORMAL_PATH);
-    //    item_select->setScale(GAME_MENU_SELECT_SCALE);
-    //    cocos2d::Sprite* item_normal = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_PLAYING_MENU_NORMAL_PATH);
-    //    cocos2d::MenuItemSprite* item = cocos2d::MenuItemSprite::create(item_normal, item_select, [=](cocos2d::Ref*) {
-    //        this->popSettingAlert();
-    //    });
-    //    item->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-    //    cocos2d::Menu* menu = cocos2d::Menu::createWithItem(item);
-    //    //menu->setName(UI_NAME_GAME_PLAYING_MENU);
-    //    menu->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
-    //    menu->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-    //    menu->setPosition(cocos2d::Vec2::ZERO);
-    //    this->addChild(menu, UI_ZORDER_MENU);
-    //}
-
     void bubble_second::GameStageSelectionScene::gotoPuzzleGame()
     {
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
@@ -324,10 +261,6 @@ namespace bubble_second {
             runtimeEngine->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
             runtimeEngine->start();
 #else
-            //if (cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua"))
-            //{
-            //    return false;
-            //}
 			cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua");
 #endif
     }
@@ -337,7 +270,6 @@ namespace bubble_second {
         GameSettingAlert* alert = GameSettingAlert::create();
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-        //alert->setScale(scale_zoom_);
         this->addChild(alert, UI_ZORDER_MENU);
     }
 
