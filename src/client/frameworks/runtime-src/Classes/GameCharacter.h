@@ -48,8 +48,8 @@ namespace bubble_second {
 		void removeEventListenerCustom();
         void addCharacterArmature();
 		void addCharacterArmatureInvisibleWithName(const std::string& name);
-        void playStandbyAnimation();
-        cocostudio::Armature* getCharactorArmature();
+        void playStandbyAnimation(cocostudio::Armature* armature, const std::string& name);
+        cocostudio::Armature* getCharactorArmature1();
 		cocostudio::Armature* getCharactorArmature2();
         cocostudio::Armature* getCharactorArmature3();
 		//cocostudio::Armature* getCharactorArmatureVictory();
@@ -66,9 +66,9 @@ namespace bubble_second {
 		void playShootAnimation2();
 		void playShootAnimation3();
         void playShootAnimation4();
-        void changeStandbyAnimation1();
-        void changeStandbyAnimation3();
-        void changeStandbyAnimation4();
+        void playStandbyAnimation1();
+        void playStandbyAnimation3();
+        void playStandbyAnimation4();
 		void charactorVictorChange();
 		void playCharactorVictorChangeAnimation();
         void playShootBubbleAnimation(cocos2d::EventCustom* event);

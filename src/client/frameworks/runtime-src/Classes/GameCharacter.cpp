@@ -1,6 +1,6 @@
 #include "GameCharacter.h"
-#include "GameCharacterFactory.h"
-#include "SpriteTextureController.h"
+//#include "GameCharacterFactory.h"
+//#include "SpriteTextureController.h"
 #include "GamePlayController.h"
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_NAME = "laohu";
 const std::string GAME_CHARACTER_ARMATURE_LAOHU2_NAME = "laohu2";
@@ -8,15 +8,15 @@ const std::string GAME_CHARACTER_ARMATURE_LAOHU3_NAME = "laohu3";
 const std::string GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_NAME = "TX-yanwu";
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_NAME = "laohu-shengli";
 
-const std::string GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME = "daiji-01-1";
+const std::string CHARACTER_ANIMATION_STANDBY_NAME_1 = "daiji-01-1";
+const std::string CHARACTER_ANIMATION_STANDBY_NAME_4 = "rengqiu-04-daiji";
+const std::string CHARACTER_ANIMATION_STANDBY_NAME_3 = "rengqiu-03-daiji";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_1 = "rengqiu01";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_1TO2 = "01-rengqiuqiehuan-02";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2TO1 = "02-rengqiuqiehuan-01";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2 = "rengqiu-02";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_3 = "rengqiu-03";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_4 = "rengqiu-04";
-const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_4 = "rengqiu-04-daiji";
-const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_3 = "rengqiu-03-daiji";
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1 = 40.0f;
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_2 = -10.0f;
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_3 = -40.0f;
@@ -26,7 +26,6 @@ const float CHARACTER_SHOOT_BUBBLE_DELAYTIME_2 = 0.05f;
 const std::string CHARACTER_DEFEAT_ANIMATION_NAME_1 = "shibai-01";
 const std::string CHARACTER_DEFEAT_ANIMATION_NAME_3 = "shibai-03ku-xunhuan";
 const std::string CHARACTER_VICTORY_SMOKE_ANIMATION_NAME = "Animation1";
-//const std::string CHARACTER_VICTORY_CHANGE_ANIMATION_NAME = "shengli";
 const std::string CHARACTER_VICTORY_STANDBY_ANIMATION_1_NAME = "laohu-shengli";
 const std::string CHARACTER_VICTORY_STANDBY_ANIMATION_2_NAME = "laohu-shengli-xunhuan";
 
@@ -47,7 +46,7 @@ namespace bubble_second {
 			return false;
 		}
 		this->addCharacterArmature();
-		this->playStandbyAnimation();
+		this->playStandbyAnimation1();
 		return true;
 	}
 
@@ -74,6 +73,7 @@ namespace bubble_second {
 	{
 		auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
 		dispatcher->removeCustomEventListeners(EVENT_SHOOT_PREPARE_BUBBLE);
+        dispatcher->removeCustomEventListeners(EVENT_ROTATE_SIGHTING_DEVICE);
 	}
 
 	void GameCharacter::addCharacterArmature()
@@ -81,19 +81,11 @@ namespace bubble_second {
 		{
 			cocostudio::Armature* charactor = cocostudio::Armature::create(GAME_CHARACTER_ARMATURE_LAOHU_NAME);
 			charactor->setScale(CHARACTER_ARMATURE_SCALE);
-			//charactor_armature_1_->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
 			this->addChild(charactor);
 			armature_vector_.insert(GAME_CHARACTER_ARMATURE_LAOHU_NAME, charactor);
 		}
 		this->addCharacterArmatureInvisibleWithName(GAME_CHARACTER_ARMATURE_LAOHU2_NAME);
         this->addCharacterArmatureInvisibleWithName(GAME_CHARACTER_ARMATURE_LAOHU3_NAME);
-		//{
-		//	cocostudio::Armature* charactor = cocostudio::Armature::create(GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_NAME);
-		//	charactor->setScale(CHARACTER_ARMATURE_SCALE);
-		//	charactor->setVisible(false);
-		//	this->addChild(charactor);
-		//	armature_vector_.insert(CHARACTER_ARMATRUE_KEY_VECTORY, charactor);
-		//}
 	}
 
 	void GameCharacter::addCharacterArmatureInvisibleWithName(const std::string& name)
@@ -105,12 +97,6 @@ namespace bubble_second {
 		armature_vector_.insert(name, charactor);
 	}
 
-	void GameCharacter::playStandbyAnimation()
-	{
-		auto armature = this->getCharactorArmature();
-        this->setOtherArmatureInvisible(armature);
-        armature->getAnimation()->play(GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-	}
 	void GameCharacter::playShootBubbleAnimation(cocos2d::EventCustom* event)
 	{
         float angle = *static_cast<float*>(event->getUserData());
@@ -132,22 +118,24 @@ namespace bubble_second {
         }
 	}
 
-
     void bubble_second::GameCharacter::changeCharacterAngle(cocos2d::EventCustom * event)
     {
         float angle = *static_cast<float*>(event->getUserData());
-        CCLOG("%f", angle);
         if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1)
         {
-            this->changeStandbyAnimation1();
+            this->playStandbyAnimation1();
         }
         else if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_2)
         {
-            this->changeStandbyAnimation3();
+            this->playStandbyAnimation1();
+        }
+        else if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_3)
+        {
+            this->playStandbyAnimation3();
         }
         else
         {
-            this->changeStandbyAnimation4();
+            this->playStandbyAnimation4();
         }
     }
 
@@ -163,14 +151,13 @@ namespace bubble_second {
 
     void bubble_second::GameCharacter::playAnimationWithNameAndCallfunc(const std::string & name, const std::function<void()>& callfunc)
     {
-        auto armature = this->getCharactorArmature();
+        auto armature = this->getCharactorArmature1();
         this->setOtherArmatureInvisible(armature);
         armature->getAnimation()->stop();
         armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, false);
         armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
             if (movementType == cocostudio::COMPLETE && !isDefeat())
             {
-                //this->playStandbyAnimation();
                 callfunc();
             }
         });
@@ -178,7 +165,7 @@ namespace bubble_second {
 
     void bubble_second::GameCharacter::playAnimationWithNamesAndCallfunc(const std::vector<std::string>& names, const std::function<void()>& callfunc)
     {
-        auto armature = this->getCharactorArmature();
+        auto armature = this->getCharactorArmature1();
         armature->getAnimation()->stop();
         armature->getAnimation()->playWithNames(names, SPECIAL_BUBBLE_EFFECT_DURATION, false);
         armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
@@ -191,13 +178,12 @@ namespace bubble_second {
 
     void bubble_second::GameCharacter::playShootAnimationWithBackName(const std::string & name, const std::string& backName)
     {
-        auto armature = this->getCharactorArmature();
-        //armature->getAnimation()->stop();
+        auto armature = this->getCharactorArmature1();
         armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, false);
         armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
             if (movementType == cocostudio::COMPLETE && !isDefeat())
             {
-                this->playAnimationWithNameAndCallfunc(backName, CC_CALLBACK_0(GameCharacter::playStandbyAnimation, this));
+                this->playAnimationWithNameAndCallfunc(backName, CC_CALLBACK_0(GameCharacter::playStandbyAnimation1, this));
             }
         });
     }
@@ -215,7 +201,7 @@ namespace bubble_second {
                 std::vector<std::string> names;
                 names.push_back(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2);
                 names.push_back(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2TO1);
-                this->playAnimationWithNamesAndCallfunc(names, CC_CALLBACK_0(GameCharacter::playStandbyAnimation, this));
+                this->playAnimationWithNamesAndCallfunc(names, CC_CALLBACK_0(GameCharacter::playStandbyAnimation1, this));
             });
             cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(CHARACTER_SHOOT_BUBBLE_DELAYTIME_2), func);
             this->runAction(seq);
@@ -224,7 +210,6 @@ namespace bubble_second {
 
 	void GameCharacter::playShootAnimation3()
 	{
-        //GamePlayController::getInstance()->shootPrepareBubble();
 		cocostudio::Armature* armature = this->getCharactorArmature2();
 		this->setOtherArmatureInvisible(armature);
         this->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(CHARACTER_SHOOT_BUBBLE_DELAYTIME_2),
@@ -234,9 +219,7 @@ namespace bubble_second {
                 armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
                     if (movementType == cocostudio::COMPLETE && !isDefeat())
                     {
-                        //this->setOtherArmatureInvisible(this->getCharactorArmature());
-                        this->setOtherArmatureInvisible(this->getCharactorArmature3());
-                        this->getCharactorArmature3()->getAnimation()->play(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_4, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+                        this->playStandbyAnimation4();
                     }
                 });
             }), 
@@ -255,8 +238,7 @@ namespace bubble_second {
                 armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
                     if (movementType == cocostudio::COMPLETE && !isDefeat())
                     {
-                        //this->setOtherArmatureInvisible(this->getCharactorArmature());
-                        armature->getAnimation()->play(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_4, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+                        this->playStandbyAnimation4();
                     }
                 });
             }), 
@@ -264,34 +246,29 @@ namespace bubble_second {
         );
     }
 
-    void GameCharacter::changeStandbyAnimation1()
+    void GameCharacter::playStandbyAnimation(cocostudio::Armature* armature, const std::string& name)
     {
-        auto armature = this->getCharactorArmature();
-        if (!armature->isVisible())
+        if (armature->getAnimation()->getCurrentMovementID() == name && armature->isVisible())
         {
-            //this->setOtherArmatureInvisible(armature);
-            this->playStandbyAnimation();
+            return;
         }
+        this->setOtherArmatureInvisible(armature);
+        armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, true);
     }
 
-    void GameCharacter::changeStandbyAnimation3()
+    void GameCharacter::playStandbyAnimation1()
     {
-        auto armature = this->getCharactorArmature2();
-        if (!armature->isVisible())
-        {
-            this->setOtherArmatureInvisible(armature);
-            armature->getAnimation()->play(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_3, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-        }
+        this->playStandbyAnimation(this->getCharactorArmature1(), CHARACTER_ANIMATION_STANDBY_NAME_1);
     }
 
-    void GameCharacter::changeStandbyAnimation4()
+    void GameCharacter::playStandbyAnimation3()
     {
-        auto armature = this->getCharactorArmature3();
-        if (!armature->isVisible())
-        {
-            this->setOtherArmatureInvisible(armature);
-            armature->getAnimation()->play(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_4, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-        }
+        this->playStandbyAnimation(this->getCharactorArmature2(), CHARACTER_ANIMATION_STANDBY_NAME_3);
+    }
+
+    void GameCharacter::playStandbyAnimation4()
+    {
+        this->playStandbyAnimation(this->getCharactorArmature3(), CHARACTER_ANIMATION_STANDBY_NAME_4);
     }
 
     void GameCharacter::playLegendaryAnimation()
@@ -317,7 +294,7 @@ namespace bubble_second {
 
     void GameCharacter::playVictoryAnimation()
     {
-		auto armature = this->getCharactorArmature();
+		auto armature = this->getCharactorArmature1();
 		armature->getAnimation()->stop();
 		armature->getAnimation()->play(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2, SPECIAL_BUBBLE_EFFECT_DURATION, false);
 		armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
@@ -353,9 +330,8 @@ namespace bubble_second {
 		{
 			return;
 		}
-        auto armature = this->getCharactorArmature();
+        auto armature = this->getCharactorArmature1();
 		armature->getAnimation()->stop();
-		//this->getCharactorArmature2()->setVisible(false);
         this->setOtherArmatureInvisible(armature);
 		//armature->setVisible(true);
         this->setDefeatFlag(true);
@@ -368,7 +344,7 @@ namespace bubble_second {
 		});
     }
 
-    cocostudio::Armature * GameCharacter::getCharactorArmature()
+    cocostudio::Armature * GameCharacter::getCharactorArmature1()
     {
 		return armature_vector_.at(GAME_CHARACTER_ARMATURE_LAOHU_NAME);
     }
@@ -382,31 +358,11 @@ namespace bubble_second {
     {
         return armature_vector_.at(GAME_CHARACTER_ARMATURE_LAOHU3_NAME);
     }
-	//cocostudio::Armature * GameCharacter::getCharactorArmatureVictory()
-	//{
-	//	return armature_vector_.at(CHARACTER_ARMATRUE_KEY_VECTORY);
-	//}
 
     void GameCharacter::playNotLoopAnimationWithName(const std::string& name)
     {
-  //      auto armature = this->getCharactorArmature();
-  //      armature->getAnimation()->stop();
-  //      armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-  //      armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-  //          if (movementType == cocostudio::COMPLETE && !isDefeat())
-  //          {
-  //              this->playStandbyAnimation();
-  //          }
-		//});
-        this->playAnimationWithNameAndCallfunc(name, CC_CALLBACK_0(GameCharacter::playStandbyAnimation, this));
+        this->playAnimationWithNameAndCallfunc(name, CC_CALLBACK_0(GameCharacter::playStandbyAnimation1, this));
     }
-
-    //void GameCharacter::playLoopAnimationWithName(const std::string & name)
-    //{
-    //    //auto armature = this->getCharactorArmature();
-    //    //armature->getAnimation()->stop();
-    //    //armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-    //}
 
 	void GameCharacter::setOtherArmatureInvisible(cocostudio::Armature* armature)
 	{
