@@ -294,6 +294,7 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameAlertMask.h" />
+    <ClInclude Include="..\Classes\ButtonEffectController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -565,6 +566,7 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameAlertMask.cpp" />
+    <ClCompile Include="..\Classes\ButtonEffectController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

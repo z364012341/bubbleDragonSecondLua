@@ -15,6 +15,8 @@ const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2TO1 = "02-rengqiu
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2 = "rengqiu-02";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_3 = "rengqiu-03";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_4 = "rengqiu-04";
+const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_4 = "rengqiu-04-daiji";
+const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_3 = "rengqiu-03-daiji";
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1 = 40.0f;
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_2 = -10.0f;
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_3 = -40.0f;
@@ -65,6 +67,7 @@ namespace bubble_second {
 	{
 		auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
 		dispatcher->addCustomEventListener(EVENT_SHOOT_PREPARE_BUBBLE, CC_CALLBACK_1(GameCharacter::playShootBubbleAnimation, this));
+        dispatcher->addCustomEventListener(EVENT_ROTATE_SIGHTING_DEVICE, CC_CALLBACK_1(GameCharacter::changeCharacterAngle, this));
 	}
 
 	void GameCharacter::removeEventListenerCustom()
@@ -105,29 +108,48 @@ namespace bubble_second {
 	void GameCharacter::playStandbyAnimation()
 	{
 		auto armature = this->getCharactorArmature();
-		armature->getAnimation()->play(GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-		//this->playLoopAnimationWithName(GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME);
+        this->setOtherArmatureInvisible(armature);
+        armature->getAnimation()->play(GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
 	}
 	void GameCharacter::playShootBubbleAnimation(cocos2d::EventCustom* event)
 	{
         float angle = *static_cast<float*>(event->getUserData());
 		if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1)
-            {
-                this->playShootAnimation1();
-            }
-            else if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_2)
-            {
-                this->playShootAnimation2();
-            }
-            else if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_3)
-            {
-                this->playShootAnimation3();
-            }
-            else
-            {
-                this->playShootAnimation4();
-            }
+        {
+            this->playShootAnimation1();
+        }
+        else if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_2)
+        {
+            this->playShootAnimation2();
+        }
+        else if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_3)
+        {
+            this->playShootAnimation3();
+        }
+        else
+        {
+            this->playShootAnimation4();
+        }
 	}
+
+
+    void bubble_second::GameCharacter::changeCharacterAngle(cocos2d::EventCustom * event)
+    {
+        float angle = *static_cast<float*>(event->getUserData());
+        CCLOG("%f", angle);
+        if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1)
+        {
+            this->changeStandbyAnimation1();
+        }
+        else if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_2)
+        {
+            this->changeStandbyAnimation3();
+        }
+        else
+        {
+            this->changeStandbyAnimation4();
+        }
+    }
 
     void bubble_second::GameCharacter::playShootAnimationAloneWithNameAndDelaytime(const std::string& name, float delaytime = 0.0f)
     {
@@ -214,7 +236,7 @@ namespace bubble_second {
                     {
                         //this->setOtherArmatureInvisible(this->getCharactorArmature());
                         this->setOtherArmatureInvisible(this->getCharactorArmature3());
-                        this->getCharactorArmature3()->getAnimation()->play("rengqiu-04-daiji", SPECIAL_BUBBLE_EFFECT_DURATION, true);
+                        this->getCharactorArmature3()->getAnimation()->play(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_4, SPECIAL_BUBBLE_EFFECT_DURATION, true);
                     }
                 });
             }), 
@@ -234,12 +256,42 @@ namespace bubble_second {
                     if (movementType == cocostudio::COMPLETE && !isDefeat())
                     {
                         //this->setOtherArmatureInvisible(this->getCharactorArmature());
-                        armature->getAnimation()->play("rengqiu-04-daiji", SPECIAL_BUBBLE_EFFECT_DURATION, true);
+                        armature->getAnimation()->play(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_4, SPECIAL_BUBBLE_EFFECT_DURATION, true);
                     }
                 });
             }), 
             nullptr)
         );
+    }
+
+    void GameCharacter::changeStandbyAnimation1()
+    {
+        auto armature = this->getCharactorArmature();
+        if (!armature->isVisible())
+        {
+            //this->setOtherArmatureInvisible(armature);
+            this->playStandbyAnimation();
+        }
+    }
+
+    void GameCharacter::changeStandbyAnimation3()
+    {
+        auto armature = this->getCharactorArmature2();
+        if (!armature->isVisible())
+        {
+            this->setOtherArmatureInvisible(armature);
+            armature->getAnimation()->play(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_3, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+        }
+    }
+
+    void GameCharacter::changeStandbyAnimation4()
+    {
+        auto armature = this->getCharactorArmature3();
+        if (!armature->isVisible())
+        {
+            this->setOtherArmatureInvisible(armature);
+            armature->getAnimation()->play(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_STANDBY_NAME_4, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+        }
     }
 
     void GameCharacter::playLegendaryAnimation()
@@ -349,12 +401,12 @@ namespace bubble_second {
         this->playAnimationWithNameAndCallfunc(name, CC_CALLBACK_0(GameCharacter::playStandbyAnimation, this));
     }
 
-    void GameCharacter::playLoopAnimationWithName(const std::string & name)
-    {
-        //auto armature = this->getCharactorArmature();
-        //armature->getAnimation()->stop();
-        //armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-    }
+    //void GameCharacter::playLoopAnimationWithName(const std::string & name)
+    //{
+    //    //auto armature = this->getCharactorArmature();
+    //    //armature->getAnimation()->stop();
+    //    //armature->getAnimation()->play(name, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+    //}
 
 	void GameCharacter::setOtherArmatureInvisible(cocostudio::Armature* armature)
 	{

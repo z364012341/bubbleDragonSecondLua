@@ -3,6 +3,10 @@
 #include "GameScoreController.h"
 #include "SmartScaleController.h"
 #include <sstream>
+const std::string SCOREWIDGET_ARMATURE_NAME = "mifeng";
+const std::string SCOREWIDGET_ANIMATION_FLYING_NAME = "daiji"; //飞的动画
+const std::string SCOREWIDGET_ANIMATION_CONTACT_NAME = "shouji"; //碰到的动画
+const float SCOREWIDGET_ARMATURE_SCALE = 0.5;
 namespace bubble_second {
     ScoreWidget::ScoreWidget() :widget_combo_(0), armature_(nullptr)
     {
@@ -21,7 +25,7 @@ namespace bubble_second {
 
     bool ScoreWidget::initWithType(const ScoreWidgetType& type)
     {
-        if (!cocos2d::Sprite::init())
+        if (!cocos2d::Node::init())
         {
             return false;
         }
@@ -29,6 +33,7 @@ namespace bubble_second {
         this->addArmature();
         this->setType(type);
         this->setName(SCORE_WIDGET_NAME);
+        armature_->setScale(SCOREWIDGET_ARMATURE_SCALE);
         return true;
     }
 
@@ -49,10 +54,11 @@ namespace bubble_second {
     void ScoreWidget::setType(const ScoreWidgetType& type)
     {
         type_ = type;
-        for (auto var : ScoreWidgetManager::getInstance()->getWidgetBonePathMap())
-        {
-            armature_->getBone(var.first)->changeDisplayWithIndex((int)type, true);
-        }
+        //armature_->setColor(ScoreWidgetManager::getInstance()->getWidgetColorWithType(type_));
+        //for (auto var : ScoreWidgetManager::getInstance()->getWidgetBonePathMap())
+        //{
+        //    armature_->getBone(var.first)->changeDisplayWithIndex((int)type, true);
+        //}
     }
 
     void ScoreWidget::addPhysicsBody()
@@ -167,16 +173,16 @@ namespace bubble_second {
 
     void ScoreWidget::addArmature()
     {
-        armature_ = cocostudio::Armature::create(SCOREWIDGET_ARMATURE_BLUE_NAME);
+        armature_ = cocostudio::Armature::create(SCOREWIDGET_ARMATURE_NAME);
         this->addChild(armature_);
-        for (auto var1: ScoreWidgetManager::getInstance()->getWidgetBonePathMap())
-        {
-            for (auto var2 : var1.second)
-            {
-                cocostudio::Skin *skin = cocostudio::Skin::create(var2.second);
-                armature_->getBone(var1.first)->addDisplay(skin, (int)var2.first);
-            }
-        }
+        //for (auto var1: ScoreWidgetManager::getInstance()->getWidgetBonePathMap())
+        //{
+        //    for (auto var2 : var1.second)
+        //    {
+        //        cocostudio::Skin *skin = cocostudio::Skin::create(var2.second);
+        //        armature_->getBone(var1.first)->addDisplay(skin, (int)var2.first);
+        //    }
+        //}
     }
 
     void ScoreWidget::playFlyingAnimation(float duration)

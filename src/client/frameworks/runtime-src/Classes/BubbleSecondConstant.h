@@ -151,7 +151,7 @@ const int BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_X = 30000; //Ê¤Àûºó·¢ÉäÐ¡ÇòµÄ³åÁ¿Ë
 const int BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_Y_MIN = 80000;
 const int BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_Y_MAX = 100000;
 const float GAME_MENU_SELECT_SCALE = 0.8f;    //²Ëµ¥µã»÷Ê±µÄ·Å´ó±ÈÀý
-const float GAME_BUTTON_ZOOM_SCALE = -0.2f;    //BUTTONµã»÷Ê±µÄ·Å´ó±ÈÀý
+//const float GAME_BUTTON_ZOOM_SCALE = -0.2f;    //BUTTONµã»÷Ê±µÄ·Å´ó±ÈÀý
 const float PI = 3.14f; //Ô²ÖÜÂÊ
 const float SQRT3 = 1.732f;//¸ùºÅ3
 const int MAP_MAX_ROW_IN_SCREEN = 10; //ÆÁÄ»ÄÚµÄÐ¡ÇòµÄÐÐÊý
@@ -382,10 +382,6 @@ const std::string MUTIPLE_SEAL_CHARACTOR_ANIMATIOIN_STANDBY_NAME = "zhayan";
 const std::string MUTIPLE_SEAL_CHARACTOR_ANIMATIOIN_ELIMINATE_NAME = "tiaochu";
 const std::string MUTIPLE_SEAL_BUBBLE_ARMATURE_GOG_PATH = "DaGou/DaGou.ExportJson"; //¶àÖØ·âÓ¡ÇòµÄ¶¯»­
 const std::string MUTIPLE_SEAL_BUBBLE_ARMATURE_DOG_NAME = "DaGou";
-const std::string SCOREWIDGET_ARMATURE_BLUE_PATH = "L-H-TX/L-H-TX.ExportJson"; //µÃ·Ö¹Ò¼þµÄ¶¯»­
-const std::string SCOREWIDGET_ARMATURE_BLUE_NAME = "L-H-TX";
-const std::string SCOREWIDGET_ANIMATION_FLYING_NAME = "tanchu"; //·ÉµÄ¶¯»­
-const std::string SCOREWIDGET_ANIMATION_CONTACT_NAME = "tanchu_Copy1"; //Åöµ½µÄ¶¯»­
 //const std::string GAME_CHARACTER_ARMATURE_LAOHU_NAME = "laohu";
 //const std::string GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME = "daiji-01-1";
 //const std::string GAME_CHARACTER_LAOHU_ANIMATION_SHOOT_BUBBLE_NAME = "rengqiu01";
@@ -693,7 +689,6 @@ const float GAME_STAGE_SELECTION_CELL_SCALE = 0.73f;
 //GameStageSelectionScene
 const std::string GAME_STAGE_SELECTION_SCENE_NAME = "game_stage_selection_scene";
 const float GAME_STAGE_SCROLLVIEW_CELL_HEIGHT = 745.0f;
-const std::string GAME_STAGE_SCROLLVIEW_BOTTOM_PATH = "StageSelectRes/episode000_hd.jpg";
 const float GAME_STAGE_SCROLLVIEW_CELL_BACKGROUND_HEIGHT = 1024.0f;
 const float GAME_STAGE_SCROLLVIEW_CELL_OFFSET_OFFSET = GAME_DESIGN_RESOLUTION_HEIGHT - GAME_STAGE_SCROLLVIEW_CELL_BACKGROUND_HEIGHT;
 //EnterGameAlert

@@ -1,6 +1,10 @@
 #include "ScoreWidgetManager.h"
 #include "ScoreWidget.h"
 #include "GameScoreController.h"
+const float WIDGET_POSITION_RANGE_RIGHT_MAX = GAME_DESIGN_RESOLUTION_WIDTH / 2 - BUBBLE_RADIUS - SCORE_WIDGET_BODY_RADIUS;
+const float WIDGET_POSITION_RANGE_RIGHT_MIN = GAME_DESIGN_RESOLUTION_WIDTH / 2 - BUBBLE_RADIUS * 2 - SCORE_WIDGET_BODY_RADIUS;
+const float WIDGET_POSITION_RANGE_LEFT_MAX = -WIDGET_POSITION_RANGE_RIGHT_MIN;
+const float WIDGET_POSITION_RANGE_LEFT_MIN = -WIDGET_POSITION_RANGE_RIGHT_MAX;
 namespace bubble_second {
     ScoreWidgetManager::ScoreWidgetManager():widget_total_(0)
     {
@@ -14,11 +18,9 @@ namespace bubble_second {
         combo_to_type_[6] = kScoreWidgetGreen;
         widget_update_sequence_.push_back(kScoreWidgetBlue);
         widget_update_sequence_.push_back(kScoreWidgetPink);
-        //widget_update_sequence_.push_back(kScoreWidgetGreen);
         widget_remove_sequence_.push_back(kScoreWidgetGreen);
         widget_remove_sequence_.push_back(kScoreWidgetPink);
         widget_remove_sequence_.push_back(kScoreWidgetBlue);
-
 
         std::map<ScoreWidgetType, std::string> type_to_head;
         type_to_head[kScoreWidgetBlue] = SCORE_WIDGET_HEAD_BLUE_PATH;
@@ -182,12 +184,16 @@ namespace bubble_second {
 
     bool ScoreWidgetManager::isNearbyExistence(const cocos2d::Vec2& point)
     {
+        bool borderFlag = this->isNearByBorder(point);
+        if (borderFlag)
+        {
+            return true;
+        }
         for (auto var_1 : score_widget_map_)
         {
             for (auto var_2 : var_1.second)
             {
-                //cocos2d::log("score_distance: %f", var_2->getSelfPosition().distance(point));
-                if (var_2->getSelfPosition().distance(point) < TWO_SCORE_WIDGET_DISTANCE || this->isNearByBorder(point))
+                if (var_2->getSelfPosition().distance(point) < TWO_SCORE_WIDGET_DISTANCE)
                 {    
                     return true;
                 }
@@ -198,11 +204,7 @@ namespace bubble_second {
 
     bool ScoreWidgetManager::isNearByBorder(const cocos2d::Vec2 & point)
     {
-        float right_max = GAME_DESIGN_RESOLUTION_WIDTH - BUBBLE_RADIUS - SCORE_WIDGET_BODY_RADIUS+20;
-        float right_min = GAME_DESIGN_RESOLUTION_WIDTH - (BUBBLE_RADIUS * 2 + SCORE_WIDGET_BODY_RADIUS)-15;
-        float left_max = right_min * -1;
-        float left_min = right_max * -1;
-        return (left_min<point.x && point.x<left_max) || (right_min<point.x && point.x<right_max);
+        return (WIDGET_POSITION_RANGE_LEFT_MIN<point.x && point.x<WIDGET_POSITION_RANGE_LEFT_MAX) || (WIDGET_POSITION_RANGE_RIGHT_MIN<point.x && point.x<WIDGET_POSITION_RANGE_RIGHT_MAX);
     }
 
     int ScoreWidgetManager::getScoreWidgetTotal()
@@ -225,8 +227,9 @@ namespace bubble_second {
         return widget_points_seed_;
     }
 
-    const WidgetBonePathMap& ScoreWidgetManager::getWidgetBonePathMap()
+    const WidgetBonePathMap & ScoreWidgetManager::getWidgetBonePathMap()
     {
         return bonename_to_map_;
     }
+
 }

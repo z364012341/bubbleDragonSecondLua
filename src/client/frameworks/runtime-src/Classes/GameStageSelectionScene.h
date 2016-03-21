@@ -50,6 +50,7 @@ namespace bubble_second {
         //拼图按钮
         void gotoPuzzleGame();
         void popSettingAlert();
+        cocos2d::Node* getAlertRenderNode();
         //进入场景调整滚动视图位置
         void adjustingScrollviewPosition();
         //创建滚动内容

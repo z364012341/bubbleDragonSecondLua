@@ -87,29 +87,25 @@ namespace bubble_second {
 
     void ScoreProgressMenu::increaseProgressTimer()
     {
-        static float direction = 0.0f;
+        //static float direction = 0.0f;
         if (this->isScheduled(GAME_SCORE_PROGRESS_SCHEDULE_KEY))
         {
             return;
         }
-        //float percent = getScoreProgressTimer()->getPercentage();
         float percent = this->getPercentage();
-        //direction = getScoreProgressTimer()->getPercentage() == 0.0f?1.0f:-1.0f;
-        direction = percent == 0.0f ? 1.0f : -1.0f;
+        //direction = percent == 0.0f ? 1.0f : -1.0f;
         this->schedule([=](float) {
-            //this->getScoreProgressTimer()->setPercentage(percentage);
-            this->setPercentage(this->getPercentage() + GAME_SCORE_PROGRESS_TIMER_PER_INCREASE_PERCENT*direction);
-            //this->controlStartLight(getScoreProgressTimer()->getPercentage());
+            //this->setPercentage(this->getPercentage() + GAME_SCORE_PROGRESS_TIMER_PER_INCREASE_PERCENT*direction);
+            this->setPercentage(this->getPercentage() + GAME_SCORE_PROGRESS_TIMER_PER_INCREASE_PERCENT);
             this->controlStartLight(this->getPercentage());
-            //if (this->isCompletedGoalPercent(getScoreProgressTimer()->getPercentage()))
             if (this->isCompletedGoalPercent(this->getPercentage()))
             {
                 this->unschedule(GAME_SCORE_PROGRESS_SCHEDULE_KEY);
             }
-            if (this->isCompletedBack(percent - GAME_SCORE_PROGRESS_TIMER_BACK_PERCENT))
-            {
-                direction = 1.0f;
-            }
+            //if (this->isCompletedBack(percent - GAME_SCORE_PROGRESS_TIMER_BACK_PERCENT))
+            //{
+            //    direction = 1.0f;
+            //}
         }, GAME_SCORE_PROGRESS_SCHEDULE_KEY);
     }
 
@@ -143,11 +139,11 @@ namespace bubble_second {
         return percent >= this->getGoalPercent() || percent>=100.0f;
     }
 
-    bool ScoreProgressMenu::isCompletedBack(float percent)
-    {
-        //return getScoreProgressTimer()->getPercentage() <= percent || getScoreProgressTimer()->getPercentage() <= 0.0f;
-        return this->getPercentage() <= percent || this->getPercentage() <= 0.0f;
-    }
+    //bool ScoreProgressMenu::isCompletedBack(float percent)
+    //{
+    //    //return getScoreProgressTimer()->getPercentage() <= percent || getScoreProgressTimer()->getPercentage() <= 0.0f;
+    //    return this->getPercentage() <= percent || this->getPercentage() <= 0.0f;
+    //}
 
     StartNumbleModule ScoreProgressMenu::getStartNumbleModule()
     {

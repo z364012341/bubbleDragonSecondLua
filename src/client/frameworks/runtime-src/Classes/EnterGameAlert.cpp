@@ -6,6 +6,7 @@
 #include "EnterPropsViewManager.h"
 #include "cocostudio/CocoStudio.h"
 #include "GameAlertMask.h"
+#include "ButtonEffectController.h"
 const std::string& ENTER_GAME_ALERT_CSB = "EnterGameAlert.csb";
 const std::string& ENTER_GAME_ALERT_START_BUTTON_NAME = "startButton";
 const std::string& ENTER_GAME_ALERT_CLOSE_BUTTON_NAME = "closeButton";
@@ -79,12 +80,14 @@ namespace bubble_second {
     {
         alert_csb_node_ = cocos2d::CSLoader::createNode(ENTER_GAME_ALERT_CSB);
         this->addChild(alert_csb_node_);
+        ButtonEffectController::setButtonsZoomScale(alert_csb_node_);
     }
 
     void EnterGameAlert::initStartButton(int cell_numble, int level)
     {
         cocos2d::ui::Button* button = this->getStartButton();
-        button->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
+        //button->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
+        //ButtonEffectController::setButtonZoomScale(button, GAME_BUTTON_ZOOM_SCALE);
         button->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
             {
@@ -97,7 +100,7 @@ namespace bubble_second {
     void bubble_second::EnterGameAlert::initCloseButton()
     {
         cocos2d::ui::Button* button = this->getCloseButton();
-        button->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
+        //button->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
         button->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
             {

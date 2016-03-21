@@ -44,7 +44,7 @@ namespace bubble_second {
         //判断是否完成了目标百分比
         bool isCompletedGoalPercent(float percent);
         //判断是否退到位
-        bool isCompletedBack(float percent);
+        //bool isCompletedBack(float percent);
         StartNumbleModule getStartNumbleModule();
         void controlStartLight(float percent);
         //设置进度条实际的进度

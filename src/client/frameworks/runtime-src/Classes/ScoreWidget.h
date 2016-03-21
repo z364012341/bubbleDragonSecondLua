@@ -13,7 +13,7 @@
 #include "BubbleSecondConstant.h"
 #include "cocostudio\CocoStudio.h"
 namespace bubble_second {
-    class ScoreWidget : public cocos2d::Sprite
+    class ScoreWidget : public cocos2d::Node
     {
     public:
         static ScoreWidget* createWithType(const ScoreWidgetType& type)

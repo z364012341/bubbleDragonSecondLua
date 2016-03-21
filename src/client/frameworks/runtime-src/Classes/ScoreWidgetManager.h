@@ -33,6 +33,7 @@ namespace bubble_second {
         void setWidgetPointsSeed(WidgetPointsSeed seed);
         WidgetPointsSeed getWidgetPointsSeed();
         const WidgetBonePathMap& getWidgetBonePathMap();
+        cocos2d::Color3B getWidgetColorWithType(const ScoreWidgetType type);
     private:
         ScoreWidgetManager();
         //添加时间监听
@@ -59,6 +60,7 @@ namespace bubble_second {
         //位置种子
         WidgetPointsSeed widget_points_seed_;
         WidgetBonePathMap bonename_to_map_;
+        //std::map<ScoreWidgetType, cocos2d::Color3B> type_to_color_;
     };
 }
 #endif //_SCORE_WIDGET_MANAGER_H_

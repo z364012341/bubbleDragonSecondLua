@@ -36,7 +36,6 @@ namespace bubble_second {
         GameCharacter();
         ~GameCharacter();
     public:
-		void playShootBubbleAnimation(cocos2d::EventCustom* event);
         void playLegendaryAnimation();
         void playVictoryAnimation();
         void playDefeatAnimation();
@@ -55,7 +54,7 @@ namespace bubble_second {
         cocostudio::Armature* getCharactorArmature3();
 		//cocostudio::Armature* getCharactorArmatureVictory();
         void playNotLoopAnimationWithName(const std::string& name);
-        void playLoopAnimationWithName(const std::string& name);
+        //void playLoopAnimationWithName(const std::string& name);
         void setDefeatFlag(bool flag);
         bool isDefeat();
 		//根据角度播放发射动画
@@ -67,8 +66,13 @@ namespace bubble_second {
 		void playShootAnimation2();
 		void playShootAnimation3();
         void playShootAnimation4();
+        void changeStandbyAnimation1();
+        void changeStandbyAnimation3();
+        void changeStandbyAnimation4();
 		void charactorVictorChange();
 		void playCharactorVictorChangeAnimation();
+        void playShootBubbleAnimation(cocos2d::EventCustom* event);
+        void changeCharacterAngle(cocos2d::EventCustom* event);
 		//设置其他动画不可见
 		void setOtherArmatureInvisible(cocostudio::Armature* armature);
     private:

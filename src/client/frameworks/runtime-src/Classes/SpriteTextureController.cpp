@@ -6,6 +6,7 @@ const std::string GAME_CHARACTER_ARMATURE_LAOHU_2_PATH = "laohu2/laohu2.ExportJs
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_3_PATH = "laohu3/laohu3.ExportJson"; //老虎3的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_PATH = "laohu-shengli/laohu-shengli.ExportJson"; //老虎胜利的动画
 const std::string GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_PATH = "TX-yanwu/TX-yanwu.ExportJson"; //胜利烟雾的动画
+const std::string SCOREWIDGET_ARMATURE_PATH = "mifeng/mifeng.ExportJson"; //得分挂件的动画
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()
@@ -110,7 +111,7 @@ namespace bubble_second {
         cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(RAINBOW_BUBBLE_ARMATURE_PATH);
         cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_PATH);
         cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_GOG_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(SCOREWIDGET_ARMATURE_BLUE_PATH);
+        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(SCOREWIDGET_ARMATURE_PATH);
         cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(WINDMILL_BUBBLE_DEMON_ARMATURE_PATH);
 		cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_1_PATH);
 		cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_2_PATH);
@@ -137,7 +138,7 @@ namespace bubble_second {
         cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(RAINBOW_BUBBLE_ARMATURE_PATH);
         cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_PATH);
         cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_GOG_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(SCOREWIDGET_ARMATURE_BLUE_PATH);
+        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(SCOREWIDGET_ARMATURE_PATH);
 		cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_1_PATH);
         cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(WINDMILL_BUBBLE_DEMON_ARMATURE_PATH);
 		cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_2_PATH);

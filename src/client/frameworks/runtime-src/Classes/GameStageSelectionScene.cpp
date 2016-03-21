@@ -10,6 +10,7 @@
 #include "CCLuaEngine.h"
 #include "StageNumble.h"
 #include "ui\UIButton.h"
+#include "ButtonEffectController.h"
 const std::string GAME_STAGE_SELECTION_CSB_PATH = "GameStageSelectionLayer.csb";
 const std::string STAGE_SCROLLVIEW_NAME = "StageScrollView";
 const std::string SETTING_BUTTON_NAME = "SettingButton";
@@ -21,6 +22,8 @@ const std::string RANKINGLIST_BUTTON = "RankingList";
 const std::string GIFT_BUTTON = "Gift";
 const std::string CHECKIN_BUTTON = "CheckIn";
 const std::string CHALLENGEMODE_BUTTON = "ChallengeMode";
+const std::string GAME_STAGE_SCROLLVIEW_BOTTOM_PATH = "StageSelectRes/episode000_hd.jpg";
+const std::string GAME_STAGE_ALERT_RENDER_NODE_NAME = "alertNode";
 const float TOP_INFO_POS_Y_PERCENT = 0.9564f;
 const float BUTTON_POS_Y_PERCENT_1 = 0.8343f;
 const float BUTTON_POS_Y_PERCENT_2 = 0.6988f;
@@ -113,6 +116,7 @@ namespace bubble_second {
     {
         float visibleHeight = cocos2d::Director::getInstance()->getVisibleSize().height;
         csb_node_->getChildByName(STRENGTH_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
+        //csb_node_->getChildByName(STRENGTH_INFO)->setGlobalZOrder(0.1f);
         csb_node_->getChildByName(COIN_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
         csb_node_->getChildByName(DIAMOND_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
 
@@ -124,6 +128,16 @@ namespace bubble_second {
 
         csb_node_->getChildByName(CHALLENGEMODE_BUTTON)->setPositionY(visibleHeight*BUTTON_POS_Y_PERCENT_3);
 
+        //cocos2d::Vector<cocos2d::Node*> buttonVector = csb_node_->getChildren();
+        //for (auto var : buttonVector)
+        //{
+        //    if (cocos2d::ui::Button* button = dynamic_cast<cocos2d::ui::Button*>(var))
+        //    {
+        //        //button->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
+        //        ButtonEffectController::setButtonZoomScale(button, GAME_BUTTON_ZOOM_SCALE);
+        //    }
+        //}
+        ButtonEffectController::setButtonsZoomScale(csb_node_);
     }
 
     void GameStageSelectionScene::addStageCell()
@@ -235,7 +249,7 @@ namespace bubble_second {
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
         alert->setScale(SmartScaleController::getInstance()->getFixedHeightZoom());
-        this->addChild(alert, UI_ZORDER_MENU);
+        this->getAlertRenderNode()->addChild(alert);
     }
 
     void GameStageSelectionScene::enterNextStage(StageData data)
@@ -270,7 +284,13 @@ namespace bubble_second {
         GameSettingAlert* alert = GameSettingAlert::create();
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-        this->addChild(alert, UI_ZORDER_MENU);
+        //this->addChild(alert, UI_ZORDER_MENU);
+        this->getAlertRenderNode()->addChild(alert);
+    }
+
+    cocos2d::Node * GameStageSelectionScene::getAlertRenderNode()
+    {
+        return csb_node_->getChildByName(GAME_STAGE_ALERT_RENDER_NODE_NAME);
     }
 
     void GameStageSelectionScene::adjustingScrollviewPosition()

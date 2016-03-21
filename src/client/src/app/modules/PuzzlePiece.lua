@@ -52,7 +52,7 @@ function PuzzlePiece.onTouchBegan(touch, event)
 end
 
 function PuzzlePiece.onTouchMoved(touch, event)
-    printf("PuzzlePiece onTouchMoved");
+    --printf("PuzzlePiece onTouchMoved");
     local node = event:getCurrentTarget();
     local dis = touch:getDelta()
     local zoomScale = node:getParent():getParent():getScale();
@@ -77,7 +77,7 @@ function PuzzlePiece:isToucnOnAnswer()
     local puzzlePoint = self:getParent():convertToWorldSpace(cc.p(self:getPosition()));
     local answer = self:getPuzzlePieceAnswer();
     local answerPoint = answer:getParent():convertToWorldSpace(cc.p(answer:getPosition()));
-    return cc.pGetDistance(puzzlePoint, answerPoint) < PUZZLE_STENCIL_WIDTH / 2;
+    return cc.pGetDistance(puzzlePoint, answerPoint) < 90;
 end
 
 function PuzzlePiece:moveToAnswer()

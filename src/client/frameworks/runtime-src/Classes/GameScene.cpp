@@ -31,7 +31,7 @@
 #include "UserDataManager.h"
 #include "EnterPropsViewManager.h"
 #include "StageDataManager.h"
-
+#include "ButtonEffectController.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -39,7 +39,8 @@ const std::string GAME_STAGE_TYPE_SPRITE_NAME = "stageTypeSprite";
 const std::string UI_NAME_GAME_PLAYING_MENU = "gamePlayMenu";      //游戏场景的菜单
 const std::string UI_NAME_COMPLETED_TASK = "completedNumble";//已完成目标的label
 const std::string UI_NAME_GAME_TASK = "taskNumble";//胜利任务目标的label
-const std::string BUBBLE_MAP_LINE_PATH = "xian.PNG";
+const std::string BUBBLE_MAP_LINE_PATH = "xian.PNG"; //顶部波浪线
+const std::string BUBBLE_MAP_LINE_NAME = "wavy_line"; //顶部波浪线
 const float GAME_SCORE_PERCENT_X = 0.1647f; //得分的label的x坐标百分比
 const float GAME_RIGHT_LABEL_PERCENT_X = 0.8353f; //右边的胜利条件的label的x坐标百分比
 const float GAME_TOP_INFO_POS_Y_PERCENT = 0.85f; //y的位置百分比
@@ -297,7 +298,8 @@ namespace bubble_second {
                 this->getStageType());
             //菜单按钮
             pause_button_ = dynamic_cast<cocos2d::ui::Button*>(top_right_ui->getChildByName(UI_NAME_GAME_PLAYING_MENU));
-            pause_button_->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
+            //pause_button_->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
+            ButtonEffectController::setButtonZoomScale(pause_button_);
             pause_button_->addTouchEventListener([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
                 if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
                 {
@@ -441,13 +443,15 @@ namespace bubble_second {
     {
         bubble_map_node_ = cocos2d::Node::create();
         bubble_map_node_->setName(BUBBLE_MAP_NODE_NAME);
+
         cocos2d::Sprite* line = SpriteTextureController::getInstance()->createGameSpriteWithPath(BUBBLE_MAP_LINE_PATH);
+        line->setName(BUBBLE_MAP_LINE_NAME);
         line->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
         bubble_map_node_->addChild(line);
         bubble_map_node_->setPosition(this->getBubbleMapOrigin());
         csb_node_->addChild(bubble_map_node_, UI_ZORDER_MAP_BUBBLE);
+
         GamePlayController::getInstance()->loadStageMap(stage_numble);
-        //this->addPrepareBubble();
     }
 
     void GameScene::initUIZOrder()
@@ -638,6 +642,10 @@ namespace bubble_second {
         listener = cocos2d::EventListenerCustom::create(EVENT_CUT_AIR_BUBBLE_NUMBLE, CC_CALLBACK_1(GameScene::cutOneAirBubblesNumble, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_WINDMILL_MAP_BORDER_LOADED, CC_CALLBACK_1(GameScene::addWindmillBorder, this));
+        dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        listener = cocos2d::EventListenerCustom::create(EVENT_WINDMILL_MAP_BORDER_LOADED, [=](cocos2d::EventCustom*) {
+            bubble_map_node_->getChildByName(BUBBLE_MAP_LINE_NAME)->setVisible(false);
+        });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_WINDMILL_ROTATION, CC_CALLBACK_1(GameScene::windmillBubbleRotation, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);

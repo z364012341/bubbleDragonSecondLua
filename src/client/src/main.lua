@@ -9,6 +9,7 @@ cc.FileUtils:getInstance():addSearchPath("res/ui/menuRes/", false);
 cc.FileUtils:getInstance():addSearchPath("res/ui/daochu/", false);
 cc.FileUtils:getInstance():addSearchPath("res/puzzle_ui/", false);
 cc.FileUtils:getInstance():addSearchPath("res/animation/", false);
+cc.FileUtils:getInstance():addSearchPath("res/stage/", false);
 require "config"
 require "cocos.init"
 require("app.PuzzleConstant")

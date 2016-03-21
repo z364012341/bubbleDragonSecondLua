@@ -212,6 +212,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\BubbleSecondConstant.h" />
     <ClInclude Include="..\Classes\BubbleSightingDevice.h" />
     <ClInclude Include="..\Classes\BubbleSightingPoint.h" />
+    <ClInclude Include="..\Classes\ButtonEffectController.h" />
     <ClInclude Include="..\Classes\CenteredMenuItemSprite.h" />
     <ClInclude Include="..\Classes\ColorBombBubble.h" />
     <ClInclude Include="..\Classes\ColorBombProperty.h" />
@@ -309,6 +310,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\BubbleFactory.cpp" />
     <ClCompile Include="..\Classes\BubbleSightingDevice.cpp" />
     <ClCompile Include="..\Classes\BubbleSightingPoint.cpp" />
+    <ClCompile Include="..\Classes\ButtonEffectController.cpp" />
     <ClCompile Include="..\Classes\CenteredMenuItemSprite.cpp" />
     <ClCompile Include="..\Classes\ColorBombBubble.cpp" />
     <ClCompile Include="..\Classes\ColorBombProperty.cpp" />
