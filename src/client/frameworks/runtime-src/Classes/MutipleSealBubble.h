@@ -37,6 +37,9 @@ namespace bubble_second {
     private:
         MutipleSealBubble();
         bool initWithComponentNumble(int numble);
+		void playStandbyAnimation();
+		void runBubbleEffect(const std::string& name, const cocos2d::Vec2& point) override;
+	private:
         cocostudio::Armature *armature_;
     };
 }

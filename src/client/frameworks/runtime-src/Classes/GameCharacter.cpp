@@ -9,6 +9,7 @@ const std::string GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_NAME = "TX-yanwu";
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_NAME = "laohu-shengli";
 
 const std::string CHARACTER_ANIMATION_STANDBY_NAME_1 = "daiji-01-1";
+const std::string CHARACTER_ANIMATION_STANDBY_NAME_2 = "daiji-02";
 const std::string CHARACTER_ANIMATION_STANDBY_NAME_4 = "rengqiu-04-daiji";
 const std::string CHARACTER_ANIMATION_STANDBY_NAME_3 = "rengqiu-03-daiji";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_1 = "rengqiu01";
@@ -124,10 +125,11 @@ namespace bubble_second {
         if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1)
         {
             this->playStandbyAnimation1();
+			//this->playStandbyAnimation1To2(angle);
         }
         else if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_2)
         {
-            this->playStandbyAnimation1();
+            this->playStandbyAnimation2();
         }
         else if (angle >= CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_3)
         {
@@ -195,17 +197,17 @@ namespace bubble_second {
 
 	void GameCharacter::playShootAnimation2()
 	{
-		this->playAnimationWithNameAndCallfunc(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_1TO2, [=]() {
+		//this->playAnimationWithNameAndCallfunc(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_1TO2, [=]() {
             GamePlayController::getInstance()->shootPrepareBubble();
             cocos2d::CallFunc* func = cocos2d::CallFunc::create([=]() {
                 std::vector<std::string> names;
                 names.push_back(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2);
                 names.push_back(CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2TO1);
-                this->playAnimationWithNamesAndCallfunc(names, CC_CALLBACK_0(GameCharacter::playStandbyAnimation1, this));
+				this->playAnimationWithNamesAndCallfunc(names, CC_CALLBACK_0(GameCharacter::playStandbyAnimation1, this));
             });
             cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(CHARACTER_SHOOT_BUBBLE_DELAYTIME_2), func);
             this->runAction(seq);
-        });
+        //});
 	}
 
 	void GameCharacter::playShootAnimation3()
@@ -260,6 +262,16 @@ namespace bubble_second {
     {
         this->playStandbyAnimation(this->getCharactorArmature1(), CHARACTER_ANIMATION_STANDBY_NAME_1);
     }
+
+	//void GameCharacter::playStandbyAnimation1To2(float angle)
+	//{
+	//	this->getCharactorArmature1()->getAnimation()->gotoAndPause(angle/40);
+	//}
+
+	void GameCharacter::playStandbyAnimation2()
+	{
+		this->playStandbyAnimation(this->getCharactorArmature1(), CHARACTER_ANIMATION_STANDBY_NAME_2);
+	}
 
     void GameCharacter::playStandbyAnimation3()
     {

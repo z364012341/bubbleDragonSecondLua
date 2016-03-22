@@ -25,6 +25,7 @@ namespace bubble_second {
         void turnOnBlink();
         //设置选择按钮能不能点
         void setSelectionMenuEnable(bool flag);
+		bool isCurrentStage();
     private:
         StageSelectionMenu();
         bool init(int cell_numble, int level, const StageType& type);
@@ -48,6 +49,7 @@ namespace bubble_second {
         bool menu_enable_ = true;
         int cell_numble_ = 0;
         int level_numble_ = 0;
+		//bool is_current_stage_flag_ = false;
     };
 }
 #endif //_STAGE_SELECTION_MENU_H_

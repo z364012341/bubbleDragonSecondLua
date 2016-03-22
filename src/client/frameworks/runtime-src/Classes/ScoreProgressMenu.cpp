@@ -56,7 +56,7 @@ namespace bubble_second {
         for (auto var : this->getStartNumbleModule().getPercentModule())
         {
             ScoreProgressStart* start = ScoreProgressStart::createWithPercent(var.second);
-            start->setPosition(this->getStartPositionWithPercent(var.second));
+			start->setPosition(this->getStartPositionWithPercent(start->getStartPercent()));
             this->addChild(start);
             start_sprite_map_.insert(var.first, start);
         }
@@ -69,7 +69,7 @@ namespace bubble_second {
 
 
         cocos2d::Rect rect = this->getScoreProgressTimer()->getBoundingBox();
-        float x = PROGRESS_TIMER_OVAL_A*1.9 * percent - PROGRESS_TIMER_OVAL_A;
+        float x = PROGRESS_TIMER_OVAL_A*2 * percent - PROGRESS_TIMER_OVAL_A;
         float y = sqrt((1 - pow(x, 2)/ PROGRESS_TIMER_OVAL_POW_A)*PROGRESS_TIMER_OVAL_POW_B);
         return cocos2d::Vec2(x, -y);
     }

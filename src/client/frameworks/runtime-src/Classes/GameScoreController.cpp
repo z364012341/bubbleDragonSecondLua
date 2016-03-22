@@ -145,8 +145,14 @@ namespace bubble_second {
 
     void GameScoreController::addBubbleUseCount(int numble)
     {
+		int last_numble = this->getBubbleUseCount();
         this->setBubbleUseCount(this->getBubbleUseCount() + numble);
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_UPDATE_SECOND_BUBBLE);
+
+		if (last_numble == 0)
+		{
+			cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHOOT_BUBBLE);
+		}
     }
 
     int GameScoreController::getBubbleUseCount()

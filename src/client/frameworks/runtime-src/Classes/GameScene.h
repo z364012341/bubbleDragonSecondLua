@@ -173,7 +173,7 @@ namespace bubble_second {
         //发射检测刚体
         void  recentbubbleCast();
         //改变旋风的颜色
-        void changeSwirlColor();
+        //void changeSwirlColor();
 		//准备小球待机动画
 		void playPrepareBubbleStanbyAction();
         //播放泡泡的动画返回动画的最长时间
@@ -223,7 +223,7 @@ namespace bubble_second {
         //地图缓慢下落模式
         void mapFallingBegin();
         //获取下落moveby
-        cocos2d::MoveBy* getMapFallingAction();
+        //cocos2d::MoveBy* getMapFallingAction();
         //移动地图
         void moveMapWithDistance(float moveby_distance);
         //计算移动距离
@@ -325,7 +325,7 @@ namespace bubble_second {
         BaseProperty* bomb_bomb_property_;
         BaseProperty* wooden_hammer_property_;
         BaseProperty* staves_property_;
-        std::map<BubbleType, std::string> bubblecolor_to_swirl_;
+        //std::map<BubbleType, std::string> bubblecolor_to_swirl_;
         BaseWeapon* props_weapon_;
         bool first_flag_;
         bool barrel_score_display_flag_;
@@ -335,7 +335,7 @@ namespace bubble_second {
         int total_air_bubbles_numble_ = 0;
         StageType stage_type_;
         bool is_fall_stage_ = false;
-        cocos2d::ui::Button* pause_button_ = nullptr;
+		cocos2d::ui::Button* pause_menu_ = nullptr;
     };
 }
 #endif //_GAME_SCENE_H_

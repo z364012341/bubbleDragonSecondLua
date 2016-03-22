@@ -240,6 +240,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GameSettingAlert.h" />
     <ClInclude Include="..\Classes\GameStageSelectionCell.h" />
     <ClInclude Include="..\Classes\GameStageSelectionScene.h" />
+    <ClInclude Include="..\Classes\GameStageVehicle.h" />
     <ClInclude Include="..\Classes\GameTextInfo.h" />
     <ClInclude Include="..\Classes\GameVictoryAlert.h" />
     <ClInclude Include="..\Classes\GameVolControlView.h" />
@@ -271,6 +272,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\SpriteTextureController.h" />
     <ClInclude Include="..\Classes\StageDataManager.h" />
     <ClInclude Include="..\Classes\StageDataModule.h" />
+    <ClInclude Include="..\Classes\StageMenuManager.h" />
     <ClInclude Include="..\Classes\StageNumble.h" />
     <ClInclude Include="..\Classes\StageSelectionMenu.h" />
     <ClInclude Include="..\Classes\StartNumbleModule.h" />
@@ -338,6 +340,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GameSettingAlert.cpp" />
     <ClCompile Include="..\Classes\GameStageSelectionCell.cpp" />
     <ClCompile Include="..\Classes\GameStageSelectionScene.cpp" />
+    <ClCompile Include="..\Classes\GameStageVehicle.cpp" />
     <ClCompile Include="..\Classes\GameTextInfo.cpp" />
     <ClCompile Include="..\Classes\GameVictoryAlert.cpp" />
     <ClCompile Include="..\Classes\GameVolControlView.cpp" />
@@ -367,6 +370,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\SpriteTextureController.cpp" />
     <ClCompile Include="..\Classes\StageDataManager.cpp" />
     <ClCompile Include="..\Classes\StageDataModule.cpp" />
+    <ClCompile Include="..\Classes\StageMenuManager.cpp" />
     <ClCompile Include="..\Classes\StageNumble.cpp" />
     <ClCompile Include="..\Classes\StageSelectionMenu.cpp" />
     <ClCompile Include="..\Classes\StartNumbleModule.cpp" />

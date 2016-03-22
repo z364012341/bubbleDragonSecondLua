@@ -21,6 +21,7 @@ E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.androi
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\laohu2 \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\laohu3 \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\mifeng \
+E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\qingwa \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\TX-yanwu \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\laohu\laohu.ExportJson \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\laohu\laohu0.plist \
@@ -39,6 +40,9 @@ E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.androi
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\mifeng\mifeng.ExportJson \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\mifeng\mifeng0.plist \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\mifeng\mifeng0.png \
+E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\qingwa\qingwa.ExportJson \
+E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\qingwa\qingwa0.plist \
+E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\qingwa\qingwa0.png \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\TX-yanwu\TX-yanwu.ExportJson \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\TX-yanwu\TX-yanwu0.plist \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\animation\TX-yanwu\TX-yanwu0.png \
@@ -123,7 +127,6 @@ E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.androi
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\menuRes \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\PPP-TX \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\PPX-TX \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\qingwa \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\RainbowAnimation \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\score_widget_res \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\SD-TX \
@@ -215,13 +218,6 @@ E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.androi
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\uishang.PNG \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\uixia.PNG \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\windmill_bubble.png \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\X-cheng.png \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\X-fen.png \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\X-hong.png \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\X-huang.png \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\X-lan.png \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\X-lv.png \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\X-purple.png \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\xian.PNG \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\XiaoYao-body.png \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\gameRes\XiaoYao-tou.png \
@@ -314,9 +310,6 @@ E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.androi
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\PPX-TX\PPX-TX.ExportJson \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\PPX-TX\PPX-TX0.plist \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\PPX-TX\PPX-TX0.png \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\qingwa\qingwa.ExportJson \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\qingwa\qingwa0.plist \
-E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\qingwa\qingwa0.png \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\RainbowAnimation\RainbowAnimation.ExportJson \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\RainbowAnimation\RainbowAnimation0.plist \
 E:\svn\games\bubbleDragonSecondLua\src\client\frameworks\runtime-src\proj.android\assets\res\ui\RainbowAnimation\RainbowAnimation0.png \

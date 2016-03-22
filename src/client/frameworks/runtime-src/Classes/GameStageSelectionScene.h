@@ -16,6 +16,7 @@
 namespace bubble_second {
 	using cocos2d::ui::ScrollView;
     class GameStageSelectionCell;
+	class GameStageVehicle;
 	class GameStageSelectionScene : public cocos2d::Layer
     {
     public:
@@ -56,6 +57,8 @@ namespace bubble_second {
         //创建滚动内容
         //cocos2d::Layer* createScrollViewContentLayer();
 		void scrollViewMoveCallback(cocos2d::Ref *pSender, cocos2d::ui::ScrollView::EventType eventType);
+		//添加载具
+		void addStageVehicle();
     private:
         float scrollview_bottom_height_ = 0.0f;
         cocos2d::Vector<GameStageSelectionCell*> cell_vector_;
@@ -64,7 +67,7 @@ namespace bubble_second {
         //float scale_zoom_;
         ScrollView* scrollview_ = nullptr;
         cocos2d::Node* csb_node_ = nullptr;
-
+		GameStageVehicle* stage_vehicle_ = nullptr;
     };
 }
 #endif //_GAME_STAGE_SELECTION_SCENE_H_

@@ -21,6 +21,7 @@ namespace bubble_second {
         void controlLightWithPercent(float percent);
         void controlLightWithFlag(bool flag);
         bool startIsOn();
+		float getStartPercent();
     private:
         bool initWithPercent(float percent);
         //bool initWithSwitchFlag(bool flag);
@@ -29,7 +30,6 @@ namespace bubble_second {
         void startTurnOff();
         ScoreProgressStart();
         void setStartPercent(float percent);
-        float getStartPercent();
         void setStartSpriteShader(const std::string& shader_path);
         bool isNeedTurnOn(float percent);
     private:

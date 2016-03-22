@@ -12,7 +12,6 @@
 #define _GAME_CHARACTOR_H_
 #include "cocos2d.h"
 #include "cocostudio\CocoStudio.h"
-
 namespace bubble_second {
     class GameCharacter : public cocos2d::Node
     {
@@ -52,9 +51,7 @@ namespace bubble_second {
         cocostudio::Armature* getCharactorArmature1();
 		cocostudio::Armature* getCharactorArmature2();
         cocostudio::Armature* getCharactorArmature3();
-		//cocostudio::Armature* getCharactorArmatureVictory();
         void playNotLoopAnimationWithName(const std::string& name);
-        //void playLoopAnimationWithName(const std::string& name);
         void setDefeatFlag(bool flag);
         bool isDefeat();
 		//根据角度播放发射动画
@@ -67,6 +64,8 @@ namespace bubble_second {
 		void playShootAnimation3();
         void playShootAnimation4();
         void playStandbyAnimation1();
+		//void playStandbyAnimation1To2(float angle);
+		void playStandbyAnimation2();
         void playStandbyAnimation3();
         void playStandbyAnimation4();
 		void charactorVictorChange();

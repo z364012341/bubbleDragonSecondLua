@@ -295,6 +295,8 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameAlertMask.h" />
     <ClInclude Include="..\Classes\ButtonEffectController.h" />
+    <ClInclude Include="..\Classes\GameStageVehicle.h" />
+    <ClInclude Include="..\Classes\StageMenuManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -567,6 +569,8 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameAlertMask.cpp" />
     <ClCompile Include="..\Classes\ButtonEffectController.cpp" />
+    <ClCompile Include="..\Classes\GameStageVehicle.cpp" />
+    <ClCompile Include="..\Classes\StageMenuManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

@@ -11,6 +11,8 @@
 #include "StageNumble.h"
 #include "ui\UIButton.h"
 #include "ButtonEffectController.h"
+#include "GameStageVehicle.h"
+#include "StageMenuManager.h"
 const std::string GAME_STAGE_SELECTION_CSB_PATH = "GameStageSelectionLayer.csb";
 const std::string STAGE_SCROLLVIEW_NAME = "StageScrollView";
 const std::string SETTING_BUTTON_NAME = "SettingButton";
@@ -32,7 +34,6 @@ namespace bubble_second {
     cocos2d::Vec2 GameStageSelectionScene::scrollview_offset_ = cocos2d::Vec2::ZERO;
     GameStageSelectionScene::GameStageSelectionScene()
     {
-        //scale_zoom_ = 1.0f;
     }
     GameStageSelectionScene::~GameStageSelectionScene()
     {
@@ -83,6 +84,7 @@ namespace bubble_second {
         this->setName(GAME_STAGE_SELECTION_SCENE_NAME);
         this->loadView();
         this->addStageCell();
+		this->addStageVehicle();
         cocos2d::Director::getInstance()->setDisplayStats(false);
         return true;
     }
@@ -298,7 +300,7 @@ namespace bubble_second {
         static bool fire_flag = true;
         if (fire_flag)
         {//第一次要移动到最新的关卡
-			scrollview_->setInnerContainerPosition(getScorllViewOffset(UserDataManager::getInstance()->getPresentCell()));
+			scrollview_->setInnerContainerPosition(this->getScorllViewOffset(UserDataManager::getInstance()->getPresentCell()));
             fire_flag = false;
         }
         else
@@ -306,4 +308,11 @@ namespace bubble_second {
 			scrollview_->setInnerContainerPosition(scrollview_offset_);
         }
     }
+
+	void GameStageSelectionScene::addStageVehicle()
+	{
+		stage_vehicle_ = GameStageVehicle::create();
+		this->addChild(stage_vehicle_);
+		stage_vehicle_->setPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
+	}
 }

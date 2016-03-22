@@ -63,7 +63,7 @@ namespace bubble_second {
         cocos2d::Vec2 getBubbleIndex() const;
         //cocos2d::Vec2 getPointInMapNode();
         //播放撞击动画
-        void runBubbleEffect(const std::string& name, const cocos2d::Vec2& point);
+        virtual void runBubbleEffect(const std::string& name, const cocos2d::Vec2& point);
         //自己的类型是否是普通的彩色小球
         bool isColorBubbleType();
         //自己类型是否是组件形式

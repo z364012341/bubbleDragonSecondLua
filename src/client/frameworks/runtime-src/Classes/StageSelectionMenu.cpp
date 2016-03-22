@@ -5,6 +5,7 @@
 #include "UserDataManager.h"
 #include "ZCGConfigDataDict.h"
 #include "GameStageSelectionScene.h"
+#include "StageMenuManager.h"
 namespace bubble_second {
     StageSelectionMenu::StageSelectionMenu()
     {
@@ -48,6 +49,8 @@ namespace bubble_second {
         if (level == newest_stage_numble)
         {
             this->turnOnBlink();
+			//is_current_stage_flag_ = true;
+			StageMenuManager::getInstance()->setCurrentStageMenu(this);
             UserDataManager::getInstance()->setPresentCell(cell_numble);
         }
         else if (UserDataManager::getInstance()->isCompletedGame())
@@ -57,6 +60,7 @@ namespace bubble_second {
         if (level <= newest_stage_numble || debugFlag)
         {
             this->setSelectionMenuEnable(true);
+			StageMenuManager::getInstance()->setLastStageMenu(this);
         }
         else
         {

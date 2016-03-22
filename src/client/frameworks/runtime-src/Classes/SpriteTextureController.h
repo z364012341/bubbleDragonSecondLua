@@ -9,7 +9,6 @@
 //*******************************************************************************
 #ifndef _SPRITE_TEXTURE_CONTROLLER_H_
 #define _SPRITE_TEXTURE_CONTROLLER_H_
-//#include "cocos2d.h"
 #include "BubbleSecondConstant.h"
 namespace bubble_second {
     class CenteredMenuItemSprite;

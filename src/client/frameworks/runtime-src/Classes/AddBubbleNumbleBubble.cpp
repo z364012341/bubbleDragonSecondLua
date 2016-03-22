@@ -1,6 +1,7 @@
 #include "AddBubbleNumbleBubble.h"
 #include "cocostudio/CocoStudio.h"
 #include "GameScoreController.h"
+#include "GamePlayController.h"
 namespace bubble_second {
     AddBubbleNumbleBubble::AddBubbleNumbleBubble()
     {
@@ -29,6 +30,7 @@ namespace bubble_second {
     void AddBubbleNumbleBubble::bubbleEliminate(int)
     {
         GameScoreController::getInstance()->addBubbleUseCount(3);
+		//GamePlayController::getInstance()->setBubbleShootEnabled(true);
         this->removeFromParent();
     }
 

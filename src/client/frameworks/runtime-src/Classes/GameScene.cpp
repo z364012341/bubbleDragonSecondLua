@@ -297,10 +297,9 @@ namespace bubble_second {
                 dynamic_cast<cocos2d::Sprite*>(top_right_ui->getChildByName(GAME_STAGE_TYPE_SPRITE_NAME)), 
                 this->getStageType());
             //菜单按钮
-            pause_button_ = dynamic_cast<cocos2d::ui::Button*>(top_right_ui->getChildByName(UI_NAME_GAME_PLAYING_MENU));
-            //pause_button_->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
-            ButtonEffectController::setButtonZoomScale(pause_button_);
-            pause_button_->addTouchEventListener([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
+			pause_menu_ = dynamic_cast<cocos2d::ui::Button*>(top_right_ui->getChildByName(UI_NAME_GAME_PLAYING_MENU));
+			ButtonEffectController::setButtonZoomScale(pause_menu_);
+			pause_menu_->addTouchEventListener([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
                 if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
                 {
                     this->popPauseAlert();
@@ -315,12 +314,12 @@ namespace bubble_second {
             }
 
         }
-        {   //发射台上的漩涡
-            cocos2d::Sprite* swirl = SpriteTextureController::getInstance()->createGameSpriteWithPath(GUNSIGHT_SWIRL_RED_PATH);
-            swirl->setPosition(this->getGunsightPosition());
-            csb_node_->addChild(swirl, UI_ZORDER_GUNSIGHT_SWIRL);
-            swirl->runAction(cocos2d::RepeatForever::create(cocos2d::RotateBy::create(UI_SWIRL_ROTATIEBY_TIME, UI_SWIRL_ROTATIEBY_DEGREE)));
-        }
+        //{   //发射台上的漩涡
+        //    cocos2d::Sprite* swirl = SpriteTextureController::getInstance()->createGameSpriteWithPath(GUNSIGHT_SWIRL_RED_PATH);
+        //    swirl->setPosition(this->getGunsightPosition());
+        //    csb_node_->addChild(swirl, UI_ZORDER_GUNSIGHT_SWIRL);
+        //    swirl->runAction(cocos2d::RepeatForever::create(cocos2d::RotateBy::create(UI_SWIRL_ROTATIEBY_TIME, UI_SWIRL_ROTATIEBY_DEGREE)));
+        //}
         this->initBarrelScoreLabel();
     }
 
@@ -345,14 +344,14 @@ namespace bubble_second {
         props_name_to_handle_[COLOR_BOMB_BUBBLE_NAME] = [=](BaseProperty* property) {this->haveShootPropsBubble(property); };
         props_name_to_color_[PROPS_COLOR_BOMB_NAME] = kBubbleColorBomb;
         props_name_to_color_[PROPS_BOMB_BOMB_NAME] = kBubbleBombBombProperty;
-        bubblecolor_to_swirl_[kBubbleTransparent] = "";
-        bubblecolor_to_swirl_[kBubbleRed] = GUNSIGHT_SWIRL_RED_PATH;
-        bubblecolor_to_swirl_[kBubbleYellow] = GUNSIGHT_SWIRL_YELLOW_PATH;
-        bubblecolor_to_swirl_[kBubbleOrange] = GUNSIGHT_SWIRL_ORANGE_PATH;
-        bubblecolor_to_swirl_[kBubbleGreen] = GUNSIGHT_SWIRL_GREEN_PATH;
-        bubblecolor_to_swirl_[kBubblePink] = GUNSIGHT_SWIRL_PINK_PATH;
-        bubblecolor_to_swirl_[kBubblePurple] = GUNSIGHT_SWIRL_PURPLE_PATH;
-        bubblecolor_to_swirl_[kBubbleBlue] = GUNSIGHT_SWIRL_BLUE_PATH;
+        //bubblecolor_to_swirl_[kBubbleTransparent] = "";
+        //bubblecolor_to_swirl_[kBubbleRed] = GUNSIGHT_SWIRL_RED_PATH;
+        //bubblecolor_to_swirl_[kBubbleYellow] = GUNSIGHT_SWIRL_YELLOW_PATH;
+        //bubblecolor_to_swirl_[kBubbleOrange] = GUNSIGHT_SWIRL_ORANGE_PATH;
+        //bubblecolor_to_swirl_[kBubbleGreen] = GUNSIGHT_SWIRL_GREEN_PATH;
+        //bubblecolor_to_swirl_[kBubblePink] = GUNSIGHT_SWIRL_PINK_PATH;
+        //bubblecolor_to_swirl_[kBubblePurple] = GUNSIGHT_SWIRL_PURPLE_PATH;
+        //bubblecolor_to_swirl_[kBubbleBlue] = GUNSIGHT_SWIRL_BLUE_PATH;
     }
 
     void GameScene::initBarrelScoreLabel()
@@ -652,6 +651,7 @@ namespace bubble_second {
         listener = cocos2d::EventListenerCustom::create(EVENT_INITIAL_START_NUMBLES, [=](cocos2d::EventCustom* event) {
             StartNumbleModule start_numbles = *static_cast<StartNumbleModule*>(event->getUserData());
             this->getScoreProgressMenu()->initialStartNumble(start_numbles);
+			//GamePlayController::getInstance()->setBubbleShootEnabled(true);
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_GAME_DEFEAT, [=](cocos2d::EventCustom*) {this->defeat(); });
@@ -678,7 +678,6 @@ namespace bubble_second {
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_ADD_ELIMINATE_SCORE_LABEL, CC_CALLBACK_1(GameScene::addEliminateScoreLabel, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-
     }
 
     void GameScene::removeEventListenerCustom()
@@ -796,7 +795,7 @@ namespace bubble_second {
             if (second_bubble)
             {
                 second_bubble->setVisible(!isOnlyBubbleUseCount());
-                this->changeSwirlColor();
+				this->changeSightingDeviceColor();
 				this->playPrepareBubbleStanbyAction();
             }
             GamePlayController::getInstance()->setBubbleShootEnabled(true);
@@ -832,7 +831,7 @@ namespace bubble_second {
             auto control = GamePlayController::getInstance();
             control->setBubbleShootEnabled(true);
             control->setPrepareBubble(dynamic_cast<BaseBubble*>(second_bubble));
-            this->changeSwirlColor();
+            this->changeSightingDeviceColor();
 			this->playPrepareBubbleStanbyAction();
 			//dynamic_cast<ColorBubble*>(second_bubble)->playStanbyAnimation();
         }), nullptr);
@@ -1256,7 +1255,7 @@ namespace bubble_second {
     void GameScene::setMenuTouchEnabled(bool flag)
     {
         setPropertyTouchEnabled(flag);
-        pause_button_->setEnabled(flag);
+		pause_menu_->setEnabled(flag);
     }
 
     void GameScene::haveUsedProps(cocos2d::EventCustom* event)
@@ -1391,19 +1390,18 @@ namespace bubble_second {
 
     void GameScene::mapFallingBegin()
     {
-        cocos2d::MoveBy* move = getMapFallingAction();
-        auto controller = GameScoreController::getInstance();
-        if (controller->gameDefeat() || controller->gameVictory())
+		if (GameScoreController::getInstance()->gameDefeat() || GameScoreController::getInstance()->gameVictory())
         {
             return;
         }
+		cocos2d::MoveBy* move = cocos2d::MoveBy::create(3.0f, cocos2d::Vec2(0.0f, -100.0f));
         bubble_map_node_->runAction(cocos2d::RepeatForever::create(move));
     }
 
-    cocos2d::MoveBy * GameScene::getMapFallingAction()
-    {
-        return cocos2d::MoveBy::create(3.0f, cocos2d::Vec2(0.0f, -100.0f));
-    }
+    //cocos2d::MoveBy * GameScene::getMapFallingAction()
+    //{
+    //    return cocos2d::MoveBy::create(3.0f, cocos2d::Vec2(0.0f, -100.0f));
+    //}
 
     void GameScene::removePropsSelectAlert(cocos2d::EventCustom*)
     {
@@ -1417,33 +1415,33 @@ namespace bubble_second {
         bubble_map_node_->resume();
     }
 
-    void GameScene::changeSwirlColor()
-    {
-        BaseBubble* pre_bubble = GamePlayController::getInstance()->getPrepareBubble();
-        if (!pre_bubble)
-        {
-            return;
-        }
-        std::string path = bubblecolor_to_swirl_[pre_bubble->getBubbleType()];
-        if (path == "")
-        {
-            return;
-        }
-        cocos2d::Sprite* swirl_sp = dynamic_cast<cocos2d::Sprite*>(csb_node_->getChildByName(UI_NAME_GUNSIGHT_SWIRL));
-        if (!swirl_sp)
-        {
-            cocos2d::Sprite* swirl = SpriteTextureController::getInstance()->createGameSpriteWithPath(path);
-            swirl->setPosition(this->getGunsightPosition());
-            swirl->setName(UI_NAME_GUNSIGHT_SWIRL);
-            csb_node_->addChild(swirl, UI_ZORDER_SWIRL);
-            swirl->runAction(cocos2d::RepeatForever::create(cocos2d::RotateBy::create(UI_SWIRL_ROTATIEBY_TIME, UI_SWIRL_ROTATIEBY_DEGREE)));
-        }
-        else
-        {
-            SpriteTextureController::getInstance()->setSpriteTexture(path, swirl_sp);
-        }
-        this->changeSightingDeviceColor();
-    }
+    //void GameScene::changeSwirlColor()
+    //{
+    //    BaseBubble* pre_bubble = GamePlayController::getInstance()->getPrepareBubble();
+    //    if (!pre_bubble)
+    //    {
+    //        return;
+    //    }
+    //    std::string path = bubblecolor_to_swirl_[pre_bubble->getBubbleType()];
+    //    if (path == "")
+    //    {
+    //        return;
+    //    }
+    //    cocos2d::Sprite* swirl_sp = dynamic_cast<cocos2d::Sprite*>(csb_node_->getChildByName(UI_NAME_GUNSIGHT_SWIRL));
+    //    if (!swirl_sp)
+    //    {
+    //        cocos2d::Sprite* swirl = SpriteTextureController::getInstance()->createGameSpriteWithPath(path);
+    //        swirl->setPosition(this->getGunsightPosition());
+    //        swirl->setName(UI_NAME_GUNSIGHT_SWIRL);
+    //        csb_node_->addChild(swirl, UI_ZORDER_SWIRL);
+    //        swirl->runAction(cocos2d::RepeatForever::create(cocos2d::RotateBy::create(UI_SWIRL_ROTATIEBY_TIME, UI_SWIRL_ROTATIEBY_DEGREE)));
+    //    }
+    //    else
+    //    {
+    //        SpriteTextureController::getInstance()->setSpriteTexture(path, swirl_sp);
+    //    }
+    //    this->changeSightingDeviceColor();
+    //}
 
 	void GameScene::playPrepareBubbleStanbyAction()
 	{
@@ -1566,15 +1564,15 @@ namespace bubble_second {
         {
             controller->prepareBubbleChangeType(second_prepare_bubble);
         }
-        this->changeSwirlColor();
+		this->changeSightingDeviceColor();
     }
 
     void GameScene::changeSightingDeviceColor()
     {
-        if (this->getBubbleSightingDevice())
-        {
-            this->getBubbleSightingDevice()->changePointsColor(GamePlayController::getInstance()->getPrepareBubble()->getBubbleType());
-        }
+		if (BaseBubble* bubble = GamePlayController::getInstance()->getPrepareBubble())
+		{
+			this->getBubbleSightingDevice()->changePointsColor(bubble->getBubbleType());
+		}
     }
 
     void GameScene::addExchangeBubbleListener()
