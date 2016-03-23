@@ -86,7 +86,7 @@ namespace bubble_second {
         this->loadView();
         this->addStageCell();
 		this->addStageVehicle();
-        cocos2d::Director::getInstance()->setDisplayStats(false);
+        cocos2d::Director::getInstance()->setDisplayStats(true);
 
 		//stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
 		//cocos2d::MoveBy * move = cocos2d::MoveBy::create(2.0f, StageMenuManager::getInstance()->getCurrentStagePositionDelta());

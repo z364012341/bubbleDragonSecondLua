@@ -513,9 +513,9 @@ const std::string SCORE_PROGRESS_START_3_NAME = "xingxing_24_1"; //Â¥ÉÏµÄ·ÖÊı½ø¶
 const std::string SCORE_PROGRESS_BORDER_NAME = "Image_2"; //Â¥ÉÏµÄ·ÖÊı½ø¶ÈÌìÉËµÄ±ß¿ò
 const std::string SCORE_PROGRESS_START_PATH = "xingxing.png"; //Â¥ÉÏµÄ·ÖÊı½ø¶ÈÌìÉËµÄĞÇĞÇ
 //shader
-const std::string GREY_SCALE_FSH_PATH = "shader/example_GreyScale.fsh";
-const std::string NORMAL_FSH_PATH = "shader/example_Normal.fsh";
-const std::string BLUR_FSH_PATH = "shader/example_Blur.fsh";
+const std::string GREY_SCALE_FSH_PATH = "shaders/example_GreyScale.fsh";
+const std::string NORMAL_FSH_PATH = "shaders/example_Normal.fsh";
+//const std::string BLUR_FSH_PATH = "shaders/example_Blur.fsh";
 //ß÷×¼Æ÷
 const std::string NAME_BUBBLE_SIGHTING_POINT = "bubble_sighting_point"; //Ãû×Ö
 const std::string NAME_BUBBLE_SIGHTING_DEVICE = "bubble_sighting_device"; //Ãû×Ö
@@ -785,9 +785,6 @@ const int UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_REPEAT = UI_ZORDER_MENU; //Áù
 const int UI_ZORDER_RAINBOW_SEALED_CHARACTOR = -1; //²Êºç·âÓ¡ÀïÃæµÄÈËÎï
 //const float UI_GLOBALZORDER_LIGHTING_EFFECT_BACKGROUND = 1.1f; //ÉÁµçÌØĞ§µÄºÚÉ«±³¾°
 //const float UI_GLOBALZORDER_LIGHTING_EFFECT = 10.5f; //ÉÁµçÌØĞ§
-const int UI_ZORDER_MENU_MASK_NULL_BUTTON = -1; //ALERTµÄ¿Õ°×°´Å¥
-const int UI_ZORDER_MENU_MASK_COLOR_LAYER = UI_ZORDER_MENU_MASK_NULL_BUTTON -1; //ºÚÉ«ÃÉ°æ
-const int UI_ZORDER_MENU_MASK_BLUR_SPRITE = UI_ZORDER_MENU_MASK_COLOR_LAYER - 1; //½ØÍ¼¾«Áé
 //Åö×²ÑÚÂë
 const int BITMASK_BUBBLE_STATIC_CATEGORY = 0x10001; //Ğ¡Çò¾²Ì¬¸ÕÌåµÄÖÖÀàÑÚÂë
 const int BITMASK_BUBBLE_STATIC_COLLISION = 0x0001; //Ğ¡Çò¾²Ì¬¸ÕÌåµÄÅö×²ÑÚÂë

@@ -293,10 +293,21 @@
     <ClInclude Include="..\Classes\EnterGamePropsView.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameAlertMask.h" />
-    <ClInclude Include="..\Classes\ButtonEffectController.h" />
-    <ClInclude Include="..\Classes\GameStageVehicle.h" />
-    <ClInclude Include="..\Classes\StageMenuManager.h" />
+    <ClInclude Include="..\Classes\ButtonEffectController.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameAlertMask.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameStageVehicle.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SpriteBlur.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageMenuManager.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -567,10 +578,21 @@
     <ClCompile Include="..\Classes\EnterGamePropsView.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameAlertMask.cpp" />
-    <ClCompile Include="..\Classes\ButtonEffectController.cpp" />
-    <ClCompile Include="..\Classes\GameStageVehicle.cpp" />
-    <ClCompile Include="..\Classes\StageMenuManager.cpp" />
+    <ClCompile Include="..\Classes\ButtonEffectController.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameAlertMask.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameStageVehicle.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SpriteBlur.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageMenuManager.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

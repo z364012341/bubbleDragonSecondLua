@@ -27,11 +27,16 @@ namespace bubble_second {
         //¼ÓÔØÎÆÀí
         void addResourcesTexture();
         void addGameBackgroundTexture(int cell_numble);
+        cocos2d::Sprite* createGameBlurBackground();
     private:
         SpriteTextureController();
         void readGameSceneBackgroundFile();
         void addArmatureFile();
         void removeArmatureFile();
+        //Ä£ºý
+        cocos2d::RenderTexture* SpriteBlurer(cocos2d::Sprite* pSprite, const float fRadius = 8.0f, const float fSampleNum = 8.0f);
+        //½ØÆÁ
+        cocos2d::RenderTexture* ScreenShot(const bool bIsSave, std::function<void(cocos2d::RenderTexture*, const std::string&)> pFuncCallback);
     private:
         std::map<StageType, std::string> stagetype_to_path_;
         cocos2d::ValueMap cell_to_path_;

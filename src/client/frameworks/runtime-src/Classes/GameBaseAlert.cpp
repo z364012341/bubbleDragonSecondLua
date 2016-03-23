@@ -1,6 +1,9 @@
 #include "GameBaseAlert.h"
 #include "SpriteTextureController.h"
 #include "CenteredMenuItemSprite.h"
+const int UI_ZORDER_MENU_MASK_NULL_BUTTON = -1; //ALERTµÄ¿Õ°×°´Å¥
+const int UI_ZORDER_MENU_MASK_COLOR_LAYER = UI_ZORDER_MENU_MASK_NULL_BUTTON - 1; //ºÚÉ«ÃÉ°æ
+const int UI_ZORDER_MENU_MASK_BLUR_SPRITE = UI_ZORDER_MENU_MASK_COLOR_LAYER - 1; //½ØÍ¼¾«Áé
 namespace bubble_second {
     GameBaseAlert::GameBaseAlert()
     {

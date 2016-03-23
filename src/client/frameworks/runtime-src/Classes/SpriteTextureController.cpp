@@ -1,6 +1,7 @@
 #include "SpriteTextureController.h"
 #include "CenteredMenuItemSprite.h"
 #include "cocostudio\CocoStudio.h"
+#include "SpriteBlur.h"
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_1_PATH = "laohu/laohu.ExportJson"; //老虎的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_2_PATH = "laohu2/laohu2.ExportJson"; //老虎2的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_3_PATH = "laohu3/laohu3.ExportJson"; //老虎3的动画
@@ -95,6 +96,17 @@ namespace bubble_second {
         cocos2d::Director::getInstance()->getTextureCache()->addImageAsync(cell_to_path_[str].asString(), nullptr);
     }
 
+    cocos2d::Sprite * SpriteTextureController::createGameBlurBackground()
+    {
+        cocos2d::RenderTexture* textureScreen = this->ScreenShot(false, nullptr);
+        cocos2d::RenderTexture* textureBlur = this->SpriteBlurer(textureScreen->getSprite());
+        //将模糊化后的图片保存成一张图片 
+        cocos2d::Sprite* blurSprite = cocos2d::Sprite::createWithSpriteFrame(textureBlur->getSprite()->getSpriteFrame());
+        blurSprite->setRotation(180.0f);
+        blurSprite->setFlippedX(true);
+        return blurSprite;
+    }
+
     void SpriteTextureController::addArmatureFile()
     {
         cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(LIGHTNING_BUBBLE_EFFECT_PATH);
@@ -147,6 +159,52 @@ namespace bubble_second {
 		cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_PATH);
 		cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_PATH);
 		cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_FIRE_BALLOON_ARMATURE_PATH);
+    }
+
+    cocos2d::RenderTexture* SpriteTextureController::SpriteBlurer(cocos2d::Sprite* pSprite, const float fRadius, const float fSampleNum)
+    {
+        //模糊化的临时精灵  
+        auto pSptBlur = SpriteBlur::create(pSprite, fRadius, fSampleNum);
+        pSptBlur->setRotationSkewX(180.0f);
+        pSptBlur->setPositionX(pSptBlur->getContentSize().width / 2);
+        pSptBlur->setPositionY(pSptBlur->getContentSize().height / 2);
+        //使用精灵尺寸初始化一个空的渲染纹理对象  
+        cocos2d::RenderTexture* textureScreen =
+            cocos2d::RenderTexture::create(pSptBlur->getContentSize().width, pSptBlur->getContentSize().height);
+        //开始获取  
+        textureScreen->beginWithClear(0.0f, 0.0f, 0.0f, 0.0f);
+        //遍历节点对象，填充纹理到texure中  
+        pSptBlur->visit();
+        //结束获取  
+        textureScreen->end();
+        return textureScreen;
+    }
+
+    cocos2d::RenderTexture* SpriteTextureController::ScreenShot(const bool bIsSave, std::function<void(cocos2d::RenderTexture*, const std::string&)> pFuncCallback)
+
+    {
+        //使用屏幕尺寸初始化一个空的渲染纹理对象  
+        cocos2d::Size sizeWin = cocos2d::Director::getInstance()->getWinSize();
+        cocos2d::RenderTexture* textureScreen = cocos2d::RenderTexture::create(sizeWin.width, sizeWin.height);
+        //清除数据并开始获取  
+        textureScreen->beginWithClear(0.0f, 0.0f, 0.0f, 0.0f);
+        //遍历场景节点对象，填充纹理到texure中  
+        cocos2d::Director::getInstance()->getRunningScene()->visit();
+        //结束获取  
+        textureScreen->end();
+
+        if (bIsSave)
+        {//保存为PNG图  
+            textureScreen->saveToFile("ScreenShot.png", cocos2d::Image::Format::PNG, true, pFuncCallback);
+        }
+        else
+        {
+            if (nullptr != pFuncCallback)
+            {
+                pFuncCallback(textureScreen, "");
+            }
+        }
+        return textureScreen;
     }
 
 }
