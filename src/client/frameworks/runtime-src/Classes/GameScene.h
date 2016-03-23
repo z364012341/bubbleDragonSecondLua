@@ -34,6 +34,8 @@ namespace bubble_second {
         GameScene();
         ~GameScene();
     public:
+		void updateStart(float delta);
+		virtual void update(float delta) override;
         void onEnter() override;
         void onExit() override;
     public:
@@ -336,6 +338,7 @@ namespace bubble_second {
         StageType stage_type_;
         bool is_fall_stage_ = false;
 		cocos2d::ui::Button* pause_menu_ = nullptr;
+		BaseBubble* second_bubble_ = nullptr;
     };
 }
 #endif //_GAME_SCENE_H_

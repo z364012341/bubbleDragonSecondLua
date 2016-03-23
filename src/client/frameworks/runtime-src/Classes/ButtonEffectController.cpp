@@ -1,6 +1,6 @@
 #include "ButtonEffectController.h"
 //#include "BubbleSecondConstant.h"
-const float GAME_BUTTON_ZOOM_SCALE = -0.2f;    //BUTTON点击时的放大比例
+const float GAME_BUTTON_ZOOM_SCALE = -0.1f;    //BUTTON点击时的放大比例
 namespace bubble_second {
 
     void ButtonEffectController::setButtonZoomScale(cocos2d::ui::Button * button)

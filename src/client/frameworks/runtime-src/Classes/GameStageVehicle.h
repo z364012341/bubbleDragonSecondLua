@@ -18,6 +18,7 @@ namespace bubble_second {
 	public:
 		CREATE_FUNC(GameStageVehicle);
 		~GameStageVehicle();
+		void setPositionWithWorldPosition(const cocos2d::Vec2& point);
 	private:
 		GameStageVehicle();
 		bool init();

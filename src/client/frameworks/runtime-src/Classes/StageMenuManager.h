@@ -20,6 +20,7 @@ namespace bubble_second {
 		void setLastStageMenu(cocos2d::Node* menu);
 		cocos2d::Vec2 getCurrentStageWorldPosition() const;
 		cocos2d::Vec2 getLastStageWorldPosition() const;
+		cocos2d::Vec2 getCurrentStagePositionDelta() const;
 	private:
 		StageMenuManager();
 	private:

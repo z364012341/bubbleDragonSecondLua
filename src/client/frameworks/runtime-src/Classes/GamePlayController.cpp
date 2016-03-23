@@ -202,9 +202,12 @@ namespace bubble_second {
     {
         if (bubble_node->getParent())
         {
+			static int numble = 0;
+			++numble;
+			CCLOG("event_total: %d", numble);
             bubble_node->removeFromParent();
-            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CUT_AIR_BUBBLE_NUMBLE);
-            dynamic_cast<BarrelBottom*>(barrel_node)->contactOnce();
+			cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CUT_AIR_BUBBLE_NUMBLE);
+			dynamic_cast<BarrelBottom*>(barrel_node)->contactOnce();
         }
     }
 
@@ -530,6 +533,10 @@ namespace bubble_second {
             return;
         }
         numble = 0;
+		if (!prepare_bubble_)
+		{
+			return;
+		}
         const cocos2d::Vec2 touch_location = this->convertGLToNodeSpace(touch_point, prepare_bubble_->getParent());
         if (this->canShootingBubble(touch_location))
         {

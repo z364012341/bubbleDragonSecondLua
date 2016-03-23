@@ -65,6 +65,7 @@ namespace bubble_second {
         bool initWithTypeAndCloud(int type, int cloud = kBubbleNoCloud);
         virtual ~ColorBubble();
         //¥”ø’÷–µÙ¬‰
+		void dispatchCustomAddAirBubbleNumbleEvent();
         void downFromAir() override;
     private:
         bool init();

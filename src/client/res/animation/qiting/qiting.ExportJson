@@ -10,8 +10,8 @@
           "name": "Layer2",
           "parent": "",
           "dI": 0,
-          "x": 3.5000019073486328,
-          "y": 134.5,
+          "x": -1.428571343421936,
+          "y": 115.71427917480469,
           "z": 1,
           "cX": 0.3,
           "cY": 0.3,
@@ -47,7 +47,7 @@
       "mov_data": [
         {
           "name": "yidong",
-          "dr": 25,
+          "dr": 46,
           "lp": true,
           "to": 0,
           "drTW": 0,
@@ -76,13 +76,13 @@
                 {
                   "dI": 0,
                   "x": 0.0,
-                  "y": 46.0,
+                  "y": 16.0,
                   "z": 0,
-                  "cX": 1.05,
+                  "cX": 1.02,
                   "cY": 1.0,
                   "kX": 0.0,
                   "kY": 0.0,
-                  "fi": 10,
+                  "fi": 20,
                   "twE": 0,
                   "tweenFrame": true,
                   "bd_src": 1,
@@ -97,99 +97,7 @@
                   "cY": 1.0,
                   "kX": 0.0,
                   "kY": 0.0,
-                  "fi": 24,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "daiji",
-          "dr": 26,
-          "lp": true,
-          "to": 0,
-          "drTW": 0,
-          "twE": 0,
-          "sc": 0.1,
-          "mov_bone_data": [
-            {
-              "name": "Layer2",
-              "dl": 0.0,
-              "frame_data": [
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 0,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 23.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 7,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 12,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 23.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 17,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 25,
+                  "fi": 45,
                   "twE": 0,
                   "tweenFrame": true,
                   "bd_src": 1,
@@ -205,8 +113,8 @@
   "texture_data": [
     {
       "name": "qiting_0000_2",
-      "width": 313.0,
-      "height": 454.0,
+      "width": 188.0,
+      "height": 263.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""

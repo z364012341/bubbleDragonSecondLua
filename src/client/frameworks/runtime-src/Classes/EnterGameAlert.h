@@ -44,6 +44,7 @@ namespace bubble_second {
         //cocos2d::MenuItem* cancel_item_ = nullptr;
         //cocos2d::MenuItem* begin_item_ = nullptr;
         cocos2d::Node* alert_csb_node_ = nullptr;
+		cocos2d::Node* start_node_ = nullptr;
     };
 }
 #endif //_ENTER_GAME_ALERT_H_

@@ -20,8 +20,10 @@ namespace bubble_second {
     private:
         void initWithColorVector(const std::vector<BubbleType>& color_vector);
         void mixBubbleColor(const std::vector<BubbleType>& color_vector);
+		//void printColorRender(const std::vector<BubbleType>& color_vector);
     private:
         std::map<BubbleType, BubbleType> color_to_color_;
+		std::vector<BubbleType> origin_color_vector;
     };
 }
 #endif //_BUBBLE_COLOR_RENDER_H_

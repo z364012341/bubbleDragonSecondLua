@@ -53,6 +53,10 @@ namespace bubble_second {
 			StageMenuManager::getInstance()->setCurrentStageMenu(this);
             UserDataManager::getInstance()->setPresentCell(cell_numble);
         }
+		else if (level < newest_stage_numble)
+		{
+			StageMenuManager::getInstance()->setLastStageMenu(this);
+		}
         else if (UserDataManager::getInstance()->isCompletedGame())
         {
             UserDataManager::getInstance()->setPresentCell(cell_numble);
@@ -60,7 +64,6 @@ namespace bubble_second {
         if (level <= newest_stage_numble || debugFlag)
         {
             this->setSelectionMenuEnable(true);
-			StageMenuManager::getInstance()->setLastStageMenu(this);
         }
         else
         {

@@ -89,8 +89,16 @@ namespace bubble_second {
         body->applyImpulse(impulse*zoom);
         body->setAngularVelocity(angular_v);
         //this->delayNotCollision();
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ADD_AIR_BUBBLE_NUMBLE);
+		//this->setName(MAP_BUBBLE_NAME);
+        //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ADD_AIR_BUBBLE_NUMBLE);
+		this->dispatchCustomAddAirBubbleNumbleEvent();
     }
+
+	void ColorBubble::dispatchCustomAddAirBubbleNumbleEvent()
+	{
+		this->setName(MAP_BUBBLE_NAME);
+		cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ADD_AIR_BUBBLE_NUMBLE);
+	}
 
     void ColorBubble::addBubbleDynamicBody()
     {
@@ -133,8 +141,8 @@ namespace bubble_second {
 
     void ColorBubble::shootAfterVictory()
     {	
+		//this->setName(MAP_BUBBLE_NAME);
         this->addBubbleDynamicBody();
-
         this->setLocalZOrder(UI_ZORDER_DOWN_AIR_BUBBLE);
         int x = cocos2d::random(-BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_X, BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_X);
         float angular_v = x >= 0 ? BUBBLE_DOWN_FROM_AIR_ANGULAR_VELOCITY : -BUBBLE_DOWN_FROM_AIR_ANGULAR_VELOCITY;
@@ -144,7 +152,8 @@ namespace bubble_second {
         this->getPhysicsBody()->applyImpulse(cocos2d::Vec2(x, y)*SmartScaleController::getInstance()->getPlayAreaZoom());
         GameScoreController::getInstance()->cutBubbleUseCount();
         //this->delayNotCollision();
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ADD_AIR_BUBBLE_NUMBLE);
+        //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ADD_AIR_BUBBLE_NUMBLE);
+		this->dispatchCustomAddAirBubbleNumbleEvent();
     }
 
     void ColorBubble::delayNotCollision()

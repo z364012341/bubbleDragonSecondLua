@@ -135,6 +135,20 @@ namespace bubble_second {
     {
     }
 
+	void GameScene::updateStart(float delta)
+	{
+		this->getScenePhysicsWorld()->setAutoStep(false);
+		scheduleUpdate();
+	}
+
+	void GameScene::update(float delta)
+	{
+		// use fixed time and calculate 3 times per frame makes physics simulate more precisely.
+		for (int i = 0; i < 3; ++i)
+		{
+			this->getScenePhysicsWorld()->step(1 / 180.0f);
+		}
+	}
     void GameScene::onEnter()
     {
         Layer::onEnter();
@@ -149,7 +163,7 @@ namespace bubble_second {
         edge_shape_node_->setName(MAP_PHYSICS_BORDER_NAME);
         addChild(edge_shape_node_);
         this->setPhysicsWorldBody();
-        //this->scheduleOnce(CC_SCHEDULE_SELECTOR(GameScene::updateStart), 1);
+        this->scheduleOnce(CC_SCHEDULE_SELECTOR(GameScene::updateStart), 1);
     }
 
     void GameScene::onExit()
@@ -770,14 +784,14 @@ namespace bubble_second {
         {
             return nullptr;
         }
-        BaseBubble* bubble = this->createPrepareBubble();
-        if (bubble)
+		second_bubble_ = this->createPrepareBubble();
+		if (second_bubble_)
         {
-            bubble->setName(SECOND_PREPARE_BUBBLE_NAME);
-            bubble->setPosition(this->getGrassPosition());
-            bubble->setVisible(false);
+			second_bubble_->setName(SECOND_PREPARE_BUBBLE_NAME);
+			second_bubble_->setPosition(this->getGrassPosition());
+			second_bubble_->setVisible(false);
         }
-        return bubble;
+		return second_bubble_;
     }
 
     void GameScene::reloadPrepareBubble(cocos2d::EventCustom *)
@@ -1606,7 +1620,7 @@ namespace bubble_second {
     }
     BaseBubble* GameScene::getSecondPrepareBubble()
     {
-        return dynamic_cast<BaseBubble*>(csb_node_->getChildByName(SECOND_PREPARE_BUBBLE_NAME));
+		return second_bubble_;
     }
 
     void GameScene::spritesDownFromAir(cocos2d::EventCustom* event)
@@ -1927,7 +1941,6 @@ namespace bubble_second {
                 bubble->setVisible(true);
                 cocos2d::MoveTo* move = cocos2d::MoveTo::create(AFTER_VECTORY_PREPARE_RELOAD_MOVE_TIME, this->getGunsightPosition());
                 cocos2d::CallFunc* func = cocos2d::CallFunc::create([=]() {
-                    bubble->setName("");
                     dynamic_cast<ColorBubble*>(bubble)->shootAfterVictory(); 
                 });
                 this->addSecondPrepareBubble();
@@ -2192,14 +2205,17 @@ namespace bubble_second {
     void GameScene::addOneAirBubblesNumble(cocos2d::EventCustom*)
     {
         ++total_air_bubbles_numble_;
-        //static int numble = 0;
-        //++numble;
+        static int numble = 0;
+        ++numble;
+		//CCLOG("total: %d", numble);
+		//CCLOG("++%d", total_air_bubbles_numble_);
         this->displayBarrelScoreLabel();
     }
 
     void GameScene::cutOneAirBubblesNumble(cocos2d::EventCustom*)
     {
         --total_air_bubbles_numble_;
+		//CCLOG("--%d", total_air_bubbles_numble_);
         if (this->isNeedNotDisplayedBarrelScoreLabel())
         {
             this->notDisplayedBarrelScoreLabel();

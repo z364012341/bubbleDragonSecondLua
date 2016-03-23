@@ -30,6 +30,7 @@ const float TOP_INFO_POS_Y_PERCENT = 0.9564f;
 const float BUTTON_POS_Y_PERCENT_1 = 0.8343f;
 const float BUTTON_POS_Y_PERCENT_2 = 0.6988f;
 const float BUTTON_POS_Y_PERCENT_3 = 0.6988f;
+const float STAGE_VEHICLE_MOVE_DURATION = 2.0f;
 namespace bubble_second {
     cocos2d::Vec2 GameStageSelectionScene::scrollview_offset_ = cocos2d::Vec2::ZERO;
     GameStageSelectionScene::GameStageSelectionScene()
@@ -86,6 +87,13 @@ namespace bubble_second {
         this->addStageCell();
 		this->addStageVehicle();
         cocos2d::Director::getInstance()->setDisplayStats(false);
+
+		//stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
+		//cocos2d::MoveBy * move = cocos2d::MoveBy::create(2.0f, StageMenuManager::getInstance()->getCurrentStagePositionDelta());
+	 //   stage_vehicle_->runAction(move);
+
+
+
         return true;
     }
 
@@ -256,17 +264,26 @@ namespace bubble_second {
 
     void GameStageSelectionScene::enterNextStage(StageData data)
     {
-        StageData next_data;
-        if (cell_vector_.at(data.cell_numble)->isInCell(data.level_numble))
-        {
-            next_data.cell_numble = data.cell_numble;
-        }
-        else
-        {
-            next_data.cell_numble = data.cell_numble + 1;
-        }
-        next_data.level_numble = data.level_numble + 1;
-        this->popEnterGameAlert(next_data);
+		if (data.level_numble < UserDataManager::getInstance()->getStagePassCount())
+		{
+			return;
+		}
+		stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
+		cocos2d::MoveBy * move = cocos2d::MoveBy::create(STAGE_VEHICLE_MOVE_DURATION, StageMenuManager::getInstance()->getCurrentStagePositionDelta());
+		cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move, cocos2d::CallFunc::create([=](){
+			StageData next_data;
+			if (cell_vector_.at(data.cell_numble)->isInCell(data.level_numble))
+			{
+				next_data.cell_numble = data.cell_numble;
+			}
+			else
+			{
+				next_data.cell_numble = data.cell_numble + 1;
+			}
+			next_data.level_numble = data.level_numble + 1;
+			this->popEnterGameAlert(next_data);
+		}));
+		stage_vehicle_->runAction(seq);
     }
 
     void bubble_second::GameStageSelectionScene::gotoPuzzleGame()
@@ -312,7 +329,7 @@ namespace bubble_second {
 	void GameStageSelectionScene::addStageVehicle()
 	{
 		stage_vehicle_ = GameStageVehicle::create();
-		this->addChild(stage_vehicle_);
-		stage_vehicle_->setPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
+		scrollview_->addChild(stage_vehicle_);
+		stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getCurrentStageWorldPosition());
 	}
 }

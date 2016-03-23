@@ -1,7 +1,7 @@
 #include "GameStageVehicle.h"
 #include "BubbleSecondConstant.h"
 const std::string FIRE_BALLON_ARMATURE_NAME = "qiting";
-const std::string FIRE_BALLON_ANIMATION_STANDBY_NAME = "daiji";
+const std::string FIRE_BALLON_ANIMATION_STANDBY_NAME = "yidong";
 namespace bubble_second {
 	GameStageVehicle::GameStageVehicle()
 	{
@@ -32,5 +32,10 @@ namespace bubble_second {
 	void GameStageVehicle::playStandbyAnimation()
 	{
 		vehicle_armature_->getAnimation()->play(FIRE_BALLON_ANIMATION_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+	}
+
+	void GameStageVehicle::setPositionWithWorldPosition(const cocos2d::Vec2& point)
+	{
+		this->setPosition(this->getParent()->convertToNodeSpace(point));
 	}
 }

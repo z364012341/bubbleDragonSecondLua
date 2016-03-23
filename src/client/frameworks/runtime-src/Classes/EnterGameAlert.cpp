@@ -7,7 +7,9 @@
 #include "cocostudio/CocoStudio.h"
 #include "GameAlertMask.h"
 #include "ButtonEffectController.h"
+#include "ui\UIScale9Sprite.h"
 const std::string& ENTER_GAME_ALERT_CSB = "EnterGameAlert.csb";
+const std::string& ENTER_GAME_ALERT_START_NODE_NAME = "startMenuNode";
 const std::string& ENTER_GAME_ALERT_START_BUTTON_NAME = "startButton";
 const std::string& ENTER_GAME_ALERT_CLOSE_BUTTON_NAME = "closeButton";
 const std::string& ENTER_GAME_ALERT_STAGE_NUMBLE_LABEL_NAME = "stageNumbleLabel";
@@ -85,16 +87,39 @@ namespace bubble_second {
 
     void EnterGameAlert::initStartButton(int cell_numble, int level)
     {
-        cocos2d::ui::Button* button = this->getStartButton();
-        //button->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
-        //ButtonEffectController::setButtonZoomScale(button, GAME_BUTTON_ZOOM_SCALE);
-        button->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
-            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-            {
-                cocos2d::Scene* scene = GameScene::createScene(cell_numble, level);
-                cocos2d::Director::getInstance()->replaceScene(scene);
-            }
-        });
+        //cocos2d::ui::Button* button = this->getStartButton();
+        ////button->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
+        ////ButtonEffectController::setButtonZoomScale(button, GAME_BUTTON_ZOOM_SCALE);
+        //button->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
+        //    if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+        //    {
+        //        cocos2d::Scene* scene = GameScene::createScene(cell_numble, level);
+        //        cocos2d::Director::getInstance()->replaceScene(scene);
+        //    }
+        //});
+
+		cocos2d::Node* button_top = cocos2d::CSLoader::createNode("GameStartMenuTop.csb");
+		auto action = cocos2d::CSLoader::createTimeline("GameStartMenuTop.csb");
+		button_top->runAction(action);
+		action->gotoFrameAndPlay(0, true);
+
+		cocos2d::ClippingNode* clipping = cocos2d::ClippingNode::create(SpriteTextureController::getInstance()->createGameSpriteWithPath("startBubbleBG1.png"));
+		clipping->setAlphaThreshold(0);
+		clipping->addChild(button_top);
+		start_node_ = cocos2d::CSLoader::createNode("GameStartMenuBottom.csb");
+		//start_node_->addChild(clipping);
+		alert_csb_node_->getChildByName(ENTER_GAME_ALERT_START_NODE_NAME)->addChild(start_node_);
+		cocos2d::ui::Button* button = this->getStartButton();
+		clipping->setPosition(button->getContentSize().width / 2, button->getContentSize().height/2);
+		button->getRendererNormal()->addChild(clipping);
+		ButtonEffectController::setButtonZoomScale(button);
+		button->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
+		    if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+		    {
+		        cocos2d::Scene* scene = GameScene::createScene(cell_numble, level);
+		        cocos2d::Director::getInstance()->replaceScene(scene);
+		    }
+		});
     }
 
     void bubble_second::EnterGameAlert::initCloseButton()
@@ -125,7 +150,7 @@ namespace bubble_second {
 
     cocos2d::ui::Button * EnterGameAlert::getStartButton()
     {
-        return dynamic_cast<cocos2d::ui::Button*>(alert_csb_node_->getChildByName(ENTER_GAME_ALERT_START_BUTTON_NAME));
+		return dynamic_cast<cocos2d::ui::Button*>(start_node_->getChildByName(ENTER_GAME_ALERT_START_BUTTON_NAME));
     }
 
     cocos2d::ui::Button * bubble_second::EnterGameAlert::getCloseButton()
