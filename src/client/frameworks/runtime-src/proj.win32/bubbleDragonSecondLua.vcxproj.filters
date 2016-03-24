@@ -308,6 +308,13 @@
     <ClInclude Include="..\Classes\StageMenuManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\AddButton.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UserCoinInfoBoard.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UserDiamondInfoBoard.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -593,6 +600,13 @@
     <ClCompile Include="..\Classes\StageMenuManager.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AddButton.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UserCoinInfoBoard.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UserDiamondInfoBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

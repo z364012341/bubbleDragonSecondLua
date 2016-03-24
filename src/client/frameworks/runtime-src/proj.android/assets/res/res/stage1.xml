@@ -14,5 +14,5 @@
         <data type="0" row="0" col="10" cloud="0" path=""/>
         <data type="17" row="1" col="2" cloud="0" path=""/>
     </bubbles>
-    <info bubbleNum="35" type="1" start1="10" start2="20" start3 ="90" colors ="1111111"/>
+    <info bubbleNum="10" type="1" start1="10" start2="20" start3 ="90" colors ="1111111"/>
 </include>

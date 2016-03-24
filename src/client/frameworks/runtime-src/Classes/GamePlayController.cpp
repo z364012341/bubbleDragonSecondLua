@@ -220,6 +220,10 @@ namespace bubble_second {
     void GamePlayController::setPrepareBubble(BaseBubble* color_bubble)
     {
         prepare_bubble_ = color_bubble;
+		if (prepare_bubble_)
+		{
+			prepare_bubble_->setName(PREPARE_BUBBLE_NAME);
+		}
     }
 
     void GamePlayController::clearPrepareBubble()

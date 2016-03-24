@@ -112,6 +112,7 @@ namespace bubble_second {
         //获取发射小球
         BaseBubble* getPrepareBubble();
         //获取第二备用小球
+		void setSecondPrepareBubble(BaseBubble* bubble);
         BaseBubble* getSecondPrepareBubble();
         //添加准备发射小球
         void addPrepareBubble();
@@ -339,6 +340,7 @@ namespace bubble_second {
         bool is_fall_stage_ = false;
 		cocos2d::ui::Button* pause_menu_ = nullptr;
 		BaseBubble* second_bubble_ = nullptr;
+		ScoreProgressMenu* score_progress_ = nullptr;
     };
 }
 #endif //_GAME_SCENE_H_

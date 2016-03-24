@@ -28,7 +28,7 @@ namespace bubble_second {
             return false;
         }
         this->initScoreMenu();
-        this->setName(GAME_TOP_INFO_NAME);
+        //this->setName(GAME_TOP_INFO_NAME);
         this->getScoreProgressTimer()->setPercentage(percent_);
         return true;
     }

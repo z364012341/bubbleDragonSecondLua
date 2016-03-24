@@ -13,6 +13,8 @@
 #include "ButtonEffectController.h"
 #include "GameStageVehicle.h"
 #include "StageMenuManager.h"
+#include "UserCoinInfoBoard.h"
+#include "UserDiamondInfoBoard.h"
 const std::string GAME_STAGE_SELECTION_CSB_PATH = "GameStageSelectionLayer.csb";
 const std::string STAGE_SCROLLVIEW_NAME = "StageScrollView";
 const std::string SETTING_BUTTON_NAME = "SettingButton";
@@ -126,8 +128,11 @@ namespace bubble_second {
     {
         float visibleHeight = cocos2d::Director::getInstance()->getVisibleSize().height;
         csb_node_->getChildByName(STRENGTH_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
-        //csb_node_->getChildByName(STRENGTH_INFO)->setGlobalZOrder(0.1f);
+
+		csb_node_->getChildByName(COIN_INFO)->addChild(UserCoinInfoBoard::create());
         csb_node_->getChildByName(COIN_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
+
+        csb_node_->getChildByName(DIAMOND_INFO)->addChild(UserDiamondInfoBoard::create());
         csb_node_->getChildByName(DIAMOND_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
 
         csb_node_->getChildByName(RANKINGLIST_BUTTON)->setPositionY(visibleHeight*BUTTON_POS_Y_PERCENT_1);

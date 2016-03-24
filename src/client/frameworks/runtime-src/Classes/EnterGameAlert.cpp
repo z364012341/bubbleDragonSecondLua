@@ -8,12 +8,15 @@
 #include "GameAlertMask.h"
 #include "ButtonEffectController.h"
 #include "ui\UIScale9Sprite.h"
-const std::string& ENTER_GAME_ALERT_CSB = "EnterGameAlert.csb";
-const std::string& ENTER_GAME_ALERT_START_NODE_NAME = "startMenuNode";
-const std::string& ENTER_GAME_ALERT_START_BUTTON_NAME = "startButton";
-const std::string& ENTER_GAME_ALERT_CLOSE_BUTTON_NAME = "closeButton";
-const std::string& ENTER_GAME_ALERT_STAGE_NUMBLE_LABEL_NAME = "stageNumbleLabel";
-const std::string& ENTER_GAME_ALERT_STAGE_TYPE_LABEL_NAME = "stageTypeLabel";
+const std::string ENTER_GAME_ALERT_CSB = "EnterGameAlert.csb";
+const std::string START_BUTTON_TOP_CSB = "GameStartMenuTop.csb";
+const std::string START_BUTTON_BOTTOM_CSB = "GameStartMenuBottom.csb";
+const std::string START_BUTTON_CLIPPINT_STENCIL_PATH = "startBubbleBG1.png";
+const std::string ENTER_GAME_ALERT_START_NODE_NAME = "startMenuNode";
+const std::string ENTER_GAME_ALERT_START_BUTTON_NAME = "startButton";
+const std::string ENTER_GAME_ALERT_CLOSE_BUTTON_NAME = "closeButton";
+const std::string ENTER_GAME_ALERT_STAGE_NUMBLE_LABEL_NAME = "stageNumbleLabel";
+const std::string ENTER_GAME_ALERT_STAGE_TYPE_LABEL_NAME = "stageTypeLabel";
 namespace bubble_second {
     EnterGameAlert * EnterGameAlert::create(int cell_numble, int level, const StageType & type)
     {
@@ -98,15 +101,15 @@ namespace bubble_second {
         //    }
         //});
 
-		cocos2d::Node* button_top = cocos2d::CSLoader::createNode("GameStartMenuTop.csb");
-		auto action = cocos2d::CSLoader::createTimeline("GameStartMenuTop.csb");
+		cocos2d::Node* button_top = cocos2d::CSLoader::createNode(START_BUTTON_TOP_CSB);
+		auto action = cocos2d::CSLoader::createTimeline(START_BUTTON_TOP_CSB);
 		button_top->runAction(action);
 		action->gotoFrameAndPlay(0, true);
 
-		cocos2d::ClippingNode* clipping = cocos2d::ClippingNode::create(SpriteTextureController::getInstance()->createGameSpriteWithPath("startBubbleBG1.png"));
+		cocos2d::ClippingNode* clipping = cocos2d::ClippingNode::create(SpriteTextureController::getInstance()->createGameSpriteWithPath(START_BUTTON_CLIPPINT_STENCIL_PATH));
 		clipping->setAlphaThreshold(0);
 		clipping->addChild(button_top);
-		start_node_ = cocos2d::CSLoader::createNode("GameStartMenuBottom.csb");
+		start_node_ = cocos2d::CSLoader::createNode(START_BUTTON_BOTTOM_CSB);
 		//start_node_->addChild(clipping);
 		alert_csb_node_->getChildByName(ENTER_GAME_ALERT_START_NODE_NAME)->addChild(start_node_);
 		cocos2d::ui::Button* button = this->getStartButton();

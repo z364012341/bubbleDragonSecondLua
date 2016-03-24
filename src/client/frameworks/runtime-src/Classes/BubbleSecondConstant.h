@@ -25,8 +25,6 @@
 //×ÊÔ´Â·¾¶
 const std::string GAME_SCENE = "GameScene";
 const std::string GAME_LAYER_CSB = "GameLayer.csb";
-const std::string GAME_TOP_INFO_NAME = "TopUINode"; 
-const std::string GAME_TOP_INFO_CSB = "TopUINode.csb";
 const std::string GAME_RIGHT_INFO_NAME = "right_UI_node";
 const float GAME_RIGHT_STAGE_SPRITE_POS_X = -90.0f; //¹Ø¿¨ÀàÐÍÍ¼±êÎ»ÖÃ
 const std::string BUBBLE_NO_COLOR_PATH = ""; //ÎÞÉ«             
@@ -512,6 +510,7 @@ const std::string SCORE_PROGRESS_START_2_NAME = "xingxing_24_0"; //Â¥ÉÏµÄ·ÖÊý½ø¶
 const std::string SCORE_PROGRESS_START_3_NAME = "xingxing_24_1"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇ
 const std::string SCORE_PROGRESS_BORDER_NAME = "Image_2"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄ±ß¿ò
 const std::string SCORE_PROGRESS_START_PATH = "xingxing.png"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇ
+const std::string ADD_BUTTON_NODE_NAME = "addButtonNode";
 //shader
 const std::string GREY_SCALE_FSH_PATH = "shaders/example_GreyScale.fsh";
 const std::string NORMAL_FSH_PATH = "shaders/example_Normal.fsh";

@@ -30,7 +30,7 @@ bool SpriteBlur::initWithTexture(cocos2d::Texture2D* texture, const cocos2d::Rec
     if (Sprite::initWithTexture(texture, rect))
     {
 #if CC_ENABLE_CACHE_TEXTURE_DATA  
-        auto listener = EventListenerCustom::create(EVENT_RENDERER_RECREATED, [this](EventCustom* event) {
+		auto listener = cocos2d::EventListenerCustom::create(EVENT_RENDERER_RECREATED, [this](cocos2d::EventCustom* event) {
             setGLProgram(nullptr);
             initGLProgram();
         });

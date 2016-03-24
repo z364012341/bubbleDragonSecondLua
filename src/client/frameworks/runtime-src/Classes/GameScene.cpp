@@ -291,10 +291,10 @@ namespace bubble_second {
         {//顶部星星进度条
             cocos2d::Rect rect = this->getChildByName(UI_NAME_TOP_UI_BACKGROUND)->getBoundingBox();
             float pos_y = visible_size.height - rect.size.height*GAME_TOP_INFO_POS_Y_PERCENT / 2;
-            ScoreProgressMenu* score_progress = ScoreProgressMenu::create();
-            score_progress->setPosition(cocos2d::Vec2(visible_size.width / 2, visible_size.height));
-            score_progress->setScale(zoom);
-            this->addChild(score_progress, UI_ZORDER_MENU_INFO);
+			score_progress_ = ScoreProgressMenu::create();
+			score_progress_->setPosition(cocos2d::Vec2(visible_size.width / 2, visible_size.height));
+			score_progress_->setScale(zoom);
+			this->addChild(score_progress_, UI_ZORDER_MENU_INFO);
 
             //左边分数的label
             cocos2d::Node* score_node = cocos2d::CSLoader::createNode(GAME_SCORE_INFO_CSB);
@@ -831,17 +831,19 @@ namespace bubble_second {
         //cocos2d::Node* prepare_bubble = csb_node_->getChildByName(PREPARE_BUBBLE_NAME);
         cocos2d::Node* prepare_bubble = GamePlayController::getInstance()->getPrepareBubble();
         assert(prepare_bubble);
-        cocos2d::Node* second_bubble = csb_node_->getChildByName(SECOND_PREPARE_BUBBLE_NAME);
+        //cocos2d::Node* second_bubble = csb_node_->getChildByName(SECOND_PREPARE_BUBBLE_NAME);
+		cocos2d::Node* second_bubble = this->getSecondPrepareBubble();
         cocos2d::MoveTo* move_to_second = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getGrassPosition());
         cocos2d::Sequence* seq_prepare = cocos2d::Sequence::create(move_to_second, cocos2d::CallFunc::create([=]() {
-            prepare_bubble->setName(SECOND_PREPARE_BUBBLE_NAME);
+            //prepare_bubble->setName(SECOND_PREPARE_BUBBLE_NAME);
+			this->setSecondPrepareBubble(dynamic_cast<BaseBubble*>(prepare_bubble));
         }), nullptr);
 		//dynamic_cast<ColorBubble*>(prepare_bubble)->stopStanbyAnimation();
         prepare_bubble->runAction(seq_prepare);
 
         cocos2d::MoveTo* move_to_prepare = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getGunsightPosition());
         cocos2d::Sequence* seq_second = cocos2d::Sequence::create(move_to_prepare, cocos2d::CallFunc::create([=]() {
-            second_bubble->setName(PREPARE_BUBBLE_NAME);
+            //second_bubble->setName(PREPARE_BUBBLE_NAME);
             auto control = GamePlayController::getInstance();
             control->setBubbleShootEnabled(true);
             control->setPrepareBubble(dynamic_cast<BaseBubble*>(second_bubble));
@@ -914,7 +916,7 @@ namespace bubble_second {
 
     ScoreProgressMenu* GameScene::getScoreProgressMenu()
     {
-        return dynamic_cast<ScoreProgressMenu*>(this->getChildByName(GAME_TOP_INFO_NAME));
+		return score_progress_;
     }
 
     void GameScene::setStageType(StageType type)
@@ -1618,6 +1620,13 @@ namespace bubble_second {
     {
         return dynamic_cast<BaseBubble*>(csb_node_->getChildByName(PREPARE_BUBBLE_NAME));
     }
+
+	void GameScene::setSecondPrepareBubble(BaseBubble* bubble)
+	{
+		second_bubble_ = bubble;
+		second_bubble_->setName(SECOND_PREPARE_BUBBLE_NAME);
+	}
+
     BaseBubble* GameScene::getSecondPrepareBubble()
     {
 		return second_bubble_;
