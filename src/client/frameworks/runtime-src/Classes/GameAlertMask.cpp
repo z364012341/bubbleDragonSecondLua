@@ -18,9 +18,9 @@ namespace bubble_second {
             return false;
         }
         this->setScale(1 / SmartScaleController::getInstance()->getFixedHeightZoom());
-
-        this->addChild(SpriteTextureController::getInstance()->createGameBlurBackground());
-
+        //this->runAction(cocos2d::CallFunc::create([=]() {
+        //    this->addChild(SpriteTextureController::getInstance()->createGameBlurBackground());
+        //}));
         cocos2d::Sprite* item_select = cocos2d::Sprite::create();
         item_select->setContentSize(cocos2d::Size(GAME_ALERT_MASK_WIDTH, GAME_ALERT_MASK_HEIGHT));
         cocos2d::Sprite* item_normal = cocos2d::Sprite::create();
@@ -32,7 +32,7 @@ namespace bubble_second {
 
         cocos2d::LayerColor* layer = cocos2d::LayerColor::create(cocos2d::Color4B(0, 0, 0, 180), GAME_ALERT_MASK_WIDTH, GAME_ALERT_MASK_HEIGHT);
         layer->setPosition(-GAME_ALERT_MASK_WIDTH / 2, -GAME_ALERT_MASK_HEIGHT / 2);
-        this->addChild(layer);
+        //this->addChild(layer);
 
         return true;
     }
