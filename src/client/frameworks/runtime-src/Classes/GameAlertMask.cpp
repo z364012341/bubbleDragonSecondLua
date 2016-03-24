@@ -17,9 +17,9 @@ namespace bubble_second {
         {
             return false;
         }
-        //this->setScale(1 / SmartScaleController::getInstance()->getFixedHeightZoom());
+        this->setScale(1 / SmartScaleController::getInstance()->getFixedHeightZoom());
 
-        //this->addChild(SpriteTextureController::getInstance()->createGameBlurBackground());
+        this->addChild(SpriteTextureController::getInstance()->createGameBlurBackground());
 
         cocos2d::Sprite* item_select = cocos2d::Sprite::create();
         item_select->setContentSize(cocos2d::Size(GAME_ALERT_MASK_WIDTH, GAME_ALERT_MASK_HEIGHT));

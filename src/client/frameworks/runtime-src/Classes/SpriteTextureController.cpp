@@ -169,8 +169,7 @@ namespace bubble_second {
         pSptBlur->setPositionX(pSptBlur->getContentSize().width / 2);
         pSptBlur->setPositionY(pSptBlur->getContentSize().height / 2);
         //使用精灵尺寸初始化一个空的渲染纹理对象  
-        cocos2d::RenderTexture* textureScreen =
-            cocos2d::RenderTexture::create(pSptBlur->getContentSize().width, pSptBlur->getContentSize().height);
+        cocos2d::RenderTexture* textureScreen = cocos2d::RenderTexture::create(pSptBlur->getContentSize().width, pSptBlur->getContentSize().height);
         //开始获取  
         textureScreen->beginWithClear(0.0f, 0.0f, 0.0f, 0.0f);
         //遍历节点对象，填充纹理到texure中  
