@@ -34,8 +34,8 @@ namespace bubble_second {
         GameScene();
         ~GameScene();
     public:
-		void updateStart(float delta);
-		virtual void update(float delta) override;
+		//void updateStart(float delta);
+		//virtual void update(float delta) override;
         void onEnter() override;
         void onExit() override;
     public:

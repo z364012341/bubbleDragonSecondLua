@@ -339,7 +339,7 @@ namespace bubble_second {
     void GameBubbleMap::checkAirBubbles()
     {
         BubbleVector air_vector = game_bubble_map_impl_->disposeAirBubbleAfterEliminate();
-        this->dispatchCustomEvent(EVENT_BUBBLE_Air, &air_vector);
+        this->dispatchCustomEvent(EVENT_BUBBLE_AIR, &air_vector);
         this->disposeCompletedTaskNumble();
     } 
 
@@ -471,7 +471,7 @@ namespace bubble_second {
     void GameBubbleMap::disposeGameVictory()
     {
         BubbleVector vector = game_bubble_map_impl_->getAllBubblesFromMap();
-        this->dispatchCustomEvent(EVENT_BUBBLE_Air, &vector);
+        this->dispatchCustomEvent(EVENT_BUBBLE_AIR, &vector);
     }
 
     void GameBubbleMap::disposeGameDefeat()

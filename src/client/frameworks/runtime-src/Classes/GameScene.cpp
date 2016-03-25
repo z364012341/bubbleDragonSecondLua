@@ -135,20 +135,20 @@ namespace bubble_second {
     {
     }
 
-	void GameScene::updateStart(float delta)
-	{
-		this->getScenePhysicsWorld()->setAutoStep(false);
-		scheduleUpdate();
-	}
+	//void GameScene::updateStart(float delta)
+	//{
+	//	this->getScenePhysicsWorld()->setAutoStep(false);
+	//	scheduleUpdate();
+	//}
 
-	void GameScene::update(float delta)
-	{
-		// use fixed time and calculate 3 times per frame makes physics simulate more precisely.
-		for (int i = 0; i < 3; ++i)
-		{
-			this->getScenePhysicsWorld()->step(1 / 180.0f);
-		}
-	}
+	//void GameScene::update(float delta)
+	//{
+	//	// use fixed time and calculate 3 times per frame makes physics simulate more precisely.
+	//	for (int i = 0; i < 3; ++i)
+	//	{
+	//		this->getScenePhysicsWorld()->step(1 / 180.0f);
+	//	}
+	//}
     void GameScene::onEnter()
     {
         Layer::onEnter();
@@ -163,7 +163,7 @@ namespace bubble_second {
         edge_shape_node_->setName(MAP_PHYSICS_BORDER_NAME);
         addChild(edge_shape_node_);
         this->setPhysicsWorldBody();
-        this->scheduleOnce(CC_SCHEDULE_SELECTOR(GameScene::updateStart), 1);
+        //this->scheduleOnce(CC_SCHEDULE_SELECTOR(GameScene::updateStart), 1);
     }
 
     void GameScene::onExit()
@@ -586,7 +586,7 @@ namespace bubble_second {
             this->setPropertyTouchEnabled(true);
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        listener = cocos2d::EventListenerCustom::create(EVENT_BUBBLE_Air, CC_CALLBACK_1(GameScene::spritesDownFromAir, this));
+        listener = cocos2d::EventListenerCustom::create(EVENT_BUBBLE_AIR, CC_CALLBACK_1(GameScene::spritesDownFromAir, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_BUBBLE_RUN_EFFECT, CC_CALLBACK_1(GameScene::runBubbleContactEffect, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
@@ -701,7 +701,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_MAP_LOADED);
         dispatcher->removeCustomEventListeners(EVENT_SHOOT_BUBBLE);
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_CLING);
-        dispatcher->removeCustomEventListeners(EVENT_BUBBLE_Air);
+        dispatcher->removeCustomEventListeners(EVENT_BUBBLE_AIR);
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_RUN_EFFECT);
         dispatcher->removeCustomEventListeners(EVENT_ADD_ELIMINATE_COMBO);
         dispatcher->removeCustomEventListeners(EVENT_CUT_ELIMINATE_COMBO);
@@ -1624,7 +1624,7 @@ namespace bubble_second {
 	void GameScene::setSecondPrepareBubble(BaseBubble* bubble)
 	{
 		second_bubble_ = bubble;
-		second_bubble_->setName(SECOND_PREPARE_BUBBLE_NAME);
+		//second_bubble_->setName(SECOND_PREPARE_BUBBLE_NAME);
 	}
 
     BaseBubble* GameScene::getSecondPrepareBubble()

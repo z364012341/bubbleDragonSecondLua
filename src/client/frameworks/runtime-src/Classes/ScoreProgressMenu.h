@@ -29,7 +29,11 @@ namespace bubble_second {
         bool init();
         void initScoreMenu();
         void initStartSprite();
+        void addProgressTimerHead();
+        void updateHeadPosition();
+        cocos2d::Vec2 getHeadPosition();
         cocos2d::Vec2 getStartPositionWithPercent(float percent);
+        cocos2d::Vec2 calculateOvalPositionWithPercent(float percent);
         //void lightenStartSpriteWithKey(const std::string& key);
         //void lightenStartSpriteWithPercent(float percent);
         cocos2d::ProgressTimer* getScoreProgressTimer();
@@ -52,6 +56,8 @@ namespace bubble_second {
         float getPercentage();
     private:
         cocos2d::ProgressTimer* score_progress_timer_ = nullptr;
+        cocos2d::Sprite* progress_timer_head_ = nullptr;
+        cocos2d::ParticleSystemQuad* particle_ = nullptr;
         StartNumbleModule start_numble_;
         float percent_;
         int last_score_ = 0;
