@@ -1544,7 +1544,9 @@ namespace bubble_second {
         auto controller = GamePlayController::getInstance();
         int combo = GameScoreController::getInstance()->getEliminateCombo();
         float time = this->playBubblesEffects(*sprites);
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(time), cocos2d::CallFunc::create([=]() {controller->checkAirBubbles(); })));
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(time), cocos2d::CallFunc::create([=]() {
+            controller->checkAirBubbles(); 
+        })));
         int color_bubble_numble = 0;
         for (size_t i = 0; i != sprites->size(); i++)
         {
@@ -1650,6 +1652,8 @@ namespace bubble_second {
             }
             this->disposedPrepareBubbleType();
         });
+        //static int n = 0;
+        //CCLOG("%d", ++n);
         float time = this->playBubblesEffects(*sprites) + BUBBLS_ADJUST_MAP_DELAYETIME;
         this->runAction(cocos2d::Sequence::create(callfunc, cocos2d::DelayTime::create(time), cocos2d::CallFunc::create([=]() {
             controller->adjustGameScenePosition();
@@ -2214,8 +2218,8 @@ namespace bubble_second {
     void GameScene::addOneAirBubblesNumble(cocos2d::EventCustom*)
     {
         ++total_air_bubbles_numble_;
-        static int numble = 0;
-        ++numble;
+        //static int numble = 0;
+        //++numble;
 		//CCLOG("total: %d", numble);
 		//CCLOG("++%d", total_air_bubbles_numble_);
         this->displayBarrelScoreLabel();

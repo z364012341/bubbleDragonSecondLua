@@ -74,7 +74,7 @@ namespace bubble_second {
 
         type_to_complete_handle_[kWindmill] = [=]() {
             BubbleVector vector = game_bubble_map_impl_->getAllBubblesFromMap();
-            if (vector.size() <= 1)
+            if (vector.size() == 1 && vector.front()->getBubbleType() == kBubbleWindmill)
             {
                 this->eliminateBubbles(vector);
                 return true;
@@ -340,6 +340,8 @@ namespace bubble_second {
     {
         BubbleVector air_vector = game_bubble_map_impl_->disposeAirBubbleAfterEliminate();
         this->dispatchCustomEvent(EVENT_BUBBLE_AIR, &air_vector);
+        //static int n = 0;
+        //CCLOG("check air %d", ++n);
         this->disposeCompletedTaskNumble();
     } 
 
