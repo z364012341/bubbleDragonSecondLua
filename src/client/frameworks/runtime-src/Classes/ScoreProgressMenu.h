@@ -36,7 +36,7 @@ namespace bubble_second {
         cocos2d::Vec2 calculateOvalPositionWithPercent(float percent);
         //void lightenStartSpriteWithKey(const std::string& key);
         //void lightenStartSpriteWithPercent(float percent);
-        cocos2d::ProgressTimer* getScoreProgressTimer();
+        //cocos2d::ProgressTimer* getScoreProgressTimer();
         //增长进度条
         void increaseProgressTimer();
         //设置目标百分比, 到达了计时器就会停
@@ -52,14 +52,17 @@ namespace bubble_second {
         StartNumbleModule getStartNumbleModule();
         void controlStartLight(float percent);
         //设置进度条实际的进度
-        void setPercentage(float percent);
+        void setPercentage(float percentage);
         float getPercentage();
+        void rotateProgressTimerWithPercentDelta(float percent_delta);
     private:
-        cocos2d::ProgressTimer* score_progress_timer_ = nullptr;
+        cocos2d::Sprite* score_progress_timer_ = nullptr;
         cocos2d::Sprite* progress_timer_head_ = nullptr;
         cocos2d::ParticleSystemQuad* particle_ = nullptr;
         StartNumbleModule start_numble_;
-        float percent_;
+        float global_percent_;
+        //0 to 100 percent
+        float current_percentage_;
         int last_score_ = 0;
         //星星容器
         cocos2d::Map<std::string, ScoreProgressStart*> start_sprite_map_;

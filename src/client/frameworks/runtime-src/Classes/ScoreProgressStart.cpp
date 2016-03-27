@@ -1,6 +1,6 @@
 #include "ScoreProgressStart.h"
 #include "SpriteTextureController.h"
-const float START_PERCENT_ZOOM_SCALE = 0.96f;
+const float START_PERCENT_ZOOM_SCALE = 0.90f;
 namespace bubble_second {
     ScoreProgressStart::ScoreProgressStart()
     {

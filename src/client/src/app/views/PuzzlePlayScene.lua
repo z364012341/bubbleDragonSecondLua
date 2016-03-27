@@ -11,11 +11,13 @@ function PuzzlePlayScene:ctor()
     printf("PuzzlePlayScene");
     local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create("puzzle_1.png")
     local puzzleNode = collection:getPuzzleNode();
-    puzzleNode:setPosition(300, 300);
+    puzzleNode:setPosition(300, 0);
+    --puzzleNode:setScale(0.6);
     self:addChild(puzzleNode);
 
     local answerNode = collection:getAnswerNode();
     answerNode:setPosition(0, 300);
+    --answerNode:setScale(0.6);
     self:addChild(answerNode, -1);
     self:addBackMenu();
     self:addTouchesListerner();
@@ -50,7 +52,7 @@ function PuzzlePlayScene:addBackMenu()
     menu:addChild(item);
     menu:setPosition(0, 0);
     self:addChild(menu);
-    self:setScale(0.6);
+    --self:setScale(0.6);
 end
 
 function PuzzlePlayScene:addTouchesListerner()
@@ -73,12 +75,19 @@ end
 
 function PuzzlePlayScene.onTouchMoved(touches, event)
     if #touches == 1 then
+        event:getCurrentTarget():touchToMove(touches);
         return;
     end 
-    local dis1 = cc.pGetDistance(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
-    local dis2 = cc.pGetDistance(touches[1]:getLocation(), touches[2]:getLocation());
-    local target = event:getCurrentTarget();
-    target:setScale(target:calculateZoomScale(dis1, dis2));
+    event:getCurrentTarget():pinchToZoom(touches);
+    -- local dis1 = cc.pGetDistance(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
+    -- local dis2 = cc.pGetDistance(touches[1]:getLocation(), touches[2]:getLocation());
+    -- local target = event:getCurrentTarget();
+    -- local middlePoint = cc.pMidpoint(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
+    -- local pointInLayer = target:convertToNodeSpace(middlePoint);
+    -- target:setScale(target:calculateZoomScale(dis1, dis2));
+    -- local pointAfterScale = target:convertToWorldSpace(pointInLayer);
+    -- local newPoint = cc.pAdd(cc.pSub(middlePoint, pointAfterScale), cc.p(target:getPosition()));
+    -- target:setPosition(newPoint);
 end
 
 function PuzzlePlayScene.onTouchEnded(touches, event)
@@ -95,5 +104,24 @@ function PuzzlePlayScene:calculateZoomScale(preDistance, locDistance)
     scale = math.min(scale, PUZZLE_PLAY_SCENE_ZOOM_SCALE_MAX);
     scale = math.max(scale, PUZZLE_PLAY_SCENE_ZOOM_SCALE_MIN);
     return scale;
+end
+
+function PuzzlePlayScene:pinchToZoom(touches)
+    local dis1 = cc.pGetDistance(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
+    local dis2 = cc.pGetDistance(touches[1]:getLocation(), touches[2]:getLocation());
+    --local target = event:getCurrentTarget();
+    local middlePoint = cc.pMidpoint(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
+    local pointInLayer = self:convertToNodeSpace(middlePoint);
+    self:setScale(self:calculateZoomScale(dis1, dis2));
+    local pointAfterScale = self:convertToWorldSpace(pointInLayer);
+    local newPoint = cc.pAdd(cc.pSub(middlePoint, pointAfterScale), cc.p(self:getPosition()));
+    self:setPosition(newPoint);
+end
+
+function PuzzlePlayScene:touchToMove(touches)
+    local dis = touches[1]:getDelta()
+    local zoomScale = self:getScale();
+    self:setPositionX(self:getPositionX() + dis.x/zoomScale);
+    self:setPositionY(self:getPositionY() + dis.y/zoomScale);
 end
 return PuzzlePlayScene

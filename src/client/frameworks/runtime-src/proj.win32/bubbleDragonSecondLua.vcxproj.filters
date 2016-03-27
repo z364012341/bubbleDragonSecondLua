@@ -314,7 +314,9 @@
     <ClInclude Include="..\Classes\UserCoinInfoBoard.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UserDiamondInfoBoard.h" />
+    <ClInclude Include="..\Classes\UserDiamondInfoBoard.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -606,7 +608,9 @@
     <ClCompile Include="..\Classes\UserCoinInfoBoard.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UserDiamondInfoBoard.cpp" />
+    <ClCompile Include="..\Classes\UserDiamondInfoBoard.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

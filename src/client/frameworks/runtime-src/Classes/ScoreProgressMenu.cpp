@@ -12,7 +12,7 @@ const float PROGRESS_TIMER_MIN = 31.8f;
 const float PROGRESS_TIMER_MAX = 100.0f - PROGRESS_TIMER_MIN;
 const float PROGRESS_TIMER_DISTANCE = PROGRESS_TIMER_MAX - PROGRESS_TIMER_MIN;
 
-const float PROGRESS_TIMER_ANGLE_MIN = 24.6f;
+const float PROGRESS_TIMER_ANGLE_MIN = 360.0f * PROGRESS_TIMER_MIN / 100.0f - 90.0f;
 const float PROGRESS_TIMER_ANGLE_MAX = 180.0f - PROGRESS_TIMER_ANGLE_MIN;
 const float PROGRESS_TIMER_ANGLE_DISTANCE = PROGRESS_TIMER_ANGLE_MAX - PROGRESS_TIMER_ANGLE_MIN;
 //float PROGRESS_TIMER_OVAL_A = 110.0f;
@@ -24,7 +24,7 @@ const int PROGRESS_TIMER_ZORDER = 1;
 const int START_ZORDER = PROGRESS_TIMER_ZORDER + 1;
 const cocos2d::Vec2 BACKGROUND_POS(0.0f, 52.0f);
 namespace bubble_second {
-    ScoreProgressMenu::ScoreProgressMenu():percent_(PROGRESS_TIMER_MIN)
+    ScoreProgressMenu::ScoreProgressMenu() :global_percent_(PROGRESS_TIMER_MIN), current_percentage_(PROGRESS_TIMER_MIN)
     {
     }
 
@@ -40,24 +40,18 @@ namespace bubble_second {
         }
         this->initScoreMenu();
         //this->setName(GAME_TOP_INFO_NAME);
-        this->getScoreProgressTimer()->setPercentage(percent_);
+        //score_progress_timer_->setPercentage(global_percent_);
         return true;
     }
     void ScoreProgressMenu::initScoreMenu()
     {
-        //score_progress_node_ = cocos2d::CSLoader::createNode(GAME_TOP_INFO_CSB);
         cocos2d::Sprite* background = SpriteTextureController::getInstance()->createGameSpriteWithPath(PROGRESS_TIMER_BACKGROUND_PATH);
-        //bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_TOP);
         background->setPosition(BACKGROUND_POS);
         this->addChild(background, -1);
 
-        cocos2d::Sprite* timerSprite = SpriteTextureController::getInstance()->createGameSpriteWithPath(PROGRESS_TIMER_PATH);
-        score_progress_timer_ = cocos2d::ProgressTimer::create(timerSprite);
-        score_progress_timer_->setReverseDirection(true);
-        score_progress_timer_->setType(cocos2d::ProgressTimer::Type::RADIAL);
-        //this->addChild(score_progress_timer_, PROGRESS_TIMER_ZORDER);
-        //score_progress_timer_->setPosition(background->getPosition());
-
+        score_progress_timer_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(PROGRESS_TIMER_PATH);
+        score_progress_timer_->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
+        score_progress_timer_->setRotation(-PROGRESS_TIMER_ANGLE_MIN);
         this->addProgressTimerHead();
 
         cocos2d::ClippingNode* clipping = cocos2d::ClippingNode::create(score_progress_timer_);
@@ -140,10 +134,10 @@ namespace bubble_second {
         this->initStartSprite();
     }
 
-    cocos2d::ProgressTimer* ScoreProgressMenu::getScoreProgressTimer()
-    {
-        return score_progress_timer_;
-    }
+    //cocos2d::ProgressTimer* ScoreProgressMenu::getScoreProgressTimer()
+    //{
+    //    return score_progress_timer_;
+    //}
 
     void ScoreProgressMenu::increaseProgressTimer()
     {
@@ -166,12 +160,12 @@ namespace bubble_second {
 
     void ScoreProgressMenu::setGoalPercent(float percent)
     {
-        percent_ = percent;
+        global_percent_ = percent;
     }
 
     float ScoreProgressMenu::getGoalPercent()
     {
-        return percent_;
+        return global_percent_;
     }
 
     void ScoreProgressMenu::setLastScore(int last_score)
@@ -213,14 +207,24 @@ namespace bubble_second {
         }
     }
 
-    void ScoreProgressMenu::setPercentage(float percent)
+    void ScoreProgressMenu::setPercentage(float percentage)
     {
-        this->getScoreProgressTimer()->setPercentage(PROGRESS_TIMER_DISTANCE / 100 * percent + PROGRESS_TIMER_MIN);
+        float new_percent = PROGRESS_TIMER_DISTANCE / 100 * percentage + PROGRESS_TIMER_MIN;
+        float delta = new_percent - current_percentage_;
+        current_percentage_ = new_percent;
+        this->rotateProgressTimerWithPercentDelta(delta);
+        //this->getScoreProgressTimer()->setPercentage(PROGRESS_TIMER_DISTANCE / 100 * percentage + PROGRESS_TIMER_MIN);
     }
 
     float ScoreProgressMenu::getPercentage()
     {
-        return MAX(0.0f, (this->getScoreProgressTimer()->getPercentage() - PROGRESS_TIMER_MIN)/ PROGRESS_TIMER_DISTANCE * 100);
+        //return MAX(0.0f, (this->getScoreProgressTimer()->getPercentage() - PROGRESS_TIMER_MIN)/ PROGRESS_TIMER_DISTANCE * 100);
+        return  MAX(0.0f, (current_percentage_ - PROGRESS_TIMER_MIN) / PROGRESS_TIMER_DISTANCE * 100);
+    }
+
+    void ScoreProgressMenu::rotateProgressTimerWithPercentDelta(float percent_delta)
+    {
+        score_progress_timer_->setRotation(score_progress_timer_->getRotation() + -360.0f * percent_delta/100);
     }
 
     void ScoreProgressMenu::setScoreProgressTimerPercent(float score)

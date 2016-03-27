@@ -404,6 +404,10 @@ namespace bubble_second {
 
     void GameBubbleMap::disposeUseWoodenHammer(BaseBubble* bubble)
     {
+        if (!bubble)
+        {
+            return;
+        }
         BubbleVector vector(1);
         cocos2d::Vec2 bubble_point = bubble->getPosition();
         auto handle = type_to_disposed_[bubble->getBubbleType()];
