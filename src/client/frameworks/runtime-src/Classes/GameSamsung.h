@@ -20,15 +20,18 @@ namespace bubble_second {
     private:
         GameSamsung();
         bool initWithNumble(int numble);
-        void addStart();
+        void addStart(int numble);
         void addStartLeft();
         void addStartMiddle();
         void addStartRight();
-        void controlStartLight(int numble);
+        void addStartDouble();
+        void addStartTriple();
+        //void controlStartLight(int numble);
     private:
         //ScoreProgressStart* start_left_ = nullptr;
         //ScoreProgressStart* start_middle_ = nullptr;
         //ScoreProgressStart* start_right_ = nullptr;
+        std::map<int, std::function<void()>> numble_to_handle_;
         cocos2d::Vector<ScoreProgressStart*> start_vector_;
     };
 }

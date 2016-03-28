@@ -28,6 +28,7 @@ namespace bubble_second {
         bool init();
         void startTurnOn();
         void startTurnOff();
+        void playTurnOnAnimation();
         ScoreProgressStart();
         void setStartPercent(float percent);
         void setStartSpriteShader(const std::string& shader_path);

@@ -3,6 +3,7 @@
 #include "StageSelectionMenu.h"
 #include "StageDataManager.h"
 #include "StageNumble.h"
+const std::string STAGE_CELL_BACKGROUND = "stageBackground";
 namespace bubble_second {
     GameStageSelectionCell::GameStageSelectionCell()
     {
@@ -15,6 +16,11 @@ namespace bubble_second {
     bool GameStageSelectionCell::isInCell(int level)
     {
         return level < this->getLevelMax();
+    }
+
+    float GameStageSelectionCell::getBackgroundHeight()
+    {
+        return background_node_->getChildByName(STAGE_CELL_BACKGROUND)->getContentSize().height;
     }
 
     GameStageSelectionCell * bubble_second::GameStageSelectionCell::create()
@@ -71,7 +77,7 @@ namespace bubble_second {
             if (node && !StageNumble::getInstance()->moreThanStageTotal())
             {
                 menu = StageSelectionMenu::create(cell_numble, stage_numble, StageDataManager::getInstance()->getStageTypeWithNumble(stage_numble));
-                menu->setScale(0.5);
+                //menu->setScale(0.5);
                 node->addChild(menu);
                 StageNumble::getInstance()->nextStageNumble();
                 ++tag;

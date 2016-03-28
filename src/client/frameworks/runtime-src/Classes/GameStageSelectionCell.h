@@ -18,6 +18,7 @@ namespace bubble_second {
         ~GameStageSelectionCell();
         //判断传进来的关卡是否是本cell的
         bool isInCell(int level);
+        float getBackgroundHeight();
     private:
         GameStageSelectionCell();
         bool init();

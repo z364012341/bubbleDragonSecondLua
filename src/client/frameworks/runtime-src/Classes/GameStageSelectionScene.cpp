@@ -172,8 +172,10 @@ namespace bubble_second {
             }
             cell->setPosition(cell_x, cell_y);
             scrollview_->addChild(cell);
-            cell_y += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
-            scrollview_height += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
+            //cell_y += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
+            //scrollview_height += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
+            cell_y += cell->getBackgroundHeight();
+            scrollview_height += cell->getBackgroundHeight();
             cell_vector_.pushBack(cell);
         }
         cocos2d::Sprite* bottom_sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SCROLLVIEW_BOTTOM_PATH);

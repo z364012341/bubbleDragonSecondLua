@@ -1,6 +1,8 @@
 #include "ScoreProgressStart.h"
 #include "SpriteTextureController.h"
 const float START_PERCENT_ZOOM_SCALE = 0.90f;
+const std::string SCORE_PROGRESS_START_PATH = "xingxing.png"; //ÁÁÐÇÐÇ
+//const std::string SCORE_PROGRESS_START_DARK_PATH = "xingxinghui.png"; //ÁÁÐÇÐÇ
 namespace bubble_second {
     ScoreProgressStart::ScoreProgressStart()
     {
@@ -34,7 +36,7 @@ namespace bubble_second {
             return false;
         }
         SpriteTextureController::getInstance()->setSpriteTexture(SCORE_PROGRESS_START_PATH, this);
-        this->setScale(TEXTURE_SCALE);
+        //this->setScale(TEXTURE_SCALE);
         this->setStartPercent(percent);
         this->startTurnOff();
         return true;
@@ -71,14 +73,37 @@ namespace bubble_second {
 
     void ScoreProgressStart::startTurnOn()
     {
+        if (this->startIsOn())
+        {
+            return;
+        }
         this->setStartSpriteShader(NORMAL_FSH_PATH);
+        //SpriteTextureController::getInstance()->setSpriteTexture(SCORE_PROGRESS_START_PATH, this);
         start_on_flag_ = true;
+        this->playTurnOnAnimation();
     }
 
     void ScoreProgressStart::startTurnOff()
     {
+        if (!this->startIsOn())
+        {
+            return;
+        }
         this->setStartSpriteShader(GREY_SCALE_FSH_PATH);
+        //SpriteTextureController::getInstance()->setSpriteTexture(SCORE_PROGRESS_START_DARK_PATH, this);
         start_on_flag_ = false;
+    }
+
+    void ScoreProgressStart::playTurnOnAnimation()
+    {
+        cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(SCORE_PROGRESS_START_PATH);
+        //sp->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+        sp->setPosition(this->getContentSize().width/2, this->getContentSize().height / 2);
+        this->addChild(sp);
+        cocos2d::ScaleTo* move1 = cocos2d::ScaleTo::create(0.25f, 1.3f);
+        cocos2d::ScaleTo* move2 = cocos2d::ScaleTo::create(0.25f, 1.0f);
+        cocos2d::CallFunc* callfunc = cocos2d::CallFunc::create(CC_CALLBACK_0(cocos2d::Sprite::removeFromParent, sp));
+        sp->runAction(cocos2d::Sequence::create(move1, move2, callfunc, nullptr));
     }
 
     void ScoreProgressStart::controlLightWithPercent(float percent)

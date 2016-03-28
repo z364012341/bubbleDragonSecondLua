@@ -6,6 +6,13 @@
 #include "ZCGConfigDataDict.h"
 #include "GameStageSelectionScene.h"
 #include "StageMenuManager.h"
+//¹Ø¿¨°´Å¥
+const std::string GAME_STAGE_SELECTION_MENU_BLUE_PATH = "anniu (1).png";
+const std::string GAME_STAGE_SELECTION_MENU_GRAY_PATH = "anniu2.png";
+//const std::string GAME_STAGE_SELECTION_MENU_ORANGE_PATH = "anniu2.png";
+const cocos2d::Vec2 STAGE_SELECTION_MENU_SAMSUNG_POSITION(0.0f, 80.0f);
+const cocos2d::Vec2 STAGE_SELECTION_MENU_STAGE_LABEL_POSITION(0.0f, -50.0f);
+const float STAGE_SELECTION_MENU_STAGE_LABEL_FONTSIZE = 50.0f;
 namespace bubble_second {
     StageSelectionMenu::StageSelectionMenu()
     {
@@ -36,7 +43,7 @@ namespace bubble_second {
         this->addButton(cell_numble, level, type);
         this->addSamsung(UserDataManager::getInstance()->getStartNumbleWithLevel(level));
         this->addStageLabel(level); 
-        this->setScale(STAGE_SELECTION_MENU_SCALE);
+        //this->setScale(STAGE_SELECTION_MENU_SCALE);
         this->addStageTypeTexture(type);
         this->setMenuState(cell_numble, level);
         return true;
@@ -73,7 +80,8 @@ namespace bubble_second {
 
     void StageSelectionMenu::addButton(int cell_numble, int level, const StageType& type)
     {
-        button_sp_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SELECTION_MENU_PURPLE_PATH);
+        //button_sp_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SELECTION_MENU_PURPLE_PATH);
+        button_sp_ = cocos2d::Sprite::createWithSpriteFrameName(GAME_STAGE_SELECTION_MENU_BLUE_PATH);
         this->addChild(button_sp_);
         auto listener = cocos2d::EventListenerTouchOneByOne::create();
         listener->setSwallowTouches(false);
@@ -111,7 +119,7 @@ namespace bubble_second {
     void StageSelectionMenu::addSamsung(int start_numble)
     {
         samsung_ = GameSamsung::createWithNumble(start_numble);
-        samsung_->setScale(STAGE_SELECTION_MENU_SAMSUNG_SCALE);
+        //samsung_->setScale(STAGE_SELECTION_MENU_SAMSUNG_SCALE);
         samsung_->setPosition(STAGE_SELECTION_MENU_SAMSUNG_POSITION);
         this->addChild(samsung_);
     }
@@ -135,6 +143,7 @@ namespace bubble_second {
     {
         cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createStageTypeSprite(type);
         sp->setPosition(STAGE_SELECTION_MENU_STAGETYPE_TEXTURE_POSITION);
+        sp->setScale(0.7f);
         this->addChild(sp, 1);
     }
     void StageSelectionMenu::halfMoonSlash(const HalfMoonSlashDirection& direction)
@@ -173,25 +182,27 @@ namespace bubble_second {
     }
     void StageSelectionMenu::turnOnBlink()
     {
-        cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SELECTION_MENU_ORANGE_PATH);
-        this->addChild(sp);
-        cocos2d::FadeOut* fadeout = cocos2d::FadeOut::create(STAGE_SELECTION_MENU_THE_BLINK_FADE_DURATION);
-        cocos2d::FadeIn* fadein = cocos2d::FadeIn::create(STAGE_SELECTION_MENU_THE_BLINK_FADE_DURATION);
-        cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(fadeout, fadein);
-        sp->runAction(cocos2d::RepeatForever::create(seq));
-        this->halfMoonSlash(kLeft);
-        this->halfMoonSlash(kRight);
+        //cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SELECTION_MENU_ORANGE_PATH);
+        //this->addChild(sp);
+        //cocos2d::FadeOut* fadeout = cocos2d::FadeOut::create(STAGE_SELECTION_MENU_THE_BLINK_FADE_DURATION);
+        //cocos2d::FadeIn* fadein = cocos2d::FadeIn::create(STAGE_SELECTION_MENU_THE_BLINK_FADE_DURATION);
+        //cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(fadeout, fadein);
+        //sp->runAction(cocos2d::RepeatForever::create(seq));
+        //this->halfMoonSlash(kLeft);
+        //this->halfMoonSlash(kRight);
     }
     void StageSelectionMenu::setSelectionMenuEnable(bool flag)
     {
         menu_enable_ = flag;
         if (flag)
         {
-            SpriteTextureController::getInstance()->setSpriteTexture(GAME_STAGE_SELECTION_MENU_PURPLE_PATH, button_sp_);
+            //SpriteTextureController::getInstance()->setSpriteTexture(GAME_STAGE_SELECTION_MENU_BLUE_PATH, button_sp_);
+            button_sp_->setSpriteFrame(cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(GAME_STAGE_SELECTION_MENU_BLUE_PATH));
         }
         else
         {
-            SpriteTextureController::getInstance()->setSpriteTexture(GAME_STAGE_SELECTION_MENU_GRAY_PATH, button_sp_);
+            //SpriteTextureController::getInstance()->setSpriteTexture(GAME_STAGE_SELECTION_MENU_GRAY_PATH, button_sp_);
+            button_sp_->setSpriteFrame(cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(GAME_STAGE_SELECTION_MENU_GRAY_PATH));
         }
     }
 }

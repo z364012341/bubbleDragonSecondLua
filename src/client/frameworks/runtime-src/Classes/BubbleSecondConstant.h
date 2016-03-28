@@ -269,7 +269,7 @@ const int WINDMILL_ROTATION_ACTION_TAG = 234;
 const float WINDMILL_ROTATION_SPEED_SPEED = 2.0f;
 const int COLOR_BUBBLE_TAG = 235; //²ÊÉ«Ð¡ÇòµÄtag
 const float AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME = 0.7f;
-const float TEXTURE_SCALE = 0.4f;//¾«ÖÂÌùÍ¼µÄËõ·Å
+//const float TEXTURE_SCALE = 0.4f;//¾«ÖÂÌùÍ¼µÄËõ·Å
 const std::string GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY = "GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY";
 //¹Ø¿¨xml½âÎö
 const char BUBBLE_COLOR_IN_RANGE = '1';
@@ -494,7 +494,7 @@ const std::string BUBBLE_MAP_NODE_NAME = "bubble_map_node";  //µØÍ¼node
 const std::string SCORE_WIDGET_NODE_NAME = "ProjectNode_1";  //µÃ·Ö¹Ò¼þµÄnodeÃû×Ö
 const std::string PREPARE_BUBBLE_NAME = "prepare_bubble";  //×¼±¸Ð¡Çò
 const std::string COLOR_BOMB_BUBBLE_NAME = "color_bomb_bubble";  //µÀ¾ß²ÊÇò
-const std::string SECOND_PREPARE_BUBBLE_NAME = "second_bubble";  //±¸Ñ¡Ð¡Çò
+//const std::string SECOND_PREPARE_BUBBLE_NAME = "second_bubble";  //±¸Ñ¡Ð¡Çò
 const std::string BARREL_BOTTOM_NAME = "BARREL_BOTTOM_NAME";//Í°µ×
 const std::string SCORE_WIDGET_NAME = "SCORE_WIDGET";    //µÃ·Ö×²»÷Åä¼þ
 const std::string MAP_BUBBLE_NAME = ""; //µØÍ¼ÉÏµÄÐ¡ÇòÃû×Ö
@@ -502,14 +502,14 @@ const std::string MAP_PHYSICS_BORDER_NAME = "map_physics_border_name"; //µØÍ¼ÉÏ±
 const std::string SCORE_PROGRESS_START_1_KEY = STAGE_XML_FIELDS_START1; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇkey
 const std::string SCORE_PROGRESS_START_2_KEY = STAGE_XML_FIELDS_START2; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇkey
 const std::string SCORE_PROGRESS_START_3_KEY = STAGE_XML_FIELDS_START3; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇkey
-const std::string SCORE_PROGRESS_START_1_SPRITE_KEY = SCORE_PROGRESS_START_1_KEY;
-const std::string SCORE_PROGRESS_START_2_SPRITE_KEY = SCORE_PROGRESS_START_2_KEY;
-const std::string SCORE_PROGRESS_START_3_SPRITE_KEY = SCORE_PROGRESS_START_3_KEY;
-const std::string SCORE_PROGRESS_START_1_NAME = "xingxing_24"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇ
-const std::string SCORE_PROGRESS_START_2_NAME = "xingxing_24_0"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇ
-const std::string SCORE_PROGRESS_START_3_NAME = "xingxing_24_1"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇ
-const std::string SCORE_PROGRESS_BORDER_NAME = "Image_2"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄ±ß¿ò
-const std::string SCORE_PROGRESS_START_PATH = "xingxing.png"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇ
+//const std::string SCORE_PROGRESS_START_1_SPRITE_KEY = SCORE_PROGRESS_START_1_KEY;
+//const std::string SCORE_PROGRESS_START_2_SPRITE_KEY = SCORE_PROGRESS_START_2_KEY;
+//const std::string SCORE_PROGRESS_START_3_SPRITE_KEY = SCORE_PROGRESS_START_3_KEY;
+//const std::string SCORE_PROGRESS_START_1_NAME = "xingxing_24"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇ
+//const std::string SCORE_PROGRESS_START_2_NAME = "xingxing_24_0"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇ
+//const std::string SCORE_PROGRESS_START_3_NAME = "xingxing_24_1"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄÐÇÐÇ
+//const std::string SCORE_PROGRESS_BORDER_NAME = "Image_2"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄ±ß¿ò
+
 const std::string ADD_BUTTON_NODE_NAME = "addButtonNode";
 //shader
 const std::string GREY_SCALE_FSH_PATH = "shaders/example_GreyScale.fsh";
@@ -630,7 +630,7 @@ const cocos2d::Vec2 GAME_DEFEAT_ALERT_REPLAY_POSITION(100.0f, -70.0f);
 const cocos2d::Vec2 GAME_DEFEAT_ALERT_STORE_POSITION(-100.0f, GAME_DEFEAT_ALERT_REPLAY_POSITION.y);
 const std::string GAME_DEFEAT_ALERT_COMMODITY_BACKGROUND_PATH = "djkuang.png"; //ÖÐ¼äµÄÐ¡Ãæ°å
 const cocos2d::Vec2 GAME_VICTORY_ALERT_REWARDS_BACKGROUND_POSITION(10.0f, -100.0f);
-const std::string GAME_COMMODITY_TEN_BUBBLE_PATH = "j10p.png";
+const std::string GAME_COMMODITY_TEN_BUBBLE_PATH = "jinbi.PNG";
 const std::string GAME_ALERT_CONTINUE_BUTTON_PATH = "jixu1.png";
 const std::string GAME_ALERT_COMMODITY_TEN_BUBBLE_PRICE_BACKGROUND_PATH = GAME_PAUSE_ALERT_VOLUME_SWITCH_BACKGROUND_PATH; //¼Û¸ñÏÂÃæµÄ±±¾©
 const std::string GAME_DIAMOND_PATH = "zuans.png"; //×©Ê¯
@@ -656,23 +656,14 @@ const cocos2d::Vec2 GAME_VICTORY_ALERT_SCORE_LABEL_TEXT_POSITION(0.0f, 100.0f); 
 const cocos2d::Vec2 GAME_VICTORY_ALERT_SAMSUNG_POSITION(0.0f, 180.0f); //ÈýÐÇÎ»ÖÃ
 const float GAME_VICTORY_ALERT_ADD_SCORE_LABEL_POSITION_PERCENT_X = 0.5f; //+180½ð±Ò
 const float GAME_VICTORY_ALERT_ADD_FATIGUE_LABEL_POSITION_PERCENT_X = 0.8f; //+1ÌåÁ¦
-const float GAME_SAMSUNG_MIDDLE_POSITION_Y = 50.0f;
-const float GAME_SAMSUNG_TWO_SIDES_POSITION_X = 130.0f;
 const float GAME_SAMSUNG_TWO_SIDES_ROTATIOIN = 25.0f;
-//¹Ø¿¨°´Å¥
-const std::string GAME_STAGE_SELECTION_MENU_PURPLE_PATH = "anniu1.png";
-const std::string GAME_STAGE_SELECTION_MENU_GRAY_PATH = "anniu3.png";
-const std::string GAME_STAGE_SELECTION_MENU_ORANGE_PATH = "anniu2.png";
 //GameBaseAlert
 const std::string GAME_BASE_ALERT_NAME = "GAME_BASE_ALERT_NAME";
 //GamePauseAlert
 const float GAME_PAUSE_ALERT_VOL_POS_Y = 60.0f;
 //StageSelectionMenu
-const float STAGE_SELECTION_MENU_SCALE = 0.7f;
-const float STAGE_SELECTION_MENU_SAMSUNG_SCALE = 0.5f;
-const cocos2d::Vec2 STAGE_SELECTION_MENU_SAMSUNG_POSITION(0.0f, 80.0f);
-const cocos2d::Vec2 STAGE_SELECTION_MENU_STAGE_LABEL_POSITION(0.0f, -50.0f);
-const float STAGE_SELECTION_MENU_STAGE_LABEL_FONTSIZE = 60.0f;
+//const float STAGE_SELECTION_MENU_SCALE = 0.7f;
+//const float STAGE_SELECTION_MENU_SAMSUNG_SCALE = 0.5f;
 const cocos2d::Vec2 STAGE_SELECTION_MENU_STAGETYPE_TEXTURE_POSITION(0.0f, 20.0f);
 const float STAGE_SELECTION_MENU_THE_BLINK_FADE_DURATION = 0.75f;
 const float STAGE_SELECTION_MENU_HALFMOONSLASH_POSITION_X = 60.0f;

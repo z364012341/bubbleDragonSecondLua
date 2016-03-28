@@ -787,7 +787,7 @@ namespace bubble_second {
 		second_bubble_ = this->createPrepareBubble();
 		if (second_bubble_)
         {
-			second_bubble_->setName(SECOND_PREPARE_BUBBLE_NAME);
+			//second_bubble_->setName(SECOND_PREPARE_BUBBLE_NAME);
 			second_bubble_->setPosition(this->getGrassPosition());
 			second_bubble_->setVisible(false);
         }

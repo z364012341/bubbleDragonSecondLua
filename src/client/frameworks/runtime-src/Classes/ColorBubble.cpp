@@ -141,7 +141,7 @@ namespace bubble_second {
 
     void ColorBubble::shootAfterVictory()
     {	
-		//this->setName(MAP_BUBBLE_NAME);
+		this->setName(MAP_BUBBLE_NAME);
         this->addBubbleDynamicBody();
         this->setLocalZOrder(UI_ZORDER_DOWN_AIR_BUBBLE);
         int x = cocos2d::random(-BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_X, BUBBLE_IMPULSE_AFTER_VICTORY_RANDOM_X);
