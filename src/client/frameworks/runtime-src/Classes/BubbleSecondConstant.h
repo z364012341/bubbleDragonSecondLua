@@ -58,6 +58,7 @@ const std::string PROPS_ITEM_BACKGROUND_PATH = "kuangdaoju.png";  //µÀ¾ßitemµÄ±³
 //const std::string GUNSIGHT_SWIRL_GREEN_PATH = "X-lv.png";  //·¢ÉäÌ¨ÉÏµÄÐý·çÂÌ
 const std::string RAINBOW_CHARACTOR_PATH = "be_sealed_charactor.png"; //²Êºç·âÓ¡ÀïÃæµÄÈËÎï
 const std::string ADD_BUBBLE_NUMBLE_BUBBLE_PATH = "addBubbleNumble.png"; //+3ÌØÊâÅÝÅÝ
+const std::string GAME_NUMBLE_FONT_PATH = "fonts/typeface-export.fnt";
 //µÃ·Ö¹Ò¼þ
 const std::string SCORE_WIDGET_BONE_HEAD_NAME = "Layer11"; //¹Ç÷ÀÃû×Ö
 const std::string SCORE_WIDGET_BONE_BODY_NAME = "Layer10";
@@ -478,6 +479,7 @@ const std::string EVENT_ADD_AIR_BUBBLE_NUMBLE = "add_air_bubble_numble"; //Ôö¼Ó¿
 const std::string EVENT_CUT_AIR_BUBBLE_NUMBLE = "cut_air_bubble_numble"; //--¿ÕÖÐÐ¡ÇòµôÂäÊýÍ³¼Æ
 const std::string EVENT_GAME_DEFEAT = "event_game_defeat"; //ÓÎÏ·Ê§°Ü
 const std::string EVENT_POP_ENTER_GAME_ALERT = "event_pop_enter_game_alert"; //µ¯³ö½øÈëÓÎÏ·µÄÃæ°å
+const std::string EVENT_SETTING_ALERT_CLOSE = "event_setting_alert_close"; //¹Ø¿¨½çÃæµÄÉèÖÃÃæ°å¹Ø±Õ
 const std::string EVENT_FIND_THREE_BUBBLE = "EVENT_FIND_THREE_BUBBLE";  //Ê¹ÓÃ¼Ó3µÀ¾ß
 const std::string EVENT_UPDATE_SECOND_BUBBLE = "EVENT_UPDATE_SECOND_BUBBLE"; //¸üÐÂµÚ¶þÐ¡Çò
 const std::string EVENT_DEFEAT = "EVENT_DEFEAT"; //Ê§°Ü
@@ -485,6 +487,7 @@ const std::string EVENT_ADD_ELIMINATE_SCORE_LABEL = "EVENT_ADD_ELIMINATE_SCORE_L
 const std::string EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_SCORE_KEY = "score_text";
 const std::string EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_POS_X_KEY = "pos_x";
 const std::string EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_POS_Y_KEY = "pos_y";
+const std::string EVENT_UNLOCK_STAGE_MENU = "event_unlock_stage_menu"; //½âËøÍê¹Ø¿¨°´Å¥
 //Ñ¡ÔñÌØÐ§µÄkey
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //´ó·ù¶ÈÌØÐ§
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //Ð¡·ù¶ÈÌØÐ§
@@ -634,7 +637,6 @@ const std::string GAME_COMMODITY_TEN_BUBBLE_PATH = "jinbi.PNG";
 const std::string GAME_ALERT_CONTINUE_BUTTON_PATH = "jixu1.png";
 const std::string GAME_ALERT_COMMODITY_TEN_BUBBLE_PRICE_BACKGROUND_PATH = GAME_PAUSE_ALERT_VOLUME_SWITCH_BACKGROUND_PATH; //¼Û¸ñÏÂÃæµÄ±±¾©
 const std::string GAME_DIAMOND_PATH = "zuans.png"; //×©Ê¯
-const std::string GAME_COIN_PATH = "jinb.png"; //½ð±Ò
 const float GAME_VICTORY_ALERT_COIN_POSITION_PERCENT_X = 0.4f;
 const std::string GAME_FATIGUE_PATH = "xin.png"; //Æ£ÀÍ
 const float GAME_VICTORY_ALERT_FATIGUE_POSITION_PERCENT_X = 0.7f;
@@ -664,13 +666,7 @@ const float GAME_PAUSE_ALERT_VOL_POS_Y = 60.0f;
 //StageSelectionMenu
 //const float STAGE_SELECTION_MENU_SCALE = 0.7f;
 //const float STAGE_SELECTION_MENU_SAMSUNG_SCALE = 0.5f;
-const cocos2d::Vec2 STAGE_SELECTION_MENU_STAGETYPE_TEXTURE_POSITION(0.0f, 20.0f);
-const float STAGE_SELECTION_MENU_THE_BLINK_FADE_DURATION = 0.75f;
-const float STAGE_SELECTION_MENU_HALFMOONSLASH_POSITION_X = 60.0f;
-const float STAGE_SELECTION_MENU_HALFMOONSLASH_POSITION_Y = 15.0f;
-const float STAGE_SELECTION_MENU_HALFMOONSLASH_ACTION_DURATION = 0.5f;
-const float STAGE_SELECTION_MENU_HALFMOONSLASH_DELAYTIME = 2.0f;
-const std::string STAGE_SELECTION_MENU_HALFMOONSLASH_PATH = "kuosan.png";
+//const float STAGE_SELECTION_MENU_THE_BLINK_FADE_DURATION = 0.75f;
 //GameStageSelectionCell
 const int GAME_STAGE_SELECTION_CELL_MENU_POSITION_NODE_TAG_BEGIN = 1;  //tage´Ó1¿ªÊ¼
 const int GAME_STAGE_SELECTION_CELL_NUMBLE_BEGIN = 0; //cell´Ó0¿ªÊ¼
@@ -728,8 +724,6 @@ const std::string GAME_TEXT_SETTING_KEY = "setting";
 const std::string GAME_TEXT_NICKNAME_KEY = "nickname";  //êÇ³Æ
 const std::string GAME_TEXT_VOLUME_ON_KEY = "volume_on";
 const std::string GAME_TEXT_VOLUME_OFF_KEY = "volume_off";
-const std::string GAME_TEXT_LEVEL_NUMBLE_1_KEY = "alert_level_1";
-const std::string GAME_TEXT_LEVEL_NUMBLE_2_KEY = "alert_level_2";
 const std::string GAME_TEXT_BUY_BUBBLE_KEY = "add_ten_bubble";
 const std::string GAME_TEXT_BUY_BUBBLE_LABEL_KEY = "buy_ten_bubble_label";
 const std::string GAME_TEXT_REWARDS_KEY = "rewards_label";

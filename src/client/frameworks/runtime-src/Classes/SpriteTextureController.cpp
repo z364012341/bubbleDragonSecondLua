@@ -10,6 +10,9 @@ const std::string GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_PATH = "TX-yanwu/TX-yanw
 const std::string SCOREWIDGET_ARMATURE_PATH = "mifeng/mifeng.ExportJson"; //得分挂件的动画
 const std::string GAME_CHARACTER_ARMATURE_FIRE_BALLOON_ARMATURE_PATH = "qiting/qiting.ExportJson"; //热气球的动画
 const std::string GAME_STAGE_BUTTON_ARMATURE_PATH = "guankaanniu/guankaanniu.ExportJson"; //关卡按钮的动画
+const std::string GAME_SETTING_BUTTON_ARMATURE_PATH = "feichuan/feichuan.ExportJson"; //气球设置按钮的动画
+const std::string GAME_STAGE_BUTTON_UNLOCK_ARMATURE_PATH = "guankaanniu/guankaanniu.ExportJson";    //关卡解锁动画
+const std::string MENU_STAGETYPE_TEXTURE_TOPELIMINATE_PATH = "tubiao01.png";
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()
@@ -18,7 +21,39 @@ namespace bubble_second {
         stagetype_to_path_[kRescueAnimal] = STAGETYPE_TEXTURE_RESCUEANIMAL_PATH;
         stagetype_to_path_[kDestroyRainbowSeal] = STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH;
         stagetype_to_path_[kWindmill] = STAGETYPE_TEXTURE_WINDMILL_PATH;
+
+        stage_menu_stagetype_to_path_[kTopEliminate] = MENU_STAGETYPE_TEXTURE_TOPELIMINATE_PATH;
+        stage_menu_stagetype_to_path_[kRescueAnimal] = STAGETYPE_TEXTURE_RESCUEANIMAL_PATH;
+        stage_menu_stagetype_to_path_[kDestroyRainbowSeal] = STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH;
+        stage_menu_stagetype_to_path_[kWindmill] = STAGETYPE_TEXTURE_WINDMILL_PATH;
         this->readGameSceneBackgroundFile();
+
+        armature_path_.push_back(LIGHTNING_BUBBLE_EFFECT_PATH);
+        armature_path_.push_back(ONE_ROUND_BOMB_EFFECT_PATH);
+        armature_path_.push_back(TWO_ROUND_BOMB_EFFECT_PATH);
+        armature_path_.push_back(BLACK_HOLE_BUBBLE_EFFECT_PATH);
+        armature_path_.push_back(BARREL_BOTTOM_EFFECT_PATH);
+        armature_path_.push_back(COLOR_BUBBLE_ELIMINATE_EFFECT_PATH);
+        armature_path_.push_back(BALL_LIGHTNING_BUBBLE_EFFECT_PATH);
+        armature_path_.push_back(BARREL_BOTTOM_STANDBY_EFFECT_PATH);
+        armature_path_.push_back(BIG_COMBO_EFFECT_FIRE_ONCE_PATH);
+        armature_path_.push_back(BIG_COMBO_EFFECT_FIRE_REPEAT_PATH);
+        armature_path_.push_back(BIG_COMBO_EFFECT_UNDER_FIRE_PATH);
+        armature_path_.push_back(RAINBOW_CHARACTOR_ARMATURE_PATH);
+        armature_path_.push_back(RAINBOW_BUBBLE_ARMATURE_PATH);
+        armature_path_.push_back(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_PATH);
+        armature_path_.push_back(MUTIPLE_SEAL_BUBBLE_ARMATURE_GOG_PATH);
+        armature_path_.push_back(SCOREWIDGET_ARMATURE_PATH);
+        armature_path_.push_back(WINDMILL_BUBBLE_DEMON_ARMATURE_PATH);
+        armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_1_PATH);
+        armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_2_PATH);
+        armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_3_PATH);
+        armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_PATH);
+        armature_path_.push_back(GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_PATH);
+        armature_path_.push_back(GAME_CHARACTER_ARMATURE_FIRE_BALLOON_ARMATURE_PATH);
+        armature_path_.push_back(GAME_STAGE_BUTTON_ARMATURE_PATH);
+        armature_path_.push_back(GAME_SETTING_BUTTON_ARMATURE_PATH);
+        armature_path_.push_back(GAME_STAGE_BUTTON_UNLOCK_ARMATURE_PATH);
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()
@@ -71,6 +106,11 @@ namespace bubble_second {
         return this->createGameSpriteWithPath(stagetype_to_path_[type]);
     }
 
+    cocos2d::Sprite* SpriteTextureController::createMenuStageTypeSprite(const StageType& type)
+    {
+        return this->createGameSpriteWithPath(stage_menu_stagetype_to_path_[type]);
+    }
+
     void SpriteTextureController::setStageTypeSprite(cocos2d::Sprite* sp, const StageType& type)
     {
         this->setSpriteTexture(stagetype_to_path_[type], sp);
@@ -110,58 +150,70 @@ namespace bubble_second {
 
     void SpriteTextureController::addArmatureFile()
     {
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(LIGHTNING_BUBBLE_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(ONE_ROUND_BOMB_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(TWO_ROUND_BOMB_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BLACK_HOLE_BUBBLE_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BARREL_BOTTOM_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(COLOR_BUBBLE_ELIMINATE_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BALL_LIGHTNING_BUBBLE_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BARREL_BOTTOM_STANDBY_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BIG_COMBO_EFFECT_FIRE_ONCE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BIG_COMBO_EFFECT_FIRE_REPEAT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BIG_COMBO_EFFECT_UNDER_FIRE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(RAINBOW_CHARACTOR_ARMATURE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(RAINBOW_BUBBLE_ARMATURE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_GOG_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(SCOREWIDGET_ARMATURE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(WINDMILL_BUBBLE_DEMON_ARMATURE_PATH);
-		cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_1_PATH);
-		cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_2_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_3_PATH);
-		cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_PATH);
-		cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_PATH);
-		cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_FIRE_BALLOON_ARMATURE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_STAGE_BUTTON_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(LIGHTNING_BUBBLE_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(ONE_ROUND_BOMB_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(TWO_ROUND_BOMB_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BLACK_HOLE_BUBBLE_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BARREL_BOTTOM_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(COLOR_BUBBLE_ELIMINATE_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BALL_LIGHTNING_BUBBLE_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BARREL_BOTTOM_STANDBY_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BIG_COMBO_EFFECT_FIRE_ONCE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BIG_COMBO_EFFECT_FIRE_REPEAT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(BIG_COMBO_EFFECT_UNDER_FIRE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(RAINBOW_CHARACTOR_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(RAINBOW_BUBBLE_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_GOG_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(SCOREWIDGET_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(WINDMILL_BUBBLE_DEMON_ARMATURE_PATH);
+		//cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_1_PATH);
+		//cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_2_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_3_PATH);
+		//cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_PATH);
+		//cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_PATH);
+		//cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_CHARACTER_ARMATURE_FIRE_BALLOON_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_STAGE_BUTTON_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_SETTING_BUTTON_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(GAME_STAGE_BUTTON_UNLOCK_ARMATURE_PATH);
+        for (auto var : armature_path_)
+        {
+            cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(var);
+        }
     }
 
     void SpriteTextureController::removeArmatureFile()
     {
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(LIGHTNING_BUBBLE_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(ONE_ROUND_BOMB_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(TWO_ROUND_BOMB_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BLACK_HOLE_BUBBLE_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BARREL_BOTTOM_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(COLOR_BUBBLE_ELIMINATE_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BALL_LIGHTNING_BUBBLE_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BARREL_BOTTOM_STANDBY_EFFECT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BIG_COMBO_EFFECT_FIRE_ONCE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BIG_COMBO_EFFECT_FIRE_REPEAT_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BIG_COMBO_EFFECT_UNDER_FIRE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(RAINBOW_CHARACTOR_ARMATURE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(RAINBOW_BUBBLE_ARMATURE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_GOG_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(SCOREWIDGET_ARMATURE_PATH);
-		cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_1_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(WINDMILL_BUBBLE_DEMON_ARMATURE_PATH);
-		cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_2_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_3_PATH);
-		cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_PATH);
-		cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_PATH);
-		cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_FIRE_BALLOON_ARMATURE_PATH);
-        cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_STAGE_BUTTON_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(LIGHTNING_BUBBLE_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(ONE_ROUND_BOMB_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(TWO_ROUND_BOMB_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BLACK_HOLE_BUBBLE_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BARREL_BOTTOM_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(COLOR_BUBBLE_ELIMINATE_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BALL_LIGHTNING_BUBBLE_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BARREL_BOTTOM_STANDBY_EFFECT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BIG_COMBO_EFFECT_FIRE_ONCE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BIG_COMBO_EFFECT_FIRE_REPEAT_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(BIG_COMBO_EFFECT_UNDER_FIRE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(RAINBOW_CHARACTOR_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(RAINBOW_BUBBLE_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(MUTIPLE_SEAL_BUBBLE_ARMATURE_GOG_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(SCOREWIDGET_ARMATURE_PATH);
+		//cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_1_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(WINDMILL_BUBBLE_DEMON_ARMATURE_PATH);
+		//cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_2_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_3_PATH);
+		//cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_PATH);
+		//cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_PATH);
+		//cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_CHARACTER_ARMATURE_FIRE_BALLOON_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_STAGE_BUTTON_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_SETTING_BUTTON_ARMATURE_PATH);
+  //      cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(GAME_STAGE_BUTTON_UNLOCK_ARMATURE_PATH);
+        for (auto var : armature_path_)
+        {
+            cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(var);
+        }
     }
 
     //cocos2d::RenderTexture* SpriteTextureController::SpriteBlurer(cocos2d::Sprite* pSprite, const float fRadius, const float fSampleNum)

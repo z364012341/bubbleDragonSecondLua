@@ -3,7 +3,7 @@
 #include "ui\UIImageView.h"
 #include "ScoreProgressStart.h"
 #include "SpriteTextureController.h"
-const std::string PROGRESS_TIMER_PATH = "jindutiao.png";//进度条
+const std::string PROGRESS_TIMER_PATH = "jindutiao.PNG";//进度条
 const std::string PROGRESS_TIMER_BACKGROUND_PATH = "jindutiaokuang.png";//进度条背景
 const std::string PROGRESS_TIMER_HEAD_PARTICLE_PATH = "particle/jingyantiaotuowei.plist";//进度条头头的粒子
 const std::string PROGRESS_TIMER_BUBBLE_PARTICLE_PATH = "particle/qipao6.plist";//泡泡

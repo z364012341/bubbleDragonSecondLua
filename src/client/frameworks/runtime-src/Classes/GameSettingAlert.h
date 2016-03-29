@@ -25,7 +25,7 @@ namespace bubble_second {
         void addTopLabel();
         void addNicknameInput();
         void addHelpInfo();
-        //void cancelButtonCallback(cocos2d::Ref* ref) override;
+        void cancelButtonCallback(cocos2d::Ref* ref) override;
     private:
         cocos2d::ui::TextField* nickname_textfield = nullptr;
     };

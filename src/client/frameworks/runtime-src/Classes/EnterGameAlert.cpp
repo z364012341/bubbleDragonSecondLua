@@ -139,10 +139,10 @@ namespace bubble_second {
 
     void EnterGameAlert::initStageNumbleLabel(int level)
     {
-        std::string str1 = GameTextInfo::getInstance()->getTextInfoWithKey(GAME_TEXT_LEVEL_NUMBLE_1_KEY);
-        std::string str2 = GameTextInfo::getInstance()->getTextInfoWithKey(GAME_TEXT_LEVEL_NUMBLE_2_KEY);
+        //std::string str1 = GameTextInfo::getInstance()->getTextInfoWithKey(GAME_TEXT_LEVEL_NUMBLE_1_KEY);
+        //std::string str2 = GameTextInfo::getInstance()->getTextInfoWithKey(GAME_TEXT_LEVEL_NUMBLE_2_KEY);
         char str[20];
-        sprintf(str, "%s  %d  %s", str1.c_str(), level, str2.c_str());
+        sprintf(str, "%d", level);
         this->getStageNumbleLabel()->setString(str);
     }
 

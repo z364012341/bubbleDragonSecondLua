@@ -12,7 +12,9 @@
 #include "BubbleSecondConstant.h"
 //#include "extensions\cocos-ext.h"
 //#include "GUI\CCScrollView\CCScrollView.h"
+#include "cocostudio\CocoStudio.h"
 #include "ui\UIScrollView.h"
+#include "ui\UIButton.h"
 namespace bubble_second {
 	using cocos2d::ui::ScrollView;
     class GameStageSelectionCell;
@@ -33,6 +35,7 @@ namespace bubble_second {
         bool init();
         void loadView();
         void layout();
+        cocos2d::ui::Button* getSettingButton();
         //增加关卡单元
         void addStageCell();
         //增加自定义事件
@@ -59,6 +62,9 @@ namespace bubble_second {
 		void scrollViewMoveCallback(cocos2d::Ref *pSender, cocos2d::ui::ScrollView::EventType eventType);
 		//添加载具
 		void addStageVehicle();
+        //设置按钮回调
+        void settingButtonFunc(cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType type);
+        void setSettingButtonEnabled(bool enabled);
     private:
         float scrollview_bottom_height_ = 0.0f;
         cocos2d::Vector<GameStageSelectionCell*> cell_vector_;
@@ -68,6 +74,7 @@ namespace bubble_second {
         ScrollView* scrollview_ = nullptr;
         cocos2d::Node* csb_node_ = nullptr;
 		GameStageVehicle* stage_vehicle_ = nullptr;
+        cocostudio::Armature* setting_armature_ = nullptr;
     };
 }
 #endif //_GAME_STAGE_SELECTION_SCENE_H_

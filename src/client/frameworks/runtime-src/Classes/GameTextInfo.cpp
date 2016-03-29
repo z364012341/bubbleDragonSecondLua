@@ -1,6 +1,4 @@
 #include "GameTextInfo.h"
-
-
 namespace bubble_second {
     GameTextInfo::GameTextInfo()
     {

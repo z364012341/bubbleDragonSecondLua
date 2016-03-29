@@ -10,6 +10,9 @@
 #ifndef _GAME_TEXT_INFO_H_
 #define _GAME_TEXT_INFO_H_
 #include "BubbleSecondConstant.h"
+const std::string GAME_TEXT_LEVEL_NUMBLE_1_KEY = "alert_level_1";
+const std::string GAME_TEXT_LEVEL_NUMBLE_2_KEY = "alert_level_2";
+
 namespace bubble_second {
     class GameTextInfo
     {

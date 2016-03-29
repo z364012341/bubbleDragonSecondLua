@@ -1,6 +1,6 @@
 #include "GameSamsung.h"
 #include "ScoreProgressStart.h"
-const float GAME_SAMSUNG_TWO_SIDES_POSITION_X = 70.0f;
+const float GAME_SAMSUNG_TWO_SIDES_POSITION_X = 50.0f;
 const float GAME_SAMSUNG_MIDDLE_POSITION_Y = 20.0f;
 const cocos2d::Vec2 SAMSUNG_DOUBLE_POSITION(35.0f, 0.0f);
 namespace bubble_second {

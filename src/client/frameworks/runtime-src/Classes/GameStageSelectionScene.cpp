@@ -6,18 +6,19 @@
 #include "StageDataManager.h"
 #include "EnterGameAlert.h"
 #include "GameSettingAlert.h"
-#include "cocostudio\CocoStudio.h"
 #include "CCLuaEngine.h"
 #include "StageNumble.h"
-#include "ui\UIButton.h"
 #include "ButtonEffectController.h"
 #include "GameStageVehicle.h"
 #include "StageMenuManager.h"
 #include "UserCoinInfoBoard.h"
 #include "UserDiamondInfoBoard.h"
+#include "GameAlertMask.h"
+#include "StageSelectionMenu.h"
 const std::string GAME_STAGE_SELECTION_CSB_PATH = "GameStageSelectionLayer.csb";
 const std::string STAGE_SCROLLVIEW_NAME = "StageScrollView";
 const std::string SETTING_BUTTON_NAME = "SettingButton";
+const std::string SETTING_BUTTON_LINE_NAME = "shengzi_3";
 const std::string PUZZLE_BUTTON_NAME = "Puzzle";
 const std::string STRENGTH_INFO = "StrengthInfo";
 const std::string COIN_INFO = "CoinInfo";
@@ -28,6 +29,8 @@ const std::string CHECKIN_BUTTON = "CheckIn";
 const std::string CHALLENGEMODE_BUTTON = "ChallengeMode";
 const std::string GAME_STAGE_SCROLLVIEW_BOTTOM_PATH = "StageSelectRes/episode000_hd.jpg";
 const std::string GAME_STAGE_ALERT_RENDER_NODE_NAME = "alertNode";
+const std::string SETTING_BUTTON_ARMATURE_RENDER_NODE_NAME = "armatureNode";
+const std::string GAME_STAGE_SETTING_ANIMATION_NAME = "feichuan";
 const float TOP_INFO_POS_Y_PERCENT = 0.9564f;
 const float BUTTON_POS_Y_PERCENT_1 = 0.8343f;
 const float BUTTON_POS_Y_PERCENT_2 = 0.6988f;
@@ -106,13 +109,10 @@ namespace bubble_second {
         this->addChild(csb_node_);
         scrollview_ = dynamic_cast<ScrollView*>(csb_node_->getChildByName(STAGE_SCROLLVIEW_NAME));
 
-        Button* settingButton = dynamic_cast<Button*>(csb_node_->getChildByName(SETTING_BUTTON_NAME));
-        settingButton->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
-            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-            {
-                this->popSettingAlert();
-            }
+        this->getSettingButton()->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
+            this->settingButtonFunc(target, type);
         });
+
         Button* puzzleButton = dynamic_cast<Button*>(csb_node_->getChildByName(PUZZLE_BUTTON_NAME));
         puzzleButton->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
@@ -122,6 +122,11 @@ namespace bubble_second {
         });
 
         this->layout();
+    }
+
+    cocos2d::ui::Button * bubble_second::GameStageSelectionScene::getSettingButton()
+    {
+        return dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(SETTING_BUTTON_NAME));
     }
 
     void GameStageSelectionScene::layout()
@@ -212,16 +217,24 @@ namespace bubble_second {
     {
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         auto listener = cocos2d::EventListenerCustom::create(EVENT_POP_ENTER_GAME_ALERT, [=](cocos2d::EventCustom* event) {
-            StageData data = *static_cast<StageData*>(event->getUserData());
-            this->popEnterGameAlert(data);
+            this->popEnterGameAlert(*static_cast<StageData*>(event->getUserData()));
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        dispatcher->addCustomEventListener(EVENT_SETTING_ALERT_CLOSE, [=](cocos2d::EventCustom* event) {
+            this->setSettingButtonEnabled(true);
+            setting_armature_->removeFromParent();
+        });
+        dispatcher->addCustomEventListener(EVENT_UNLOCK_STAGE_MENU, [=](cocos2d::EventCustom* event) {
+            this->popEnterGameAlert(*static_cast<StageData*>(event->getUserData()));
+        });
     }
 
     void GameStageSelectionScene::removeEventListenerCustom()
     {
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         dispatcher->removeCustomEventListeners(EVENT_POP_ENTER_GAME_ALERT);
+        dispatcher->removeCustomEventListeners(EVENT_SETTING_ALERT_CLOSE);
+        dispatcher->removeCustomEventListeners(EVENT_UNLOCK_STAGE_MENU);
     }
 
     void GameStageSelectionScene::addMouseEventListener()
@@ -288,7 +301,8 @@ namespace bubble_second {
 				next_data.cell_numble = data.cell_numble + 1;
 			}
 			next_data.level_numble = data.level_numble + 1;
-			this->popEnterGameAlert(next_data);
+            StageMenuManager::getInstance()->getCurentStagemenu()->unlockStage();
+			//this->popEnterGameAlert(next_data);
 		}));
 		stage_vehicle_->runAction(seq);
     }
@@ -326,6 +340,7 @@ namespace bubble_second {
         {//第一次要移动到最新的关卡
 			scrollview_->setInnerContainerPosition(this->getScorllViewOffset(UserDataManager::getInstance()->getPresentCell()));
             fire_flag = false;
+            StageMenuManager::getInstance()->getCurentStagemenu()->turnOnBlink();
         }
         else
         {
@@ -339,4 +354,31 @@ namespace bubble_second {
 		scrollview_->addChild(stage_vehicle_);
 		stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getCurrentStageWorldPosition());
 	}
+
+    void GameStageSelectionScene::settingButtonFunc(cocos2d::Ref * target, cocos2d::ui::Widget::TouchEventType type)
+    {
+        if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+        {
+            GameAlertMask* mask = GameAlertMask::createTransparentMask();
+            this->getAlertRenderNode()->addChild(mask);
+            this->setSettingButtonEnabled(false);
+            setting_armature_ = cocostudio::Armature::create(GAME_STAGE_SETTING_ANIMATION_NAME);
+            setting_armature_->setPosition(this->getSettingButton()->getPosition());
+            csb_node_->getChildByName(SETTING_BUTTON_ARMATURE_RENDER_NODE_NAME)->addChild(setting_armature_);
+            setting_armature_->getAnimation()->playWithIndex(0);
+            setting_armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+                if (movementType == cocostudio::COMPLETE)
+                {
+                    mask->removeFromParent();
+                    this->popSettingAlert();
+                }
+            });
+        }
+    }
+
+    void GameStageSelectionScene::setSettingButtonEnabled(bool enabled)
+    {
+        this->getSettingButton()->setVisible(enabled);
+        csb_node_->getChildByName(SETTING_BUTTON_LINE_NAME)->setVisible(enabled);
+    }
 }

@@ -1304,6 +1304,7 @@ namespace bubble_second {
         this->setMenuTouchEnabled(false);
         this->recentbubbleCast();
         bubble_map_node_->pause();
+        //this->getScenePhysicsWorld()->pause
     }
 
     void GameScene::recentbubbleCast()
@@ -2103,12 +2104,14 @@ namespace bubble_second {
     void GameScene::gamePause()
     {
         bubble_map_node_->pause();
+        this->getScenePhysicsWorld()->setSpeed(0);
         this->pause();
     }
 
     void GameScene::gameResume()
     {
         bubble_map_node_->resume();
+        this->getScenePhysicsWorld()->setSpeed(1);
         this->resume();
     }
 

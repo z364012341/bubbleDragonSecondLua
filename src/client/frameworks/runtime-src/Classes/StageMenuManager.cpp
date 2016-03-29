@@ -1,5 +1,5 @@
 #include "StageMenuManager.h"
-
+#include "StageSelectionMenu.h"
 namespace bubble_second {
 	StageMenuManager::StageMenuManager()
 	{
@@ -9,12 +9,17 @@ namespace bubble_second {
 	{
 	}
 
-	void StageMenuManager::setCurrentStageMenu(cocos2d::Node* menu)
+	void StageMenuManager::setCurrentStageMenu(StageSelectionMenu* menu)
 	{
 		current_menu_ = menu;
 	}
 
-	void StageMenuManager::setLastStageMenu(cocos2d::Node* menu)
+    StageSelectionMenu * StageMenuManager::getCurentStagemenu()
+    {
+        return current_menu_;
+    }
+
+	void StageMenuManager::setLastStageMenu(StageSelectionMenu* menu)
 	{
 		last_menu_ = menu;
 	}

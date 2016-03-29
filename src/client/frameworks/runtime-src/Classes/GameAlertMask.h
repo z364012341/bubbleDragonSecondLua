@@ -16,10 +16,14 @@ namespace bubble_second {
     {
     public:
         CREATE_FUNC(GameAlertMask);
+        static GameAlertMask* createTransparentMask();
         ~GameAlertMask();
     private:
         GameAlertMask();
         bool init();
+        bool initTransparentMask();
+        void addMaskMenu();
+        void addColorLayer();
     };
 }
 #endif //_GAME_ALERT_MASK_H_

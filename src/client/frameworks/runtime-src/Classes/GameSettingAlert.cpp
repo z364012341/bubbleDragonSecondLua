@@ -92,9 +92,9 @@ namespace bubble_second {
         menu->setPosition(rect.size.width/2, rect.size.height/2);
         bg->addChild(menu);
     }
-    //void GameSettingAlert::cancelButtonCallback(cocos2d::Ref* ref)
-    //{
-    //    UserDataManager::getInstance()->setUserNickname(nickname_textfield->getString());
-    //    UserDataManager::getInstance()->saveUserData();
-    //}
+
+    void GameSettingAlert::cancelButtonCallback(cocos2d::Ref* ref)
+    {
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SETTING_ALERT_CLOSE);
+    }
 }

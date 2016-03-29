@@ -26,6 +26,8 @@ namespace bubble_second {
         //设置选择按钮能不能点
         void setSelectionMenuEnable(bool flag);
 		bool isCurrentStage();
+        void unlockStage();
+        void playUnlockStageAnimation();
     private:
         StageSelectionMenu();
         bool init(int cell_numble, int level, const StageType& type);
@@ -44,6 +46,7 @@ namespace bubble_second {
     private:
         GameSamsung* samsung_ = nullptr;
         cocos2d::Sprite* button_sp_ = nullptr;
+        cocos2d::Sprite* stage_type_sprite_ = nullptr;
         cocos2d::Vec2 touch_begin_position_;
         bool touch_enable_ = true;
         bool menu_enable_ = true;
