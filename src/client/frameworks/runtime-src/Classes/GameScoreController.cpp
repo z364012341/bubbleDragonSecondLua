@@ -30,6 +30,7 @@ namespace bubble_second {
         this->totalScoreClear();
         this->gameTaskNumbleClear();
         this->completedTaskNumbleClear();
+        prepare_bubble_in_air_numble_ = 0;
     }
 
     void GameScoreController::eliminateComboClear()
@@ -119,6 +120,11 @@ namespace bubble_second {
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_UPDATE_BUBBLE_USE_COUNT_LABEL);
     }
 
+    bool GameScoreController::isNoPreareBubbleInAir()
+    {
+        return prepare_bubble_in_air_numble_ == 0;
+    }
+
     bool GameScoreController::gameVictory()
     {
         return this->getCompletedTaskNumble() >= this->getGameTaskNumble();
@@ -126,7 +132,7 @@ namespace bubble_second {
 
     bool GameScoreController::gameDefeat()
     {
-        return noUseBubbleCount() && !this->gameVictory();
+        return noUseBubbleCount() && !this->gameVictory() && this->isNoPreareBubbleInAir();
     }
 
     bool GameScoreController::noUseBubbleCount()
@@ -182,6 +188,16 @@ namespace bubble_second {
     int GameScoreController::getTotalScore()
     {
         return total_score_;
+    }
+
+    void GameScoreController::addPrepareBubbleAirNumble()
+    {
+        prepare_bubble_in_air_numble_++;
+    }
+
+    void GameScoreController::cutPrepareBubbleAirNumble()
+    {
+        prepare_bubble_in_air_numble_--;
     }
 
     void GameScoreController::setGameTaskNumble(int numble)

@@ -30,10 +30,10 @@ namespace bubble_second {
         void initScoreMenu();
         void initStartSprite();
         void addProgressTimerHead();
-        void updateHeadPosition();
-        cocos2d::Vec2 getHeadPosition();
+        //void updateHeadPosition();
+        //cocos2d::Vec2 getHeadPosition();
         cocos2d::Vec2 getStartPositionWithPercent(float percent);
-        cocos2d::Vec2 calculateOvalPositionWithPercent(float percent);
+        cocos2d::Vec2 calculateCirclePositionWithPercent(float percent);
         //void lightenStartSpriteWithKey(const std::string& key);
         //void lightenStartSpriteWithPercent(float percent);
         //cocos2d::ProgressTimer* getScoreProgressTimer();
@@ -57,8 +57,7 @@ namespace bubble_second {
         void rotateProgressTimerWithPercentDelta(float percent_delta);
     private:
         cocos2d::Sprite* score_progress_timer_ = nullptr;
-        cocos2d::Sprite* progress_timer_head_ = nullptr;
-        cocos2d::ParticleSystemQuad* particle_ = nullptr;
+        //cocos2d::Sprite* progress_timer_head_ = nullptr;
         StartNumbleModule start_numble_;
         float global_percent_;
         //0 to 100 percent

@@ -317,6 +317,7 @@
     <ClInclude Include="..\Classes\UserDiamondInfoBoard.h">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\StageData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -611,6 +612,7 @@
     <ClCompile Include="..\Classes\UserDiamondInfoBoard.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\StageData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

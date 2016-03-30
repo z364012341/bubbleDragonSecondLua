@@ -47,9 +47,9 @@ namespace bubble_second {
 
     cocos2d::Vec2 GameStageSelectionScene::getScorllViewOffset(int cell_numble)
     {
-        float pos_y = (-cell_vector_.at(cell_numble)->getPositionY() + GAME_STAGE_SCROLLVIEW_CELL_OFFSET_OFFSET)/*scale_zoom_*/;
-        cocos2d::Vec2 point = cocos2d::Vec2(0.0f, pos_y);
-        return point;
+        //float pos_y = (-cell_vector_.at(cell_numble)->getPositionY() + GAME_STAGE_SCROLLVIEW_CELL_OFFSET_OFFSET)/*scale_zoom_*/;
+        //cocos2d::Vec2 point = cocos2d::Vec2(0.0f, pos_y);
+        return cell_position_vector_.at(cell_numble);
     }
 
     void GameStageSelectionScene::onEnter()
@@ -163,8 +163,8 @@ namespace bubble_second {
     void GameStageSelectionScene::addStageCell()
     {
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-        float cell_x = visibleSize.width / 2;
-        float cell_y = GAME_STAGE_SCROLLVIEW_CELL_HEIGHT / 2;
+        const float cell_x = visibleSize.width / 2;
+        float cell_y = 0.0f;
         float scrollview_height = 0.0;
         cocos2d::Layer *slayer = cocos2d::Layer::create();
         GameStageSelectionCell *cell = nullptr;
@@ -175,7 +175,12 @@ namespace bubble_second {
             {
                 break;
             }
+            //if (cell_y == 0.0f)
+            //{
+            //    cell_y += cell->getBackgroundHeight() / 2;
+            //}
             cell->setPosition(cell_x, cell_y);
+            cell_position_vector_.push_back(cocos2d::Vec2(0.0f, cell_y));
             scrollview_->addChild(cell);
             //cell_y += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
             //scrollview_height += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
@@ -225,7 +230,8 @@ namespace bubble_second {
             setting_armature_->removeFromParent();
         });
         dispatcher->addCustomEventListener(EVENT_UNLOCK_STAGE_MENU, [=](cocos2d::EventCustom* event) {
-            this->popEnterGameAlert(*static_cast<StageData*>(event->getUserData()));
+            StageData data = *static_cast<StageData*>(event->getUserData());
+            this->popEnterGameAlert(data);
         });
     }
 
@@ -288,6 +294,8 @@ namespace bubble_second {
 		{
 			return;
 		}
+        StageMenuManager::getInstance()->getCurentStagemenu()->setSelectionMenuEnable(false);
+
 		stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
 		cocos2d::MoveBy * move = cocos2d::MoveBy::create(STAGE_VEHICLE_MOVE_DURATION, StageMenuManager::getInstance()->getCurrentStagePositionDelta());
 		cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move, cocos2d::CallFunc::create([=](){
@@ -338,7 +346,9 @@ namespace bubble_second {
         static bool fire_flag = true;
         if (fire_flag)
         {//第一次要移动到最新的关卡
+            //auto p = this->getScorllViewOffset(UserDataManager::getInstance()->getPresentCell());
 			scrollview_->setInnerContainerPosition(this->getScorllViewOffset(UserDataManager::getInstance()->getPresentCell()));
+            //scrollview_->setInnerContainerPosition(cocos2d::Vec2::ZERO);
             fire_flag = false;
             StageMenuManager::getInstance()->getCurentStagemenu()->turnOnBlink();
         }
@@ -366,13 +376,16 @@ namespace bubble_second {
             setting_armature_->setPosition(this->getSettingButton()->getPosition());
             csb_node_->getChildByName(SETTING_BUTTON_ARMATURE_RENDER_NODE_NAME)->addChild(setting_armature_);
             setting_armature_->getAnimation()->playWithIndex(0);
-            setting_armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-                if (movementType == cocostudio::COMPLETE)
-                {
-                    mask->removeFromParent();
-                    this->popSettingAlert();
-                }
-            });
+            this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.2f), cocos2d::CallFunc::create([=]() {
+                this->popSettingAlert();
+                mask->removeFromParent();
+            })));
+            //setting_armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+            //    if (movementType == cocostudio::COMPLETE)
+            //    {
+            //        mask->removeFromParent();
+            //    }
+            //});
         }
     }
 

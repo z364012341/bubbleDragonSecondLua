@@ -31,16 +31,17 @@ namespace bubble_second {
     private:
         StageSelectionMenu();
         bool init(int cell_numble, int level, const StageType& type);
-        void addButton(int cell_numble, int level, const StageType& type);
+        void addButton(const StageType& type);
+        StageData getStageData();
         //设置状态
-        void setMenuState(int cell_numble, int level);
+        void setMenuState();
         void setButtonEnable(bool flag);
         void addSamsung(int start_numble);
-        void addStageLabel(int level);
+        void addStageLabel();
         bool isButtonEnable();
         void addStageTypeTexture(const StageType& type);
         //两边的半月斩
-        void halfMoonSlash(const HalfMoonSlashDirection& direction);
+        //void halfMoonSlash(const HalfMoonSlashDirection& direction);
         //计算父类layer
         cocos2d::Node* getSelectionLayer();
     private:
@@ -50,8 +51,9 @@ namespace bubble_second {
         cocos2d::Vec2 touch_begin_position_;
         bool touch_enable_ = true;
         bool menu_enable_ = true;
-        int cell_numble_ = 0;
-        int level_numble_ = 0;
+        StageData stageData_;
+        //int cell_numble_ = 0;
+        //int level_numble_ = 0;
 		//bool is_current_stage_flag_ = false;
     };
 }

@@ -396,7 +396,7 @@ namespace bubble_second {
 
     void GamePlayController::disposeFallBubbleBorder(cocos2d::Node * border_node, cocos2d::Node * other_node)
     {
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_DEFEAT);
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_GAME_DEFEAT);
     }
 
     cocos2d::Vec2 GamePlayController::convertGLToNodeSpace(const cocos2d::Vec2& touch_location, cocos2d::Node* node)

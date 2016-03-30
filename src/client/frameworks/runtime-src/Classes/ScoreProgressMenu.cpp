@@ -66,24 +66,25 @@ namespace bubble_second {
 
     void ScoreProgressMenu::addProgressTimerHead()
     {
-        particle_ = cocos2d::ParticleSystemQuad::create(PROGRESS_TIMER_HEAD_PARTICLE_PATH);
-        this->addChild(particle_, PROGRESS_TIMER_ZORDER);
-        progress_timer_head_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(PROGRESS_TIMER_HEAD_PATH);
-        this->addChild(progress_timer_head_);
+        cocos2d::ParticleSystemQuad* particle = cocos2d::ParticleSystemQuad::create(PROGRESS_TIMER_HEAD_PARTICLE_PATH);
+        particle->setPosition(17.0f, 0.0f);
+        score_progress_timer_->addChild(particle, PROGRESS_TIMER_ZORDER);
+        //progress_timer_head_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(PROGRESS_TIMER_HEAD_PATH);
+        //this->addChild(progress_timer_head_);
         //progress_timer_head_->setVisible(false);
-        this->updateHeadPosition();
+        //this->updateHeadPosition();
     }
 
-    void ScoreProgressMenu::updateHeadPosition()
-    {
-        particle_->setPosition(this->getHeadPosition());
-        progress_timer_head_->setPosition(this->getHeadPosition());
-    }
+    //void ScoreProgressMenu::updateHeadPosition()
+    //{
+    //    particle_->setPosition(this->getHeadPosition());
+    //    //progress_timer_head_->setPosition(this->getHeadPosition());
+    //}
 
-    cocos2d::Vec2 ScoreProgressMenu::getHeadPosition()
-    {
-        return this->calculateOvalPositionWithPercent(this->getPercentage() /100.0f);
-    }
+   // cocos2d::Vec2 ScoreProgressMenu::getHeadPosition()
+   // {
+   //     return this->calculateOvalPositionWithPercent(this->getPercentage() /100.0f);
+   // }
 
     void ScoreProgressMenu::initStartSprite()
     {
@@ -102,10 +103,10 @@ namespace bubble_second {
         //float x = PROGRESS_TIMER_OVAL_A*2 * percent - PROGRESS_TIMER_OVAL_A;
         //float y = sqrt((1 - pow(x, 2)/ PROGRESS_TIMER_OVAL_POW_A)*PROGRESS_TIMER_OVAL_POW2_B);
         //return cocos2d::Vec2(x, -y);
-        return this->calculateOvalPositionWithPercent(percent);
+        return this->calculateCirclePositionWithPercent(percent);
     }
 
-    cocos2d::Vec2 ScoreProgressMenu::calculateOvalPositionWithPercent(float percent)
+    cocos2d::Vec2 ScoreProgressMenu::calculateCirclePositionWithPercent(float percent)
     {
         //float x = PROGRESS_TIMER_OVAL_A * 2 * percent - PROGRESS_TIMER_OVAL_A;
         //float y = sqrt((1 - pow(x, 2) / PROGRESS_TIMER_OVAL_POW2_A)*PROGRESS_TIMER_OVAL_POW2_B);
@@ -154,7 +155,7 @@ namespace bubble_second {
             {
                 this->unschedule(GAME_SCORE_PROGRESS_SCHEDULE_KEY);
             }
-            this->updateHeadPosition();
+            //this->updateHeadPosition();
         }, GAME_SCORE_PROGRESS_SCHEDULE_KEY);
     }
 
@@ -209,7 +210,8 @@ namespace bubble_second {
 
     void ScoreProgressMenu::setPercentage(float percentage)
     {
-        float new_percent = PROGRESS_TIMER_DISTANCE / 100 * percentage + PROGRESS_TIMER_MIN;
+        float min_percent = MIN(percentage, 100);
+        float new_percent = PROGRESS_TIMER_DISTANCE / 100 * min_percent + PROGRESS_TIMER_MIN;
         float delta = new_percent - current_percentage_;
         current_percentage_ = new_percent;
         this->rotateProgressTimerWithPercentDelta(delta);

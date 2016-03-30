@@ -14,6 +14,7 @@
 #include "ui\UITextAtlas.h"
 #include "ui\UITextBMFont.h"
 #include "ui\UIButton.h"
+#include "StageData.h"
 namespace bubble_second {
     class BaseProperty;
     class BaseWeapon;

@@ -271,6 +271,7 @@ namespace bubble_second {
 		this->getPhysicsBody()->applyImpulse(shoot_impulse_);
         //auto controller = GamePlayController::getInstance();
         //controller->setBubbleShootEnabled(false);
+        GameScoreController::getInstance()->addPrepareBubbleAirNumble();
 		GamePlayController::getInstance()->setPrepareBubble(nullptr);
         this->dispatchEventAfterShooted();
 

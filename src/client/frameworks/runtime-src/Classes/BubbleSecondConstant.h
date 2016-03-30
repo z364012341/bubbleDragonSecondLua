@@ -11,6 +11,7 @@
 #ifndef _BUBBLE_SECOND_CONSTANT_H_
 #define _BUBBLE_SECOND_CONSTANT_H_
 #include "cocos2d.h"
+#include "StageData.h"
 #define GETINSTANCE_FUNC(__TYPE__) \
     static __TYPE__* getInstance() \
     { \
@@ -482,7 +483,7 @@ const std::string EVENT_POP_ENTER_GAME_ALERT = "event_pop_enter_game_alert"; //µ
 const std::string EVENT_SETTING_ALERT_CLOSE = "event_setting_alert_close"; //¹Ø¿¨½çÃæµÄÉèÖÃÃæ°å¹Ø±Õ
 const std::string EVENT_FIND_THREE_BUBBLE = "EVENT_FIND_THREE_BUBBLE";  //Ê¹ÓÃ¼Ó3µÀ¾ß
 const std::string EVENT_UPDATE_SECOND_BUBBLE = "EVENT_UPDATE_SECOND_BUBBLE"; //¸üÐÂµÚ¶þÐ¡Çò
-const std::string EVENT_DEFEAT = "EVENT_DEFEAT"; //Ê§°Ü
+//const std::string EVENT_DEFEAT = "EVENT_DEFEAT"; //Ê§°Ü
 const std::string EVENT_ADD_ELIMINATE_SCORE_LABEL = "EVENT_ADD_ELIMINATE_SCORE_LABEL"; //Ìí¼ÓÏû³ýµÄ·ÖÊýlabel
 const std::string EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_SCORE_KEY = "score_text";
 const std::string EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_POS_X_KEY = "pos_x";
@@ -674,9 +675,9 @@ const int GAME_STAGE_NUMBLE_BEGIN = 1; //¹Ø¿¨´Ó1¿ªÊ¼
 const float GAME_STAGE_SELECTION_CELL_SCALE = 0.73f;
 //GameStageSelectionScene
 const std::string GAME_STAGE_SELECTION_SCENE_NAME = "game_stage_selection_scene";
-const float GAME_STAGE_SCROLLVIEW_CELL_HEIGHT = 745.0f;
-const float GAME_STAGE_SCROLLVIEW_CELL_BACKGROUND_HEIGHT = 1024.0f;
-const float GAME_STAGE_SCROLLVIEW_CELL_OFFSET_OFFSET = GAME_DESIGN_RESOLUTION_HEIGHT - GAME_STAGE_SCROLLVIEW_CELL_BACKGROUND_HEIGHT;
+//const float GAME_STAGE_SCROLLVIEW_CELL_HEIGHT = 745.0f;
+//const float GAME_STAGE_SCROLLVIEW_CELL_BACKGROUND_HEIGHT = 1024.0f;
+//const float GAME_STAGE_SCROLLVIEW_CELL_OFFSET_OFFSET = GAME_DESIGN_RESOLUTION_HEIGHT - GAME_STAGE_SCROLLVIEW_CELL_BACKGROUND_HEIGHT;
 //EnterGameAlert
 const std::string ENTER_GAME_ALERT_CHARACTOR_PATH = "juese.png";
 const int ENTER_GAME_ALERT_CHARACTOR_TAG = 124;
@@ -814,11 +815,11 @@ namespace bubble_second {
     typedef cocos2d::Vector<BaseBubble*> BubbleVector;
     typedef std::vector<cocos2d::Vec2> BubbleIndexVector;
     typedef std::map<std::string, BubbleVector> BubbleVectorMap;
-    struct StageData
-    {
-        int cell_numble = 0;
-        int level_numble = 0;
-    };
+    //struct StageData
+    //{
+    //    int cell_numble = 0;
+    //    int level_numble = 0;
+    //};
 }
 
 enum BubbleType
