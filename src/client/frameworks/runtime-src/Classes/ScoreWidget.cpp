@@ -10,12 +10,12 @@ const float SCOREWIDGET_ARMATURE_SCALE = 0.5;
 namespace bubble_second {
     ScoreWidget::ScoreWidget() :widget_combo_(0), armature_(nullptr)
     {
-        type_update_to_type_[kScoreWidgetBlue] = kScoreWidgetPink;
-        type_update_to_type_[kScoreWidgetPink] = kScoreWidgetGreen;
-        type_update_to_type_[kScoreWidgetGreen] = kScoreWidgetGreen;
-        type_to_score_[kScoreWidgetBlue] = SCORE_WIDGET_BLUE_SCORE;
-        type_to_score_[kScoreWidgetPink] = SCORE_WIDGET_YELLOW_SCORE;
-        type_to_score_[kScoreWidgetGreen] = SCORE_WIDGET_GREEN_SCORE;
+        type_update_to_type_[kScoreWidgetLow] = kScoreWidgetMiddle;
+        type_update_to_type_[kScoreWidgetMiddle] = kScoreWidgetHigh;
+        type_update_to_type_[kScoreWidgetHigh] = kScoreWidgetHigh;
+        type_to_score_[kScoreWidgetLow] = SCORE_WIDGET_BLUE_SCORE;
+        type_to_score_[kScoreWidgetMiddle] = SCORE_WIDGET_YELLOW_SCORE;
+        type_to_score_[kScoreWidgetHigh] = SCORE_WIDGET_GREEN_SCORE;
     }
 
     ScoreWidget::~ScoreWidget()
@@ -54,6 +54,7 @@ namespace bubble_second {
     void ScoreWidget::setType(const ScoreWidgetType& type)
     {
         type_ = type;
+        ScoreWidgetManager::getInstance()->changeScoreWidgetArmatureDisplay(armature_, type_);
         //armature_->setColor(ScoreWidgetManager::getInstance()->getWidgetColorWithType(type_));
         //for (auto var : ScoreWidgetManager::getInstance()->getWidgetBonePathMap())
         //{
@@ -175,14 +176,21 @@ namespace bubble_second {
     {
         armature_ = cocostudio::Armature::create(SCOREWIDGET_ARMATURE_NAME);
         this->addChild(armature_);
+
+
         //for (auto var1: ScoreWidgetManager::getInstance()->getWidgetBonePathMap())
         //{
         //    for (auto var2 : var1.second)
         //    {
-        //        cocostudio::Skin *skin = cocostudio::Skin::create(var2.second);
-        //        armature_->getBone(var1.first)->addDisplay(skin, (int)var2.first);
+        //        //cocostudio::Skin *skin = cocostudio::Skin::create(var2.second);
+        //        //armature_->getBone(var1.first)->addDisplay(skin, (int)var2.first);
         //    }
         //}
+        this->setType(kScoreWidgetHigh);
+        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("high/mifengguai_0003_MiFeng-tou4.png"), 0);
+        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("high/mifengguai_0009_MiFeng-tou1.png"), 1);
+        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("high/mifengguai_0004_MiFeng-tou3.png"), 2);
+        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("high/mifengguai_0006_MiFeng-tou2.png"), 3);
     }
 
     void ScoreWidget::playFlyingAnimation(float duration)

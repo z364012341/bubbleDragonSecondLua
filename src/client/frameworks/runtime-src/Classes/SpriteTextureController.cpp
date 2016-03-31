@@ -13,6 +13,7 @@ const std::string GAME_STAGE_BUTTON_ARMATURE_PATH = "guankaanniu/guankaanniu.Exp
 const std::string GAME_SETTING_BUTTON_ARMATURE_PATH = "feichuan/feichuan.ExportJson"; //气球设置按钮的动画
 const std::string GAME_STAGE_BUTTON_UNLOCK_ARMATURE_PATH = "guankaanniu/guankaanniu.ExportJson";    //关卡解锁动画
 const std::string MENU_STAGETYPE_TEXTURE_TOPELIMINATE_PATH = "tubiao01.png";
+const std::string GAME_CURRENT_STAGE_BUTTON_HALO_ARMATURE_PATH = "anniu-TX/anniu-TX.ExportJson";    //当前关卡光圈动画
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()
@@ -54,6 +55,7 @@ namespace bubble_second {
         armature_path_.push_back(GAME_STAGE_BUTTON_ARMATURE_PATH);
         armature_path_.push_back(GAME_SETTING_BUTTON_ARMATURE_PATH);
         armature_path_.push_back(GAME_STAGE_BUTTON_UNLOCK_ARMATURE_PATH);
+        armature_path_.push_back(GAME_CURRENT_STAGE_BUTTON_HALO_ARMATURE_PATH);
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()

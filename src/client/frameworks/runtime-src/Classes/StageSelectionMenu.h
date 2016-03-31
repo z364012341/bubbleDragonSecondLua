@@ -26,6 +26,8 @@ namespace bubble_second {
         //设置选择按钮能不能点
         void setSelectionMenuEnable(bool flag);
 		bool isCurrentStage();
+        //按钮预解锁
+        void preUnlockStage();
         void unlockStage();
         void playUnlockStageAnimation();
     private:
@@ -44,6 +46,9 @@ namespace bubble_second {
         //void halfMoonSlash(const HalfMoonSlashDirection& direction);
         //计算父类layer
         cocos2d::Node* getSelectionLayer();
+        //粒子
+        void addStandbyParticle();
+        void addStandbyHaloAnimation();
     private:
         GameSamsung* samsung_ = nullptr;
         cocos2d::Sprite* button_sp_ = nullptr;
@@ -52,6 +57,7 @@ namespace bubble_second {
         bool touch_enable_ = true;
         bool menu_enable_ = true;
         StageData stageData_;
+        cocos2d::ParticleSystemQuad* pre_unlock_particle_ = nullptr;
         //int cell_numble_ = 0;
         //int level_numble_ = 0;
 		//bool is_current_stage_flag_ = false;

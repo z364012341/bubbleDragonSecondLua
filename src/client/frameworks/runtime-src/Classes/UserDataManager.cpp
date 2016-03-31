@@ -113,6 +113,7 @@ namespace bubble_second {
     {
         this->readStageFile();
         this->readUserDataFile();
+        unlock_stage_numble_ = this->getStagePassCount();
     }
     std::string UserDataManager::getStageDataPath() const
     {
@@ -125,5 +126,13 @@ namespace bubble_second {
     int UserDataManager::getStagePassCount()
     {
         return stage_data_.size();
+    }
+    void UserDataManager::addUnlockStageNumble()
+    {
+        unlock_stage_numble_++;
+    }
+    bool UserDataManager::isUnlockWithStageNumble(int stage_numble)
+    {
+        return stage_numble <= unlock_stage_numble_;
     }
 }

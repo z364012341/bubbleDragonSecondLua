@@ -290,13 +290,15 @@ namespace bubble_second {
 
     void GameStageSelectionScene::enterNextStage(StageData data)
     {
-		if (data.level_numble < UserDataManager::getInstance()->getStagePassCount())
+		if (UserDataManager::getInstance()->isUnlockWithStageNumble(data.level_numble))
 		{
 			return;
 		}
-        StageMenuManager::getInstance()->getCurentStagemenu()->setSelectionMenuEnable(false);
+        UserDataManager::getInstance()->addUnlockStageNumble();
+        StageMenuManager::getInstance()->getCurentStagemenu()->preUnlockStage();
 
 		stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
+
 		cocos2d::MoveBy * move = cocos2d::MoveBy::create(STAGE_VEHICLE_MOVE_DURATION, StageMenuManager::getInstance()->getCurrentStagePositionDelta());
 		cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move, cocos2d::CallFunc::create([=](){
 			StageData next_data;

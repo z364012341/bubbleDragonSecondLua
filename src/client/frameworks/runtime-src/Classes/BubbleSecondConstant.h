@@ -60,32 +60,7 @@ const std::string PROPS_ITEM_BACKGROUND_PATH = "kuangdaoju.png";  //道具item的背
 const std::string RAINBOW_CHARACTOR_PATH = "be_sealed_charactor.png"; //彩虹封印里面的人物
 const std::string ADD_BUBBLE_NUMBLE_BUBBLE_PATH = "addBubbleNumble.png"; //+3特殊泡泡
 const std::string GAME_NUMBLE_FONT_PATH = "fonts/typeface-export.fnt";
-//得分挂件
-const std::string SCORE_WIDGET_BONE_HEAD_NAME = "Layer11"; //骨骼名字
-const std::string SCORE_WIDGET_BONE_BODY_NAME = "Layer10";
-const std::string SCORE_WIDGET_BONE_BG_NAME = "Layer21";
-const std::string SCORE_WIDGET_BONE_EAR1_NAME = "Layer13";
-const std::string SCORE_WIDGET_BONE_EAR2_NAME = "Layer12";
-const std::string SCORE_WIDGET_RES_PATH = "score_widget_res/"; //资源的相对路径
-const std::string SCORE_WIDGET_HEAD_BLUE_PATH = SCORE_WIDGET_RES_PATH + "L-H-tou.png"; //蓝色的头的路径
-const std::string SCORE_WIDGET_HEAD_PINK_PATH = SCORE_WIDGET_RES_PATH + "Fen-H-tou.png"; 
-const std::string SCORE_WIDGET_HEAD_GREEN_PATH = SCORE_WIDGET_RES_PATH + "LV-H-tou.png";
 
-const std::string SCORE_WIDGET_BODY_BLUE_PATH = SCORE_WIDGET_RES_PATH + "L-H-shenti.png";
-const std::string SCORE_WIDGET_BODY_PINK_PATH = SCORE_WIDGET_RES_PATH + "Fen-H-shenti.png";
-const std::string SCORE_WIDGET_BODY_GREEN_PATH = SCORE_WIDGET_RES_PATH + "LV-H-shenti.png";
-
-const std::string SCORE_WIDGET_BG_BLUE_PATH = SCORE_WIDGET_RES_PATH + "L-H-guang.png";
-const std::string SCORE_WIDGET_BG_PINK_PATH = SCORE_WIDGET_RES_PATH + "Fen-H-guang.png";
-const std::string SCORE_WIDGET_BG_GREEN_PATH = SCORE_WIDGET_RES_PATH + "L-H-guang.png";
-
-const std::string SCORE_WIDGET_EAR1_BLUE_PATH = SCORE_WIDGET_RES_PATH + "L-H-r01.png";
-const std::string SCORE_WIDGET_EAR1_PINK_PATH = SCORE_WIDGET_RES_PATH + "Fen-H-r01.png";
-const std::string SCORE_WIDGET_EAR1_GREEN_PATH = SCORE_WIDGET_RES_PATH + "LV-H-r01.png";
-
-const std::string SCORE_WIDGET_EAR2_BLUE_PATH = SCORE_WIDGET_RES_PATH + "L-H-r02.png";
-const std::string SCORE_WIDGET_EAR2_PINK_PATH = SCORE_WIDGET_RES_PATH + "Fen-H-r02.png";
-const std::string SCORE_WIDGET_EAR2_GREEN_PATH = SCORE_WIDGET_RES_PATH + "LV-H-r02.png";
 //瞄准线点path
 const std::string SIGHT_POINT_COLORFUL_PATH = "caisedian.png";  //彩色的
 const std::string SIGHT_POINT_ORANGE_PATH = "chengdian.png";
@@ -856,9 +831,9 @@ enum BubbleType
 
 enum ScoreWidgetType
 {//挂件种类
-    kScoreWidgetBlue = 0,
-    kScoreWidgetPink,
-    kScoreWidgetGreen,
+    kScoreWidgetLow = 0,
+    kScoreWidgetMiddle,
+    kScoreWidgetHigh,
     kScoreWidgetTypeTotal
 };
 

@@ -35,6 +35,9 @@ namespace bubble_second {
         void saveUserData();
         //游戏是否通关
         bool isCompletedGame();
+        //+1解锁关卡
+        void addUnlockStageNumble();
+        bool isUnlockWithStageNumble(int stage_numble);
     private:
         ~UserDataManager();
         void writeStageDataToFile();
@@ -46,6 +49,7 @@ namespace bubble_second {
         cocos2d::ValueMap stage_data_;
         int present_cell_ = 0;
         cocos2d::ValueMap user_data_;
+        int unlock_stage_numble_ = 0;
     };
 }
 #endif //_USER_DATA_MANAGER_H_

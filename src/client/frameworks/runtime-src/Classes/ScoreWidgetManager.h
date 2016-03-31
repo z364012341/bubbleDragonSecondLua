@@ -11,9 +11,10 @@
 #define _SCORE_WIDGET_MANAGER_H_
 #include "cocos2d.h"
 #include "BubbleSecondConstant.h"
+#include "cocostudio\CocoStudio.h"
 namespace bubble_second {
     typedef cocos2d::Vector<cocos2d::Node*> WidgetPointsSeed;
-    typedef std::map<std::string, std::map<ScoreWidgetType, std::string>> WidgetBonePathMap;
+    //typedef std::map<std::string, std::map<ScoreWidgetType, std::string>> WidgetBonePathMap;
     class ScoreWidget;
     class ScoreWidgetManager
     {
@@ -32,8 +33,10 @@ namespace bubble_second {
         //位置种子
         void setWidgetPointsSeed(WidgetPointsSeed seed);
         WidgetPointsSeed getWidgetPointsSeed();
-        const WidgetBonePathMap& getWidgetBonePathMap();
+        //const WidgetBonePathMap& getWidgetBonePathMap();
         cocos2d::Color3B getWidgetColorWithType(const ScoreWidgetType type);
+        //切换骨骼动画皮肤
+        void changeScoreWidgetArmatureDisplay(cocostudio::Armature* armature, const ScoreWidgetType& type);
     private:
         ScoreWidgetManager();
         //添加时间监听
@@ -57,9 +60,12 @@ namespace bubble_second {
         //    kScoreWidgetGreen
         //};
         std::map<int, ScoreWidgetType> combo_to_type_;
+        std::map<ScoreWidgetType, std::string> type_to_key_;
         //位置种子
         WidgetPointsSeed widget_points_seed_;
-        WidgetBonePathMap bonename_to_map_;
+
+        cocos2d::ValueMap bee_bone_data_;
+        //WidgetBonePathMap bonename_to_map_;
         //std::map<ScoreWidgetType, cocos2d::Color3B> type_to_color_;
     };
 }

@@ -15,9 +15,12 @@ const std::string GAME_STAGE_SELECTION_MENU_GRAY_PATH = "anniu2.png";
 const std::string STAGE_UNLOCK_PARTICLE_PATH = "particle/anniuningju.plist";
 const std::string MENU_BLINK_PARTICLE_PATH = "particle/guankadaiji.plist";
 const std::string STAGE_UNLOCK_ARMATURE_NAME = "guankaanniu";
+const std::string STAGE_HALO_ARMATURE_NAME = "anniu-TX";
 const float STAGE_SELECTION_MENU_SAMSUNG_SCALE = 0.6f;
 const float STAGE_LEVEL_LABEL_SCALE = 0.8f;
+const float HALO_ANIMATION_SCALE = 2.0f;
 const int UPPER_ZORDER = 1; //粒子, 标签之类的zorder
+const int HALO_ANIMATION_ZORDER = -1;
 //const std::string GAME_STAGE_SELECTION_MENU_ORANGE_PATH = "anniu2.png";
 const cocos2d::Vec2 STAGE_SELECTION_MENU_SAMSUNG_POSITION(0.0f, 45.0f);
 const cocos2d::Vec2 STAGE_SELECTION_MENU_STAGE_LABEL_POSITION(0.0f, -23.0f);
@@ -54,13 +57,10 @@ namespace bubble_second {
 
     bool StageSelectionMenu::init(int cell_numble, int level, const StageType& type)
     {
-        //cell_numble_ = cell_numble;
-        //level_numble_ = level;
         stageData_ = StageData(cell_numble, level);
         this->addButton(type);
         this->addSamsung(UserDataManager::getInstance()->getStartNumbleWithLevel(level));
         this->addStageLabel(); 
-        //this->setScale(STAGE_SELECTION_MENU_SCALE);
         this->addStageTypeTexture(type);
         this->setMenuState();
         return true;
@@ -72,8 +72,7 @@ namespace bubble_second {
         int newest_stage_numble = UserDataManager::getInstance()->getStagePassCount()+1;
         if (stageData_.level_numble == newest_stage_numble)
         {
-            //this->turnOnBlink();
-			//is_current_stage_flag_ = true;
+            this->turnOnBlink();
 			StageMenuManager::getInstance()->setCurrentStageMenu(this);
             UserDataManager::getInstance()->setPresentCell(stageData_.cell_numble);
         }
@@ -98,7 +97,6 @@ namespace bubble_second {
 
     void StageSelectionMenu::addButton(const StageType& type)
     {
-        //button_sp_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SELECTION_MENU_PURPLE_PATH);
         button_sp_ = cocos2d::Sprite::createWithSpriteFrameName(GAME_STAGE_SELECTION_MENU_BLUE_PATH);
         this->addChild(button_sp_);
         auto listener = cocos2d::EventListenerTouchOneByOne::create();
@@ -119,15 +117,6 @@ namespace bubble_second {
         listener->onTouchEnded = [=](cocos2d::Touch *touch, cocos2d::Event *event) {
             if (this->isButtonEnable())
             {
-                //EnterGameAlert* alert = EnterGameAlert::create(cell_numble, level, type);
-                //cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-                //alert->setPosition(visibleSize.width/2, visibleSize.height/2);
-                //alert->setScale(SmartScaleController::getInstance()->getFixedWidthZoom());
-                //this->getSelectionLayer()->addChild(alert);
-
-                //StageData userData;
-                //userData.cell_numble = cell_numble;
-                //userData.level_numble = level;
                 cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_ENTER_GAME_ALERT, &stageData_);
             }
         };
@@ -152,10 +141,6 @@ namespace bubble_second {
     {
         char str[10];
         sprintf(str, "%d", stageData_.level_numble);
-        //cocos2d::Label* label = cocos2d::Label::createWithSystemFont(str, "", STAGE_SELECTION_MENU_STAGE_LABEL_FONTSIZE);
-        //label->setPosition(STAGE_SELECTION_MENU_STAGE_LABEL_POSITION);
-        //this->addChild(label, 1);
-
         cocos2d::ui::TextBMFont* label = cocos2d::ui::TextBMFont::create(str, GAME_NUMBLE_FONT_PATH);
         label->setPosition(STAGE_SELECTION_MENU_STAGE_LABEL_POSITION);
         label->setScale(STAGE_LEVEL_LABEL_SCALE);
@@ -175,7 +160,6 @@ namespace bubble_second {
     {
         stage_type_sprite_ = SpriteTextureController::getInstance()->createMenuStageTypeSprite(type);
         stage_type_sprite_->setPosition(STAGE_SELECTION_MENU_STAGETYPE_TEXTURE_POSITION);
-        //sp->setScale(0.7f);
         this->addChild(stage_type_sprite_, UPPER_ZORDER);
     }
 
@@ -216,20 +200,30 @@ namespace bubble_second {
     }
     void StageSelectionMenu::turnOnBlink()
     {
-        //cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SELECTION_MENU_ORANGE_PATH);
-        //this->addChild(sp);
-        //cocos2d::FadeOut* fadeout = cocos2d::FadeOut::create(STAGE_SELECTION_MENU_THE_BLINK_FADE_DURATION);
-        //cocos2d::FadeIn* fadein = cocos2d::FadeIn::create(STAGE_SELECTION_MENU_THE_BLINK_FADE_DURATION);
-        //cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(fadeout, fadein);
-        //sp->runAction(cocos2d::RepeatForever::create(seq));
-        //this->halfMoonSlash(kLeft);
-        //this->halfMoonSlash(kRight);
         button_sp_->setVisible(true);
         this->setSelectionMenuEnable(true);
+        this->addStandbyParticle();
+        this->addStandbyHaloAnimation();
+    }
+
+    void StageSelectionMenu::addStandbyParticle()
+    {
         cocos2d::ParticleSystemQuad* particle = cocos2d::ParticleSystemQuad::create(MENU_BLINK_PARTICLE_PATH);
-        particle->setPosition(cocos2d::Vec2::ZERO);
-        particle->setScale(0.7f);
-        this->addChild(particle, UPPER_ZORDER);
+        particle->setPositionType(cocos2d::ParticleSystem::PositionType::RELATIVE);
+        cocos2d::BlendFunc blend = {GL_DST_COLOR, GL_ONE};
+        particle->setBlendFunc(blend);
+        particle->setPosition(button_sp_->getContentSize().width/2, button_sp_->getContentSize().height / 2 + 5.0f);
+        button_sp_->addChild(particle, UPPER_ZORDER);
+
+    }
+
+    void StageSelectionMenu::addStandbyHaloAnimation()
+    {
+        cocostudio::Armature* halo_armature = cocostudio::Armature::create(STAGE_HALO_ARMATURE_NAME);
+        halo_armature->setPosition(button_sp_->getContentSize().width / 2, button_sp_->getContentSize().height/2+5.0f);
+        button_sp_->addChild(halo_armature, HALO_ANIMATION_ZORDER);
+        halo_armature->setScale(HALO_ANIMATION_SCALE);
+        halo_armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, true);
     }
 
     void StageSelectionMenu::setSelectionMenuEnable(bool flag)
@@ -237,13 +231,11 @@ namespace bubble_second {
         menu_enable_ = flag;
         if (flag)
         {
-            //SpriteTextureController::getInstance()->setSpriteTexture(GAME_STAGE_SELECTION_MENU_BLUE_PATH, button_sp_);
             button_sp_->setSpriteFrame(cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(GAME_STAGE_SELECTION_MENU_BLUE_PATH));
             stage_type_sprite_->setOpacity(255);
         }
         else
         {
-            //SpriteTextureController::getInstance()->setSpriteTexture(GAME_STAGE_SELECTION_MENU_GRAY_PATH, button_sp_);
             button_sp_->setSpriteFrame(cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(GAME_STAGE_SELECTION_MENU_GRAY_PATH));
             stage_type_sprite_->setOpacity(190);
         }
@@ -251,13 +243,15 @@ namespace bubble_second {
 
     void StageSelectionMenu::unlockStage()
     {
-        cocos2d::ParticleSystemQuad* particle = cocos2d::ParticleSystemQuad::create(STAGE_UNLOCK_PARTICLE_PATH);
-        particle->setPosition(cocos2d::Vec2::ZERO);
-        this->addChild(particle);
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(2.0f), cocos2d::CallFunc::create([=]() {
-            particle->removeFromParent();
-            this->playUnlockStageAnimation();
-        })));
+        this->playUnlockStageAnimation();
+    }
+
+    void StageSelectionMenu::preUnlockStage()
+    {
+        pre_unlock_particle_ = cocos2d::ParticleSystemQuad::create(STAGE_UNLOCK_PARTICLE_PATH);
+        pre_unlock_particle_->setPosition(cocos2d::Vec2::ZERO);
+        this->addChild(pre_unlock_particle_);
+        this->setSelectionMenuEnable(false);
     }
 
     void StageSelectionMenu::playUnlockStageAnimation()
@@ -270,7 +264,7 @@ namespace bubble_second {
             if (movementType == cocostudio::COMPLETE)
             {
                 armature->removeFromParent();
-                this->setSelectionMenuEnable(true);
+                pre_unlock_particle_->removeFromParent();
                 this->turnOnBlink();
                 cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_UNLOCK_STAGE_MENU, &stageData_);
             }
