@@ -19,8 +19,8 @@ namespace bubble_second {
     public:
         //获取关卡配置信息
         StageDataModule* decodeStageXMLWithStageNumble(int stageNumble);
-        int convertStringToInt(const std::string& str);
-
+        static int convertStringToInt(const std::string& str);
+        static std::string convertIntToString(int numble);
     };
 }
 #endif //_XML_TOOL_H_

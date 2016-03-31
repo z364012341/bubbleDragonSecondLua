@@ -73,5 +73,14 @@ namespace bubble_second {
         out >> numble;
         return numble;
     }
+
+    std::string XMLTool::convertIntToString(int numble)
+    {
+        std::stringstream out;
+        out << numble;
+        std::string str = "";
+        out >> str;
+        return str;
+    }
     
 }

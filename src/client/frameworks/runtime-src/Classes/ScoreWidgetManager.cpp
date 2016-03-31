@@ -1,10 +1,12 @@
 #include "ScoreWidgetManager.h"
 #include "ScoreWidget.h"
 #include "GameScoreController.h"
+#include "XMLTool.h"
 const float WIDGET_POSITION_RANGE_RIGHT_MAX = GAME_DESIGN_RESOLUTION_WIDTH / 2 - BUBBLE_RADIUS - SCORE_WIDGET_BODY_RADIUS + 5.0f;
 const float WIDGET_POSITION_RANGE_RIGHT_MIN = GAME_DESIGN_RESOLUTION_WIDTH / 2 - BUBBLE_RADIUS * 2 - SCORE_WIDGET_BODY_RADIUS - 5.0f;
 const float WIDGET_POSITION_RANGE_LEFT_MAX = -WIDGET_POSITION_RANGE_RIGHT_MIN;
 const float WIDGET_POSITION_RANGE_LEFT_MIN = -WIDGET_POSITION_RANGE_RIGHT_MAX;
+const std::string BEE_BONE_DATA_PLIST_PATH = "mifeng/mifeng.plist";
 //得分挂件
 //const std::string SCORE_WIDGET_BONE_HEAD_NAME = "Layer11"; //骨骼名字
 //const std::string SCORE_WIDGET_BONE_BODY_NAME = "Layer10";
@@ -134,28 +136,28 @@ namespace bubble_second {
         type_to_key_[kScoreWidgetLow] = "low";
         type_to_key_[kScoreWidgetMiddle] = "middle";
         type_to_key_[kScoreWidgetHigh] = "high";
-        {
+        /*{
             cocos2d::ValueMap bee_low_data;
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "mifengguai_0001_MiFeng-yanpi2.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "mifengguai_0001_MiFeng-yanpi2.png";
                 bee_low_data["Layer48"] = bone_data; }
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "mifengguai_0000_MiFeng-yanpi1.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "mifengguai_0000_MiFeng-yanpi1.png";
                 bee_low_data["Layer46"] = bone_data;
             }
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "新建文件夹 (12)/mifengguai_0003_MiFeng-yanpi4.png";
-                bone_data[1] = "新建文件夹 (12)/mifengguai_0009_MiFeng-yanpi1.png";
-                bone_data[2] = "新建文件夹 (12)/mifengguai_0004_MiFeng-yanpi3.png";
-                bone_data[3] = "新建文件夹 (12)/mifengguai_0006_MiFeng-yanpi2.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "新建文件夹 (12)/mifengguai_0003_MiFeng-yanpi4.png";
+                bone_data[XMLTool::convertIntToString(1)] = "新建文件夹 (12)/mifengguai_0009_MiFeng-yanpi1.png";
+                bone_data[XMLTool::convertIntToString(2)] = "新建文件夹 (12)/mifengguai_0004_MiFeng-yanpi3.png";
+                bone_data[XMLTool::convertIntToString(3)] = "新建文件夹 (12)/mifengguai_0006_MiFeng-yanpi2.png";
                 bee_low_data["Layer17"] = bone_data;
             }
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "新建文件夹 (12)/mifengguai_0013_MiFeng-body.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "新建文件夹 (12)/mifengguai_0013_MiFeng-body.png";
                 bee_low_data["Layer16"] = bone_data;
             }
             bee_bone_data_["low"] = bee_low_data;
@@ -163,25 +165,25 @@ namespace bubble_second {
         {
             cocos2d::ValueMap bee_low_data;
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "middle/mifengguai_0001_MiFeng-yanpi2.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "middle/mifengguai_0001_MiFeng-yanpi2.png";
                 bee_low_data["Layer48"] = bone_data; }
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "middle/mifengguai_0000_MiFeng-yanpi1.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "middle/mifengguai_0000_MiFeng-yanpi1.png";
                 bee_low_data["Layer46"] = bone_data;
             }
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "middle/mifengguai_0003_MiFeng-yanpi4.png";
-                bone_data[1] = "middle/mifengguai_0009_MiFeng-yanpi1.png";
-                bone_data[2] = "middle/mifengguai_0004_MiFeng-yanpi3.png";
-                bone_data[3] = "middle/mifengguai_0006_MiFeng-yanpi2.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "middle/mifengguai_0003_MiFeng-yanpi4.png";
+                bone_data[XMLTool::convertIntToString(1)] = "middle/mifengguai_0009_MiFeng-yanpi1.png";
+                bone_data[XMLTool::convertIntToString(2)] = "middle/mifengguai_0004_MiFeng-yanpi3.png";
+                bone_data[XMLTool::convertIntToString(3)] = "middle/mifengguai_0006_MiFeng-yanpi2.png";
                 bee_low_data["Layer17"] = bone_data;
             }
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "middle/mifengguai_0013_MiFeng-body.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "middle/mifengguai_0013_MiFeng-body.png";
                 bee_low_data["Layer16"] = bone_data;
             }
             bee_bone_data_["middle"] = bee_low_data;
@@ -189,33 +191,37 @@ namespace bubble_second {
         {
             cocos2d::ValueMap bee_high_data;
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "high/mifengguai_0001_MiFeng-yanpi2.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "high/mifengguai_0001_MiFeng-yanpi2.png";
                 bee_high_data["Layer48"] = bone_data; }
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "high/mifengguai_0000_MiFeng-yanpi1.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "high/mifengguai_0000_MiFeng-yanpi1.png";
                 bee_high_data["Layer46"] = bone_data;
             }
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "high/mifengguai_0003_MiFeng-yanpi4.png";
-                bone_data[1] = "high/mifengguai_0009_MiFeng-yanpi1.png";
-                bone_data[2] = "high/mifengguai_0004_MiFeng-yanpi3.png";
-                bone_data[3] = "high/mifengguai_0006_MiFeng-yanpi2.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "high/mifengguai_0003_MiFeng-yanpi4.png";
+                bone_data[XMLTool::convertIntToString(1)] = "high/mifengguai_0009_MiFeng-yanpi1.png";
+                bone_data[XMLTool::convertIntToString(2)] = "high/mifengguai_0004_MiFeng-yanpi3.png";
+                bone_data[XMLTool::convertIntToString(3)] = "high/mifengguai_0006_MiFeng-yanpi2.png";
                 bee_high_data["Layer17"] = bone_data;
             }
             {
-                cocos2d::ValueMapIntKey bone_data;
-                bone_data[0] = "high/mifengguai_0013_MiFeng-body.png";
+                cocos2d::ValueMap bone_data;
+                bone_data[XMLTool::convertIntToString(0)] = "high/mifengguai_0013_MiFeng-body.png";
                 bee_high_data["Layer16"] = bone_data;
             }
             bee_bone_data_["high"] = bee_high_data;
-        }
+            
+            //cocos2d::FileUtils::getInstance()->writeValueMapToFile(bee_bone_data_, cocos2d::FileUtils::getInstance()->getWritablePath() + "mifeng.plist");
+        }*/
+
     }
 
     ScoreWidgetManager::~ScoreWidgetManager()
     {
+
     }
 
     void ScoreWidgetManager::clear()
@@ -231,20 +237,28 @@ namespace bubble_second {
     {
         for (auto var1: bee_bone_data_[type_to_key_[type]].asValueMap())
         {
-            for (auto var2 : var1.second.asIntKeyMap())
+            for (auto var2 : var1.second.asValueMap())
             {
-                auto path = var2.second.asString();
+                //auto path = var2.second.asString();
+                //int index = XMLTool::convertStringToInt(var2.first);
                 if (type == kScoreWidgetLow)
                 {
-                    armature->getBone(var1.first)->addDisplay(cocostudio::Skin::createWithSpriteFrameName(var2.second.asString()), var2.first);
+                    //cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(var2.second.asString());
+                    armature->getBone(var1.first)->addDisplay(cocostudio::Skin::createWithSpriteFrameName(var2.second.asString()), XMLTool::convertStringToInt(var2.first));
                 }
                 else
                 {
-                    armature->getBone(var1.first)->addDisplay(cocostudio::Skin::create(armature->getName() + "/" + var2.second.asString()), var2.first);
+                    //auto p = armature->getName() + "/" + var2.second.asString();
+                    armature->getBone(var1.first)->addDisplay(cocostudio::Skin::create(armature->getName() + "/" + var2.second.asString()), XMLTool::convertStringToInt(var2.first));
                 }
                 
             }
         }
+    }
+
+    void ScoreWidgetManager::readBoneDateFromFile()
+    {
+        bee_bone_data_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(BEE_BONE_DATA_PLIST_PATH);
     }
 
     void ScoreWidgetManager::removeTwoScoreWidget()

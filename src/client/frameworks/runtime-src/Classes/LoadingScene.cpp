@@ -5,6 +5,7 @@
 #include "SpriteTextureController.h"
 #include "GameStageSelectionScene.h"
 #include "SmartScaleController.h"
+#include "ScoreWidgetManager.h"
 namespace bubble_second {
     cocos2d::Scene * LoadingScene::createScene()
     {
@@ -37,10 +38,11 @@ namespace bubble_second {
 
     void LoadingScene::beginLoading()
     {
-        bubble_second::StageDataManager::getInstance()->initStageData();
-        bubble_second::GameTextInfo::getInstance()->plistToMap();
-        bubble_second::UserDataManager::getInstance()->readDataFile();
-        bubble_second::SpriteTextureController::getInstance()->addResourcesTexture();
+        StageDataManager::getInstance()->initStageData();
+        GameTextInfo::getInstance()->plistToMap();
+        UserDataManager::getInstance()->readDataFile();
+        SpriteTextureController::getInstance()->addResourcesTexture();
+        ScoreWidgetManager::getInstance()->readBoneDateFromFile();
         cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
     }
 

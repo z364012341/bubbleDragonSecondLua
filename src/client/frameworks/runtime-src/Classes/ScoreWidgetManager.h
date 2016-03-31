@@ -37,6 +37,8 @@ namespace bubble_second {
         cocos2d::Color3B getWidgetColorWithType(const ScoreWidgetType type);
         //ÇÐ»»¹Ç÷À¶¯»­Æ¤·ô
         void changeScoreWidgetArmatureDisplay(cocostudio::Armature* armature, const ScoreWidgetType& type);
+        //¶ÁÈ¡¹Ç÷À»»Æ¤Êý¾Ý
+        void readBoneDateFromFile();
     private:
         ScoreWidgetManager();
         //Ìí¼ÓÊ±¼ä¼àÌý

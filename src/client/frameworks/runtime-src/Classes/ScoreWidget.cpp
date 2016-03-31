@@ -2,7 +2,7 @@
 #include "ScoreWidgetManager.h"
 #include "GameScoreController.h"
 #include "SmartScaleController.h"
-#include <sstream>
+#include "XMLTool.h"
 const std::string SCOREWIDGET_ARMATURE_NAME = "mifeng";
 const std::string SCOREWIDGET_ANIMATION_FLYING_NAME = "daiji"; //飞的动画
 const std::string SCOREWIDGET_ANIMATION_CONTACT_NAME = "shouji"; //碰到的动画
@@ -162,12 +162,12 @@ namespace bubble_second {
             auto label = this->getPopScoreLabel();
             if (label)
             {
-                std::string str = label->getString();
-                std::stringstream out;
-                out << str;
-                int score = 0;
-                out >> score;
-                this->updatePopScoreLabel(score);
+                //std::string str = label->getString();
+                //std::stringstream out;
+                //out << str;
+                //int score = 0;
+                //out >> score;
+                this->updatePopScoreLabel(XMLTool::convertStringToInt(label->getString()));
             }
         }
     }
@@ -186,11 +186,11 @@ namespace bubble_second {
         //        //armature_->getBone(var1.first)->addDisplay(skin, (int)var2.first);
         //    }
         //}
-        this->setType(kScoreWidgetHigh);
-        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("high/mifengguai_0003_MiFeng-tou4.png"), 0);
-        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("high/mifengguai_0009_MiFeng-tou1.png"), 1);
-        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("high/mifengguai_0004_MiFeng-tou3.png"), 2);
-        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("high/mifengguai_0006_MiFeng-tou2.png"), 3);
+        //this->setType(kScoreWidgetHigh);
+        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("mifeng\\high\\mifengguai_0003_MiFeng-tou4.png"), 0);
+        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("mifeng/high/mifengguai_0009_MiFeng-tou1.png"), 1);
+        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("mifeng/high/mifengguai_0004_MiFeng-tou3.png"), 2);
+        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("mifeng/high/mifengguai_0006_MiFeng-tou2.png"), 3);
     }
 
     void ScoreWidget::playFlyingAnimation(float duration)
