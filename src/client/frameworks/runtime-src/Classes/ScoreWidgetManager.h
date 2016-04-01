@@ -66,7 +66,8 @@ namespace bubble_second {
         //Œª÷√÷÷◊”
         WidgetPointsSeed widget_points_seed_;
 
-        cocos2d::ValueMap bee_bone_data_;
+        //cocos2d::ValueMap bee_bone_data_;
+        cocos2d::ValueMap score_widget_bone_data_;
         //WidgetBonePathMap bonename_to_map_;
         //std::map<ScoreWidgetType, cocos2d::Color3B> type_to_color_;
     };

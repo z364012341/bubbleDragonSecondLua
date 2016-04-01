@@ -1101,6 +1101,7 @@ namespace bubble_second {
         sprite->removeFromParent();
         this->addBubblePhysicsBodyToMap(bubble);
         this->setPropertyTouchEnabled(true);
+        GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
     }
 
     void GameScene::windmillBubbleRotation(cocos2d::EventCustom* event)
@@ -1188,6 +1189,10 @@ namespace bubble_second {
 
     void GameScene::useBubbleBombProps(cocos2d::EventCustom* event)
     {
+        //if (nullptr == this->getPrepareBubble())
+        //{
+        //    return;
+        //}
         this->removeExchangeBubbleListener();
         BaseProperty* property = static_cast<BaseProperty*>(event->getUserData());
         auto controller = GamePlayController::getInstance();
@@ -1228,23 +1233,21 @@ namespace bubble_second {
                 this->changeSightingDeviceColor();
                 property->actionEnded();
             }));
-            this->getPrepareBubble()->runAction(seq);
+            this->getPrepareBubble()->runAction(seq);   
         }
     }
 
     void GameScene::cancelUsedBubbleBombProps(cocos2d::EventCustom* event)
     {
-        if (property_bubble_)
-        {
-            property_bubble_->removeFromParent();
-            property_bubble_ = nullptr;
-        }
         this->haveShootPropsBubble(static_cast<BaseProperty*>(event->getUserData()));
     }
 
     void GameScene::haveShootPropsBubble(BaseProperty* property)
     {
-
+        if (nullptr == this->getPrepareBubble())
+        {
+            return;
+        }
         property->actionBegan();
         auto controller = GamePlayController::getInstance();
         controller->setBubbleShootEnabled(false);
@@ -2022,9 +2025,9 @@ namespace bubble_second {
     void GameScene::defeat()
     {
         bubble_map_node_->stopAllActions();
+        this->setPropertyTouchEnabled(false);
         GamePlayController::getInstance()->disposeDefeat();
         this->getGameCharacter()->playDefeatAnimation();
-        this->setPropertyTouchEnabled(false);
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(2.0f), cocos2d::CallFunc::create([=]() {
             this->popDefeatBuyAlert();
         })));

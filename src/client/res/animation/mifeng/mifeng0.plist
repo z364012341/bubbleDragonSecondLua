@@ -4,6 +4,63 @@
 	<dict>
 		<key>frames</key>
 		<dict>
+			<key>level_tip_01.png</key>
+			<dict>
+				<key>width</key>
+				<integer>59</integer>
+				<key>height</key>
+				<integer>40</integer>
+				<key>originalWidth</key>
+				<integer>84</integer>
+				<key>originalHeight</key>
+				<integer>56</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>-0.5</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>mifengguai_0000_MiFeng-yanpi1.png</key>
+			<dict>
+				<key>width</key>
+				<integer>55</integer>
+				<key>height</key>
+				<integer>25</integer>
+				<key>originalWidth</key>
+				<integer>55</integer>
+				<key>originalHeight</key>
+				<integer>25</integer>
+				<key>x</key>
+				<integer>61</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>mifengguai_0001_MiFeng-yanpi2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>55</integer>
+				<key>height</key>
+				<integer>26</integer>
+				<key>originalWidth</key>
+				<integer>55</integer>
+				<key>originalHeight</key>
+				<integer>26</integer>
+				<key>x</key>
+				<integer>61</integer>
+				<key>y</key>
+				<integer>27</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
 			<key>worm_halo_01.png</key>
 			<dict>
 				<key>width</key>
@@ -17,7 +74,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>55</integer>
 				<key>offsetX</key>
 				<real>0.5</real>
 				<key>offsetY</key>
@@ -36,7 +93,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>32</integer>
+				<integer>87</integer>
 				<key>offsetX</key>
 				<real>-0.5</real>
 				<key>offsetY</key>
@@ -53,34 +110,34 @@
 				<key>originalHeight</key>
 				<integer>33</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>118</integer>
 				<key>y</key>
-				<integer>66</integer>
+				<integer>0</integer>
 				<key>offsetX</key>
 				<real>-4</real>
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>level_tip_01.png</key>
+			<key>high/mifengguai_0000_MiFeng-yanpi1.png</key>
 			<dict>
 				<key>width</key>
-				<integer>59</integer>
+				<integer>55</integer>
 				<key>height</key>
-				<integer>40</integer>
+				<integer>25</integer>
 				<key>originalWidth</key>
-				<integer>84</integer>
+				<integer>55</integer>
 				<key>originalHeight</key>
-				<integer>56</integer>
+				<integer>25</integer>
 				<key>x</key>
 				<integer>79</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>55</integer>
 				<key>offsetX</key>
-				<real>-0.5</real>
+				<real>0</real>
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>mifengguai_0001_MiFeng-yanpi2.png</key>
+			<key>high/mifengguai_0001_MiFeng-yanpi2.png</key>
 			<dict>
 				<key>width</key>
 				<integer>55</integer>
@@ -90,105 +147,238 @@
 				<integer>55</integer>
 				<key>originalHeight</key>
 				<integer>26</integer>
+				<key>x</key>
+				<integer>79</integer>
+				<key>y</key>
+				<integer>82</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>high/mifengguai_0003_MiFeng-tou4.png</key>
+			<dict>
+				<key>width</key>
+				<integer>74</integer>
+				<key>height</key>
+				<integer>72</integer>
+				<key>originalWidth</key>
+				<integer>74</integer>
+				<key>originalHeight</key>
+				<integer>72</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>121</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>high/mifengguai_0004_MiFeng-tou3.png</key>
+			<dict>
+				<key>width</key>
+				<integer>74</integer>
+				<key>height</key>
+				<integer>72</integer>
+				<key>originalWidth</key>
+				<integer>74</integer>
+				<key>originalHeight</key>
+				<integer>72</integer>
 				<key>x</key>
 				<integer>77</integer>
 				<key>y</key>
-				<integer>42</integer>
+				<integer>110</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>mifengguai_0000_MiFeng-yanpi1.png</key>
+			<key>high/mifengguai_0006_MiFeng-tou2.png</key>
 			<dict>
 				<key>width</key>
-				<integer>55</integer>
+				<integer>74</integer>
 				<key>height</key>
-				<integer>25</integer>
-				<key>originalWidth</key>
-				<integer>55</integer>
-				<key>originalHeight</key>
-				<integer>25</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>101</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>新建文件夹 (12)/mifengguai_0008_MiFeng-L-yanqiu2.png</key>
-			<dict>
-				<key>width</key>
-				<integer>8</integer>
-				<key>height</key>
-				<integer>7</integer>
-				<key>originalWidth</key>
-				<integer>8</integer>
-				<key>originalHeight</key>
-				<integer>7</integer>
-				<key>x</key>
-				<integer>140</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>新建文件夹 (12)/mifengguai_0007_MiFeng-R-yanqiu2.png</key>
-			<dict>
-				<key>width</key>
-				<integer>7</integer>
-				<key>height</key>
-				<integer>7</integer>
-				<key>originalWidth</key>
-				<integer>7</integer>
-				<key>originalHeight</key>
-				<integer>7</integer>
-				<key>x</key>
 				<integer>72</integer>
+				<key>originalWidth</key>
+				<integer>74</integer>
+				<key>originalHeight</key>
+				<integer>72</integer>
+				<key>x</key>
+				<integer>153</integer>
 				<key>y</key>
-				<integer>70</integer>
+				<integer>35</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>新建文件夹 (12)/mifengguai_0005_MiFeng-yanqiu2.png</key>
+			<key>high/mifengguai_0009_MiFeng-tou1.png</key>
 			<dict>
 				<key>width</key>
-				<integer>19</integer>
+				<integer>74</integer>
 				<key>height</key>
-				<integer>18</integer>
+				<integer>72</integer>
 				<key>originalWidth</key>
-				<integer>19</integer>
+				<integer>74</integer>
 				<key>originalHeight</key>
-				<integer>20</integer>
+				<integer>72</integer>
 				<key>x</key>
-				<integer>140</integer>
+				<integer>153</integer>
 				<key>y</key>
-				<integer>9</integer>
+				<integer>109</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
-				<real>1</real>
+				<real>0</real>
 			</dict>
-			<key>新建文件夹 (12)/mifengguai_0002_MiFeng-L-yanqiu.png</key>
+			<key>high/mifengguai_0013_MiFeng-body.png</key>
 			<dict>
 				<key>width</key>
-				<integer>5</integer>
+				<integer>36</integer>
 				<key>height</key>
-				<integer>4</integer>
+				<integer>42</integer>
 				<key>originalWidth</key>
-				<integer>5</integer>
+				<integer>36</integer>
 				<key>originalHeight</key>
-				<integer>4</integer>
+				<integer>42</integer>
 				<key>x</key>
-				<integer>150</integer>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>195</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0000_MiFeng-yanpi1.png</key>
+			<dict>
+				<key>width</key>
+				<integer>55</integer>
+				<key>height</key>
+				<integer>25</integer>
+				<key>originalWidth</key>
+				<integer>55</integer>
+				<key>originalHeight</key>
+				<integer>25</integer>
+				<key>x</key>
+				<integer>190</integer>
 				<key>y</key>
 				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0001_MiFeng-yanpi2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>55</integer>
+				<key>height</key>
+				<integer>26</integer>
+				<key>originalWidth</key>
+				<integer>55</integer>
+				<key>originalHeight</key>
+				<integer>26</integer>
+				<key>x</key>
+				<integer>38</integer>
+				<key>y</key>
+				<integer>195</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0003_MiFeng-tou4.png</key>
+			<dict>
+				<key>width</key>
+				<integer>74</integer>
+				<key>height</key>
+				<integer>72</integer>
+				<key>originalWidth</key>
+				<integer>74</integer>
+				<key>originalHeight</key>
+				<integer>72</integer>
+				<key>x</key>
+				<integer>247</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0004_MiFeng-tou3.png</key>
+			<dict>
+				<key>width</key>
+				<integer>74</integer>
+				<key>height</key>
+				<integer>72</integer>
+				<key>originalWidth</key>
+				<integer>74</integer>
+				<key>originalHeight</key>
+				<integer>72</integer>
+				<key>x</key>
+				<integer>229</integer>
+				<key>y</key>
+				<integer>74</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0006_MiFeng-tou2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>74</integer>
+				<key>height</key>
+				<integer>72</integer>
+				<key>originalWidth</key>
+				<integer>74</integer>
+				<key>originalHeight</key>
+				<integer>72</integer>
+				<key>x</key>
+				<integer>323</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0009_MiFeng-tou1.png</key>
+			<dict>
+				<key>width</key>
+				<integer>74</integer>
+				<key>height</key>
+				<integer>72</integer>
+				<key>originalWidth</key>
+				<integer>74</integer>
+				<key>originalHeight</key>
+				<integer>72</integer>
+				<key>x</key>
+				<integer>229</integer>
+				<key>y</key>
+				<integer>148</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0013_MiFeng-body.png</key>
+			<dict>
+				<key>width</key>
+				<integer>36</integer>
+				<key>height</key>
+				<integer>42</integer>
+				<key>originalWidth</key>
+				<integer>36</integer>
+				<key>originalHeight</key>
+				<integer>42</integer>
+				<key>x</key>
+				<integer>95</integer>
+				<key>y</key>
+				<integer>184</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -205,9 +395,28 @@
 				<key>originalHeight</key>
 				<integer>4</integer>
 				<key>x</key>
-				<integer>72</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>79</integer>
+				<integer>42</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>新建文件夹 (12)/mifengguai_0002_MiFeng-L-yanqiu.png</key>
+			<dict>
+				<key>width</key>
+				<integer>5</integer>
+				<key>height</key>
+				<integer>4</integer>
+				<key>originalWidth</key>
+				<integer>5</integer>
+				<key>originalHeight</key>
+				<integer>4</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>48</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -224,28 +433,9 @@
 				<key>originalHeight</key>
 				<integer>72</integer>
 				<key>x</key>
-				<integer>140</integer>
+				<integer>305</integer>
 				<key>y</key>
-				<integer>29</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>新建文件夹 (12)/mifengguai_0009_MiFeng-tou1.png</key>
-			<dict>
-				<key>width</key>
 				<integer>74</integer>
-				<key>height</key>
-				<integer>72</integer>
-				<key>originalWidth</key>
-				<integer>74</integer>
-				<key>originalHeight</key>
-				<integer>72</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>128</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -262,13 +452,32 @@
 				<key>originalHeight</key>
 				<integer>72</integer>
 				<key>x</key>
-				<integer>76</integer>
+				<integer>399</integer>
 				<key>y</key>
-				<integer>103</integer>
+				<integer>0</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
 				<real>0</real>
+			</dict>
+			<key>新建文件夹 (12)/mifengguai_0005_MiFeng-yanqiu2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>19</integer>
+				<key>height</key>
+				<integer>18</integer>
+				<key>originalWidth</key>
+				<integer>19</integer>
+				<key>originalHeight</key>
+				<integer>20</integer>
+				<key>x</key>
+				<integer>118</integer>
+				<key>y</key>
+				<integer>35</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>1</real>
 			</dict>
 			<key>新建文件夹 (12)/mifengguai_0006_MiFeng-tou2.png</key>
 			<dict>
@@ -281,9 +490,66 @@
 				<key>originalHeight</key>
 				<integer>72</integer>
 				<key>x</key>
-				<integer>76</integer>
+				<integer>305</integer>
 				<key>y</key>
-				<integer>177</integer>
+				<integer>148</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>新建文件夹 (12)/mifengguai_0007_MiFeng-R-yanqiu2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>7</integer>
+				<key>height</key>
+				<integer>7</integer>
+				<key>originalWidth</key>
+				<integer>7</integer>
+				<key>originalHeight</key>
+				<integer>7</integer>
+				<key>x</key>
+				<integer>7</integer>
+				<key>y</key>
+				<integer>42</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>新建文件夹 (12)/mifengguai_0008_MiFeng-L-yanqiu2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>8</integer>
+				<key>height</key>
+				<integer>7</integer>
+				<key>originalWidth</key>
+				<integer>8</integer>
+				<key>originalHeight</key>
+				<integer>7</integer>
+				<key>x</key>
+				<integer>16</integer>
+				<key>y</key>
+				<integer>42</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>新建文件夹 (12)/mifengguai_0009_MiFeng-tou1.png</key>
+			<dict>
+				<key>width</key>
+				<integer>74</integer>
+				<key>height</key>
+				<integer>72</integer>
+				<key>originalWidth</key>
+				<integer>74</integer>
+				<key>originalHeight</key>
+				<integer>72</integer>
+				<key>x</key>
+				<integer>381</integer>
+				<key>y</key>
+				<integer>74</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -300,9 +566,9 @@
 				<key>originalHeight</key>
 				<integer>18</integer>
 				<key>x</key>
-				<integer>81</integer>
+				<integer>38</integer>
 				<key>y</key>
-				<integer>70</integer>
+				<integer>223</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -319,9 +585,9 @@
 				<key>originalHeight</key>
 				<integer>18</integer>
 				<key>x</key>
-				<integer>57</integer>
+				<integer>229</integer>
 				<key>y</key>
-				<integer>101</integer>
+				<integer>27</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -338,9 +604,9 @@
 				<key>originalHeight</key>
 				<integer>42</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>133</integer>
 				<key>y</key>
-				<integer>202</integer>
+				<integer>184</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -357,9 +623,9 @@
 				<key>originalHeight</key>
 				<integer>73</integer>
 				<key>x</key>
-				<integer>152</integer>
+				<integer>381</integer>
 				<key>y</key>
-				<integer>103</integer>
+				<integer>148</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -376,9 +642,9 @@
 				<key>originalHeight</key>
 				<integer>73</integer>
 				<key>x</key>
-				<integer>152</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>178</integer>
+				<integer>243</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -394,14 +660,14 @@
 			<key>realTextureFileName</key>
 			<string>mifeng0.png</string>
 			<key>size</key>
-			<string>{1024,2048}</string>
+			<string>{1024,1024}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
 			<integer>1024</integer>
 			<key>height</key>
-			<integer>2048</integer>
+			<integer>1024</integer>
 		</dict>
 	</dict>
 </plist>
