@@ -527,11 +527,6 @@ const std::string UI_NAME_BIG_COMBO_ELIMINATE = "big_combo_eliminate";      //六
 const std::string UI_NAME_WINDMILL_PIN_NODE = "windmill_pin_node"; //风车的关节pin的node
 const std::string UI_NAME_GAME_VICTORY_ALERT = "UI_NAME_GAME_VICTORY_ALERT"; //胜利面板的名字
 //下面部分的ui名字
-const std::string UI_NAME_BARRELHEAD_FIRST = "Image_14";        //从左数第一个桶盖
-const std::string UI_NAME_BARRELHEAD_SECOND = "Image_12";
-const std::string UI_NAME_BARRELHEAD_THIRD = "Image_6";
-const std::string UI_NAME_BARRELHEAD_FOURTH = "Image_8";
-const std::string UI_NAME_BARRELHEAD_FIFTH = "Image_10";       //从左数第五个桶盖
 const std::string UI_NAME_BARRELHEAD_BORDER_FIRST = "Node_7";       //从左数第1个桶边节点
 const std::string UI_NAME_BARRELHEAD_BORDER_SECOND = "Node_8";        //从左数第2个桶边节点
 const std::string UI_NAME_BARRELHEAD_BORDER_THIRD = "Node_9";       //从左数第3个桶边节点
@@ -543,19 +538,6 @@ const std::string UI_NAME_BARREL_BOTTOM_SECOND = "Node_2";       //左起第2个桶底
 const std::string UI_NAME_BARREL_BOTTOM_THIRD = "Node_3";        //左起第3个桶底
 const std::string UI_NAME_BARREL_BOTTOM_FOURTH = "Node_4";        //左起第4个桶底
 const std::string UI_NAME_BARREL_BOTTOM_FIFTH = "Node_5";        //左起第5个桶底
-const std::string UI_NAME_BARREL_FIRST = "Image_13"; //左数第一的桶身体
-const std::string UI_NAME_BARREL_SECOND = "Image_11"; //左数第2的桶身体
-const std::string UI_NAME_BARREL_THIIRD = "Image_5"; //左数第3的桶身体
-const std::string UI_NAME_BARREL_FOURTH = "Image_7"; //左数第4的桶身体
-const std::string UI_NAME_BARREL_FIFTH = "Image_9"; //左数第5的桶身体
-const std::string UI_NAME_BARREL_NUMBLE_FIRST = "AtlasLabel_3"; //左数第一的桶上的数字
-const std::string UI_NAME_BARREL_NUMBLE_SECOND = "AtlasLabel_3_0"; //左数第2的桶数字
-const std::string UI_NAME_BARREL_NUMBLE_THIIRD = "AtlasLabel_3_0_0"; //左数第3的桶数字
-const std::string UI_NAME_BARREL_NUMBLE_FOURTH = "AtlasLabel_3_0_1"; //左数第4的桶数字
-const std::string UI_NAME_BARREL_NUMBLE_FIFTH = "AtlasLabel_3_1"; //左数第5的桶数字
-const std::string UI_NAME_BARREL_NUMBLES[5] = { UI_NAME_BARREL_NUMBLE_FIRST , UI_NAME_BARREL_NUMBLE_SECOND, 
-UI_NAME_BARREL_NUMBLE_THIIRD,UI_NAME_BARREL_NUMBLE_FOURTH,UI_NAME_BARREL_NUMBLE_FIFTH };
-const std::string UI_NAME_BUBBLE_USE_COUNT = "AtlasLabel_1";//小球使用数的label
 const std::string UI_NAME_WINDMILL_BORDER = "windmill_border";//风车地图的边界
 const std::string UI_NAME_FALL_BOTTOM_BORDER = "UI_NAME_FALL_BOTTOM_BORDER";//下落模式底部的边界
 //风车小妖

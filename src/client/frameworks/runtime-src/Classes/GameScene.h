@@ -15,6 +15,7 @@
 #include "ui\UITextBMFont.h"
 #include "ui\UIButton.h"
 #include "StageData.h"
+
 namespace bubble_second {
     class BaseProperty;
     class BaseWeapon;
@@ -130,7 +131,7 @@ namespace bubble_second {
         //获取胜利任务数
         cocos2d::ui::TextBMFont* getGameTaskLabel();
         //获取小球发射数
-        cocos2d::ui::TextAtlas* getBubbleUseCountLabel();
+        cocos2d::ui::TextBMFont* getBubbleUseCountLabel();
         //获取人物
         GameCharacter* getGameCharacter();
         //获取分数进度条

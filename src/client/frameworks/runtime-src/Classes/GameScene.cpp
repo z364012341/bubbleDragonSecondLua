@@ -52,7 +52,24 @@ const float PROPS_BACKGROUND_PERCENT_X_FOURTH = 0.8931f; //道具item_1背景的X坐标
 const float PROPS_BACKGROUND_PERCENT_PER_DISTANCE = (PROPS_BACKGROUND_PERCENT_X_FOURTH - PROPS_BACKGROUND_PERCENT_X_FIRST)/3;
 const float PROPS_BACKGROUND_PERCENT_X_SECOND = PROPS_BACKGROUND_PERCENT_X_FIRST+PROPS_BACKGROUND_PERCENT_PER_DISTANCE; //道具item_1背景的X坐标百分比
 const float PROPS_BACKGROUND_PERCENT_X_THIRD = PROPS_BACKGROUND_PERCENT_X_FIRST + PROPS_BACKGROUND_PERCENT_PER_DISTANCE*2; //道具item_1背景的X坐标百分比
-
+const std::string UI_NAME_BARRELHEAD_FIRST = "barrelhead_1";        //从左数第一个桶盖
+const std::string UI_NAME_BARRELHEAD_SECOND = "barrelhead_2";
+const std::string UI_NAME_BARRELHEAD_THIRD = "barrelhead_3";
+const std::string UI_NAME_BARRELHEAD_FOURTH = "barrelhead_4";
+const std::string UI_NAME_BARRELHEAD_FIFTH = "barrelhead_5";       //从左数第五个桶盖
+const std::string UI_NAME_BARREL_NUMBLE_FIRST = "barrel_label_1"; //左数第一的桶上的数字
+const std::string UI_NAME_BARREL_NUMBLE_SECOND = "barrel_label_2"; //左数第2的桶数字
+const std::string UI_NAME_BARREL_NUMBLE_THIIRD = "barrel_label_3"; //左数第3的桶数字
+const std::string UI_NAME_BARREL_NUMBLE_FOURTH = "barrel_label_4"; //左数第4的桶数字
+const std::string UI_NAME_BARREL_NUMBLE_FIFTH = "barrel_label_5"; //左数第5的桶数字
+const std::string UI_NAME_BARREL_FIRST = "barrel_body_1"; //左数第一的桶身体
+const std::string UI_NAME_BARREL_SECOND = "barrel_body_2"; //左数第2的桶身体
+const std::string UI_NAME_BARREL_THIIRD = "barrel_body_3"; //左数第3的桶身体
+const std::string UI_NAME_BARREL_FOURTH = "barrel_body_4"; //左数第4的桶身体
+const std::string UI_NAME_BARREL_FIFTH = "barrel_body_5"; //左数第5的桶身体
+const std::string UI_NAME_BARREL_NUMBLES[5] = { UI_NAME_BARREL_NUMBLE_FIRST , UI_NAME_BARREL_NUMBLE_SECOND,
+UI_NAME_BARREL_NUMBLE_THIIRD,UI_NAME_BARREL_NUMBLE_FOURTH,UI_NAME_BARREL_NUMBLE_FIFTH };
+const std::string UI_NAME_BUBBLE_USE_COUNT = "bubble_numble_label";//小球使用数的label
 namespace bubble_second {
     cocos2d::Scene* GameScene::createScene(int cell_numble, int numble)
     {
@@ -278,6 +295,7 @@ namespace bubble_second {
             staves_property_->setPosition(visible_size.width * PROPS_BACKGROUND_PERCENT_X_FOURTH, visible_size.height * GAME_PROPS_BACKGROUND_PERCENT_Y);
             this->addChild(staves_property_, UI_ZORDER_MENU_INFO);
         }
+        this->setPropertyTouchEnabled(false);
         {//顶部横条的背景
             cocos2d::Sprite* top_ui_bg = SpriteTextureController::getInstance()->createGameSpriteWithPath(TOP_UI_BACKGROUND_PATH);
             top_ui_bg->setPosition(cocos2d::Vec2(0, visible_size.height));
@@ -910,9 +928,9 @@ namespace bubble_second {
         return dynamic_cast<cocos2d::ui::TextBMFont*>(this->getChildByName(GAME_RIGHT_INFO_NAME)->getChildByName(UI_NAME_GAME_TASK));
     }
 
-    cocos2d::ui::TextAtlas * GameScene::getBubbleUseCountLabel()
+    cocos2d::ui::TextBMFont * GameScene::getBubbleUseCountLabel()
     {
-        return dynamic_cast<cocos2d::ui::TextAtlas*>(csb_node_->getChildByName(UI_NAME_BUBBLE_USE_COUNT));
+        return dynamic_cast<cocos2d::ui::TextBMFont*>(csb_node_->getChildByName(UI_NAME_BUBBLE_USE_COUNT));
     }
 
     GameCharacter* GameScene::getGameCharacter()
@@ -2205,6 +2223,7 @@ namespace bubble_second {
             this->addTouchEventListener();
             this->usedEnterProps();
             this->setFirstHandleFlag(false);
+            this->setPropertyTouchEnabled(true);
         }
         if (this->isFallStage())
         {
