@@ -12,7 +12,9 @@
 #include "BubbleSecondConstant.h"
 const std::string GAME_TEXT_LEVEL_NUMBLE_1_KEY = "alert_level_1";
 const std::string GAME_TEXT_LEVEL_NUMBLE_2_KEY = "alert_level_2";
-
+const std::string COMMODITY_ADD_10_BUBBLE_KEY = "add_10_bubble";   //加10个球
+const std::string COMMODITY_AIMING_LINE_KEY = "aiming_line"; //瞄准线道具
+const std::string COMMODITY_ADD_SPECIAL_KEY = "add_special_bubble"; //加3个特殊泡泡
 namespace bubble_second {
     class GameTextInfo
     {

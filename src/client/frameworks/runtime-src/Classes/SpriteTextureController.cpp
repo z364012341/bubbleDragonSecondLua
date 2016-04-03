@@ -134,12 +134,12 @@ namespace bubble_second {
         this->addArmatureFile();
     }
 
-    void SpriteTextureController::addGameBackgroundTexture(int cell_numble)
-    {
-        char str[10];
-        sprintf(str, "%d", cell_numble);
-        cocos2d::Director::getInstance()->getTextureCache()->addImageAsync(cell_to_path_[str].asString(), nullptr);
-    }
+    //void SpriteTextureController::addGameBackgroundTexture(int cell_numble)
+    //{
+    //    char str[10];
+    //    sprintf(str, "%d", cell_numble);
+    //    cocos2d::Director::getInstance()->getTextureCache()->addImageAsync(cell_to_path_[str].asString(), nullptr);
+    //}
 
     //cocos2d::Sprite * SpriteTextureController::createGameBlurBackground()
     //{

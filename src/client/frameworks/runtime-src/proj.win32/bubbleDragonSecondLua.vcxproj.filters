@@ -317,8 +317,12 @@
     <ClInclude Include="..\Classes\UserDiamondInfoBoard.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\StageData.h" />
-    <ClInclude Include="..\Classes\StageCellRabbit.h" />
+    <ClInclude Include="..\Classes\StageCellRabbit.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageData.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -613,8 +617,12 @@
     <ClCompile Include="..\Classes\UserDiamondInfoBoard.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\StageData.cpp" />
-    <ClCompile Include="..\Classes\StageCellRabbit.cpp" />
+    <ClCompile Include="..\Classes\StageCellRabbit.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageData.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

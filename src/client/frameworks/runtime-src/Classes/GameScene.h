@@ -48,7 +48,7 @@ namespace bubble_second {
         //获取发射台
         cocos2d::Node* getGunsight();
         //获取小草
-        cocos2d::Node* getGrass();
+        cocos2d::Node* getSecondBubbleStoreNode();
         int getPresentStageNumble();
         void setPresentStageData(StageData numble);
         int getPresentStageCellNumble();
@@ -121,7 +121,7 @@ namespace bubble_second {
         //获取得分挂件的位置
         //cocos2d::Vec2 getScoreWidgetPosition();
         //获取第二发射台位置
-        cocos2d::Vec2 getGrassPosition();
+        cocos2d::Vec2 getSecondBubbleStoreNodePosition();
         //通过名字获取精灵的位置
         cocos2d::Vec2 getNodePositionWithName(const std::string& child_name);
         //获取瞄准设备

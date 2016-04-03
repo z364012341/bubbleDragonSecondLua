@@ -514,7 +514,6 @@ const std::string UI_NAME_GAME_PLAY_AREA_NODE = "csb_node";
 const std::string UI_NAME_GUNSIGHT = "fashetaishang_38"; //喵准器
 const std::string UI_NAME_TOP_PANEL = "uishang_5";     //顶部信息栏
 const std::string UI_NAME_PAD = "fashetaixia_27";    //喵准器下面的基台
-const std::string UI_NAME_GRASS = "yezi_7";        //喵准器旁边的小草
 const std::string UI_NAME_SCORE_TEXT = "AtlasLabel_2";    //游戏场景中的分数标签
 //const std::string UI_NAME_SCORE_PROGRESS_TIMER = "LoadingBar_1"; //游戏场景中的分数进度条
 const std::string UI_NAME_TOP_UI_BACKGROUND = "top_ui_bg";     //顶部ui的背景
@@ -591,7 +590,7 @@ const cocos2d::Vec2 GAME_DEFEAT_ALERT_REPLAY_POSITION(100.0f, -70.0f);
 const cocos2d::Vec2 GAME_DEFEAT_ALERT_STORE_POSITION(-100.0f, GAME_DEFEAT_ALERT_REPLAY_POSITION.y);
 const std::string GAME_DEFEAT_ALERT_COMMODITY_BACKGROUND_PATH = "djkuang.png"; //中间的小面板
 const cocos2d::Vec2 GAME_VICTORY_ALERT_REWARDS_BACKGROUND_POSITION(10.0f, -100.0f);
-const std::string GAME_COMMODITY_TEN_BUBBLE_PATH = "jinbi.PNG";
+const std::string GAME_COMMODITY_TEN_BUBBLE_PATH = "addBubbleNumble.png";
 const std::string GAME_ALERT_CONTINUE_BUTTON_PATH = "jixu1.png";
 const std::string GAME_ALERT_COMMODITY_TEN_BUBBLE_PRICE_BACKGROUND_PATH = GAME_PAUSE_ALERT_VOLUME_SWITCH_BACKGROUND_PATH; //价格下面的北京
 const std::string GAME_DIAMOND_PATH = "zuans.png"; //砖石
@@ -651,14 +650,9 @@ const std::string GAME_USER_DATA_PATH = "userData.plist";
 const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
 const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
 const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT"; 
-const std::string AIMING_LINE_COMMODITY_NAME = "AimingLineCommodity";
-const std::string ADD_SPECIAL_COMMODITY_NAME = "AddSpecialCommodity";
-const std::string ADD_BUBBLE_NUMBLE_COMMODITY_NAME = "AddBubbleNumbleCommodity";
 //EnterGamePropsView
 const std::string ENTER_GAME_PROPS_VIEW_SIGHT_PROPS_PATH = "fzx.png"; //瞄准线
 const std::string ENTER_GAME_PROPS_VIEW_ADD_SPECIAL_BUBBLE_PROPS_PATH = "yaoshui.png"; //加特殊泡泡
-const std::string ENTER_GAME_PROPS_VIEW_ADD_BUBBLE_PROPS_PATH = GAME_COMMODITY_TEN_BUBBLE_PATH; //加特殊泡泡
-const float ENTER_GAME_PROPS_VIEW_LEFT_POS_X = -150.0f;
 const std::string ENTER_GAME_PROPS_VIEW_BACKGROUND_PATH = "daojd.png";
 //每个场景对应的游戏背景
 const std::string GAME_SCENE_BACKGROUND_PATH = "res/gameBackground.plist";
@@ -694,10 +688,7 @@ const std::string GAME_TEXT_BEAT_THE_ROBBER = "kDestroyRainbowSeal";            
 const std::string GAME_TEXT_RESCUE_GHOST = "kWindmill";                                           //解救幽灵
 const std::string COMMODITY_COIN_KEY = "coin";
 const std::string COMMODITY_DIAMOND_KEY = "diamond";
-const std::string COMMODITY_ADD_10_BUBBLE_KEY = "add_10_bubble";   //加10个球
 const std::string GAME_TEXT_SELECT_PROPS_LABEL_KEY = "choose_props";
-const std::string COMMODITY_AIMING_LINE_KEY = "aiming_line"; //瞄准线道具
-const std::string COMMODITY_ADD_SPECIAL_KEY = "add_special_bubble"; //加3个特殊泡泡
 //ColorBubble
 const float ENTER_PROPS_ACTION_DURATION = 1.0f; //进场道具的动画时间
 //EnterPropsViewManager

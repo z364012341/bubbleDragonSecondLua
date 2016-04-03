@@ -361,7 +361,7 @@ namespace bubble_second {
 
     bool bubble_second::GamePlayController::touchInGrass(const cocos2d::Vec2 & touch_point)
     {
-        float distance = touch_point.distance(game_scene_delegate_->getGrass()->getPosition());
+        float distance = touch_point.distance(game_scene_delegate_->getSecondBubbleStoreNode()->getPosition());
         return  distance <= GRASS_EXCHANGE_DISTANCE;
     }
 

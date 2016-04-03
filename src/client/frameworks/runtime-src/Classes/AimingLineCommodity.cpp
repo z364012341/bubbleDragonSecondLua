@@ -1,6 +1,7 @@
 #include "AimingLineCommodity.h"
-#include "SpriteTextureController.h"
+//#include "SpriteTextureController.h"
 #include "GameTextInfo.h"
+const std::string AIMING_LIME_COMMODITY_CSB_PATH = "AimingLineCommodity.csb";
 namespace bubble_second {
     AimingLineCommodity::AimingLineCommodity()
     {
@@ -12,11 +13,11 @@ namespace bubble_second {
 
     bool AimingLineCommodity::init()
     {
-        if (!EnterGamePropsView::init(SpriteTextureController::getInstance()->createGameSpriteWithPath(ENTER_GAME_PROPS_VIEW_SIGHT_PROPS_PATH)))
+        if (!EnterGamePropsView::init(AIMING_LIME_COMMODITY_CSB_PATH))
         {
             return false;
         }
-        this->addCostView(GameTextInfo::getInstance()->getCommodityCoinValueWithKey(COMMODITY_AIMING_LINE_KEY));
+        //this->addCostView(GameTextInfo::getInstance()->getCommodityCoinValueWithKey(COMMODITY_AIMING_LINE_KEY));
         this->setName(AIMING_LINE_COMMODITY_NAME);
         return true;
     }

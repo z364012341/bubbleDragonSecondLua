@@ -9,7 +9,7 @@
         {
           "name": "Layer1",
           "parent": "",
-          "dI": 0,
+          "dI": 4,
           "x": 0.0,
           "y": 0.0,
           "z": 1,
@@ -79,20 +79,6 @@
               ]
             },
             {
-              "name": "zhi1-2.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
               "name": "zhi1-2(1).png",
               "displayType": 0,
               "skin_data": [
@@ -129,7 +115,7 @@
               "dl": 0.0,
               "frame_data": [
                 {
-                  "dI": 0,
+                  "dI": 4,
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -245,8 +231,8 @@
     },
     {
       "name": "zhi1-2(1)",
-      "width": 0.0,
-      "height": 0.0,
+      "width": 420.0,
+      "height": 440.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""

@@ -17,6 +17,7 @@ const std::string ENTER_GAME_ALERT_START_BUTTON_NAME = "startButton";
 const std::string ENTER_GAME_ALERT_CLOSE_BUTTON_NAME = "closeButton";
 const std::string ENTER_GAME_ALERT_STAGE_NUMBLE_LABEL_NAME = "stageNumbleLabel";
 const std::string ENTER_GAME_ALERT_STAGE_TYPE_LABEL_NAME = "stageTypeLabel";
+const cocos2d::Vec2 COMMODITY_NODE_POS(-5.0f, -238.7f);
 namespace bubble_second {
     EnterGameAlert * EnterGameAlert::create(int cell_numble, int level, const StageType & type)
     {
@@ -76,8 +77,10 @@ namespace bubble_second {
         this->initCloseButton();
         this->initStageNumbleLabel(level);
         this->initStageTypeLabel(type);
-        SpriteTextureController::getInstance()->addGameBackgroundTexture(cell_numble);
-        EnterPropsViewManager::getInstance()->createEnterPropsAlert();
+        //SpriteTextureController::getInstance()->addGameBackgroundTexture(cell_numble);
+        cocos2d::Node* node = EnterPropsViewManager::getInstance()->createEnterPropsAlert();
+        node->setPosition(COMMODITY_NODE_POS);
+        this->addChild(node);
         return true;
     }
 
@@ -150,6 +153,12 @@ namespace bubble_second {
     {
         this->getStageTypeLabel()->setString(GameTextInfo::getInstance()->getTextInfoWithStageType(type));
     }
+
+    //void EnterGameAlert::initEnterProps()
+    //{
+    //    cocos2d::Node*  commodity = alert_csb_node_->getChildByName(AIMING_LINE_COMMODITY_NAME);
+    //    cocos2d::ui::Button* button = dynamic_cast<cocos2d::ui::Button*>(commodity->getChildByName("FileNode_1")->getChildByName("Button_3"));
+    //}
 
     cocos2d::ui::Button * EnterGameAlert::getStartButton()
     {

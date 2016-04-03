@@ -70,6 +70,7 @@ const std::string UI_NAME_BARREL_FIFTH = "barrel_body_5"; //左数第5的桶身体
 const std::string UI_NAME_BARREL_NUMBLES[5] = { UI_NAME_BARREL_NUMBLE_FIRST , UI_NAME_BARREL_NUMBLE_SECOND,
 UI_NAME_BARREL_NUMBLE_THIIRD,UI_NAME_BARREL_NUMBLE_FOURTH,UI_NAME_BARREL_NUMBLE_FIFTH };
 const std::string UI_NAME_BUBBLE_USE_COUNT = "bubble_numble_label";//小球使用数的label
+const std::string UI_NAME_SECOND_BUBBLE_STORE = "second_bubble_store";        //喵准器旁边的小草
 namespace bubble_second {
     cocos2d::Scene* GameScene::createScene(int cell_numble, int numble)
     {
@@ -398,9 +399,9 @@ namespace bubble_second {
         return csb_node_->getChildByName(UI_NAME_GUNSIGHT);
     }
 
-    cocos2d::Node* GameScene::getGrass()
+    cocos2d::Node* GameScene::getSecondBubbleStoreNode()
     {
-        return csb_node_->getChildByName(UI_NAME_GRASS);
+        return csb_node_->getChildByName(UI_NAME_SECOND_BUBBLE_STORE);
     }
 
     int GameScene::getPresentStageNumble()
@@ -487,7 +488,7 @@ namespace bubble_second {
     {
         this->setUIZOrderWithNameAndNumber(UI_NAME_GUNSIGHT, UI_ZORDER_GUNSIGHT);
         //this->setUIZOrderWithNameAndNumber(UI_NAME_PAD, UI_ZORDER_PAD);
-        this->setUIZOrderWithNameAndNumber(UI_NAME_GRASS, UI_ZORDER_GRASS);
+        this->setUIZOrderWithNameAndNumber(UI_NAME_SECOND_BUBBLE_STORE, UI_ZORDER_GRASS);
         this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_FIRST, UI_ZORDER_BARRELHEAD_FIRST);
         this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_SECOND, UI_ZORDER_BARRELHEAD_SECOND);
         this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_THIRD, UI_ZORDER_BARRELHEAD_THIRD);
@@ -811,7 +812,7 @@ namespace bubble_second {
             if (second_bubble_)
             {
                 //second_bubble_->setName(SECOND_PREPARE_BUBBLE_NAME);
-                second_bubble_->setPosition(this->getGrassPosition());
+                second_bubble_->setPosition(this->getSecondBubbleStoreNodePosition());
                 second_bubble_->setVisible(false);
             }
         }
@@ -857,7 +858,7 @@ namespace bubble_second {
         assert(prepare_bubble);
         //cocos2d::Node* second_bubble = csb_node_->getChildByName(SECOND_PREPARE_BUBBLE_NAME);
 		cocos2d::Node* second_bubble = this->getSecondPrepareBubble();
-        cocos2d::MoveTo* move_to_second = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getGrassPosition());
+        cocos2d::MoveTo* move_to_second = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getSecondBubbleStoreNodePosition());
         cocos2d::Sequence* seq_prepare = cocos2d::Sequence::create(move_to_second, cocos2d::CallFunc::create([=]() {
             //prepare_bubble->setName(SECOND_PREPARE_BUBBLE_NAME);
 			this->setSecondPrepareBubble(dynamic_cast<BaseBubble*>(prepare_bubble));
@@ -902,9 +903,9 @@ namespace bubble_second {
 		return this->getGunsightPosition();
 	}
 
-    cocos2d::Vec2 GameScene::getGrassPosition()
+    cocos2d::Vec2 GameScene::getSecondBubbleStoreNodePosition()
     {
-        return this->getGrass()->getPosition();
+        return this->getSecondBubbleStoreNode()->getPosition();
     }
 
     cocos2d::Vec2 GameScene::getNodePositionWithName(const std::string& child_name)
@@ -930,7 +931,7 @@ namespace bubble_second {
 
     cocos2d::ui::TextBMFont * GameScene::getBubbleUseCountLabel()
     {
-        return dynamic_cast<cocos2d::ui::TextBMFont*>(csb_node_->getChildByName(UI_NAME_BUBBLE_USE_COUNT));
+        return dynamic_cast<cocos2d::ui::TextBMFont*>(this->getSecondBubbleStoreNode()->getChildByName(UI_NAME_BUBBLE_USE_COUNT));
     }
 
     GameCharacter* GameScene::getGameCharacter()
@@ -1244,7 +1245,7 @@ namespace bubble_second {
             {
                 bubble->setVisible(false);
             }
-            cocos2d::MoveTo* move = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getGrassPosition());
+            cocos2d::MoveTo* move = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getSecondBubbleStoreNodePosition());
             cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move, cocos2d::CallFunc::create([=]() {
                 controller->setBubbleShootEnabled(true);
                 controller->setPrepareBubble(property_bubble_);
@@ -1640,14 +1641,14 @@ namespace bubble_second {
         listener->onTouchBegan = CC_CALLBACK_2(GamePlayController::exchangePrepareBubbleOnTouchBegan, game_controller);
         listener->onTouchMoved = CC_CALLBACK_2(GamePlayController::exchangePrepareBubbleOnTouchMoved, game_controller);
         listener->onTouchEnded = CC_CALLBACK_2(GamePlayController::exchangePrepareBubbleOnTouchEnded, game_controller);
-        dispatcher->addEventListenerWithSceneGraphPriority(listener, this->getGrass());
+        dispatcher->addEventListenerWithSceneGraphPriority(listener, this->getSecondBubbleStoreNode());
     }
 
     void GameScene::removeExchangeBubbleListener()
     {
         auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         dispatcher->removeEventListenersForTarget(this->getGunsight());
-        dispatcher->removeEventListenersForTarget(this->getGrass());
+        dispatcher->removeEventListenersForTarget(this->getSecondBubbleStoreNode());
     }
 
     BaseBubble* GameScene::getPrepareBubble()

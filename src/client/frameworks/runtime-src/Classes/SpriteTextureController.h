@@ -28,7 +28,7 @@ namespace bubble_second {
         cocos2d::Sprite* createGameBackgroundSprite(int cell_numble);
         //º”‘ÿŒ∆¿Ì
         void addResourcesTexture();
-        void addGameBackgroundTexture(int cell_numble);
+        //void addGameBackgroundTexture(int cell_numble);
         //cocos2d::Sprite* createGameBlurBackground();
     private:
         SpriteTextureController();

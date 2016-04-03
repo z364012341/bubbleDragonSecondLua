@@ -29,6 +29,7 @@ namespace bubble_second {
         void initCloseButton();
         void initStageNumbleLabel(int level);
         void initStageTypeLabel(const StageType& type);
+        //void initEnterProps();
     private:
         cocos2d::ui::Button* getStartButton();
         cocos2d::ui::Button* getCloseButton();
