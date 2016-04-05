@@ -17,7 +17,7 @@ namespace bubble_second {
         {
             return false;
         }
-        //this->addCostView(GameTextInfo::getInstance()->getCommodityCoinValueWithKey(COMMODITY_ADD_SPECIAL_KEY));
+        this->setCostLabelStringWithKey(COMMODITY_ADD_SPECIAL_KEY);
         this->setName(ADD_SPECIAL_COMMODITY_NAME);
         return true;
     }

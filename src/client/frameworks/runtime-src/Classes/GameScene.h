@@ -15,13 +15,13 @@
 #include "ui\UITextBMFont.h"
 #include "ui\UIButton.h"
 #include "StageData.h"
-
 namespace bubble_second {
     class BaseProperty;
     class BaseWeapon;
     class BubbleSightingDevice;
     class GameCharacter;
     class ScoreProgressMenu;
+    class BarrelScoreLabelNode;
     //struct StageData
     //{
     //    int cell_numble = 0;
@@ -63,6 +63,7 @@ namespace bubble_second {
         void initBubbleMap(int stage_numble);
         //初始化控件层级
         void initUIZOrder();
+        //cocos2d::Node* getBarrelHeadNode();
         //初始化水桶
         void initBarrels();
         //对控件进行屏幕适配调整
@@ -199,10 +200,10 @@ namespace bubble_second {
         //是否只剩下一个备用小球
         bool isOnlyBubbleUseCount();
         //是否在显示桶上面的分数
-        bool isBarrelScoreLabelDisplay();
-        void setBarrelScoreLabelDisplay(bool flag);
+        //bool isBarrelScoreLabelDisplay();
+        //void setBarrelScoreLabelDisplay(bool flag);
         //对桶上面的分数进行操作
-        void handleBarrelScoreLabel(std::function<void(const std::string& name)> func);
+        //void handleBarrelScoreLabel(std::function<void(const std::string& name)> func);
         int getTotalAirBubblesNumble();
         //是否需要显示
         bool isNeedNotDisplayedBarrelScoreLabel();
@@ -333,7 +334,7 @@ namespace bubble_second {
         //std::map<BubbleType, std::string> bubblecolor_to_swirl_;
         BaseWeapon* props_weapon_;
         bool first_flag_;
-        bool barrel_score_display_flag_;
+        //bool barrel_score_display_flag_;
         GameCharacter* game_character_;
         //int present_stage_numble_ = 0;
         StageData stage_data_;
@@ -343,6 +344,7 @@ namespace bubble_second {
 		cocos2d::ui::Button* pause_menu_ = nullptr;
 		BaseBubble* second_bubble_ = nullptr;
 		ScoreProgressMenu* score_progress_ = nullptr;
+        BarrelScoreLabelNode* barrel_score_node_ = nullptr;
     };
 }
 #endif //_GAME_SCENE_H_

@@ -197,6 +197,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\AimingLineCommodity.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BarrelBottom.h" />
+    <ClInclude Include="..\Classes\BarrelScoreLabelNode.h" />
     <ClInclude Include="..\Classes\BaseBubble.h" />
     <ClInclude Include="..\Classes\BaseComponentBubble.h" />
     <ClInclude Include="..\Classes\BaseProperty.h" />
@@ -258,6 +259,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\lua_module_register.h" />
     <ClInclude Include="..\Classes\MutipleSealBubble.h" />
     <ClInclude Include="..\Classes\NullBubble.h" />
+    <ClInclude Include="..\Classes\PopScoreLabelComponent.h" />
     <ClInclude Include="..\Classes\PropertiesFactory.h" />
     <ClInclude Include="..\Classes\PropsSelectAlert.h" />
     <ClInclude Include="..\Classes\RainbowCharactor.h" />
@@ -304,6 +306,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\AimingLineCommodity.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BarrelBottom.cpp" />
+    <ClCompile Include="..\Classes\BarrelScoreLabelNode.cpp" />
     <ClCompile Include="..\Classes\BaseBubble.cpp" />
     <ClCompile Include="..\Classes\BaseComponentBubble.cpp" />
     <ClCompile Include="..\Classes\BaseProperty.cpp" />
@@ -362,6 +365,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp" />
     <ClCompile Include="..\Classes\MutipleSealBubble.cpp" />
     <ClCompile Include="..\Classes\NullBubble.cpp" />
+    <ClCompile Include="..\Classes\PopScoreLabelComponent.cpp" />
     <ClCompile Include="..\Classes\PropertiesFactory.cpp" />
     <ClCompile Include="..\Classes\PropsSelectAlert.cpp" />
     <ClCompile Include="..\Classes\RainbowCharactor.cpp" />

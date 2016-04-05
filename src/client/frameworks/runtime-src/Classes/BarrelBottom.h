@@ -11,6 +11,7 @@
 #ifndef _BARREL_BOTTOM_H_
 #define _BARREL_BOTTOM_H_
 #include "cocostudio\CocoStudio.h"
+//#include "ui\UITextBMFont.h"
 namespace bubble_second {
     typedef bool EffectEnabled;
     class BarrelBottom : public cocos2d::Node
@@ -34,17 +35,18 @@ namespace bubble_second {
     public:
         void contactOnce();
     private:
-        //void onEnter() override;
+        void onEnter() override;
         //void onExit() override;
         BarrelBottom();
         virtual ~BarrelBottom();
         bool initScoreWithName(const std::string& name);
         void initPhysicsBody();
         void initScore(const std::string& name);
+        //void initScoreLabel();
         //播放小球撞到的特效
         void playEffect();
         //播放待机特效
-        void playStandbyEffect();
+        //void playStandbyEffect();
         //初始化特效间隔时间
         void initialStacdbyEffectTime();
         void setStacdbyEffectTime(int time);
@@ -52,6 +54,7 @@ namespace bubble_second {
         int score_;
         EffectEnabled effect_flag_;
         int standby_effect_delaytime_max_;
+       //cocos2d::ui::TextBMFont* score_label_ = nullptr;
     };
 }
 #endif //_BARREL_BOTTOM_H_

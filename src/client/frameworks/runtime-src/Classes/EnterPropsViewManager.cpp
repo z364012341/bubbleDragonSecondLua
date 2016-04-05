@@ -5,7 +5,7 @@
 #include "AimingLineCommodity.h"
 #include "AddSpecialCommodity.h"
 #include "AddBubbleNumbleCommodity.h"
-const float ENTER_GAME_PROPS_VIEW_LEFT_POS_X = -180.0f;
+const float ENTER_GAME_PROPS_VIEW_LEFT_POS_X = -170.0f;
 //const float ENTER_GAME_PROPS_VIEW_LEFT_POS_Y = -238.70;
 namespace bubble_second {
     EnterPropsViewManager::EnterPropsViewManager()

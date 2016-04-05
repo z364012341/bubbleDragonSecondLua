@@ -229,13 +229,6 @@ const cocos2d::Vec2 BUBBLE_MUTIPLE_SEAL_3_ANCHORPOINT(0.5, 0.75); //三重封印贴图
 const cocos2d::Vec2 BUBBLE_IN_RAINBOW_BUBBLE_POS(-50, 20); //彩虹封印里面小球的位置
 const float BUBBLE_IN_RAINBOW_BUBBLE_SCALE = 0.7f; //封印里面小球的缩放
 const float SCORE_WIDGET_BEZIER_FLYING_DURATION = 1.0f; //得分挂件的赛贝尔运动时间
-const float BARREL_SCORE_LABEL_OFFS_Y = 100.0f;//酒桶分数的y偏移
-const float BARREL_SCORE_LABEL_MOVEBY_OFFS_Y = 5.0f;
-const int BARREL_SCORE_LABEL_ACTION_TAG = 101; //动作的tag人直
-const float BARREL_SCORE_LABEL_MOVEBY_Y = BARREL_SCORE_LABEL_OFFS_Y + BARREL_SCORE_LABEL_MOVEBY_OFFS_Y; //酒桶分数的移动时候的y偏移
-const float BARREL_SCORE_LABEL_MOVEBY_1_DURATION = 1.0f;
-const float BARREL_SCORE_LABEL_MOVEBY_2_DURATION = 0.1f;
-const float BARREL_SCORE_LABEL_DELAYTIME_DURATION = 0.3f;
 const int WINDMILL_BUBBLE_TAG = 243; //风车小球的tag
 const int TOP_ELIMINATE_GAME_TASK_NUMBLE = 6; //顶部消除玩法的目标数量
 const float WINDMILL_BUBBLE_ROTATION_FACTOR = 30.0f; //风车转转转的速度系数
@@ -292,8 +285,8 @@ const std::string BARREL_BOTTOM_EFFECT_NAME = "diaoluo-TX"; //小球掉到桶消除特效
 //const float BARREL_BOTTOM_EFFECT_POSITION_Y = 0.0f;
 const std::string COLOR_BUBBLE_ELIMINATE_EFFECT_PATH = "PPX-TX/PPX-TX.ExportJson"; //普通小球消除特效的路径
 const std::string COLOR_BUBBLE_ELIMINATE_EFFECT_NAME = "PPX-TX"; //普通小球消除特效的路径
-const std::string BARREL_BOTTOM_STANDBY_EFFECT_PATH = "PPP-TX/PPP-TX.ExportJson"; //桶底冒泡特效的路径
-const std::string BARREL_BOTTOM_STANDBY_EFFECT_NAME = "PPP-TX"; //桶底冒泡特效的名字
+//const std::string BARREL_BOTTOM_STANDBY_EFFECT_PATH = "PPP-TX/PPP-TX.ExportJson"; //桶底冒泡特效的路径
+//const std::string BARREL_BOTTOM_STANDBY_EFFECT_NAME = "PPP-TX"; //桶底冒泡特效的名字
 const int BARREL_BOTTOM_STANDBY_EFFECT_SPEED_SCALE = 1.7f; //超大特效的时候动画的速度改变
 const float BARREL_BOTTOM_STANDBY_EFFECT_POS_Y = 90.0f; //位置
 const int BARREL_BOTTOM_STANDBY_EFFECT_DELAYTIME_MAX = 10;
@@ -693,10 +686,10 @@ const std::string GAME_TEXT_SELECT_PROPS_LABEL_KEY = "choose_props";
 const float ENTER_PROPS_ACTION_DURATION = 1.0f; //进场道具的动画时间
 //EnterPropsViewManager
 const int ADD_BUBBLE_NUMBLE_PROPS_NUMBLE = 10;
-//ui控件的zorder
-const int UI_ZORDER_BACKGROUND = -4;                       //背景  
+//zorder
 const int UI_ZORDER_MAP_BUBBLE = -2;  //小球地图 csb_node
 const int UI_ZORDER_DOWN_AIR_BUBBLE = UI_ZORDER_MAP_BUBBLE + 1;    //下落小球
+const int UI_ZORDER_BACKGROUND = -4;                       //背景  
 const int UI_ZORDER_PROPS_SELECT_ALERT = UI_ZORDER_MAP_BUBBLE - 1; //道具选择面板
 const int UI_ZORDER_PREPARE_BUBBLE = UI_ZORDER_PROPS_SELECT_ALERT - 1;   //准备小球
 const int UI_ZORDER_SWIRL = UI_ZORDER_PREPARE_BUBBLE - 1; //旋风
@@ -705,17 +698,18 @@ const int UI_ZORDER_SIGHTING_DEVICE = UI_ZORDER_GUNSIGHT - 1; //瞄准导线
 const int UI_ZORDER_PAD = UI_ZORDER_GUNSIGHT;      //喵准器下面的基台
 const int UI_ZORDER_GRASS = UI_ZORDER_GUNSIGHT;      //小草
 const int UI_ZORDER_BARRELBOTTOM = UI_ZORDER_DOWN_AIR_BUBBLE - 1;
-const int UI_ZORDER_BARRELHEAD_FIRST = UI_ZORDER_BARRELBOTTOM - 1;   //桶盖从左数第一
-const int UI_ZORDER_BARRELHEAD_SECOND = UI_ZORDER_BARRELHEAD_FIRST;
-const int UI_ZORDER_BARRELHEAD_THIRD = UI_ZORDER_BARRELHEAD_FIRST;
-const int UI_ZORDER_BARRELHEAD_FOURTH = UI_ZORDER_BARRELHEAD_FIRST;
-const int UI_ZORDER_BARRELHEAD_FIFTH = UI_ZORDER_BARRELHEAD_FIRST;    //从左数第五个桶盖
+const int UI_ZORDER_BARRELHEAD_NODE = UI_ZORDER_BARRELBOTTOM - 1;   //桶盖
+const int UI_ZORDER_BARREL_NUMBLE_NODE = UI_ZORDER_BARRELHEAD_NODE;   //桶盖
+//const int UI_ZORDER_BARRELHEAD_FIRST = UI_ZORDER_BARRELBOTTOM - 3;   //桶盖从左数第一
+//const int UI_ZORDER_BARRELHEAD_SECOND = UI_ZORDER_BARRELHEAD_FIRST + 1;
+//const int UI_ZORDER_BARRELHEAD_THIRD = UI_ZORDER_BARRELHEAD_SECOND + 1;
+//const int UI_ZORDER_BARRELHEAD_FOURTH = UI_ZORDER_BARRELHEAD_SECOND;
+//const int UI_ZORDER_BARRELHEAD_FIFTH = UI_ZORDER_BARRELHEAD_FIRST;    //从左数第五个桶盖
 const int UI_ZORDER_MENU = 1;    //菜单和按钮
-const int UI_ZORDER_MENU_INFO = 1;    //分数信息之类的
 const int UI_ZORDER_GUNSIGHT_SWIRL = UI_ZORDER_GUNSIGHT + 1; //炮台上的旋风
 const int UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_ONCE = UI_ZORDER_BACKGROUND; //六连消时候后面的播放一次的特效
 const int UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_REPEAT = UI_ZORDER_MENU; //六连消时候后面的连续播放的特效
-const int UI_ZORDER_RAINBOW_SEALED_CHARACTOR = -1; //彩虹封印里面的人物
+const int UI_ZORDER_MENU_INFO = 1;    //分数信息之类的
 //const float UI_GLOBALZORDER_LIGHTING_EFFECT_BACKGROUND = 1.1f; //闪电特效的黑色背景
 //const float UI_GLOBALZORDER_LIGHTING_EFFECT = 10.5f; //闪电特效
 //碰撞掩码

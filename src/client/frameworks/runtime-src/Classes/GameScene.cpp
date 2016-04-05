@@ -32,10 +32,12 @@
 #include "EnterPropsViewManager.h"
 #include "StageDataManager.h"
 #include "ButtonEffectController.h"
+#include "BarrelScoreLabelNode.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
 const std::string GAME_STAGE_TYPE_SPRITE_NAME = "stageTypeSprite";
+const std::string BARREL_SCORE_LABEL_NODE_NAME = "BarrelScoreLabelNode";
 const std::string UI_NAME_GAME_PLAYING_MENU = "gamePlayMenu";      //游戏场景的菜单
 const std::string UI_NAME_COMPLETED_TASK = "completedNumble";//已完成目标的label
 const std::string UI_NAME_GAME_TASK = "taskNumble";//胜利任务目标的label
@@ -52,23 +54,25 @@ const float PROPS_BACKGROUND_PERCENT_X_FOURTH = 0.8931f; //道具item_1背景的X坐标
 const float PROPS_BACKGROUND_PERCENT_PER_DISTANCE = (PROPS_BACKGROUND_PERCENT_X_FOURTH - PROPS_BACKGROUND_PERCENT_X_FIRST)/3;
 const float PROPS_BACKGROUND_PERCENT_X_SECOND = PROPS_BACKGROUND_PERCENT_X_FIRST+PROPS_BACKGROUND_PERCENT_PER_DISTANCE; //道具item_1背景的X坐标百分比
 const float PROPS_BACKGROUND_PERCENT_X_THIRD = PROPS_BACKGROUND_PERCENT_X_FIRST + PROPS_BACKGROUND_PERCENT_PER_DISTANCE*2; //道具item_1背景的X坐标百分比
-const std::string UI_NAME_BARRELHEAD_FIRST = "barrelhead_1";        //从左数第一个桶盖
-const std::string UI_NAME_BARRELHEAD_SECOND = "barrelhead_2";
-const std::string UI_NAME_BARRELHEAD_THIRD = "barrelhead_3";
-const std::string UI_NAME_BARRELHEAD_FOURTH = "barrelhead_4";
-const std::string UI_NAME_BARRELHEAD_FIFTH = "barrelhead_5";       //从左数第五个桶盖
-const std::string UI_NAME_BARREL_NUMBLE_FIRST = "barrel_label_1"; //左数第一的桶上的数字
-const std::string UI_NAME_BARREL_NUMBLE_SECOND = "barrel_label_2"; //左数第2的桶数字
-const std::string UI_NAME_BARREL_NUMBLE_THIIRD = "barrel_label_3"; //左数第3的桶数字
-const std::string UI_NAME_BARREL_NUMBLE_FOURTH = "barrel_label_4"; //左数第4的桶数字
-const std::string UI_NAME_BARREL_NUMBLE_FIFTH = "barrel_label_5"; //左数第5的桶数字
-const std::string UI_NAME_BARREL_FIRST = "barrel_body_1"; //左数第一的桶身体
-const std::string UI_NAME_BARREL_SECOND = "barrel_body_2"; //左数第2的桶身体
-const std::string UI_NAME_BARREL_THIIRD = "barrel_body_3"; //左数第3的桶身体
-const std::string UI_NAME_BARREL_FOURTH = "barrel_body_4"; //左数第4的桶身体
-const std::string UI_NAME_BARREL_FIFTH = "barrel_body_5"; //左数第5的桶身体
-const std::string UI_NAME_BARREL_NUMBLES[5] = { UI_NAME_BARREL_NUMBLE_FIRST , UI_NAME_BARREL_NUMBLE_SECOND,
-UI_NAME_BARREL_NUMBLE_THIIRD,UI_NAME_BARREL_NUMBLE_FOURTH,UI_NAME_BARREL_NUMBLE_FIFTH };
+const std::string UI_NAME_BARRELHEAD_NODE = "barrelhead";        //桶盖
+//const std::string UI_NAME_BARRELHEAD_FIRST = "barrelhead_1";        //从左数第一个桶盖
+//const std::string UI_NAME_BARRELHEAD_SECOND = "barrelhead_2";
+//const std::string UI_NAME_BARRELHEAD_THIRD = "barrelhead_3";
+//const std::string UI_NAME_BARRELHEAD_FOURTH = "barrelhead_4";
+//const std::string UI_NAME_BARRELHEAD_FIFTH = "barrelhead_5";       //从左数第五个桶盖
+//const std::string UI_NAME_BARREL_NUMBLE_FIRST = "barrel_label_1"; //左数第一的桶上的数字
+//const std::string UI_NAME_BARREL_NUMBLE_SECOND = "barrel_label_2"; //左数第2的桶数字
+//const std::string UI_NAME_BARREL_NUMBLE_THIRD = "barrel_label_3"; //左数第3的桶数字
+//const std::string UI_NAME_BARREL_NUMBLE_FOURTH = "barrel_label_4"; //左数第4的桶数字
+//const std::string UI_NAME_BARREL_NUMBLE_FIFTH = "barrel_label_5"; //左数第5的桶数字
+const std::string UI_NAME_BARREL_NODE = "barrel_body"; //桶身体
+//const std::string UI_NAME_BARREL_FIRST = "barrel_body_1"; //左数第一的桶身体
+//const std::string UI_NAME_BARREL_SECOND = "barrel_body_2"; //左数第2的桶身体
+//const std::string UI_NAME_BARREL_THIIRD = "barrel_body_3"; //左数第3的桶身体
+//const std::string UI_NAME_BARREL_FOURTH = "barrel_body_4"; //左数第4的桶身体
+//const std::string UI_NAME_BARREL_FIFTH = "barrel_body_5"; //左数第5的桶身体
+//const std::string UI_NAME_BARREL_NUMBLES[5] = { UI_NAME_BARREL_NUMBLE_FIRST , UI_NAME_BARREL_NUMBLE_SECOND,
+//UI_NAME_BARREL_NUMBLE_THIRD,UI_NAME_BARREL_NUMBLE_FOURTH,UI_NAME_BARREL_NUMBLE_FIFTH };
 const std::string UI_NAME_BUBBLE_USE_COUNT = "bubble_numble_label";//小球使用数的label
 const std::string UI_NAME_SECOND_BUBBLE_STORE = "second_bubble_store";        //喵准器旁边的小草
 namespace bubble_second {
@@ -124,7 +128,7 @@ namespace bubble_second {
         property_bubble_ = nullptr;
         props_weapon_ = nullptr;
         first_flag_ = true;
-        barrel_score_display_flag_ = false;
+        //barrel_score_display_flag_ = false;
         game_character_ = nullptr;
         this->initHandle();
         this->addKeyboardEventListener();
@@ -387,11 +391,15 @@ namespace bubble_second {
 
     void GameScene::initBarrelScoreLabel()
     {
-        auto pos_func = [=](const std::string& name) {
-            cocos2d::Node* node = csb_node_->getChildByName(name);
-            node->setPositionY(node->getPositionY() - BARREL_SCORE_LABEL_OFFS_Y);
-        };
-        this->handleBarrelScoreLabel(pos_func);
+        //auto pos_func = [=](const std::string& name) {
+        //    cocos2d::Node* node = csb_node_->getChildByName(name);
+        //    node->setPositionY(node->getPositionY() - BARREL_SCORE_LABEL_OFFS_Y);
+        // };
+        //this->handleBarrelScoreLabel(pos_func);
+        barrel_score_node_ = BarrelScoreLabelNode::create();
+        barrel_score_node_->setPosition(375.0f, 0.0f);
+        barrel_score_node_->setName(BARREL_SCORE_LABEL_NODE_NAME);
+        csb_node_->addChild(barrel_score_node_, UI_ZORDER_BARREL_NUMBLE_NODE);
     }
 
     cocos2d::Node* GameScene::getGunsight()
@@ -489,12 +497,27 @@ namespace bubble_second {
         this->setUIZOrderWithNameAndNumber(UI_NAME_GUNSIGHT, UI_ZORDER_GUNSIGHT);
         //this->setUIZOrderWithNameAndNumber(UI_NAME_PAD, UI_ZORDER_PAD);
         this->setUIZOrderWithNameAndNumber(UI_NAME_SECOND_BUBBLE_STORE, UI_ZORDER_GRASS);
-        this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_FIRST, UI_ZORDER_BARRELHEAD_FIRST);
-        this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_SECOND, UI_ZORDER_BARRELHEAD_SECOND);
-        this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_THIRD, UI_ZORDER_BARRELHEAD_THIRD);
-        this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_FOURTH, UI_ZORDER_BARRELHEAD_FOURTH);
-        this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_FIFTH, UI_ZORDER_BARRELHEAD_FIFTH);
+
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_NODE, UI_ZORDER_BARRELHEAD_FIRST);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_FIRST, UI_ZORDER_BARRELHEAD_FIRST);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_FIFTH, UI_ZORDER_BARRELHEAD_FIFTH);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_SECOND, UI_ZORDER_BARRELHEAD_SECOND);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_FOURTH, UI_ZORDER_BARRELHEAD_FOURTH);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_THIRD, UI_ZORDER_BARRELHEAD_THIRD);
+
+        this->setUIZOrderWithNameAndNumber(UI_NAME_BARRELHEAD_NODE, UI_ZORDER_BARRELHEAD_NODE);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARREL_NUMBLE_FIRST, UI_ZORDER_BARREL_NUMBLE_NODE);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARREL_NUMBLE_SECOND, UI_ZORDER_BARREL_NUMBLE_NODE);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARREL_NUMBLE_FIFTH, UI_ZORDER_BARREL_NUMBLE_NODE);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARREL_NUMBLE_FOURTH, UI_ZORDER_BARREL_NUMBLE_NODE);
+        //this->setUIZOrderWithNameAndNumber(UI_NAME_BARREL_NUMBLE_THIRD, UI_ZORDER_BARREL_NUMBLE_NODE);
+
     }
+
+    //cocos2d::Node * GameScene::getBarrelHeadNode()
+    //{
+    //    return csb_node_->getChildByName(UI_NAME_BARRELHEAD_NODE);
+    //}
 
     void GameScene::initBarrels()
     {
@@ -1834,13 +1857,16 @@ namespace bubble_second {
             armature->setPosition(BIG_COMBO_EFFECT_UNDER_FIRE_POSITION);
             csb_node_->addChild(armature, UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_REPEAT);
         }
-        {
+        {//桶晃动
             this->startShakeBarrel();
             BigBackgroundEffect* blue_effect = BigBackgroundEffect::create();
             this->addChild(blue_effect, -3);
         }
-        {
+        {//人物特效
             this->getGameCharacter()->playLegendaryAnimation();
+        }
+        {//标签双倍
+            barrel_score_node_->doubleBarrelScoreLabel();
         }
     }
 
@@ -1862,10 +1888,12 @@ namespace bubble_second {
             node->removeFromParent();
         }
         this->stopShakeBarrel();
+        barrel_score_node_->SingleBarrelScoreLabel();
     }
 
     void GameScene::startShakeBarrel()
     {
+
         auto shake_func = [=](std::string name) {
             float x = BARREL_SHAKE_MOVEBY_DISTANCE_X;
             float y = BARREL_SHAKE_MOVEBY_DISTANCE_Y;
@@ -1882,14 +1910,11 @@ namespace bubble_second {
 
             cocos2d::Sequence* seq_1 = cocos2d::Sequence::create(move_1, move_2, move_3, move_4, nullptr);
             cocos2d::Sequence* seq_2 = cocos2d::Sequence::create(move_5, move_6, move_7, move_8, nullptr);
+            //cocos2d::Spawn* spawn = cocos2d::Spawn::createWithTwoActions(cocos2d::RepeatForever::create(seq_1), cocos2d::RepeatForever::create(seq_2));
             csb_node_->getChildByName(name)->runAction(cocos2d::RepeatForever::create(seq_1));
             csb_node_->getChildByName(name)->runAction(cocos2d::RepeatForever::create(seq_2));
         };
-        shake_func(UI_NAME_BARRELHEAD_FIRST);
-        shake_func(UI_NAME_BARRELHEAD_SECOND);
-        shake_func(UI_NAME_BARRELHEAD_THIRD);
-        shake_func(UI_NAME_BARRELHEAD_FOURTH);
-        shake_func(UI_NAME_BARRELHEAD_FIFTH);
+        shake_func(UI_NAME_BARRELHEAD_NODE);
         shake_func(UI_NAME_BARRELHEAD_BORDER_FIRST);
         shake_func(UI_NAME_BARRELHEAD_BORDER_SECOND);
         shake_func(UI_NAME_BARRELHEAD_BORDER_THIRD);
@@ -1901,22 +1926,20 @@ namespace bubble_second {
         shake_func(UI_NAME_BARREL_BOTTOM_THIRD);
         shake_func(UI_NAME_BARREL_BOTTOM_FOURTH);
         shake_func(UI_NAME_BARREL_BOTTOM_FIFTH);
-        shake_func(UI_NAME_BARREL_FIRST);
-        shake_func(UI_NAME_BARREL_SECOND);
-        shake_func(UI_NAME_BARREL_THIIRD);
-        shake_func(UI_NAME_BARREL_FOURTH);
-        shake_func(UI_NAME_BARREL_FIFTH);
-        this->handleBarrelScoreLabel(shake_func);
+        shake_func(UI_NAME_BARREL_NODE);
+        //this->handleBarrelScoreLabel(shake_func);
+        shake_func(BARREL_SCORE_LABEL_NODE_NAME);
     }
 
     void GameScene::stopShakeBarrel()
     {
         auto stop_func = [=](std::string name) {csb_node_->getChildByName(name)->stopAllActions(); };
-        stop_func(UI_NAME_BARRELHEAD_FIRST);
-        stop_func(UI_NAME_BARRELHEAD_SECOND);
-        stop_func(UI_NAME_BARRELHEAD_THIRD);
-        stop_func(UI_NAME_BARRELHEAD_FOURTH);
-        stop_func(UI_NAME_BARRELHEAD_FIFTH);
+        stop_func(UI_NAME_BARRELHEAD_NODE);
+        //stop_func(UI_NAME_BARRELHEAD_FIRST);
+        //stop_func(UI_NAME_BARRELHEAD_SECOND);
+        //stop_func(UI_NAME_BARRELHEAD_THIRD);
+        //stop_func(UI_NAME_BARRELHEAD_FOURTH);
+        //stop_func(UI_NAME_BARRELHEAD_FIFTH);
         stop_func(UI_NAME_BARRELHEAD_BORDER_FIRST);
         stop_func(UI_NAME_BARRELHEAD_BORDER_SECOND);
         stop_func(UI_NAME_BARRELHEAD_BORDER_THIRD);
@@ -1928,17 +1951,28 @@ namespace bubble_second {
         stop_func(UI_NAME_BARREL_BOTTOM_THIRD);
         stop_func(UI_NAME_BARREL_BOTTOM_FOURTH);
         stop_func(UI_NAME_BARREL_BOTTOM_FIFTH);
-        stop_func(UI_NAME_BARREL_FIRST);
-        stop_func(UI_NAME_BARREL_SECOND);
-        stop_func(UI_NAME_BARREL_THIIRD);
-        stop_func(UI_NAME_BARREL_FOURTH);
-        stop_func(UI_NAME_BARREL_FIFTH);
-        stop_func(UI_NAME_BARREL_NUMBLE_FIRST);
-        stop_func(UI_NAME_BARREL_NUMBLE_SECOND);
-        stop_func(UI_NAME_BARREL_NUMBLE_THIIRD);
-        stop_func(UI_NAME_BARREL_NUMBLE_FOURTH);
-        stop_func(UI_NAME_BARREL_NUMBLE_FIFTH);
+        stop_func(UI_NAME_BARREL_NODE);
+        //stop_func(UI_NAME_BARREL_FIRST);
+        //stop_func(UI_NAME_BARREL_SECOND);
+        //stop_func(UI_NAME_BARREL_THIIRD);
+        //stop_func(UI_NAME_BARREL_FOURTH);
+        //stop_func(UI_NAME_BARREL_FIFTH);
+        //stop_func(UI_NAME_BARREL_NUMBLE_FIRST);
+        //stop_func(UI_NAME_BARREL_NUMBLE_SECOND);
+        //stop_func(UI_NAME_BARREL_NUMBLE_THIRD);
+        //stop_func(UI_NAME_BARREL_NUMBLE_FOURTH);
+        //stop_func(UI_NAME_BARREL_NUMBLE_FIFTH);
+
+        stop_func(BARREL_SCORE_LABEL_NODE_NAME);
     }
+
+    //void GameScene::doubleBarrelScoreLabel()
+    //{
+    //}
+
+    //void GameScene::SingleBarrelScoreLabel()
+    //{
+    //}
 
     void GameScene::updateCompletedTaskLabel(cocos2d::EventCustom*)
     {
@@ -1970,7 +2004,7 @@ namespace bubble_second {
         BaseBubble* prepare_bubble = this->getPrepareBubble();
         if (!prepare_bubble)
         {
-            if (!this->isBarrelScoreLabelDisplay())
+            if (!barrel_score_node_->isBarrelScoreLabelDisplay())
             {
                 this->popVictoryAlert();
             }
@@ -2160,47 +2194,49 @@ namespace bubble_second {
 
     void GameScene::displayBarrelScoreLabel()
     {
-        if (!this->isBarrelScoreLabelDisplay())
+        if (!barrel_score_node_->isBarrelScoreLabelDisplay())
         {
-            auto func = [=](const std::string& name) {
-                cocos2d::Node* node = csb_node_->getChildByName(name);
-                if (node->getActionByTag(BARREL_SCORE_LABEL_ACTION_TAG) == nullptr)
-                {
-                    cocos2d::MoveBy* move1 = cocos2d::MoveBy::create(BARREL_SCORE_LABEL_MOVEBY_1_DURATION, cocos2d::Vec2(0.0f, BARREL_SCORE_LABEL_MOVEBY_Y));
-                    cocos2d::DelayTime* delay = cocos2d::DelayTime::create(BARREL_SCORE_LABEL_DELAYTIME_DURATION);
-                    cocos2d::MoveBy* move2 = cocos2d::MoveBy::create(BARREL_SCORE_LABEL_MOVEBY_2_DURATION, cocos2d::Vec2(0.0f, -BARREL_SCORE_LABEL_MOVEBY_OFFS_Y));
-                    cocos2d::Sequence* seq = cocos2d::Sequence::create(move1, delay, move2, nullptr);
-                    seq->setTag(BARREL_SCORE_LABEL_ACTION_TAG);
-                    node->runAction(seq);
-                    this->setBarrelScoreLabelDisplay(true);
-                }
-            };
-            this->handleBarrelScoreLabel(func);
+            //auto func = [=](const std::string& name) {
+            //    cocos2d::Node* node = csb_node_->getChildByName(name);
+            //    if (node->getActionByTag(BARREL_SCORE_LABEL_ACTION_TAG) == nullptr)
+            //    {
+            //        cocos2d::MoveBy* move1 = cocos2d::MoveBy::create(BARREL_SCORE_LABEL_MOVEBY_1_DURATION, cocos2d::Vec2(0.0f, BARREL_SCORE_LABEL_MOVEBY_Y));
+            //        cocos2d::DelayTime* delay = cocos2d::DelayTime::create(BARREL_SCORE_LABEL_DELAYTIME_DURATION);
+            //        cocos2d::MoveBy* move2 = cocos2d::MoveBy::create(BARREL_SCORE_LABEL_MOVEBY_2_DURATION, cocos2d::Vec2(0.0f, -BARREL_SCORE_LABEL_MOVEBY_OFFS_Y));
+            //        cocos2d::Sequence* seq = cocos2d::Sequence::create(move1, delay, move2, nullptr);
+            //        seq->setTag(BARREL_SCORE_LABEL_ACTION_TAG);
+            //        node->runAction(seq);
+            //        this->setBarrelScoreLabelDisplay(true);
+            //    }
+            //};
+            //this->handleBarrelScoreLabel(func);
+            barrel_score_node_->displayBarrelScoreLabel();
         }
     }
 
     void GameScene::notDisplayedBarrelScoreLabel()
     {
-        if (this->isBarrelScoreLabelDisplay())
+        if (barrel_score_node_->isBarrelScoreLabelDisplay())
         {
-            auto func = [=](const std::string& name) {
-                cocos2d::Node* node = csb_node_->getChildByName(name);
-                if (node->getActionByTag(BARREL_SCORE_LABEL_ACTION_TAG) == nullptr)
-                {
-                    cocos2d::Vector<cocos2d::FiniteTimeAction*> vector;
-                    cocos2d::MoveBy* move2 = cocos2d::MoveBy::create(BARREL_SCORE_LABEL_MOVEBY_1_DURATION, cocos2d::Vec2(0.0f, -BARREL_SCORE_LABEL_MOVEBY_Y));
-                    vector.pushBack(move2);
-                    cocos2d::DelayTime* delay = cocos2d::DelayTime::create(BARREL_SCORE_LABEL_DELAYTIME_DURATION);
-                    vector.pushBack(delay);
-                    cocos2d::MoveBy* move1 = cocos2d::MoveBy::create(BARREL_SCORE_LABEL_MOVEBY_2_DURATION, cocos2d::Vec2(0.0f, BARREL_SCORE_LABEL_MOVEBY_OFFS_Y));
-                    vector.pushBack(move1);
-                    cocos2d::Sequence* seq = cocos2d::Sequence::create(vector);
-                    seq->setTag(BARREL_SCORE_LABEL_ACTION_TAG);
-                    node->runAction(seq);
-                    this->setBarrelScoreLabelDisplay(false);
-                }
-            };
-            this->handleBarrelScoreLabel(func);
+            //auto func = [=](const std::string& name) {
+            //    cocos2d::Node* node = csb_node_->getChildByName(name);
+            //    if (node->getActionByTag(BARREL_SCORE_LABEL_ACTION_TAG) == nullptr)
+            //    {
+            //        cocos2d::Vector<cocos2d::FiniteTimeAction*> vector;
+            //        cocos2d::MoveBy* move2 = cocos2d::MoveBy::create(BARREL_SCORE_LABEL_MOVEBY_1_DURATION, cocos2d::Vec2(0.0f, -BARREL_SCORE_LABEL_MOVEBY_Y));
+            //        vector.pushBack(move2);
+            //        cocos2d::DelayTime* delay = cocos2d::DelayTime::create(BARREL_SCORE_LABEL_DELAYTIME_DURATION);
+            //        vector.pushBack(delay);
+            //        cocos2d::MoveBy* move1 = cocos2d::MoveBy::create(BARREL_SCORE_LABEL_MOVEBY_2_DURATION, cocos2d::Vec2(0.0f, BARREL_SCORE_LABEL_MOVEBY_OFFS_Y));
+            //        vector.pushBack(move1);
+            //        cocos2d::Sequence* seq = cocos2d::Sequence::create(vector);
+            //        seq->setTag(BARREL_SCORE_LABEL_ACTION_TAG);
+            //        node->runAction(seq);
+            //        this->setBarrelScoreLabelDisplay(false);
+            //    }
+            //};
+            //this->handleBarrelScoreLabel(func);
+            barrel_score_node_->notDisplayedBarrelScoreLabel();
             if (GameScoreController::getInstance()->gameVictory())
             {
                 this->popVictoryAlert();
@@ -2237,23 +2273,23 @@ namespace bubble_second {
         return GameScoreController::getInstance()->getBubbleUseCount() <= 1;
     }
 
-    bool GameScene::isBarrelScoreLabelDisplay()
-    {
-        return barrel_score_display_flag_;
-    }
+    //bool GameScene::isBarrelScoreLabelDisplay()
+    //{
+    //    return barrel_score_display_flag_;
+    //}
 
-    void GameScene::setBarrelScoreLabelDisplay(bool flag)
-    {
-        barrel_score_display_flag_ = flag;
-    }
+    //void GameScene::setBarrelScoreLabelDisplay(bool flag)
+    //{
+    //    barrel_score_display_flag_ = flag;
+    //}
 
-    void GameScene::handleBarrelScoreLabel(std::function<void(const std::string&name)> func)
-    {
-        for (auto var : UI_NAME_BARREL_NUMBLES)
-        {
-            func(var);
-        }
-    }
+    //void GameScene::handleBarrelScoreLabel(std::function<void(const std::string&name)> func)
+    //{
+    //    for (auto var : UI_NAME_BARREL_NUMBLES)
+    //    {
+    //        func(var);
+    //    }
+    //}
     void GameScene::addOneAirBubblesNumble(cocos2d::EventCustom*)
     {
         ++total_air_bubbles_numble_;

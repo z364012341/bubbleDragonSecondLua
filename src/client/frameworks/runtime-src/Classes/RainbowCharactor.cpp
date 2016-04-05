@@ -4,6 +4,7 @@
 #include "RainbowSealBubble.h"
 #include "RainbowSealManager.h"
 #include "GameScene.h"
+const int UI_ZORDER_RAINBOW_SEALED_CHARACTOR = -1; //彩虹封印里面的人物
 namespace bubble_second {
     RainbowCharactor::RainbowCharactor()
     {

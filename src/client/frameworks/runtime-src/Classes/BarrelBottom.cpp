@@ -3,6 +3,8 @@
 #include "SmartScaleController.h"
 #include "cocos2d.h"
 #include "GameScoreController.h"
+//#include "XMLTool.h"
+const std::string BARREL_SCORE_LABEL_FNT_PATH = "fonts/tongshuzi-export.fnt";
 namespace bubble_second {
     BarrelBottom::BarrelBottom()
     {
@@ -12,16 +14,26 @@ namespace bubble_second {
     {
     }
 
-    //void BarrelBottom::onEnter()
-    //{
-    //    cocos2d::Node::onEnter();
-
-    //}
+    void BarrelBottom::onEnter()
+    {
+        cocos2d::Node::onEnter();
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(UI_NAME_BIG_COMBO_ELIMINATE, [=](cocos2d::EventCustom*) {
+            score_ *= 2;
+            //dynamic_cast<cocostudio::Armature*>(this->getChildByName(BARREL_BOTTOM_STANDBY_EFFECT_NAME))->getAnimation()->setSpeedScale(BARREL_BOTTOM_STANDBY_EFFECT_SPEED_SCALE);
+            standby_effect_delaytime_max_ = BARREL_BOTTOM_STANDBY_BIG_EFFECT_DELAYTIME_MAX;
+        });
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CUT_ELIMINATE_COMBO, [=](cocos2d::EventCustom*) {
+            score_ /= 2;
+            //dynamic_cast<cocostudio::Armature*>(this->getChildByName(BARREL_BOTTOM_STANDBY_EFFECT_NAME))->getAnimation()->setSpeedScale(1.0f);
+            this->initialStacdbyEffectTime();
+        });
+    }
 
     //void BarrelBottom::onExit()
     //{
     //    cocos2d::Node::onExit();
     //    cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(UI_NAME_BIG_COMBO_ELIMINATE);
+    //    cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_CUT_ELIMINATE_COMBO);
     //}
 
     bool BarrelBottom::initScoreWithName(const std::string& name)
@@ -35,15 +47,15 @@ namespace bubble_second {
         this->setName(BARREL_BOTTOM_NAME);
         this->initScore(name);
         this->initPhysicsBody();
-        this->playStandbyEffect();
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(UI_NAME_BIG_COMBO_ELIMINATE, [=](cocos2d::EventCustom*) {
-            dynamic_cast<cocostudio::Armature*>(this->getChildByName(BARREL_BOTTOM_STANDBY_EFFECT_NAME))->getAnimation()->setSpeedScale(BARREL_BOTTOM_STANDBY_EFFECT_SPEED_SCALE);
-            standby_effect_delaytime_max_ = BARREL_BOTTOM_STANDBY_BIG_EFFECT_DELAYTIME_MAX;
-        });
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CUT_ELIMINATE_COMBO, [=](cocos2d::EventCustom*) {
-            dynamic_cast<cocostudio::Armature*>(this->getChildByName(BARREL_BOTTOM_STANDBY_EFFECT_NAME))->getAnimation()->setSpeedScale(1.0f);
-            this->initialStacdbyEffectTime();
-        });
+        //this->playStandbyEffect();
+        //cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(UI_NAME_BIG_COMBO_ELIMINATE, [=](cocos2d::EventCustom*) {
+        //    dynamic_cast<cocostudio::Armature*>(this->getChildByName(BARREL_BOTTOM_STANDBY_EFFECT_NAME))->getAnimation()->setSpeedScale(BARREL_BOTTOM_STANDBY_EFFECT_SPEED_SCALE);
+        //    standby_effect_delaytime_max_ = BARREL_BOTTOM_STANDBY_BIG_EFFECT_DELAYTIME_MAX;
+        //});
+        //cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CUT_ELIMINATE_COMBO, [=](cocos2d::EventCustom*) {
+        //    dynamic_cast<cocostudio::Armature*>(this->getChildByName(BARREL_BOTTOM_STANDBY_EFFECT_NAME))->getAnimation()->setSpeedScale(1.0f);
+        //    this->initialStacdbyEffectTime();
+        //});
         return true;
     }
 
@@ -71,6 +83,12 @@ namespace bubble_second {
         }
     }
 
+    //void BarrelBottom::initScoreLabel()
+    //{
+    //    score_label_ = cocos2d::ui::TextBMFont::create(XMLTool::convertIntToString(score_), BARREL_SCORE_LABEL_FNT_PATH);
+    //    this->addChild(score_label_);
+    //}
+
     void BarrelBottom::playEffect()
     {
         using cocostudio::ArmatureDataManager;
@@ -93,30 +111,30 @@ namespace bubble_second {
         }
     }
 
-    void BarrelBottom::playStandbyEffect()
-    {
-        using cocostudio::ArmatureDataManager;
-        using cocostudio::Armature;
-        Armature* armature = Armature::create(BARREL_BOTTOM_STANDBY_EFFECT_NAME);
-        //armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-        auto call_func = [=](Armature* armature, cocostudio::MovementEventType type, const std::string&) {
-            if (type == cocostudio::COMPLETE)
-            {
-                armature->setVisible(false);
-                float time = RANDOM_DECIMALS(0, standby_effect_delaytime_max_);
-                armature->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(time), cocos2d::CallFunc::create(
-                    [=]() {
-                    armature->setVisible(true);
-                    armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-                })));
-            }
-        };
-        armature->getAnimation()->setMovementEventCallFunc(call_func);
-        call_func(armature, cocostudio::COMPLETE, "");
-        armature->setPositionY(BARREL_BOTTOM_STANDBY_EFFECT_POS_Y);
-        //armature->setPosition(-50, 50);
-        this->addChild(armature);
-    }
+    //void BarrelBottom::playStandbyEffect()
+    //{
+    //    using cocostudio::ArmatureDataManager;
+    //    using cocostudio::Armature;
+    //    Armature* armature = Armature::create(BARREL_BOTTOM_STANDBY_EFFECT_NAME);
+    //    //armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+    //    auto call_func = [=](Armature* armature, cocostudio::MovementEventType type, const std::string&) {
+    //        if (type == cocostudio::COMPLETE)
+    //        {
+    //            armature->setVisible(false);
+    //            float time = RANDOM_DECIMALS(0, standby_effect_delaytime_max_);
+    //            armature->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(time), cocos2d::CallFunc::create(
+    //                [=]() {
+    //                armature->setVisible(true);
+    //                armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+    //            })));
+    //        }
+    //    };
+    //    armature->getAnimation()->setMovementEventCallFunc(call_func);
+    //    call_func(armature, cocostudio::COMPLETE, "");
+    //    armature->setPositionY(BARREL_BOTTOM_STANDBY_EFFECT_POS_Y);
+    //    //armature->setPosition(-50, 50);
+    //    this->addChild(armature);
+    //}
 
     void BarrelBottom::initialStacdbyEffectTime()
     {

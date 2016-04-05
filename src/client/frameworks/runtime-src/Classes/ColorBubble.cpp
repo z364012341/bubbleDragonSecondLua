@@ -5,8 +5,8 @@
 #include "GamePlayController.h"
 #include "cocostudio\CocoStudio.h"
 #include "GameScoreController.h"
-#include "StageDataManager.h"
-#include "GameScene.h"
+//#include "StageDataManager.h"
+//#include "GameScene.h"
 const int STANBY_ACTION_TAG = 121;
 const float STANBY_ACTION_TIME = 0.5f;
 const float STANBY_ACTION_RANGE = 3.0f;

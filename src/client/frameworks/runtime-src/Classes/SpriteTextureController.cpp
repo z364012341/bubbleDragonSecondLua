@@ -37,7 +37,7 @@ namespace bubble_second {
         armature_path_.push_back(BARREL_BOTTOM_EFFECT_PATH);
         armature_path_.push_back(COLOR_BUBBLE_ELIMINATE_EFFECT_PATH);
         armature_path_.push_back(BALL_LIGHTNING_BUBBLE_EFFECT_PATH);
-        armature_path_.push_back(BARREL_BOTTOM_STANDBY_EFFECT_PATH);
+        //armature_path_.push_back(BARREL_BOTTOM_STANDBY_EFFECT_PATH);
         armature_path_.push_back(BIG_COMBO_EFFECT_FIRE_ONCE_PATH);
         armature_path_.push_back(BIG_COMBO_EFFECT_FIRE_REPEAT_PATH);
         armature_path_.push_back(BIG_COMBO_EFFECT_UNDER_FIRE_PATH);
