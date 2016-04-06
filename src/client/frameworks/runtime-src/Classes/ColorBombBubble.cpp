@@ -1,6 +1,6 @@
 #include "ColorBombBubble.h"
 #include "cocostudio\CocoStudio.h"
-
+#include "GameScoreController.h"
 namespace bubble_second {
     ColorBombBubble::ColorBombBubble()
     {
@@ -19,6 +19,7 @@ namespace bubble_second {
     void ColorBombBubble::bubbleEliminate(int)
     {
         this->removeFromParent();
+        GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
     }
 
     bool ColorBombBubble::init()

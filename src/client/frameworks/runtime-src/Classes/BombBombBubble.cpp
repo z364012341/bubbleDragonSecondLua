@@ -1,6 +1,6 @@
 #include "BombBombBubble.h"
 #include "cocostudio/CocoStudio.h"
-
+#include "GameScoreController.h"
 namespace bubble_second {
     BombBombBubble::BombBombBubble()
     {
@@ -30,6 +30,7 @@ namespace bubble_second {
     void BombBombBubble::bubbleEliminate(int combo)
     {
         this->removeFromParent();
+        GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
     }
 
     float BombBombBubble::playTheSpecialEffects()

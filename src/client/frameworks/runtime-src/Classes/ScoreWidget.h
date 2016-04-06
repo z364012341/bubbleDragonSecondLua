@@ -9,10 +9,11 @@
 //*******************************************************************************
 #ifndef _SCORE_WIDGET_H_
 #define _SCORE_WIDGET_H_
-#include "cocos2d.h"
+//#include "cocos2d.h"
 #include "BubbleSecondConstant.h"
 #include "cocostudio\CocoStudio.h"
 namespace bubble_second {
+    class PopScoreLabelComponent;
     class ScoreWidget : public cocos2d::Node
     {
     public:
@@ -52,13 +53,14 @@ namespace bubble_second {
     private:
         ScoreWidget();
         bool initWithType(const ScoreWidgetType& type);
+        void initPopScoreLabel();
         void setType(const ScoreWidgetType& type);
         //获取撞击增加的分数
         int getContactScore();
         void turnOffCombo(float);
         //分数标签
-        cocos2d::LabelAtlas* getPopScoreLabel();
-        void setPopScoreLabel(cocos2d::LabelAtlas* label);
+        //cocos2d::LabelAtlas* getPopScoreLabel();
+        //void setPopScoreLabel(cocos2d::LabelAtlas* label);
         //撞击特效
         void runContactAction(int score);
         //添加动画
@@ -66,7 +68,7 @@ namespace bubble_second {
         //播放飞行动画
         void playFlyingAnimation(float duration);
         //更新分数标签
-        void updatePopScoreLabel(int score);
+        //void updatePopScoreLabel(int score);
         //是否在播放撞击动画
         bool canPlayingContactAnimation();
         void setPlayContactAnimationEnabled(bool flag);
@@ -79,9 +81,10 @@ namespace bubble_second {
         std::map<ScoreWidgetType, int> type_to_score_;
         int widget_combo_;
         bool combo_flag_;
-        cocos2d::LabelAtlas* pop_score_label_;
+        //cocos2d::LabelAtlas* pop_score_label_;
         cocos2d::Vec2 self_position_;
         cocostudio::Armature* armature_;
+        PopScoreLabelComponent* label_component_ = nullptr;
     };
 }
 #endif //_SCORE_WIDGET_H_

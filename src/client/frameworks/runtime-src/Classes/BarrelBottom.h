@@ -13,6 +13,7 @@
 #include "cocostudio\CocoStudio.h"
 //#include "ui\UITextBMFont.h"
 namespace bubble_second {
+    class PopScoreLabelComponent;
     typedef bool EffectEnabled;
     class BarrelBottom : public cocos2d::Node
     {
@@ -42,6 +43,7 @@ namespace bubble_second {
         bool initScoreWithName(const std::string& name);
         void initPhysicsBody();
         void initScore(const std::string& name);
+        void initPopLabelComponent();
         //void initScoreLabel();
         //播放小球撞到的特效
         void playEffect();
@@ -55,6 +57,7 @@ namespace bubble_second {
         EffectEnabled effect_flag_;
         int standby_effect_delaytime_max_;
        //cocos2d::ui::TextBMFont* score_label_ = nullptr;
+        PopScoreLabelComponent* label_component_ = nullptr;
     };
 }
 #endif //_BARREL_BOTTOM_H_

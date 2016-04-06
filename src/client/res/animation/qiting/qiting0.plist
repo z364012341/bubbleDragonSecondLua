@@ -4,16 +4,16 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>qiting_0000_2.png</key>
+			<key>shadow.png</key>
 			<dict>
 				<key>width</key>
-				<integer>188</integer>
+				<integer>213</integer>
 				<key>height</key>
-				<integer>263</integer>
+				<integer>159</integer>
 				<key>originalWidth</key>
-				<integer>188</integer>
+				<integer>215</integer>
 				<key>originalHeight</key>
-				<integer>263</integer>
+				<integer>161</integer>
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
@@ -22,6 +22,234 @@
 				<real>0</real>
 				<key>offsetY</key>
 				<real>0</real>
+			</dict>
+			<key>qiting_0010_1.png</key>
+			<dict>
+				<key>width</key>
+				<integer>202</integer>
+				<key>height</key>
+				<integer>59</integer>
+				<key>originalWidth</key>
+				<integer>202</integer>
+				<key>originalHeight</key>
+				<integer>59</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>161</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0009_2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>190</integer>
+				<key>height</key>
+				<integer>88</integer>
+				<key>originalWidth</key>
+				<integer>190</integer>
+				<key>originalHeight</key>
+				<integer>88</integer>
+				<key>x</key>
+				<integer>215</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0008_3.png</key>
+			<dict>
+				<key>width</key>
+				<integer>200</integer>
+				<key>height</key>
+				<integer>42</integer>
+				<key>originalWidth</key>
+				<integer>200</integer>
+				<key>originalHeight</key>
+				<integer>42</integer>
+				<key>x</key>
+				<integer>215</integer>
+				<key>y</key>
+				<integer>90</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0007_4.png</key>
+			<dict>
+				<key>width</key>
+				<integer>203</integer>
+				<key>height</key>
+				<integer>88</integer>
+				<key>originalWidth</key>
+				<integer>203</integer>
+				<key>originalHeight</key>
+				<integer>88</integer>
+				<key>x</key>
+				<integer>215</integer>
+				<key>y</key>
+				<integer>134</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0006_5.png</key>
+			<dict>
+				<key>width</key>
+				<integer>181</integer>
+				<key>height</key>
+				<integer>96</integer>
+				<key>originalWidth</key>
+				<integer>181</integer>
+				<key>originalHeight</key>
+				<integer>96</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>222</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0005_6.png</key>
+			<dict>
+				<key>width</key>
+				<integer>200</integer>
+				<key>height</key>
+				<integer>85</integer>
+				<key>originalWidth</key>
+				<integer>200</integer>
+				<key>originalHeight</key>
+				<integer>85</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>320</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0004_7.png</key>
+			<dict>
+				<key>width</key>
+				<integer>193</integer>
+				<key>height</key>
+				<integer>113</integer>
+				<key>originalWidth</key>
+				<integer>193</integer>
+				<key>originalHeight</key>
+				<integer>113</integer>
+				<key>x</key>
+				<integer>202</integer>
+				<key>y</key>
+				<integer>224</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0003_8.png</key>
+			<dict>
+				<key>width</key>
+				<integer>219</integer>
+				<key>height</key>
+				<integer>72</integer>
+				<key>originalWidth</key>
+				<integer>219</integer>
+				<key>originalHeight</key>
+				<integer>72</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>407</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0002_9.png</key>
+			<dict>
+				<key>width</key>
+				<integer>216</integer>
+				<key>height</key>
+				<integer>53</integer>
+				<key>originalWidth</key>
+				<integer>216</integer>
+				<key>originalHeight</key>
+				<integer>53</integer>
+				<key>x</key>
+				<integer>202</integer>
+				<key>y</key>
+				<integer>339</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0001_10.png</key>
+			<dict>
+				<key>width</key>
+				<integer>182</integer>
+				<key>height</key>
+				<integer>95</integer>
+				<key>originalWidth</key>
+				<integer>182</integer>
+				<key>originalHeight</key>
+				<integer>95</integer>
+				<key>x</key>
+				<integer>221</integer>
+				<key>y</key>
+				<integer>394</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0000_11.png</key>
+			<dict>
+				<key>width</key>
+				<integer>202</integer>
+				<key>height</key>
+				<integer>59</integer>
+				<key>originalWidth</key>
+				<integer>202</integer>
+				<key>originalHeight</key>
+				<integer>59</integer>
+				<key>x</key>
+				<integer>407</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>qiting_0000_2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>172</integer>
+				<key>height</key>
+				<integer>253</integer>
+				<key>originalWidth</key>
+				<integer>188</integer>
+				<key>originalHeight</key>
+				<integer>263</integer>
+				<key>x</key>
+				<integer>420</integer>
+				<key>y</key>
+				<integer>61</integer>
+				<key>offsetX</key>
+				<real>-2</real>
+				<key>offsetY</key>
+				<real>2</real>
 			</dict>
 		</dict>
 		<key>metadata</key>
@@ -33,14 +261,14 @@
 			<key>realTextureFileName</key>
 			<string>qiting0.png</string>
 			<key>size</key>
-			<string>{1024,2048}</string>
+			<string>{1024,1024}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
 			<integer>1024</integer>
 			<key>height</key>
-			<integer>2048</integer>
+			<integer>1024</integer>
 		</dict>
 	</dict>
 </plist>

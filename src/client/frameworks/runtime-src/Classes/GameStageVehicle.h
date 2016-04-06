@@ -18,12 +18,15 @@ namespace bubble_second {
 	public:
 		CREATE_FUNC(GameStageVehicle);
 		~GameStageVehicle();
-		void setPositionWithWorldPosition(const cocos2d::Vec2& point);
+        void moveVehicle(cocos2d::CallFunc* call_func);
+        void setVehicleDirection();
+        void setPositionWithWorldPosition(const cocos2d::Vec2& point);
 	private:
 		GameStageVehicle();
 		bool init();
 		void addArmature();
 		void playStandbyAnimation();
+
 	private:
 		cocostudio::Armature* vehicle_armature_ = nullptr;
 	};

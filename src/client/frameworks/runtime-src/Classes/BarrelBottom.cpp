@@ -3,8 +3,9 @@
 #include "SmartScaleController.h"
 #include "cocos2d.h"
 #include "GameScoreController.h"
-//#include "XMLTool.h"
+#include "PopScoreLabelComponent.h"
 const std::string BARREL_SCORE_LABEL_FNT_PATH = "fonts/tongshuzi-export.fnt";
+const float POP_SCORE_LABEL_POS_Y = 85.0f;
 namespace bubble_second {
     BarrelBottom::BarrelBottom()
     {
@@ -46,6 +47,7 @@ namespace bubble_second {
         this->initialStacdbyEffectTime();
         this->setName(BARREL_BOTTOM_NAME);
         this->initScore(name);
+        this->initPopLabelComponent();
         this->initPhysicsBody();
         //this->playStandbyEffect();
         //cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(UI_NAME_BIG_COMBO_ELIMINATE, [=](cocos2d::EventCustom*) {
@@ -81,8 +83,15 @@ namespace bubble_second {
         {
             score_ = BARREL_BOTTOM_SCORE_FIFTH;
         }
+
     }
 
+    void bubble_second::BarrelBottom::initPopLabelComponent()
+    {
+        label_component_ = PopScoreLabelComponent::create();
+        label_component_->setPositionY(POP_SCORE_LABEL_POS_Y);
+        this->addChild(label_component_);
+    }
     //void BarrelBottom::initScoreLabel()
     //{
     //    score_label_ = cocos2d::ui::TextBMFont::create(XMLTool::convertIntToString(score_), BARREL_SCORE_LABEL_FNT_PATH);
@@ -161,6 +170,7 @@ namespace bubble_second {
     {
         //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SCORE_ADD, &score_);
         GameScoreController::getInstance()->addScoreWithNumble(score_);
+        label_component_->popLabelWithScore(score_);
         this->playEffect();
     }
 }

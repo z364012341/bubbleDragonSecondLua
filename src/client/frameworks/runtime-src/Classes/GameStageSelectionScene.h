@@ -10,8 +10,6 @@
 #ifndef _GAME_STAGE_SELECTION_SCENE_H_
 #define _GAME_STAGE_SELECTION_SCENE_H_
 #include "BubbleSecondConstant.h"
-//#include "extensions\cocos-ext.h"
-//#include "GUI\CCScrollView\CCScrollView.h"
 #include "cocostudio\CocoStudio.h"
 #include "ui\UIScrollView.h"
 #include "ui\UIButton.h"

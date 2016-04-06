@@ -17,11 +17,15 @@ namespace bubble_second {
     public:
         CREATE_FUNC(PopScoreLabelComponent);
         ~PopScoreLabelComponent();
+        void popLabelWithScore(int score);
+        void popOnceLabelWithScore(int score);
     private:
         PopScoreLabelComponent();
         bool init();
+        void runPopAction();
     private:
         cocos2d::ui::TextBMFont* score_label_ = nullptr;
+        bool remove_flag_ = false;
     };
 }
 #endif //_PopScore_Label_Component_H_

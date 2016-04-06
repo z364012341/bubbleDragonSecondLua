@@ -35,7 +35,7 @@ const float TOP_INFO_POS_Y_PERCENT = 0.9564f;
 const float BUTTON_POS_Y_PERCENT_1 = 0.8343f;
 const float BUTTON_POS_Y_PERCENT_2 = 0.6988f;
 const float BUTTON_POS_Y_PERCENT_3 = 0.6988f;
-const float STAGE_VEHICLE_MOVE_DURATION = 2.0f;
+
 namespace bubble_second {
     cocos2d::Vec2 GameStageSelectionScene::scrollview_offset_ = cocos2d::Vec2::ZERO;
     GameStageSelectionScene::GameStageSelectionScene()
@@ -297,24 +297,39 @@ namespace bubble_second {
         UserDataManager::getInstance()->addUnlockStageNumble();
         StageMenuManager::getInstance()->getCurentStagemenu()->preUnlockStage();
 
-		stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
+		//stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
 
-		cocos2d::MoveBy * move = cocos2d::MoveBy::create(STAGE_VEHICLE_MOVE_DURATION, StageMenuManager::getInstance()->getCurrentStagePositionDelta());
-		cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move, cocos2d::CallFunc::create([=](){
-			StageData next_data;
-			if (cell_vector_.at(data.cell_numble)->isInCell(data.level_numble))
-			{
-				next_data.cell_numble = data.cell_numble;
-			}
-			else
-			{
-				next_data.cell_numble = data.cell_numble + 1;
-			}
-			next_data.level_numble = data.level_numble + 1;
+		//cocos2d::MoveBy * move = cocos2d::MoveBy::create(STAGE_VEHICLE_MOVE_DURATION, StageMenuManager::getInstance()->getCurrentStagePositionDelta());
+		//cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move, cocos2d::CallFunc::create([=](){
+		//	StageData next_data;
+		//	if (cell_vector_.at(data.cell_numble)->isInCell(data.level_numble))
+		//	{
+		//		next_data.cell_numble = data.cell_numble;
+		//	}
+		//	else
+		//	{
+		//		next_data.cell_numble = data.cell_numble + 1;
+		//	}
+		//	next_data.level_numble = data.level_numble + 1;
+  //          StageMenuManager::getInstance()->getCurentStagemenu()->unlockStage();
+		//	//this->popEnterGameAlert(next_data);
+		//}));
+		//stage_vehicle_->runAction(seq);
+
+        stage_vehicle_->moveVehicle(cocos2d::CallFunc::create([=]() {
+            StageData next_data;
+            if (cell_vector_.at(data.cell_numble)->isInCell(data.level_numble))
+            {
+                next_data.cell_numble = data.cell_numble;
+            }
+            else
+            {
+                next_data.cell_numble = data.cell_numble + 1;
+        }
+            next_data.level_numble = data.level_numble + 1;
             StageMenuManager::getInstance()->getCurentStagemenu()->unlockStage();
-			//this->popEnterGameAlert(next_data);
-		}));
-		stage_vehicle_->runAction(seq);
+            //this->popEnterGameAlert(next_data);
+    }));
     }
 
     void bubble_second::GameStageSelectionScene::gotoPuzzleGame()

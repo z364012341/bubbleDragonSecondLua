@@ -2,6 +2,7 @@
 #include "BubbleFactory.h"
 #include "SpriteTextureController.h"
 #include "GamePlayController.h"
+//#include "GameScoreController.h"
 namespace bubble_second {
     BaseBubble::BaseBubble()
     {
@@ -66,34 +67,34 @@ namespace bubble_second {
 
     void BaseBubble::bubbleEliminate(int combo)
     {
-        if (this->getParent())
-        {
-            cocos2d::ScaleTo* scaleto = cocos2d::ScaleTo::create(0.02f, 1.3f);
-            cocos2d::Sequence* seq_2 = cocos2d::Sequence::create(scaleto,
-                cocos2d::CallFunc::create([=]() {
-                char score_text[10];
-                sprintf(score_text, "%d", SINGLE_BUBBLE_SCORE(combo));
-                cocos2d::LabelAtlas* pop_score_label = cocos2d::LabelAtlas::create(
-                    score_text, POP_SCORE_CHARMAP_PATH, POP_SCORE_CHARMAP_ITEMWIDTH, POP_SCORE_CHARMAP_ITEMHEIGHT, '.');
-                pop_score_label->setAnchorPoint(POP_SCORE_ANCHORPOINT);
-                pop_score_label->setScale(POP_SCORE_INITIAL_SCALE);
-                pop_score_label->setPosition(this->getPosition());
-                cocos2d::ScaleTo* scaleto_1 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_1_TIME, POP_SCORE_SCALETO_1_NUMBLE);
-                cocos2d::ScaleTo* scaleto_2 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_2_TIME, POP_SCORE_SCALETO_2_NUMBLE);
-                cocos2d::ScaleTo* scaleto_3 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_3_TIME, POP_SCORE_SCALETO_3_NUMBLE);
-                cocos2d::ScaleTo* scaleto_4 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_4_TIME, POP_SCORE_SCALETO_4_NUMBLE);
-                cocos2d::ScaleTo* scaleto_5 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_5_TIME, POP_SCORE_SCALETO_5_NUMBLE);
-                cocos2d::MoveBy* move = cocos2d::MoveBy::create(POP_SCORE_MOVEBY_TIME, POP_SCORE_MOVEBY_VEC2);
-                cocos2d::Sequence* seq = cocos2d::Sequence::create(scaleto_1, scaleto_2, scaleto_3, scaleto_4, scaleto_5,
-                    cocos2d::DelayTime::create(POP_SCORE_DELAYTIME),
-                    cocos2d::CallFunc::create([=]() {pop_score_label->removeFromParent(); }), NULL);
-                cocos2d::Spawn* spawn = cocos2d::Spawn::createWithTwoActions(move, seq);
-                this->getParent()->addChild(pop_score_label);
-                pop_score_label->runAction(spawn);
+        //if (this->getParent())
+        //{
+        //    cocos2d::ScaleTo* scaleto = cocos2d::ScaleTo::create(0.02f, 1.3f);
+        //    cocos2d::Sequence* seq_2 = cocos2d::Sequence::create(scaleto,
+        //        cocos2d::CallFunc::create([=]() {
+        //        char score_text[10];
+        //        sprintf(score_text, "%d", SINGLE_BUBBLE_SCORE(combo));
+        //        cocos2d::LabelAtlas* pop_score_label = cocos2d::LabelAtlas::create(
+        //            score_text, POP_SCORE_CHARMAP_PATH, POP_SCORE_CHARMAP_ITEMWIDTH, POP_SCORE_CHARMAP_ITEMHEIGHT, '.');
+        //        pop_score_label->setAnchorPoint(POP_SCORE_ANCHORPOINT);
+        //        pop_score_label->setScale(POP_SCORE_INITIAL_SCALE);
+        //        pop_score_label->setPosition(this->getPosition());
+        //        cocos2d::ScaleTo* scaleto_1 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_1_TIME, POP_SCORE_SCALETO_1_NUMBLE);
+        //        cocos2d::ScaleTo* scaleto_2 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_2_TIME, POP_SCORE_SCALETO_2_NUMBLE);
+        //        cocos2d::ScaleTo* scaleto_3 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_3_TIME, POP_SCORE_SCALETO_3_NUMBLE);
+        //        cocos2d::ScaleTo* scaleto_4 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_4_TIME, POP_SCORE_SCALETO_4_NUMBLE);
+        //        cocos2d::ScaleTo* scaleto_5 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_5_TIME, POP_SCORE_SCALETO_5_NUMBLE);
+        //        cocos2d::MoveBy* move = cocos2d::MoveBy::create(POP_SCORE_MOVEBY_TIME, POP_SCORE_MOVEBY_VEC2);
+        //        cocos2d::Sequence* seq = cocos2d::Sequence::create(scaleto_1, scaleto_2, scaleto_3, scaleto_4, scaleto_5,
+        //            cocos2d::DelayTime::create(POP_SCORE_DELAYTIME),
+        //            cocos2d::CallFunc::create([=]() {pop_score_label->removeFromParent(); }), NULL);
+        //        cocos2d::Spawn* spawn = cocos2d::Spawn::createWithTwoActions(move, seq);
+        //        this->getParent()->addChild(pop_score_label);
+        //        pop_score_label->runAction(spawn);
                 this->removeFromParent();
-            }), NULL);
-            this->runAction(seq_2);
-        }
+        //    }), NULL);
+        //    this->runAction(seq_2);
+        //}
     }
 
     void BaseBubble::addBubbleStaticBody()

@@ -33,6 +33,7 @@
 #include "StageDataManager.h"
 #include "ButtonEffectController.h"
 #include "BarrelScoreLabelNode.h"
+#include "PopScoreLabelComponent.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -75,6 +76,7 @@ const std::string UI_NAME_BARREL_NODE = "barrel_body"; //桶身体
 //UI_NAME_BARREL_NUMBLE_THIRD,UI_NAME_BARREL_NUMBLE_FOURTH,UI_NAME_BARREL_NUMBLE_FIFTH };
 const std::string UI_NAME_BUBBLE_USE_COUNT = "bubble_numble_label";//小球使用数的label
 const std::string UI_NAME_SECOND_BUBBLE_STORE = "second_bubble_store";        //喵准器旁边的小草
+const int BARRELHEADEDGE_BODY_RADIUS = 20;  //桶边刚体半径
 namespace bubble_second {
     cocos2d::Scene* GameScene::createScene(int cell_numble, int numble)
     {
@@ -1106,29 +1108,31 @@ namespace bubble_second {
     void GameScene::addEliminateScoreLabel(cocos2d::EventCustom * event)
     {
         cocos2d::ValueMap data_map = *static_cast<cocos2d::ValueMap*>(event->getUserData());
-        std::string score_text = data_map.at(EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_SCORE_KEY).asString();
-        cocos2d::LabelAtlas* pop_score_label = cocos2d::LabelAtlas::create(
-            score_text, POP_SCORE_CHARMAP_PATH, POP_SCORE_CHARMAP_ITEMWIDTH, POP_SCORE_CHARMAP_ITEMHEIGHT, '.');
-        pop_score_label->setAnchorPoint(POP_SCORE_ANCHORPOINT);
-        pop_score_label->setScale(POP_SCORE_INITIAL_SCALE);
-        cocos2d::ScaleTo* scaleto_1 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_1_TIME, POP_SCORE_SCALETO_1_NUMBLE);
-        cocos2d::ScaleTo* scaleto_2 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_2_TIME, POP_SCORE_SCALETO_2_NUMBLE);
-        cocos2d::ScaleTo* scaleto_3 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_3_TIME, POP_SCORE_SCALETO_3_NUMBLE);
-        cocos2d::ScaleTo* scaleto_4 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_4_TIME, POP_SCORE_SCALETO_4_NUMBLE);
-        cocos2d::ScaleTo* scaleto_5 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_5_TIME, POP_SCORE_SCALETO_5_NUMBLE);
-        cocos2d::MoveBy* move = cocos2d::MoveBy::create(POP_SCORE_MOVEBY_TIME, POP_SCORE_MOVEBY_VEC2);
-        cocos2d::Sequence* seq = cocos2d::Sequence::create(scaleto_1, scaleto_2, scaleto_3, scaleto_4, scaleto_5,
-            cocos2d::CallFunc::create([=]() {
-            pop_score_label->removeFromParent();
-        }), NULL);
-        cocos2d::Spawn* spawn = cocos2d::Spawn::createWithTwoActions(move, seq);
-        pop_score_label->runAction(spawn);
+        //std::string score_text = data_map.at(EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_SCORE_KEY).asString();
+        //cocos2d::ui::TextBMFont* pop_score_label = cocos2d::ui::TextBMFont::create(
+        //    score_text, POP_SCORE_CHARMAP_PATH);
+        //pop_score_label->setAnchorPoint(POP_SCORE_ANCHORPOINT);
+        //pop_score_label->setScale(POP_SCORE_INITIAL_SCALE);
+        //cocos2d::ScaleTo* scaleto_1 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_1_TIME, POP_SCORE_SCALETO_1_NUMBLE);
+        //cocos2d::ScaleTo* scaleto_2 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_2_TIME, POP_SCORE_SCALETO_2_NUMBLE);
+        //cocos2d::ScaleTo* scaleto_3 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_3_TIME, POP_SCORE_SCALETO_3_NUMBLE);
+        //cocos2d::ScaleTo* scaleto_4 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_4_TIME, POP_SCORE_SCALETO_4_NUMBLE);
+        //cocos2d::ScaleTo* scaleto_5 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_5_TIME, POP_SCORE_SCALETO_5_NUMBLE);
+        //cocos2d::MoveBy* move = cocos2d::MoveBy::create(POP_SCORE_MOVEBY_TIME, POP_SCORE_MOVEBY_VEC2);
+        //cocos2d::Sequence* seq = cocos2d::Sequence::create(scaleto_1, scaleto_2, scaleto_3, scaleto_4, scaleto_5,
+        //    cocos2d::CallFunc::create([=]() {
+        //    pop_score_label->removeFromParent();
+        //}), NULL);
+        //cocos2d::Spawn* spawn = cocos2d::Spawn::createWithTwoActions(move, seq);
+        //pop_score_label->runAction(spawn);
 
+        PopScoreLabelComponent* pop_score_label = PopScoreLabelComponent::create();
+        //pop_score_label->setScale(POP_SCORE_INITIAL_SCALE);
         cocos2d::Vec2 point(data_map.at(EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_POS_X_KEY).asFloat(), 
             data_map.at(EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_POS_Y_KEY).asFloat());
         pop_score_label->setPosition(this->convertMapToCsbSpace(point));
         csb_node_->addChild(pop_score_label);
-
+        pop_score_label->popOnceLabelWithScore(data_map.at(EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_SCORE_KEY).asInt());
     }
 
     void GameScene::clingBubble(cocos2d::EventCustom* event)
@@ -1281,6 +1285,8 @@ namespace bubble_second {
 
     void GameScene::cancelUsedBubbleBombProps(cocos2d::EventCustom* event)
     {
+        property_bubble_->removeFromParent();
+        property_bubble_ = nullptr;
         this->haveShootPropsBubble(static_cast<BaseProperty*>(event->getUserData()));
     }
 

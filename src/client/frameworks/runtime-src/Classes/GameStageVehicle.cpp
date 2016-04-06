@@ -1,7 +1,10 @@
 #include "GameStageVehicle.h"
 #include "BubbleSecondConstant.h"
+#include "StageMenuManager.h"
 const std::string FIRE_BALLON_ARMATURE_NAME = "qiting";
 const std::string FIRE_BALLON_ANIMATION_STANDBY_NAME = "yidong";
+const float STAGE_VEHICLE_MOVE_DURATION = 2.0f;
+const std::string VEHICLE_FLAG_BONE_NAME = "Layer8";
 namespace bubble_second {
 	GameStageVehicle::GameStageVehicle()
 	{
@@ -37,5 +40,26 @@ namespace bubble_second {
 	void GameStageVehicle::setPositionWithWorldPosition(const cocos2d::Vec2& point)
 	{
 		this->setPosition(this->getParent()->convertToNodeSpace(point));
+        this->setVehicleDirection();
 	}
+    void GameStageVehicle::moveVehicle(cocos2d::CallFunc * call_func)
+    {
+        this->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
+        cocos2d::MoveBy * move = cocos2d::MoveBy::create(STAGE_VEHICLE_MOVE_DURATION, 
+            StageMenuManager::getInstance()->getCurrentStagePositionDelta());
+        cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move, call_func);
+        this->runAction(seq);
+    }
+
+    void GameStageVehicle::setVehicleDirection()
+    {
+        if (StageMenuManager::getInstance()->getCurrentStagePositionDelta().x > 0)
+        {
+            vehicle_armature_->getBone(VEHICLE_FLAG_BONE_NAME)->setScaleX(1);
+        }
+        else
+        {
+            vehicle_armature_->getBone(VEHICLE_FLAG_BONE_NAME)->setScaleX(-1);
+        }
+    }
 }
