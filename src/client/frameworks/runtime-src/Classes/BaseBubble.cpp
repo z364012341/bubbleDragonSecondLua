@@ -2,7 +2,7 @@
 #include "BubbleFactory.h"
 #include "SpriteTextureController.h"
 #include "GamePlayController.h"
-//#include "GameScoreController.h"
+#include "GameScoreController.h"
 namespace bubble_second {
     BaseBubble::BaseBubble()
     {
@@ -92,9 +92,31 @@ namespace bubble_second {
         //        this->getParent()->addChild(pop_score_label);
         //        pop_score_label->runAction(spawn);
                 this->removeFromParent();
+                this->disposeAirShootBubble();
+                //GamePlayController::getInstance()->checkAirBubbles();
         //    }), NULL);
         //    this->runAction(seq_2);
         //}
+    }
+
+    void BaseBubble::bubbleEliminateInSequence(int combo, float time)
+    {
+        GamePlayController::getInstance()->subtractPrepareColor(this->getBubbleType());
+        this->disposeAirShootBubble();
+        cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(time), cocos2d::CallFunc::create([=]() {
+            GamePlayController::getInstance()->disposeDarkCloudBubble(this->getBubbleIndex());
+            this->bubbleEliminate(combo);
+        }));
+        this->runAction(seq);
+    }
+
+    void BaseBubble::disposeAirShootBubble()
+    {
+        if (this->isShootBubble())
+        {
+            GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
+            this->setShootBubble(false);
+        }
     }
 
     void BaseBubble::addBubbleStaticBody()
@@ -190,6 +212,16 @@ namespace bubble_second {
     void BaseBubble::setSupensionPoint(bool flag)
     {
         suspension_flag_ = flag;
+    }
+
+    void BaseBubble::setShootBubble(bool flag)
+    {
+        shoot_bubble_flag_ = flag;
+    }
+
+    bool BaseBubble::isShootBubble()
+    {
+        return shoot_bubble_flag_;
     }
 
     void BaseBubble::setEliminateDelayTime(float time)

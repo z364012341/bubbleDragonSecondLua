@@ -120,7 +120,7 @@ namespace bubble_second {
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_UPDATE_BUBBLE_USE_COUNT_LABEL);
     }
 
-    bool GameScoreController::isNoPreareBubbleInAir()
+    bool GameScoreController::isNoShootBubbleInAir()
     {
         return prepare_bubble_in_air_numble_ == 0;
     }
@@ -132,7 +132,7 @@ namespace bubble_second {
 
     bool GameScoreController::gameDefeat()
     {
-        return noUseBubbleCount() && !this->gameVictory() && this->isNoPreareBubbleInAir();
+        return noUseBubbleCount() && !this->gameVictory() && this->isNoShootBubbleInAir();
     }
 
     bool GameScoreController::noUseBubbleCount()

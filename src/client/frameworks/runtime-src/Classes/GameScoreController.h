@@ -70,7 +70,7 @@ namespace bubble_second {
         void dispatchUpdateCompletedTaskEvent();
         void dispatchUpdateBubbleUseCount();
 
-        bool isNoPreareBubbleInAir();
+        bool isNoShootBubbleInAir();
     private:
         GameScoreController();
     private:

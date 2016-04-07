@@ -29,8 +29,8 @@ namespace bubble_second {
 
     void BombBombBubble::bubbleEliminate(int combo)
     {
-        this->removeFromParent();
-        GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
+        //this->removeFromParent();
+        BaseBubble::bubbleEliminate();
     }
 
     float BombBombBubble::playTheSpecialEffects()

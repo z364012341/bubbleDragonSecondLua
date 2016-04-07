@@ -113,6 +113,7 @@ namespace bubble_second {
         //获取地图面板原始位置
         cocos2d::Vec2 getBubbleMapOrigin();
         //获取发射小球
+        void setPrepareColorBubble(BaseBubble* bubble);
         BaseBubble* getPrepareBubble();
         //获取第二备用小球
 		void setSecondPrepareBubble(BaseBubble* bubble);
@@ -342,6 +343,7 @@ namespace bubble_second {
         StageType stage_type_;
         bool is_fall_stage_ = false;
 		cocos2d::ui::Button* pause_menu_ = nullptr;
+        BaseBubble* prepare_bubble_ = nullptr;
 		BaseBubble* second_bubble_ = nullptr;
 		ScoreProgressMenu* score_progress_ = nullptr;
         BarrelScoreLabelNode* barrel_score_node_ = nullptr;

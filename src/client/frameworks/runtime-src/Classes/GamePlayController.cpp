@@ -391,7 +391,7 @@ namespace bubble_second {
 
     void bubble_second::GamePlayController::disposeContactWindmillBorder(cocos2d::Node * border_node, cocos2d::Node * other_node)
     {
-        other_node->removeFromParent();
+        dynamic_cast<BaseBubble*>(other_node)->bubbleEliminate();
     }
 
     void GamePlayController::disposeFallBubbleBorder(cocos2d::Node * border_node, cocos2d::Node * other_node)

@@ -85,6 +85,7 @@ function PuzzlePiece:moveToAnswer()
     local answerPoint = answer:getParent():convertToWorldSpace(cc.p(answer:getPosition()));
     self:setPosition(self:getParent():convertToNodeSpace(answerPoint));
     self._shadow:removeFromParent();
+    self:setLocalZOrder(0);
     cc.Director:getInstance():getEventDispatcher():removeEventListenersForTarget(self);
 end
 

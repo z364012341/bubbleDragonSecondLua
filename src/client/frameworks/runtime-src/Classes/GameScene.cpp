@@ -801,10 +801,11 @@ namespace bubble_second {
     void GameScene::addPrepareBubble()
     {
         BaseBubble* bubble = this->createPrepareBubble();//测试,没有填入参数
-        bubble->setName(PREPARE_BUBBLE_NAME);
+        //bubble->setName(PREPARE_BUBBLE_NAME);
         bubble->setPosition(this->getGunsightPosition());
         auto controller = GamePlayController::getInstance();
         controller->setPrepareBubble(bubble);
+        this->setPrepareColorBubble(bubble);
         if (BaseBubble* second_bubble = this->addSecondPrepareBubble())
         {
             second_bubble->setVisible(true);
@@ -851,7 +852,8 @@ namespace bubble_second {
         {
             return;
         }
-        bubble->setName(PREPARE_BUBBLE_NAME);
+        //bubble->setName(PREPARE_BUBBLE_NAME);
+        this->setPrepareColorBubble(bubble);
         BaseBubble* second_bubble = this->addSecondPrepareBubble();
         GamePlayController::getInstance()->setPrepareBubble(bubble);
         cocos2d::MoveTo* move = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getGunsightPosition());
@@ -1140,8 +1142,8 @@ namespace bubble_second {
         BubbleVector* bubble_vector = static_cast<BubbleVector*>(event->getUserData());
         BaseBubble* sprite = bubble_vector->at(0);
         BaseBubble* bubble = bubble_vector->at(1);
-        auto controller = GamePlayController::getInstance();
-        controller->addPrepareColor(bubble->getBubbleType());
+        //auto controller = GamePlayController::getInstance();
+        GamePlayController::getInstance()->addPrepareColor(bubble->getBubbleType());
         dynamic_cast<ColorBubble*>(bubble)->runBubbleEffect(LONG_EFFECT_BUBBLE_KEY,
             bubble_map_node_->convertToNodeSpaceAR(sprite->getPosition()));
         sprite->removeFromParent();
@@ -1599,11 +1601,11 @@ namespace bubble_second {
     void GameScene::eliminateSprites(cocos2d::EventCustom* event)
     {
         auto sprites = static_cast<BubbleVector*>(event->getUserData());
-        auto controller = GamePlayController::getInstance();
+        //auto controller = GamePlayController::getInstance();
         int combo = GameScoreController::getInstance()->getEliminateCombo();
         float time = this->playBubblesEffects(*sprites);
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(time), cocos2d::CallFunc::create([=]() {
-            controller->checkAirBubbles(); 
+            GamePlayController::getInstance()->checkAirBubbles();
         })));
         int color_bubble_numble = 0;
         for (size_t i = 0; i != sprites->size(); i++)
@@ -1614,23 +1616,23 @@ namespace bubble_second {
             {
                 ++color_bubble_numble;
             }
-            if (var->getName() != PREPARE_BUBBLE_NAME)
-            {
-                controller->subtractPrepareColor(var->getBubbleType());
-            }
-            else
-            {
-                GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
-            }
-            cocos2d::Vector<cocos2d::FiniteTimeAction*> arrayOfActions;
-            arrayOfActions.pushBack(cocos2d::DelayTime::create(time));
-            arrayOfActions.pushBack(cocos2d::CallFunc::create([=]() {
-                controller->disposeDarkCloudBubble(var->getBubbleIndex());
-                var->bubbleEliminate(combo);
-            }));
-            cocos2d::Sequence* seq = cocos2d::Sequence::create(arrayOfActions);
-            var->runAction(seq);
-
+            //if (var->getName() != PREPARE_BUBBLE_NAME)
+            //{
+            //    GamePlayController::getInstance()->subtractPrepareColor(var->getBubbleType());
+            //}
+            //else
+            //{
+            //    GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
+            //}
+            //cocos2d::Vector<cocos2d::FiniteTimeAction*> arrayOfActions;
+            //arrayOfActions.pushBack(cocos2d::DelayTime::create(combo));
+            //arrayOfActions.pushBack(cocos2d::CallFunc::create([=]() {
+            //    GamePlayController::getInstance()->disposeDarkCloudBubble(var->getBubbleIndex());
+            //    var->bubbleEliminate(combo);
+            //}));
+            //cocos2d::Sequence* seq = cocos2d::Sequence::create(arrayOfActions);
+            //var->runAction(seq);
+            var->bubbleEliminateInSequence(combo, time);
         }
         GameScoreController::getInstance()->addScoreWithEliminateNumble(color_bubble_numble);
         this->setPropertyTouchEnabled(true);
@@ -1680,9 +1682,16 @@ namespace bubble_second {
         dispatcher->removeEventListenersForTarget(this->getSecondBubbleStoreNode());
     }
 
+    void GameScene::setPrepareColorBubble(BaseBubble * bubble)
+    {
+        prepare_bubble_ = bubble;
+        prepare_bubble_->setName(PREPARE_BUBBLE_NAME);
+    }
+
     BaseBubble* GameScene::getPrepareBubble()
     {
-        return dynamic_cast<BaseBubble*>(csb_node_->getChildByName(PREPARE_BUBBLE_NAME));
+        //return dynamic_cast<BaseBubble*>(csb_node_->getChildByName(PREPARE_BUBBLE_NAME));
+        return prepare_bubble_;
     }
 
 	void GameScene::setSecondPrepareBubble(BaseBubble* bubble)

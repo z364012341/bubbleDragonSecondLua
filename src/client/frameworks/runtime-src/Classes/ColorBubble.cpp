@@ -131,10 +131,11 @@ namespace bubble_second {
             }
         });
         this->getParent()->addChild(armature);
-
+        //BaseBubble::bubbleEliminate();
         cocos2d::ScaleTo* scaleto = cocos2d::ScaleTo::create(BUBBLE_ELIMINATE_DELAY_TIME, BUBBLE_ELIMINATE_SCALETO);
         cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(scaleto, cocos2d::CallFunc::create([=]() {
-            this->removeFromParent();
+            BaseBubble::bubbleEliminate();
+            //this->removeFromParent();
         }));
         this->runAction(seq);
     }
@@ -274,7 +275,7 @@ namespace bubble_second {
         GameScoreController::getInstance()->addPrepareBubbleAirNumble();
 		GamePlayController::getInstance()->setPrepareBubble(nullptr);
         this->dispatchEventAfterShooted();
-
+        this->setShootBubble(true);
         //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHOOT_PREPARE_BUBBLE);
     }
 

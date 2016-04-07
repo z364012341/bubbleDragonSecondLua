@@ -31,7 +31,14 @@ namespace bubble_second {
 
 	cocos2d::Vec2 StageMenuManager::getLastStageWorldPosition() const
 	{
-		return last_menu_->getParent()->convertToWorldSpace(last_menu_->getPosition());
+        if (last_menu_ != nullptr)
+        {
+            return last_menu_->getParent()->convertToWorldSpace(last_menu_->getPosition());
+        }
+        else
+        {
+            return this->getCurrentStageWorldPosition();
+        }
 	}
 
 	cocos2d::Vec2 StageMenuManager::getCurrentStagePositionDelta() const

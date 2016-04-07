@@ -491,7 +491,7 @@ namespace bubble_second {
     void GameBubbleMap::disposeWindmillBubbleContactBorder(BaseBubble* bubble)
     {
         game_bubble_map_impl_->removeSpriteFromeMapWithIndex(bubble->getBubbleIndex());
-        dynamic_cast<ColorBubble*>(bubble)->playEliminateEffect();
+        dynamic_cast<ColorBubble*>(bubble)->bubbleEliminateInSequence();
         this->disposeCompletedTaskNumble();
         if (bubble->getName() == PREPARE_BUBBLE_NAME)
         {

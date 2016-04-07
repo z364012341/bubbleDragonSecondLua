@@ -48,6 +48,8 @@ namespace bubble_second {
         virtual void downFromAir();
         //小球正常消除
         virtual void bubbleEliminate(int combo = 0);
+        void bubbleEliminateInSequence(int combo = 0, float time = 0);
+        void disposeAirShootBubble();
         //需要从地图中移除
         virtual bool needRemoveFromBubbleMap();
         //播放消除前的动画, 一般就是特殊泡泡才有这个动画
@@ -96,6 +98,9 @@ namespace bubble_second {
         //计算撞击特效的方向
         cocos2d::Vec2 getEffectDistance(const cocos2d::Vec2& point, float distance);
         void setSupensionPoint(bool flag);
+        //设置发射小球flag
+        void setShootBubble(bool flag);
+        bool isShootBubble();
     protected:
         std::map<std::string, std::function<void(const cocos2d::Vec2& point)>> key_to_handle_effect_;
     private:
@@ -107,6 +112,7 @@ namespace bubble_second {
         bool suspension_flag_;
         int bubble_component_numble_;
         bool had_contacted_ = false;
+        bool shoot_bubble_flag_ = false;
     };
 }
 #endif //_BASE_BUBBLE_H_

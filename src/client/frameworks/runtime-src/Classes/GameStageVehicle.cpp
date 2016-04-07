@@ -53,7 +53,7 @@ namespace bubble_second {
 
     void GameStageVehicle::setVehicleDirection()
     {
-        if (StageMenuManager::getInstance()->getCurrentStagePositionDelta().x > 0)
+        if (StageMenuManager::getInstance()->getCurrentStagePositionDelta().x >= 0.0f)
         {
             vehicle_armature_->getBone(VEHICLE_FLAG_BONE_NAME)->setScaleX(1);
         }
