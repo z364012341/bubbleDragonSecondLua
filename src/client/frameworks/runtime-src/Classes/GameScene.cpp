@@ -34,6 +34,7 @@
 #include "ButtonEffectController.h"
 #include "BarrelScoreLabelNode.h"
 #include "PopScoreLabelComponent.h"
+#include "GameStandbyTimer.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -56,24 +57,7 @@ const float PROPS_BACKGROUND_PERCENT_PER_DISTANCE = (PROPS_BACKGROUND_PERCENT_X_
 const float PROPS_BACKGROUND_PERCENT_X_SECOND = PROPS_BACKGROUND_PERCENT_X_FIRST+PROPS_BACKGROUND_PERCENT_PER_DISTANCE; //道具item_1背景的X坐标百分比
 const float PROPS_BACKGROUND_PERCENT_X_THIRD = PROPS_BACKGROUND_PERCENT_X_FIRST + PROPS_BACKGROUND_PERCENT_PER_DISTANCE*2; //道具item_1背景的X坐标百分比
 const std::string UI_NAME_BARRELHEAD_NODE = "barrelhead";        //桶盖
-//const std::string UI_NAME_BARRELHEAD_FIRST = "barrelhead_1";        //从左数第一个桶盖
-//const std::string UI_NAME_BARRELHEAD_SECOND = "barrelhead_2";
-//const std::string UI_NAME_BARRELHEAD_THIRD = "barrelhead_3";
-//const std::string UI_NAME_BARRELHEAD_FOURTH = "barrelhead_4";
-//const std::string UI_NAME_BARRELHEAD_FIFTH = "barrelhead_5";       //从左数第五个桶盖
-//const std::string UI_NAME_BARREL_NUMBLE_FIRST = "barrel_label_1"; //左数第一的桶上的数字
-//const std::string UI_NAME_BARREL_NUMBLE_SECOND = "barrel_label_2"; //左数第2的桶数字
-//const std::string UI_NAME_BARREL_NUMBLE_THIRD = "barrel_label_3"; //左数第3的桶数字
-//const std::string UI_NAME_BARREL_NUMBLE_FOURTH = "barrel_label_4"; //左数第4的桶数字
-//const std::string UI_NAME_BARREL_NUMBLE_FIFTH = "barrel_label_5"; //左数第5的桶数字
 const std::string UI_NAME_BARREL_NODE = "barrel_body"; //桶身体
-//const std::string UI_NAME_BARREL_FIRST = "barrel_body_1"; //左数第一的桶身体
-//const std::string UI_NAME_BARREL_SECOND = "barrel_body_2"; //左数第2的桶身体
-//const std::string UI_NAME_BARREL_THIIRD = "barrel_body_3"; //左数第3的桶身体
-//const std::string UI_NAME_BARREL_FOURTH = "barrel_body_4"; //左数第4的桶身体
-//const std::string UI_NAME_BARREL_FIFTH = "barrel_body_5"; //左数第5的桶身体
-//const std::string UI_NAME_BARREL_NUMBLES[5] = { UI_NAME_BARREL_NUMBLE_FIRST , UI_NAME_BARREL_NUMBLE_SECOND,
-//UI_NAME_BARREL_NUMBLE_THIRD,UI_NAME_BARREL_NUMBLE_FOURTH,UI_NAME_BARREL_NUMBLE_FIFTH };
 const std::string UI_NAME_BUBBLE_USE_COUNT = "bubble_numble_label";//小球使用数的label
 const std::string UI_NAME_SECOND_BUBBLE_STORE = "second_bubble_store";        //喵准器旁边的小草
 const int BARRELHEADEDGE_BODY_RADIUS = 20;  //桶边刚体半径
@@ -134,6 +118,7 @@ namespace bubble_second {
         game_character_ = nullptr;
         this->initHandle();
         this->addKeyboardEventListener();
+
         GamePlayController::getInstance()->setGameSceneDelegate(this);
 
         //char a[8][16];
@@ -186,6 +171,7 @@ namespace bubble_second {
         addChild(edge_shape_node_);
         this->setPhysicsWorldBody();
         //this->scheduleOnce(CC_SCHEDULE_SELECTOR(GameScene::updateStart), 1);
+
     }
 
     void GameScene::onExit()
@@ -358,6 +344,7 @@ namespace bubble_second {
         //    swirl->runAction(cocos2d::RepeatForever::create(cocos2d::RotateBy::create(UI_SWIRL_ROTATIEBY_TIME, UI_SWIRL_ROTATIEBY_DEGREE)));
         //}
         this->initBarrelScoreLabel();
+        this->addStandbyTimer();
     }
 
     void bubble_second::GameScene::addGameBackground(int cell_numble)
@@ -402,6 +389,11 @@ namespace bubble_second {
         barrel_score_node_->setPosition(375.0f, 0.0f);
         barrel_score_node_->setName(BARREL_SCORE_LABEL_NODE_NAME);
         csb_node_->addChild(barrel_score_node_, UI_ZORDER_BARREL_NUMBLE_NODE);
+    }
+
+    void GameScene::addStandbyTimer()
+    {
+        this->addChild(GameStandbyTimer::create());
     }
 
     cocos2d::Node* GameScene::getGunsight()
@@ -2077,6 +2069,7 @@ namespace bubble_second {
 
     void GameScene::addKeyboardEventListener()
     {
+#if (CC_TARGET_PLATFORM  ==  CC_PLATFORM_WIN32)
         auto listener = cocos2d::EventListenerKeyboard::create();
         listener->onKeyPressed = [=](cocos2d::EventKeyboard::KeyCode code, cocos2d::Event*) {
             if (code == cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE)
@@ -2086,8 +2079,13 @@ namespace bubble_second {
                     this->popPauseAlert();
                 }
             }
+            if (code == cocos2d::EventKeyboard::KeyCode::KEY_F5)
+            {
+                this->replayGame();
+            }
         };
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+#endif
     }
 
     void GameScene::defeat()

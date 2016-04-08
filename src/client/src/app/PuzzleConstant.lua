@@ -1,9 +1,12 @@
 cc.exports.GlobalFunction = {
 	createGameSpriteWithPath = function (path)
-		return cc.Sprite:create(path);
+		--return cc.Sprite:create(path);
+		return cc.Sprite:createWithSpriteFrameName(path);
 	end,
 	setGameSpriteTextureWithPath = function (path, sprite)
-		sprite:setTexture(path);
+		--sprite:setTexture(path);
+		local frame = cc.SpriteFrameCache:getInstance():getSpriteFrameByName(path);
+        sprite:setSpriteFrame(frame);
 	end,
 	getPuzzlePiecePositionWithDirection = function (direction)
 		return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_POSITION];

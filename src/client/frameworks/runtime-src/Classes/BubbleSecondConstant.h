@@ -44,7 +44,6 @@ const std::string BUBBLE_RAINBOW_SEAL_PATH = "kuangliubianxing.PNG"; //²Êºç·âÓ¡Å
 const std::string BUBBLE_MUTIPLE_SEAL_1_PATH = "paopaotouming.PNG"; //Ò»ÖØ·âÓ¡ÅÝÅÝ
 const std::string BUBBLE_MUTIPLE_SEAL_3_PATH = "paopaotoumingsanjiao.PNG"; //¶þÖØ·âÓ¡ÅÝÅÝ
 const std::string BUBBLE_MUTIPLE_SEAL_7_PATH = BUBBLE_RAINBOW_SEAL_PATH; //ÆßÖØ·âÓ¡ÅÝÅÝ
-const std::string BUBBLE_WINDMILL_PATH = "windmill_bubble.png"; //·ç³µÅÝÅÝ
 //const std::string POP_SCORE_CHARMAP_PATH = "popscore.png";   //µ¯³ö·ÖÊýµÄÒÕÊõÊý×ÖÓÃµÄÍ¼Æ¬
 const std::string TOP_UI_BACKGROUND_PATH = "uishang.PNG";   //ÉÏ±ßuiµÄ±³¾°
 const std::string BOTTOM_UI_BACKGROUND_PATH = "uixia.PNG";    //ÏÂ±ßuiµÄ±³¾°
@@ -58,7 +57,7 @@ const std::string PROPS_ITEM_BACKGROUND_PATH = "kuangdaoju.png";  //µÀ¾ßitemµÄ±³
 //const std::string GUNSIGHT_SWIRL_YELLOW_PATH = "X-huang.png";  //·¢ÉäÌ¨ÉÏµÄÐý·ç»Æ
 //const std::string GUNSIGHT_SWIRL_GREEN_PATH = "X-lv.png";  //·¢ÉäÌ¨ÉÏµÄÐý·çÂÌ
 const std::string RAINBOW_CHARACTOR_PATH = "be_sealed_charactor.png"; //²Êºç·âÓ¡ÀïÃæµÄÈËÎï
-const std::string ADD_BUBBLE_NUMBLE_BUBBLE_PATH = "addBubbleNumble.png"; //+3ÌØÊâÅÝÅÝ
+const std::string ADD_BUBBLE_NUMBLE_BUBBLE_PATH = "addThreeBubble.png"; //+3ÌØÊâÅÝÅÝ
 const std::string GAME_NUMBLE_FONT_PATH = "fonts/typeface-export.fnt";
 
 //Ãé×¼Ïßµãpath
@@ -354,8 +353,8 @@ const std::string MUTIPLE_SEAL_BUBBLE_ARMATURE_DOG_NAME = "DaGou";
 //const std::string GAME_CHARACTER_LAOHU_ANIMATION_STANDBY_NAME = "daiji-01-1";
 //const std::string GAME_CHARACTER_LAOHU_ANIMATION_SHOOT_BUBBLE_NAME = "rengqiu01";
 const std::string GAME_CHARACTER_ANIMATION_LEGENDARY_NAME = "liulianji";
-const std::string WINDMILL_BUBBLE_DEMON_ARMATURE_PATH = "xiaoyao/xiaoyao.ExportJson"; //·ç³µÑý¾«µÄ¶¯»­
-const std::string WINDMILL_BUBBLE_DEMON_ARMATURE_NAME = "xiaoyao";
+//const std::string WINDMILL_BUBBLE_DEMON_ARMATURE_PATH = "xiaoyao/xiaoyao.ExportJson"; //·ç³µÑý¾«µÄ¶¯»­
+//const std::string WINDMILL_BUBBLE_DEMON_ARMATURE_NAME = "xiaoyao";
 //Ð¡Çò¸ÕÌå
 const int BUBBLE_BODY_MASS = 100;    //Ð¡ÇòÖÊÁ¿
 const float BUBBLE_BODY_DENSITY = 0.5f;  //Ð¡ÇòÃÜ¶È
@@ -456,6 +455,8 @@ const std::string EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_SCORE_KEY = "score_text";
 const std::string EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_POS_X_KEY = "pos_x";
 const std::string EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_POS_Y_KEY = "pos_y";
 const std::string EVENT_UNLOCK_STAGE_MENU = "event_unlock_stage_menu"; //½âËøÍê¹Ø¿¨°´Å¥
+const std::string EVENT_CLOCK_RANG = "event_clock_rang"; //¶¨Ê±ÄÖÖÓÏì
+const std::string EVENT_CLOCK_CLEAR = "event_clock_clear"; //¶¨Ê±ÄÖÖÓclear
 //Ñ¡ÔñÌØÐ§µÄkey
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //´ó·ù¶ÈÌØÐ§
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //Ð¡·ù¶ÈÌØÐ§

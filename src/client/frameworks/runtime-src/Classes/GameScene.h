@@ -78,6 +78,8 @@ namespace bubble_second {
         void initHandle();
         //初始化桶上面分数标签的
         void initBarrelScoreLabel();
+        //加入闹钟定时器
+        void addStandbyTimer();
         //添加换球的监听
         //void addExchangeBubbleListener();
         //移除换球的监听

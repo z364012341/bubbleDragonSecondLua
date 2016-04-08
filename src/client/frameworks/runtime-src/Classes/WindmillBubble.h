@@ -11,23 +11,32 @@
 #define _WINDMILL_BUBBLE_H_
 #include "cocos2d.h"
 #include "BaseBubble.h"
+#include "cocostudio\CocoStudio.h"
 namespace bubble_second {
     class WindmillBubble : public BaseBubble
     {
     public:
         CREATE_FUNC(WindmillBubble);
         ~WindmillBubble();
+        void onEnter() override;
+        void onExit() override;
         void setParent(cocos2d::Node* parent) override;
         void bubbleEliminate(int combo = 0) override;
     private:
         WindmillBubble();
         bool init();
-        void setBubbleTexture(BubbleType type) override;
-        cocos2d::Node* getFlyingTexture();
-        cocos2d::Action* getFlyingAction();
-        cocos2d::CardinalSplineBy* getArchimedeanSpiralAction();
+        void setBubbleTexture(BubbleType type) override {};
+        void addArmature(cocos2d::Node* ndoe, const cocos2d::Vec2& point);
+        void playStandbyAnimation();
+        //ÊÇ·ñÎÞ²Ù×÷×´Ì¬
+        bool isNoop();
+        void playNoopAnimation();
+        //cocos2d::Node* getFlyingTexture();
+        //cocos2d::Action* getFlyingAction();
+        //cocos2d::CardinalSplineBy* getArchimedeanSpiralAction();
     private:
-        cocos2d::Sprite* sp_ = nullptr;
+        //cocos2d::Sprite* sp_ = nullptr;
+        cocostudio::Armature* armature_ = nullptr;
     };
 }
 #endif //_WINDMILL_BUBBLE_H_

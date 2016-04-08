@@ -19,7 +19,7 @@ function PuzzlePieceSingleEdges:ctor(direction, insideOrOutside)
     	self._edgesSprite = GlobalFunction.createGameSpriteWithPath(PUZZLE_NOT_PLAIN_EDGES_PATH);
     end
     self._edgesSprite:setAnchorPoint(PUZZLE_COMPONENT_ANCHOR);
-    self._edgesSprite:getTexture():setAntiAliasTexParameters();
+    --self._edgesSprite:getTexture():setAntiAliasTexParameters();
     self._edgesSprite:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction, insideOrOutside));
     self:addChild(self._edgesSprite);
     self:setPosition(GlobalFunction.getPuzzlePiecePositionWithDirection(direction));

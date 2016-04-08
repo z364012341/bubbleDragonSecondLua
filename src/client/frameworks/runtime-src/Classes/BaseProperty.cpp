@@ -2,7 +2,9 @@
 #include "GamePlayController.h"
 const float PROPS_BUTTON_POS_X = 100.0f;
 const float PROPS_BUTTON_POS_Y = 35.0f;
-//const std::string PROPS_NUMBLE_LABEL_PATH = "shuzibiaoqian.png";
+const std::string PROPS_NUMBLE_LABEL_PATH = "fonts/shuzibiaoqian.png";
+const int PROPS_NUMBLE_LABEL_ITEM_WIDTH = 16;
+const int PROPS_NUMBLE_LABEL_ITEM_HEIGHT = 30;
 namespace bubble_second {
     BaseProperty::BaseProperty()
     {
@@ -130,8 +132,8 @@ namespace bubble_second {
 
     void bubble_second::BaseProperty::addNumbleLabel(cocos2d::Sprite * bgSprite)
     {
-        props_numble_label_ = cocos2d::ui::TextBMFont::create(
-            "9", GAME_NUMBLE_FONT_PATH);
+        props_numble_label_ = cocos2d::ui::TextAtlas::create(
+            "9", PROPS_NUMBLE_LABEL_PATH, PROPS_NUMBLE_LABEL_ITEM_WIDTH, PROPS_NUMBLE_LABEL_ITEM_HEIGHT, ".");
         props_numble_label_->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
         props_numble_label_->setPosition(cocos2d::Vec2(bgSprite->getContentSize().width / 2, bgSprite->getContentSize().height / 2));
         bgSprite->addChild(props_numble_label_, UI_ZORDER_MENU_INFO);

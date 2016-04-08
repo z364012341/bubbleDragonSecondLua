@@ -11,7 +11,7 @@
 #define _BASE_PROPERTY_H_
 #include "cocos2d.h"
 #include "SpriteTextureController.h"
-#include "ui\UITextBMFont.h"
+#include "ui\UITextAtlas.h"
 namespace bubble_second {
     enum PropsState
     {//道具的使用状态
@@ -74,7 +74,7 @@ namespace bubble_second {
         TouchEnabled touch_flag_;
         cocos2d::Menu* menu_;
         bool touch_enable_ = true;
-        cocos2d::ui::TextBMFont* props_numble_label_ = nullptr;
+        cocos2d::ui::TextAtlas* props_numble_label_ = nullptr;
     };
 }
 #endif //_BASE_PROPERTY_H_

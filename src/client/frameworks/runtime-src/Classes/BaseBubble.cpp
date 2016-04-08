@@ -101,7 +101,11 @@ namespace bubble_second {
 
     void BaseBubble::bubbleEliminateInSequence(int combo, float time)
     {
-        GamePlayController::getInstance()->subtractPrepareColor(this->getBubbleType());
+        if (this->getName() != PREPARE_BUBBLE_NAME)
+        {
+            GamePlayController::getInstance()->subtractPrepareColor(this->getBubbleType());
+        }
+        //GamePlayController::getInstance()->subtractPrepareColor(this->getBubbleType());
         this->disposeAirShootBubble();
         cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(time), cocos2d::CallFunc::create([=]() {
             GamePlayController::getInstance()->disposeDarkCloudBubble(this->getBubbleIndex());

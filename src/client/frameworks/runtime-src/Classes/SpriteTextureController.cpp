@@ -15,6 +15,7 @@ const std::string GAME_STAGE_BUTTON_UNLOCK_ARMATURE_PATH = "guankaanniu/guankaan
 const std::string MENU_STAGETYPE_TEXTURE_TOPELIMINATE_PATH = "tubiao01.png";
 const std::string GAME_CURRENT_STAGE_BUTTON_HALO_ARMATURE_PATH = "anniu-TX/anniu-TX.ExportJson";    //当前关卡光圈动画
 const std::string STAGE_CELL_RABBIT_ARMATURE_PATH = "tuzizuan/tuzizuan.ExportJson";    //兔子动画
+const std::string WINDMILL_BUBBLE_ARMATURE_PATH = "laoshu/laoshu.ExportJson";    //风车动画
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()
@@ -46,7 +47,7 @@ namespace bubble_second {
         armature_path_.push_back(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_PATH);
         armature_path_.push_back(MUTIPLE_SEAL_BUBBLE_ARMATURE_GOG_PATH);
         armature_path_.push_back(SCOREWIDGET_ARMATURE_PATH);
-        armature_path_.push_back(WINDMILL_BUBBLE_DEMON_ARMATURE_PATH);
+        //armature_path_.push_back(WINDMILL_BUBBLE_DEMON_ARMATURE_PATH);
         armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_1_PATH);
         armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_2_PATH);
         armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_3_PATH);
@@ -58,6 +59,7 @@ namespace bubble_second {
         armature_path_.push_back(GAME_STAGE_BUTTON_UNLOCK_ARMATURE_PATH);
         armature_path_.push_back(GAME_CURRENT_STAGE_BUTTON_HALO_ARMATURE_PATH);
         armature_path_.push_back(STAGE_CELL_RABBIT_ARMATURE_PATH);
+        armature_path_.push_back(WINDMILL_BUBBLE_ARMATURE_PATH);
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()
@@ -83,6 +85,7 @@ namespace bubble_second {
         //    auto frame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(path);
         //    sprite->setSpriteFrame(frame);
         //}
+        //cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(path)
     }
 
     cocos2d::Sprite* SpriteTextureController::createGameSpriteWithPath(const std::string& path)
@@ -132,6 +135,7 @@ namespace bubble_second {
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("StudioResPlist.plist");
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("gameRes.plist");
         this->addArmatureFile();
+        cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("puzzle_ui.plist");
     }
 
     //void SpriteTextureController::addGameBackgroundTexture(int cell_numble)

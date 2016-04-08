@@ -66,7 +66,7 @@ namespace bubble_second {
         key_to_path[kBubbleMutipleSeal1] = BUBBLE_MUTIPLE_SEAL_1_PATH;
         key_to_path[kBubbleMutipleSeal3] = BUBBLE_MUTIPLE_SEAL_3_PATH;
         key_to_path[kBubbleMutipleSeal7] = BUBBLE_MUTIPLE_SEAL_7_PATH;
-        key_to_path[kBubbleWindmill] = BUBBLE_WINDMILL_PATH;
+        key_to_path[kBubbleWindmill] = "";
         key_to_path[kBubbleAddNumbleBubble] = ADD_BUBBLE_NUMBLE_BUBBLE_PATH;
 
     }

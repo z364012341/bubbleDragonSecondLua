@@ -113,7 +113,7 @@ namespace bubble_second {
             if (node && !StageNumble::getInstance()->moreThanStageTotal())
             {
                 menu = StageSelectionMenu::create(cell_numble, stage_numble, StageDataManager::getInstance()->getStageTypeWithNumble(stage_numble));
-                //menu->setScale(0.5);
+                menu->setScale(0.9f);
                 node->addChild(menu);
                 StageNumble::getInstance()->nextStageNumble();
                 ++tag;
