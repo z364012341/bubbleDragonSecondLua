@@ -3,8 +3,11 @@
 #include "BubbleFactory.h"
 #include "GameScene.h"
 #include "GameScoreController.h"
+#include "GameBubbleMapImple.h"
+#include "GameNoopAnimationComponent.h"
 const std::string BUBBLE_WINDMILL_ARMATURE_NAME = "laoshu";
 const std::string BUBBLE_ANIMATION_NAME_0 = "daiji-zhayan";
+const std::string BUBBLE_ANIMATION_NAME_1 = "shouji";
 const std::string BUBBLE_ANIMATION_NAME_2 = "wucaozuo";
 const std::string BUBBLE_ANIMATION_NAME_3 = "siwang";
 const std::string BUBBLE_ANIMATION_NAME_4 = "chuancha-zuoyoukan";
@@ -21,20 +24,22 @@ namespace bubble_second {
     void WindmillBubble::onEnter()
     {
         cocos2d::Node::onEnter();
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CLOCK_RANG, [=](cocos2d::EventCustom* event) {
-            this->playNoopAnimation();
-        });
+        //cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CLOCK_RANG, [=](cocos2d::EventCustom* event) {
+        //    this->playNoopAnimation();
+        //});
 
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CLOCK_CLEAR, [=](cocos2d::EventCustom* event) {
-            this->playStandbyAnimation();
-        });
+        //cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CLOCK_CLEAR, [=](cocos2d::EventCustom* event) {
+        //    this->playStandbyAnimation();
+        //});
+
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_BUBBLE_ELIMINATED, CC_CALLBACK_1(WindmillBubble::disposedAroundEliminate, this));
     }
 
     void WindmillBubble::onExit()
     {
         cocos2d::Node::onExit();
-        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_CLOCK_RANG);
-        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_CLOCK_CLEAR);
+        //cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_CLOCK_RANG);
+        //cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_CLOCK_CLEAR);
     }
     
     bool WindmillBubble::init()
@@ -57,6 +62,12 @@ namespace bubble_second {
         armature_->setScale(ARMATURE_SCALE);
         ndoe->addChild(armature_);
         this->playStandbyAnimation();
+        this->addNoopComponent();
+    }
+
+    void WindmillBubble::addNoopComponent()
+    {
+        this->addChild(GameNoopAnimationComponent::create(armature_, BUBBLE_ANIMATION_NAME_2, CC_CALLBACK_0(WindmillBubble::playStandbyAnimation, this)));
     }
 
     void WindmillBubble::playStandbyAnimation()
@@ -67,20 +78,61 @@ namespace bubble_second {
         names.push_back(BUBBLE_ANIMATION_NAME_0);
         names.push_back(BUBBLE_ANIMATION_NAME_4);
         armature_->getAnimation()->playWithNames(names);
+        armature_->getAnimation()->setMovementEventCallFunc(nullptr);
     }
 
-    bool WindmillBubble::isNoop()
-    {
-        return armature_->getAnimation()->getCurrentMovementID() == BUBBLE_ANIMATION_NAME_2;
-    }
+    //bool WindmillBubble::isNoop()
+    //{
+    //    return armature_->getAnimation()->getCurrentMovementID() == BUBBLE_ANIMATION_NAME_2;
+    //}
 
-    void WindmillBubble::playNoopAnimation()
+    //void WindmillBubble::playNoopAnimation()
+    //{
+    //    if (this->isNoop())
+    //    {
+    //        return;
+    //    }
+    //    armature_->getAnimation()->play(BUBBLE_ANIMATION_NAME_2);
+    //}
+
+    void WindmillBubble::playContactAnimation()
     {
-        if (this->isNoop())
+        if (armature_->getAnimation()->getCurrentMovementID() == BUBBLE_ANIMATION_NAME_1)
         {
             return;
         }
-        armature_->getAnimation()->play(BUBBLE_ANIMATION_NAME_2);
+        armature_->getAnimation()->play(BUBBLE_ANIMATION_NAME_1);
+        armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+            if (movementType == cocostudio::COMPLETE)
+            {
+                this->playStandbyAnimation();
+            }
+        });
+    }
+
+    void WindmillBubble::disposedAroundEliminate(cocos2d::EventCustom * event)
+    {
+        BubbleVector sprites = *static_cast<BubbleVector*>(event->getUserData());
+        BubbleIndexVector indexs = GameBubbleMapImple::getAroundIndexWithIndexWithoutCondition(this->getBubbleIndex());
+        for (auto var : sprites)
+        {
+            if (this->needPlayContactAnimation(var->getBubbleIndex(), indexs))
+            {
+                this->playContactAnimation();
+            }
+        }
+    }
+
+    bool WindmillBubble::needPlayContactAnimation(const cocos2d::Vec2 & bubble_index, const BubbleIndexVector & around_index)
+    {
+        for (auto var : around_index)
+        {
+            if (bubble_index == var)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     //void WindmillBubble::setBubbleTexture(BubbleType type)

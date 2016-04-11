@@ -61,6 +61,7 @@ const std::string UI_NAME_BARREL_NODE = "barrel_body"; //桶身体
 const std::string UI_NAME_BUBBLE_USE_COUNT = "bubble_numble_label";//小球使用数的label
 const std::string UI_NAME_SECOND_BUBBLE_STORE = "second_bubble_store";        //喵准器旁边的小草
 const int BARRELHEADEDGE_BODY_RADIUS = 20;  //桶边刚体半径
+const float POP_VICTORY_ALERT_DELAYTIME = 1.5f;
 namespace bubble_second {
     cocos2d::Scene* GameScene::createScene(int cell_numble, int numble)
     {
@@ -703,10 +704,10 @@ namespace bubble_second {
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_GAME_DEFEAT, [=](cocos2d::EventCustom*) {
-            if (!GameScoreController::getInstance()->gameVictory())
-            {
+            //if (!GameScoreController::getInstance()->gameVictory())
+            //{
                 this->defeat();
-            }
+            //}
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_FIND_THREE_BUBBLE, CC_CALLBACK_1(GameScene::findThreeBubble, this));
@@ -2143,7 +2144,7 @@ namespace bubble_second {
         int start_numble = this->getScoreProgressMenu()->getStartOnNumble();
         int present_stage_numble = this->getPresentStageNumble();
         UserDataManager::getInstance()->updateStageData(present_stage_numble, start_numble);
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(WINDMILL_BUBBLE_FLYING_ACTION_DURATION), cocos2d::CallFunc::create([=]() {
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(POP_VICTORY_ALERT_DELAYTIME), cocos2d::CallFunc::create([=]() {
             GameVictoryAlert* alert = GameVictoryAlert::create(present_stage_numble, GameScoreController::getInstance()->getTotalScore(), start_numble);
             alert->setName(UI_NAME_GAME_VICTORY_ALERT);
             alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());

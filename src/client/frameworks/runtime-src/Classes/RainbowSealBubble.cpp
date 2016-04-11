@@ -145,5 +145,10 @@ namespace bubble_second {
         }));
         armature->runAction(cocos2d::RepeatForever::create(seq));
     }
-    
+
+    void RainbowSealBubble::runBubbleEffect(const std::string& name, const cocos2d::Vec2& point)
+    {
+        BaseComponentBubble::runBubbleEffect(name, point);
+        this->getSealedCharactor()->playContactAnimation();
+    }
 }

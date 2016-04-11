@@ -25,6 +25,8 @@ namespace bubble_second {
         GameBubbleMapImple();
         ~GameBubbleMapImple();
     public:
+        //获取周围索引不附加条件
+        static BubbleIndexVector getAroundIndexWithIndexWithoutCondition(const cocos2d::Vec2& index);
         //根据关卡数来初始化泡泡容器,参数需要输入string类型
         BubbleSpriteMap initBubbleSpriteVetctor(BubbleColorRender* render, const BubblesData& stage_info, const StageType& stage_type);
         //碰撞后获取颜色相同的小球, 参数是附着后的发射小球的索引
@@ -92,7 +94,6 @@ namespace bubble_second {
     private:
         //获取一个索引的四周索引
         BubbleIndexVector getAroundIndexWithIndex(const cocos2d::Vec2& index);
-        BubbleIndexVector getAroundIndexWithIndexWithoutCondition(const cocos2d::Vec2& index);
         //获取一个索引外第二圈的索引
         BubbleIndexVector getSecondAroundIndexWithIndex(const cocos2d::Vec2& index);
         //获取一个索引旁边两圈的缩影

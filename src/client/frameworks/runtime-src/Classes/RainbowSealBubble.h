@@ -38,6 +38,7 @@ namespace bubble_second {
         bool isSealing();
         //增加待机动画
         void addStandbyAnimation();
+        void runBubbleEffect(const std::string& name, const cocos2d::Vec2& point) override;
     private:
         //封印颜色
         BubbleType rainbow_color_;

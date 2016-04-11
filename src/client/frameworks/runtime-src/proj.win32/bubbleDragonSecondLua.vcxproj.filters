@@ -326,6 +326,7 @@
     <ClInclude Include="..\Classes\BarrelScoreLabelNode.h" />
     <ClInclude Include="..\Classes\PopScoreLabelComponent.h" />
     <ClInclude Include="..\Classes\GameStandbyTimer.h" />
+    <ClInclude Include="..\Classes\GameNoopAnimationComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -629,6 +630,7 @@
     <ClCompile Include="..\Classes\BarrelScoreLabelNode.cpp" />
     <ClCompile Include="..\Classes\PopScoreLabelComponent.cpp" />
     <ClCompile Include="..\Classes\GameStandbyTimer.cpp" />
+    <ClCompile Include="..\Classes\GameNoopAnimationComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

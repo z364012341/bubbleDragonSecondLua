@@ -20,21 +20,7 @@ namespace bubble_second {
     {
     public:
         //CREATE_FUNC(RainbowCharactor);
-        static RainbowCharactor* createWithFile(const std::string& path)
-        {
-            RainbowCharactor *pRet = new(std::nothrow) RainbowCharactor();
-            if (pRet && pRet->initWithFile(path))
-            {
-                pRet->autorelease();
-                return pRet;
-            }
-            else
-            {
-                delete pRet;
-                pRet = NULL;
-                return NULL;
-            }
-        }
+        static RainbowCharactor* createWithFile(const std::string& path);
         ~RainbowCharactor();
         //开始封印
         void beginSealingCharactor(RainbowSealBubble* bubble);
@@ -45,21 +31,24 @@ namespace bubble_second {
         //设置动画的路径
         void setArmaturePath(const std::string& path);
         std::string getArmaturePath();
+        void playContactAnimation();
     private:
         RainbowCharactor();
         //bool init();
         bool initWithFile(const std::string& path);
         void initTexture();
-        void setSealedBubble(BaseBubble* bubble);
-        BaseBubble* getSealedBubble();
+        //void setSealedBubble(BaseBubble* bubble);
+        //BaseBubble* getSealedBubble();
         void addCharactorArmature();
+        void playStandbyAnimation();
         //void runFlyingAnimation(RainbowSealBubble* bubble, const cocos2d::Vec2& armature_point, bool armature_point_need_convert = true);
     private:
         //里面人物手上托的球
-        BaseBubble* sealed_bubble_;
+        //BaseBubble* sealed_bubble_;
         cocos2d::Sprite* rainbow_swirl_;
         cocos2d::Sprite* rainbow_background_;
         std::string armature_path_;
+        cocostudio::Armature *armature_ = nullptr;
     };
 }
 #endif //_RAINBOW_CHARACTOR_H_

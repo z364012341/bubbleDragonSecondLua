@@ -1,6 +1,7 @@
 #include "RainbowSealManager.h"
 #include "RainbowSealBubble.h"
 #include "RainbowCharactor.h"
+const std::string RAINBOW_CHARACTOR_ARMATURE_NAME = "langda";
 namespace bubble_second {
     RainbowSealManager::RainbowSealManager()
     {

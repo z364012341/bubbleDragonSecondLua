@@ -27,10 +27,14 @@ namespace bubble_second {
         bool init();
         void setBubbleTexture(BubbleType type) override {};
         void addArmature(cocos2d::Node* ndoe, const cocos2d::Vec2& point);
+        void addNoopComponent();
         void playStandbyAnimation();
         //ÊÇ·ñÎÞ²Ù×÷×´Ì¬
-        bool isNoop();
-        void playNoopAnimation();
+        //bool isNoop();
+        //void playNoopAnimation();
+        void playContactAnimation();
+        void disposedAroundEliminate(cocos2d::EventCustom* event);
+        bool needPlayContactAnimation(const cocos2d::Vec2& bubble_index, const BubbleIndexVector& around_index);
         //cocos2d::Node* getFlyingTexture();
         //cocos2d::Action* getFlyingAction();
         //cocos2d::CardinalSplineBy* getArchimedeanSpiralAction();

@@ -4,17 +4,34 @@
 #include "RainbowSealBubble.h"
 #include "RainbowSealManager.h"
 #include "GameScene.h"
+#include "GameNoopAnimationComponent.h"
 const int UI_ZORDER_RAINBOW_SEALED_CHARACTOR = -1; //彩虹封印里面的人物
 namespace bubble_second {
     RainbowCharactor::RainbowCharactor()
     {
-        sealed_bubble_ = nullptr;
+        //sealed_bubble_ = nullptr;
         rainbow_swirl_ = nullptr;
         rainbow_background_ = nullptr;
     }
 
     RainbowCharactor::~RainbowCharactor()
     {
+    }
+
+    RainbowCharactor* bubble_second::RainbowCharactor::createWithFile(const std::string& path)
+    {
+        RainbowCharactor *pRet = new(std::nothrow) RainbowCharactor();
+        if (pRet && pRet->initWithFile(path))
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
     }
 
     bool RainbowCharactor::initWithFile(const std::string& path)
@@ -38,7 +55,7 @@ namespace bubble_second {
             bubble->setScale(BUBBLE_IN_RAINBOW_BUBBLE_SCALE);
             bubble->setPosition(BUBBLE_IN_RAINBOW_BUBBLE_POS);
             this->addChild(bubble, 1);
-            this->setSealedBubble(bubble);
+            //this->setSealedBubble(bubble);
         }
         {
             rainbow_swirl_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(RAINBOW_CHARACTOR_SWIRL_PATH);
@@ -60,42 +77,68 @@ namespace bubble_second {
     {
         using cocostudio::ArmatureDataManager;
         using cocostudio::Armature;
-        Armature *armature = Armature::create(this->getArmaturePath());
-        armature->setPositionX(RAINBOW_CHARACTOR_ARMATURE_POS_X);
-        armature->getAnimation()->play(RAINBOW_CHARACTOR_ANIMATIOIN_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-        this->addChild(armature);
+        armature_ = Armature::create(this->getArmaturePath());
+        //armature_->setPositionX(RAINBOW_CHARACTOR_ARMATURE_POS_X);
+        //armature_->getAnimation()->play(RAINBOW_CHARACTOR_ANIMATIOIN_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+        armature_->setScale(0.85f);
+        this->addChild(armature_);
+        this->playStandbyAnimation();
+
+        this->addChild(GameNoopAnimationComponent::create(armature_, BUBBLE_ANIMATION_NOOP_NAME, CC_CALLBACK_0(RainbowCharactor::playStandbyAnimation, this)));
+    }
+
+    void RainbowCharactor::playStandbyAnimation()
+    {
+        std::vector<std::string> names;
+        names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+        names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+        names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+        names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+        names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_2);
+        names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+        names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+        names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_2);
+        armature_->getAnimation()->playWithNames(names);
+        armature_->getAnimation()->setMovementEventCallFunc(nullptr);
     }
 
     void RainbowCharactor::beginSealingCharactor(RainbowSealBubble* bubble)
     {
-        bubble->getParent()->addChild(this, UI_ZORDER_RAINBOW_SEALED_CHARACTOR);
-        this->setVisible(false);
-        cocos2d::Vec2 bubble_pos = bubble->getPosition();
-        this->setPosition(bubble_pos);
         bubble->setSealedCharactor(this);
+        //bubble->getParent()->addChild(this, UI_ZORDER_RAINBOW_SEALED_CHARACTOR);
+        //this->setVisible(false);
+        //cocos2d::Vec2 bubble_pos = bubble->getPosition();
+        //this->setPosition(bubble_pos);
         cocos2d::Node* node = bubble->getParent()->getParent();
         GameScene* game_scene = dynamic_cast<GameScene*>(node->getParent());
-        using cocostudio::ArmatureDataManager;
-        using cocostudio::Armature;
-        Armature* armature = Armature::create(this->getArmaturePath());
-        armature->setPosition(RAINBOW_CHARACTOR_ARMATURE_ENTER_FROM_LEFT_POS);
-        if (bubble_pos < armature->getPosition())
-        {
-            armature->setScaleX(-1);
-        }
-        armature->getAnimation()->play(RAINBOW_CHARACTOR_ANIMATIOIN_FLYING_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-        node->addChild(armature);
-        cocos2d::ccBezierConfig config;
-        config.endPosition = game_scene->convertMapToCsbSpace(bubble_pos);
-        config.controlPoint_1 = armature->getPosition();
-        config.controlPoint_2 = config.endPosition + RAINBOW_CHARACTOR_ARMATURE_BEZIERTO_CONTROLLPOINT_2_OFFS;
-        cocos2d::BezierTo* bezier = cocos2d::BezierTo::create(RAINBOW_CHARACTOR_ARMATURE_BEZIERTO_DURATION, config);
-        cocos2d::Sequence* seq = cocos2d::Sequence::create(bezier, cocos2d::CallFunc::create([=]() {
-            armature->removeFromParent();
-            this->setVisible(true);
-            bubble->changeRainbowColor();
-        }), nullptr);
-        armature->runAction(seq);
+        //using cocostudio::ArmatureDataManager;
+        //using cocostudio::Armature;
+        //Armature* armature = Armature::create(this->getArmaturePath());
+        //armature->setPosition(RAINBOW_CHARACTOR_ARMATURE_ENTER_FROM_LEFT_POS);
+        //if (bubble_pos < armature->getPosition())
+        //{
+        //    armature->setScaleX(-1);
+        //}
+        //armature->getAnimation()->play(RAINBOW_CHARACTOR_ANIMATIOIN_FLYING_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+        //node->addChild(armature);
+        //cocos2d::ccBezierConfig config;
+        //config.endPosition = game_scene->convertMapToCsbSpace(bubble_pos);
+        //config.controlPoint_1 = armature->getPosition();
+        //config.controlPoint_2 = config.endPosition + RAINBOW_CHARACTOR_ARMATURE_BEZIERTO_CONTROLLPOINT_2_OFFS;
+        //cocos2d::BezierTo* bezier = cocos2d::BezierTo::create(RAINBOW_CHARACTOR_ARMATURE_BEZIERTO_DURATION, config);
+        //cocos2d::Sequence* seq = cocos2d::Sequence::create(bezier, cocos2d::CallFunc::create([=]() {
+        //    armature->removeFromParent();
+        //    this->setVisible(true);
+        //    bubble->changeRainbowColor();
+        //}), nullptr);
+        //armature->runAction(seq);
+        this->setScale(0.5f);
+        cocos2d::FadeIn* fade = cocos2d::FadeIn::create(0.3f);
+        cocos2d::ScaleTo* scale_1 = cocos2d::ScaleTo::create(0.4f, 1.2f);
+        cocos2d::ScaleTo* scale_2 = cocos2d::ScaleTo::create(0.2f, 0.8f);
+        cocos2d::ScaleTo* scale_3 = cocos2d::ScaleTo::create(0.1f, 1.0f);
+        cocos2d::Sequence* seq = cocos2d::Sequence::create(fade, scale_1, scale_2, scale_3, nullptr);
+        this->runAction(seq);
     }
     void RainbowCharactor::moveSealintCharactor(RainbowSealBubble* bubble, const cocos2d::Vec2& from_point)
     {
@@ -134,7 +177,7 @@ namespace bubble_second {
 
     void RainbowCharactor::setRainbowColor(BubbleType color)
     {
-        this->getSealedBubble()->setBubbleType(color);
+        //this->getSealedBubble()->setBubbleType(color);
         rainbow_background_->setColor(RainbowSealManager::getInstance()->getColor3BWithBubbleColor(color));
     }
 
@@ -148,13 +191,24 @@ namespace bubble_second {
         return armature_path_;
     }
 
-    void RainbowCharactor::setSealedBubble(BaseBubble* bubble)
+    void RainbowCharactor::playContactAnimation()
     {
-        sealed_bubble_ = bubble;
+        armature_->getAnimation()->play(BUBBLE_ANIMATION_CONTACT_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+            if (movementType == cocostudio::COMPLETE)
+            {
+                this->playStandbyAnimation();
+            }
+        });
     }
 
-    BaseBubble* RainbowCharactor::getSealedBubble()
-    {
-        return sealed_bubble_;
-    }
+    //void RainbowCharactor::setSealedBubble(BaseBubble* bubble)
+    //{
+    //    sealed_bubble_ = bubble;
+    //}
+
+    //BaseBubble* RainbowCharactor::getSealedBubble()
+    //{
+    //    return sealed_bubble_;
+    //}
 }

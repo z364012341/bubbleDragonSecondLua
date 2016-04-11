@@ -1,17 +1,21 @@
 #include "MutipleSealBubble.h"
 #include "SpriteTextureController.h"
 #include "BubbleFactory.h"
-const std::string ANIMATION_STANDBY_NAME_1 = "daiji";
-const std::string ANIMATION_STANDBY_NAME_2 = "daiji-zhayan";
-const std::string ANIMATION_STANDBY_NAME_3 = "zuoyoukan";
-const std::string ANIMATION_STANDBY_NAME_4 = "shangxiakan";
-const std::string ANIMATION_DEFEAT_NAME = "siwang";
+#include "GameNoopAnimationComponent.h"
+const std::string MUTIPLE_SEAL_3_BUBBLE_ARMATURE_NAME = "wa";
+const std::string MUTIPLE_SEAL_7_BUBBLE_ARMATURE_NAME = "xiongda";
+const std::string MUTIPLE_SEAL_1_BUBBLE_ARMATURE_NAME = "1gebianfu";
+//const std::string ANIMATION_STANDBY_NAME_1 = "daiji-zhayan";
+//const std::string ANIMATION_STANDBY_NAME_2 = "chuancha";
+//const std::string ANIMATION_CONTACT_NAME = "aida";
+//const std::string ANIMATION_VICTORY_NAME = "siwang";
+//const std::string ANIMATION_DEFEAT_NAME = "shibai";
+//const std::string ANIMATION_NOOP_NAME = "wucaozuo";
 namespace bubble_second {
     MutipleSealBubble::MutipleSealBubble()
     {
         armature_ = nullptr;
     }
-
 
     MutipleSealBubble::~MutipleSealBubble()
     {
@@ -28,6 +32,12 @@ namespace bubble_second {
         this->addGameTaskNumble();
         return true;
     }
+
+    void MutipleSealBubble::onEnter()
+    {
+        cocos2d::Node::onEnter();
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_GAME_DEFEAT, CC_CALLBACK_1(MutipleSealBubble::playDefeatAnimation, this));
+}
 
     void MutipleSealBubble::bubbleEliminate(int combo)
     {
@@ -47,7 +57,7 @@ namespace bubble_second {
 		else
 		{
 			this->setLocalZOrder(1);
-			armature_->getAnimation()->play(ANIMATION_DEFEAT_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+			armature_->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
 			armature_->setLocalZOrder(1);
 			armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
 				if (movementType == cocostudio::COMPLETE)
@@ -65,7 +75,7 @@ namespace bubble_second {
 	void MutipleSealBubble::runBubbleEffect(const std::string& name, const cocos2d::Vec2& point)
 	{
 		BaseComponentBubble::runBubbleEffect(name, point);
-		armature_->getAnimation()->play(ANIMATION_STANDBY_NAME_4, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+		armature_->getAnimation()->play(BUBBLE_ANIMATION_CONTACT_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
 		armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
 			if (movementType == cocostudio::COMPLETE)
 			{
@@ -84,13 +94,13 @@ namespace bubble_second {
         using cocostudio::ArmatureDataManager;
         using cocostudio::Armature;
         BubbleType type = kBubbleMutipleSeal;
-        auto func = [=](const std::string& path) {            
-            armature_ = Armature::create(path);
-            armature_->getAnimation()->play(MUTIPLE_SEAL_CHARACTOR_ANIMATIOIN_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-            auto rect = this->getBoundingBox();
-            armature_->setPosition(rect.size.width / 2, rect.size.height / 2);
-            this->addChild(armature_, -1);
-        };
+        //auto func = [=](const std::string& path) {            
+        //    armature_ = Armature::create(path);
+        //    armature_->getAnimation()->play(MUTIPLE_SEAL_CHARACTOR_ANIMATIOIN_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+        //    auto rect = this->getBoundingBox();
+        //    armature_->setPosition(rect.size.width / 2, rect.size.height / 2);
+        //    this->addChild(armature_, -1);
+        //};
 
 		auto armatureFunc = [=](const std::string& name) {
 			armature_ = Armature::create(name);
@@ -105,49 +115,57 @@ namespace bubble_second {
         {
             type = kBubbleMutipleSeal1;
             BaseComponentBubble::setBubbleTexture(type);
-            func(MUTIPLE_SEAL_BUBBLE_ARMATURE_DOG_NAME);
+            armatureFunc(MUTIPLE_SEAL_1_BUBBLE_ARMATURE_NAME);
             break;
         }
         case BUBBLE_MUTIPLE_SEAL_COMPONENT_NUMBLE_3:
         {
             type = kBubbleMutipleSeal3;
             BaseComponentBubble::setBubbleTexture(type);
-			armatureFunc(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_NAME);
+			armatureFunc(MUTIPLE_SEAL_3_BUBBLE_ARMATURE_NAME);
             this->setAnchorPoint(BUBBLE_MUTIPLE_SEAL_3_ANCHORPOINT);
-            armature_->setScale(0.95f);
+            //armature_->setScale(0.95f);
             break;
         }
         case BUBBLE_MUTIPLE_SEAL_COMPONENT_NUMBLE_7:
         {
             type = kBubbleMutipleSeal7;
             BaseComponentBubble::setBubbleTexture(type);
-			armatureFunc(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_NAME);
+			armatureFunc(MUTIPLE_SEAL_7_BUBBLE_ARMATURE_NAME);
+            armature_->setScale(0.9f);
             break;
         }
         default:
             assert(false);
             break;
         }
+        this->addNoopComponent();
+    }
+
+    void MutipleSealBubble::addNoopComponent()
+    {
+        this->addChild(GameNoopAnimationComponent::create(armature_, BUBBLE_ANIMATION_NOOP_NAME, CC_CALLBACK_0(MutipleSealBubble::playStandbyAnimation, this)));
     }
 
 	void MutipleSealBubble::playStandbyAnimation()
 	{
 		std::vector<std::string> names;
-		names.push_back(ANIMATION_STANDBY_NAME_1);
-		names.push_back(ANIMATION_STANDBY_NAME_1);
-		names.push_back(ANIMATION_STANDBY_NAME_1);
-		names.push_back(ANIMATION_STANDBY_NAME_1);
-		names.push_back(ANIMATION_STANDBY_NAME_3);
-		names.push_back(ANIMATION_STANDBY_NAME_1);
-		names.push_back(ANIMATION_STANDBY_NAME_1);
-		names.push_back(ANIMATION_STANDBY_NAME_3);
-		names.push_back(ANIMATION_STANDBY_NAME_1);
-		names.push_back(ANIMATION_STANDBY_NAME_1);
-		names.push_back(ANIMATION_STANDBY_NAME_1);
-		names.push_back(ANIMATION_STANDBY_NAME_1);
-		names.push_back(ANIMATION_STANDBY_NAME_2);
-		armature_->getAnimation()->playWithNames(names, SPECIAL_BUBBLE_EFFECT_DURATION, true);
+		names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+		names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+		names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+		names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+		names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_2);
+		names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+		names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_1);
+		names.push_back(BUBBLE_ANIMATION_STANDBY_NAME_2);
+		armature_->getAnimation()->playWithNames(names);
+        armature_->getAnimation()->setMovementEventCallFunc(nullptr);
 	}
+
+    void MutipleSealBubble::playDefeatAnimation(cocos2d::EventCustom * event)
+    {
+        armature_->getAnimation()->play(BUBBLE_ANIMATION_DEFEAT_NAME);
+    }
 
     void MutipleSealBubble::addBubbleStaticBody()
     {

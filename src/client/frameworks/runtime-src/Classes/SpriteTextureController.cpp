@@ -16,6 +16,10 @@ const std::string MENU_STAGETYPE_TEXTURE_TOPELIMINATE_PATH = "tubiao01.png";
 const std::string GAME_CURRENT_STAGE_BUTTON_HALO_ARMATURE_PATH = "anniu-TX/anniu-TX.ExportJson";    //当前关卡光圈动画
 const std::string STAGE_CELL_RABBIT_ARMATURE_PATH = "tuzizuan/tuzizuan.ExportJson";    //兔子动画
 const std::string WINDMILL_BUBBLE_ARMATURE_PATH = "laoshu/laoshu.ExportJson";    //风车动画
+const std::string MUTIPLE_SEAL_3_BUBBLE_ARMATURE_PATH = "wa/wa.ExportJson"; //多重封印球的动画
+const std::string MUTIPLE_SEAL_7_BUBBLE_ARMATURE_PATH = "xiongda/xiongda.ExportJson"; //多重封印球的动画
+const std::string MUTIPLE_SEAL_1_BUBBLE_ARMATURE_PATH = "1gebianfu/1gebianfu.ExportJson"; //多重封印球的动画
+const std::string RAINBOW_CHARACTOR_ARMATURE_PATH = "langda/langda.ExportJson"; //彩虹封印的人物
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()
@@ -44,8 +48,8 @@ namespace bubble_second {
         armature_path_.push_back(BIG_COMBO_EFFECT_UNDER_FIRE_PATH);
         armature_path_.push_back(RAINBOW_CHARACTOR_ARMATURE_PATH);
         armature_path_.push_back(RAINBOW_BUBBLE_ARMATURE_PATH);
-        armature_path_.push_back(MUTIPLE_SEAL_BUBBLE_ARMATURE_FROG_PATH);
-        armature_path_.push_back(MUTIPLE_SEAL_BUBBLE_ARMATURE_GOG_PATH);
+        armature_path_.push_back(MUTIPLE_SEAL_3_BUBBLE_ARMATURE_PATH);
+        armature_path_.push_back(MUTIPLE_SEAL_1_BUBBLE_ARMATURE_PATH);
         armature_path_.push_back(SCOREWIDGET_ARMATURE_PATH);
         //armature_path_.push_back(WINDMILL_BUBBLE_DEMON_ARMATURE_PATH);
         armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_1_PATH);
@@ -60,6 +64,7 @@ namespace bubble_second {
         armature_path_.push_back(GAME_CURRENT_STAGE_BUTTON_HALO_ARMATURE_PATH);
         armature_path_.push_back(STAGE_CELL_RABBIT_ARMATURE_PATH);
         armature_path_.push_back(WINDMILL_BUBBLE_ARMATURE_PATH);
+        armature_path_.push_back(MUTIPLE_SEAL_7_BUBBLE_ARMATURE_PATH);
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()

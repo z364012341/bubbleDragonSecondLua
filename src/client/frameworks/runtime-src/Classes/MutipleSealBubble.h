@@ -30,6 +30,7 @@ namespace bubble_second {
             }
         }
         ~MutipleSealBubble();
+        void onEnter() override;
         void bubbleEliminate(int combo = 0) override;
         void downFromAir() override;
         void setBubbleTexture(BubbleType type) override;
@@ -38,7 +39,9 @@ namespace bubble_second {
         MutipleSealBubble();
         bool initWithComponentNumble(int numble);
 		void playStandbyAnimation();
+        void playDefeatAnimation(cocos2d::EventCustom* event);
 		void runBubbleEffect(const std::string& name, const cocos2d::Vec2& point) override;
+        void addNoopComponent();
 	private:
         cocostudio::Armature *armature_;
     };
