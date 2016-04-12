@@ -23,12 +23,14 @@ namespace bubble_second {
         void downFromAir() override;
         //改变颜色
         void changeRainbowColor();
-        void setSealedCharactor(RainbowCharactor* charactor);
-        RainbowCharactor* getSealedCharactor();
+        void beginSealingCharactor();
+        //void setSealedCharactor(RainbowCharactor* charactor);
+        //RainbowCharactor* getSealedCharactor();
         //float playTheSpecialEffects();
     private:
         RainbowSealBubble();
         bool init();
+        void setBubbleTexture(BubbleType type) override;
         //设置颜色
         void setRainbowColor(BubbleType color);
         BubbleType getRainbowColor();
@@ -38,6 +40,7 @@ namespace bubble_second {
         bool isSealing();
         //增加待机动画
         void addStandbyAnimation();
+        void addRainbowCharactor();
         void runBubbleEffect(const std::string& name, const cocos2d::Vec2& point) override;
     private:
         //封印颜色

@@ -42,7 +42,7 @@ namespace bubble_second {
         //处理消除后的悬空小球
         BubbleVector disposeAirBubbleAfterEliminate();
         //获取传入的x索引的所在的那一行小球, 
-        BubbleVector getSameRowBubblesWithIndex(const cocos2d::Vec2& index);
+        BubbleVector getSameYBubblesWithIndex(const cocos2d::Vec2& index);
         //获取传入的索引周围的阴云泡泡
         cocos2d::Vector<ColorBubble*> getAroundDarkCloudBubbleWithIndex(const cocos2d::Vec2& index);
         //根据索引获取容器里的小球
@@ -92,6 +92,13 @@ namespace bubble_second {
         void setFallFlag(bool flag);
         bool isFallStage();
     private:
+        static int getColFactorWithIndex(const cocos2d::Vec2& index);
+        static cocos2d::Vec2 getUpLeftIndex(const cocos2d::Vec2& index);
+        static cocos2d::Vec2 getLeftIndex(const cocos2d::Vec2& index);
+        static cocos2d::Vec2 getBottomLeftIndex(const cocos2d::Vec2& index);
+        static cocos2d::Vec2 getBottomRightIndex(const cocos2d::Vec2& index);
+        static cocos2d::Vec2 getRightIndex(const cocos2d::Vec2& index);
+        static cocos2d::Vec2 getUpRightIndex(const cocos2d::Vec2& index);
         //获取一个索引的四周索引
         BubbleIndexVector getAroundIndexWithIndex(const cocos2d::Vec2& index);
         //获取一个索引外第二圈的索引

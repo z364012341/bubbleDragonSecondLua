@@ -61,6 +61,7 @@ namespace bubble_second {
         void setEliminateDelayTime(float time);
         float getEliminateDelayTime();
         virtual BubbleType getBubbleType() const;
+        //index
         void setBubbleIndex(cocos2d::Vec2);
         cocos2d::Vec2 getBubbleIndex() const;
         //cocos2d::Vec2 getPointInMapNode();
@@ -76,6 +77,7 @@ namespace bubble_second {
         bool isWindmillBubble();
         //类型是否相同
         bool isEqualType(BubbleType type);
+        bool isIndexlargeThen(const cocos2d::Vec2& index);
         //增加点击事件
         virtual void addTouchEventListener();
         virtual void removeTouchEventListener();

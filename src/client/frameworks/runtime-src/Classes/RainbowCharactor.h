@@ -13,6 +13,7 @@
 #include "cocos2d.h"
 #include "BubbleSecondConstant.h"
 #include "cocostudio/CocoStudio.h"
+const std::string RAINBOW_CHARACTOR_ARMATURE_NAME = "langda";
 namespace bubble_second {
     class RainbowSealBubble;
     class BaseBubble;
@@ -23,7 +24,7 @@ namespace bubble_second {
         static RainbowCharactor* createWithFile(const std::string& path);
         ~RainbowCharactor();
         //开始封印
-        void beginSealingCharactor(RainbowSealBubble* bubble);
+        void beginSealingCharactor();
         //封印转移
         void moveSealintCharactor(RainbowSealBubble* bubble, const cocos2d::Vec2& from_point);
         //改变封印的颜色(改变托着的小球颜色)
@@ -32,6 +33,8 @@ namespace bubble_second {
         void setArmaturePath(const std::string& path);
         std::string getArmaturePath();
         void playContactAnimation();
+        void playStandbyAnimation();
+        void playDefeatAnimation();
     private:
         RainbowCharactor();
         //bool init();
@@ -40,7 +43,6 @@ namespace bubble_second {
         //void setSealedBubble(BaseBubble* bubble);
         //BaseBubble* getSealedBubble();
         void addCharactorArmature();
-        void playStandbyAnimation();
         //void runFlyingAnimation(RainbowSealBubble* bubble, const cocos2d::Vec2& armature_point, bool armature_point_need_convert = true);
     private:
         //里面人物手上托的球

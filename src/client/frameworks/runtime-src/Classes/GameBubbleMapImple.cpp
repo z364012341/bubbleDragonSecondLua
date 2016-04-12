@@ -15,9 +15,10 @@ namespace bubble_second{
             cocos2d::Map<int, BaseBubble*> sprite_map;
             for (int i = -1; i != MAP_EVEN_ROW_MAX; i++)
             {
-                BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(kBubbleTransparent,
-                    cocos2d::Vec2(MAP_TOP_ROW_INDEX, i),
-                    this->convertIndexToPoint(cocos2d::Vec2(MAP_TOP_ROW_INDEX, i)));
+                BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(
+                    kBubbleTransparent,
+                    cocos2d::Vec2(i, MAP_TOP_ROW_INDEX),
+                    this->convertIndexToPoint(cocos2d::Vec2(i, MAP_TOP_ROW_INDEX)));
                 sprite_map.insert(i, bubble);
                 this->addSuspensionPointToVector(bubble);
             }
@@ -79,8 +80,8 @@ namespace bubble_second{
         int row = tool->convertStringToInt(info.at(STAGE_XML_FIELDS_ROW));
         int col = tool->convertStringToInt(info.at(STAGE_XML_FIELDS_COL));
         int cloud = tool->convertStringToInt(info.at(STAGE_XML_FIELDS_CLOUD));
-        BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(type, cocos2d::Vec2(row, col),
-            this->convertIndexToPoint(cocos2d::Vec2(row, col)), cloud);
+        BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(type, cocos2d::Vec2(col, row),
+            this->convertIndexToPoint(cocos2d::Vec2(col, row)), cloud);
         CC_SAFE_DELETE(tool);
         return bubble;
     }
@@ -113,11 +114,46 @@ namespace bubble_second{
 
     cocos2d::Vec2 GameBubbleMapImple::convertIndexToPoint(const cocos2d::Vec2& index)
     {
-        int row = index.x;
-        int col = index.y;
+        int row = index.y;
+        int col = index.x;
         float posX = (abs(row) % 2 + 1) * (MAP_BUBBLE_RADIUS)+col * MAP_BUBBLE_RADIUS * 2;
         float posY = 0 - MAP_BUBBLE_RADIUS - row * (MAP_BUBBLE_RADIUS  * SQRT3);
         return cocos2d::Vec2(posX, posY);
+    }
+
+    int bubble_second::GameBubbleMapImple::getColFactorWithIndex(const cocos2d::Vec2 & index)
+    {
+        return abs((int)index.y % 2);
+    }
+
+    cocos2d::Vec2 GameBubbleMapImple::getUpLeftIndex(const cocos2d::Vec2& index)
+    {
+        return cocos2d::Vec2(index.x + getColFactorWithIndex(index) - 1, index.y - 1);
+    }
+
+    cocos2d::Vec2 bubble_second::GameBubbleMapImple::getLeftIndex(const cocos2d::Vec2 & index)
+    {
+        return cocos2d::Vec2(index.x - 1, index.y);
+    }
+
+    cocos2d::Vec2 bubble_second::GameBubbleMapImple::getBottomLeftIndex(const cocos2d::Vec2 & index)
+    {
+        return cocos2d::Vec2(index.x + getColFactorWithIndex(index) - 1, index.y + 1);
+    }
+
+    cocos2d::Vec2 bubble_second::GameBubbleMapImple::getBottomRightIndex(const cocos2d::Vec2 & index)
+    {
+        return cocos2d::Vec2(index.x + getColFactorWithIndex(index), index.y + 1);
+    }
+
+    cocos2d::Vec2 bubble_second::GameBubbleMapImple::getRightIndex(const cocos2d::Vec2 & index)
+    {
+        return cocos2d::Vec2(index.x + 1, index.y);
+    }
+
+    cocos2d::Vec2 bubble_second::GameBubbleMapImple::getUpRightIndex(const cocos2d::Vec2 & index)
+    {
+        return cocos2d::Vec2(index.x + getColFactorWithIndex(index), index.y - 1);
     }
 
     BubbleIndexVector GameBubbleMapImple::getAroundIndexWithIndex(const cocos2d::Vec2& index)
@@ -128,25 +164,25 @@ namespace bubble_second{
         }
         using cocos2d::Vec2;
         BubbleIndexVector index_vector;
-        int special = abs((int)index.x % 2);
-        if (special != 0 || index.y != 0.0f)
+        int special = getColFactorWithIndex(index);
+        if (special != 0 || index.x != 0.0f)
         {
-            index_vector.push_back(Vec2(index.x - 1, index.y + (special - 1)));//左上
-            if (special != 1 || index.y != 0.0f)
+            index_vector.push_back(getUpLeftIndex(index));//左上
+            if (special != 1 || index.x != 0.0f)
             {
-                index_vector.push_back(Vec2(index.x, index.y - 1));//左
+                index_vector.push_back(getLeftIndex(index));//左
             }
-            index_vector.push_back(Vec2(index.x + 1, index.y + (special - 1)));//左下
+            index_vector.push_back(getBottomLeftIndex(index));//左下
         }
 
-        if (special != 0 || index.y != MAP_EVEN_ROW_MAX - 1)
+        if (special != 0 || index.x != MAP_EVEN_ROW_MAX - 1)
         {
-            index_vector.push_back(Vec2(index.x + 1, index.y + special));//右下
-            if (special != 1 || index.y != MAP_ODD_ROW_MAX - 1)
+            index_vector.push_back(getBottomRightIndex(index));//右下
+            if (special != 1 || index.x != MAP_ODD_ROW_MAX - 1)
             {
-                index_vector.push_back(Vec2(index.x, index.y + 1));//右
+                index_vector.push_back(getRightIndex(index));//右
             }
-            index_vector.push_back(Vec2(index.x - 1, index.y + special));//右上
+            index_vector.push_back(getUpRightIndex(index));//右上
         }
         return index_vector;
     }
@@ -155,33 +191,33 @@ namespace bubble_second{
     {
         using cocos2d::Vec2;
         BubbleIndexVector index_vector;
-        int special = abs((int)index.x % 2);
-        index_vector.push_back(Vec2(index.x - 1, index.y + (special - 1)));//左上
-        index_vector.push_back(Vec2(index.x, index.y - 1));//左
-        index_vector.push_back(Vec2(index.x + 1, index.y + (special - 1)));//左下
-        index_vector.push_back(Vec2(index.x + 1, index.y + special));//右下
-        index_vector.push_back(Vec2(index.x, index.y + 1));//右
-        index_vector.push_back(Vec2(index.x - 1, index.y + special));//右上
+        //int special = getColFactorWithIndex(index);
+        index_vector.push_back(getUpLeftIndex(index));//左上
+        index_vector.push_back(getLeftIndex(index));//左
+        index_vector.push_back(getBottomLeftIndex(index));//左下
+        index_vector.push_back(getBottomRightIndex(index));//右下
+        index_vector.push_back(getRightIndex(index));//右
+        index_vector.push_back(getUpRightIndex(index));//右上
         return index_vector;
     }
 
     BubbleIndexVector GameBubbleMapImple::getSecondAroundIndexWithIndex(const cocos2d::Vec2& index)
     {
         using cocos2d::Vec2;
-        int special = abs((int)index.x % 2);
+        //int special = getColFactorWithIndex(index);
         BubbleIndexVector index_vector;
-        index_vector.push_back(Vec2(index.x - 2, index.y - 1)); //左上左上
-        index_vector.push_back(Vec2(index.x - 1, index.y - 2 + special)); //左上左
-        index_vector.push_back(Vec2(index.x, index.y - 2)); //左左
-        index_vector.push_back(Vec2(index.x+1, index.y - 2 + special)); //左左下
-        index_vector.push_back(Vec2(index.x + 2, index.y - 1)); //左下左下
-        index_vector.push_back(Vec2(index.x + 2, index.y)); //下下
-        index_vector.push_back(Vec2(index.x + 2, index.y + 1)); //右下右下
-        index_vector.push_back(Vec2(index.x + 1, index.y + 1 + special)); //右下右
-        index_vector.push_back(Vec2(index.x, index.y + 2)); //右右
-        index_vector.push_back(Vec2(index.x - 1, index.y + 1 + special)); //右上右
-        index_vector.push_back(Vec2(index.x - 2, index.y + 1)); //右上右上
-        index_vector.push_back(Vec2(index.x - 2, index.y)); //右右
+        index_vector.push_back(getUpLeftIndex(getUpLeftIndex(index))); //左上左上
+        index_vector.push_back(getLeftIndex(getUpLeftIndex(index))); //左上左
+        index_vector.push_back(getLeftIndex(getLeftIndex(index))); //左左
+        index_vector.push_back(getBottomLeftIndex(getLeftIndex(index))); //左左下
+        index_vector.push_back(getBottomLeftIndex(getBottomLeftIndex(index))); //左下左下
+        index_vector.push_back(getBottomLeftIndex(getBottomRightIndex(index))); //下下
+        index_vector.push_back(getBottomRightIndex(getBottomRightIndex(index))); //右下右下
+        index_vector.push_back(getRightIndex(getBottomRightIndex(index))); //右下右
+        index_vector.push_back(getRightIndex(getRightIndex(index))); //右右
+        index_vector.push_back(getRightIndex(getUpRightIndex(index))); //右上右
+        index_vector.push_back(getUpRightIndex(getUpRightIndex(index))); //右上右上
+        index_vector.push_back(getRightIndex(getRightIndex(index))); //右右
         return index_vector;
     }
 
@@ -189,14 +225,14 @@ namespace bubble_second{
     {
         using cocos2d::Vec2;
         BubbleIndexVector index_vector;
-        int special = abs((int)index.x % 2);
-        if (special != 0 || index.y != 0.0)
+        int special = getColFactorWithIndex(index);
+        if (special != 0 || index.x != 0.0)
         {
-            index_vector.push_back(Vec2(index.x + 1, index.y + (special - 1)));//左下
+            index_vector.push_back(getBottomLeftIndex(index));//左下
         }
-        if (special != 0 || index.y != MAP_EVEN_ROW_MAX - 1)
+        if (special != 0 || index.x != MAP_EVEN_ROW_MAX - 1)
         {
-            index_vector.push_back(Vec2(index.x + 1, index.y + special));//右下
+            index_vector.push_back(getBottomRightIndex(index));//右下
         }
         return index_vector;
     }
@@ -324,7 +360,7 @@ namespace bubble_second{
 
     BaseBubble* GameBubbleMapImple::getSpriteWithIndex(const cocos2d::Vec2& index)
     {
-        return bubble_sprite_map_[index.x].at(index.y);;
+        return bubble_sprite_map_[index.y].at(index.x);;
     }
 
     BaseBubble* GameBubbleMapImple::clingBubble(BaseBubble* prepare_bubble, const cocos2d::Vec2& contact_index)
@@ -348,7 +384,7 @@ namespace bubble_second{
 
     void GameBubbleMapImple::removeSpriteFromeMapWithIndex(const cocos2d::Vec2& index)
     {
-        bubble_sprite_map_[index.x].erase(index.y);
+        bubble_sprite_map_[index.y].erase(index.x);
     }
 
     std::vector<cocos2d::Vec2> GameBubbleMapImple::getAroundEmptyIndexWithIndex(const cocos2d::Vec2& index)
@@ -356,7 +392,7 @@ namespace bubble_second{
         std::vector<cocos2d::Vec2> index_vector = this->getAroundIndexWithIndex(index);
         for (auto iter = index_vector.begin(); iter != index_vector.end();)
         {
-            if (bubble_sprite_map_[iter->x].at(iter->y))
+            if (bubble_sprite_map_[iter->y].at(iter->x))
             {
                 iter = index_vector.erase(iter);
                 break;
@@ -408,7 +444,7 @@ namespace bubble_second{
     void GameBubbleMapImple::addBubbleToBubbleMap(BaseBubble* bubble)
     {
         cocos2d::Vec2 index = bubble->getBubbleIndex();
-        bubble_sprite_map_[index.x].insert(index.y, bubble);
+        bubble_sprite_map_[index.y].insert(index.x, bubble);
 		//bubble_sprite_map_[index.x][index.y] = bubble;
     }
 
@@ -621,9 +657,9 @@ namespace bubble_second{
         return this->getIndexMindistanceWithVector(prepare_point, around_index);
     }
 
-    BubbleVector GameBubbleMapImple::getSameRowBubblesWithIndex(const cocos2d::Vec2& index)
+    BubbleVector GameBubbleMapImple::getSameYBubblesWithIndex(const cocos2d::Vec2& index)
     {
-        cocos2d::Map<int, BaseBubble*> row_map = bubble_sprite_map_[index.x];
+        cocos2d::Map<int, BaseBubble*> row_map = bubble_sprite_map_[index.y];
         BubbleVector same_row_bubbles;
         for (auto iter = row_map.begin(); iter != row_map.end(); ++iter)
         {                              
@@ -653,7 +689,7 @@ namespace bubble_second{
         {
             if (bubble_sprite_map_[i].size()!=0)
             {
-                return this->convertIndexToPoint(cocos2d::Vec2(i, 0)).y;
+                return this->convertIndexToPoint(cocos2d::Vec2(0, i)).y;
             }
         }
         return 0.0f;

@@ -272,6 +272,22 @@ namespace bubble_second {
         return this->getBubbleType() == type;
     }
 
+    bool BaseBubble::isIndexlargeThen(const cocos2d::Vec2 & index)
+    {
+        if (this->getBubbleIndex().y > index.y)
+        {
+            return true;
+        }
+        else if (this->getBubbleIndex().y < index.y)
+        {
+            return false;
+        }
+        else
+        {
+            return this->getBubbleIndex().x > index.x;
+        }
+    }
+
     void BaseBubble::addTouchEventListener()
     {
         auto listener = cocos2d::EventListenerTouchOneByOne::create();

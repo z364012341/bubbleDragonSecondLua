@@ -327,6 +327,8 @@
     <ClInclude Include="..\Classes\PopScoreLabelComponent.h" />
     <ClInclude Include="..\Classes\GameStandbyTimer.h" />
     <ClInclude Include="..\Classes\GameNoopAnimationComponent.h" />
+    <ClInclude Include="..\Classes\GameClingAnimationComponent.h" />
+    <ClInclude Include="..\Classes\GameDefeatAnimationComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -631,6 +633,8 @@
     <ClCompile Include="..\Classes\PopScoreLabelComponent.cpp" />
     <ClCompile Include="..\Classes\GameStandbyTimer.cpp" />
     <ClCompile Include="..\Classes\GameNoopAnimationComponent.cpp" />
+    <ClCompile Include="..\Classes\GameClingAnimationComponent.cpp" />
+    <ClCompile Include="..\Classes\GameDefeatAnimationComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

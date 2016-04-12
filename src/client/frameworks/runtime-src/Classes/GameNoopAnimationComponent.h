@@ -7,8 +7,8 @@
 //-------------------------------------------------------------------------------
 //作者     : <黄泽昊>, [yyy], [zzz] ...（作者和逗号分割的修改者列表）
 //*******************************************************************************
-#ifndef _Game_Noop_Animation_Component_H_
-#define _Game_Noop_Animation_Component_H_
+#ifndef _GAME_NOOP_ANIMATION_COMPONENT_H_
+#define _GAME_NOOP_ANIMATION_COMPONENT_H_
 #include "cocos2d.h"
 #include "cocostudio\CocoStudio.h"
 namespace bubble_second {
@@ -32,4 +32,4 @@ namespace bubble_second {
         bool noop_state_ = false;
     };
 }
-#endif //_Game_Noop_Animation_Component_H_
+#endif //_GAME_NOOP_ANIMATION_COMPONENT_H_

@@ -593,63 +593,6 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>新建文件夹 (7)/laohu_0006_LaoHu-tou6.png</key>
-			<dict>
-				<key>width</key>
-				<integer>328</integer>
-				<key>height</key>
-				<integer>339</integer>
-				<key>originalWidth</key>
-				<integer>328</integer>
-				<key>originalHeight</key>
-				<integer>339</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>695</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>新建文件夹 (7)/laohu_0005_LaoHu-you7.png</key>
-			<dict>
-				<key>width</key>
-				<integer>328</integer>
-				<key>height</key>
-				<integer>339</integer>
-				<key>originalWidth</key>
-				<integer>328</integer>
-				<key>originalHeight</key>
-				<integer>339</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>1036</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>新建文件夹 (7)/laohu_0007_LaoHu-tou5.png</key>
-			<dict>
-				<key>width</key>
-				<integer>328</integer>
-				<key>height</key>
-				<integer>339</integer>
-				<key>originalWidth</key>
-				<integer>328</integer>
-				<key>originalHeight</key>
-				<integer>339</integer>
-				<key>x</key>
-				<integer>330</integer>
-				<key>y</key>
-				<integer>1023</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
 			<key>新建文件夹 (7)/laohu_0022_LaoHu-hudiejie.png</key>
 			<dict>
 				<key>width</key>
@@ -680,9 +623,9 @@
 				<key>originalHeight</key>
 				<integer>112</integer>
 				<key>x</key>
-				<integer>777</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>341</integer>
+				<integer>695</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -699,9 +642,9 @@
 				<key>originalHeight</key>
 				<integer>117</integer>
 				<key>x</key>
-				<integer>840</integer>
-				<key>y</key>
 				<integer>0</integer>
+				<key>y</key>
+				<integer>770</integer>
 				<key>offsetX</key>
 				<real>-1.5</real>
 				<key>offsetY</key>
@@ -718,9 +661,9 @@
 				<key>originalHeight</key>
 				<integer>109</integer>
 				<key>x</key>
-				<integer>777</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>416</integer>
+				<integer>888</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -739,7 +682,7 @@
 				<key>x</key>
 				<integer>840</integer>
 				<key>y</key>
-				<integer>118</integer>
+				<integer>0</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -756,9 +699,9 @@
 				<key>originalHeight</key>
 				<integer>145</integer>
 				<key>x</key>
-				<integer>777</integer>
+				<integer>196</integer>
 				<key>y</key>
-				<integer>526</integer>
+				<integer>695</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -794,9 +737,9 @@
 				<key>originalHeight</key>
 				<integer>203</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>840</integer>
 				<key>y</key>
-				<integer>1377</integer>
+				<integer>105</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -813,9 +756,9 @@
 				<key>originalHeight</key>
 				<integer>110</integer>
 				<key>x</key>
-				<integer>840</integer>
+				<integer>196</integer>
 				<key>y</key>
-				<integer>223</integer>
+				<integer>842</integer>
 				<key>offsetX</key>
 				<real>0.5</real>
 				<key>offsetY</key>
@@ -834,7 +777,7 @@
 				<key>x</key>
 				<integer>777</integer>
 				<key>y</key>
-				<integer>673</integer>
+				<integer>341</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -889,9 +832,9 @@
 				<key>originalHeight</key>
 				<integer>122</integer>
 				<key>x</key>
-				<integer>911</integer>
+				<integer>777</integer>
 				<key>y</key>
-				<integer>526</integer>
+				<integer>472</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -908,9 +851,9 @@
 				<key>originalHeight</key>
 				<integer>130</integer>
 				<key>x</key>
-				<integer>181</integer>
+				<integer>777</integer>
 				<key>y</key>
-				<integer>1377</integer>
+				<integer>596</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -926,14 +869,14 @@
 			<key>realTextureFileName</key>
 			<string>laohu0.png</string>
 			<key>size</key>
-			<string>{1024,2048}</string>
+			<string>{1024,1024}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
 			<integer>1024</integer>
 			<key>height</key>
-			<integer>2048</integer>
+			<integer>1024</integer>
 		</dict>
 	</dict>
 </plist>

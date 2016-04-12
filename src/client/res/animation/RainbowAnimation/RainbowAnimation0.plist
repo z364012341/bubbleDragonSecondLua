@@ -4,6 +4,25 @@
 	<dict>
 		<key>frames</key>
 		<dict>
+			<key>_0035_TeXiao4-3.png</key>
+			<dict>
+				<key>width</key>
+				<integer>670</integer>
+				<key>height</key>
+				<integer>686</integer>
+				<key>originalWidth</key>
+				<integer>670</integer>
+				<key>originalHeight</key>
+				<integer>686</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
 			<key>_0037_TeXiao4-1.png</key>
 			<dict>
 				<key>width</key>
@@ -15,45 +34,7 @@
 				<key>originalHeight</key>
 				<integer>101</integer>
 				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>_0036_TeXiao4-2.png</key>
-			<dict>
-				<key>width</key>
-				<integer>372</integer>
-				<key>height</key>
-				<integer>362</integer>
-				<key>originalWidth</key>
-				<integer>372</integer>
-				<key>originalHeight</key>
-				<integer>362</integer>
-				<key>x</key>
-				<integer>106</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>_0029_TeXiao6.png</key>
-			<dict>
-				<key>width</key>
-				<integer>181</integer>
-				<key>height</key>
-				<integer>181</integer>
-				<key>originalWidth</key>
-				<integer>181</integer>
-				<key>originalHeight</key>
-				<integer>181</integer>
-				<key>x</key>
-				<integer>480</integer>
+				<integer>672</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
@@ -74,7 +55,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>364</integer>
+				<integer>688</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -91,9 +72,9 @@
 				<key>originalHeight</key>
 				<integer>277</integer>
 				<key>x</key>
-				<integer>207</integer>
+				<integer>672</integer>
 				<key>y</key>
-				<integer>364</integer>
+				<integer>103</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -110,9 +91,9 @@
 				<key>originalHeight</key>
 				<integer>329</integer>
 				<key>x</key>
-				<integer>509</integer>
+				<integer>207</integer>
 				<key>y</key>
-				<integer>364</integer>
+				<integer>688</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -129,9 +110,9 @@
 				<key>originalHeight</key>
 				<integer>90</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>778</integer>
 				<key>y</key>
-				<integer>695</integer>
+				<integer>0</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -148,9 +129,9 @@
 				<key>originalHeight</key>
 				<integer>186</integer>
 				<key>x</key>
-				<integer>195</integer>
+				<integer>672</integer>
 				<key>y</key>
-				<integer>695</integer>
+				<integer>382</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -167,9 +148,9 @@
 				<key>originalHeight</key>
 				<integer>156</integer>
 				<key>x</key>
-				<integer>399</integer>
+				<integer>543</integer>
 				<key>y</key>
-				<integer>695</integer>
+				<integer>688</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -186,9 +167,28 @@
 				<key>originalHeight</key>
 				<integer>183</integer>
 				<key>x</key>
-				<integer>603</integer>
+				<integer>747</integer>
 				<key>y</key>
-				<integer>695</integer>
+				<integer>570</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>_0029_TeXiao6.png</key>
+			<dict>
+				<key>width</key>
+				<integer>181</integer>
+				<key>height</key>
+				<integer>181</integer>
+				<key>originalWidth</key>
+				<integer>181</integer>
+				<key>originalHeight</key>
+				<integer>181</integer>
+				<key>x</key>
+				<integer>747</integer>
+				<key>y</key>
+				<integer>755</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>

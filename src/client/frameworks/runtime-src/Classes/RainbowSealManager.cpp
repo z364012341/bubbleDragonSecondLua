@@ -1,7 +1,6 @@
 #include "RainbowSealManager.h"
 #include "RainbowSealBubble.h"
 #include "RainbowCharactor.h"
-const std::string RAINBOW_CHARACTOR_ARMATURE_NAME = "langda";
 namespace bubble_second {
     RainbowSealManager::RainbowSealManager()
     {
@@ -24,12 +23,20 @@ namespace bubble_second {
     void RainbowSealManager::clear()
     {   
         rainbow_seal_bubbles_.clear();
-        rainbow_charactor_ = nullptr;
+        //rainbow_charactor_ = nullptr;
     }
 
     void RainbowSealManager::addRainbowSealBubble(RainbowSealBubble* bubble)
     {
-        rainbow_seal_bubbles_.insert(0, bubble);
+        for (int i = 0; i < rainbow_seal_bubbles_.size(); i++)
+        {
+            if (bubble->isIndexlargeThen(rainbow_seal_bubbles_.at(i)->getBubbleIndex()))
+            {
+                rainbow_seal_bubbles_.insert(i, bubble);
+                return;
+            }
+        }
+        rainbow_seal_bubbles_.pushBack(bubble);
     }
 
     void RainbowSealManager::beginSealingCharactor()
@@ -39,31 +46,34 @@ namespace bubble_second {
         {
             return;
         }
-        if (!this->haveBeganSealed())
-        {
-            rainbow_charactor_ = RainbowCharactor::createWithFile(RAINBOW_CHARACTOR_ARMATURE_NAME);
-        }
-        rainbow_charactor_->beginSealingCharactor(begin_bubble);
+        begin_bubble->beginSealingCharactor();
+
+
+        //if (!this->haveBeganSealed())
+        //{
+        //    rainbow_charactor_ = RainbowCharactor::createWithFile(RAINBOW_CHARACTOR_ARMATURE_NAME);
+        //}
+        //rainbow_charactor_->beginSealingCharactor(begin_bubble);
         //(*begin_bubble)->addChild(rainbow_charactor_);
         //auto rect = (*begin_bubble)->getBoundingBox();
         //rainbow_charactor_->setPosition(rect.size.width/2, rect.size.height/2);
         //(*begin_bubble)->changeRainbowColor();
     }
 
-    void RainbowSealManager::setRainbowCharactor(RainbowCharactor* charactor)
-    {
-        rainbow_charactor_ = charactor;
-    }
+    //void RainbowSealManager::setRainbowCharactor(RainbowCharactor* charactor)
+    //{
+    //    rainbow_charactor_ = charactor;
+    //}
 
-    RainbowCharactor* RainbowSealManager::getRainbowCharactor()
-    {
-        return rainbow_charactor_;
-    }
+    //RainbowCharactor* RainbowSealManager::getRainbowCharactor()
+    //{
+    //    return rainbow_charactor_;
+    //}
 
-    bool RainbowSealManager::haveBeganSealed()
-    {
-        return this->getRainbowCharactor()!=nullptr;
-    }
+    //bool RainbowSealManager::haveBeganSealed()
+    //{
+    //    return this->getRainbowCharactor()!=nullptr;
+    //}
 
     cocos2d::Color3B RainbowSealManager::getColor3BWithBubbleColor(BubbleType color)
     {
@@ -74,7 +84,12 @@ namespace bubble_second {
     {
         auto from_point = bubble->getPosition();
         rainbow_seal_bubbles_.eraseObject(bubble);
-        rainbow_charactor_->moveSealintCharactor(this->getNextRainbowSealBubble(), from_point);
+        if (RainbowSealBubble* bubble = this->getNextRainbowSealBubble())
+        {
+            bubble->beginSealingCharactor();
+        }
+
+        //rainbow_charactor_->moveSealintCharactor(this->getNextRainbowSealBubble(), from_point);
     }
 
     RainbowSealBubble * RainbowSealManager::getNextRainbowSealBubble()

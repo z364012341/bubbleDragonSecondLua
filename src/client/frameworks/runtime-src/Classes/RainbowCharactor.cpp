@@ -5,7 +5,10 @@
 #include "RainbowSealManager.h"
 #include "GameScene.h"
 #include "GameNoopAnimationComponent.h"
+#include "GameClingAnimationComponent.h"
+#include "GameDefeatAnimationComponent.h"
 const int UI_ZORDER_RAINBOW_SEALED_CHARACTOR = -1; //彩虹封印里面的人物
+const float CHARACTOR_ARMATURE_SCALE = 0.8f;
 namespace bubble_second {
     RainbowCharactor::RainbowCharactor()
     {
@@ -43,6 +46,7 @@ namespace bubble_second {
         }         
         this->setArmaturePath(path);
         this->initTexture();
+        //this->setVisible(false);
         return true;
     }
 
@@ -68,7 +72,7 @@ namespace bubble_second {
         }
         {
             rainbow_background_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(RAINBOW_CHARACTOR_BG_PATH);
-            rainbow_background_->setScale(0.9f);
+            //rainbow_background_->setScale(0.9f);
             this->addChild(rainbow_background_, -2);
         }
     }
@@ -80,11 +84,15 @@ namespace bubble_second {
         armature_ = Armature::create(this->getArmaturePath());
         //armature_->setPositionX(RAINBOW_CHARACTOR_ARMATURE_POS_X);
         //armature_->getAnimation()->play(RAINBOW_CHARACTOR_ANIMATIOIN_STANDBY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
-        armature_->setScale(0.85f);
+        //armature_->setScale(0.8f);
+        armature_->setOpacity(0);
         this->addChild(armature_);
         this->playStandbyAnimation();
 
         this->addChild(GameNoopAnimationComponent::create(armature_, BUBBLE_ANIMATION_NOOP_NAME, CC_CALLBACK_0(RainbowCharactor::playStandbyAnimation, this)));
+        this->addChild(GameClingAnimationComponent::create(armature_, BUBBLE_ANIMATION_DEFEAT_NAME, CC_CALLBACK_0(RainbowCharactor::playStandbyAnimation, this)));
+        this->addChild(GameDefeatAnimationComponent::create(armature_, BUBBLE_ANIMATION_DEFEAT_NAME));
+
     }
 
     void RainbowCharactor::playStandbyAnimation()
@@ -102,15 +110,26 @@ namespace bubble_second {
         armature_->getAnimation()->setMovementEventCallFunc(nullptr);
     }
 
-    void RainbowCharactor::beginSealingCharactor(RainbowSealBubble* bubble)
+    void RainbowCharactor::playDefeatAnimation()
     {
-        bubble->setSealedCharactor(this);
+        armature_->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+            if (movementType == cocostudio::COMPLETE)
+            {
+                this->removeFromParent();
+            }
+        });
+    }
+
+    void RainbowCharactor::beginSealingCharactor()
+    {
+        //bubble->setSealedCharactor(this);
         //bubble->getParent()->addChild(this, UI_ZORDER_RAINBOW_SEALED_CHARACTOR);
         //this->setVisible(false);
         //cocos2d::Vec2 bubble_pos = bubble->getPosition();
         //this->setPosition(bubble_pos);
-        cocos2d::Node* node = bubble->getParent()->getParent();
-        GameScene* game_scene = dynamic_cast<GameScene*>(node->getParent());
+        //cocos2d::Node* node = bubble->getParent()->getParent();
+        //GameScene* game_scene = dynamic_cast<GameScene*>(node->getParent());
         //using cocostudio::ArmatureDataManager;
         //using cocostudio::Armature;
         //Armature* armature = Armature::create(this->getArmaturePath());
@@ -132,13 +151,13 @@ namespace bubble_second {
         //    bubble->changeRainbowColor();
         //}), nullptr);
         //armature->runAction(seq);
-        this->setScale(0.5f);
-        cocos2d::FadeIn* fade = cocos2d::FadeIn::create(0.3f);
-        cocos2d::ScaleTo* scale_1 = cocos2d::ScaleTo::create(0.4f, 1.2f);
-        cocos2d::ScaleTo* scale_2 = cocos2d::ScaleTo::create(0.2f, 0.8f);
-        cocos2d::ScaleTo* scale_3 = cocos2d::ScaleTo::create(0.1f, 1.0f);
+        armature_->setScale(0.5f);
+        cocos2d::FadeIn* fade = cocos2d::FadeIn::create(0.5f);
+        cocos2d::ScaleTo* scale_1 = cocos2d::ScaleTo::create(0.4f, CHARACTOR_ARMATURE_SCALE+0.2f);
+        cocos2d::ScaleTo* scale_2 = cocos2d::ScaleTo::create(0.2f, CHARACTOR_ARMATURE_SCALE - 0.2f);
+        cocos2d::ScaleTo* scale_3 = cocos2d::ScaleTo::create(0.1f, CHARACTOR_ARMATURE_SCALE);
         cocos2d::Sequence* seq = cocos2d::Sequence::create(fade, scale_1, scale_2, scale_3, nullptr);
-        this->runAction(seq);
+        armature_->runAction(seq);
     }
     void RainbowCharactor::moveSealintCharactor(RainbowSealBubble* bubble, const cocos2d::Vec2& from_point)
     {
@@ -150,7 +169,7 @@ namespace bubble_second {
         this->setVisible(false);
         cocos2d::Vec2 bubble_pos = bubble->getPosition();
         this->setPosition(bubble_pos);
-        bubble->setSealedCharactor(this);
+        //bubble->setSealedCharactor(this);
         cocos2d::Node* node = bubble->getParent();
         using cocostudio::ArmatureDataManager;
         using cocostudio::Armature;

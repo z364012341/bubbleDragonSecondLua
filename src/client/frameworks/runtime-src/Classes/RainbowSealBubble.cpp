@@ -4,6 +4,7 @@
 #include "RainbowSealManager.h"
 #include "BubbleFactory.h"
 #include "RainbowCharactor.h"
+#include "SpriteTextureController.h"
 namespace bubble_second {
     RainbowSealBubble::RainbowSealBubble()
     {
@@ -27,8 +28,19 @@ namespace bubble_second {
         this->setSupensionPoint(true);
         this->setBubbleComponentNumble(BUBBLE_REABOW_SEAL_COMPONENT_NUMBLE);
         this->addGameTaskNumble();
-        RainbowSealManager::getInstance()->addRainbowSealBubble(this);
+        this->runAction(cocos2d::CallFunc::create([=]() {       
+            RainbowSealManager::getInstance()->addRainbowSealBubble(this);
+        }));
         return true;
+    }
+
+    void RainbowSealBubble::setBubbleTexture(BubbleType type)
+    {
+        if (type >= 0)
+        {
+            //this->setSpriteFrame(BubbleFactory::getInstance()->getPathWithType(type));
+            this->addChild(SpriteTextureController::getInstance()->createGameSpriteWithPath(BubbleFactory::getInstance()->getPathWithType(type)), 1);
+        }
     }
 
     bool RainbowSealBubble::isEqualRainbowColor(BubbleType color)
@@ -38,7 +50,7 @@ namespace bubble_second {
 
     bool RainbowSealBubble::isSealing()
     {
-        return this->getSealedCharactor()!=nullptr;
+        return sealed_charactor_!=nullptr;
     }
 
     BubbleVector RainbowSealBubble::disposeRainbowSeal(BubbleType color)
@@ -80,24 +92,24 @@ namespace bubble_second {
         rainbow_color_ = color;
         if (this->isSealing())
         {
-            this->getSealedCharactor()->setRainbowColor(rainbow_color_);
+            sealed_charactor_->setRainbowColor(rainbow_color_);
         }
     }
 
-    void RainbowSealBubble::setSealedCharactor(RainbowCharactor* charactor)
-    {
-        sealed_charactor_ = charactor;
-    }
+    //void RainbowSealBubble::setSealedCharactor(RainbowCharactor* charactor)
+    //{
+    //    sealed_charactor_ = charactor;
+    //}
 
-    RainbowCharactor * RainbowSealBubble::getSealedCharactor()
-    {
-        return sealed_charactor_;
-    }
+    //RainbowCharactor * RainbowSealBubble::getSealedCharactor()
+    //{
+    //    return sealed_charactor_;
+    //}
 
     void RainbowSealBubble::bubbleEliminate(int combo)
     {
         this->addCompletedTaskNumble();
-        RainbowSealManager::getInstance()->moveSealedCharactor(this);
+
         using cocostudio::ArmatureDataManager;
         using cocostudio::Armature;
         Armature *armature = Armature::create(RAINBOW_BUBBLE_ARMATURE_NAME);
@@ -107,6 +119,7 @@ namespace bubble_second {
         armature->getAnimation()->setMovementEventCallFunc([=](Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
             if (movementType == cocostudio::COMPLETE)
             {
+                RainbowSealManager::getInstance()->moveSealedCharactor(this);
                 this->removeFromParent();
             }
         });
@@ -124,7 +137,7 @@ namespace bubble_second {
         using cocostudio::Armature;
         Armature *armature = Armature::create(RAINBOW_BUBBLE_ARMATURE_NAME);
         armature->setScale(0.87f);
-        armature->setPosition(-13.0f, -2.0f);
+        armature->setPosition(this->getContentSize().width / 2, this->getContentSize().height / 2);
         armature->getAnimation()->setMovementEventCallFunc([=](Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
             if (movementType == cocostudio::START)
             {
@@ -135,7 +148,7 @@ namespace bubble_second {
                 armature->setVisible(false);
             }
         });
-        this->addChild(armature, -1);
+        this->addChild(armature, 1);
         cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(10.0f), cocos2d::CallFunc::create([=]() {
             if (this->isSealing())
             {
@@ -144,11 +157,33 @@ namespace bubble_second {
 
         }));
         armature->runAction(cocos2d::RepeatForever::create(seq));
+
+        if (sealed_charactor_)
+        {
+            sealed_charactor_->playDefeatAnimation();
+        }
+    }
+
+    void RainbowSealBubble::addRainbowCharactor()
+    {
+        sealed_charactor_ = RainbowCharactor::createWithFile(RAINBOW_CHARACTOR_ARMATURE_NAME);
+        sealed_charactor_->setPosition(this->getContentSize().width/2, this->getContentSize().height / 2);
+        this->addChild(sealed_charactor_);
     }
 
     void RainbowSealBubble::runBubbleEffect(const std::string& name, const cocos2d::Vec2& point)
     {
         BaseComponentBubble::runBubbleEffect(name, point);
-        this->getSealedCharactor()->playContactAnimation();
+        if (sealed_charactor_)
+        {
+            sealed_charactor_->playContactAnimation();
+        }
+    }
+
+    void RainbowSealBubble::beginSealingCharactor()
+    {
+        this->addRainbowCharactor();
+        sealed_charactor_->beginSealingCharactor();
+        this->changeRainbowColor();
     }
 }

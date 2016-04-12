@@ -174,7 +174,7 @@ namespace bubble_second {
 
     BubbleVector GameBubbleMap::disposeContactLightningBubble(const cocos2d::Vec2& buff_index)
     {
-        auto row_vector = game_bubble_map_impl_->getSameRowBubblesWithIndex(buff_index);
+        auto row_vector = game_bubble_map_impl_->getSameYBubblesWithIndex(buff_index);
         return row_vector;
     }
 

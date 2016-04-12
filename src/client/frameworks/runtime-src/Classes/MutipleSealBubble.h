@@ -33,10 +33,10 @@ namespace bubble_second {
         void onEnter() override;
         void bubbleEliminate(int combo = 0) override;
         void downFromAir() override;
-        void setBubbleTexture(BubbleType type) override;
         void addBubbleStaticBody() override;
     private:
         MutipleSealBubble();
+        void setBubbleTexture(BubbleType type) override;
         bool initWithComponentNumble(int numble);
 		void playStandbyAnimation();
         void playDefeatAnimation(cocos2d::EventCustom* event);

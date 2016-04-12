@@ -22,16 +22,16 @@ namespace bubble_second {
         void addRainbowSealBubble(RainbowSealBubble* bubble);
         void beginSealingCharactor();
         void moveSealedCharactor(RainbowSealBubble* bubble);
-        void setRainbowCharactor(RainbowCharactor* charactor);
-        RainbowCharactor* getRainbowCharactor();
-        bool haveBeganSealed();
+        //void setRainbowCharactor(RainbowCharactor* charactor);
+        //RainbowCharactor* getRainbowCharactor();
+        //bool haveBeganSealed();
         cocos2d::Color3B getColor3BWithBubbleColor(BubbleType color);
     private:
         RainbowSealManager();
         RainbowSealBubble* getNextRainbowSealBubble();
     private:
         cocos2d::Vector<RainbowSealBubble*> rainbow_seal_bubbles_;
-        RainbowCharactor* rainbow_charactor_;
+        //RainbowCharactor* rainbow_charactor_;
         std::map<BubbleType, cocos2d::Color3B> bubblecolor_to_color3b_;
     };
 }
