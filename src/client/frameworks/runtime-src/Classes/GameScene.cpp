@@ -871,30 +871,23 @@ namespace bubble_second {
             GamePlayController::getInstance()->setBubbleShootEnabled(true);
             return;
         }
-        //GamePlayController::getInstance()->setBubbleShootEnabled(false);
-
-        //cocos2d::Node* prepare_bubble = csb_node_->getChildByName(PREPARE_BUBBLE_NAME);
+        
         cocos2d::Node* prepare_bubble = GamePlayController::getInstance()->getPrepareBubble();
         assert(prepare_bubble);
-        //cocos2d::Node* second_bubble = csb_node_->getChildByName(SECOND_PREPARE_BUBBLE_NAME);
 		cocos2d::Node* second_bubble = this->getSecondPrepareBubble();
         cocos2d::MoveTo* move_to_second = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getSecondBubbleStoreNodePosition());
         cocos2d::Sequence* seq_prepare = cocos2d::Sequence::create(move_to_second, cocos2d::CallFunc::create([=]() {
-            //prepare_bubble->setName(SECOND_PREPARE_BUBBLE_NAME);
 			this->setSecondPrepareBubble(dynamic_cast<BaseBubble*>(prepare_bubble));
         }), nullptr);
-		//dynamic_cast<ColorBubble*>(prepare_bubble)->stopStanbyAnimation();
         prepare_bubble->runAction(seq_prepare);
 
         cocos2d::MoveTo* move_to_prepare = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getGunsightPosition());
         cocos2d::Sequence* seq_second = cocos2d::Sequence::create(move_to_prepare, cocos2d::CallFunc::create([=]() {
-            //second_bubble->setName(PREPARE_BUBBLE_NAME);
             auto control = GamePlayController::getInstance();
             control->setBubbleShootEnabled(true);
             control->setPrepareBubble(dynamic_cast<BaseBubble*>(second_bubble));
             this->changeSightingDeviceColor();
 			this->playPrepareBubbleStanbyAction();
-			//dynamic_cast<ColorBubble*>(second_bubble)->playStanbyAnimation();
         }), nullptr);
         second_bubble->runAction(seq_second);
     }
@@ -1870,9 +1863,9 @@ namespace bubble_second {
             BigBackgroundEffect* blue_effect = BigBackgroundEffect::create();
             this->addChild(blue_effect, -3);
         }
-        {//人物特效
-            this->getGameCharacter()->playLegendaryAnimation();
-        }
+        //{//人物特效
+        //    this->getGameCharacter()->playLegendaryAnimation();
+        //}
         {//标签双倍
             barrel_score_node_->doubleBarrelScoreLabel();
         }

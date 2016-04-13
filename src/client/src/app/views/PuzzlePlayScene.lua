@@ -62,6 +62,13 @@ function PuzzlePlayScene:addTouchesListerner()
     listener:registerScriptHandler(self.onTouchMoved,cc.Handler.EVENT_TOUCHES_MOVED);
     --listener:registerScriptHandler(self.onTouchEnded,cc.Handler.EVENT_TOUCHES_ENDED);
     cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self);
+
+
+    local mouseListener = cc.EventListenerMouse:create();
+    mouseListener:registerScriptHandler(function(event)
+        self:setScale(math.max(0.1, self:getScale() + event:getScrollY()*-0.1));
+    end,cc.Handler.EVENT_MOUSE_SCROLL);
+    cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(mouseListener, self);
 end
 
 function PuzzlePlayScene.onTouchBegan(touches, event)
@@ -121,7 +128,7 @@ end
 function PuzzlePlayScene:touchToMove(touches)
     local dis = touches[1]:getDelta()
     local zoomScale = self:getScale();
-    self:setPositionX(self:getPositionX() + dis.x/zoomScale);
-    self:setPositionY(self:getPositionY() + dis.y/zoomScale);
+    self:setPositionX(self:getPositionX() + dis.x);
+    self:setPositionY(self:getPositionY() + dis.y);
 end
 return PuzzlePlayScene

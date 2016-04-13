@@ -5,12 +5,12 @@ namespace bubble_second {
     RainbowSealManager::RainbowSealManager()
     {
         this->clear();
-        bubblecolor_to_color3b_[kBubbleYellow] = cocos2d::Color3B::YELLOW;
-        bubblecolor_to_color3b_[kBubblePurple] = cocos2d::Color3B(180, 29, 192);
-        bubblecolor_to_color3b_[kBubbleBlue] = cocos2d::Color3B::BLUE;
-        bubblecolor_to_color3b_[kBubbleRed] = cocos2d::Color3B::RED;
-        bubblecolor_to_color3b_[kBubbleGreen] = cocos2d::Color3B::GREEN;
-        bubblecolor_to_color3b_[kBubbleOrange] = cocos2d::Color3B::ORANGE;
+        bubblecolor_to_color3b_[kBubbleYellow] = cocos2d::Color3B(229, 167, 13);
+        bubblecolor_to_color3b_[kBubblePurple] = cocos2d::Color3B(140, 10, 175);
+        bubblecolor_to_color3b_[kBubbleBlue] = cocos2d::Color3B(27, 37, 194);
+        bubblecolor_to_color3b_[kBubbleRed] = cocos2d::Color3B(167, 6, 3);
+        bubblecolor_to_color3b_[kBubbleGreen] = cocos2d::Color3B(36, 131, 2);
+        bubblecolor_to_color3b_[kBubbleOrange] = cocos2d::Color3B(222, 78, 0);
         bubblecolor_to_color3b_[kBubblePink] = cocos2d::Color3B(253, 123, 234);
         bubblecolor_to_color3b_[kBubbleTransparent] = cocos2d::Color3B::WHITE;
 

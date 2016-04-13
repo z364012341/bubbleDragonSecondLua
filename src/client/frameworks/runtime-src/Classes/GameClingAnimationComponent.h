@@ -18,7 +18,7 @@ namespace bubble_second {
         static GameClingAnimationComponent* create(cocostudio::Armature* armature, const std::string& noop_name, std::function<void()> animation_end_func_ = nullptr);
         ~GameClingAnimationComponent();
         void onEnter() override;
-        //void onExit() override;
+        void onExit() override;
     private:
         GameClingAnimationComponent();
         bool init(cocostudio::Armature* armature, const std::string& noop_name, std::function<void()> animation_end_func_);
@@ -27,6 +27,7 @@ namespace bubble_second {
         cocostudio::Armature* armature_ = nullptr;
         std::string animation_name_;
         std::function<void()> animation_end_func_ = nullptr;
+        cocos2d::EventListenerCustom* listener_ = nullptr;
     };
 }
 #endif //_GAME_CLING_ANIMATION_COMPONENT_H_

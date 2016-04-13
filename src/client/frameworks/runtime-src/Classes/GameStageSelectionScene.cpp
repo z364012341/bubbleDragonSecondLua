@@ -297,25 +297,6 @@ namespace bubble_second {
         UserDataManager::getInstance()->addUnlockStageNumble();
         StageMenuManager::getInstance()->getCurentStagemenu()->preUnlockStage();
 
-		//stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
-
-		//cocos2d::MoveBy * move = cocos2d::MoveBy::create(STAGE_VEHICLE_MOVE_DURATION, StageMenuManager::getInstance()->getCurrentStagePositionDelta());
-		//cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move, cocos2d::CallFunc::create([=](){
-		//	StageData next_data;
-		//	if (cell_vector_.at(data.cell_numble)->isInCell(data.level_numble))
-		//	{
-		//		next_data.cell_numble = data.cell_numble;
-		//	}
-		//	else
-		//	{
-		//		next_data.cell_numble = data.cell_numble + 1;
-		//	}
-		//	next_data.level_numble = data.level_numble + 1;
-  //          StageMenuManager::getInstance()->getCurentStagemenu()->unlockStage();
-		//	//this->popEnterGameAlert(next_data);
-		//}));
-		//stage_vehicle_->runAction(seq);
-
         stage_vehicle_->moveVehicle(cocos2d::CallFunc::create([=]() {
             StageData next_data;
             if (cell_vector_.at(data.cell_numble)->isInCell(data.level_numble))
@@ -349,7 +330,6 @@ namespace bubble_second {
         GameSettingAlert* alert = GameSettingAlert::create();
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-        //this->addChild(alert, UI_ZORDER_MENU);
         this->getAlertRenderNode()->addChild(alert);
     }
 

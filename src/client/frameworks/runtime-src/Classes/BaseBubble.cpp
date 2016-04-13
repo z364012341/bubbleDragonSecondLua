@@ -326,6 +326,11 @@ namespace bubble_second {
         return had_contacted_;
     }
 
+    bool BaseBubble::isEliminateByProperty()
+    {
+        return true;
+    }
+
     bool BaseBubble::needRemoveFromBubbleMap()
     {
         return true;

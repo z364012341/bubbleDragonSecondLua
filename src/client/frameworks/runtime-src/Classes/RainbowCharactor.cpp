@@ -12,9 +12,6 @@ const float CHARACTOR_ARMATURE_SCALE = 0.8f;
 namespace bubble_second {
     RainbowCharactor::RainbowCharactor()
     {
-        //sealed_bubble_ = nullptr;
-        rainbow_swirl_ = nullptr;
-        rainbow_background_ = nullptr;
     }
 
     RainbowCharactor::~RainbowCharactor()
@@ -52,7 +49,6 @@ namespace bubble_second {
 
     void RainbowCharactor::initTexture()
     {
-
         this->addCharactorArmature();
         {
             auto bubble = BubbleFactory::getInstance()->createBubbleWithType(kBubbleTransparent);
@@ -60,20 +56,6 @@ namespace bubble_second {
             bubble->setPosition(BUBBLE_IN_RAINBOW_BUBBLE_POS);
             this->addChild(bubble, 1);
             //this->setSealedBubble(bubble);
-        }
-        {
-            rainbow_swirl_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(RAINBOW_CHARACTOR_SWIRL_PATH);
-            this->addChild(rainbow_swirl_, -1);
-            rainbow_swirl_->setOpacity(200);
-            cocos2d::BlendFunc blend = { GL_SRC_ALPHA, GL_ONE };
-            rainbow_swirl_->setBlendFunc(blend);
-            cocos2d::RotateBy* rotate = cocos2d::RotateBy::create(8.0f, 360);
-            rainbow_swirl_->runAction(cocos2d::RepeatForever::create(rotate));
-        }
-        {
-            rainbow_background_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(RAINBOW_CHARACTOR_BG_PATH);
-            //rainbow_background_->setScale(0.9f);
-            this->addChild(rainbow_background_, -2);
         }
     }
 
@@ -192,12 +174,6 @@ namespace bubble_second {
             bubble->changeRainbowColor();
         }), nullptr);
         armature->runAction(seq);
-    }
-
-    void RainbowCharactor::setRainbowColor(BubbleType color)
-    {
-        //this->getSealedBubble()->setBubbleType(color);
-        rainbow_background_->setColor(RainbowSealManager::getInstance()->getColor3BWithBubbleColor(color));
     }
 
     void RainbowCharactor::setArmaturePath(const std::string& path)

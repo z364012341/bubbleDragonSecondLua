@@ -14,7 +14,6 @@ namespace bubble_second {
         }
         armature_ = armature;
         animation_name_ = noop_name;
-        //animation_end_func_ = animation_end_func;
         return true;
     }
 
@@ -43,9 +42,17 @@ namespace bubble_second {
     void GameDefeatAnimationComponent::onEnter()
     {
         cocos2d::Node::onEnter();
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_GAME_DEFEAT, [=](cocos2d::EventCustom* event) {
+        cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+        listener_ = cocos2d::EventListenerCustom::create(EVENT_GAME_DEFEAT, [=](cocos2d::EventCustom* event) {
             this->playDefeatAnimation();
         });
+        dispatcher->addEventListenerWithFixedPriority(listener_, 1);
+    }
+
+    void GameDefeatAnimationComponent::onExit()
+    {
+        cocos2d::Node::onExit();
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
     }
 
     void GameDefeatAnimationComponent::playDefeatAnimation()

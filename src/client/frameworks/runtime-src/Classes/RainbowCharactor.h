@@ -27,8 +27,6 @@ namespace bubble_second {
         void beginSealingCharactor();
         //封印转移
         void moveSealintCharactor(RainbowSealBubble* bubble, const cocos2d::Vec2& from_point);
-        //改变封印的颜色(改变托着的小球颜色)
-        void setRainbowColor(BubbleType color);
         //设置动画的路径
         void setArmaturePath(const std::string& path);
         std::string getArmaturePath();
@@ -47,8 +45,7 @@ namespace bubble_second {
     private:
         //里面人物手上托的球
         //BaseBubble* sealed_bubble_;
-        cocos2d::Sprite* rainbow_swirl_;
-        cocos2d::Sprite* rainbow_background_;
+
         std::string armature_path_;
         cocostudio::Armature *armature_ = nullptr;
     };

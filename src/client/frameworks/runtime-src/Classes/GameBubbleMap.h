@@ -70,6 +70,8 @@ namespace bubble_second {
         void eliminateBubbles(BubbleVector vector, BaseBubble* prepare_bubble = nullptr, float delay_time = 0.0f);
         //消除泡泡的时候做的remove的操作
         void disposeEliminateHandle(BubbleVector* same_bubbles, float delay_time);
+        //去除容器里不能被道具消除的泡泡
+        void eraseBubbleCanntEliminateByProperty(BubbleVector* same_bubbles);
         //分发自定义事件
         void dispatchCustomEvent(const std::string& eventName, void* userData = nullptr);
         //处理buff类的小球

@@ -18,6 +18,7 @@ const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2TO1 = "02-rengqiu
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2 = "rengqiu-02";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_3 = "rengqiu-03";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_4 = "rengqiu-04";
+const std::string CHARACTER_LAOHU_RELOAD_BUBBLE_ANIMATION_NAME = "jieqiu-01";
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1 = 40.0f;
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_2 = -10.0f;
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_3 = -40.0f;
@@ -68,6 +69,7 @@ namespace bubble_second {
 		auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
 		dispatcher->addCustomEventListener(EVENT_SHOOT_PREPARE_BUBBLE, CC_CALLBACK_1(GameCharacter::playShootBubbleAnimation, this));
         dispatcher->addCustomEventListener(EVENT_ROTATE_SIGHTING_DEVICE, CC_CALLBACK_1(GameCharacter::changeCharacterAngle, this));
+        dispatcher->addCustomEventListener(EVENT_EXCHANGE_BUBBLE, [=](cocos2d::EventCustom* event) {this->playExchangeBubbleAnimation(); });
 	}
 
 	void GameCharacter::removeEventListenerCustom()
@@ -283,10 +285,10 @@ namespace bubble_second {
         this->playStandbyAnimation(this->getCharactorArmature3(), CHARACTER_ANIMATION_STANDBY_NAME_4);
     }
 
-    void GameCharacter::playLegendaryAnimation()
-    {
-        //this->playNotLoopAnimationWithName(GAME_CHARACTER_ANIMATION_LEGENDARY_NAME);
-    }
+    //void GameCharacter::playLegendaryAnimation()
+    //{
+    //    //this->playNotLoopAnimationWithName(GAME_CHARACTER_ANIMATION_LEGENDARY_NAME);
+    //}
 
 	void  GameCharacter::charactorVictorChange()
 	{
@@ -303,6 +305,11 @@ namespace bubble_second {
 			}
 		});
 	}
+
+    void GameCharacter::playExchangeBubbleAnimation()
+    {
+        this->playAnimationWithNameAndCallfunc(CHARACTER_LAOHU_RELOAD_BUBBLE_ANIMATION_NAME, CC_CALLBACK_0(GameCharacter::playStandbyAnimation1, this));
+    }
 
     void GameCharacter::playVictoryAnimation()
     {

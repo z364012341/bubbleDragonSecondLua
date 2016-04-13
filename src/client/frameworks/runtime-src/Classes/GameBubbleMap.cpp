@@ -214,12 +214,32 @@ namespace bubble_second {
             this->dispatchCustomEvent(EVENT_BUBBLE_ELIMINATED, &same_bubbles);
             return;
         }
+        this->eraseBubbleCanntEliminateByProperty(&same_bubbles);
         this->disposeEliminateHandle(&same_bubbles, delay_time);
         this->dispatchCustomEvent(EVENT_BUBBLE_ELIMINATED, &same_bubbles);
     }
 
+    void bubble_second::GameBubbleMap::eraseBubbleCanntEliminateByProperty(BubbleVector * same_bubbles)
+    {
+        for (auto iter = same_bubbles->begin(); iter != same_bubbles->end();)
+        {
+            if (!(*iter)->isEliminateByProperty())
+            {
+                iter = same_bubbles->erase(iter);
+            }
+            else
+            {
+                iter++;
+            }
+        }
+    }
+
     void GameBubbleMap::disposeEliminateHandle(BubbleVector* same_bubbles, float delay_time)
     {
+        if (same_bubbles->empty())
+        {
+            return;
+        }
         float percent = 1 / same_bubbles->size();
         float time = 1;
         for (auto iter = same_bubbles->begin(); iter != same_bubbles->end();)

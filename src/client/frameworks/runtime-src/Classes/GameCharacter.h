@@ -35,7 +35,7 @@ namespace bubble_second {
         GameCharacter();
         ~GameCharacter();
     public:
-        void playLegendaryAnimation();
+        //void playLegendaryAnimation();
         void playVictoryAnimation();
         void playDefeatAnimation();
 	protected:
@@ -69,6 +69,7 @@ namespace bubble_second {
         void playStandbyAnimation3();
         void playStandbyAnimation4();
 		void charactorVictorChange();
+        void playExchangeBubbleAnimation();
 		void playCharactorVictorChangeAnimation();
         void playShootBubbleAnimation(cocos2d::EventCustom* event);
         void changeCharacterAngle(cocos2d::EventCustom* event);

@@ -43,9 +43,17 @@ namespace bubble_second {
     void GameClingAnimationComponent::onEnter()
     {
         cocos2d::Node::onEnter();
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_BUBBLE_CLING, [=](cocos2d::EventCustom* event) {
+        cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+        listener_ = cocos2d::EventListenerCustom::create(EVENT_BUBBLE_CLING, [=](cocos2d::EventCustom* event) {
             this->playClingAnimation();
         });
+        dispatcher->addEventListenerWithFixedPriority(listener_, 1);
+    }
+
+    void GameClingAnimationComponent::onExit()
+    {
+        cocos2d::Node::onExit();
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
     }
 
     void GameClingAnimationComponent::playClingAnimation()

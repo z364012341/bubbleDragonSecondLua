@@ -31,6 +31,7 @@ namespace bubble_second {
         }
         ~MutipleSealBubble();
         void onEnter() override;
+        void onExit() override;
         void bubbleEliminate(int combo = 0) override;
         void downFromAir() override;
         void addBubbleStaticBody() override;
@@ -44,6 +45,7 @@ namespace bubble_second {
         void addNoopComponent();
 	private:
         cocostudio::Armature *armature_;
+        cocos2d::EventListenerCustom* listener_ = nullptr;
     };
 }
 #endif //_MUTIPLE_SEAL_BUBBLE_H_

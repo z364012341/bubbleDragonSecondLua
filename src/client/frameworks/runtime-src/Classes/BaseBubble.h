@@ -87,6 +87,8 @@ namespace bubble_second {
         //设置flag , 判断是否已经碰撞过了
         void hadContacted();
         bool isHadContacted();
+        //是否可以被道具消除
+        virtual bool isEliminateByProperty();
     protected:
         //重载比较运算符以便使用std::find
         //bool operator==(const BaseBubble& bubble);

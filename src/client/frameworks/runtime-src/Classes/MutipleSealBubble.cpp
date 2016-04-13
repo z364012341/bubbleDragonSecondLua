@@ -36,8 +36,16 @@ namespace bubble_second {
     void MutipleSealBubble::onEnter()
     {
         cocos2d::Node::onEnter();
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_GAME_DEFEAT, CC_CALLBACK_1(MutipleSealBubble::playDefeatAnimation, this));
-}
+        cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+        listener_ = cocos2d::EventListenerCustom::create(EVENT_GAME_DEFEAT, CC_CALLBACK_1(MutipleSealBubble::playDefeatAnimation, this));
+        dispatcher->addEventListenerWithFixedPriority(listener_, 1);
+        }
+
+    void MutipleSealBubble::onExit()
+    {
+        cocos2d::Node::onEnter();
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
+    }
 
     void MutipleSealBubble::bubbleEliminate(int combo)
     {
