@@ -35,6 +35,7 @@
 #include "BarrelScoreLabelNode.h"
 #include "PopScoreLabelComponent.h"
 #include "GameStandbyTimer.h"
+//#include "AirBubbleManager.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -1596,6 +1597,7 @@ namespace bubble_second {
         int color_bubble_numble = 0;
         for (size_t i = 0; i != sprites->size(); i++)
         {
+
             auto var = sprites->at(i);
             time = time + var->getEliminateDelayTime();
             if (var->isColorBubbleType())
@@ -1699,13 +1701,22 @@ namespace bubble_second {
         cocos2d::CallFunc* callfunc = cocos2d::CallFunc::create([=]() {
             for (auto var : vector)
             {
+                if (var->getParent() == nullptr)
+                {
+                    continue;
+                }
                 controller->subtractPrepareColor(var->getBubbleType());
-                var->retain();
+                //var->retain();
+
+                //var->setPosition(this->convertMapToCsbSpace(var->getPosition()));
+                //csb_node_->addChild(var, UI_ZORDER_DOWN_AIR_BUBBLE);
+                //var->release();
+                //var->downFromAir();
+                BaseBubble* bubble = var->clone();
+                bubble->setPosition(this->convertMapToCsbSpace(var->getPosition()));
+                csb_node_->addChild(bubble, UI_ZORDER_DOWN_AIR_BUBBLE);
+                bubble->downFromAir();
                 var->removeFromParent();
-                var->setPosition(this->convertMapToCsbSpace(var->getPosition()));
-                csb_node_->addChild(var, UI_ZORDER_DOWN_AIR_BUBBLE);
-                var->release();
-                var->downFromAir();
             }
             this->disposedPrepareBubbleType();
         });
@@ -2342,6 +2353,7 @@ namespace bubble_second {
     bool GameScene::isNeedNotDisplayedBarrelScoreLabel()
     {
         return this->getTotalAirBubblesNumble() == 0;
+        //return AirBubbleManager::getInstance()->isNoneAirBubble();
     }
 
     //void GameScene::add3DCharactor()

@@ -2,11 +2,9 @@
 //#include "GameCharacterFactory.h"
 //#include "SpriteTextureController.h"
 #include "GamePlayController.h"
-const std::string GAME_CHARACTER_ARMATURE_LAOHU_NAME = "laohu";
-const std::string GAME_CHARACTER_ARMATURE_LAOHU2_NAME = "laohu2";
-const std::string GAME_CHARACTER_ARMATURE_LAOHU3_NAME = "laohu3";
+#include "GameCharactorNameManager.h"
 const std::string GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_NAME = "TX-yanwu";
-const std::string GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_NAME = "laohu-shengli";
+
 
 const std::string CHARACTER_ANIMATION_STANDBY_NAME_1 = "daiji-01-1";
 const std::string CHARACTER_ANIMATION_STANDBY_NAME_2 = "daiji-02";
@@ -28,13 +26,13 @@ const float CHARACTER_SHOOT_BUBBLE_DELAYTIME_2 = 0.05f;
 const std::string CHARACTER_DEFEAT_ANIMATION_NAME_1 = "shibai-01";
 const std::string CHARACTER_DEFEAT_ANIMATION_NAME_3 = "shibai-03ku-xunhuan";
 const std::string CHARACTER_VICTORY_SMOKE_ANIMATION_NAME = "Animation1";
-const std::string CHARACTER_VICTORY_STANDBY_ANIMATION_1_NAME = "laohu-shengli";
-const std::string CHARACTER_VICTORY_STANDBY_ANIMATION_2_NAME = "laohu-shengli-xunhuan";
+const std::string CHARACTER_VICTORY_STANDBY_ANIMATION_1_NAME = "shengli";
+const std::string CHARACTER_VICTORY_STANDBY_ANIMATION_2_NAME = "shengli-xunhuan";
 
 namespace bubble_second {
 	GameCharacter::GameCharacter()
 	{
-	}
+    }
 
 
 	GameCharacter::~GameCharacter()
@@ -82,13 +80,13 @@ namespace bubble_second {
 	void GameCharacter::addCharacterArmature()
 	{
 		{
-			cocostudio::Armature* charactor = cocostudio::Armature::create(GAME_CHARACTER_ARMATURE_LAOHU_NAME);
+			cocostudio::Armature* charactor = cocostudio::Armature::create(GameCharactorNameManager::getInstance()->getCurrentArmatureName1());
 			charactor->setScale(CHARACTER_ARMATURE_SCALE);
 			this->addChild(charactor);
-			armature_vector_.insert(GAME_CHARACTER_ARMATURE_LAOHU_NAME, charactor);
+			armature_vector_.insert(GameCharactorNameManager::getInstance()->getCurrentArmatureName1(), charactor);
 		}
-		this->addCharacterArmatureInvisibleWithName(GAME_CHARACTER_ARMATURE_LAOHU2_NAME);
-        this->addCharacterArmatureInvisibleWithName(GAME_CHARACTER_ARMATURE_LAOHU3_NAME);
+		this->addCharacterArmatureInvisibleWithName(GameCharactorNameManager::getInstance()->getCurrentArmatureName2());
+        this->addCharacterArmatureInvisibleWithName(GameCharactorNameManager::getInstance()->getCurrentArmatureName3());
 	}
 
 	void GameCharacter::addCharacterArmatureInvisibleWithName(const std::string& name)
@@ -326,7 +324,7 @@ namespace bubble_second {
 
 	void GameCharacter::playCharactorVictorChangeAnimation()
 	{
-		cocostudio::Armature* charactor = cocostudio::Armature::create(GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_NAME);
+		cocostudio::Armature* charactor = cocostudio::Armature::create(GameCharactorNameManager::getInstance()->getCurrentArmatureNameVictory());
 		charactor->setScale(CHARACTER_ARMATURE_SCALE);
 		charactor->setOpacity(0);
 		this->addChild(charactor);
@@ -365,17 +363,17 @@ namespace bubble_second {
 
     cocostudio::Armature * GameCharacter::getCharactorArmature1()
     {
-		return armature_vector_.at(GAME_CHARACTER_ARMATURE_LAOHU_NAME);
+		return armature_vector_.at(GameCharactorNameManager::getInstance()->getCurrentArmatureName1());
     }
 
 	cocostudio::Armature * GameCharacter::getCharactorArmature2()
 	{
-		return armature_vector_.at(GAME_CHARACTER_ARMATURE_LAOHU2_NAME);
+		return armature_vector_.at(GameCharactorNameManager::getInstance()->getCurrentArmatureName2());
 	}
 
     cocostudio::Armature * GameCharacter::getCharactorArmature3()
     {
-        return armature_vector_.at(GAME_CHARACTER_ARMATURE_LAOHU3_NAME);
+        return armature_vector_.at(GameCharactorNameManager::getInstance()->getCurrentArmatureName3());
     }
 
     void GameCharacter::playNotLoopAnimationWithName(const std::string& name)

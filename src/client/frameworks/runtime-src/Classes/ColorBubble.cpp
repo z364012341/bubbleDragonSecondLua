@@ -7,6 +7,7 @@
 #include "GameScoreController.h"
 //#include "StageDataManager.h"
 //#include "GameScene.h"
+//#include "AirBubbleManager.h"
 const int STANBY_ACTION_TAG = 121;
 const float STANBY_ACTION_TIME = 0.5f;
 const float STANBY_ACTION_RANGE = 3.0f;
@@ -77,6 +78,8 @@ namespace bubble_second {
 
         float impulse_x = cocos2d::random(BUBBLE_DOWN_FROM_AIR_IMPULSE_MIN_X, BUBBLE_DOWN_FROM_AIR_IMPULSE_MAX_X);
         float impulse_y = cocos2d::random(BUBBLE_DOWN_FROM_AIR_IMPULSE_MIN_Y, BUBBLE_DOWN_FROM_AIR_IMPULSE_MAX_Y);
+        //static int n = 0;
+        //CCLOG("%d, x: %f, y:%f, type: %d", ++n, this->getPositionX(), this->getPositionY(), this->getBubbleType());
         cocos2d::Vec2 impulse(impulse_x, impulse_y*2);
         auto body = this->getPhysicsBody();
         float torque = BUBBLE_DOWN_FROM_AIR_TORQUE;
@@ -98,6 +101,7 @@ namespace bubble_second {
 	{
 		this->setName(MAP_BUBBLE_NAME);
 		cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ADD_AIR_BUBBLE_NUMBLE);
+        //AirBubbleManager::getInstance()->addAirBubble(this);
 	}
 
     void ColorBubble::addBubbleDynamicBody()
@@ -283,6 +287,13 @@ namespace bubble_second {
 	{
 		shoot_impulse_ = this->getImpulseByTouchlocation(touch_location)*SmartScaleController::getInstance()->getPlayAreaZoom();
 	}
+
+    void ColorBubble::contactBarrelBottom()
+    {
+        //AirBubbleManager::getInstance()->cutAirBubble(this);
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CUT_AIR_BUBBLE_NUMBLE);
+        this->removeFromParent();
+    }
 
     cocos2d::Vec2 ColorBubble::getImpulseByTouchlocation(cocos2d::Vec2 touch_location)
     {

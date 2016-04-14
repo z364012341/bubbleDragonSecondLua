@@ -343,6 +343,6 @@ namespace bubble_second {
 
     BaseBubble*  BaseBubble::clone()
     {
-        return BubbleFactory::getInstance()->createBubbleWithType(this->getBubbleType());
+        return BubbleFactory::getInstance()->createBubbleWithType(this->getBubbleType(), this->getBubbleIndex(), this->getPosition());
     }
 }

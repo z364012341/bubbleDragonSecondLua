@@ -14,6 +14,9 @@ namespace bubble_second {
     {
         return;
     }
+    void NullBubble::downFromAir()
+    {
+    }
     bool NullBubble::needRemoveFromBubbleMap()
     {
         return false;

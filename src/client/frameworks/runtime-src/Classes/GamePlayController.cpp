@@ -202,11 +202,12 @@ namespace bubble_second {
     {
         if (bubble_node->getParent())
         {
-			static int numble = 0;
-			++numble;
+			//static int numble = 0;
+			//++numble;
 			//CCLOG("event_total: %d", numble);
-            bubble_node->removeFromParent();
-			cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CUT_AIR_BUBBLE_NUMBLE);
+            //bubble_node->removeFromParent();
+			//cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CUT_AIR_BUBBLE_NUMBLE);
+            dynamic_cast<ColorBubble*>(bubble_node)->contactBarrelBottom();
 			dynamic_cast<BarrelBottom*>(barrel_node)->contactOnce();
         }
     }

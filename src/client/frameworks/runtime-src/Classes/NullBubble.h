@@ -17,6 +17,7 @@ namespace bubble_second {
         CREATE_FUNC(NullBubble);
         virtual ~NullBubble();
         void bubbleEliminate(int combo = 0) override;
+        void downFromAir() override;
         bool needRemoveFromBubbleMap() override;
     private:
         NullBubble();

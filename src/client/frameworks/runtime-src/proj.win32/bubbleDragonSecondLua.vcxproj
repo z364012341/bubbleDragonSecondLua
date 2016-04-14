@@ -195,6 +195,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\AddButton.h" />
     <ClInclude Include="..\Classes\AddSpecialCommodity.h" />
     <ClInclude Include="..\Classes\AimingLineCommodity.h" />
+    <ClInclude Include="..\Classes\AirBubbleManager.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BarrelBottom.h" />
     <ClInclude Include="..\Classes\BarrelScoreLabelNode.h" />
@@ -231,6 +232,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GameBubbleMapImple.h" />
     <ClInclude Include="..\Classes\GameCharacter.h" />
     <ClInclude Include="..\Classes\GameCharacterFactory.h" />
+    <ClInclude Include="..\Classes\GameCharactorNameManager.h" />
     <ClInclude Include="..\Classes\GameClingAnimationComponent.h" />
     <ClInclude Include="..\Classes\GameDefeatAlert.h" />
     <ClInclude Include="..\Classes\GameDefeatAnimationComponent.h" />
@@ -308,6 +310,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\AddButton.cpp" />
     <ClCompile Include="..\Classes\AddSpecialCommodity.cpp" />
     <ClCompile Include="..\Classes\AimingLineCommodity.cpp" />
+    <ClCompile Include="..\Classes\AirBubbleManager.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BarrelBottom.cpp" />
     <ClCompile Include="..\Classes\BarrelScoreLabelNode.cpp" />
@@ -343,6 +346,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GameBubbleMapImple.cpp" />
     <ClCompile Include="..\Classes\GameCharacter.cpp" />
     <ClCompile Include="..\Classes\GameCharacterFactory.cpp" />
+    <ClCompile Include="..\Classes\GameCharactorNameManager.cpp" />
     <ClCompile Include="..\Classes\GameClingAnimationComponent.cpp" />
     <ClCompile Include="..\Classes\GameDefeatAlert.cpp" />
     <ClCompile Include="..\Classes\GameDefeatAnimationComponent.cpp" />

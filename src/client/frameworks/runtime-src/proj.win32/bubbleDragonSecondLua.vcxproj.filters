@@ -329,6 +329,8 @@
     <ClInclude Include="..\Classes\GameNoopAnimationComponent.h" />
     <ClInclude Include="..\Classes\GameClingAnimationComponent.h" />
     <ClInclude Include="..\Classes\GameDefeatAnimationComponent.h" />
+    <ClInclude Include="..\Classes\GameCharactorNameManager.h" />
+    <ClInclude Include="..\Classes\AirBubbleManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -635,6 +637,8 @@
     <ClCompile Include="..\Classes\GameNoopAnimationComponent.cpp" />
     <ClCompile Include="..\Classes\GameClingAnimationComponent.cpp" />
     <ClCompile Include="..\Classes\GameDefeatAnimationComponent.cpp" />
+    <ClCompile Include="..\Classes\GameCharactorNameManager.cpp" />
+    <ClCompile Include="..\Classes\AirBubbleManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

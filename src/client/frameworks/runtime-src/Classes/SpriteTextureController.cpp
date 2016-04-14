@@ -6,6 +6,12 @@ const std::string GAME_CHARACTER_ARMATURE_LAOHU_1_PATH = "laohu/laohu.ExportJson
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_2_PATH = "laohu2/laohu2.ExportJson"; //老虎2的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_3_PATH = "laohu3/laohu3.ExportJson"; //老虎3的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_PATH = "laohu-shengli/laohu-shengli.ExportJson"; //老虎胜利的动画
+
+const std::string GAME_CHARACTER_ARMATURE_MIAO_1_PATH = "xiaomao1/xiaomao1.ExportJson"; //喵喵的动画
+const std::string GAME_CHARACTER_ARMATURE_MIAO_2_PATH = "xiaomao2/xiaomao2.ExportJson"; //喵喵2的动画
+const std::string GAME_CHARACTER_ARMATURE_MIAO_3_PATH = "xiaomao3/xiaomao3.ExportJson"; //喵喵3的动画
+const std::string GAME_CHARACTER_ARMATURE_MIAO_VICTORY_PATH = "shenglimao/shenglimao.ExportJson";
+
 const std::string GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_PATH = "TX-yanwu/TX-yanwu.ExportJson"; //胜利烟雾的动画
 const std::string SCOREWIDGET_ARMATURE_PATH = "mifeng/mifeng.ExportJson"; //得分挂件的动画
 const std::string GAME_CHARACTER_ARMATURE_FIRE_BALLOON_ARMATURE_PATH = "qiting/qiting.ExportJson"; //热气球的动画
@@ -55,7 +61,11 @@ namespace bubble_second {
         armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_1_PATH);
         armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_2_PATH);
         armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_3_PATH);
+        armature_path_.push_back(GAME_CHARACTER_ARMATURE_MIAO_1_PATH);
+        armature_path_.push_back(GAME_CHARACTER_ARMATURE_MIAO_2_PATH);
+        armature_path_.push_back(GAME_CHARACTER_ARMATURE_MIAO_3_PATH);
         armature_path_.push_back(GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_PATH);
+        armature_path_.push_back(GAME_CHARACTER_ARMATURE_MIAO_VICTORY_PATH);
         armature_path_.push_back(GAME_CHARACTER_ARMATURE_VICTORY_SMOKE_PATH);
         armature_path_.push_back(GAME_CHARACTER_ARMATURE_FIRE_BALLOON_ARMATURE_PATH);
         armature_path_.push_back(GAME_STAGE_BUTTON_ARMATURE_PATH);
