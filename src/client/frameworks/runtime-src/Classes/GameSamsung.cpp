@@ -1,8 +1,8 @@
 #include "GameSamsung.h"
-#include "ScoreProgressStart.h"
-const float GAME_SAMSUNG_TWO_SIDES_POSITION_X = 50.0f;
-const float GAME_SAMSUNG_MIDDLE_POSITION_Y = 20.0f;
-const cocos2d::Vec2 SAMSUNG_DOUBLE_POSITION(35.0f, 0.0f);
+#include "ScoreProgressStar.h"
+const float GAME_SAMSUNG_TWO_SIDES_POSITION_X = 150.8f;
+const float GAME_SAMSUNG_MIDDLE_POSITION_Y = 55.0f;
+const cocos2d::Vec2 SAMSUNG_DOUBLE_POSITION(100.0f, 0.0f);
 namespace bubble_second {
     GameSamsung::GameSamsung()
     {
@@ -46,7 +46,7 @@ namespace bubble_second {
     }
     void GameSamsung::addStartLeft()
     {
-        ScoreProgressStart* start = ScoreProgressStart::create();
+        ScoreProgressStar* start = ScoreProgressStar::create();
         this->addChild(start);
         start->setPosition(-GAME_SAMSUNG_TWO_SIDES_POSITION_X, 0.0f);
         start->setRotation(-GAME_SAMSUNG_TWO_SIDES_ROTATIOIN);
@@ -54,14 +54,14 @@ namespace bubble_second {
     }
     void GameSamsung::addStartMiddle()
     {
-        ScoreProgressStart* start = ScoreProgressStart::create();
+        ScoreProgressStar* start = ScoreProgressStar::create();
         this->addChild(start);
         start->setPosition(0.0f, GAME_SAMSUNG_MIDDLE_POSITION_Y);
         start_vector_.pushBack(start);
     }
     void GameSamsung::addStartRight()
     {
-        ScoreProgressStart* start = ScoreProgressStart::create();
+        ScoreProgressStar* start = ScoreProgressStar::create();
         this->addChild(start);
         start->setPosition(GAME_SAMSUNG_TWO_SIDES_POSITION_X, 0.0f);
         start->setRotation(GAME_SAMSUNG_TWO_SIDES_ROTATIOIN);
@@ -70,13 +70,13 @@ namespace bubble_second {
 
     void bubble_second::GameSamsung::addStartDouble()
     {
-        ScoreProgressStart* left_start = ScoreProgressStart::create();
+        ScoreProgressStar* left_start = ScoreProgressStar::create();
         this->addChild(left_start);
         left_start->setPosition(SAMSUNG_DOUBLE_POSITION*-1);
         left_start->setRotation(-GAME_SAMSUNG_TWO_SIDES_ROTATIOIN);
         start_vector_.pushBack(left_start);
 
-        ScoreProgressStart* right_start = ScoreProgressStart::create();
+        ScoreProgressStar* right_start = ScoreProgressStar::create();
         this->addChild(right_start);
         right_start->setPosition(SAMSUNG_DOUBLE_POSITION);
         right_start->setRotation(GAME_SAMSUNG_TWO_SIDES_ROTATIOIN);

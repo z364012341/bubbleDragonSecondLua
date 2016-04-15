@@ -227,9 +227,6 @@
     <ClInclude Include="..\Classes\ScoreProgressMenu.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\ScoreProgressStart.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ScoreWidget.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -330,7 +327,10 @@
     <ClInclude Include="..\Classes\GameClingAnimationComponent.h" />
     <ClInclude Include="..\Classes\GameDefeatAnimationComponent.h" />
     <ClInclude Include="..\Classes\GameCharactorNameManager.h" />
-    <ClInclude Include="..\Classes\AirBubbleManager.h" />
+    <ClInclude Include="..\Classes\ScoreProgressStar.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageNumbleBoardController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -535,9 +535,6 @@
     <ClCompile Include="..\Classes\ScoreProgressMenu.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\ScoreProgressStart.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ScoreWidget.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -638,7 +635,10 @@
     <ClCompile Include="..\Classes\GameClingAnimationComponent.cpp" />
     <ClCompile Include="..\Classes\GameDefeatAnimationComponent.cpp" />
     <ClCompile Include="..\Classes\GameCharactorNameManager.cpp" />
-    <ClCompile Include="..\Classes\AirBubbleManager.cpp" />
+    <ClCompile Include="..\Classes\ScoreProgressStar.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageNumbleBoardController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

@@ -43,7 +43,7 @@ namespace bubble_second {
 
     void MutipleSealBubble::onExit()
     {
-        cocos2d::Node::onEnter();
+        cocos2d::Node::onExit();
         cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
     }
 

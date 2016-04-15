@@ -1,31 +1,25 @@
 //*******************************************************************************
-//类名称   : AirBubbleManager
-//功能     : <空中小球管理>
+//类名称   : GameScoreController
+//功能     : <关卡数面板控制器>
 //-------------------------------------------------------------------------------
 //备注     : <>
-//           
 //典型用法 : <>
 //-------------------------------------------------------------------------------
 //作者     : <黄泽昊>, [yyy], [zzz] ...（作者和逗号分割的修改者列表）
 //*******************************************************************************
-#ifndef _AIR_BUBBLE_MANAGER_H_
-#define _AIR_BUBBLE_MANAGER_H_
+#ifndef _Stage_Numble_Board_Controller_H_
+#define _Stage_Numble_Board_Controller_H_
 #include "cocos2d.h"
 #include "BubbleSecondConstant.h"
-#include "BaseBubble.h"
 namespace bubble_second {
-    class AirBubbleManager
+    class StageNumbleBoardController
     {
     public:
-        GETINSTANCE_FUNC(AirBubbleManager);
-        ~AirBubbleManager();
-        void addAirBubble(BaseBubble* bubble);
-        void cutAirBubble(BaseBubble* bubble);
-        bool isNoneAirBubble();
+        GETINSTANCE_FUNC(StageNumbleBoardController);
+        ~StageNumbleBoardController();
+        void loadView(cocos2d::Node* node, int numble);
     private:
-        AirBubbleManager();
-    private:
-        std::set<BaseBubble*> air_bubbles_;
+        StageNumbleBoardController();
     };
 }
-#endif //_AIR_BUBBLE_MANAGER_H_
+#endif//_Stage_Numble_Board_Controller_H_ 

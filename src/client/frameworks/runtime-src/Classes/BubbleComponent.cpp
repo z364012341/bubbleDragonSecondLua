@@ -47,6 +47,11 @@ namespace bubble_second {
         this->removeFromParent();
     }
 
+    bool BubbleComponent::isEliminateByProperty()
+    {
+        return this->getCoreBubble()->isEliminateByProperty();
+    }
+
     void BubbleComponent::downFromAir()
     {
         this->bubbleEliminate();

@@ -9,7 +9,7 @@
 //*******************************************************************************
 #ifndef _ENTER_GAME_ALERT_H_
 #define _ENTER_GAME_ALERT_H_
-#include "GameBaseAlert.h"
+//#include "GameBaseAlert.h"
 #include "BubbleSecondConstant.h"
 #include "ui\UIButton.h"
 #include "ui\UITextBMFont.h"
@@ -33,7 +33,7 @@ namespace bubble_second {
     private:
         cocos2d::ui::Button* getStartButton();
         cocos2d::ui::Button* getCloseButton();
-        cocos2d::ui::TextBMFont* getStageNumbleLabel();
+        //cocos2d::ui::TextBMFont* getStageNumbleLabel();
         cocos2d::ui::TextBMFont* getStageTypeLabel();
         //void addBackground();
         //void addTopLabel(int level);

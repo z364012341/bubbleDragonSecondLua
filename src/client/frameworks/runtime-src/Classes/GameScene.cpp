@@ -872,8 +872,8 @@ namespace bubble_second {
             GamePlayController::getInstance()->setBubbleShootEnabled(true);
             return;
         }
-        
-        cocos2d::Node* prepare_bubble = GamePlayController::getInstance()->getPrepareBubble();
+        //this->setPropertyTouchEnabled(false);
+        cocos2d::Node* prepare_bubble = this->getPrepareBubble();
         assert(prepare_bubble);
 		cocos2d::Node* second_bubble = this->getSecondPrepareBubble();
         cocos2d::MoveTo* move_to_second = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getSecondBubbleStoreNodePosition());
@@ -887,8 +887,10 @@ namespace bubble_second {
             auto control = GamePlayController::getInstance();
             control->setBubbleShootEnabled(true);
             control->setPrepareBubble(dynamic_cast<BaseBubble*>(second_bubble));
+            this->setPrepareColorBubble(dynamic_cast<BaseBubble*>(second_bubble));
             this->changeSightingDeviceColor();
 			this->playPrepareBubbleStanbyAction();
+            //this->setPropertyTouchEnabled(true);
         }), nullptr);
         second_bubble->runAction(seq_second);
     }
@@ -2155,12 +2157,18 @@ namespace bubble_second {
             cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
             alert->setPosition(visible_size.width / 2, visible_size.height / 2);
             this->addChild(alert, 2);
-            alert->setReplayCallback([=](cocos2d::Ref*) {
-                this->replayGame();
+            alert->setReplayCallback([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
+                if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+                {
+                    this->replayGame();
+                }
             });
-            alert->setNextCallback([=](cocos2d::Ref*) {
-                cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createSceneWithStageData(this->getPresentStageData()));
-            });
+            alert->setNextCallback([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
+                if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+                {
+                    cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createSceneWithStageData(this->getPresentStageData()));
+                }
+                });
         })));
     }
 

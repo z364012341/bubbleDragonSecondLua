@@ -195,7 +195,6 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\AddButton.h" />
     <ClInclude Include="..\Classes\AddSpecialCommodity.h" />
     <ClInclude Include="..\Classes\AimingLineCommodity.h" />
-    <ClInclude Include="..\Classes\AirBubbleManager.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BarrelBottom.h" />
     <ClInclude Include="..\Classes\BarrelScoreLabelNode.h" />
@@ -273,7 +272,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\RainbowSealManager.h" />
     <ClInclude Include="..\Classes\SceneReplaceController.h" />
     <ClInclude Include="..\Classes\ScoreProgressMenu.h" />
-    <ClInclude Include="..\Classes\ScoreProgressStart.h" />
+    <ClInclude Include="..\Classes\ScoreProgressStar.h" />
     <ClInclude Include="..\Classes\ScoreWidget.h" />
     <ClInclude Include="..\Classes\ScoreWidgetManager.h" />
     <ClInclude Include="..\Classes\SimpleControlSwitch.h" />
@@ -286,6 +285,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\StageDataModule.h" />
     <ClInclude Include="..\Classes\StageMenuManager.h" />
     <ClInclude Include="..\Classes\StageNumble.h" />
+    <ClInclude Include="..\Classes\StageNumbleBoardController.h" />
     <ClInclude Include="..\Classes\StageSelectionMenu.h" />
     <ClInclude Include="..\Classes\StartNumbleModule.h" />
     <ClInclude Include="..\Classes\StavesProperty.h" />
@@ -310,7 +310,6 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\AddButton.cpp" />
     <ClCompile Include="..\Classes\AddSpecialCommodity.cpp" />
     <ClCompile Include="..\Classes\AimingLineCommodity.cpp" />
-    <ClCompile Include="..\Classes\AirBubbleManager.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BarrelBottom.cpp" />
     <ClCompile Include="..\Classes\BarrelScoreLabelNode.cpp" />
@@ -385,7 +384,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\RainbowSealManager.cpp" />
     <ClCompile Include="..\Classes\SceneReplaceController.cpp" />
     <ClCompile Include="..\Classes\ScoreProgressMenu.cpp" />
-    <ClCompile Include="..\Classes\ScoreProgressStart.cpp" />
+    <ClCompile Include="..\Classes\ScoreProgressStar.cpp" />
     <ClCompile Include="..\Classes\ScoreWidget.cpp" />
     <ClCompile Include="..\Classes\ScoreWidgetManager.cpp" />
     <ClCompile Include="..\Classes\SimpleControlSwitch.cpp" />
@@ -398,6 +397,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\StageDataModule.cpp" />
     <ClCompile Include="..\Classes\StageMenuManager.cpp" />
     <ClCompile Include="..\Classes\StageNumble.cpp" />
+    <ClCompile Include="..\Classes\StageNumbleBoardController.cpp" />
     <ClCompile Include="..\Classes\StageSelectionMenu.cpp" />
     <ClCompile Include="..\Classes\StartNumbleModule.cpp" />
     <ClCompile Include="..\Classes\StavesProperty.cpp" />

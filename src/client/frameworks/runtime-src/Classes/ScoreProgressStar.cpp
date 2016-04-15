@@ -1,21 +1,22 @@
-#include "ScoreProgressStart.h"
+#include "ScoreProgressStar.h"
 #include "SpriteTextureController.h"
-const float START_PERCENT_ZOOM_SCALE = 0.90f;
+const float STAR_PERCENT_ZOOM_SCALE = 0.90f;
+const float STAR_TEXTURE_SCALE = 0.35f;
 const std::string SCORE_PROGRESS_START_PATH = "xingxing.png"; //ÁÁÐÇÐÇ
 //const std::string SCORE_PROGRESS_START_DARK_PATH = "xingxinghui.png"; //ÁÁÐÇÐÇ
 namespace bubble_second {
-    ScoreProgressStart::ScoreProgressStart()
+    ScoreProgressStar::ScoreProgressStar()
     {
     }
 
 
-    ScoreProgressStart::~ScoreProgressStart()
+    ScoreProgressStar::~ScoreProgressStar()
     {
     }
 
-    ScoreProgressStart* bubble_second::ScoreProgressStart::createWithPercent(float percent)
+    ScoreProgressStar* bubble_second::ScoreProgressStar::createWithPercent(float percent)
     {
-        ScoreProgressStart *pRet = new(std::nothrow) ScoreProgressStart();
+        ScoreProgressStar *pRet = new(std::nothrow) ScoreProgressStar();
         if (pRet && pRet->initWithPercent(percent))
         {
             pRet->autorelease();
@@ -29,20 +30,20 @@ namespace bubble_second {
         }
     }
 
-    bool ScoreProgressStart::initWithPercent(float percent)
+    bool ScoreProgressStar::initWithPercent(float percent)
     {
         if (!cocos2d::Sprite::init())
         {
             return false;
         }
         SpriteTextureController::getInstance()->setSpriteTexture(SCORE_PROGRESS_START_PATH, this);
-        //this->setScale(TEXTURE_SCALE);
+        this->setScale(STAR_TEXTURE_SCALE);
         this->setStartPercent(percent);
         this->startTurnOff();
         return true;
     }
 
-    bool ScoreProgressStart::init()
+    bool ScoreProgressStar::init()
     {
         if (!cocos2d::Sprite::init())
         {
@@ -52,16 +53,16 @@ namespace bubble_second {
         return true;
     }
 
-    void ScoreProgressStart::setStartPercent(float percent)
+    void ScoreProgressStar::setStartPercent(float percent)
     {
-		start_percent_ = percent*START_PERCENT_ZOOM_SCALE;
+		start_percent_ = percent*STAR_PERCENT_ZOOM_SCALE;
     }
-    float ScoreProgressStart::getStartPercent()
+    float ScoreProgressStar::getStartPercent()
     {
         return start_percent_;
     }
 
-    void ScoreProgressStart::setStartSpriteShader(const std::string & shader_path)
+    void ScoreProgressStar::setStartSpriteShader(const std::string & shader_path)
     {
         auto fileUtiles = cocos2d::FileUtils::getInstance();
         std::string fragmentFullPath = fileUtiles->fullPathForFilename(shader_path.c_str());
@@ -71,7 +72,7 @@ namespace bubble_second {
         this->setGLProgramState(program_state);
     }
 
-    void ScoreProgressStart::startTurnOn()
+    void ScoreProgressStar::startTurnOn()
     {
         if (this->startIsOn())
         {
@@ -83,7 +84,7 @@ namespace bubble_second {
         this->playTurnOnAnimation();
     }
 
-    void ScoreProgressStart::startTurnOff()
+    void ScoreProgressStar::startTurnOff()
     {
         if (!this->startIsOn())
         {
@@ -94,7 +95,7 @@ namespace bubble_second {
         start_on_flag_ = false;
     }
 
-    void ScoreProgressStart::playTurnOnAnimation()
+    void ScoreProgressStar::playTurnOnAnimation()
     {
         cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(SCORE_PROGRESS_START_PATH);
         //sp->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
@@ -106,7 +107,7 @@ namespace bubble_second {
         sp->runAction(cocos2d::Sequence::create(move1, move2, callfunc, nullptr));
     }
 
-    void ScoreProgressStart::controlLightWithPercent(float percent)
+    void ScoreProgressStar::controlLightWithPercent(float percent)
     {
         if (this->isNeedTurnOn(percent))
         {
@@ -114,7 +115,7 @@ namespace bubble_second {
         }
     }
 
-    void ScoreProgressStart::controlLightWithFlag(bool flag)
+    void ScoreProgressStar::controlLightWithFlag(bool flag)
     {
         if (flag)
         {
@@ -126,12 +127,12 @@ namespace bubble_second {
         }
     }
 
-    bool ScoreProgressStart::startIsOn()
+    bool ScoreProgressStar::startIsOn()
     {
         return start_on_flag_;
     }
 
-    bool ScoreProgressStart::isNeedTurnOn(float percent)
+    bool ScoreProgressStar::isNeedTurnOn(float percent)
     {
         return percent >= this->getStartPercent();
     }

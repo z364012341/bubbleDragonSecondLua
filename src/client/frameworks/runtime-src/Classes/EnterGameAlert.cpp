@@ -1,13 +1,14 @@
 #include "EnterGameAlert.h"
 #include "SpriteTextureController.h"
 #include "GameTextInfo.h"
-#include "CenteredMenuItemSprite.h"
+//#include "CenteredMenuItemSprite.h"
 #include "GameScene.h"
 #include "EnterPropsViewManager.h"
 #include "cocostudio/CocoStudio.h"
 #include "GameAlertMask.h"
 #include "ButtonEffectController.h"
 #include "ui\UIScale9Sprite.h"
+#include "StageNumbleBoardController.h"
 const std::string ENTER_GAME_ALERT_CSB = "EnterGameAlert.csb";
 const std::string START_BUTTON_TOP_CSB = "GameStartMenuTop.csb";
 const std::string START_BUTTON_BOTTOM_CSB = "GameStartMenuBottom.csb";
@@ -15,7 +16,7 @@ const std::string START_BUTTON_CLIPPINT_STENCIL_PATH = "startBubbleBG1.png";
 const std::string ENTER_GAME_ALERT_START_NODE_NAME = "startMenuNode";
 const std::string ENTER_GAME_ALERT_START_BUTTON_NAME = "startButton";
 const std::string ENTER_GAME_ALERT_CLOSE_BUTTON_NAME = "closeButton";
-const std::string ENTER_GAME_ALERT_STAGE_NUMBLE_LABEL_NAME = "stageNumbleLabel";
+const std::string ENTER_GAME_ALERT_STAGE_NUMBLE_BOARD_NAME = "stageNumbleBoard";
 const std::string ENTER_GAME_ALERT_STAGE_TYPE_LABEL_NAME = "stageTypeLabel";
 const cocos2d::Vec2 COMMODITY_NODE_POS(-5.0f, -238.7f);
 namespace bubble_second {
@@ -144,9 +145,10 @@ namespace bubble_second {
     {
         //std::string str1 = GameTextInfo::getInstance()->getTextInfoWithKey(GAME_TEXT_LEVEL_NUMBLE_1_KEY);
         //std::string str2 = GameTextInfo::getInstance()->getTextInfoWithKey(GAME_TEXT_LEVEL_NUMBLE_2_KEY);
-        char str[20];
-        sprintf(str, "%d", level);
-        this->getStageNumbleLabel()->setString(str);
+        //char str[20];
+        //sprintf(str, "%d", level);
+        //this->getStageNumbleLabel()->setString(str);
+        StageNumbleBoardController::getInstance()->loadView(alert_csb_node_->getChildByName(ENTER_GAME_ALERT_STAGE_NUMBLE_BOARD_NAME), level);
     }
 
     void EnterGameAlert::initStageTypeLabel(const StageType & type)
@@ -170,10 +172,10 @@ namespace bubble_second {
         return dynamic_cast<cocos2d::ui::Button*>(alert_csb_node_->getChildByName(ENTER_GAME_ALERT_CLOSE_BUTTON_NAME));
     }
 
-    cocos2d::ui::TextBMFont * EnterGameAlert::getStageNumbleLabel()
-    {
-        return dynamic_cast<cocos2d::ui::TextBMFont*>(alert_csb_node_->getChildByName(ENTER_GAME_ALERT_STAGE_NUMBLE_LABEL_NAME));
-    }
+    //cocos2d::ui::TextBMFont * EnterGameAlert::getStageNumbleLabel()
+    //{
+    //    return dynamic_cast<cocos2d::ui::TextBMFont*>(alert_csb_node_->getChildByName(ENTER_GAME_ALERT_STAGE_NUMBLE_BOARD_NAME)->getChildByName(ENTER_GAME_ALERT_STAGE_NUMBLE_LABEL_NAME));
+    //}
 
     cocos2d::ui::TextBMFont * EnterGameAlert::getStageTypeLabel()
     {

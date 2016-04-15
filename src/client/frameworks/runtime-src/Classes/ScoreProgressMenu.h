@@ -15,7 +15,7 @@
 #include "StartNumbleModule.h"
 
 namespace bubble_second {
-    class ScoreProgressStart;
+    class ScoreProgressStar;
     class ScoreProgressMenu : public cocos2d::Node
     {
     public:
@@ -64,7 +64,7 @@ namespace bubble_second {
         float current_percentage_;
         int last_score_ = 0;
         //ÐÇÐÇÈÝÆ÷
-        cocos2d::Map<std::string, ScoreProgressStart*> start_sprite_map_;
+        cocos2d::Map<std::string, ScoreProgressStar*> start_sprite_map_;
     };
 }
 #endif 

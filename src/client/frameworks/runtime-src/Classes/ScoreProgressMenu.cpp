@@ -1,7 +1,7 @@
 #include "ScoreProgressMenu.h"
 #include "cocostudio\CocoStudio.h"
 #include "ui\UIImageView.h"
-#include "ScoreProgressStart.h"
+#include "ScoreProgressStar.h"
 #include "SpriteTextureController.h"
 const std::string PROGRESS_TIMER_PATH = "jindutiao.png";//进度条
 const std::string PROGRESS_TIMER_BACKGROUND_PATH = "jindutiaokuang.png";//进度条背景
@@ -90,7 +90,7 @@ namespace bubble_second {
     {
         for (auto var : this->getStartNumbleModule().getPercentModule())
         {
-            ScoreProgressStart* start = ScoreProgressStart::createWithPercent(var.second);
+            ScoreProgressStar* start = ScoreProgressStar::createWithPercent(var.second);
 			start->setPosition(this->getStartPositionWithPercent(start->getStartPercent()));
             this->addChild(start, START_ZORDER);
             start_sprite_map_.insert(var.first, start);

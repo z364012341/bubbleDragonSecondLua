@@ -38,6 +38,7 @@ namespace bubble_second {
         else
         {
             score_label_ = cocos2d::ui::TextBMFont::create(XMLTool::convertIntToString(score), GAME_NUMBLE_FONT_PATH);
+            score_label_->setScale(0.5f);
             score_label_->setOpacity(LABEL_OPACITY);
             this->addChild(score_label_);
             this->runPopAction();

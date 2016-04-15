@@ -33,6 +33,7 @@ namespace bubble_second {
         BaseBubble* getCoreBubble();
         BubbleVector getTotalBubbles();
         void bubbleEliminate(int combo = 0) override;
+        bool isEliminateByProperty() override;
         void downFromAir() override;
     private:
         BubbleComponent();
