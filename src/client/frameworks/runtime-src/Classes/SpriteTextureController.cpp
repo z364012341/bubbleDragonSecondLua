@@ -26,6 +26,8 @@ const std::string MUTIPLE_SEAL_3_BUBBLE_ARMATURE_PATH = "wa/wa.ExportJson"; //多
 const std::string MUTIPLE_SEAL_7_BUBBLE_ARMATURE_PATH = "xiongda/xiongda.ExportJson"; //多重封印球的动画
 const std::string MUTIPLE_SEAL_1_BUBBLE_ARMATURE_PATH = "1gebianfu/1gebianfu.ExportJson"; //多重封印球的动画
 const std::string RAINBOW_CHARACTOR_ARMATURE_PATH = "langda/langda.ExportJson"; //彩虹封印的人物
+const std::string BLACK_HOLE_BUBBLE_EFFECT_PATH = "heidongTX/heidongTX.ExportJson"; //黑洞特效的路径
+
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()

@@ -21,20 +21,11 @@ namespace bubble_second {
         void setNextCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
     private:
         GameVictoryAlert();
-        bool init(int level, int score, int start_numble);
-        //void addButtonItem();
-        //void addRewardsShow();
-        //void addTopLabel(int level);
-        //void addFlashLight();
-        //void addSamsung(int numble);
-        //void addScoreLabel(int score);
-        
         void loadView();
-        //void initNextButton(int level);
-    //private:
-    //    cocos2d::MenuItem* replay_item_ = nullptr;
-    //    cocos2d::MenuItem* store_item_ = nullptr;
-    //    cocos2d::MenuItem* next_item_ = nullptr;
+        bool init(int level, int score, int start_numble);
+        void initTopLabel(int level);
+        void initScoreLabel(int score);  
+        void initStart(int start_numble);
     private:
         cocos2d::Node* csb_node_ = nullptr;
     };

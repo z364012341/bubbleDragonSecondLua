@@ -38,7 +38,7 @@ const std::string BUBBLE_ORANGE_PATH = "paopaocheng.PNG"; //橙
 const std::string BUBBLE_PINK_PATH = "paopaofen.PNG";//粉
 const std::string BUBBLE_LIGHTNING_PATH = "paopaoshandian.PNG"; //闪电泡泡
 const std::string BUBBLE_DARKCLOUD_PATH = "paopaoyun.PNG";      //阴云泡泡
-const std::string BUBBLE_BLACKHOLE_PATH = "paopaoheidong.PNG"; //黑洞泡泡
+const std::string BUBBLE_BLACKHOLE_PATH = "heidong.png"; //黑洞泡泡
 const std::string BUBBLE_BOMB_BOMB_PATH = "paopaozhadan.PNG"; //炸弹泡泡
 const std::string BUBBLE_RAINBOW_SEAL_PATH = "kuangliubianxing.PNG"; //彩虹封印泡泡
 const std::string BUBBLE_MUTIPLE_SEAL_1_PATH = "paopaotouming.PNG"; //一重封印泡泡
@@ -211,8 +211,7 @@ const int BLACKHOLE_BUBBLE_SWALLOW_DIRECTION = 1;
 const int BLACKHOLE_BUBBLE_SWALLOW_DEGREE = 360* BLACKHOLE_BUBBLE_SWALLOW_DIRECTION; //吸入黑洞小球的旋转角度
 const float BLACKHOLE_BUBBLE_SWALLOW_TIME = 1.5f; //吸入黑洞小球的旋转时间
 const int BLACKHOLE_BUBBLE_SWALLOW_NUMBLE_MAX = 3; //黑洞小球吸收最大次数
-const float BLACKHOLE_BUBBLE_SCALETO_TIME = 0.4f; //黑洞小球放大动作时间
-const float BLACKHOLE_BUBBLE_SCALETO_PER = 1.2f; //黑洞小球缩放的幅度
+
 const int INITIAL_SCORE_WIDGET_NUMBLE = 2; //进场时的蜘蛛数量
 const float INITIAL_SCORE_WIDGET_POS_Y = 200.0f; //进场的y高度
 const float UI_SWIRL_ROTATIEBY_TIME = 2; //旋风旋转的时间
@@ -275,8 +274,7 @@ const int TWO_ROUND_BOMB_EFFECT_RIPPLE2D_WAVES = 1; //波浪数
 const float TWO_ROUND_BOMB_EFFECT_RIPPLE2D_AMPLITUDE = 100.0f; //幅度
 const cocos2d::Size ACTION_3DGRID(64, 48);
 const float TWO_ROUND_BOMB_EFFECT_DELAY_TIME = LIGHTNING_BUBBLE_EFFECT_DELAY_TIME;   //用作返回的参数
-const std::string BLACK_HOLE_BUBBLE_EFFECT_PATH = "HD-XT/HD-XT.ExportJson"; //黑洞特效的路径
-const std::string BLACK_HOLE_BUBBLE_EFFECT_NAME = "HD-XT"; //黑洞特效的名字
+
 //const GLubyte BLACK_HOLE_SWALLOW_OPACITY_CUT = 50;
 const GLubyte TEXTURE_OPACITY = 255;
 const std::string BARREL_BOTTOM_EFFECT_PATH = "diaoluo-TX/diaoluo-TX.ExportJson"; //小球掉到桶消除特效的路径
@@ -559,7 +557,7 @@ const int GAME_ALERT_TOP_BACKGROUND_TAG = 123;
 const int GAME_ALERT_BIG_BACKGROUND_TAG = 122;
 const cocos2d::Color4B GAME_PAUSE_ALERT_PAUSE_LABEL_COLOR(35, 157, 142, 255);
 const float GAME_PAUSE_ALERT_PAUSE_LABEL_FONTSIZE = 50.0f; //字体大小
-const float GAME_VICTORY_ALERT_SCORENUMBLE_LABEL_FONTSIZE = 80.0f; //字体大小
+//const float GAME_VICTORY_ALERT_SCORENUMBLE_LABEL_FONTSIZE = 80.0f; //字体大小
 const std::string GAME_PAUSE_ALERT_MUSIC_ICON_PATH = "yinyue.png"; //音乐图标
 //const float GAME_PAUSE_ALERT_MUSIC_ICON_POSITION_Y = -38.48f;
 const std::string GAME_PAUSE_ALERT_EFFECT_ICON_PATH = "yinxiao.png"; //音效图标
@@ -604,12 +602,13 @@ const std::string GAME_VICTORY_ALERT_FLASH_LIGHT_BACKGROUND_PATH = "dikuang.png"
 const std::string GAME_VICTORY_ALERT_FLASH_LIGHT_PATH = "guang.png"; //闪光
 const float GAME_VICTORY_ALERT_FLASH_LIGHT_ROTATEBY_DURATION = 5.0f;
 const float GAME_VICTORY_ALERT_FLASH_LIGHT_ROTATEBY_DELTAANGLE = 360.0f;
-const cocos2d::Vec2 GAME_VICTORY_ALERT_SCORE_LABEL_POSITION(0.0f, 30.0f); //奖励分数位置
-const cocos2d::Vec2 GAME_VICTORY_ALERT_SCORE_LABEL_TEXT_POSITION(0.0f, 100.0f); //奖励: DE位置
+//const cocos2d::Vec2 GAME_VICTORY_ALERT_SCORE_LABEL_POSITION(0.0f, 30.0f); //奖励分数位置
+//const cocos2d::Vec2 GAME_VICTORY_ALERT_SCORE_LABEL_TEXT_POSITION(0.0f, 100.0f); //奖励: DE位置
 const cocos2d::Vec2 GAME_VICTORY_ALERT_SAMSUNG_POSITION(0.0f, 180.0f); //三星位置
 const float GAME_VICTORY_ALERT_ADD_SCORE_LABEL_POSITION_PERCENT_X = 0.5f; //+180金币
 const float GAME_VICTORY_ALERT_ADD_FATIGUE_LABEL_POSITION_PERCENT_X = 0.8f; //+1体力
 const float GAME_SAMSUNG_TWO_SIDES_ROTATIOIN = 25.0f;
+const std::string ALERT_REPLAY_BUTTON_NAME = "Button_1";
 //GameBaseAlert
 const std::string GAME_BASE_ALERT_NAME = "GAME_BASE_ALERT_NAME";
 //GamePauseAlert
@@ -675,7 +674,7 @@ const std::string GAME_TEXT_BUY_BUBBLE_LABEL_KEY = "buy_ten_bubble_label";
 const std::string GAME_TEXT_REWARDS_KEY = "rewards_label";
 const int GAME_TEXT_REWARDS_LABEL_OPACITY = 180;
 const float GAME_TEXT_REWARDS_LABEL_POSITION_PERCENT_X = 0.2f;
-const std::string GAME_TEXT_SCORE_KEY = "score_label";
+//const std::string GAME_TEXT_SCORE_KEY = "score_label";
 const std::string GAME_TEXT_TOP_ELIMINATE = "kTopEliminate";      //消除顶部泡泡
 const std::string GAME_TEXT_RESCUE_ANIMAL = "kRescueAnimal";                   //解救动物
 const std::string GAME_TEXT_BEAT_THE_ROBBER = "kDestroyRainbowSeal";                     //击败强盗

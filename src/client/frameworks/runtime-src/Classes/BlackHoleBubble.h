@@ -10,7 +10,6 @@
 #define _BLACK_HOLE_BUBBLE_H_
 #include "cocos2d.h"
 #include "BaseBubble.h"
-#include "cocostudio\CocoStudio.h"
 namespace bubble_second {
     class BlackHoleBubble : public BaseBubble
     {
@@ -43,7 +42,7 @@ namespace bubble_second {
     private:
         int swallow_times_;
         BubbleVector swallow_vector_;
-        cocostudio::Armature* armature_;
+        //cocostudio::Armature* armature_;
     };
 }
 #endif //_BLACK_HOLE_BUBBLE_H_

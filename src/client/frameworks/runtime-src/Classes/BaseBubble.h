@@ -117,6 +117,7 @@ namespace bubble_second {
         int bubble_component_numble_;
         bool had_contacted_ = false;
         bool shoot_bubble_flag_ = false;
+        bool once_eliminate_flag_ = false;
     };
 }
 #endif //_BASE_BUBBLE_H_

@@ -344,6 +344,7 @@ namespace bubble_second {
         int total_air_bubbles_numble_ = 0;
         StageType stage_type_;
         bool is_fall_stage_ = false;
+        bool add_props_flag = true;
 		cocos2d::ui::Button* pause_menu_ = nullptr;
         BaseBubble* prepare_bubble_ = nullptr;
 		BaseBubble* second_bubble_ = nullptr;

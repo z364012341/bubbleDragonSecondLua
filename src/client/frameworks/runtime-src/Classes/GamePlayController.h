@@ -64,7 +64,7 @@ namespace bubble_second {
         //设置颜色范围
         void setBubbleColorRange();
         //处理小球消除后的颜色
-        void prepareBubbleChangeType(BaseBubble* bubble);
+        void prepareBubbleChangeType(BaseBubble* pre_bubble, BaseBubble* pre_second_bubble);
         //处理特殊泡泡的掉落
         void disposeBuffBubbleDown(BaseBubble* bubble);
         //处理周围的氤氲泡泡

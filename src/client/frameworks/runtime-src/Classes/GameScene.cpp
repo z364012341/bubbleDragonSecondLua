@@ -1630,12 +1630,12 @@ namespace bubble_second {
 
     void GameScene::disposedPrepareBubbleType()
     {
-        auto controller = GamePlayController::getInstance();
-        BaseBubble* second_prepare_bubble = getSecondPrepareBubble();
-        if (second_prepare_bubble)
-        {
-            controller->prepareBubbleChangeType(second_prepare_bubble);
-        }
+        //auto controller = GamePlayController::getInstance();
+        //BaseBubble* second_prepare_bubble = getSecondPrepareBubble();
+        //if (second_prepare_bubble)
+        //{
+            GamePlayController::getInstance()->prepareBubbleChangeType(this->getPrepareBubble(), getSecondPrepareBubble());
+        //}
 		this->changeSightingDeviceColor();
     }
 
@@ -1715,10 +1715,22 @@ namespace bubble_second {
                 //var->release();
                 //var->downFromAir();
                 BaseBubble* bubble = var->clone();
-                bubble->setPosition(this->convertMapToCsbSpace(var->getPosition()));
-                csb_node_->addChild(bubble, UI_ZORDER_DOWN_AIR_BUBBLE);
-                bubble->downFromAir();
-                var->removeFromParent();
+                if (bubble != nullptr && bubble->isColorBubbleType())
+                {
+                    bubble->setPosition(this->convertMapToCsbSpace(var->getPosition()));
+                    csb_node_->addChild(bubble, UI_ZORDER_DOWN_AIR_BUBBLE);
+                    bubble->downFromAir();
+                    var->removeFromParent();
+                }
+                else
+                {
+                    var->retain();
+                    var->removeFromParent();
+                    var->setPosition(this->convertMapToCsbSpace(var->getPosition()));
+                    csb_node_->addChild(var, UI_ZORDER_DOWN_AIR_BUBBLE);
+                    var->release();
+                    var->downFromAir();
+                }
             }
             this->disposedPrepareBubbleType();
         });
@@ -1792,9 +1804,8 @@ namespace bubble_second {
 
     void GameScene::addListenerForBubblesInVisibleSize(cocos2d::EventCustom* event)
     {
-        static bool add_flag = true;
         auto bubbles = static_cast<BubbleVector*>(event->getUserData());
-        if (add_flag)
+        if (add_props_flag)
         {
             for (auto bubble : *bubbles)
             {
@@ -1811,7 +1822,7 @@ namespace bubble_second {
                 bubble->removeTouchEventListener();
             }
         }
-        add_flag = !add_flag;
+        add_props_flag = !add_props_flag;
     }
 
     void GameScene::removeListenerForBubblesInVisibleSize()
@@ -2179,17 +2190,26 @@ namespace bubble_second {
         cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visible_size.width / 2, visible_size.height / 2);
         this->addChild(alert, 2);
-        alert->setReturnCallback([=](cocos2d::Ref*) {
-            cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
-            this->gameResume();
+        alert->setReturnCallback([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
+            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+            {
+                cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
+                this->gameResume();
+            }
         });
-        alert->setReplayCallback([=](cocos2d::Ref*) {
-            this->replayGame();
-            this->gameResume();
+        alert->setReplayCallback([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
+            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+            {
+                this->replayGame();
+                this->gameResume();
+            }
         });
-        alert->setContinueCallback([=](cocos2d::Ref*) {
-            this->gameResume();
-            alert->removeFromParent();
+        alert->setContinueCallback([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
+            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+            {
+                this->gameResume();
+                alert->removeFromParent();
+            }
 
         });
         bubble_map_node_->pause();

@@ -420,15 +420,15 @@ namespace bubble_second {
         bubble_map_->disposeUsedPropertyBubble(flying_node, contacted_bubble->getBubbleIndex());
     }
 
-    void GamePlayController::prepareBubbleChangeType(BaseBubble* bubble)
+    void GamePlayController::prepareBubbleChangeType(BaseBubble* pre_bubble, BaseBubble* pre_second_bubble)
     {
-        if (bubble&&color_picker_->needChangeBubbleType(bubble->getBubbleType()))
+        if (pre_second_bubble&&color_picker_->needChangeBubbleType(pre_second_bubble->getBubbleType()))
         {
-            bubble->setBubbleType(color_picker_->getBubbleColorFromPicker());
+            pre_second_bubble->setBubbleType(color_picker_->getBubbleColorFromPicker());
         }
-        if (prepare_bubble_&&color_picker_->needChangeBubbleType(prepare_bubble_->getBubbleType()))
+        if (pre_bubble&&color_picker_->needChangeBubbleType(pre_bubble->getBubbleType()))
         {
-            prepare_bubble_->setBubbleType(color_picker_->getBubbleColorFromPicker());
+            pre_bubble->setBubbleType(color_picker_->getBubbleColorFromPicker());
         }
     }
 
