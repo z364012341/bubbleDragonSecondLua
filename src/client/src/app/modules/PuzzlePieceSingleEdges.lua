@@ -23,7 +23,7 @@ function PuzzlePieceSingleEdges:ctor(direction, insideOrOutside)
     self._edgesSprite:setRotation(GlobalFunction.getPuzzlePiecePositionWithRotation(direction, insideOrOutside));
     self:addChild(self._edgesSprite);
     self:setPosition(GlobalFunction.getPuzzlePiecePositionWithDirection(direction));
-    self:changeTextureColor(ccc3(135, 123, 123));
+    self:changeTextureColor(cc.c3b(135, 123, 123));
 end
 
 function PuzzlePieceSingleEdges:changeTextureColor(color)

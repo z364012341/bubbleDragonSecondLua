@@ -152,7 +152,7 @@ namespace bubble_second {
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("StudioResPlist.plist");
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("gameRes.plist");
         this->addArmatureFile();
-        cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("puzzle_ui.plist");
+        //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("puzzle_ui.plist");
     }
 
     //void SpriteTextureController::addGameBackgroundTexture(int cell_numble)
