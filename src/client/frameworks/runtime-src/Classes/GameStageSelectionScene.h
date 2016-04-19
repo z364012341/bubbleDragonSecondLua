@@ -28,6 +28,7 @@ namespace bubble_second {
         cocos2d::Vec2 getScorllViewOffset(int cell_numble);
         void onEnter() override;
         void onExit() override;
+        //void screenShot(bool bIsSave);
     private:
         GameStageSelectionScene();
         bool init();

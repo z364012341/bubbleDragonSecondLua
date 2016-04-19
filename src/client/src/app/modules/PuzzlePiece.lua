@@ -22,13 +22,30 @@ local PuzzleStencil = require(PUZZLE_STENCIL_PATH);
 local PuzzlePieceEdges = require(PUZZLE_PIECE_EDGES_PATH);
 local PuzzlePieceShadow = require(PUZZLE_PIECE_SHADOW_PATH);
 --local PuzzlePiecesCollection = require(PUZZLE_PIECES_COLLECTION_PATH);
+--local numble = 0
 function PuzzlePiece:ctor(params)
     printf("PuzzlePiece");
     self:addTouchEvent();
+    self:initPuzzleRenderTexture();
+    self:addPuzzlePieceShadow(params);
+end
+
+function PuzzlePiece:initPuzzleRenderTexture()
+    self.node_ = cc.Node:create();
+    self:addChild(self.node_);
+
     self:addClippingNode(params);
     self:addPuzzlePieceEdges(params)
-    self:addPuzzlePieceShadow(params);
-    --self:setScale(0.5);
+    --GL_DEPTH24_STENCIL8 = 0x88F0
+    local puzzleRender = cc.RenderTexture:create(400, 400, cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888, 0x88F0);
+    puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0); 
+    self.node_:setPosition(200, 200);
+    self.node_:visit(); 
+    puzzleRender:endToLua();
+    local render_sp = cc.Sprite:createWithTexture(puzzleRender:getSprite():getTexture());
+    render_sp:setScaleY(-1);
+    self:addChild(render_sp);
+    self.node_:removeFromParent();
 end
 
 function PuzzlePiece:addTouchEvent()
@@ -101,11 +118,11 @@ function PuzzlePiece:addClippingNode(params)
     local clippingNode = cc.ClippingNode:create(PuzzleStencil:create(params.left, params.right, params.top, params.bottom));
     clippingNode:addChild(PuzzleBottomPlate:create(params.index_x, params.index_y, params.path));
     clippingNode:setAlphaThreshold(0.0);
-    self:addChild(clippingNode);
+    self.node_:addChild(clippingNode);
 end
 
 function PuzzlePiece:addPuzzlePieceEdges(params)
-    self:addChild(PuzzlePieceEdges:create(params.left, params.right, params.top, params.bottom));
+    self.node_:addChild(PuzzlePieceEdges:create(params.left, params.right, params.top, params.bottom));
 end
 
 function PuzzlePiece:addPuzzlePieceShadow(params)

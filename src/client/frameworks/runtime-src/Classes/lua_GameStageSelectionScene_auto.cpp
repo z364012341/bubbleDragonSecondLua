@@ -88,43 +88,6 @@ int lua_GameStageSelectionScene_GameStageSelectionScene_create(lua_State* tolua_
 #endif
     return 0;
 }
-int lua_GameStageSelectionScene_GameStageSelectionScene_createSceneWithStageData(lua_State* tolua_S)
-{
-    int argc = 0;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertable(tolua_S,1,"bs.GameStageSelectionScene",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    argc = lua_gettop(tolua_S) - 1;
-
-    if (argc == 1)
-    {
-        bubble_second::StageData arg0;
-        #pragma warning NO CONVERSION TO NATIVE FOR StageData
-		ok = false;
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_GameStageSelectionScene_GameStageSelectionScene_createSceneWithStageData'", nullptr);
-            return 0;
-        }
-        cocos2d::Scene* ret = bubble_second::GameStageSelectionScene::createSceneWithStageData(arg0);
-        object_to_luaval<cocos2d::Scene>(tolua_S, "cc.Scene",(cocos2d::Scene*)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "bs.GameStageSelectionScene:createSceneWithStageData",argc, 1);
-    return 0;
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_GameStageSelectionScene_GameStageSelectionScene_createSceneWithStageData'.",&tolua_err);
-#endif
-    return 0;
-}
 int lua_GameStageSelectionScene_GameStageSelectionScene_createScene(lua_State* tolua_S)
 {
     int argc = 0;
@@ -173,7 +136,6 @@ int lua_register_GameStageSelectionScene_GameStageSelectionScene(lua_State* tolu
     tolua_beginmodule(tolua_S,"GameStageSelectionScene");
         tolua_function(tolua_S,"getScorllViewOffset",lua_GameStageSelectionScene_GameStageSelectionScene_getScorllViewOffset);
         tolua_function(tolua_S,"create", lua_GameStageSelectionScene_GameStageSelectionScene_create);
-        tolua_function(tolua_S,"createSceneWithStageData", lua_GameStageSelectionScene_GameStageSelectionScene_createSceneWithStageData);
         tolua_function(tolua_S,"createScene", lua_GameStageSelectionScene_GameStageSelectionScene_createScene);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(bubble_second::GameStageSelectionScene).name();

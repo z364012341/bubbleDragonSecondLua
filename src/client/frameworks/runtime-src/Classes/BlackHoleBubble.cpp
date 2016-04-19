@@ -2,12 +2,14 @@
 #include "BlackHoleBubble.h"
 #include "GamePlayController.h"
 #include "SpriteTextureController.h"
-#include "cocostudio\CocoStudio.h"
+#include "BubbleFactory.h"
 const std::string BLACK_HOLE_BUBBLE_LOGO_PATH = "heidongxuanwo.png"; //黑洞上面转的
-const std::string BLACK_HOLE_BUBBLE_EFFECT_NAME = "heidongTX"; //黑洞特效的名字
+const std::string BLACK_HOLE_BUBBLE_EFFECT_NAME = "heidongpaopao"; //黑洞特效的名字
+const std::string BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME = "heidongTX"; 
 const std::string BLACK_HOLE_STANDBY_ANIMATION_NAME = "jizhong-qian";
-const float BLACKHOLE_BUBBLE_SCALETO_TIME = 0.33f; //黑洞小球放大动作时间
-const float BLACKHOLE_BUBBLE_SCALETO_PER = 0.7f; //黑洞小球缩放的幅度
+const float BLACKHOLE_BUBBLE_SCALETO_TIME = 0.46f; //黑洞小球放大动作时间
+const float BLACKHOLE_BUBBLE_FIRST_SCALETO_DURATION = BLACKHOLE_BUBBLE_SCALETO_TIME*1.4f;
+const float BLACKHOLE_BUBBLE_SCALETO_PER = 0.9f; //黑洞小球缩放的幅度
 const float BLACKHOLE_BUBBLE_LOGO_ROTATION_DURATION = 2.67f;
 namespace bubble_second {
     BlackHoleBubble::BlackHoleBubble()
@@ -103,14 +105,16 @@ namespace bubble_second {
 
     void BlackHoleBubble::bubbleEliminate(int combo)
     {
-        cocostudio::Armature* armature = cocostudio::Armature::create(BLACK_HOLE_BUBBLE_EFFECT_NAME);
-        armature->getAnimation()->play(0);
+        cocostudio::Armature* armature = cocostudio::Armature::create(BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME);
+        armature->getAnimation()->playWithIndex(0);
         armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
             if (movementType == cocostudio::COMPLETE)
             {
                 armature->removeFromParent();
             }
         });
+        armature->setPosition(this->getPosition());
+        this->getParent()->addChild(armature);
         for (auto var : swallow_vector_)
         {
             var->removeFromParent();
@@ -130,6 +134,7 @@ namespace bubble_second {
         {
             this->bubbleEliminate();
         }
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_BUBBLE_CONTACT_BLACKHOLE);
     }
 
     void BlackHoleBubble::addSwallowTimes()
@@ -139,21 +144,21 @@ namespace bubble_second {
         {
             this->playFirstAction();
         }
+        else if (swallow_times_ == 2)
+        {
+            this->playSecondAction();
+        }
     }
 
     void BlackHoleBubble::setBubbleTexture(BubbleType type)
     {   
-        BaseBubble::setBubbleTexture(type);
-        //using cocostudio::ArmatureDataManager;
-        //using cocostudio::Armature;
-        //armature_ = Armature::create(BLACK_HOLE_BUBBLE_EFFECT_NAME);
-        //armature_->getAnimation()->play(BLACK_HOLE_STANDBY_ANIMATION_NAME);
-        ////armature_->getAnimation()->setSpeedScale(1.3f);
-        //this->addChild(armature_, 1);
-        cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(BLACK_HOLE_BUBBLE_LOGO_PATH);
-        this->addChild(sp);
-        sp->setPosition(this->getContentSize().width/2, this->getContentSize().height/2);
-        sp->runAction(cocos2d::RepeatForever::create(cocos2d::RotateBy::create(BLACKHOLE_BUBBLE_LOGO_ROTATION_DURATION, 360)));
+        //BaseBubble::setBubbleTexture(type);
+        using cocostudio::ArmatureDataManager;
+        using cocostudio::Armature;
+        armature_ = Armature::create(BLACK_HOLE_BUBBLE_EFFECT_NAME);
+        armature_->getAnimation()->play(BLACK_HOLE_STANDBY_ANIMATION_NAME);
+        //armature_->getAnimation()->setSpeedScale(1.3f);
+        this->addChild(armature_, 1);
     }
 
     bool BlackHoleBubble::isNeedEliminate()
@@ -178,7 +183,7 @@ namespace bubble_second {
         listener->setSwallowTouches(true);
         listener->onTouchBegan = CC_CALLBACK_2(GamePlayController::touchSelectBubble, GamePlayController::getInstance());
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
-        dispatcher->addEventListenerWithSceneGraphPriority(listener, /*this->getChildByName(BLACK_HOLE_BUBBLE_EFFECT_NAME*/this);
+        dispatcher->addEventListenerWithSceneGraphPriority(listener, armature_);
     }
 
     void BlackHoleBubble::removeTouchEventListener()
@@ -188,12 +193,22 @@ namespace bubble_second {
 
     void BlackHoleBubble::playFirstAction()
     {
-        cocos2d::ScaleTo* scale_1 = cocos2d::ScaleTo::create(BLACKHOLE_BUBBLE_SCALETO_TIME, BLACKHOLE_BUBBLE_SCALETO_PER);
-        cocos2d::ScaleTo* scale_2 = cocos2d::ScaleTo::create(BLACKHOLE_BUBBLE_SCALETO_TIME, 1.0f);
-        //cocos2d::EaseInOut * ease_1 = cocos2d::EaseInOut::create(scale_1, 1.5f);
-        //cocos2d::EaseInOut * ease_2 = cocos2d::EaseInOut::create(scale_2, 1.5f);
-        cocos2d::Sequence* seq = cocos2d::Sequence::create(scale_1, scale_2, nullptr);
-        this->runAction(cocos2d::RepeatForever::create(seq));
+        cocos2d::ScaleTo* scale_1 = cocos2d::ScaleTo::create(BLACKHOLE_BUBBLE_FIRST_SCALETO_DURATION, BLACKHOLE_BUBBLE_SCALETO_PER);
+        cocos2d::ScaleTo* scale_2 = cocos2d::ScaleTo::create(BLACKHOLE_BUBBLE_FIRST_SCALETO_DURATION, 1.0f);
+        cocos2d::EaseInOut * ease_1 = cocos2d::EaseInOut::create(scale_1, 1.5f);
+        cocos2d::EaseInOut * ease_2 = cocos2d::EaseInOut::create(scale_2, 1.5f);
+        cocos2d::Sequence* seq = cocos2d::Sequence::create(ease_1, ease_2, nullptr);
+        armature_->runAction(cocos2d::RepeatForever::create(seq));
     }
 
+    void bubble_second::BlackHoleBubble::playSecondAction()
+    {
+        armature_->stopAllActions();
+        cocos2d::ScaleTo* scale_1 = cocos2d::ScaleTo::create(BLACKHOLE_BUBBLE_SCALETO_TIME, BLACKHOLE_BUBBLE_SCALETO_PER);
+        cocos2d::ScaleTo* scale_2 = cocos2d::ScaleTo::create(BLACKHOLE_BUBBLE_SCALETO_TIME, 1.0f);
+        cocos2d::EaseInOut * ease_1 = cocos2d::EaseInOut::create(scale_1, 1.5f);
+        cocos2d::EaseInOut * ease_2 = cocos2d::EaseInOut::create(scale_2, 1.5f);
+        cocos2d::Sequence* seq = cocos2d::Sequence::create(ease_1, ease_2, nullptr);
+        armature_->runAction(cocos2d::RepeatForever::create(seq));
+    }
 }

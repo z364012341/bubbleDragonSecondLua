@@ -46,6 +46,7 @@ namespace bubble_second{
     BubbleSpriteMap GameBubbleMapImple::initBubbleSpriteVetctor(BubbleColorRender* render, const BubblesData& stage_info, const StageType& stage_type)
     {
         BaseBubble* bubble = nullptr;
+        BubbleVector componentBubbles;
         for (auto var: stage_info)
         {
             bubble = this->convertBubbleDataToBubble(render, var);
@@ -54,10 +55,15 @@ namespace bubble_second{
                 this->addBubbleToBubbleMap(bubble);
                 if (bubble->getBubbleComponentNumble() != 0)
                 {
-                    this->addBubbleComponentByBubble(bubble);
+                    //this->addBubbleComponentByBubble(bubble);
+                    componentBubbles.pushBack(bubble);
                 }
                 this->disposeAddSuspensionPoint(bubble);
             }
+        }
+        for (auto var : componentBubbles)
+        {
+            this->addBubbleComponentByBubble(var);
         }
         this->stageTypeFunc(stage_type);
         return bubble_sprite_map_;        

@@ -4,214 +4,214 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>bianfu_0005_yanqiu.png</key>
+			<key>heidongTX_0007_2.png</key>
 			<dict>
 				<key>width</key>
-				<integer>4</integer>
+				<integer>119</integer>
 				<key>height</key>
-				<integer>4</integer>
+				<integer>110</integer>
 				<key>originalWidth</key>
-				<integer>4</integer>
+				<integer>217</integer>
 				<key>originalHeight</key>
-				<integer>4</integer>
+				<integer>217</integer>
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
-				<real>0</real>
+				<real>3</real>
 				<key>offsetY</key>
-				<real>0</real>
+				<real>-8.5</real>
 			</dict>
-			<key>bianfu_0001_1gebianfu-L-shou.png</key>
+			<key>heidongTX_0006_3.png</key>
 			<dict>
 				<key>width</key>
-				<integer>13</integer>
+				<integer>133</integer>
 				<key>height</key>
-				<integer>20</integer>
+				<integer>122</integer>
 				<key>originalWidth</key>
-				<integer>13</integer>
+				<integer>217</integer>
 				<key>originalHeight</key>
-				<integer>20</integer>
+				<integer>217</integer>
 				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>6</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>bianfu_0000_1gebianfu-R-shou.png</key>
-			<dict>
-				<key>width</key>
-				<integer>13</integer>
-				<key>height</key>
-				<integer>20</integer>
-				<key>originalWidth</key>
-				<integer>13</integer>
-				<key>originalHeight</key>
-				<integer>20</integer>
-				<key>x</key>
-				<integer>15</integer>
+				<integer>121</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
-				<real>0</real>
+				<real>4</real>
 				<key>offsetY</key>
-				<real>0</real>
+				<real>-10.5</real>
 			</dict>
-			<key>bianfu_0005_1gebianfu-tou2.png</key>
+			<key>heidongTX_0005_4.png</key>
 			<dict>
 				<key>width</key>
-				<integer>55</integer>
-				<key>height</key>
-				<integer>47</integer>
-				<key>originalWidth</key>
-				<integer>55</integer>
-				<key>originalHeight</key>
-				<integer>47</integer>
-				<key>x</key>
-				<integer>30</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>bianfu_0006_1gebianfu-tou1.png</key>
-			<dict>
-				<key>width</key>
-				<integer>55</integer>
-				<key>height</key>
-				<integer>47</integer>
-				<key>originalWidth</key>
-				<integer>55</integer>
-				<key>originalHeight</key>
-				<integer>47</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>49</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>bianfu_0004_1gebianfu-tou3.png</key>
-			<dict>
-				<key>width</key>
-				<integer>55</integer>
-				<key>height</key>
-				<integer>47</integer>
-				<key>originalWidth</key>
-				<integer>55</integer>
-				<key>originalHeight</key>
-				<integer>47</integer>
-				<key>x</key>
-				<integer>57</integer>
-				<key>y</key>
-				<integer>49</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>bianfu_0003_1gebianfu-tou4.png</key>
-			<dict>
-				<key>width</key>
-				<integer>55</integer>
-				<key>height</key>
-				<integer>47</integer>
-				<key>originalWidth</key>
-				<integer>55</integer>
-				<key>originalHeight</key>
-				<integer>47</integer>
-				<key>x</key>
-				<integer>87</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>offsetX</key>
-				<real>0</real>
-				<key>offsetY</key>
-				<real>0</real>
-			</dict>
-			<key>bianfu_0002_1gebianfu-tou5.png</key>
-			<dict>
-				<key>width</key>
-				<integer>55</integer>
-				<key>height</key>
-				<integer>47</integer>
-				<key>originalWidth</key>
-				<integer>55</integer>
-				<key>originalHeight</key>
-				<integer>47</integer>
-				<key>x</key>
 				<integer>144</integer>
+				<key>height</key>
+				<integer>137</integer>
+				<key>originalWidth</key>
+				<integer>217</integer>
+				<key>originalHeight</key>
+				<integer>217</integer>
+				<key>x</key>
+				<integer>256</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
-				<real>0</real>
+				<real>3.5</real>
 				<key>offsetY</key>
-				<real>0</real>
+				<real>-18</real>
 			</dict>
-			<key>bianfu_0008_1gebianfu-L-erduo.png</key>
+			<key>heidongTX_0004_5.png</key>
 			<dict>
 				<key>width</key>
-				<integer>20</integer>
+				<integer>153</integer>
 				<key>height</key>
-				<integer>23</integer>
+				<integer>131</integer>
 				<key>originalWidth</key>
-				<integer>20</integer>
+				<integer>217</integer>
 				<key>originalHeight</key>
-				<integer>23</integer>
+				<integer>217</integer>
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>98</integer>
+				<integer>139</integer>
 				<key>offsetX</key>
-				<real>0</real>
+				<real>6</real>
 				<key>offsetY</key>
-				<real>0</real>
+				<real>-15</real>
 			</dict>
-			<key>bianfu_0007_1gebianfu-R-erduo.png</key>
+			<key>heidongTX_0003_6.png</key>
 			<dict>
 				<key>width</key>
-				<integer>20</integer>
+				<integer>168</integer>
 				<key>height</key>
-				<integer>23</integer>
+				<integer>137</integer>
 				<key>originalWidth</key>
-				<integer>20</integer>
+				<integer>217</integer>
 				<key>originalHeight</key>
-				<integer>23</integer>
+				<integer>217</integer>
 				<key>x</key>
-				<integer>22</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>98</integer>
+				<integer>272</integer>
 				<key>offsetX</key>
-				<real>0</real>
+				<real>4.5</real>
 				<key>offsetY</key>
-				<real>0</real>
+				<real>-20</real>
 			</dict>
-			<key>bianfu_0009_1gebianfu-weiba.png</key>
+			<key>heidongTX_0002_7.png</key>
 			<dict>
 				<key>width</key>
-				<integer>22</integer>
+				<integer>176</integer>
 				<key>height</key>
-				<integer>39</integer>
+				<integer>133</integer>
 				<key>originalWidth</key>
-				<integer>22</integer>
+				<integer>217</integer>
 				<key>originalHeight</key>
-				<integer>39</integer>
+				<integer>217</integer>
 				<key>x</key>
-				<integer>114</integer>
+				<integer>170</integer>
 				<key>y</key>
-				<integer>49</integer>
+				<integer>139</integer>
+				<key>offsetX</key>
+				<real>7.5</real>
+				<key>offsetY</key>
+				<real>-21</real>
+			</dict>
+			<key>heidongTX_0001_8.png</key>
+			<dict>
+				<key>width</key>
+				<integer>182</integer>
+				<key>height</key>
+				<integer>134</integer>
+				<key>originalWidth</key>
+				<integer>217</integer>
+				<key>originalHeight</key>
+				<integer>217</integer>
+				<key>x</key>
+				<integer>170</integer>
+				<key>y</key>
+				<integer>274</integer>
+				<key>offsetX</key>
+				<real>5.5</real>
+				<key>offsetY</key>
+				<real>-26.5</real>
+			</dict>
+			<key>heidongTX_0000_9.png</key>
+			<dict>
+				<key>width</key>
+				<integer>116</integer>
+				<key>height</key>
+				<integer>81</integer>
+				<key>originalWidth</key>
+				<integer>217</integer>
+				<key>originalHeight</key>
+				<integer>217</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>411</integer>
+				<key>offsetX</key>
+				<real>44.5</real>
+				<key>offsetY</key>
+				<real>-10</real>
+			</dict>
+			<key>heidongTX_0008_guangquan.png</key>
+			<dict>
+				<key>width</key>
+				<integer>131</integer>
+				<key>height</key>
+				<integer>37</integer>
+				<key>originalWidth</key>
+				<integer>217</integer>
+				<key>originalHeight</key>
+				<integer>217</integer>
+				<key>x</key>
+				<integer>348</integer>
+				<key>y</key>
+				<integer>139</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
-				<real>0</real>
+				<real>-4</real>
+			</dict>
+			<key>heidongTX_0009_1.png</key>
+			<dict>
+				<key>width</key>
+				<integer>104</integer>
+				<key>height</key>
+				<integer>104</integer>
+				<key>originalWidth</key>
+				<integer>217</integer>
+				<key>originalHeight</key>
+				<integer>217</integer>
+				<key>x</key>
+				<integer>402</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0.5</real>
+				<key>offsetY</key>
+				<real>1.5</real>
+			</dict>
+			<key>heidongTX_0010_guang.png</key>
+			<dict>
+				<key>width</key>
+				<integer>201</integer>
+				<key>height</key>
+				<integer>202</integer>
+				<key>originalWidth</key>
+				<integer>217</integer>
+				<key>originalHeight</key>
+				<integer>217</integer>
+				<key>x</key>
+				<integer>508</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>1</real>
+				<key>offsetY</key>
+				<real>0.5</real>
 			</dict>
 		</dict>
 		<key>metadata</key>
@@ -219,9 +219,9 @@
 			<key>format</key>
 			<integer>0</integer>
 			<key>textureFileName</key>
-			<string>1gebianfu0.png</string>
+			<string>heidongTX0.png</string>
 			<key>realTextureFileName</key>
-			<string>1gebianfu0.png</string>
+			<string>heidongTX0.png</string>
 			<key>size</key>
 			<string>{1024,2048}</string>
 		</dict>

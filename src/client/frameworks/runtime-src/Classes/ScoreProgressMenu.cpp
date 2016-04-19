@@ -55,6 +55,7 @@ namespace bubble_second {
         this->addProgressTimerHead();
 
         cocos2d::ClippingNode* clipping = cocos2d::ClippingNode::create(score_progress_timer_);
+        //clipping->visit(cocos2d::Director::getInstance()->getRenderer(), this->getTransf(), this->flags);
         clipping->setAlphaThreshold(0);
         clipping->setPosition(background->getPosition());
         clipping->addChild(score_progress_timer_, PROGRESS_TIMER_ZORDER);

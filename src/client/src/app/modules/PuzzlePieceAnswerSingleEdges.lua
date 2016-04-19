@@ -15,7 +15,7 @@ function PuzzlePieceAnswerSingleEdges:ctor(direction, insideOrOutside)
     --local path = insideOrOutside == PUZZLE_STENCIL_COMPONENT_PLAIN and 
     --  PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PLAIN_PATH or PUZZLE_PIECE_ANSWER_SINGLE_EDGES_NOT_PLAIN_PATH;
     local singleEdges = PuzzlePieceSingleEdges:create(direction, insideOrOutside);
-    singleEdges:changeTextureColor(ccc3(231, 213, 186)); 
+    singleEdges:changeTextureColor(cc.c3b(231, 213, 186)); 
     --singleEdges._edgesSprite:setAnchorPoint({x = 5/189, y = 0.5}); 
     self:addChild(singleEdges);
 end

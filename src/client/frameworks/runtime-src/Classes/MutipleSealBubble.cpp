@@ -49,35 +49,17 @@ namespace bubble_second {
 
     void MutipleSealBubble::bubbleEliminate(int combo)
     {
-		if (this->getBubbleComponentNumble() == BUBBLE_MUTIPLE_SEAL_COMPONENT_NUMBLE_1)
-		{
-			this->setLocalZOrder(1);
-			armature_->getAnimation()->play(MUTIPLE_SEAL_CHARACTOR_ANIMATIOIN_ELIMINATE_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-			armature_->setLocalZOrder(1);
-			armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-				if (movementType == cocostudio::COMPLETE)
-				{
-					this->addCompletedTaskNumble();
-					this->removeFromParent();
-				}
-			});
-		}
-		else
-		{
-			this->setLocalZOrder(1);
-			armature_->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-			armature_->setLocalZOrder(1);
-			armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-				if (movementType == cocostudio::COMPLETE)
-				{
-					this->addCompletedTaskNumble();
-					//armature->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::FadeOut::create(1.0f), cocos2d::CallFunc::create(CC_CALLBACK_0(MutipleSealBubble::removeFromParent, this))));
-					this->removeFromParent();
-				}
-			});
-		}
-
-        //this->removeFromParent();
+		this->setLocalZOrder(1);
+		armature_->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+		armature_->setLocalZOrder(1);
+		armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+			if (movementType == cocostudio::COMPLETE)
+			{
+				this->addCompletedTaskNumble();
+				//armature->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::FadeOut::create(1.0f), cocos2d::CallFunc::create(CC_CALLBACK_0(MutipleSealBubble::removeFromParent, this))));
+				this->removeFromParent();
+			}
+		});
     }
 
 	void MutipleSealBubble::runBubbleEffect(const std::string& name, const cocos2d::Vec2& point)

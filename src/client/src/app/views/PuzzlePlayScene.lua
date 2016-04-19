@@ -11,7 +11,7 @@ function PuzzlePlayScene:ctor()
     printf("PuzzlePlayScene");
     local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create("puzzle_1.png")
     local puzzleNode = collection:getPuzzleNode();
-    puzzleNode:setPosition(300, 0);
+    puzzleNode:setPosition(200, 200);
     --puzzleNode:setScale(0.6);
     self:addChild(puzzleNode);
 
@@ -46,7 +46,7 @@ end
 function PuzzlePlayScene:addBackMenu()
     local item = cc.MenuItemSprite:create(cc.Sprite:create("001.png"), cc.Sprite:create("001.png"));
     item:registerScriptTapHandler(function (event)
-       cc.Director:getInstance():replaceScene(bs.GameStageSelectionScene:createScene());
+        cc.Director:getInstance():replaceScene(bs.GameStageSelectionScene:createScene());
     end);
     local menu = cc.Menu:create();
     menu:addChild(item);

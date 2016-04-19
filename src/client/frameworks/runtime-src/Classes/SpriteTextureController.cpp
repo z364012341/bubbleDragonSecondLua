@@ -26,7 +26,8 @@ const std::string MUTIPLE_SEAL_3_BUBBLE_ARMATURE_PATH = "wa/wa.ExportJson"; //多
 const std::string MUTIPLE_SEAL_7_BUBBLE_ARMATURE_PATH = "xiongda/xiongda.ExportJson"; //多重封印球的动画
 const std::string MUTIPLE_SEAL_1_BUBBLE_ARMATURE_PATH = "1gebianfu/1gebianfu.ExportJson"; //多重封印球的动画
 const std::string RAINBOW_CHARACTOR_ARMATURE_PATH = "langda/langda.ExportJson"; //彩虹封印的人物
-const std::string BLACK_HOLE_BUBBLE_EFFECT_PATH = "heidongTX/heidongTX.ExportJson"; //黑洞特效的路径
+const std::string BLACK_HOLE_BUBBLE_EFFECT_PATH = "heidongpaopao/heidongpaopao.ExportJson"; //黑洞特效的路径
+const std::string BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME = "heidongTX/heidongTX.ExportJson";
 
 namespace bubble_second {
 
@@ -77,6 +78,7 @@ namespace bubble_second {
         armature_path_.push_back(STAGE_CELL_RABBIT_ARMATURE_PATH);
         armature_path_.push_back(WINDMILL_BUBBLE_ARMATURE_PATH);
         armature_path_.push_back(MUTIPLE_SEAL_7_BUBBLE_ARMATURE_PATH);
+        armature_path_.push_back(BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME);
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()
@@ -152,7 +154,7 @@ namespace bubble_second {
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("StudioResPlist.plist");
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("gameRes.plist");
         this->addArmatureFile();
-        //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("puzzle_ui.plist");
+        cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("puzzle_ui.plist");
     }
 
     //void SpriteTextureController::addGameBackgroundTexture(int cell_numble)
@@ -239,6 +241,10 @@ namespace bubble_second {
         {
             cocostudio::ArmatureDataManager::getInstance()->removeArmatureFileInfo(var);
         }
+
+        //cocos2d::RenderTexture* textureScreen = cocos2d::RenderTexture::create(100, 100);
+        //cocos2d::Sprite* sp = cocos2d::Sprite::createWithTexture(textureScreen->getSprite());
+        //cocos2d::Sprite::createWithTexture(textureScreen->getSprite()->getTexture());
     }
 
     //cocos2d::RenderTexture* SpriteTextureController::SpriteBlurer(cocos2d::Sprite* pSprite, const float fRadius, const float fSampleNum)
@@ -259,8 +265,7 @@ namespace bubble_second {
     //    return textureScreen;
     //}
 
-    //cocos2d::RenderTexture* SpriteTextureController::ScreenShot(const bool bIsSave, std::function<void(cocos2d::RenderTexture*, const std::string&)> pFuncCallback)
-
+    //void SpriteTextureController::screenShot(const bool bIsSave)
     //{
     //    //使用屏幕尺寸初始化一个空的渲染纹理对象  
     //    cocos2d::Size sizeWin = cocos2d::Director::getInstance()->getWinSize();
@@ -275,17 +280,9 @@ namespace bubble_second {
 
     //    if (bIsSave)
     //    {//保存为PNG图  
-    //        textureScreen->saveToFile("ScreenShot.png", cocos2d::Image::Format::PNG, true, pFuncCallback);
-    //    }
-    //    else
-    //    {
-    //        if (nullptr != pFuncCallback)
-    //        {
-    //            pFuncCallback(textureScreen, "");
-    //        }
+    //        textureScreen->saveToFile("ScreenShot.png", cocos2d::Image::Format::PNG, true, nullptr);
     //    }
     //    //cocos2d::utils::captureScreen([=](bool succeed, const std::string& outputFile) {}, "ScreenShot.png");
-    //    return textureScreen;
     //}
 
 }

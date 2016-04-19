@@ -733,6 +733,9 @@ namespace bubble_second {
         //dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_ADD_ELIMINATE_SCORE_LABEL, CC_CALLBACK_1(GameScene::addEliminateScoreLabel, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        dispatcher->addCustomEventListener(EVENT_BUBBLE_CONTACT_BLACKHOLE, [=](cocos2d::EventCustom * event) {
+            this->setPropertyTouchEnabled(true);
+        });
     }
 
     void GameScene::removeEventListenerCustom()
@@ -780,6 +783,7 @@ namespace bubble_second {
         //dispatcher->removeCustomEventListeners(EVENT_DEFEAT);
         dispatcher->removeCustomEventListeners(EVENT_ADD_ELIMINATE_SCORE_LABEL);
         dispatcher->removeCustomEventListeners(EVENT_CAN_USED_PROPS);
+        dispatcher->removeCustomEventListeners(EVENT_BUBBLE_CONTACT_BLACKHOLE);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1643,7 +1647,7 @@ namespace bubble_second {
     {
 		if (BaseBubble* bubble = GamePlayController::getInstance()->getPrepareBubble())
 		{
-			this->getBubbleSightingDevice()->changePointsColor(bubble->getBubbleType());
+            this->getBubbleSightingDevice()->changePointsColor(bubble->getBubbleType());
 		}
     }
 

@@ -10,6 +10,7 @@
 #define _BLACK_HOLE_BUBBLE_H_
 #include "cocos2d.h"
 #include "BaseBubble.h"
+#include "cocostudio\CocoStudio.h"
 namespace bubble_second {
     class BlackHoleBubble : public BaseBubble
     {
@@ -37,12 +38,13 @@ namespace bubble_second {
         void removeTouchEventListener() override;
         //播放一级动画
         void playFirstAction();
+        void playSecondAction();
         //阿基米德螺线动作
         void playAchimedeanSpiralAction(BaseBubble* bubble);
     private:
         int swallow_times_;
         BubbleVector swallow_vector_;
-        //cocostudio::Armature* armature_;
+        cocostudio::Armature* armature_;
     };
 }
 #endif //_BLACK_HOLE_BUBBLE_H_

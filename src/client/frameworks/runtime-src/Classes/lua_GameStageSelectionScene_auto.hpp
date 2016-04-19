@@ -16,5 +16,4 @@ int register_all_GameStageSelectionScene(lua_State* tolua_S);
 
 
 
-
 #endif // __GameStageSelectionScene_h__

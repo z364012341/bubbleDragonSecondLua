@@ -66,10 +66,32 @@ namespace bubble_second {
         this->removeEventListenerCustom();
     }
 
+    //void GameStageSelectionScene::screenShot(const bool bIsSave)
+    //{
+    //    ////使用屏幕尺寸初始化一个空的渲染纹理对象  
+    //    //cocos2d::Size sizeWin = cocos2d::Director::getInstance()->getWinSize();
+    //    //cocos2d::RenderTexture* textureScreen = cocos2d::RenderTexture::create(sizeWin.width, sizeWin.height, cocos2d::Texture2D::PixelFormat::RGBA8888);
+    //    ////清除数据并开始获取  
+    //    ////textureScreen->beginWithClear(0.0f, 0.0f, 0.0f, 0.0f);
+    //    //textureScreen->begin();
+    //    ////遍历场景节点对象，填充纹理到texure中  
+    //    //cocos2d::Director::getInstance()->getRunningScene()->visit();
+    //    ////结束获取  
+    //    //textureScreen->end();
+
+    //    //if (bIsSave)
+    //    //{//保存为PNG图  
+    //    //    textureScreen->saveToFile("ScreenShot.png", cocos2d::Image::Format::PNG, true, nullptr);
+    //    //}
+    //    ////cocos2d::utils::captureScreen([=](bool succeed, const std::string& outputFile) {}, "ScreenShot.png");
+    //    cocos2d::utils::captureScreen(nullptr, "ScreenShot.png");
+    //}
+
     cocos2d::Scene * bubble_second::GameStageSelectionScene::createScene()
     {
         cocos2d::Scene* scene = cocos2d::Scene::create();
         GameStageSelectionScene* layer = GameStageSelectionScene::create();
+        //layer->screenShot(true);
         scene->addChild(layer);
         return scene;
     }

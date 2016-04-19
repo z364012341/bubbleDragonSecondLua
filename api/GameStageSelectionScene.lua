@@ -19,13 +19,6 @@
         
 --------------------------------
 -- 
--- @function [parent=#GameStageSelectionScene] createSceneWithStageData 
--- @param self
--- @param #bs.StageData data
--- @return Scene#Scene ret (return value: cc.Scene)
-        
---------------------------------
--- 
 -- @function [parent=#GameStageSelectionScene] createScene 
 -- @param self
 -- @return Scene#Scene ret (return value: cc.Scene)
