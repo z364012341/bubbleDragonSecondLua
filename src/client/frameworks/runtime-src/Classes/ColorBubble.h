@@ -62,6 +62,8 @@ namespace bubble_second {
 		void setShootImpulse(const cocos2d::Vec2& touch_location);
         //碰到桶底部
         void contactBarrelBottom();
+        //发出闪光
+        void bubbleFlash();
     protected:
         ColorBubble();
         bool initWithTypeAndCloud(int type, int cloud = kBubbleNoCloud);

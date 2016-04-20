@@ -335,7 +335,7 @@ namespace bubble_second {
         BaseProperty* wooden_hammer_property_;
         BaseProperty* staves_property_;
         //std::map<BubbleType, std::string> bubblecolor_to_swirl_;
-        BaseWeapon* props_weapon_;
+        BaseWeapon* props_weapon_ = nullptr;
         bool first_flag_;
         //bool barrel_score_display_flag_;
         GameCharacter* game_character_;

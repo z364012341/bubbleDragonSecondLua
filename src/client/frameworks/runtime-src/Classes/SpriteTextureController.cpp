@@ -28,7 +28,8 @@ const std::string MUTIPLE_SEAL_1_BUBBLE_ARMATURE_PATH = "1gebianfu/1gebianfu.Exp
 const std::string RAINBOW_CHARACTOR_ARMATURE_PATH = "langda/langda.ExportJson"; //彩虹封印的人物
 const std::string BLACK_HOLE_BUBBLE_EFFECT_PATH = "heidongpaopao/heidongpaopao.ExportJson"; //黑洞特效的路径
 const std::string BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME = "heidongTX/heidongTX.ExportJson";
-
+const std::string WOODEN_HAMMER_WEAPON_ARMATURE_NAME = "chuizi/chuizi.ExportJson";
+const std::string STAVES_WEAPON_ARMATURE_NAME = "fazhang/fazhang.ExportJson";
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()
@@ -79,6 +80,8 @@ namespace bubble_second {
         armature_path_.push_back(WINDMILL_BUBBLE_ARMATURE_PATH);
         armature_path_.push_back(MUTIPLE_SEAL_7_BUBBLE_ARMATURE_PATH);
         armature_path_.push_back(BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME);
+        armature_path_.push_back(WOODEN_HAMMER_WEAPON_ARMATURE_NAME);
+        armature_path_.push_back(STAVES_WEAPON_ARMATURE_NAME);
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()

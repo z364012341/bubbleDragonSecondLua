@@ -57,4 +57,9 @@ namespace bubble_second {
         this->bubbleEliminate();
     }
 
+    cocos2d::Vec2 BubbleComponent::getBubblePropsWeaponPosition()
+    {
+        return core_bubble_->getBubblePropsWeaponPosition();
+    }
+
 }

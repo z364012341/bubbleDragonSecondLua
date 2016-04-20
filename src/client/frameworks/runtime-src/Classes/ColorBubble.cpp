@@ -5,6 +5,7 @@
 #include "GamePlayController.h"
 #include "cocostudio\CocoStudio.h"
 #include "GameScoreController.h"
+#include "SpriteTextureController.h"
 //#include "StageDataManager.h"
 //#include "GameScene.h"
 //#include "AirBubbleManager.h"
@@ -293,6 +294,17 @@ namespace bubble_second {
         //AirBubbleManager::getInstance()->cutAirBubble(this);
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CUT_AIR_BUBBLE_NUMBLE);
         this->removeFromParent();
+    }
+
+    void ColorBubble::bubbleFlash()
+    {
+        cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath("bai.png");
+        cocos2d::BlendFunc bf = { GL_SRC_ALPHA , GL_SRC_ALPHA };
+        sp->setBlendFunc(bf);
+        this->addChild(sp);
+        cocos2d::FadeOut* fadeout = cocos2d::FadeOut::create(0.5f);
+        cocos2d::FadeIn* fadeIn = cocos2d::FadeIn::create(0.5f);
+        sp->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::createWithTwoActions(fadeout, fadeIn)));
     }
 
     cocos2d::Vec2 ColorBubble::getImpulseByTouchlocation(cocos2d::Vec2 touch_location)

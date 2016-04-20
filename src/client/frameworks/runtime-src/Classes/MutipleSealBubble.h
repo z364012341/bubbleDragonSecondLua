@@ -35,6 +35,7 @@ namespace bubble_second {
         void bubbleEliminate(int combo = 0) override;
         void downFromAir() override;
         void addBubbleStaticBody() override;
+        cocos2d::Vec2 getBubblePropsWeaponPosition() override;
     private:
         MutipleSealBubble();
         void setBubbleTexture(BubbleType type) override;

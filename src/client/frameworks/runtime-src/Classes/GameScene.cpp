@@ -646,7 +646,10 @@ namespace bubble_second {
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_USE_SELECTION_PROPS, CC_CALLBACK_1(GameScene::addPropsSelectAlert, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        listener = cocos2d::EventListenerCustom::create(EVENT_PROPS_SELECT_ALERT_CANCEL, CC_CALLBACK_1(GameScene::removePropsSelectAlert, this));
+        listener = cocos2d::EventListenerCustom::create(EVENT_PROPS_SELECT_ALERT_CANCEL, [=](cocos2d::EventCustom*) {
+            props_weapon_->removeFromParent();
+            this->removePropsSelectAlert(nullptr);
+        });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_SELECT_BUBBLE, CC_CALLBACK_1(GameScene::selectBubble, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
@@ -1382,14 +1385,15 @@ namespace bubble_second {
         BaseBubble* bubble = static_cast<BaseBubble*>(event->getUserData());
         if (props_weapon_ && props_weapon_->inAttackRange(bubble->getBubbleType()))
         {
-            this->setPropsWeaponPosition(bubble->getPosition());
+            this->setPropsWeaponPosition(bubble->getBubblePropsWeaponPosition());
         }
     }
 
     void GameScene::setPropsWeaponPosition(const cocos2d::Vec2& point)
     {
         props_weapon_->setVisible(true);
-        props_weapon_->setPosition(this->convertMapToCsbSpace(point));
+        //props_weapon_->setPosition(this->convertMapToCsbSpace(point));
+        props_weapon_->selectBubble(this->convertMapToCsbSpace(point));
     }
 
     void GameScene::useSelectProperties(cocos2d::EventCustom*)
@@ -1406,7 +1410,7 @@ namespace bubble_second {
             {
                 node->removeFromParent();
             }
-            this->setPropsWeaponPosition(bubble->getPosition());
+            this->setPropsWeaponPosition(bubble->getBubblePropsWeaponPosition());
             GamePlayController::getInstance()->findBubblesInVisibleSize();
         }
     }
@@ -1471,13 +1475,12 @@ namespace bubble_second {
     //{
     //    return cocos2d::MoveBy::create(3.0f, cocos2d::Vec2(0.0f, -100.0f));
     //}
-
     void GameScene::removePropsSelectAlert(cocos2d::EventCustom*)
     {
         csb_node_->getChildByName(PROPS_SELECT_ALERT_LAYERCOLOR_NAME)->removeFromParent();
         wooden_hammer_property_->cancelUseItem();
         staves_property_->cancelUseItem();
-        props_weapon_->removeFromParent();
+        //props_weapon_->removeFromParent();
         props_weapon_ = nullptr;
         this->setMenuTouchEnabled(true);
         GamePlayController::getInstance()->findBubblesInVisibleSize();

@@ -35,6 +35,7 @@ namespace bubble_second {
         void bubbleEliminate(int combo = 0) override;
         bool isEliminateByProperty() override;
         void downFromAir() override;
+        cocos2d::Vec2 getBubblePropsWeaponPosition() override;
     private:
         BubbleComponent();
         bool initWithCore(BaseBubble* bubble);

@@ -223,7 +223,7 @@ namespace bubble_second{
         index_vector.push_back(getRightIndex(getRightIndex(index))); //срср
         index_vector.push_back(getRightIndex(getUpRightIndex(index))); //сриоср
         index_vector.push_back(getUpRightIndex(getUpRightIndex(index))); //сриосрио
-        index_vector.push_back(getRightIndex(getRightIndex(index))); //срср
+        index_vector.push_back(getUpRightIndex(getUpLeftIndex(index))); //иоио
         return index_vector;
     }
 

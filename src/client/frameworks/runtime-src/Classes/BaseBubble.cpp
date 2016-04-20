@@ -345,4 +345,9 @@ namespace bubble_second {
     {
         return BubbleFactory::getInstance()->createBubbleWithType(this->getBubbleType(), this->getBubbleIndex(), this->getPosition());
     }
+
+    cocos2d::Vec2 BaseBubble::getBubblePropsWeaponPosition()
+    {
+        return this->getPosition();
+    }
 }

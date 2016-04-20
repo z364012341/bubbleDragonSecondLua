@@ -1,6 +1,6 @@
 #include "BaseWeapon.h"
 //#include "BaseBubble.h"
-
+const std::string& WEAPON_STANDBY_ANIMATION_NAME = "daiji";
 namespace bubble_second {
     BaseWeapon::BaseWeapon()
     {
@@ -18,16 +18,30 @@ namespace bubble_second {
 
     void BaseWeapon::attackBubble()
     {
+        this->removeFromParent();
     }
 
-    bool BaseWeapon::init()
+    void BaseWeapon::selectBubble(const cocos2d::Vec2 & point)
     {
-        if (!cocos2d::Sprite::init())
+        this->setPosition(point);
+    }
+
+    bool BaseWeapon::init(const std::string& armature_name)
+    {
+        if (!cocos2d::Node::init())
         {
             return false;
         }
         //select_bubble_ = nullptr;
+        armature_ = cocostudio::Armature::create(armature_name);
+        armature_->getAnimation()->play(WEAPON_STANDBY_ANIMATION_NAME);
+        this->addChild(armature_);
         return true;
+    }
+
+    cocostudio::Armature * BaseWeapon::getWeaponArmature()
+    {
+        return armature_;
     }
 
     //void BaseWeapon::setSelectBubble(BaseBubble* bubble)

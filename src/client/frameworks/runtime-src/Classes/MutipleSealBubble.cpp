@@ -177,4 +177,10 @@ namespace bubble_second {
             this->setPhysicsBody(body);
         }), NULL));
     }
+    cocos2d::Vec2 MutipleSealBubble::getBubblePropsWeaponPosition()
+    {
+        cocos2d::Vec2 point(this->getContentSize().width/2, this->getContentSize().height / 2);
+        //this->getParent()->convertToNodeSpace(this->convertToWorldSpace(point));
+        return this->getParent()->convertToNodeSpace(this->convertToWorldSpace(point));
+    }
 }

@@ -56,6 +56,8 @@ namespace bubble_second {
         virtual float playTheSpecialEffects();
 		//拷贝
 		BaseBubble* clone();
+        //获取武器放上去的位置
+        virtual cocos2d::Vec2 getBubblePropsWeaponPosition();
     public:
         void setBubbleType(int type);
         void setEliminateDelayTime(float time);
