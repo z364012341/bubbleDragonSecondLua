@@ -720,6 +720,21 @@ namespace bubble_second{
         return bubbles;
     }
 
+    BubbleVector bubble_second::GameBubbleMapImple::getSameBubblesInVisibleSize(BubbleType color)
+    {
+        BubbleVector bubbles = this->getBubblesInVisibleSize();
+        for (auto iter = bubbles.begin(); iter < bubbles.end(); )
+        {
+            if (color != (*iter)->getBubbleType())
+            {
+                iter = bubbles.erase(iter);
+                continue;
+            }
+            ++iter;
+        }
+        return bubbles;
+    }
+
     int GameBubbleMapImple::getTopRowNullBubbleNumble()
     {
         return MAP_EVEN_ROW_MAX - bubble_sprite_map_[0].size();

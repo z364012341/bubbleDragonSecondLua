@@ -12,6 +12,7 @@
 const int STANBY_ACTION_TAG = 121;
 const float STANBY_ACTION_TIME = 0.5f;
 const float STANBY_ACTION_RANGE = 3.0f;
+const std::string COLOR_BUBBLE_FLASH_PATH = "bai.png";
 namespace bubble_second {
     ColorBubble::~ColorBubble()
     {
@@ -298,7 +299,7 @@ namespace bubble_second {
 
     void ColorBubble::bubbleFlash()
     {
-        cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath("bai.png");
+        cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(COLOR_BUBBLE_FLASH_PATH);
         cocos2d::BlendFunc bf = { GL_SRC_ALPHA , GL_SRC_ALPHA };
         sp->setBlendFunc(bf);
         this->addChild(sp);

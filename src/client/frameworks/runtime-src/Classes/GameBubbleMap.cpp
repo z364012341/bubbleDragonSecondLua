@@ -352,7 +352,7 @@ namespace bubble_second {
 
     void GameBubbleMap::findBubblesInVisibleSize()
     {
-        BubbleVector bubbles = getBubbleInVisibleSize();
+        BubbleVector bubbles = this->getBubbleInVisibleSize();
         this->dispatchCustomEvent(EVENT_FIND_BUBBLES_IN_VISIBLESIZE, &bubbles);
     }
 
@@ -445,20 +445,15 @@ namespace bubble_second {
 
     void GameBubbleMap::disposeUseStaves(BaseBubble* bubble)
     {
-        BubbleVector bubbles = game_bubble_map_impl_->getBubblesInVisibleSize();
-        BubbleType color = bubble->getBubbleType();
-        cocos2d::Vec2 bubble_point = bubble->getPosition();
-        for (auto iter = bubbles.begin(); iter < bubbles.end(); )
-        {
-            if (color != (*iter)->getBubbleType())
-            {
-                iter = bubbles.erase(iter);
-                continue;
-            }
-            ++iter;
-        }
-        this->dispatchAddEliminateComboEvent(bubble_point);
-        this->eliminateBubbles(bubbles);  
+        this->dispatchAddEliminateComboEvent(bubble->getPosition());
+        this->eliminateBubbles(game_bubble_map_impl_->getSameBubblesInVisibleSize(bubble->getBubbleType()));
+    }
+
+    void GameBubbleMap::disposeStavesSelectBubble(BaseBubble * bubble)
+    {
+        BubbleVector vector = game_bubble_map_impl_->getSameBubblesInVisibleSize(bubble->getBubbleType());
+        vector.eraseObject(bubble);
+        this->dispatchCustomEvent(EVENT_STAVES_SELECT_BUBBLE, &vector);
     }
 
     void GameBubbleMap::disposeCompletedTaskNumble()

@@ -51,6 +51,7 @@ namespace bubble_second {
         void disposeUseWoodenHammer(BaseBubble* bubble);
         //处理使用法杖
         void disposeUseStaves(BaseBubble* bubble);
+        void disposeStavesSelectBubble(BaseBubble* bubble);
         //处理顶部消除玩法的胜利条件
         void disposeCompletedTaskNumble();
         //加载关卡信息

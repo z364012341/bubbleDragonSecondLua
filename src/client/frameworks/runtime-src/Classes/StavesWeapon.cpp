@@ -1,6 +1,7 @@
 #include "StavesWeapon.h"
 #include "SpriteTextureController.h"
 #include "GamePlayController.h"
+#include "ColorBubble.h"
 const std::string WOODEN_HAMMER_ANIMATION_NAME = "fazhang";
 namespace bubble_second {
     StavesWeapon::StavesWeapon()
@@ -23,6 +24,24 @@ namespace bubble_second {
     {
     }
 
+    void StavesWeapon::onEnter()
+    {
+        BaseWeapon::onEnter();
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_STAVES_SELECT_BUBBLE, [=](cocos2d::EventCustom* event) {
+            BubbleVector bubbles = *static_cast<BubbleVector*>(event->getUserData());
+            for (auto var : bubbles)
+            {
+                dynamic_cast<ColorBubble*>(var)->bubbleFlash();
+            }
+        });
+    }
+
+    void StavesWeapon::onExit()
+    {
+        BaseWeapon::onExit();
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_STAVES_SELECT_BUBBLE);
+    }
+
     void bubble_second::StavesWeapon::attackBubble()
     {
         BaseWeapon::attackBubble();
@@ -37,5 +56,6 @@ namespace bubble_second {
     void StavesWeapon::selectBubble(const cocos2d::Vec2 & point)
     {
         BaseWeapon::selectBubble(point);
+        GamePlayController::getInstance()->disposeSelectSameBubbles();
     }
 }

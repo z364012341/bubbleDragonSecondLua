@@ -513,6 +513,12 @@ namespace bubble_second {
         bubble_map_->findBubblesInVisibleSize();
     }
 
+    void bubble_second::GamePlayController::disposeSelectSameBubbles()
+    {
+        assert(select_bubble_);
+        bubble_map_->disposeStavesSelectBubble(select_bubble_);
+    }
+
     void GamePlayController::disposeUseWoodenHammer()
     {
         bubble_map_->disposeUseWoodenHammer(select_bubble_);

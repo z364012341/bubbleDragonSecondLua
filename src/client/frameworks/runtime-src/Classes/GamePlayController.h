@@ -75,6 +75,8 @@ namespace bubble_second {
         void adjustGameScenePosition();
         //检测屏幕内的泡泡
         void findBubblesInVisibleSize();
+        //处理法杖选中的同色小球
+        void disposeSelectSameBubbles();
         //处理使用单手锤道具
         void disposeUseWoodenHammer();
         //设置武器选择的小球

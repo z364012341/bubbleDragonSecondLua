@@ -450,6 +450,7 @@ const std::string EVENT_UNLOCK_STAGE_MENU = "event_unlock_stage_menu"; //½âËøÍê¹
 const std::string EVENT_CLOCK_RANG = "event_clock_rang"; //¶¨Ê±ÄÖÖÓÏì
 const std::string EVENT_CLOCK_CLEAR = "event_clock_clear"; //¶¨Ê±ÄÖÖÓclear
 const std::string EVENT_BUBBLE_CONTACT_BLACKHOLE = "event_bubble_contact_blackhole"; //Ğ¡Çò×²µ½ºÚ¶´
+const std::string EVENT_STAVES_SELECT_BUBBLE = "event_staves_select_bubble"; //·¨ÕÈÑ¡ÔñĞ¡Çò
 //Ñ¡ÔñÌØĞ§µÄkey
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //´ó·ù¶ÈÌØĞ§
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //Ğ¡·ù¶ÈÌØĞ§

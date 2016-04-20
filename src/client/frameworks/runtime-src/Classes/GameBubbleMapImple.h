@@ -61,6 +61,8 @@ namespace bubble_second {
         float getBubblesMinPosition();
         //获取屏幕内的小球
         BubbleVector getBubblesInVisibleSize();
+        //获取屏幕内的同色小球
+        BubbleVector getSameBubblesInVisibleSize(BubbleType color);
         //添加泡泡的组件
         void addBubbleComponentByBubble(BaseBubble* bubble);
         //增加挂点
