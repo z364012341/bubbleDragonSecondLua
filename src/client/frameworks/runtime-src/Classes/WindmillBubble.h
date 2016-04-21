@@ -37,7 +37,7 @@ namespace bubble_second {
         bool needPlayContactAnimation(const cocos2d::Vec2& bubble_index, const BubbleIndexVector& around_index);
         //cocos2d::Node* getFlyingTexture();
         //cocos2d::Action* getFlyingAction();
-        //cocos2d::CardinalSplineBy* getArchimedeanSpiralAction();
+        cocos2d::CardinalSplineBy* getArchimedeanSpiralAction();
     private:
         //cocos2d::Sprite* sp_ = nullptr;
         cocostudio::Armature* armature_ = nullptr;

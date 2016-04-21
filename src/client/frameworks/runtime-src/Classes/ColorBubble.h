@@ -32,6 +32,8 @@ namespace bubble_second {
                 return NULL;
             }
         }
+        void onEnter() override;
+        void onExit() override;
     public:
         //播放撞击动画
         //void runBubbleEffect(const std::string& name, const cocos2d::Vec2& point);
@@ -64,6 +66,7 @@ namespace bubble_second {
         void contactBarrelBottom();
         //发出闪光
         void bubbleFlash();
+        void removeBubbleFlash();
     protected:
         ColorBubble();
         bool initWithTypeAndCloud(int type, int cloud = kBubbleNoCloud);
@@ -83,6 +86,8 @@ namespace bubble_second {
     private:
         DarkCloudBubble* cloud_bubble_;
 		cocos2d::Vec2 shoot_impulse_;
+        cocos2d::EventListenerCustom* listener_ = nullptr;
+        cocos2d::Sprite* bubble_flash_ = nullptr;
     };
 }
 #endif //_COLOR_BUBBLE_H_

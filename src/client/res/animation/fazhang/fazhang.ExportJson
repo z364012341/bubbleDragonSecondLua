@@ -9,10 +9,10 @@
         {
           "name": "Layer1",
           "parent": "",
-          "dI": 3,
+          "dI": 4,
           "x": 39.479927062988281,
           "y": -31.788660049438477,
-          "z": 3,
+          "z": 2,
           "cX": 1.0,
           "cY": 1.0,
           "kX": 0.0,
@@ -100,7 +100,7 @@
           "dI": 0,
           "x": 20.763881683349609,
           "y": 17.091642379760742,
-          "z": 2,
+          "z": 1,
           "cX": 1.0,
           "cY": 1.0,
           "kX": 0.0,
@@ -359,8 +359,8 @@
                   "fi": 0,
                   "twE": 0,
                   "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
+                  "bd_src": 770,
+                  "bd_dst": 1
                 },
                 {
                   "dI": 0,
@@ -374,8 +374,8 @@
                   "fi": 3,
                   "twE": 0,
                   "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
+                  "bd_src": 770,
+                  "bd_dst": 1
                 },
                 {
                   "dI": 0,
@@ -389,8 +389,8 @@
                   "fi": 11,
                   "twE": 0,
                   "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
+                  "bd_src": 770,
+                  "bd_dst": 1
                 },
                 {
                   "dI": 0,
@@ -404,29 +404,8 @@
                   "fi": 19,
                   "twE": 0,
                   "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": 14.0,
-                  "y": 15.0,
-                  "z": 0,
-                  "cX": 1.6,
-                  "cY": 1.6,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 28,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "color": {
-                    "a": 0,
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                  },
-                  "bd_src": 1,
-                  "bd_dst": 771
+                  "bd_src": 770,
+                  "bd_dst": 1
                 },
                 {
                   "dI": 0,
@@ -439,15 +418,15 @@
                   "kY": 0.0,
                   "fi": 35,
                   "twE": 0,
-                  "tweenFrame": true,
+                  "tweenFrame": false,
                   "color": {
                     "a": 0,
                     "r": 255,
                     "g": 255,
                     "b": 255
                   },
-                  "bd_src": 1,
-                  "bd_dst": 771
+                  "bd_src": 770,
+                  "bd_dst": 1
                 }
               ]
             }

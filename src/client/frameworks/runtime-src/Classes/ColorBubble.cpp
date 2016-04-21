@@ -205,6 +205,21 @@ namespace bubble_second {
         bubble->runAction(cocos2d::Sequence::createWithTwoActions(move, callfunc));
     }
 
+    void ColorBubble::onEnter()
+    {
+        BaseBubble::onEnter();
+        listener_ = cocos2d::EventListenerCustom::create(EVENT_BUBBLE_NO_FLASH, [=](cocos2d::EventCustom*) {
+            this->removeBubbleFlash();
+        });
+        cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 1);
+    }
+
+    void ColorBubble::onExit()
+    {
+        BaseBubble::onExit();
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
+    }
+
     void ColorBubble::addBubblePrepareBody()
     {
         cocos2d::Sequence* seq = cocos2d::Sequence::create(cocos2d::DelayTime::create(ADD_PHYSICASBODY_DELAYTIME), cocos2d::CallFunc::create([&]()
@@ -299,13 +314,24 @@ namespace bubble_second {
 
     void ColorBubble::bubbleFlash()
     {
-        cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(COLOR_BUBBLE_FLASH_PATH);
-        cocos2d::BlendFunc bf = { GL_SRC_ALPHA , GL_SRC_ALPHA };
-        sp->setBlendFunc(bf);
-        this->addChild(sp);
+        bubble_flash_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(COLOR_BUBBLE_FLASH_PATH);
+        bubble_flash_->setPosition(this->getContentSize().width/2, this->getContentSize().height/2);
+        cocos2d::BlendFunc bf = { GL_SRC_ALPHA , GL_ONE };
+        bubble_flash_->setBlendFunc(bf);
+        this->addChild(bubble_flash_);
         cocos2d::FadeOut* fadeout = cocos2d::FadeOut::create(0.5f);
         cocos2d::FadeIn* fadeIn = cocos2d::FadeIn::create(0.5f);
-        sp->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::createWithTwoActions(fadeout, fadeIn)));
+        bubble_flash_->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::createWithTwoActions(fadeout, fadeIn)));
+    }
+
+    void bubble_second::ColorBubble::removeBubbleFlash()
+    {
+        if (bubble_flash_ == nullptr)
+        {
+            return;
+        }
+        bubble_flash_->removeFromParent();
+        bubble_flash_ = nullptr;
     }
 
     cocos2d::Vec2 ColorBubble::getImpulseByTouchlocation(cocos2d::Vec2 touch_location)

@@ -649,6 +649,7 @@ namespace bubble_second {
         listener = cocos2d::EventListenerCustom::create(EVENT_PROPS_SELECT_ALERT_CANCEL, [=](cocos2d::EventCustom*) {
             props_weapon_->removeFromParent();
             this->removePropsSelectAlert(nullptr);
+            dispatcher->dispatchCustomEvent(EVENT_BUBBLE_NO_FLASH);
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_SELECT_BUBBLE, CC_CALLBACK_1(GameScene::selectBubble, this));
@@ -1382,6 +1383,7 @@ namespace bubble_second {
 
     void GameScene::selectBubble(cocos2d::EventCustom* event)
     {
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_BUBBLE_NO_FLASH);
         BaseBubble* bubble = static_cast<BaseBubble*>(event->getUserData());
         if (props_weapon_ && props_weapon_->inAttackRange(bubble->getBubbleType()))
         {
@@ -2160,7 +2162,7 @@ namespace bubble_second {
 
     void GameScene::popVictoryAlert()
     {
-        if (this->getChildByName(UI_NAME_GAME_VICTORY_ALERT) != nullptr)
+        if (this->getChildByName(UI_NAME_GAME_VICTORY_ALERT) != nullptr || GameScoreController::getInstance()->getBubbleUseCount() > 0)
         {
             return;
         }

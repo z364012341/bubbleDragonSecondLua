@@ -451,6 +451,7 @@ const std::string EVENT_CLOCK_RANG = "event_clock_rang"; //定时闹钟响
 const std::string EVENT_CLOCK_CLEAR = "event_clock_clear"; //定时闹钟clear
 const std::string EVENT_BUBBLE_CONTACT_BLACKHOLE = "event_bubble_contact_blackhole"; //小球撞到黑洞
 const std::string EVENT_STAVES_SELECT_BUBBLE = "event_staves_select_bubble"; //法杖选择小球
+const std::string EVENT_BUBBLE_NO_FLASH = "event_bubble_no_flash"; //小球不闪光
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效

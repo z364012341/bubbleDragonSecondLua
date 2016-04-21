@@ -4,6 +4,101 @@
 	<dict>
 		<key>frames</key>
 		<dict>
+			<key>guaiwuTX_0003_1.png</key>
+			<dict>
+				<key>width</key>
+				<integer>76</integer>
+				<key>height</key>
+				<integer>78</integer>
+				<key>originalWidth</key>
+				<integer>226</integer>
+				<key>originalHeight</key>
+				<integer>222</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>-3</real>
+			</dict>
+			<key>guaiwuTX_0002_2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>114</integer>
+				<key>height</key>
+				<integer>117</integer>
+				<key>originalWidth</key>
+				<integer>226</integer>
+				<key>originalHeight</key>
+				<integer>222</integer>
+				<key>x</key>
+				<integer>78</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>-5.5</real>
+			</dict>
+			<key>guaiwuTX_0001_3.png</key>
+			<dict>
+				<key>width</key>
+				<integer>159</integer>
+				<key>height</key>
+				<integer>177</integer>
+				<key>originalWidth</key>
+				<integer>226</integer>
+				<key>originalHeight</key>
+				<integer>222</integer>
+				<key>x</key>
+				<integer>194</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>1.5</real>
+				<key>offsetY</key>
+				<real>-7.5</real>
+			</dict>
+			<key>guaiwuTX_0000_4.png</key>
+			<dict>
+				<key>width</key>
+				<integer>197</integer>
+				<key>height</key>
+				<integer>197</integer>
+				<key>originalWidth</key>
+				<integer>226</integer>
+				<key>originalHeight</key>
+				<integer>222</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>179</integer>
+				<key>offsetX</key>
+				<real>2.5</real>
+				<key>offsetY</key>
+				<real>0.5</real>
+			</dict>
+			<key>222222.png</key>
+			<dict>
+				<key>width</key>
+				<integer>220</integer>
+				<key>height</key>
+				<integer>220</integer>
+				<key>originalWidth</key>
+				<integer>226</integer>
+				<key>originalHeight</key>
+				<integer>222</integer>
+				<key>x</key>
+				<integer>199</integer>
+				<key>y</key>
+				<integer>179</integer>
+				<key>offsetX</key>
+				<real>3</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
 			<key>wa_0004_wa-yanqiu.png</key>
 			<dict>
 				<key>width</key>
@@ -17,7 +112,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>80</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -34,9 +129,9 @@
 				<key>originalHeight</key>
 				<integer>81</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>355</integer>
 				<key>y</key>
-				<integer>8</integer>
+				<integer>0</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -53,9 +148,9 @@
 				<key>originalHeight</key>
 				<integer>81</integer>
 				<key>x</key>
-				<integer>92</integer>
-				<key>y</key>
 				<integer>0</integer>
+				<key>y</key>
+				<integer>378</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -72,9 +167,9 @@
 				<key>originalHeight</key>
 				<integer>81</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>355</integer>
 				<key>y</key>
-				<integer>91</integer>
+				<integer>83</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -93,7 +188,7 @@
 				<key>x</key>
 				<integer>92</integer>
 				<key>y</key>
-				<integer>83</integer>
+				<integer>378</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -110,9 +205,9 @@
 				<key>originalHeight</key>
 				<integer>80</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>184</integer>
 				<key>y</key>
-				<integer>174</integer>
+				<integer>401</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -129,9 +224,9 @@
 				<key>originalHeight</key>
 				<integer>81</integer>
 				<key>x</key>
-				<integer>184</integer>
+				<integer>277</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>401</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -148,9 +243,9 @@
 				<key>originalHeight</key>
 				<integer>81</integer>
 				<key>x</key>
-				<integer>184</integer>
+				<integer>369</integer>
 				<key>y</key>
-				<integer>83</integer>
+				<integer>401</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -167,7 +262,7 @@
 				<key>originalHeight</key>
 				<integer>81</integer>
 				<key>x</key>
-				<integer>276</integer>
+				<integer>447</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
@@ -186,9 +281,9 @@
 				<key>originalHeight</key>
 				<integer>21</integer>
 				<key>x</key>
-				<integer>93</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>166</integer>
+				<integer>88</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -205,9 +300,9 @@
 				<key>originalHeight</key>
 				<integer>21</integer>
 				<key>x</key>
-				<integer>93</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>189</integer>
+				<integer>111</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -223,14 +318,14 @@
 			<key>realTextureFileName</key>
 			<string>wa0.png</string>
 			<key>size</key>
-			<string>{1024,1024}</string>
+			<string>{1024,2048}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
 			<integer>1024</integer>
 			<key>height</key>
-			<integer>1024</integer>
+			<integer>2048</integer>
 		</dict>
 	</dict>
 </plist>
