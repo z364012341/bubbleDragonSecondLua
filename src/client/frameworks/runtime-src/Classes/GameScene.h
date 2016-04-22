@@ -315,6 +315,8 @@ namespace bubble_second {
         bool isFallStage();
         //添加消除得分label
         void addEliminateScoreLabel(cocos2d::EventCustom* event);
+        //
+        //void mutipleSealBubbleFly(cocos2d::EventCustom* event);
     private:
         //防止刚体穿透
         //void updateStart(float delta);

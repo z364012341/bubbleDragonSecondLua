@@ -30,6 +30,8 @@ const std::string BLACK_HOLE_BUBBLE_EFFECT_PATH = "heidongpaopao/heidongpaopao.E
 const std::string BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME = "heidongTX/heidongTX.ExportJson";
 const std::string WOODEN_HAMMER_WEAPON_ARMATURE_NAME = "chuizi/chuizi.ExportJson";
 const std::string STAVES_WEAPON_ARMATURE_NAME = "fazhang/fazhang.ExportJson";
+const std::string ADD_TEN_BUBBLE_NUMBLE_ARMATURE_NAME = "jiabudaoju/jiabudaoju.ExportJson";
+const std::string AIMING_LINE_COMMODITY_ARMATURE_NAME = "miaozhunxian/miaozhunxian.ExportJson";
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()
@@ -82,6 +84,8 @@ namespace bubble_second {
         armature_path_.push_back(BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME);
         armature_path_.push_back(WOODEN_HAMMER_WEAPON_ARMATURE_NAME);
         armature_path_.push_back(STAVES_WEAPON_ARMATURE_NAME);
+        armature_path_.push_back(ADD_TEN_BUBBLE_NUMBLE_ARMATURE_NAME);
+        armature_path_.push_back(AIMING_LINE_COMMODITY_ARMATURE_NAME);
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()

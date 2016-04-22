@@ -35,6 +35,10 @@ namespace bubble_second {
         float getFirstDeviceAngle() const;
         //碰到顶部反弹后让剩下的离远点
         void deviceGoAway();
+        //停止点运动
+        void stopDevicePoint();
+        //表演瞄准线
+        void  performSightingDevice();
     private:
         BubbleSightingDevice();
         bool init();

@@ -3,6 +3,11 @@
 #include "SpriteTextureController.h"
 #include "BubbleSightingDevice.h"
 namespace bubble_second {
+    void BubbleSightingPoint::pointStop()
+    {
+        this->getPhysicsBody()->removeFromWorld();
+        this->stopAllActions();
+    }
     BubbleSightingPoint::BubbleSightingPoint()
     {
     }
@@ -28,16 +33,22 @@ namespace bubble_second {
         cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createBox(cocos2d::Size(SIGHTING_POINT_BODY_RADIUS, SIGHTING_POINT_BODY_RADIUS),
             cocos2d::PhysicsMaterial(PHYSICS_SIGHTING_POINT_BODY_DENSITY, PHYSICS_SIGHTING_POINT_BODY_RESTITUTION, PHYSICS_SIGHTING_POINT_BODY_FRICTION));
         body->setDynamic(true);
-        body->setCategoryBitmask(BITMASK_SIGHTING_POINT_INITIAL_CATEGORY);
+        //body->setCategoryBitmask(BITMASK_SIGHTING_POINT_INITIAL_CATEGORY);
+        body->setCategoryBitmask(BITMASK_SIGHTING_POINT_CATEGORY);
         body->setCollisionBitmask(0);
-        body->setContactTestBitmask(BITMASK_SIGHTING_POINT_INITIAL_CONTACTTEST);
+        //body->setContactTestBitmask(BITMASK_SIGHTING_POINT_INITIAL_CONTACTTEST);
+        body->setContactTestBitmask(BITMASK_SIGHTING_POINT_CONTACTTEST);
         body->setGravityEnable(false);
         body->setGroup(BUBBLE_BODY_GROUP);
         this->setPhysicsBody(body);
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.0f), cocos2d::CallFunc::create([=]() {
-            body->setCategoryBitmask(BITMASK_SIGHTING_POINT_CATEGORY);
-            body->setContactTestBitmask(BITMASK_SIGHTING_POINT_CONTACTTEST);
-        })));
+        //this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.0f), cocos2d::CallFunc::create([=]() {
+        //    body->setCategoryBitmask(BITMASK_SIGHTING_POINT_CATEGORY);
+        //    body->setContactTestBitmask(BITMASK_SIGHTING_POINT_CONTACTTEST);
+        //})));
+        //this->runAction(cocos2d::CallFunc::create([=]() {
+        //    body->setCategoryBitmask(BITMASK_SIGHTING_POINT_CATEGORY);
+        //    body->setContactTestBitmask(BITMASK_SIGHTING_POINT_CONTACTTEST);
+        //}));
     }
 
     void BubbleSightingPoint::setPointEnabled(bool flag)

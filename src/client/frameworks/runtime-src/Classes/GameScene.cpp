@@ -35,7 +35,8 @@
 #include "BarrelScoreLabelNode.h"
 #include "PopScoreLabelComponent.h"
 #include "GameStandbyTimer.h"
-//#include "AirBubbleManager.h"
+#include "StageTypeLogo.h"
+#include "AddBubbleNumbleCommodity.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -318,9 +319,11 @@ namespace bubble_second {
             top_right_ui->setPosition(cocos2d::Vec2(visible_size.width*GAME_RIGHT_LABEL_PERCENT_X, pos_y));
             this->addChild(top_right_ui, UI_ZORDER_MENU_INFO);
             //关卡类型图标
-            SpriteTextureController::getInstance()->setStageTypeSprite(
-                dynamic_cast<cocos2d::Sprite*>(top_right_ui->getChildByName(GAME_STAGE_TYPE_SPRITE_NAME)), 
-                this->getStageType());
+            //SpriteTextureController::getInstance()->setStageTypeSprite(
+            //    dynamic_cast<cocos2d::Sprite*>(top_right_ui->getChildByName(GAME_STAGE_TYPE_SPRITE_NAME)), 
+            //    this->getStageType());
+            //StageTypeLogo* logo = StageTypeLogo::create(this->getStageType());
+            top_right_ui->getChildByName(GAME_STAGE_TYPE_SPRITE_NAME)->addChild(StageTypeLogo::create(this->getStageType()));
             //菜单按钮
 			pause_menu_ = dynamic_cast<cocos2d::ui::Button*>(top_right_ui->getChildByName(UI_NAME_GAME_PLAYING_MENU));
 			ButtonEffectController::setButtonZoomScale(pause_menu_);
@@ -788,6 +791,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_ADD_ELIMINATE_SCORE_LABEL);
         dispatcher->removeCustomEventListeners(EVENT_CAN_USED_PROPS);
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_CONTACT_BLACKHOLE);
+        //dispatcher->removeCustomEventListeners(EVENT_MUTIPLE_SEAL_BUBBLE_FLY);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1134,6 +1138,20 @@ namespace bubble_second {
         pop_score_label->popOnceLabelWithScore(data_map.at(EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_SCORE_KEY).asInt());
     }
 
+    //void GameScene::mutipleSealBubbleFly(cocos2d::EventCustom * event)
+    //{
+    //    cocostudio::Armature* armature = static_cast<cocostudio::Armature*>(event->getUserData());
+    //    this->addChild(armature, UI_ZORDER_MENU_INFO);
+    //    cocos2d::ccBezierConfig config;
+    //    config.endPosition = this->getCompletedTaskLabel();
+    //    config.controlPoint_1 = this->getPosition();
+    //    config.controlPoint_2 = cocos2d::Vec2(0.0f, 0.0f);
+    //    cocos2d::BezierTo* bezier = cocos2d::BezierTo::create(SCORE_WIDGET_BEZIER_FLYING_DURATION, config);
+    //    this->runAction(cocos2d::Sequence::createWithTwoActions(bezier, cocos2d::CallFunc::create([=]() {
+    //        this->addPhysicsBody();
+    //    })));
+    //}
+
     void GameScene::clingBubble(cocos2d::EventCustom* event)
     {
         BubbleVector* bubble_vector = static_cast<BubbleVector*>(event->getUserData());
@@ -1440,17 +1458,22 @@ namespace bubble_second {
 
     void GameScene::usedAddBubbleNumbleProps()
     {
-        GameScoreController::getInstance()->addBubbleUseCount(EnterPropsViewManager::getInstance()->getAddBubbleNumblePropsNumble());
-        cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_COMMODITY_TEN_BUBBLE_PATH);
-        sp->setPosition(this->getBubbleUseCountLabel()->getPosition());
-        csb_node_->addChild(sp);
-        cocos2d::ScaleBy* scale = cocos2d::ScaleBy::create(ENTER_PROPS_ACTION_DURATION, 2.0f);
-        cocos2d::FadeOut* fade = cocos2d::FadeOut::create(ENTER_PROPS_ACTION_DURATION);
-        cocos2d::Spawn* spawn = cocos2d::Spawn::createWithTwoActions(scale, fade);
-        cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(spawn, cocos2d::CallFunc::create([=]() {
-            sp->removeFromParent();
-        }));
-        sp->runAction(seq);
+        //GameScoreController::getInstance()->addBubbleUseCount(EnterPropsViewManager::getInstance()->getAddBubbleNumblePropsNumble());
+        //cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_COMMODITY_TEN_BUBBLE_PATH);
+        //sp->setPosition(this->getBubbleUseCountLabel()->getPosition());
+        //csb_node_->addChild(sp, 5);
+        //cocos2d::ScaleBy* scale = cocos2d::ScaleBy::create(ENTER_PROPS_ACTION_DURATION, 2.0f);
+        //cocos2d::FadeOut* fade = cocos2d::FadeOut::create(ENTER_PROPS_ACTION_DURATION);
+        //cocos2d::Spawn* spawn = cocos2d::Spawn::createWithTwoActions(scale, fade);
+        //cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(spawn, cocos2d::CallFunc::create([=]() {
+        //    sp->removeFromParent();
+        //}));
+        //sp->runAction(seq);
+
+        cocos2d::Node* node = AddBubbleNumbleCommodity::createCommodityArmature();
+        auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+        node->setPosition(visibleSize.width/2, visibleSize.height/2);
+        this->addChild(node);
     }
 
     bool GameScene::isFirstHandle()

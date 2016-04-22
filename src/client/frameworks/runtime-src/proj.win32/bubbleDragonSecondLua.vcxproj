@@ -287,6 +287,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\StageNumble.h" />
     <ClInclude Include="..\Classes\StageNumbleBoardController.h" />
     <ClInclude Include="..\Classes\StageSelectionMenu.h" />
+    <ClInclude Include="..\Classes\StageTypeLogo.h" />
     <ClInclude Include="..\Classes\StartNumbleModule.h" />
     <ClInclude Include="..\Classes\StavesProperty.h" />
     <ClInclude Include="..\Classes\StavesWeapon.h" />
@@ -399,6 +400,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\StageNumble.cpp" />
     <ClCompile Include="..\Classes\StageNumbleBoardController.cpp" />
     <ClCompile Include="..\Classes\StageSelectionMenu.cpp" />
+    <ClCompile Include="..\Classes\StageTypeLogo.cpp" />
     <ClCompile Include="..\Classes\StartNumbleModule.cpp" />
     <ClCompile Include="..\Classes\StavesProperty.cpp" />
     <ClCompile Include="..\Classes\StavesWeapon.cpp" />

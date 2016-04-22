@@ -538,7 +538,7 @@ namespace bubble_second {
     void GamePlayController::disposeSightingDevice(const cocos2d::Vec2& touch_point)
     {
         static int numble = 0;
-        if (numble >= 5)
+        if (numble >= 1)
         {//减少触发次数以提高性能
             ++numble;
             return;

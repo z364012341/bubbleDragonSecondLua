@@ -2,6 +2,7 @@
 #include "SpriteTextureController.h"
 #include "BubbleFactory.h"
 #include "GameNoopAnimationComponent.h"
+//#include "GameScoreController.h"
 const std::string MUTIPLE_SEAL_3_BUBBLE_ARMATURE_NAME = "wa";
 const std::string MUTIPLE_SEAL_7_BUBBLE_ARMATURE_NAME = "xiongda";
 const std::string MUTIPLE_SEAL_1_BUBBLE_ARMATURE_NAME = "1gebianfu";
@@ -49,17 +50,44 @@ namespace bubble_second {
 
     void MutipleSealBubble::bubbleEliminate(int combo)
     {
-		this->setLocalZOrder(1);
-		armature_->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-		armature_->setLocalZOrder(1);
-		armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-			if (movementType == cocostudio::COMPLETE)
-			{
-				this->addCompletedTaskNumble();
-				//armature->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::FadeOut::create(1.0f), cocos2d::CallFunc::create(CC_CALLBACK_0(MutipleSealBubble::removeFromParent, this))));
-				this->removeFromParent();
-			}
-		});
+		//this->setLocalZOrder(1);
+		//armature_->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+		//armature_->setLocalZOrder(1);
+		//armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+		//	if (movementType == cocostudio::COMPLETE)
+		//	{
+		//		this->addCompletedTaskNumble();
+		//		//armature->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::FadeOut::create(1.0f), cocos2d::CallFunc::create(CC_CALLBACK_0(MutipleSealBubble::removeFromParent, this))));
+		//		this->removeFromParent();
+		//	}
+		//});
+        //cocostudio::Armature* armature = cocostudio::Armature::create(armature_->getName());
+        //armature->setPosition(this->getPosition());
+        //armature->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        //armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+        //    if (movementType == cocostudio::COMPLETE)
+        //    {
+        //        GameScoreController::getInstance()->addCompletedTaskNumble();
+        //        //armature->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::FadeOut::create(1.0f), cocos2d::CallFunc::create(CC_CALLBACK_0(MutipleSealBubble::removeFromParent, this))));
+        //        armature->removeFromParent();
+        //    }
+        //});
+        this->setVisible(false);
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_MUTIPLE_SEAL_BUBBLE_FLY, this);
+        //this->removeFromParent();
+    }
+
+    cocostudio::Armature * MutipleSealBubble::getBubbleEliminateArmature()
+    {
+        cocostudio::Armature* armature = cocostudio::Armature::create(armature_->getName());
+        armature->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        return armature;
+    }
+
+    void MutipleSealBubble::bubbleEliminateFlyCallfunc()
+    {
+        this->addCompletedTaskNumble();
+        this->removeFromParent();
     }
 
 	void MutipleSealBubble::runBubbleEffect(const std::string& name, const cocos2d::Vec2& point)

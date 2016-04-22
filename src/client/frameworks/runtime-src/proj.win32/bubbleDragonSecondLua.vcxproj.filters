@@ -331,6 +331,7 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StageNumbleBoardController.h" />
+    <ClInclude Include="..\Classes\StageTypeLogo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -639,6 +640,7 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\StageNumbleBoardController.cpp" />
+    <ClCompile Include="..\Classes\StageTypeLogo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

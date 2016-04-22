@@ -27,6 +27,11 @@ namespace bubble_second {
     {
     }
 
+    void GameAlertMask::backgroundFadeOut(float duration, cocos2d::CallFunc * func)
+    {
+        layer_->runAction(cocos2d::Sequence::create(cocos2d::FadeOut::create(duration), func, nullptr));
+    }
+
     bool bubble_second::GameAlertMask::init()
     {
         if (!this->initTransparentMask())
@@ -59,8 +64,8 @@ namespace bubble_second {
     }
     void GameAlertMask::addColorLayer()
     {
-        cocos2d::LayerColor* layer = cocos2d::LayerColor::create(cocos2d::Color4B(0, 0, 0, 180), GAME_ALERT_MASK_WIDTH, GAME_ALERT_MASK_HEIGHT);
-        layer->setPosition(-GAME_ALERT_MASK_WIDTH / 2, -GAME_ALERT_MASK_HEIGHT / 2);
-        this->addChild(layer);
+        layer_ = cocos2d::LayerColor::create(cocos2d::Color4B(0, 0, 0, 180), GAME_ALERT_MASK_WIDTH, GAME_ALERT_MASK_HEIGHT);
+        layer_->setPosition(-GAME_ALERT_MASK_WIDTH / 2, -GAME_ALERT_MASK_HEIGHT / 2);
+        this->addChild(layer_);
     }
 }

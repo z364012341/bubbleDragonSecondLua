@@ -32,6 +32,8 @@ namespace bubble_second {
         void changeSelfColor(BubbleType color);
         //设置是否碰到顶部边界
         //void setContactTopBorder();
+        //停下
+        void pointStop();
     private:
         BubbleSightingPoint();
         bool init();

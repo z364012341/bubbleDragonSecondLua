@@ -26,11 +26,11 @@ local PuzzlePieceShadow = require(PUZZLE_PIECE_SHADOW_PATH);
 function PuzzlePiece:ctor(params)
     printf("PuzzlePiece");
     self:addTouchEvent();
-    self:initPuzzleRenderTexture();
+    self:initPuzzleRenderTexture(params);
     self:addPuzzlePieceShadow(params);
 end
 
-function PuzzlePiece:initPuzzleRenderTexture()
+function PuzzlePiece:initPuzzleRenderTexture(params)
     self.node_ = cc.Node:create();
     self:addChild(self.node_);
 

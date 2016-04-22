@@ -108,6 +108,25 @@ namespace bubble_second {
         }
     }
 
+    void BubbleSightingDevice::stopDevicePoint()
+    {
+        for (auto var : sighting_points_)
+        {
+            var->pointStop();
+        }
+    }
+
+    void BubbleSightingDevice::performSightingDevice()
+    {
+        this->turnOnDeviceOnce();
+        this->stopDevicePoint();
+        this->schedule([=](float) {
+            float angle = this->getRotation();
+            //SHOOT_BUBBLE_ENABLED_DEGREE;
+            this->rotateSightingDevice(angle + 1, 2000.0f);
+        }, "unused_key");
+    }
+
     cocos2d::Vec2 BubbleSightingDevice::convertLocalToCsbSpace(const cocos2d::Vec2& local_point)
     {
         cocos2d::Vec2 point = local_point;
