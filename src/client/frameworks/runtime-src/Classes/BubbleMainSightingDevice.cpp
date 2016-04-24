@@ -1,5 +1,6 @@
 #include "BubbleMainSightingDevice.h"
 #include "BubbleReflectionPointComponent.h"
+#include "EnterPropsViewManager.h"
 namespace bubble_second {
     BubbleMainSightingDevice::BubbleMainSightingDevice()
     {
@@ -11,14 +12,24 @@ namespace bubble_second {
         {
             return false;
         }
+        this->initRemainDevice();
         return true;
     }
 
     void BubbleMainSightingDevice::initRemainDevice()
     {
-        for (int i = 1; i < length; i++)
+        this->setTargetID(0);
+        this->setVisible(false);
+        this->sightingPointMove();
+        int device_numble_max = EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME) ?
+            BUBBLE_SIGHTING_DEVICE_TOTAL : BUBBLE_SIGHTING_DEVICE_UNUSED_PROPS_TOTAL;
+        for (int i = 1; i <= device_numble_max; i++)
         {
-
+            BubbleSightingDevice* device = BubbleSightingDevice::create();
+            device->setTargetID(i);
+            remaind_device_.insert(i, device);
+            device->setVisible(false);
+            device->sightingPointMove();
         }
     }
 

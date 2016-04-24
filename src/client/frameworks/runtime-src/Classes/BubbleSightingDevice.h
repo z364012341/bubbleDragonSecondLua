@@ -39,12 +39,15 @@ namespace bubble_second {
         void stopDevicePoint();
         //表演瞄准线
         void  performSightingDevice();
-    protected:
-        BubbleSightingDevice();
-        virtual bool init();
+        //发射点出去
+        void sightingPointMove();
         //targetID  {set get}
         void setTargetID(int numble);
         int getTargetID() const;
+    protected:
+        BubbleSightingDevice();
+        virtual bool init();
+
     private:
         //获取下一级面准线的位置
         cocos2d::Vec2 getReflectionPoint();
@@ -69,8 +72,7 @@ namespace bubble_second {
         //设置是否要隐藏点点
         void setHidePointEnable(bool flag);
         bool isHidePoint();
-        //发射点出去
-        void sightingPointMove();
+
         //hypotenuse_offset_ set get
         void setHypotenuseOffset(float offset);
         float getHypotenuseOffset();
