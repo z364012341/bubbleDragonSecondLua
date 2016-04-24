@@ -13,6 +13,7 @@
 #include "BaseBubble.h"
 namespace bubble_second {
     class DarkCloudBubble;
+    class BubbleReflectionPointComponent;
     class ColorBubble : public BaseBubble
     {
     public:
@@ -86,8 +87,11 @@ namespace bubble_second {
     private:
         DarkCloudBubble* cloud_bubble_;
 		cocos2d::Vec2 shoot_impulse_;
+        //cocos2d::Vec2 initial_position_;
         cocos2d::EventListenerCustom* listener_ = nullptr;
         cocos2d::Sprite* bubble_flash_ = nullptr;
+        BubbleReflectionPointComponent* reflection_point_component_ = nullptr;
+        //std::vector<cocos2d::Vec2> points_;
     };
 }
 #endif //_COLOR_BUBBLE_H_

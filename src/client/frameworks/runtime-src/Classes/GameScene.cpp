@@ -145,20 +145,20 @@ namespace bubble_second {
     {
     }
 
-	//void GameScene::updateStart(float delta)
-	//{
-	//	this->getScenePhysicsWorld()->setAutoStep(false);
-	//	scheduleUpdate();
-	//}
+	void GameScene::updateStart(float delta)
+	{
+		this->getScenePhysicsWorld()->setAutoStep(false);
+		scheduleUpdate();
+	}
 
-	//void GameScene::update(float delta)
-	//{
-	//	// use fixed time and calculate 3 times per frame makes physics simulate more precisely.
-	//	for (int i = 0; i < 3; ++i)
-	//	{
-	//		this->getScenePhysicsWorld()->step(1 / 180.0f);
-	//	}
-	//}
+	void GameScene::update(float delta)
+	{
+		// use fixed time and calculate 3 times per frame makes physics simulate more precisely.
+		for (int i = 0; i < 3; ++i)
+		{
+			this->getScenePhysicsWorld()->step(1 / 180.0f);
+		}
+	}
     void GameScene::onEnter()
     {
         Layer::onEnter();
@@ -2251,6 +2251,7 @@ namespace bubble_second {
     void GameScene::gamePause()
     {
         bubble_map_node_->pause();
+        csb_node_->pause();
         this->getScenePhysicsWorld()->setSpeed(0);
         this->pause();
     }
@@ -2258,6 +2259,7 @@ namespace bubble_second {
     void GameScene::gameResume()
     {
         bubble_map_node_->resume();
+        csb_node_->resume();
         this->getScenePhysicsWorld()->setSpeed(1);
         this->resume();
     }

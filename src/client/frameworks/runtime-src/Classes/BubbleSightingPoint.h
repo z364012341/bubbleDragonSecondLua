@@ -12,7 +12,7 @@
 #include "cocos2d.h"
 #include "BubbleSecondConstant.h"
 namespace bubble_second {
-    class BubbleSightingPoint : public cocos2d::Sprite
+    class BubbleSightingPoint : public cocos2d::Node
     {
     public:
         CREATE_FUNC(BubbleSightingPoint);
@@ -41,6 +41,7 @@ namespace bubble_second {
     private:
         //正在碰撞的总数
         int contact_count_ = 0;
+        cocos2d::Sprite* sprite_ = nullptr;
     };
 }
 #endif //_BUBBLE_SIGHTING_POINT_H_

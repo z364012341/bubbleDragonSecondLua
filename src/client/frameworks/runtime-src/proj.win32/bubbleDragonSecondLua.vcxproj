@@ -211,6 +211,8 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\BubbleColorRender.h" />
     <ClInclude Include="..\Classes\BubbleComponent.h" />
     <ClInclude Include="..\Classes\BubbleFactory.h" />
+    <ClInclude Include="..\Classes\BubbleMainSightingDevice.h" />
+    <ClInclude Include="..\Classes\BubbleReflectionPointComponent.h" />
     <ClInclude Include="..\Classes\BubbleSecondConstant.h" />
     <ClInclude Include="..\Classes\BubbleSightingDevice.h" />
     <ClInclude Include="..\Classes\BubbleSightingPoint.h" />
@@ -327,6 +329,8 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\BubbleColorRender.cpp" />
     <ClCompile Include="..\Classes\BubbleComponent.cpp" />
     <ClCompile Include="..\Classes\BubbleFactory.cpp" />
+    <ClCompile Include="..\Classes\BubbleMainSightingDevice.cpp" />
+    <ClCompile Include="..\Classes\BubbleReflectionPointComponent.cpp" />
     <ClCompile Include="..\Classes\BubbleSightingDevice.cpp" />
     <ClCompile Include="..\Classes\BubbleSightingPoint.cpp" />
     <ClCompile Include="..\Classes\ButtonEffectController.cpp" />

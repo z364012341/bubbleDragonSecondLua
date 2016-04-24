@@ -90,7 +90,8 @@ namespace bubble_second {
         cocos2d::Vector<cocos2d::FiniteTimeAction*> action_vector;
         action_vector.pushBack(spawn);
         action_vector.pushBack(cocos2d::CallFunc::create([=]() {
-            bubble->removeFromParent();
+            //bubble->removeFromParent();
+            bubble->setVisible(false);
         }));
         cocos2d::Sequence* seq = cocos2d::Sequence::create(action_vector);
         bubble->runAction(seq);
@@ -111,15 +112,17 @@ namespace bubble_second {
             if (movementType == cocostudio::COMPLETE)
             {
                 armature->removeFromParent();
+                //this->removeFromParent();
+                BaseBubble::bubbleEliminate();
             }
         });
         armature->setPosition(this->getPosition());
         this->getParent()->addChild(armature);
-        for (auto var : swallow_vector_)
-        {
-            var->removeFromParent();
-        }
-        this->removeFromParent();
+        //for (auto var : swallow_vector_)
+        //{
+        //    var->removeFromParent();
+        //}
+
     }
 
     void BlackHoleBubble::downFromAir()

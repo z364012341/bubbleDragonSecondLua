@@ -252,6 +252,16 @@ namespace bubble_second {
 		dynamic_cast<ColorBubble*>(prepare_bubble_)->shoot();
     }
 
+    float GamePlayController::getPlayAreaMaxY()
+    {
+        return game_scene_delegate_->getMapMaxPositionY();
+    }
+
+    cocos2d::Vec2 GamePlayController::getShootingInitialPosition()
+    {
+        return game_scene_delegate_->getGunsightPosition();
+    }
+
     void GamePlayController::loadStageMap(int numble)
     {
         prepare_bubble_ = nullptr;
@@ -537,13 +547,13 @@ namespace bubble_second {
 
     void GamePlayController::disposeSightingDevice(const cocos2d::Vec2& touch_point)
     {
-        static int numble = 0;
-        if (numble >= 1)
-        {//减少触发次数以提高性能
-            ++numble;
-            return;
-        }
-        numble = 0;
+        //static int numble = 0;
+        //if (numble >= 1)
+        //{//减少触发次数以提高性能
+        //    ++numble;
+        //    return;
+        //}
+        //numble = 0;
 		if (!prepare_bubble_)
 		{
 			return;

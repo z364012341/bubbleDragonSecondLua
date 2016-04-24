@@ -36,8 +36,8 @@ namespace bubble_second {
         GameScene();
         ~GameScene();
     public:
-		//void updateStart(float delta);
-		//virtual void update(float delta) override;
+		void updateStart(float delta);
+		void update(float delta) override;
         void onEnter() override;
         void onExit() override;
     public:
@@ -58,6 +58,10 @@ namespace bubble_second {
         void gameResume();
 		//获取准备小球的发射位置
 		cocos2d::Vec2 getPrepareBubbleOrigin();
+        //获取map最高点
+        float getMapMaxPositionY();
+        //获取发射台的位置
+        cocos2d::Vec2 getGunsightPosition();
     private:
         //初始化地图数据,参数是关卡
         void initBubbleMap(int stage_numble);
@@ -106,8 +110,6 @@ namespace bubble_second {
         float getBubbleMinPositionY();
         //计算地图面板调整的位置
         float getAdjustMapDistance(float map_min_pos);
-        //获取发射台的位置
-        cocos2d::Vec2 getGunsightPosition();
         //获取小球地图向下调整的距离
         float getAdjustMapDownwardDistance(float distance);
         //获取小球地图向上调整的距离
@@ -222,8 +224,6 @@ namespace bubble_second {
         void popDefeatAlert();
         void popVictoryAlert();
         void popPauseAlert();
-        //获取map最高点
-        float getMapMaxPositionY();
         //使用+10数量道具
         void usedAddBubbleNumbleProps();
         //是否是第一次

@@ -332,6 +332,8 @@
     </ClInclude>
     <ClInclude Include="..\Classes\StageNumbleBoardController.h" />
     <ClInclude Include="..\Classes\StageTypeLogo.h" />
+    <ClInclude Include="..\Classes\BubbleReflectionPointComponent.h" />
+    <ClInclude Include="..\Classes\BubbleMainSightingDevice.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -641,6 +643,8 @@
     </ClCompile>
     <ClCompile Include="..\Classes\StageNumbleBoardController.cpp" />
     <ClCompile Include="..\Classes\StageTypeLogo.cpp" />
+    <ClCompile Include="..\Classes\BubbleReflectionPointComponent.cpp" />
+    <ClCompile Include="..\Classes\BubbleMainSightingDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

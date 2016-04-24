@@ -6,12 +6,14 @@
 #include "cocostudio\CocoStudio.h"
 #include "GameScoreController.h"
 #include "SpriteTextureController.h"
+#include "BubbleReflectionPointComponent.h"
 //#include "StageDataManager.h"
 //#include "GameScene.h"
 //#include "AirBubbleManager.h"
 const int STANBY_ACTION_TAG = 121;
 const float STANBY_ACTION_TIME = 0.5f;
 const float STANBY_ACTION_RANGE = 3.0f;
+const float BUBBLE_MOVE_SPEED = 150.0f;
 const std::string COLOR_BUBBLE_FLASH_PATH = "bai.png";
 namespace bubble_second {
     ColorBubble::~ColorBubble()
@@ -288,21 +290,29 @@ namespace bubble_second {
         {
             GameScoreController::getInstance()->cutBubbleUseCount();
         }
-        //auto a = SmartScaleController::getInstance()->getPlayAreaZoom();
-        //auto i = this->getImpulseByTouchlocation(touch_location);
-		this->getPhysicsBody()->applyImpulse(shoot_impulse_);
-        //auto controller = GamePlayController::getInstance();
-        //controller->setBubbleShootEnabled(false);
+        this->stopStanbyAnimation();
+		//this->getPhysicsBody()->applyImpulse(shoot_impulse_);
+        cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
+        cocos2d::Vec2 pre_point = this->getPosition();
+        for (auto var : reflection_point_component_->getReflectionPoints())
+        {
+            actions.pushBack(cocos2d::MoveTo::create(pre_point.getDistance(var)/ BUBBLE_MOVE_SPEED, var));
+            pre_point = var;
+        }
+        this->runAction(cocos2d::Sequence::create(actions));
+
+
         GameScoreController::getInstance()->addPrepareBubbleAirNumble();
 		GamePlayController::getInstance()->setPrepareBubble(nullptr);
         this->dispatchEventAfterShooted();
         this->setShootBubble(true);
-        //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHOOT_PREPARE_BUBBLE);
     }
 
 	void ColorBubble::setShootImpulse(const cocos2d::Vec2& touch_location)
 	{
 		shoot_impulse_ = this->getImpulseByTouchlocation(touch_location)*SmartScaleController::getInstance()->getPlayAreaZoom();
+        this->addChild(reflection_point_component_ = BubbleReflectionPointComponent::create());
+        reflection_point_component_->calculateReflectionPoints(this->getPosition(), touch_location);
 	}
 
     void ColorBubble::contactBarrelBottom()
@@ -336,15 +346,16 @@ namespace bubble_second {
 
     cocos2d::Vec2 ColorBubble::getImpulseByTouchlocation(cocos2d::Vec2 touch_location)
     {
-        cocos2d::Vec2 bubble_point = this->getPosition();
-        cocos2d::Vec2 sub_numble = touch_location - bubble_point;
-        double tan_value = sub_numble.y / sub_numble.x;
-        double angle = atan(tan_value);
-        if (sub_numble.x < 0)
-        {
-            angle = angle - PI;
-        }
-        return cocos2d::Vec2(cos(angle) * BUBBLE_IMPULSE, sin(angle) * BUBBLE_IMPULSE)*GamePlayController::getInstance()->getTouchDirection();
+        //cocos2d::Vec2 bubble_point = this->getPosition();
+        //cocos2d::Vec2 sub_numble = touch_location - bubble_point;
+        //double tan_value = sub_numble.y / sub_numble.x;
+        //double angle = atan(tan_value);
+        //if (sub_numble.x < 0)
+        //{
+        //    angle = angle - PI;
+        //}
+        //return cocos2d::Vec2(cos(angle) * BUBBLE_IMPULSE, sin(angle) * BUBBLE_IMPULSE)*GamePlayController::getInstance()->getTouchDirection();
+        return  (touch_location - this->getPosition()).getNormalized() * BUBBLE_IMPULSE*GamePlayController::getInstance()->getTouchDirection();
     }
 
 	void ColorBubble::playStanbyAnimation()
@@ -366,6 +377,7 @@ namespace bubble_second {
 		if (this->getActionByTag(STANBY_ACTION_TAG))
 		{
 			this->stopActionByTag(STANBY_ACTION_TAG);
+            this->setPosition(GamePlayController::getInstance()->getShootingInitialPosition());
 		}
 	}
 }

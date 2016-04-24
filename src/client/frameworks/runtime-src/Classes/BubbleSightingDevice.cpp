@@ -1,6 +1,12 @@
 #include "BubbleSightingDevice.h"
 #include "BubbleSightingPoint.h"
 #include "EnterPropsViewManager.h"
+const float SIGHTING_POINT_BUBBLE_RADIUS = BUBBLE_RADIUS;
+const float SIGHTING_POINT_REFLECTION_WIDTH = /*700.0f;*/GAME_DESIGN_RESOLUTION_WIDTH - SIGHTING_POINT_BUBBLE_RADIUS * 2;
+const float SIGHTING_POINT_WORLD_MAX_X = GAME_DESIGN_RESOLUTION_WIDTH - SIGHTING_POINT_BUBBLE_RADIUS;
+const float SIGHTING_POINT_MOVE_SPEED = 75.0f; //瞄准点移动速度
+const float MAP_BUBBLE_DIAMETER = MAP_BUBBLE_RADIUS * 2;  //直径
+const float BUBBLE_SIGHTING_POINT_TOP_MOVEBY_Y = BUBBLE_RADIUS *4;  //瞄准线碰到顶部只反弹2颗
 namespace bubble_second {
     float BubbleSightingDevice::first_device_angle_ = 0.0f;
     float BubbleSightingDevice::max_top_y_ = 0.0f;
@@ -155,7 +161,7 @@ namespace bubble_second {
         this->setTargetID(device_numble);
         this->setVisible(false);
         this->sightingPointMove();
-        auto b = EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME);
+        //auto b = EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME);
         int device_numble_max = EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME) ?
             BUBBLE_SIGHTING_DEVICE_TOTAL : BUBBLE_SIGHTING_DEVICE_UNUSED_PROPS_TOTAL;
         if (this->getTargetID() < device_numble_max)
@@ -168,24 +174,32 @@ namespace bubble_second {
 
     void BubbleSightingDevice::sightingPointMove()
     {
-        cocos2d::MoveBy* move_go = cocos2d::MoveBy::create(1.0f, cocos2d::Vec2(0.0f, MAP_BUBBLE_DIAMETER));
-        cocos2d::MoveBy* move_back = cocos2d::MoveBy::create(0.0f, cocos2d::Vec2(0.0f, -MAP_BUBBLE_DIAMETER));
-        cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move_go, move_back);
-
+        //cocos2d::MoveTo* move_go = cocos2d::MoveTo::create(5.0f, cocos2d::Vec2(0.0f, MAP_BUBBLE_DIAMETER*sighting_points_.size()));
+        //cocos2d::MoveBy* move_back = cocos2d::MoveBy::create(0.0f, cocos2d::Vec2(0.0f, -MAP_BUBBLE_DIAMETER*sighting_points_.size()));
+        //cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move_go, move_back);
+        float distance = MAP_BUBBLE_DIAMETER*sighting_points_.size();
         float sighting_point_y = 0.0f;
         float y_offs = MAP_BUBBLE_DIAMETER;
         for (auto var : sighting_points_)
         {
             var->stopAllActions();
             var->setPosition(0.0f, sighting_point_y);
-            sighting_point_y += y_offs;
             if (!var->getParent())
             {
                 this->addChild(var);
             }
             var->clearContactCount();
             var->addPhysicsBodyCanntWorld();
-            var->runAction(cocos2d::RepeatForever::create(seq->clone()));
+            cocos2d::MoveBy* move_go = cocos2d::MoveBy::create((distance - sighting_point_y)/ SIGHTING_POINT_MOVE_SPEED, cocos2d::Vec2(0.0f, distance - sighting_point_y));
+
+            cocos2d::CallFunc* callfunc = cocos2d::CallFunc::create([=]() {
+                cocos2d::MoveBy* move_back = cocos2d::MoveBy::create(0.0f, cocos2d::Vec2(0.0f, -distance));
+                cocos2d::MoveBy* move_go2 = cocos2d::MoveBy::create(distance / SIGHTING_POINT_MOVE_SPEED, cocos2d::Vec2(0.0f, distance));
+                var->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::create(move_back, move_go2, nullptr)));
+            });
+            cocos2d::Sequence* seq = cocos2d::Sequence::create(move_go, callfunc, nullptr);
+            var->runAction(seq);
+            sighting_point_y += y_offs;
         }   
     }
 
@@ -252,22 +266,22 @@ namespace bubble_second {
                 min_y = var->getPositionY();
             }
         }
-        return min_y;
+        return min_y - MAP_BUBBLE_RADIUS;
     }
 
-    bool BubbleSightingDevice::isSightingPointsNeedHidden(const cocos2d::Vec2& point, float min_y, float max_y)
+    bool BubbleSightingDevice::isSightingPointsNeedHidden(const cocos2d::Vec2& point/*, float min_y, float max_y*/)
     {
         cocos2d::Vec2 var_point = this->convertLocalToCsbSpace(point);
-        return point.y >= min_y || var_point.x <= MAP_BUBBLE_RADIUS || var_point.x >= max_y || var_point.y >= this->getMaxTopY();
+        return point.y >= this->getSightingPointsMinPositionY() || var_point.x <= SIGHTING_POINT_BUBBLE_RADIUS || var_point.x >= SIGHTING_POINT_WORLD_MAX_X || var_point.y >= this->getMaxTopY();
     }
 
     void BubbleSightingDevice::setSightingPointsVisibled()
     {
-        float min_y = this->getSightingPointsMinPositionY();
-        float max_y = GAME_DESIGN_RESOLUTION_WIDTH - MAP_BUBBLE_RADIUS;
+        //float min_y = this->getSightingPointsMinPositionY();
+        //float max_y = GAME_DESIGN_RESOLUTION_WIDTH - MAP_BUBBLE_RADIUS;
         for (auto var : sighting_points_)
         {
-            bool need_hidden = this->isSightingPointsNeedHidden(var->getPosition(), min_y, max_y);
+            bool need_hidden = this->isSightingPointsNeedHidden(var->getPosition());
             var->setPointEnabled(!need_hidden);
         }
     }

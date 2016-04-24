@@ -100,6 +100,10 @@ namespace bubble_second {
         void setGameSceneDelegate(GameScene* scene_delegate);
 		//发射小球
 		void shootPrepareBubble();
+        //获取顶部区域位置
+        float getPlayAreaMaxY();
+        //获取发射的准确位置
+        cocos2d::Vec2 getShootingInitialPosition();
     private:
         //把准备的小球发射出去
 		void dispatchShootEvent(const cocos2d::Vec2& touch_location);

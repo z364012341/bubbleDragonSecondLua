@@ -18,12 +18,12 @@ namespace bubble_second {
     {
     public:
         CREATE_FUNC(BubbleSightingDevice);
-        ~BubbleSightingDevice();
+        virtual ~BubbleSightingDevice();
         void rotateSightingDevice(const float angle, const float& max_pos_y);
         void contactWorldBorder();
         void contactBubble();
         //打开设备
-        void turnOnDeviceOnce(int device_numble = 0);
+        virtual void turnOnDeviceOnce(int device_numble = 0);
         //改变颜色
         void changePointsColor(BubbleType color);
         //是否碰到顶部边界
@@ -39,9 +39,13 @@ namespace bubble_second {
         void stopDevicePoint();
         //表演瞄准线
         void  performSightingDevice();
-    private:
+    protected:
         BubbleSightingDevice();
-        bool init();
+        virtual bool init();
+        //targetID  {set get}
+        void setTargetID(int numble);
+        int getTargetID() const;
+    private:
         //获取下一级面准线的位置
         cocos2d::Vec2 getReflectionPoint();
         //控制point的显示
@@ -51,10 +55,7 @@ namespace bubble_second {
         //判断是否瞄到
         bool isContactBubble();
         //判断瞄准点是否需要隐藏
-        bool isSightingPointsNeedHidden(const cocos2d::Vec2& point, float min_y, float max_y);
-        //targetID  {set get}
-        void setTargetID(int numble);
-        int getTargetID() const;
+        bool isSightingPointsNeedHidden(const cocos2d::Vec2& point/*, float min_y, float max_y*/);
         //旋转剩余的设备
         void rotateRemainDevice(const float angle, const cocos2d::Vec2& point, const float& max_pos_y);
         void setDeviceRotationAndPosition(float angle, const cocos2d::Vec2& point);

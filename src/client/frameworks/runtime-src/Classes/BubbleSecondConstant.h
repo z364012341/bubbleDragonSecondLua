@@ -136,10 +136,8 @@ const int MAP_EVEN_ROW_MAX = 11;  //地图偶数行最大小球个数
 const int MAP_ODD_ROW_MAX = 10;   //地图奇数行最大小球个数
 //const int MAP_TOP_ROW_INDEX = -1;     //边界小球的索引行
 const float MAP_BUBBLE_RADIUS = 34.0f;     //地图的小球间隔半径, 是贴图的半径, 碰撞刚体半径在下面
-const float MAP_BUBBLE_DIAMETER = MAP_BUBBLE_RADIUS * 2;  //直径
 const float SIGHTING_POINT_RADIUS = 9.0f; //瞄准线点的半径
-const float SIGHTING_POINT_REFLECTION_OFFSET = 3.0f; //瞄准线反射点位置偏移
-const float SIGHTING_POINT_REFLECTION_WIDTH = /*700.0f;*/GAME_DESIGN_RESOLUTION_WIDTH - MAP_BUBBLE_DIAMETER;
+//const float SIGHTING_POINT_REFLECTION_OFFSET = 3.0f; //瞄准线反射点位置偏移
 const float BUBBLE_RADIUS = 22.0f;      //小球刚体半径
 const int CAST_BODY_RADIUS = MAP_BUBBLE_RADIUS * 5;
 const float MIN_MAP_DISTANCE = (MAP_BUBBLE_RADIUS * SQRT3 * DISTANCE_LINE_NUMBER);//发射台与面板间隔的距离
@@ -394,7 +392,6 @@ const int SCORE_WIDGET_BODY_RADIUS = 15;  //得分挂件刚体半径
 const float PHYSICS_SIGHTING_POINT_BODY_DENSITY = 0.0f;  //刚体密度
 const float PHYSICS_SIGHTING_POINT_BODY_RESTITUTION = 1.0f;   //刚体反弹力
 const float PHYSICS_SIGHTING_POINT_BODY_FRICTION = 0.0f;   //刚体摩擦力
-const float SIGHTING_POINT_BODY_RADIUS = BUBBLE_RADIUS+25;  //刚体半径
 //const float SIGHTING_POINT_BODY_RADIUS = MAP_BUBBLE_DIAMETER;  //刚体半径
 //自定义事件的名字
 const std::string EVENT_MAP_LOADED = "map_loaded";       //加载完小球地图
@@ -491,7 +488,6 @@ const cocos2d::Vec2 BUBBLE_SIGHTING_POINT_IMPULSE(0.0f, 100.0f);
 const float BUBBLE_SIGHTING_POINT_DELAYTIME = 0.5f;
 const int BUBBLE_SIGHTING_POINT_NUMBLE = 15;
 const float BUBBLE_SIGHTING_POINT_MOVEBY_Y = 1334.0f;
-const float BUBBLE_SIGHTING_POINT_TOP_MOVEBY_Y = MAP_BUBBLE_DIAMETER;  //瞄准线碰到顶部只反弹2颗
 const float BUBBLE_SIGHTING_POINT_MOVEBY_TIME = 12.0f; 
 const float BUBBLE_SIGHTING_POINT_CONTACT_VISIBLE_OFFSET = 140.0f; //碰到小球之后的可视计算时候位置误差
 const int BUBBLE_SIGHTING_DEVICE_TOTAL = 4; //一共有5条线
