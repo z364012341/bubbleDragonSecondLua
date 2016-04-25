@@ -62,7 +62,7 @@ namespace bubble_second {
 		void playStanbyAnimation();
 		void stopStanbyAnimation();
 		//设置发射冲量
-		void setShootImpulse(const cocos2d::Vec2& touch_location);
+		void setShootPoints(const cocos2d::Vec2& touch_location);
         //碰到桶底部
         void contactBarrelBottom();
         //发出闪光
@@ -86,7 +86,7 @@ namespace bubble_second {
         cocos2d::Vec2 getImpulseByTouchlocation(cocos2d::Vec2 touch_location);
     private:
         DarkCloudBubble* cloud_bubble_;
-		cocos2d::Vec2 shoot_impulse_;
+		//cocos2d::Vec2 shoot_impulse_;
         //cocos2d::Vec2 initial_position_;
         cocos2d::EventListenerCustom* listener_ = nullptr;
         cocos2d::Sprite* bubble_flash_ = nullptr;

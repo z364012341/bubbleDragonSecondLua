@@ -44,6 +44,14 @@ namespace bubble_second {
         //targetID  {set get}
         void setTargetID(int numble);
         int getTargetID() const;
+        //链接下一个设备
+        void setNextSightingDevice(BubbleSightingDevice * device);
+        BubbleSightingDevice * getNextSightingDevice();
+        //设置角度
+        void setDeviceRotation(const std::vector<float>& angles);
+        //设置位置
+        void setDevicePosition(const std::vector<cocos2d::Vec2>& points);
+       // void setVisible(bool )override;
     protected:
         BubbleSightingDevice();
         virtual bool init();
@@ -77,7 +85,7 @@ namespace bubble_second {
         void setHypotenuseOffset(float offset);
         float getHypotenuseOffset();
         //max_top_y_ set get
-        void setMaxTopY(float numble);
+        //void setMaxTopY(float numble);
         float getMaxTopY();
     private:
         static float max_top_y_; //顶部的最高坐标y   这个是csb的坐标

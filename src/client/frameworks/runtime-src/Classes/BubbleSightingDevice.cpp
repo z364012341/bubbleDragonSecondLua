@@ -1,6 +1,7 @@
 #include "BubbleSightingDevice.h"
 #include "BubbleSightingPoint.h"
 #include "EnterPropsViewManager.h"
+#include "GamePlayController.h"
 const float SIGHTING_POINT_BUBBLE_RADIUS = BUBBLE_RADIUS;
 const float SIGHTING_POINT_REFLECTION_WIDTH = /*700.0f;*/GAME_DESIGN_RESOLUTION_WIDTH - SIGHTING_POINT_BUBBLE_RADIUS * 2;
 const float SIGHTING_POINT_WORLD_MAX_X = GAME_DESIGN_RESOLUTION_WIDTH - SIGHTING_POINT_BUBBLE_RADIUS;
@@ -33,6 +34,7 @@ namespace bubble_second {
         this->schedule([=](float) {
             this->setSightingPointsVisibled();
         }, "unused_key");
+        this->sightingPointMove();
         return true;
     }
 
@@ -46,7 +48,7 @@ namespace bubble_second {
         this->setFirstDeviceAngle(angle);
         if (sight_device_)
         {
-            this->setMaxTopY(max_pos_y);
+            //this->setMaxTopY(max_pos_y);
             sight_device_->rotateRemainDevice(angle*2, this->getReflectionPoint(), max_pos_y);
         }
     }
@@ -85,6 +87,40 @@ namespace bubble_second {
         float pos_y_offs = hypotenuse * cos(CC_DEGREES_TO_RADIANS(device_angle));
         cocos2d::Vec2 result_point(0.0f - pos_x_offs, point.y - pos_y_offs);
         this->setPosition(result_point);
+    }
+
+    void BubbleSightingDevice::setDeviceRotation(const std::vector<float>& angles)
+    {
+        if (this->getTargetID() < angles.size())
+        {
+            this->setRotation(angles.at(this->getTargetID()));
+            if (sight_device_)
+            {
+                sight_device_->setDeviceRotation(angles);
+            }
+        }
+        else 
+        {
+            this->deviceGoAway();
+            return;
+        }
+    }
+
+    void BubbleSightingDevice::setDevicePosition(const std::vector<cocos2d::Vec2>& points)
+    {
+        if (this->getTargetID()-1 < points.size())
+        {
+            this->setPosition(points.at(this->getTargetID()-1));
+            if (sight_device_)
+            {
+                sight_device_->setDevicePosition(points);
+            }
+        }
+        else
+        {
+            this->deviceGoAway();
+            return;
+        }
     }
 
     cocos2d::Vec2 bubble_second::BubbleSightingDevice::calculateReflectTopPosition(const cocos2d::Vec2& point, const float& max_pos_y)
@@ -213,14 +249,14 @@ namespace bubble_second {
         return hypotenuse_offset_;
     }
 
-    void BubbleSightingDevice::setMaxTopY(float numble)
-    {
-        max_top_y_ = numble;
-    }
+    //void BubbleSightingDevice::setMaxTopY(float numble)
+    //{
+    //    max_top_y_ = numble;
+    //}
 
     float BubbleSightingDevice::getMaxTopY()
     {
-        return max_top_y_;
+        return GamePlayController::getInstance()->getPlayAreaMaxY();
     }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     cocos2d::Vec2 BubbleSightingDevice::getReflectionPoint()
@@ -236,6 +272,7 @@ namespace bubble_second {
         {
             original_y = bottom_edges / 2 / sin(CC_DEGREES_TO_RADIANS(this->getRotation()));
         }
+        //auto p = this->convertLocalToCsbSpace(point);
         point = cocos2d::Vec2(0.0f, abs(original_y) + this->getHypotenuseOffset());
         return point;
     }
@@ -324,6 +361,16 @@ namespace bubble_second {
     int BubbleSightingDevice::getTargetID() const
     {
         return target_id_;
+    }
+
+    void BubbleSightingDevice::setNextSightingDevice(BubbleSightingDevice * device)
+    {
+        sight_device_ = device;
+    }
+
+    BubbleSightingDevice * BubbleSightingDevice::getNextSightingDevice()
+    {
+        return sight_device_;
     }
 
     void BubbleSightingDevice::changePointsColor(BubbleType color)

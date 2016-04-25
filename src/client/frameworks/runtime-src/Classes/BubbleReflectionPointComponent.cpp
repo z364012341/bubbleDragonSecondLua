@@ -23,10 +23,11 @@ namespace bubble_second {
     {
     }
 
-    void BubbleReflectionPointComponent::calculateReflectionPoints(const cocos2d::Vec2& bubble_point, const cocos2d::Vec2 & touch_point)
+    void BubbleReflectionPointComponent::calculateReflectionPoints(const cocos2d::Vec2 & touch_point)
     {
         reflection_points_.clear();
-        cocos2d::Vec2 shooting_position = bubble_point;
+        reflection_angles_.clear();
+        cocos2d::Vec2 shooting_position = GamePlayController::getInstance()->getShootingInitialPosition();
         float max_y = GamePlayController::getInstance()->getPlayAreaMaxY();
         if (shooting_position.x == touch_point.x)
         {
@@ -40,42 +41,48 @@ namespace bubble_second {
         bool direction = touch_point.x < shooting_position.x;
         float x = key_to_x_[direction];
         float y = k*x + b;
-        float delta_y = (y - shooting_position.y) * 2;
-
-        {
-            cocos2d::Vec2 point = cocos2d::Vec2(x, y);
-            if (y < max_y)
-            {
-                reflection_points_.push_back(point);
-            }
-            else
-            {
-                reflection_points_.push_back(cocos2d::Vec2::getIntersectPoint(shooting_position, point, cocos2d::Vec2(REFLECTION_POINT_MIN_X, max_y), cocos2d::Vec2(REFLECTION_POINT_MAX_X, max_y)));
-                reflection_points_.push_back(cocos2d::Vec2(point.x, max_y) - point + cocos2d::Vec2(point.x, max_y));
-                delta_y *= -1;
-            }
-        }
+        delta_y_ = (y - shooting_position.y) * 2;
+        this->pushBackRelectionPoint(shooting_position, cocos2d::Vec2(x, y));
 
         while (reflection_points_.back().y > 0.0f)
         {
             direction = !direction;
-            cocos2d::Vec2 point = cocos2d::Vec2(key_to_x_[direction], reflection_points_.back().y + delta_y);
-            if (point.y < max_y)
-            {
-                reflection_points_.push_back(point);
-                //CCLOG("refle : x:%f, y:%f", point.x, point.y);
-            }
-            else
-            {
-                reflection_points_.push_back(cocos2d::Vec2::getIntersectPoint(reflection_points_.back(), point, cocos2d::Vec2(REFLECTION_POINT_MIN_X, max_y), cocos2d::Vec2(REFLECTION_POINT_MAX_X, max_y)));
-                reflection_points_.push_back(cocos2d::Vec2(point.x, max_y) - point + cocos2d::Vec2(point.x, max_y));
-                delta_y *= -1;
-            }
+            cocos2d::Vec2 point = cocos2d::Vec2(key_to_x_[direction], reflection_points_.back().y + delta_y_);
+            this->pushBackRelectionPoint(reflection_points_.back(), point);
+
         }
+      }
+
+    void BubbleReflectionPointComponent::pushBackRelectionPoint(const cocos2d::Vec2& pre_point, const cocos2d::Vec2& current_point)
+    {
+        float max_y = GamePlayController::getInstance()->getPlayAreaMaxY();
+        if (current_point.y < max_y)
+        {
+            reflection_points_.push_back(current_point);
+            this->pushBackAngle(pre_point, current_point);
+        }
+        else
+        {
+
+            reflection_points_.push_back(cocos2d::Vec2::getIntersectPoint(pre_point, current_point, cocos2d::Vec2(REFLECTION_POINT_MIN_X, max_y), cocos2d::Vec2(REFLECTION_POINT_MAX_X, max_y)));
+            this->pushBackAngle(pre_point, reflection_points_.back());
+            reflection_points_.push_back(cocos2d::Vec2(current_point.x, max_y) - current_point + cocos2d::Vec2(current_point.x, max_y));
+            this->pushBackAngle(reflection_points_.at(reflection_points_.size()-2), reflection_points_.back());
+            delta_y_ *= -1;
+        }
+    }
+
+    void BubbleReflectionPointComponent::pushBackAngle(const cocos2d::Vec2 & pre_point, const cocos2d::Vec2 & current_point)
+    {
+        reflection_angles_.push_back(-CC_RADIANS_TO_DEGREES(cocos2d::Vec2(0.0f, 1.0f).getAngle(current_point - pre_point)));
     }
 
     std::vector<cocos2d::Vec2> BubbleReflectionPointComponent::getReflectionPoints()
     {
         return reflection_points_;
+    }
+    std::vector<float> BubbleReflectionPointComponent::getReflectionAngles()
+    {
+        return reflection_angles_;
     }
 }

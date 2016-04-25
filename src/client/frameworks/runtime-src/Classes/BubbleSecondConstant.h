@@ -425,6 +425,7 @@ const std::string EVENT_SELECT_BUBBLE = "select_bubble"; //选中泡泡
 const std::string EVENT_FIND_BUBBLES_IN_VISIBLESIZE = "find_bubbles_in_visible"; //查找屏幕中的小球
 const std::string EVENT_RECENT_BUBBLE_CAST = "evnet_recent_bubble_cast"; //检测最近小球
 const std::string EVENT_ROTATE_SIGHTING_DEVICE = "rotate_sighting_device"; //旋转喵准器
+const std::string EVENT_MAIN_ROTATE_SIGHTING_DEVICE = "event_main_rotate_sighting_device"; //旋转喵准器
 const std::string EVENT_TURN_ON_SIGHTING_DEVICE = "turn_on_sighting_device"; //开启喵准器
 const std::string EVENT_TURN_OFF_SIGHTING_DEVICE = "turn_off_sighting_device"; //关闭喵准器
 const std::string EVENT_SIGHTING_POINT_CONTACT_WORLD = "sighting_point_contact_world"; //喵准点碰到边界

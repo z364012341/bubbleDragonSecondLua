@@ -37,6 +37,7 @@
 #include "GameStandbyTimer.h"
 #include "StageTypeLogo.h"
 #include "AddBubbleNumbleCommodity.h"
+#include "BubbleMainSightingDevice.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -229,11 +230,12 @@ namespace bubble_second {
 
     void GameScene::addBubbleSightingDevice()
     {
-        BubbleSightingDevice* sight = BubbleSightingDevice::create();
-        sight->setPosition(this->getGunsightPosition());
-        csb_node_->addChild(sight, UI_ZORDER_SIGHTING_DEVICE);
-        sight->turnOnDeviceOnce();
-        sight->rotateSightingDevice(5, this->getMapMaxPositionY());//给一个初始角度..不然叠在一起会卡
+        //BubbleSightingDevice* sight = BubbleSightingDevice::create();
+        main_sighting_device_ = BubbleMainSightingDevice::create();
+        main_sighting_device_->setPosition(this->getGunsightPosition());
+        csb_node_->addChild(main_sighting_device_, UI_ZORDER_SIGHTING_DEVICE);
+        //sight->turnOnDeviceOnce();
+        //sight->rotateSightingDevice(5, this->getMapMaxPositionY());//给一个初始角度..不然叠在一起会卡
     }
 
     void GameScene::initChildren()
@@ -665,8 +667,8 @@ namespace bubble_second {
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_RECENT_BUBBLE_CAST, CC_CALLBACK_1(GameScene::recentlyBubbleCast, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        listener = cocos2d::EventListenerCustom::create(EVENT_ROTATE_SIGHTING_DEVICE, CC_CALLBACK_1(GameScene::rotateSightingDevice, this));
-        dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        //listener = cocos2d::EventListenerCustom::create(EVENT_ROTATE_SIGHTING_DEVICE, CC_CALLBACK_1(GameScene::rotateSightingDevice, this));
+        //dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(UI_NAME_BIG_COMBO_ELIMINATE, CC_CALLBACK_1(GameScene::playBigEliminateEffect, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_CUT_ELIMINATE_COMBO, CC_CALLBACK_1(GameScene::stopBigEliminateEffect, this));
@@ -942,9 +944,9 @@ namespace bubble_second {
         return node->getPosition();
     }
 
-    BubbleSightingDevice* GameScene::getBubbleSightingDevice()
+    BubbleMainSightingDevice* GameScene::getBubbleSightingDevice()
     {
-        return dynamic_cast<BubbleSightingDevice*>(csb_node_->getChildByName(NAME_BUBBLE_SIGHTING_DEVICE));
+        return main_sighting_device_;
     }
 
     cocos2d::ui::TextBMFont* GameScene::getCompletedTaskLabel()
@@ -1438,11 +1440,11 @@ namespace bubble_second {
     void GameScene::rotateSightingDevice(cocos2d::EventCustom* event)
     {
         float angle = *static_cast<float*>(event->getUserData());
-        this->getGunsight()->setRotation(angle);
+        //this->getGunsight()->setRotation(angle);
         auto device = dynamic_cast<BubbleSightingDevice*>(csb_node_->getChildByName(NAME_BUBBLE_SIGHTING_DEVICE));
         if (device)
         {
-            device->rotateSightingDevice(angle, this->getMapMaxPositionY());
+           // device->rotateSightingDevice(angle, this->getMapMaxPositionY());
         }
     }
 
@@ -2252,6 +2254,7 @@ namespace bubble_second {
     {
         bubble_map_node_->pause();
         csb_node_->pause();
+        pause_nodes_ = cocos2d::Director::getInstance()->getActionManager()->pauseAllRunningActions();
         this->getScenePhysicsWorld()->setSpeed(0);
         this->pause();
     }
@@ -2260,6 +2263,7 @@ namespace bubble_second {
     {
         bubble_map_node_->resume();
         csb_node_->resume();
+        cocos2d::Director::getInstance()->getActionManager()->resumeTargets(pause_nodes_);
         this->getScenePhysicsWorld()->setSpeed(1);
         this->resume();
     }

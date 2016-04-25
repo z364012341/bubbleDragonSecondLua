@@ -18,7 +18,7 @@
 namespace bubble_second {
     class BaseProperty;
     class BaseWeapon;
-    class BubbleSightingDevice;
+    class BubbleMainSightingDevice;
     class GameCharacter;
     class ScoreProgressMenu;
     class BarrelScoreLabelNode;
@@ -60,9 +60,9 @@ namespace bubble_second {
 		cocos2d::Vec2 getPrepareBubbleOrigin();
         //获取map最高点
         float getMapMaxPositionY();
+    private:
         //获取发射台的位置
         cocos2d::Vec2 getGunsightPosition();
-    private:
         //初始化地图数据,参数是关卡
         void initBubbleMap(int stage_numble);
         //初始化控件层级
@@ -131,7 +131,7 @@ namespace bubble_second {
         //通过名字获取精灵的位置
         cocos2d::Vec2 getNodePositionWithName(const std::string& child_name);
         //获取瞄准设备
-        BubbleSightingDevice* getBubbleSightingDevice();
+        BubbleMainSightingDevice* getBubbleSightingDevice();
         //获取已完成任务的label
         cocos2d::ui::TextBMFont* getCompletedTaskLabel();
         //获取胜利任务数
@@ -352,6 +352,8 @@ namespace bubble_second {
 		BaseBubble* second_bubble_ = nullptr;
 		ScoreProgressMenu* score_progress_ = nullptr;
         BarrelScoreLabelNode* barrel_score_node_ = nullptr;
+        cocos2d::Vector<cocos2d::Node*> pause_nodes_;
+        BubbleMainSightingDevice* main_sighting_device_ = nullptr;
     };
 }
 #endif //_GAME_SCENE_H_

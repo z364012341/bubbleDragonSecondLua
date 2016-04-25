@@ -13,7 +13,7 @@
 const int STANBY_ACTION_TAG = 121;
 const float STANBY_ACTION_TIME = 0.5f;
 const float STANBY_ACTION_RANGE = 3.0f;
-const float BUBBLE_MOVE_SPEED = 150.0f;
+const float BUBBLE_MOVE_SPEED = 100.0f;
 const std::string COLOR_BUBBLE_FLASH_PATH = "bai.png";
 namespace bubble_second {
     ColorBubble::~ColorBubble()
@@ -234,7 +234,8 @@ namespace bubble_second {
             body->setGroup(BUBBLE_BODY_GROUP);
             body->setGravityEnable(false);
             body->setCategoryBitmask(BITMASK_BUBBLE_PREPARE_CATEGORY);
-            body->setCollisionBitmask(BITMASK_BUBBLE_PREPARE_COLLISION);
+            //body->setCollisionBitmask(BITMASK_BUBBLE_PREPARE_COLLISION);
+            body->setCollisionBitmask(0);
             body->setContactTestBitmask(BITMASK_BUBBLE_PREPARE_CONTACTTEST);
             //body->setEnable(false);
 			body->setEnabled(false);
@@ -291,6 +292,7 @@ namespace bubble_second {
             GameScoreController::getInstance()->cutBubbleUseCount();
         }
         this->stopStanbyAnimation();
+        this->setPosition(GamePlayController::getInstance()->getShootingInitialPosition());
 		//this->getPhysicsBody()->applyImpulse(shoot_impulse_);
         cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
         cocos2d::Vec2 pre_point = this->getPosition();
@@ -308,11 +310,11 @@ namespace bubble_second {
         this->setShootBubble(true);
     }
 
-	void ColorBubble::setShootImpulse(const cocos2d::Vec2& touch_location)
+	void ColorBubble::setShootPoints(const cocos2d::Vec2& touch_location)
 	{
-		shoot_impulse_ = this->getImpulseByTouchlocation(touch_location)*SmartScaleController::getInstance()->getPlayAreaZoom();
+		//shoot_impulse_ = this->getImpulseByTouchlocation(touch_location)*SmartScaleController::getInstance()->getPlayAreaZoom();
         this->addChild(reflection_point_component_ = BubbleReflectionPointComponent::create());
-        reflection_point_component_->calculateReflectionPoints(this->getPosition(), touch_location);
+        reflection_point_component_->calculateReflectionPoints(touch_location);
 	}
 
     void ColorBubble::contactBarrelBottom()
@@ -377,7 +379,7 @@ namespace bubble_second {
 		if (this->getActionByTag(STANBY_ACTION_TAG))
 		{
 			this->stopActionByTag(STANBY_ACTION_TAG);
-            this->setPosition(GamePlayController::getInstance()->getShootingInitialPosition());
+            //this->setPosition(GamePlayController::getInstance()->getShootingInitialPosition());
 		}
 	}
 }

@@ -123,7 +123,7 @@ namespace bubble_second {
         //判断是否点击到这个target
         bool touchOnIt(const cocos2d::Vec2& point, cocos2d::Node* sprite);
         //获取两个点的角度
-        float getAngleWithVectors(const cocos2d::Vec2& point_1, const cocos2d::Vec2& point_2);
+        //float getAngleWithVectors(const cocos2d::Vec2& point_1, const cocos2d::Vec2& point_2);
         //获取一个点跟发射小球的角度
         float getPrepareBubbleAngle(const cocos2d::Vec2& point);
         //获取喵准器的旋转角度
