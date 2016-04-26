@@ -2,7 +2,7 @@
 #include "BubbleSecondConstant.h"
 #include "SpriteTextureController.h"
 #include "BubbleSightingDevice.h"
-const float SIGHTING_POINT_BODY_RADIUS = BUBBLE_RADIUS * 2-4;  //¸ÕÌå°ë¾¶
+//const float SIGHTING_POINT_BODY_RADIUS = BUBBLE_RADIUS * 2-4;  //¸ÕÌå°ë¾¶
 namespace bubble_second {
     void BubbleSightingPoint::pointStop()
     {
@@ -33,9 +33,10 @@ namespace bubble_second {
 
     void BubbleSightingPoint::addPhysicsBodyCanntWorld()
     {
-        cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createBox(cocos2d::Size(SIGHTING_POINT_BODY_RADIUS, SIGHTING_POINT_BODY_RADIUS+20),
+        cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createBox(cocos2d::Size(BUBBLE_BODY_DIAMETER, BUBBLE_BODY_DIAMETER +20),
             cocos2d::PhysicsMaterial(PHYSICS_SIGHTING_POINT_BODY_DENSITY, PHYSICS_SIGHTING_POINT_BODY_RESTITUTION, PHYSICS_SIGHTING_POINT_BODY_FRICTION));
         body->setDynamic(true);
+
         //body->setCategoryBitmask(BITMASK_SIGHTING_POINT_INITIAL_CATEGORY);
         body->setCategoryBitmask(BITMASK_SIGHTING_POINT_CATEGORY);
         body->setCollisionBitmask(0);

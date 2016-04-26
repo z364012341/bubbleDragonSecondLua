@@ -1,7 +1,8 @@
 #include "BubbleMainSightingDevice.h"
 #include "BubbleReflectionPointComponent.h"
 #include "EnterPropsViewManager.h"
-#include "GamePlayController.h"   
+#include "GamePlayController.h" 
+#include "BubbleSecondConstant.h"
 const int MAIN_SIGHTING_DEVICE_TARGET_ID = 0;
 namespace bubble_second {
     BubbleMainSightingDevice::BubbleMainSightingDevice()
@@ -42,13 +43,15 @@ namespace bubble_second {
     void BubbleMainSightingDevice::rotateDevice(const cocos2d::Vec2 & touch_point)
     {
         reflection_point_component_->calculateReflectionPoints(touch_point);
-        //auto points = reflection_point_component_->getReflectionPoints();
+        auto points = reflection_point_component_->getReflectionPoints();
         //auto angles = reflection_point_component_->getReflectionAngles();
         //int size = points.size();
         //float angle = -CC_RADIANS_TO_DEGREES(cocos2d::Vec2(0.0f, 1.0f).getAngle(touch_point - GamePlayController::getInstance()->getShootingInitialPosition()));
-        
+        int relection_offset = (int)(points.front().getDistance(points[1])) % (int)MAP_BUBBLE_DIAMETER;
+        this->getNextSightingDevice()->setReflectionPointOffset(-relection_offset);
         this->setDeviceRotation(reflection_point_component_->getReflectionAngles());
         this->getNextSightingDevice()->setDevicePosition(reflection_point_component_->getReflectionPoints());
+        this->getNextSightingDevice()->setDevicePointHidden(reflection_point_component_->getHiddenFlags());
         //this->setRotation(angles.at(0));
         //for (auto var : remaind_device_)
         //{
@@ -81,6 +84,16 @@ namespace bubble_second {
     {
         BubbleSightingDevice::onExit();
         cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_MAIN_ROTATE_SIGHTING_DEVICE);
+    }
+    void BubbleMainSightingDevice::turnOnSightingDevice()
+    {
+        BubbleSightingDevice::turnOnSightingDevice();
+        this->setVisible(true);
+    }
+    void BubbleMainSightingDevice::turnOffSightingDevice()
+    {
+        BubbleSightingDevice::turnOffSightingDevice();
+        this->setVisible(false);
     }
     //void BubbleMainSightingDevice::changePointsColor(BubbleType color)
     //{

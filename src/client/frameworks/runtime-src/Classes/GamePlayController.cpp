@@ -263,7 +263,11 @@ namespace bubble_second {
 
     float GamePlayController::getPlayAreaMaxY()
     {
-        return game_scene_delegate_->getMapMaxPositionY();
+        if (game_scene_delegate_ != nullptr)
+        {
+            return game_scene_delegate_->getMapMaxPositionY();
+        }
+        return 0.0f;
     }
 
     cocos2d::Vec2 GamePlayController::getShootingInitialPosition()

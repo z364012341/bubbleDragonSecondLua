@@ -123,7 +123,7 @@ namespace bubble_second {
         this->initHandle();
         this->addKeyboardEventListener();
 
-        GamePlayController::getInstance()->setGameSceneDelegate(this);
+
 
         //char a[8][16];
         //int e1 = &a[4][1] - &a[3][4];
@@ -175,12 +175,13 @@ namespace bubble_second {
         addChild(edge_shape_node_);
         this->setPhysicsWorldBody();
         //this->scheduleOnce(CC_SCHEDULE_SELECTOR(GameScene::updateStart), 1);
-
+        GamePlayController::getInstance()->setGameSceneDelegate(this);
     }
 
     void GameScene::onExit()
     {
         this->removeEventListenerCustom();
+        GamePlayController::getInstance()->setGameSceneDelegate(nullptr);
         Layer::onExit();
     }
 
@@ -676,14 +677,14 @@ namespace bubble_second {
         listener = cocos2d::EventListenerCustom::create(EVENT_TURN_ON_SIGHTING_DEVICE, [=](cocos2d::EventCustom*) {
             if (this->getBubbleSightingDevice())
             {
-                this->getBubbleSightingDevice()->setVisible(true);
+                this->getBubbleSightingDevice()->turnOnSightingDevice();
             }
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_TURN_OFF_SIGHTING_DEVICE, [=](cocos2d::EventCustom*) {
             if (this->getBubbleSightingDevice())
             {
-                this->getBubbleSightingDevice()->setVisible(false);
+                this->getBubbleSightingDevice()->turnOffSightingDevice();
             }
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
@@ -770,7 +771,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_FIND_BUBBLES_IN_VISIBLESIZE);
         dispatcher->removeCustomEventListeners(EVENT_PROPS_SELECT_ALERT_CONFIRM);
         dispatcher->removeCustomEventListeners(EVENT_RECENT_BUBBLE_CAST);
-        dispatcher->removeCustomEventListeners(EVENT_ROTATE_SIGHTING_DEVICE);
+        //dispatcher->removeCustomEventListeners(EVENT_ROTATE_SIGHTING_DEVICE);
         dispatcher->removeCustomEventListeners(UI_NAME_BIG_COMBO_ELIMINATE);
         dispatcher->removeCustomEventListeners(EVENT_CUT_ELIMINATE_COMBO);
         dispatcher->removeCustomEventListeners(EVENT_TURN_ON_SIGHTING_DEVICE);

@@ -20,16 +20,20 @@ namespace bubble_second {
         void calculateReflectionPoints(const cocos2d::Vec2& touch_point);
         std::vector<cocos2d::Vec2> getReflectionPoints();
         std::vector<float> getReflectionAngles();
+        std::vector<bool> getHiddenFlags();
     private:
         BubbleReflectionPointComponent();
         bool init();
-        void pushBackRelectionPoint(const cocos2d::Vec2& pre_point, const cocos2d::Vec2& current_point);
+        void pushBackRelectionPoint(const cocos2d::Vec2 pre_point, const cocos2d::Vec2 current_point);
         void pushBackAngle(const cocos2d::Vec2& pre_point, const cocos2d::Vec2& current_point);
+        void pushBackHidden();
+        void pushBackDontBeHidden();
     private:
         //cocos2d::Vec2 shooting_position_;
         std::vector<cocos2d::Vec2> reflection_points_;
         std::vector<float> reflection_angles_;
         std::map<bool, float> key_to_x_;
+        std::vector<bool> id_to_hidden_;
         float delta_y_ = 0.0f;
     };
 }

@@ -19,7 +19,9 @@ namespace bubble_second {
     public:
         CREATE_FUNC(BubbleSightingDevice);
         virtual ~BubbleSightingDevice();
-        void rotateSightingDevice(const float angle, const float& max_pos_y);
+        void onEnter() override;
+        void onExit() override;
+        //void rotateSightingDevice(const float angle, const float& max_pos_y);
         void contactWorldBorder();
         void contactBubble();
         //打开设备
@@ -27,12 +29,12 @@ namespace bubble_second {
         //改变颜色
         void changePointsColor(BubbleType color);
         //是否碰到顶部边界
-        bool isContactTopBorder(const float& max_pos_y);
+        //bool isContactTopBorder(const float& max_pos_y);
         //是否是第一台设备
         bool isFirstDevice();
         //保存第一台设备的角度用来计算顶部反弹的位置
-        void setFirstDeviceAngle(const float& angle);
-        float getFirstDeviceAngle() const;
+        //void setFirstDeviceAngle(const float& angle);
+        //float getFirstDeviceAngle() const;
         //碰到顶部反弹后让剩下的离远点
         void deviceGoAway();
         //停止点运动
@@ -41,9 +43,11 @@ namespace bubble_second {
         void  performSightingDevice();
         //发射点出去
         void sightingPointMove();
-        //targetID  {set get}
-        void setTargetID(int numble);
-        int getTargetID() const;
+
+        void setVisible(bool visible) override;
+        virtual void turnOnSightingDevice();
+        virtual void turnOffSightingDevice();
+        bool isDeviceOnStage();
         //链接下一个设备
         void setNextSightingDevice(BubbleSightingDevice * device);
         BubbleSightingDevice * getNextSightingDevice();
@@ -51,12 +55,20 @@ namespace bubble_second {
         void setDeviceRotation(const std::vector<float>& angles);
         //设置位置
         void setDevicePosition(const std::vector<cocos2d::Vec2>& points);
-       // void setVisible(bool )override;
+        //设置两点隐藏
+        void setDevicePointHidden(const std::vector<bool>& flags);
+        //targetID  {set get}
+        void setTargetID(int numble);
+        int getTargetID() const;
+        //点点位置便宜
+        void setReflectionPointOffset(float offset);
     protected:
         BubbleSightingDevice();
         virtual bool init();
 
     private:
+        //加入刚体来进行是否碰到小球之后使剩余线消失的判断, 碰到边界剩余显示
+        //void addPhysicsBody();
         //获取下一级面准线的位置
         cocos2d::Vec2 getReflectionPoint();
         //控制point的显示
@@ -68,14 +80,14 @@ namespace bubble_second {
         //判断瞄准点是否需要隐藏
         bool isSightingPointsNeedHidden(const cocos2d::Vec2& point/*, float min_y, float max_y*/);
         //旋转剩余的设备
-        void rotateRemainDevice(const float angle, const cocos2d::Vec2& point, const float& max_pos_y);
-        void setDeviceRotationAndPosition(float angle, const cocos2d::Vec2& point);
+        //void rotateRemainDevice(const float angle, const cocos2d::Vec2& point, const float& max_pos_y);
+        //void setDeviceRotationAndPosition(float angle, const cocos2d::Vec2& point);
         //计算顶部反弹的位置
         //先按普通的算法算出位置, 如果位置超过顶部, 就重新计算位置
         //第一个参数: 还没偏移过的点的位置
         //第二个参数: 顶部位置
-        cocos2d::Vec2 calculateReflectTopPosition(const cocos2d::Vec2& point, const float& max_pos_y);
-        void setTopReflectRotationAndPosition(float angle, const cocos2d::Vec2& point, const float& max_pos_y);
+        //cocos2d::Vec2 calculateReflectTopPosition(const cocos2d::Vec2& point, const float& max_pos_y);
+        //void setTopReflectRotationAndPosition(float angle, const cocos2d::Vec2& point, const float& max_pos_y);
         cocos2d::Vec2 convertLocalToCsbSpace(const cocos2d::Vec2& local_point);
         //设置是否要隐藏点点
         void setHidePointEnable(bool flag);
@@ -88,14 +100,17 @@ namespace bubble_second {
         //void setMaxTopY(float numble);
         float getMaxTopY();
     private:
-        static float max_top_y_; //顶部的最高坐标y   这个是csb的坐标
-        size_t points_index_ = 0;
+        //static float max_top_y_; //顶部的最高坐标y   这个是csb的坐标
+        //size_t points_index_ = 0;
+        bool switch_flag_ = false;
         BubbleSightingDevice* sight_device_ = nullptr;
         SightPointVector sighting_points_;
         int target_id_ = 0;
-        static float first_device_angle_;
+        //static float first_device_angle_;
         bool is_hide_point_ = false;
         float hypotenuse_offset_ = 0.0f; //斜边偏移, 让瞄准线的点有反弹效果
+        cocos2d::Node* points_node_ = nullptr;
+        float relection_offset_ = 0.0f;
     };
 }
 #endif //_BUBBLE_SIGHTING_DEVICE_H_
