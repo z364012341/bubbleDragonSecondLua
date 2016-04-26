@@ -157,13 +157,16 @@ namespace bubble_second {
         return switch_flag_;
     }
 
-    void BubbleSightingDevice::setReflectionPointOffset(float offset)
+    void BubbleSightingDevice::setReflectionPointOffset(const std::vector<float>& offset_vector)
     {
-        relection_offset_ = offset;
-        points_node_->setPositionY(offset);
-        if (sight_device_ != nullptr)
+        //relection_offset_ = (int)(offset*3) % (int)MAP_BUBBLE_DIAMETER;
+        if (this->getTargetID() - 1 < (int)offset_vector.size())
         {
-            sight_device_->setReflectionPointOffset(offset);
+            points_node_->setPositionY(-offset_vector.at(this->getTargetID() - 1));
+            if (sight_device_ != nullptr)
+            {
+                sight_device_->setReflectionPointOffset(offset_vector);
+            }
         }
     }
 

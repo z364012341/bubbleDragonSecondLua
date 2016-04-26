@@ -53,6 +53,7 @@ namespace bubble_second {
         }
         id_to_hidden_.pop_back();
         id_to_hidden_.push_back(true);
+        this->pushBackReflectionOffset();
         //reflection_points_.pop_back();
         //reflection_angles_.pop_back();
       }
@@ -94,6 +95,25 @@ namespace bubble_second {
         id_to_hidden_.push_back(false);
     }
 
+    void BubbleReflectionPointComponent::pushBackReflectionOffset()
+    {
+        reflection_offset_.clear();
+        cocos2d::Vec2 pre_point = GamePlayController::getInstance()->getShootingInitialPosition();
+        cocos2d::Vec2 current_point;
+        int offset = 0;
+        for (auto var : reflection_points_)
+        {
+            offset = this->calculateReflectionOffset(pre_point, var, offset);
+            reflection_offset_.push_back(offset);
+            pre_point = var;
+        }
+    }
+
+    int BubbleReflectionPointComponent::calculateReflectionOffset(const cocos2d::Vec2 & pre_point, const cocos2d::Vec2 & current_point, int pre_offset)
+    {
+        return (int)(pre_point.getDistance(current_point)+ pre_offset) % (int)MAP_BUBBLE_DIAMETER;
+    }
+
     std::vector<cocos2d::Vec2> BubbleReflectionPointComponent::getReflectionPoints()
     {
         return reflection_points_;
@@ -107,5 +127,9 @@ namespace bubble_second {
     std::vector<bool> BubbleReflectionPointComponent::getHiddenFlags()
     {
         return id_to_hidden_;
+    }
+    std::vector<float> BubbleReflectionPointComponent::getReflectionoffset()
+    {
+        return reflection_offset_;
     }
 }

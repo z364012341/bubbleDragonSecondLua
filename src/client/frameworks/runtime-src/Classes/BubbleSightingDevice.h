@@ -61,7 +61,7 @@ namespace bubble_second {
         void setTargetID(int numble);
         int getTargetID() const;
         //点点位置便宜
-        void setReflectionPointOffset(float offset);
+        void setReflectionPointOffset(const std::vector<float>& offset_vector);
     protected:
         BubbleSightingDevice();
         virtual bool init();
@@ -110,7 +110,7 @@ namespace bubble_second {
         bool is_hide_point_ = false;
         float hypotenuse_offset_ = 0.0f; //斜边偏移, 让瞄准线的点有反弹效果
         cocos2d::Node* points_node_ = nullptr;
-        float relection_offset_ = 0.0f;
+        //float relection_offset_ = 0.0f;
     };
 }
 #endif //_BUBBLE_SIGHTING_DEVICE_H_

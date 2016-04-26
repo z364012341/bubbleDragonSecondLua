@@ -30,6 +30,7 @@ namespace bubble_second {
         for (int i = MAIN_SIGHTING_DEVICE_TARGET_ID+1; i <= device_numble_max; i++)
         {
             BubbleSightingDevice* device = BubbleSightingDevice::create();
+            device->setPositionX(BUBBLE_SIGHTING_DEVICE_GO_AWAY_Y);
             this->getParent()->addChild(device);
             last_device->setNextSightingDevice(device);
             device->setTargetID(i);
@@ -47,8 +48,8 @@ namespace bubble_second {
         //auto angles = reflection_point_component_->getReflectionAngles();
         //int size = points.size();
         //float angle = -CC_RADIANS_TO_DEGREES(cocos2d::Vec2(0.0f, 1.0f).getAngle(touch_point - GamePlayController::getInstance()->getShootingInitialPosition()));
-        int relection_offset = (int)(points.front().getDistance(points[1])) % (int)MAP_BUBBLE_DIAMETER;
-        this->getNextSightingDevice()->setReflectionPointOffset(-relection_offset);
+        int relection_offset = (int)(points.front().getDistance(GamePlayController::getInstance()->getShootingInitialPosition())) % (int)MAP_BUBBLE_DIAMETER;
+        this->getNextSightingDevice()->setReflectionPointOffset(reflection_point_component_->getReflectionoffset());
         this->setDeviceRotation(reflection_point_component_->getReflectionAngles());
         this->getNextSightingDevice()->setDevicePosition(reflection_point_component_->getReflectionPoints());
         this->getNextSightingDevice()->setDevicePointHidden(reflection_point_component_->getHiddenFlags());
