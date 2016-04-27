@@ -24,6 +24,7 @@ namespace bubble_second {
     void BaseWeapon::selectBubble(const cocos2d::Vec2 & point)
     {
         this->setPosition(point);
+        this->setVisible(true);
     }
 
     bool BaseWeapon::init(const std::string& armature_name)

@@ -1364,7 +1364,7 @@ namespace bubble_second {
     {
         props_weapon_ = static_cast<BaseWeapon*>(event->getUserData());
         props_weapon_->setVisible(false);
-        csb_node_->addChild(props_weapon_);
+        bubble_map_node_->addChild(props_weapon_);
         PropsSelectAlert* alert = PropsSelectAlert::create();
         csb_node_->addChild(alert, UI_ZORDER_MENU);
         cocos2d::LayerColor* layer = cocos2d::LayerColor::create(PROPS_SELECT_ALERT_LAYER_COLOR, GAME_DESIGN_RESOLUTION_WIDTH,
@@ -1414,9 +1414,9 @@ namespace bubble_second {
 
     void GameScene::setPropsWeaponPosition(const cocos2d::Vec2& point)
     {
-        props_weapon_->setVisible(true);
+        //props_weapon_->setVisible(true);
         //props_weapon_->setPosition(this->convertMapToCsbSpace(point));
-        props_weapon_->selectBubble(this->convertMapToCsbSpace(point));
+        props_weapon_->selectBubble(point);
     }
 
     void GameScene::useSelectProperties(cocos2d::EventCustom*)

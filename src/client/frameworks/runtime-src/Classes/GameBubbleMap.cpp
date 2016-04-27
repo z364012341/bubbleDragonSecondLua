@@ -191,6 +191,7 @@ namespace bubble_second {
 
     void GameBubbleMap::eliminateBubbles(BubbleVector same_bubbles, BaseBubble* prepare_bubble, float delay_time)
     {
+        this->eraseBubbleCanntEliminateByProperty(&same_bubbles);
         game_bubble_map_impl_->removeSpriteFromeMap(same_bubbles);
         //注释原因: 暂时改为道具球炸到黑洞直接消除
         //for (auto iter = same_bubbles.begin(); iter != same_bubbles.end();)
@@ -214,7 +215,6 @@ namespace bubble_second {
             this->dispatchCustomEvent(EVENT_BUBBLE_ELIMINATED, &same_bubbles);
             return;
         }
-        this->eraseBubbleCanntEliminateByProperty(&same_bubbles);
         this->disposeEliminateHandle(&same_bubbles, delay_time);
         this->dispatchCustomEvent(EVENT_BUBBLE_ELIMINATED, &same_bubbles);
     }
