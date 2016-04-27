@@ -8,6 +8,7 @@
 #include "GameScoreController.h"
 #include "StageDataManager.h"
 #include "BubbleColorRender.h"
+const float WINDMILL_BUBBLE_ROTATION_FACTOR = 3000.0f; //风车转转转的速度系数
 namespace bubble_second{
     GameBubbleMapImple::GameBubbleMapImple():special_bubble_(nullptr)
     {
@@ -366,13 +367,14 @@ namespace bubble_second{
 
     BaseBubble* GameBubbleMapImple::getSpriteWithIndex(const cocos2d::Vec2& index)
     {
-        return bubble_sprite_map_[index.y].at(index.x);;
+        return bubble_sprite_map_[index.y].at(index.x);
     }
 
     BaseBubble* GameBubbleMapImple::clingBubble(BaseBubble* prepare_bubble, const cocos2d::Vec2& contact_index)
     {
         cocos2d::Vec2 bubble_should_index = this->getTheNearestEmptyIndex(this->convertGameSceneCsbToMapSpaceWithBubble(prepare_bubble),
             contact_index);
+        assert(bubble_sprite_map_[bubble_should_index.y].at(bubble_should_index.x) == nullptr);
         BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(prepare_bubble->getBubbleType(),
             bubble_should_index, this->convertIndexToPoint(bubble_should_index));
         //bubble_sprite_map_;
@@ -401,10 +403,16 @@ namespace bubble_second{
             if (bubble_sprite_map_[iter->y].at(iter->x))
             {
                 iter = index_vector.erase(iter);
-                break;
+                continue;
             }
             ++iter;
         }
+#if (COCOS2D_DEBUG > 0)
+        for (auto var : index_vector)
+        {
+            assert(bubble_sprite_map_[var.y].at(var.x) == nullptr);
+        }
+#endif
         return index_vector;
     }
 
@@ -430,7 +438,7 @@ namespace bubble_second{
     }
 
     cocos2d::Vec2 GameBubbleMapImple::getIndexMindistanceWithVector(const cocos2d::Vec2& point, 
-        std::vector<cocos2d::Vec2> index_vector)
+        const std::vector<cocos2d::Vec2>& index_vector)
     {
         cocos2d::Vec2 nearest_index = index_vector.at(0);
         float distance = point.distance(index_vector.at(0));
@@ -444,6 +452,7 @@ namespace bubble_second{
                 distance = compare_distance;
             }
         }
+        //assert(bubble_sprite_map_[nearest_index.y].at(nearest_index.x) == nullptr);
         return nearest_index;
     }
 
@@ -573,14 +582,14 @@ namespace bubble_second{
 
     float GameBubbleMapImple::getWindmillRotationAngle(BaseBubble* prepare_bubble)
     {
-        float angle = getWindmillContactVelocity(prepare_bubble)/ (WINDMILL_BUBBLE_ROTATION_FACTOR-20); //切线的速度
+        float angle = getWindmillContactVelocity(prepare_bubble)/ WINDMILL_BUBBLE_ROTATION_FACTOR; //切线的速度
         return angle;
     }
 
-    int GameBubbleMapImple::getWindmillRotationDirection(const cocos2d::Vec2 & contact_vector, const cocos2d::Vec2 & angle_vector)
+    int GameBubbleMapImple::getWindmillRotationDirection(const cocos2d::Vec2 & bubble_speed, const cocos2d::Vec2& to_center_speed)
     {
         int direction = 0;
-        if ((contact_vector.x > 0 && angle_vector.y<0) || (contact_vector.x < 0 && angle_vector.y>0))
+        if ((to_center_speed.x > 0 && bubble_speed.y<0) || (to_center_speed.x < 0 && bubble_speed.y>0))
         {
             direction = 1;
         }
@@ -594,14 +603,13 @@ namespace bubble_second{
     float GameBubbleMapImple::getWindmillContactVelocity(BaseBubble * prepare_bubble)
     {
         cocos2d::Vec2 windmill_pos = this->convertGameSceneMapToCsbSpaceWithBubble(this->getSpecialBubble());
-        cocos2d::Vec2 contact_vector = prepare_bubble->getPosition() - windmill_pos;
-        float x = contact_vector.x;
-        float y = (0 - x*contact_vector.x) / contact_vector.y;
-        cocos2d::Vec2 tangent_line_vector = cocos2d::Vec2(x, y).getNormalized();
-        cocos2d::Vec2 angle_velocity = prepare_bubble->getPhysicsBody()->getVelocityAtWorldPoint(windmill_pos);
-        cocos2d::Vec2 angle_vector = angle_velocity.project(tangent_line_vector); //切线速度的方向
-        float velocity = sqrt(pow(angle_vector.x, 2) + pow(angle_vector.y, 2)); //切线的速度
-        return velocity * getWindmillRotationDirection(contact_vector, angle_vector);
+        cocos2d::Vec2 contact_vector = prepare_bubble->getPosition() - windmill_pos;    //指向圆心的向量
+        cocos2d::Vec2 bubble_speed = dynamic_cast<ColorBubble*>(prepare_bubble)->getBubbleSpeed();  //小球速度向量
+        cocos2d::Vec2 circle_line_speed = contact_vector.rotateByAngle(cocos2d::Vec2::ZERO, CC_DEGREES_TO_RADIANS(90.0f)).getNormalized(); //切线向量
+        float r = prepare_bubble->getPosition().getDistance(windmill_pos); //半径
+        cocos2d::Vec2 line_vector_project = bubble_speed.project(circle_line_speed); //切线速度分量
+        float line_speed = line_vector_project.length(); //求模
+        return  line_speed * getWindmillRotationDirection(line_vector_project, contact_vector)*r;
     }
 
     void GameBubbleMapImple::mergeTwoBubbleVector(BubbleVector* first_vector, 

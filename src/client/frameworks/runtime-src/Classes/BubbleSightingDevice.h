@@ -22,7 +22,7 @@ namespace bubble_second {
         void onEnter() override;
         void onExit() override;
         //void rotateSightingDevice(const float angle, const float& max_pos_y);
-        void contactWorldBorder();
+        //void contactWorldBorder();
         void contactBubble();
         //打开设备
         virtual void turnOnDeviceOnce(int device_numble = 0);
@@ -31,7 +31,7 @@ namespace bubble_second {
         //是否碰到顶部边界
         //bool isContactTopBorder(const float& max_pos_y);
         //是否是第一台设备
-        bool isFirstDevice();
+        //bool isFirstDevice();
         //保存第一台设备的角度用来计算顶部反弹的位置
         //void setFirstDeviceAngle(const float& angle);
         //float getFirstDeviceAngle() const;
@@ -70,7 +70,7 @@ namespace bubble_second {
         //加入刚体来进行是否碰到小球之后使剩余线消失的判断, 碰到边界剩余显示
         //void addPhysicsBody();
         //获取下一级面准线的位置
-        cocos2d::Vec2 getReflectionPoint();
+        //cocos2d::Vec2 getReflectionPoint();
         //控制point的显示
         void setSightingPointsVisibled();
         //计算瞄准点的最小位置y
@@ -94,7 +94,7 @@ namespace bubble_second {
         bool isHidePoint();
 
         //hypotenuse_offset_ set get
-        void setHypotenuseOffset(float offset);
+        //void setHypotenuseOffset(float offset);
         float getHypotenuseOffset();
         //max_top_y_ set get
         //void setMaxTopY(float numble);

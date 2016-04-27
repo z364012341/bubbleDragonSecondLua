@@ -83,7 +83,7 @@ namespace bubble_second {
         BubbleVector separateWindmillBubble();
         //获取风车旋转的角度 
         float getWindmillRotationAngle(BaseBubble* prepare_bubble);
-        int getWindmillRotationDirection(const cocos2d::Vec2& contact_vector, const cocos2d::Vec2& angle_vector);
+        int getWindmillRotationDirection(const cocos2d::Vec2& bubble_speed, const cocos2d::Vec2& to_center_speed);
         float getWindmillContactVelocity(BaseBubble* prepare_bubble);
         //关卡类型
         void setStageType(const StageType& type);
@@ -136,7 +136,7 @@ namespace bubble_second {
         //测试函数  打印所有小球的索引
         //void printAllIndex();
         //计算距离最短的索引
-        cocos2d::Vec2 getIndexMindistanceWithVector(const cocos2d::Vec2& point, std::vector<cocos2d::Vec2> index_vector);
+        cocos2d::Vec2 getIndexMindistanceWithVector(const cocos2d::Vec2& point, const std::vector<cocos2d::Vec2>& index_vector);
         //获取离撞击点最近的一个索引
         cocos2d::Vec2 getIndexNearestContactBubble(const cocos2d::Vec2& prepare_point,
             const cocos2d::Vec2& contact_index);

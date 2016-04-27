@@ -64,7 +64,6 @@ namespace bubble_second {
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, PROPS_BOMB_BOMB_NAME, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeBubbleCast, WOODEN_HAMMER_CAST_NODE_NAME, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeSightingPointContactBubble, NAME_BUBBLE_SIGHTING_POINT, MAP_BUBBLE_NAME);
-        this->addContactHandleWithTwoNames(&GamePlayController::disposeSightingPointContactBorder, NAME_BUBBLE_SIGHTING_POINT, MAP_PHYSICS_BORDER_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeWindmillBubbleBorder, UI_NAME_WINDMILL_BORDER, PREPARE_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeWindmillBubbleBorder, UI_NAME_WINDMILL_BORDER, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWindmillBorder, UI_NAME_WINDMILL_BORDER, PROPS_BOMB_BOMB_NAME);
@@ -196,6 +195,7 @@ namespace bubble_second {
             return;
         }
         flying_bubble->hadContacted();
+        flying_bubble->stopAllActions();
         BaseBubble* contact_bubble = dynamic_cast<BaseBubble*>(contact_node);
         if (auto props_handle = props_to_handle_[flying_bubble->getBubbleType()])
         {//优先处理道具的球
@@ -399,13 +399,6 @@ namespace bubble_second {
         }
     }
 
-    void GamePlayController::disposeSightingPointContactBorder(cocos2d::Node* sight_node, cocos2d::Node* other_node)
-    {
-        if (BubbleSightingDevice* device = dynamic_cast<BubbleSightingDevice*>(sight_node->getParent()))
-        {
-            device->contactWorldBorder();
-        }
-    }
 
     void GamePlayController::disposeWindmillBubbleBorder(cocos2d::Node * border_node, cocos2d::Node * other_node)
     {

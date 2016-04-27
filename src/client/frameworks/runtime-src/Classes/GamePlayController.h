@@ -162,7 +162,7 @@ namespace bubble_second {
         bool touchInGrass(const cocos2d::Vec2& touch_point);
         //处理碰撞面准点
         void disposeSightingPointContactBubble(cocos2d::Node* sight_node, cocos2d::Node* other_node);
-        void disposeSightingPointContactBorder(cocos2d::Node* sight_node, cocos2d::Node* other_node);
+        //void disposeSightingPointContactBorder(cocos2d::Node* sight_node, cocos2d::Node* other_node);
         //处理风车转转小球碰到边界
         void disposeWindmillBubbleBorder(cocos2d::Node* border_node, cocos2d::Node* other_node);
         void disposeContactWindmillBorder(cocos2d::Node* node_1, cocos2d::Node* node_2);

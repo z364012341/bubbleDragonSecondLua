@@ -68,6 +68,9 @@ namespace bubble_second {
         //发出闪光
         void bubbleFlash();
         void removeBubbleFlash();
+        //获取速度向量
+        cocos2d::Vec2 getSpeedNormalized();
+        cocos2d::Vec2 getBubbleSpeed();
     protected:
         ColorBubble();
         bool initWithTypeAndCloud(int type, int cloud = kBubbleNoCloud);
@@ -86,6 +89,7 @@ namespace bubble_second {
         cocos2d::Vec2 getImpulseByTouchlocation(cocos2d::Vec2 touch_location);
     private:
         DarkCloudBubble* cloud_bubble_;
+        cocos2d::Vec2 speed_normalized_;
 		//cocos2d::Vec2 shoot_impulse_;
         //cocos2d::Vec2 initial_position_;
         cocos2d::EventListenerCustom* listener_ = nullptr;

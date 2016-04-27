@@ -13,7 +13,7 @@
 const int STANBY_ACTION_TAG = 121;
 const float STANBY_ACTION_TIME = 0.5f;
 const float STANBY_ACTION_RANGE = 3.0f;
-const float BUBBLE_MOVE_SPEED = 100.0f;
+const float BUBBLE_MOVE_SPEED = 1400.0f;
 const std::string COLOR_BUBBLE_FLASH_PATH = "bai.png";
 namespace bubble_second {
     ColorBubble::~ColorBubble()
@@ -298,6 +298,9 @@ namespace bubble_second {
         cocos2d::Vec2 pre_point = this->getPosition();
         for (auto var : reflection_point_component_->getReflectionPoints())
         {
+            actions.pushBack(cocos2d::CallFunc::create([=]() {
+                speed_normalized_ = (var - pre_point).getNormalized();
+            }));
             actions.pushBack(cocos2d::MoveTo::create(pre_point.getDistance(var)/ BUBBLE_MOVE_SPEED, var));
             pre_point = var;
         }
@@ -344,6 +347,16 @@ namespace bubble_second {
         }
         bubble_flash_->removeFromParent();
         bubble_flash_ = nullptr;
+    }
+
+    cocos2d::Vec2 ColorBubble::getSpeedNormalized()
+    {
+        return speed_normalized_;
+    }
+
+    cocos2d::Vec2 ColorBubble::getBubbleSpeed()
+    {
+        return speed_normalized_ * BUBBLE_MOVE_SPEED;
     }
 
     cocos2d::Vec2 ColorBubble::getImpulseByTouchlocation(cocos2d::Vec2 touch_location)

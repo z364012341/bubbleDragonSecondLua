@@ -23,7 +23,6 @@ namespace bubble_second {
     {
         this->setTargetID(MAIN_SIGHTING_DEVICE_TARGET_ID);
         this->setVisible(false);
-        //this->sightingPointMove();
         int device_numble_max = EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME) ?
             BUBBLE_SIGHTING_DEVICE_TOTAL : BUBBLE_SIGHTING_DEVICE_UNUSED_PROPS_TOTAL;
         BubbleSightingDevice* last_device = this;
@@ -35,9 +34,6 @@ namespace bubble_second {
             last_device->setNextSightingDevice(device);
             device->setTargetID(i);
             last_device = device;
-            //remaind_device_.pushBack(device);
-            //device->setVisible(false);
-            //device->sightingPointMove();
         }
     }
 
@@ -45,24 +41,11 @@ namespace bubble_second {
     {
         reflection_point_component_->calculateReflectionPoints(touch_point);
         auto points = reflection_point_component_->getReflectionPoints();
-        //auto angles = reflection_point_component_->getReflectionAngles();
-        //int size = points.size();
-        //float angle = -CC_RADIANS_TO_DEGREES(cocos2d::Vec2(0.0f, 1.0f).getAngle(touch_point - GamePlayController::getInstance()->getShootingInitialPosition()));
         int relection_offset = (int)(points.front().getDistance(GamePlayController::getInstance()->getShootingInitialPosition())) % (int)MAP_BUBBLE_DIAMETER;
         this->getNextSightingDevice()->setReflectionPointOffset(reflection_point_component_->getReflectionoffset());
         this->setDeviceRotation(reflection_point_component_->getReflectionAngles());
         this->getNextSightingDevice()->setDevicePosition(reflection_point_component_->getReflectionPoints());
         this->getNextSightingDevice()->setDevicePointHidden(reflection_point_component_->getHiddenFlags());
-        //this->setRotation(angles.at(0));
-        //for (auto var : remaind_device_)
-        //{
-        //    if (var->getTargetID() < size)
-        //    {
-        //        //angle *= -1;
-        //        var->setPosition(points.at(var->getTargetID()-1));
-        //        var->setRotation(angles.at(var->getTargetID()));
-        //    }
-        //}
     }
     BubbleMainSightingDevice::~BubbleMainSightingDevice()
     {
@@ -96,13 +79,4 @@ namespace bubble_second {
         BubbleSightingDevice::turnOffSightingDevice();
         this->setVisible(false);
     }
-    //void BubbleMainSightingDevice::changePointsColor(BubbleType color)
-    //{
-    //    BubbleSightingDevice::changePointsColor(color);
-    //    for (auto var : remaind_device_)
-    //    {
-    //        var->changePointsColor(color);
-    //    }
-
-    //}
 }
