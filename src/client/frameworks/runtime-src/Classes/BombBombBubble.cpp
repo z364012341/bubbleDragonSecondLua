@@ -17,7 +17,6 @@ namespace bubble_second {
         {
             return false;
         }
-        //this->addBubbleStaticBody();
         this->setBubbleType(kBubbleBombBomb);
         return true;
     }
@@ -29,7 +28,6 @@ namespace bubble_second {
 
     void BombBombBubble::bubbleEliminate(int combo)
     {
-        //this->removeFromParent();
         BaseBubble::bubbleEliminate();
     }
 

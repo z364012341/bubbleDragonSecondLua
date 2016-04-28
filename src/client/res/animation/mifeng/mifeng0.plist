@@ -232,6 +232,44 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
+			<key>high/mifengguai_0010_MiFeng-R-shou.png</key>
+			<dict>
+				<key>width</key>
+				<integer>16</integer>
+				<key>height</key>
+				<integer>18</integer>
+				<key>originalWidth</key>
+				<integer>16</integer>
+				<key>originalHeight</key>
+				<integer>18</integer>
+				<key>x</key>
+				<integer>118</integer>
+				<key>y</key>
+				<integer>35</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>high/mifengguai_0011_MiFeng-L-shou.png</key>
+			<dict>
+				<key>width</key>
+				<integer>16</integer>
+				<key>height</key>
+				<integer>18</integer>
+				<key>originalWidth</key>
+				<integer>16</integer>
+				<key>originalHeight</key>
+				<integer>18</integer>
+				<key>x</key>
+				<integer>190</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
 			<key>high/mifengguai_0013_MiFeng-body.png</key>
 			<dict>
 				<key>width</key>
@@ -251,6 +289,44 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
+			<key>high/mifengguai_0014_MiFeng-R-chibang.png</key>
+			<dict>
+				<key>width</key>
+				<integer>90</integer>
+				<key>height</key>
+				<integer>73</integer>
+				<key>originalWidth</key>
+				<integer>90</integer>
+				<key>originalHeight</key>
+				<integer>73</integer>
+				<key>x</key>
+				<integer>229</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>high/mifengguai_0015_MiFeng-L-chibang.png</key>
+			<dict>
+				<key>width</key>
+				<integer>90</integer>
+				<key>height</key>
+				<integer>73</integer>
+				<key>originalWidth</key>
+				<integer>90</integer>
+				<key>originalHeight</key>
+				<integer>73</integer>
+				<key>x</key>
+				<integer>229</integer>
+				<key>y</key>
+				<integer>75</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
 			<key>middle/mifengguai_0000_MiFeng-yanpi1.png</key>
 			<dict>
 				<key>width</key>
@@ -262,9 +338,9 @@
 				<key>originalHeight</key>
 				<integer>25</integer>
 				<key>x</key>
-				<integer>190</integer>
+				<integer>38</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>195</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -283,7 +359,7 @@
 				<key>x</key>
 				<integer>38</integer>
 				<key>y</key>
-				<integer>195</integer>
+				<integer>222</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -300,7 +376,7 @@
 				<key>originalHeight</key>
 				<integer>72</integer>
 				<key>x</key>
-				<integer>247</integer>
+				<integer>321</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
@@ -321,7 +397,7 @@
 				<key>x</key>
 				<integer>229</integer>
 				<key>y</key>
-				<integer>74</integer>
+				<integer>150</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -338,9 +414,9 @@
 				<key>originalHeight</key>
 				<integer>72</integer>
 				<key>x</key>
-				<integer>323</integer>
+				<integer>321</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>74</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -357,9 +433,47 @@
 				<key>originalHeight</key>
 				<integer>72</integer>
 				<key>x</key>
-				<integer>229</integer>
+				<integer>397</integer>
 				<key>y</key>
-				<integer>148</integer>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0010_MiFeng-R-shou.png</key>
+			<dict>
+				<key>width</key>
+				<integer>16</integer>
+				<key>height</key>
+				<integer>18</integer>
+				<key>originalWidth</key>
+				<integer>16</integer>
+				<key>originalHeight</key>
+				<integer>18</integer>
+				<key>x</key>
+				<integer>208</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0011_MiFeng-L-shou.png</key>
+			<dict>
+				<key>width</key>
+				<integer>16</integer>
+				<key>height</key>
+				<integer>18</integer>
+				<key>originalWidth</key>
+				<integer>16</integer>
+				<key>originalHeight</key>
+				<integer>18</integer>
+				<key>x</key>
+				<integer>95</integer>
+				<key>y</key>
+				<integer>184</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -376,9 +490,47 @@
 				<key>originalHeight</key>
 				<integer>42</integer>
 				<key>x</key>
-				<integer>95</integer>
+				<integer>113</integer>
 				<key>y</key>
 				<integer>184</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0014_MiFeng-R-chibang.png</key>
+			<dict>
+				<key>width</key>
+				<integer>90</integer>
+				<key>height</key>
+				<integer>73</integer>
+				<key>originalWidth</key>
+				<integer>90</integer>
+				<key>originalHeight</key>
+				<integer>73</integer>
+				<key>x</key>
+				<integer>305</integer>
+				<key>y</key>
+				<integer>150</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
+			<key>middle/mifengguai_0015_MiFeng-L-chibang.png</key>
+			<dict>
+				<key>width</key>
+				<integer>90</integer>
+				<key>height</key>
+				<integer>73</integer>
+				<key>originalWidth</key>
+				<integer>90</integer>
+				<key>originalHeight</key>
+				<integer>73</integer>
+				<key>x</key>
+				<integer>397</integer>
+				<key>y</key>
+				<integer>74</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -433,9 +585,9 @@
 				<key>originalHeight</key>
 				<integer>72</integer>
 				<key>x</key>
-				<integer>305</integer>
+				<integer>397</integer>
 				<key>y</key>
-				<integer>74</integer>
+				<integer>149</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -452,9 +604,9 @@
 				<key>originalHeight</key>
 				<integer>72</integer>
 				<key>x</key>
-				<integer>399</integer>
-				<key>y</key>
 				<integer>0</integer>
+				<key>y</key>
+				<integer>250</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -471,9 +623,9 @@
 				<key>originalHeight</key>
 				<integer>20</integer>
 				<key>x</key>
-				<integer>118</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>35</integer>
+				<integer>324</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -490,9 +642,9 @@
 				<key>originalHeight</key>
 				<integer>72</integer>
 				<key>x</key>
-				<integer>305</integer>
+				<integer>76</integer>
 				<key>y</key>
-				<integer>148</integer>
+				<integer>250</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -547,9 +699,9 @@
 				<key>originalHeight</key>
 				<integer>72</integer>
 				<key>x</key>
-				<integer>381</integer>
+				<integer>153</integer>
 				<key>y</key>
-				<integer>74</integer>
+				<integer>183</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -566,9 +718,9 @@
 				<key>originalHeight</key>
 				<integer>18</integer>
 				<key>x</key>
-				<integer>38</integer>
+				<integer>95</integer>
 				<key>y</key>
-				<integer>223</integer>
+				<integer>204</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -585,9 +737,9 @@
 				<key>originalHeight</key>
 				<integer>18</integer>
 				<key>x</key>
-				<integer>229</integer>
+				<integer>95</integer>
 				<key>y</key>
-				<integer>27</integer>
+				<integer>224</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -604,9 +756,9 @@
 				<key>originalHeight</key>
 				<integer>42</integer>
 				<key>x</key>
-				<integer>133</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>184</integer>
+				<integer>344</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -623,9 +775,9 @@
 				<key>originalHeight</key>
 				<integer>73</integer>
 				<key>x</key>
-				<integer>381</integer>
+				<integer>38</integer>
 				<key>y</key>
-				<integer>148</integer>
+				<integer>324</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -642,9 +794,9 @@
 				<key>originalHeight</key>
 				<integer>73</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>152</integer>
 				<key>y</key>
-				<integer>243</integer>
+				<integer>257</integer>
 				<key>offsetX</key>
 				<real>0</real>
 				<key>offsetY</key>
@@ -660,14 +812,14 @@
 			<key>realTextureFileName</key>
 			<string>mifeng0.png</string>
 			<key>size</key>
-			<string>{1024,1024}</string>
+			<string>{1024,2048}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
 			<integer>1024</integer>
 			<key>height</key>
-			<integer>1024</integer>
+			<integer>2048</integer>
 		</dict>
 	</dict>
 </plist>

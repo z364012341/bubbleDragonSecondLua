@@ -73,6 +73,7 @@ namespace bubble_second {
     {
         BubbleSightingDevice::turnOnSightingDevice();
         this->setVisible(true);
+ 
     }
     void BubbleMainSightingDevice::turnOffSightingDevice()
     {

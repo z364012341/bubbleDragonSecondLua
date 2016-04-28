@@ -15,6 +15,7 @@ const float STANBY_ACTION_TIME = 0.5f;
 const float STANBY_ACTION_RANGE = 3.0f;
 const float BUBBLE_MOVE_SPEED = 1400.0f;
 const std::string COLOR_BUBBLE_FLASH_PATH = "bai.png";
+const std::string COLOR_BUBBLE_ELIMINATE_PARTICLE_PATH = "particle/qipaotx.plist";
 namespace bubble_second {
     ColorBubble::~ColorBubble()
     {
@@ -82,8 +83,6 @@ namespace bubble_second {
 
         float impulse_x = cocos2d::random(BUBBLE_DOWN_FROM_AIR_IMPULSE_MIN_X, BUBBLE_DOWN_FROM_AIR_IMPULSE_MAX_X);
         float impulse_y = cocos2d::random(BUBBLE_DOWN_FROM_AIR_IMPULSE_MIN_Y, BUBBLE_DOWN_FROM_AIR_IMPULSE_MAX_Y);
-        //static int n = 0;
-        //CCLOG("%d, x: %f, y:%f, type: %d", ++n, this->getPositionX(), this->getPositionY(), this->getBubbleType());
         cocos2d::Vec2 impulse(impulse_x, impulse_y*2);
         auto body = this->getPhysicsBody();
         float torque = BUBBLE_DOWN_FROM_AIR_TORQUE;
@@ -95,9 +94,6 @@ namespace bubble_second {
         }
         body->applyImpulse(impulse*zoom);
         body->setAngularVelocity(angular_v);
-        //this->delayNotCollision();
-		//this->setName(MAP_BUBBLE_NAME);
-        //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ADD_AIR_BUBBLE_NUMBLE);
 		this->dispatchCustomAddAirBubbleNumbleEvent();
     }
 
@@ -105,7 +101,6 @@ namespace bubble_second {
 	{
 		this->setName(MAP_BUBBLE_NAME);
 		cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ADD_AIR_BUBBLE_NUMBLE);
-        //AirBubbleManager::getInstance()->addAirBubble(this);
 	}
 
     void ColorBubble::addBubbleDynamicBody()
@@ -129,23 +124,28 @@ namespace bubble_second {
 
     void ColorBubble::playEliminateEffect()
     {
-        cocostudio::Armature* armature = cocostudio::Armature::create(COLOR_BUBBLE_ELIMINATE_EFFECT_NAME);
-        armature->setPosition(this->getPosition());
-        armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-        armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature* armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-            if (movementType == cocostudio::COMPLETE)
-            {
-                armature->removeFromParent();
-            }
-        });
-        this->getParent()->addChild(armature);
-        //BaseBubble::bubbleEliminate();
-        cocos2d::ScaleTo* scaleto = cocos2d::ScaleTo::create(BUBBLE_ELIMINATE_DELAY_TIME, BUBBLE_ELIMINATE_SCALETO);
-        cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(scaleto, cocos2d::CallFunc::create([=]() {
-            BaseBubble::bubbleEliminate();
-            //this->removeFromParent();
-        }));
-        this->runAction(seq);
+        //cocostudio::Armature* armature = cocostudio::Armature::create(COLOR_BUBBLE_ELIMINATE_EFFECT_NAME);
+        //armature->setPosition(this->getPosition());
+        //armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        //armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature* armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+        //    if (movementType == cocostudio::COMPLETE)
+        //    {
+        //        armature->removeFromParent();
+        //    }
+        //});
+        //this->getParent()->addChild(armature);
+        ////BaseBubble::bubbleEliminate();
+        //cocos2d::ScaleTo* scaleto = cocos2d::ScaleTo::create(BUBBLE_ELIMINATE_DELAY_TIME, BUBBLE_ELIMINATE_SCALETO);
+        //cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(scaleto, cocos2d::CallFunc::create([=]() {
+        //    BaseBubble::bubbleEliminate();
+        //    this->removeFromParent();
+        //}));
+        //this->runAction(seq);
+        cocos2d::ParticleSystemQuad* particle = cocos2d::ParticleSystemQuad::create(COLOR_BUBBLE_ELIMINATE_PARTICLE_PATH);
+        particle->setTexture(this->getTexture());
+        particle->setPosition(this->getPosition());
+        this->getParent()->addChild(particle);
+        BaseBubble::bubbleEliminate();
     }
 
     void ColorBubble::shootAfterVictory()

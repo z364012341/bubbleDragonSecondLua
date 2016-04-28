@@ -53,6 +53,8 @@ namespace bubble_second {
     private:
         ScoreWidget();
         bool initWithType(const ScoreWidgetType& type);
+        //增加组件
+        void addAnimationComponent();
         void initPopScoreLabel();
         void setType(const ScoreWidgetType& type);
         //获取撞击增加的分数
@@ -62,7 +64,9 @@ namespace bubble_second {
         //cocos2d::LabelAtlas* getPopScoreLabel();
         //void setPopScoreLabel(cocos2d::LabelAtlas* label);
         //撞击特效
-        void runContactAction(int score);
+        void playContactAnimation(int score);
+        //待机动画
+        void playStandbyAnimation();
         //添加动画
         void addArmature();
         //播放飞行动画

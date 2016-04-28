@@ -138,11 +138,15 @@ namespace bubble_second {
 
     void BubbleSightingDevice::setVisible(bool visible)
     {
-        cocos2d::Node::setVisible(visible && this->isDeviceOnStage());
-        if (sight_device_ != nullptr)
-        {
-            sight_device_->setVisible(visible);
-        }
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.05), cocos2d::CallFunc::create([=]() {     
+            cocos2d::Node::setVisible(visible && this->isDeviceOnStage());
+            if (sight_device_ != nullptr)
+            {
+                sight_device_->setVisible(visible);
+            }
+
+        })));
+
     }
 
     void BubbleSightingDevice::deviceGoAway()
@@ -165,7 +169,7 @@ namespace bubble_second {
 
     void BubbleSightingDevice::performSightingDevice()
     {
-        this->turnOnDeviceOnce();
+       // this->turnOnDeviceOnce();
         this->stopDevicePoint();
         this->schedule([=](float) {
             float angle = this->getRotation();
@@ -199,20 +203,20 @@ namespace bubble_second {
         return is_hide_point_;
     }
 
-    void BubbleSightingDevice::turnOnDeviceOnce(int device_numble)
-    {
-        this->setTargetID(device_numble);
-        this->setVisible(false);
-        this->sightingPointMove();
-        int device_numble_max = EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME) ?
-            BUBBLE_SIGHTING_DEVICE_TOTAL : BUBBLE_SIGHTING_DEVICE_UNUSED_PROPS_TOTAL;
-        if (this->getTargetID() < device_numble_max)
-        {
-            sight_device_ = BubbleSightingDevice::create();
-            this->addChild(sight_device_);
-            sight_device_->turnOnDeviceOnce(this->getTargetID()+1);
-        }
-    }
+    //void BubbleSightingDevice::turnOnDeviceOnce(int device_numble)
+    //{
+    //    this->setTargetID(device_numble);
+    //    //this->setVisible(false);
+    //    this->sightingPointMove();
+    //    int device_numble_max = EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME) ?
+    //        BUBBLE_SIGHTING_DEVICE_TOTAL : BUBBLE_SIGHTING_DEVICE_UNUSED_PROPS_TOTAL;
+    //    if (this->getTargetID() < device_numble_max)
+    //    {
+    //        sight_device_ = BubbleSightingDevice::create();
+    //        this->addChild(sight_device_);
+    //        sight_device_->turnOnDeviceOnce(this->getTargetID()+1);
+    //    }
+    //}
 
     void BubbleSightingDevice::sightingPointMove()
     {
@@ -278,14 +282,15 @@ namespace bubble_second {
     {
         for (auto var : sighting_points_)
         {
-            bool need_hidden = this->isSightingPointsNeedHidden(var->getPosition()) && this->isDeviceOnStage();
-            var->setPointEnabled(!need_hidden);
+            bool visible = (!this->isSightingPointsNeedHidden(var->getPosition())) && this->isDeviceOnStage();
+            var->setPointEnabled(visible);
         }
 
         bool contact_bubble = this->isContactBubble();
-        if (sight_device_ && contact_bubble)
+        if (sight_device_&&contact_bubble)
         {
-            sight_device_->setVisible(!contact_bubble);
+            //sight_device_->setVisible(!contact_bubble);
+            sight_device_->turnOffSightingDevice();
         }
 
     }
@@ -308,7 +313,8 @@ namespace bubble_second {
     {
         if (sight_device_)
         {
-            sight_device_->setVisible(false);
+            //sight_device_->setVisible(false);
+            sight_device_->turnOffSightingDevice();
         }
     }
 

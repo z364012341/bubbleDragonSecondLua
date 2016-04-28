@@ -42,6 +42,7 @@ namespace bubble_second {
         }
         using cocostudio::ArmatureDataManager;
         using cocostudio::Armature;
+        this->setVisible(false);
         Armature *armature = Armature::create(ONE_ROUND_BOMB_EFFECT_NAME);
         armature->setPosition(this->getPosition());
         armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);

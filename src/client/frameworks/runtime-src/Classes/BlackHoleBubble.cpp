@@ -28,24 +28,12 @@ namespace bubble_second {
             return false;
         }
         swallow_times_ = 0;
-        //this->addBubbleStaticBody();
         this->setBubbleType(kBubbleBlackHole);
         return true;
     }
 
     void BlackHoleBubble::swallowBubble(BaseBubble* bubble)
     {
-		//bubble->setName(MAP_BUBBLE_NAME);
-        //bubble->removeFromParent();
-        //BaseBubble* b = bubble->clone();
-		//bubble->getPhysicsBody()->setResting(true);
-		//cocos2d::PhysicsBody* body = bubble->getPhysicsBody();
-		//body->setEnabled(false);
-		//bubble->removeComponent(body);
-		//body->removeFromWorld();
-        //bubble->setPhysicsBody(nullptr);
-        //this->addChild(bubble, 2);
-
         cocos2d::Vec2 bubble_relative_point = this->convertToNodeSpaceAR(bubble->getParent()->convertToWorldSpaceAR(bubble->getPosition()));
         BaseBubble* swallow_bubble = bubble->clone();
         bubble->removeFromParent();
@@ -61,7 +49,6 @@ namespace bubble_second {
     void bubble_second::BlackHoleBubble::playAchimedeanSpiralAction(BaseBubble* bubble)
     {
         //基于阿基米德螺线的实现
-
         cocos2d::Vec2 bubble_relative_point = bubble->getPosition();
         float distance = bubble_relative_point.distance(cocos2d::Vec2::ZERO);
         float a = 1.0f;
@@ -80,7 +67,6 @@ namespace bubble_second {
             float r = a + b*local_theta;
             cocos2d::Vec2 point = cocos2d::Vec2(r*cos(CC_DEGREES_TO_RADIANS(local_theta + begin_theta)), r*sin(CC_DEGREES_TO_RADIANS(local_theta + begin_theta)));
             point_array->insertControlPoint(point, 0);
-            //cocos2d::log("x:%f, y:%f", point.x, point.y);
         }
         cocos2d::CardinalSplineTo* achimedeanSpiralAction = cocos2d::CardinalSplineTo::create(BLACKHOLE_BUBBLE_SWALLOW_TIME, point_array, 0);
         cocos2d::EaseOut* ease = cocos2d::EaseOut::create(achimedeanSpiralAction, 1.5f);
@@ -90,7 +76,6 @@ namespace bubble_second {
         cocos2d::Vector<cocos2d::FiniteTimeAction*> action_vector;
         action_vector.pushBack(spawn);
         action_vector.pushBack(cocos2d::CallFunc::create([=]() {
-            //bubble->removeFromParent();
             bubble->setVisible(false);
         }));
         cocos2d::Sequence* seq = cocos2d::Sequence::create(action_vector);
@@ -106,28 +91,29 @@ namespace bubble_second {
 
     void BlackHoleBubble::bubbleEliminate(int combo)
     {
-        cocostudio::Armature* armature = cocostudio::Armature::create(BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME);
-        armature->getAnimation()->playWithIndex(0);
-        armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-            if (movementType == cocostudio::COMPLETE)
-            {
-                armature->removeFromParent();
-                //this->removeFromParent();
-                BaseBubble::bubbleEliminate();
-            }
-        });
-        armature->setPosition(this->getPosition());
-        this->getParent()->addChild(armature);
-        //for (auto var : swallow_vector_)
-        //{
-        //    var->removeFromParent();
-        //}
 
+
+        cocos2d::ScaleTo* scale1 = cocos2d::ScaleTo::create(0.2f, 0.85f);
+        cocos2d::ScaleTo* scale2 = cocos2d::ScaleTo::create(0.2f, 1.2f);
+        cocos2d::Sequence* seq = cocos2d::Sequence::create(scale1, scale2, cocos2d::CallFunc::create([=]() {
+            cocostudio::Armature* armature = cocostudio::Armature::create(BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME);
+            armature->getAnimation()->playWithIndex(0);
+            armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+                if (movementType == cocostudio::COMPLETE)
+                {
+                    armature->removeFromParent();
+                }
+            });
+            armature->setPosition(this->getPosition());
+            this->getParent()->addChild(armature);
+            BaseBubble::bubbleEliminate();
+        }), nullptr);
+        this->runAction(seq);
     }
 
     void BlackHoleBubble::downFromAir()
     {
-        this->removeFromParent();
+        this->bubbleEliminate();
     }
 
     void BlackHoleBubble::swallowBubbleOnce( )
@@ -155,12 +141,10 @@ namespace bubble_second {
 
     void BlackHoleBubble::setBubbleTexture(BubbleType type)
     {   
-        //BaseBubble::setBubbleTexture(type);
         using cocostudio::ArmatureDataManager;
         using cocostudio::Armature;
         armature_ = Armature::create(BLACK_HOLE_BUBBLE_EFFECT_NAME);
         armature_->getAnimation()->play(BLACK_HOLE_STANDBY_ANIMATION_NAME);
-        //armature_->getAnimation()->setSpeedScale(1.3f);
         this->addChild(armature_, 1);
     }
 

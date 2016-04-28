@@ -64,7 +64,6 @@ namespace bubble_second {
             armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
                 if (movementType == cocostudio::COMPLETE)
                 {
-                    //armature_->getAnimation()->setMovementEventCallFunc(nullptr);
                     if (animation_end_func_ != nullptr)
                     {
                         animation_end_func_();

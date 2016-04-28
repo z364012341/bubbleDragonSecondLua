@@ -23,11 +23,6 @@ namespace bubble_second {
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CANCEL_BUBBLE_BOMB_PROPS, this);
     }
 
-    //void ColorBombProperty::haveUsedColorBombBubble(cocos2d::EventCustom*)
-    //{
-    //    this->setPropsState(kNotUsed);
-    //}
-
     bool ColorBombProperty::init()
     {
         if (!BaseProperty::init())

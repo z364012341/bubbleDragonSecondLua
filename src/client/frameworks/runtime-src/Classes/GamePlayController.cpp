@@ -248,11 +248,23 @@ namespace bubble_second {
 
 	void GamePlayController::dispatchShootEvent(const cocos2d::Vec2& touch_location)
 	{
-        dynamic_cast<ColorBubble*>(prepare_bubble_)->setShootPoints(touch_location);
-        float angle = this->getTouchAngleForPrepareBubble(touch_location);
+        cocos2d::Vec2 touch_point = this->getRealTouchPoint(touch_location);
+        dynamic_cast<ColorBubble*>(prepare_bubble_)->setShootPoints(touch_point);
+        float angle = this->getTouchAngleForPrepareBubble(touch_point);
 		cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SHOOT_PREPARE_BUBBLE, &angle);
 		this->setBubbleShootEnabled(false);
 	}
+
+    cocos2d::Vec2 bubble_second::GamePlayController::getRealTouchPoint(const cocos2d::Vec2 & touch_location)
+    {
+        cocos2d::Vec2 touch_point = touch_location;
+        if (this->isTouchUnderside())
+        {
+
+            touch_point.rotate(this->getShootingInitialPosition(), CC_DEGREES_TO_RADIANS(180.0f));
+        }
+        return touch_point;
+    }
 
     void GamePlayController::shootPrepareBubble()
     {
@@ -569,12 +581,7 @@ namespace bubble_second {
         {
             float angle = this->getTouchAngleForPrepareBubble(this->convertGLToNodeSpace(touch_point, prepare_bubble_->getParent()));
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ROTATE_SIGHTING_DEVICE, &angle);
-            cocos2d::Vec2 touch_point = touch_location;
-            if (this->isTouchUnderside())
-            {
-
-                touch_point.rotate(this->getShootingInitialPosition(), CC_DEGREES_TO_RADIANS(180.0f));
-            }
+            cocos2d::Vec2 touch_point = this->getRealTouchPoint(touch_location);
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_MAIN_ROTATE_SIGHTING_DEVICE, &touch_point);
             this->turnOnSightingDevice();
         }
@@ -606,10 +613,6 @@ namespace bubble_second {
 		cocos2d::Vec2 pre_point = game_scene_delegate_->getPrepareBubbleOrigin();
         //int direction = touch_location.x > pre_point.x? 1: -1;
         float device_angle = (90.0f - angle);// *direction;
-        if (this->isTouchUnderside())
-        {
-            device_angle = device_angle - 180.0f /* direction*/;
-        }
         return device_angle;
     }
 

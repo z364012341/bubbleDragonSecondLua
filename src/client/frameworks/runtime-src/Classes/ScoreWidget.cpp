@@ -2,11 +2,15 @@
 #include "ScoreWidgetManager.h"
 #include "GameScoreController.h"
 #include "SmartScaleController.h"
-//#include "XMLTool.h"
+#include "GameNoneBubbleDownAnimationComponent.h"
 #include "PopScoreLabelComponent.h"
 const std::string SCOREWIDGET_ARMATURE_NAME = "mifeng";
 const std::string SCOREWIDGET_ANIMATION_FLYING_NAME = "daiji"; //飞的动画
+const std::string BUBBLE_ANIMATION_STANDBY_NAME = "daiji-zhayan";
 const std::string SCOREWIDGET_ANIMATION_CONTACT_NAME = "shouji"; //碰到的动画
+const std::string SCOREWIDGET_ANIMATION_REMOVE_NAME = "siwang";
+const std::string BUBBLE_ANIMATION_LOOK_NAME_1 = "shangxiakan";
+const std::string BUBBLE_ANIMATION_LOOK_NAME_2 = "zuoyoukan";
 const float SCOREWIDGET_ARMATURE_SCALE = 0.5;
 namespace bubble_second {
     ScoreWidget::ScoreWidget() :widget_combo_(0), armature_(nullptr)
@@ -30,13 +34,20 @@ namespace bubble_second {
         {
             return false;
         }
-        //pop_score_label_ = nullptr;
         this->addArmature();
         this->setType(type);
         this->setName(SCORE_WIDGET_NAME);
         this->initPopScoreLabel();
         armature_->setScale(SCOREWIDGET_ARMATURE_SCALE);
         return true;
+    }
+
+    void ScoreWidget::addAnimationComponent()
+    {
+        std::vector<std::string> names;
+        names.push_back(BUBBLE_ANIMATION_LOOK_NAME_1);
+        names.push_back(BUBBLE_ANIMATION_LOOK_NAME_2);
+        this->addChild(GameNoneBubbleDownAnimationComponent::createRandomPlayAnimation(armature_, names, CC_CALLBACK_0(ScoreWidget::playStandbyAnimation, this)));
     }
 
     void ScoreWidget::initPopScoreLabel()
@@ -54,22 +65,18 @@ namespace bubble_second {
         {
             body->removeFromWorld();
         }
-        cocos2d::MoveBy* move = cocos2d::MoveBy::create(SCOREWIDGET_FLY_OUT_TIME,
-            cocos2d::Vec2(0, cocos2d::Director::getInstance()->getVisibleSize().height) / SmartScaleController::getInstance()->getPlayAreaZoom());
-        cocos2d::Sequence* seq = cocos2d::Sequence::create(move, cocos2d::CallFunc::create([=]() {
-            this->removeFromParent();
-        }), nullptr);
-        this->runAction(seq);
+        armature_->getAnimation()->play(SCOREWIDGET_ANIMATION_REMOVE_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+            if (movementType == cocostudio::COMPLETE)
+            {
+                this->removeFromParent();
+            }
+        });
     }
     void ScoreWidget::setType(const ScoreWidgetType& type)
     {
         type_ = type;
         ScoreWidgetManager::getInstance()->changeScoreWidgetArmatureDisplay(armature_, type_);
-        //armature_->setColor(ScoreWidgetManager::getInstance()->getWidgetColorWithType(type_));
-        //for (auto var : ScoreWidgetManager::getInstance()->getWidgetBonePathMap())
-        //{
-        //    armature_->getBone(var.first)->changeDisplayWithIndex((int)type, true);
-        //}
     }
 
     void ScoreWidget::addPhysicsBody()
@@ -123,16 +130,6 @@ namespace bubble_second {
         combo_flag_ = false;
     }
 
-    //cocos2d::LabelAtlas * ScoreWidget::getPopScoreLabel()
-    //{
-    //    return pop_score_label_;
-    //}
-
-    //void ScoreWidget::setPopScoreLabel(cocos2d::LabelAtlas* label)
-    //{
-    //    pop_score_label_ = label;
-    //}
-
     void ScoreWidget::comboClear()
     {
         widget_combo_ = ScoreWidgetManager::getInstance()->getScoreWidgetTotalWithType(type_);
@@ -144,7 +141,7 @@ namespace bubble_second {
         this->addOneCombo();
         int score = this->getContactScore();
         GameScoreController::getInstance()->addScoreWithNumble(score);
-        this->runContactAction(score);
+        this->playContactAnimation(score);
     }
 
     int ScoreWidget::getContactScore()
@@ -152,9 +149,8 @@ namespace bubble_second {
         return type_to_score_[type_]*widget_combo_;
     }
 
-    void ScoreWidget::runContactAction(int score)
+    void ScoreWidget::playContactAnimation(int score)
     {  
-        //auto b = canPlayingContactAnimation();
         if (canPlayingContactAnimation())
         {
 
@@ -164,91 +160,43 @@ namespace bubble_second {
                 if (movementType == cocostudio::COMPLETE)
                 {
                     this->setPlayContactAnimationEnabled(true);
+                    this->playStandbyAnimation();
                 }
             });
         }
         label_component_->popLabelWithScore(score);
-        //else
-        //{
-        //    auto label = this->getPopScoreLabel();
-        //    if (label)
-        //    {
-        //        //std::string str = label->getString();
-        //        //std::stringstream out;
-        //        //out << str;
-        //        //int score = 0;
-        //        //out >> score;
-        //        this->updatePopScoreLabel(XMLTool::convertStringToInt(label->getString()));
-        //    }
-        //}
+    }
+
+    void ScoreWidget::playStandbyAnimation()
+    {
+        std::vector<std::string> names;
+        names.push_back(SCOREWIDGET_ANIMATION_FLYING_NAME);
+        names.push_back(SCOREWIDGET_ANIMATION_FLYING_NAME);
+        names.push_back(SCOREWIDGET_ANIMATION_FLYING_NAME);
+        names.push_back(SCOREWIDGET_ANIMATION_FLYING_NAME);
+        names.push_back(SCOREWIDGET_ANIMATION_FLYING_NAME);
+        names.push_back(SCOREWIDGET_ANIMATION_FLYING_NAME);
+        names.push_back(SCOREWIDGET_ANIMATION_FLYING_NAME);
+        names.push_back(BUBBLE_ANIMATION_STANDBY_NAME);
+        armature_->getAnimation()->playWithNames(names);
+        armature_->getAnimation()->setMovementEventCallFunc(nullptr);
     }
 
     void ScoreWidget::addArmature()
     {
         armature_ = cocostudio::Armature::create(SCOREWIDGET_ARMATURE_NAME);
         this->addChild(armature_);
-
-
-        //for (auto var1: ScoreWidgetManager::getInstance()->getWidgetBonePathMap())
-        //{
-        //    for (auto var2 : var1.second)
-        //    {
-        //        //cocostudio::Skin *skin = cocostudio::Skin::create(var2.second);
-        //        //armature_->getBone(var1.first)->addDisplay(skin, (int)var2.first);
-        //    }
-        //}
-        //this->setType(kScoreWidgetHigh);
-        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("mifeng\\high\\mifengguai_0003_MiFeng-tou4.png"), 0);
-        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("mifeng/high/mifengguai_0009_MiFeng-tou1.png"), 1);
-        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("mifeng/high/mifengguai_0004_MiFeng-tou3.png"), 2);
-        //armature_->getBone("Layer17")->addDisplay(cocostudio::Skin::create("mifeng/high/mifengguai_0006_MiFeng-tou2.png"), 3);
+        this->addAnimationComponent();
     }
 
     void ScoreWidget::playFlyingAnimation(float duration)
     {
         armature_->getAnimation()->play(SCOREWIDGET_ANIMATION_FLYING_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, true);
         cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(duration), cocos2d::CallFunc::create([=]() {
-            armature_->getAnimation()->stop();
-            armature_->getAnimation()->play(SCOREWIDGET_ANIMATION_FLYING_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+            this->playStandbyAnimation();
         }));
         armature_->runAction(seq);
     }
-
-    //void ScoreWidget::updatePopScoreLabel(int score)
-    //{
-        //std::stringstream out;
-        //out << score;
-        //std::string str = "";
-        //out >> str;
-        //auto score_label = this->getPopScoreLabel();
-        //if (score_label)
-        //{
-        //    score_label->setString(str);
-        //}
-        //else
-        //{
-        //    score_label = cocos2d::LabelAtlas::create(
-        //        str, POP_SCORE_CHARMAP_PATH, POP_SCORE_CHARMAP_ITEMWIDTH, POP_SCORE_CHARMAP_ITEMHEIGHT, '.');
-        //    score_label->setAnchorPoint(POP_SCORE_ANCHORPOINT);
-        //    score_label->setPosition(0.0f, 30.0f);
-        //    score_label->setScale(POP_SCORE_INITIAL_SCALE);
-        //    this->addChild(score_label);
-        //    cocos2d::ScaleTo* scaleto_1 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_1_TIME, POP_SCORE_SCALETO_1_NUMBLE);
-        //    cocos2d::ScaleTo* scaleto_2 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_2_TIME, POP_SCORE_SCALETO_2_NUMBLE);
-        //    cocos2d::ScaleTo* scaleto_3 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_3_TIME, POP_SCORE_SCALETO_3_NUMBLE);
-        //    cocos2d::ScaleTo* scaleto_4 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_4_TIME, POP_SCORE_SCALETO_4_NUMBLE);
-        //    cocos2d::ScaleTo* scaleto_5 = cocos2d::ScaleTo::create(POP_SCORE_SCALETO_5_TIME, POP_SCORE_SCALETO_5_NUMBLE);
-        //    cocos2d::MoveBy* move = cocos2d::MoveBy::create(POP_SCOREWIDGET_SCORE_MOVE_TIME, POP_SCOREWIDGET_SCORE_MOVE_VEC2);
-        //    cocos2d::Sequence* seq_1 = cocos2d::Sequence::create(move, cocos2d::CallFunc::create([=]() {
-        //        score_label->removeFromParent();
-        //        this->setPopScoreLabel(nullptr);
-        //    }), NULL);
-        //    cocos2d::Sequence* seq_2 = cocos2d::Sequence::create(scaleto_1, scaleto_2, scaleto_3, scaleto_4, scaleto_5, NULL);
-        //    cocos2d::Spawn* spawn = cocos2d::Spawn::createWithTwoActions(seq_1, seq_2);
-        //    score_label->runAction(spawn);
-        //    this->setPopScoreLabel(score_label);
-        //}
-    //}
 
     bool ScoreWidget::canPlayingContactAnimation()
     {

@@ -107,6 +107,8 @@ namespace bubble_second {
     private:
         //把准备的小球发射出去
 		void dispatchShootEvent(const cocos2d::Vec2& touch_location);
+        //根据方向获取点击的真正位置
+        cocos2d::Vec2 getRealTouchPoint(const cocos2d::Vec2& touch_location);
         //根据输入的参数来分离两个node
         cocos2d::Vector<cocos2d::Node*> separateContactNodeWithName(const std::string& name, 
             cocos2d::Node* node_a, cocos2d::Node* node_b);

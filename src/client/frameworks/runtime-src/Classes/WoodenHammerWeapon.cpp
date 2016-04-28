@@ -21,10 +21,13 @@ namespace bubble_second {
             if (movementType == cocostudio::COMPLETE)
             {
                 BaseWeapon::attackBubble();
-                GamePlayController::getInstance()->disposeUseWoodenHammer();
+
                 GamePlayController::getInstance()->setBubbleShootEnabled(true);
             }
         });
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.625f), cocos2d::CallFunc::create([=]() {
+            GamePlayController::getInstance()->disposeUseWoodenHammer();
+        })));
     }
 
     bool WoodenHammerWeapon::init()

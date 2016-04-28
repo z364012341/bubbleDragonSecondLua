@@ -25,7 +25,7 @@ namespace bubble_second {
         //void contactWorldBorder();
         void contactBubble();
         //打开设备
-        virtual void turnOnDeviceOnce(int device_numble = 0);
+        //virtual void turnOnDeviceOnce(int device_numble = 0);
         //改变颜色
         void changePointsColor(BubbleType color);
         //是否碰到顶部边界
@@ -65,14 +65,13 @@ namespace bubble_second {
     protected:
         BubbleSightingDevice();
         virtual bool init();
-
+        //控制point的显示
+        void setSightingPointsVisibled();
     private:
         //加入刚体来进行是否碰到小球之后使剩余线消失的判断, 碰到边界剩余显示
         //void addPhysicsBody();
         //获取下一级面准线的位置
         //cocos2d::Vec2 getReflectionPoint();
-        //控制point的显示
-        void setSightingPointsVisibled();
         //计算瞄准点的最小位置y
         float getSightingPointsMinPositionY();
         //判断是否瞄到

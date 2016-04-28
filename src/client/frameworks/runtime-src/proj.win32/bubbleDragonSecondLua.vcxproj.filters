@@ -334,6 +334,7 @@
     <ClInclude Include="..\Classes\StageTypeLogo.h" />
     <ClInclude Include="..\Classes\BubbleReflectionPointComponent.h" />
     <ClInclude Include="..\Classes\BubbleMainSightingDevice.h" />
+    <ClInclude Include="..\Classes\GameNoneBubbleDownAnimationComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -645,6 +646,7 @@
     <ClCompile Include="..\Classes\StageTypeLogo.cpp" />
     <ClCompile Include="..\Classes\BubbleReflectionPointComponent.cpp" />
     <ClCompile Include="..\Classes\BubbleMainSightingDevice.cpp" />
+    <ClCompile Include="..\Classes\GameNoneBubbleDownAnimationComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
