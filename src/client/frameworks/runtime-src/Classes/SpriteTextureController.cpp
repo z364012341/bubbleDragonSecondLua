@@ -32,6 +32,7 @@ const std::string WOODEN_HAMMER_WEAPON_ARMATURE_NAME = "chuizi/chuizi.ExportJson
 const std::string STAVES_WEAPON_ARMATURE_NAME = "fazhang/fazhang.ExportJson";
 const std::string ADD_TEN_BUBBLE_NUMBLE_ARMATURE_NAME = "jiabudaoju/jiabudaoju.ExportJson";
 const std::string AIMING_LINE_COMMODITY_ARMATURE_NAME = "miaozhunxian/miaozhunxian.ExportJson";
+const std::string TWO_ROUND_BOMB_EFFECT_PATH = "zhadanTX/zhadanTX.ExportJson"; //炸2圈特效的路径
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()

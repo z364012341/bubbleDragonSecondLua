@@ -4,15 +4,15 @@
     {
       "strVersion": "1.6.0.0",
       "version": 1.6,
-      "name": "zhadan02-TX",
+      "name": "zhadanTX",
       "bone_data": [
         {
-          "name": "Layer3",
+          "name": "Layer8",
           "parent": "",
-          "dI": 5,
-          "x": 51.666679382324219,
-          "y": -34.807403564453125,
-          "z": 2,
+          "dI": -1,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 4,
           "cX": 1.0,
           "cY": 1.0,
           "kX": 0.0,
@@ -23,7 +23,7 @@
           "bl": 0,
           "display_data": [
             {
-              "name": "ga-mng01.png",
+              "name": "新建文件夹 (14)/zhdanTX_0000_1.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -37,7 +37,7 @@
               ]
             },
             {
-              "name": "ga-mng02.png",
+              "name": "新建文件夹 (14)/zhdanTX_0001_2.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -51,7 +51,7 @@
               ]
             },
             {
-              "name": "ga-mng03.png",
+              "name": "新建文件夹 (14)/zhdanTX_0002_3.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -65,7 +65,7 @@
               ]
             },
             {
-              "name": "ga-mng04.png",
+              "name": "新建文件夹 (14)/zhdanTX_0003_4.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -79,7 +79,7 @@
               ]
             },
             {
-              "name": "ga-mng05.png",
+              "name": "新建文件夹 (14)/zhdanTX_0004_5.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -93,7 +93,7 @@
               ]
             },
             {
-              "name": "ga-mng06.png",
+              "name": "新建文件夹 (14)/zhdanTX_0005_6.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -109,12 +109,12 @@
           ]
         },
         {
-          "name": "Layer2",
+          "name": "Layer1",
           "parent": "",
-          "dI": 7,
-          "x": 0.0,
-          "y": 0.0,
-          "z": 1,
+          "dI": -1,
+          "x": 44.117641448974609,
+          "y": 41.76470947265625,
+          "z": 3,
           "cX": 1.0,
           "cY": 1.0,
           "kX": 0.0,
@@ -125,7 +125,7 @@
           "bl": 0,
           "display_data": [
             {
-              "name": "taqing_bow_1.png",
+              "name": "zhdanTX_0001_zhadanhuoguang.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -137,93 +137,27 @@
                   "kY": 0.0
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "name": "Layer3",
+          "parent": "",
+          "dI": -1,
+          "x": 15.232665061950684,
+          "y": 9.8888521194458,
+          "z": 2,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
             {
-              "name": "taqing_bow_2.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "taqing_bow_3.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "taqing_bow_4.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "taqing_bow_5.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "taqing_bow_6.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "taqing_bow_7.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "taqing_bow_8.png",
+              "name": "zhdanTX_0001.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -243,25 +177,25 @@
   ],
   "animation_data": [
     {
-      "name": "zhadan02-TX",
+      "name": "zhadanTX",
       "mov_data": [
         {
-          "name": "Animation1",
-          "dr": 13,
+          "name": "ranshao",
+          "dr": 3,
           "lp": true,
           "to": 0,
           "drTW": 0,
           "twE": 0,
-          "sc": 0.166666672,
+          "sc": 0.4,
           "mov_bone_data": [
             {
-              "name": "Layer3",
+              "name": "Layer1",
               "dl": 0.0,
               "frame_data": [
                 {
                   "dI": 0,
-                  "x": -49.999996185302734,
-                  "y": 30.0,
+                  "x": 0.0,
+                  "y": 0.0,
                   "z": 0,
                   "cX": 1.0,
                   "cY": 1.0,
@@ -274,105 +208,24 @@
                   "bd_dst": 771
                 },
                 {
-                  "dI": 1,
-                  "x": -49.999996185302734,
-                  "y": 30.0,
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
                   "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 1,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 2,
-                  "x": -49.999996185302734,
-                  "y": 30.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
+                  "cX": 0.7,
+                  "cY": 0.7,
+                  "kX": 1.60247207,
+                  "kY": -1.60247207,
                   "fi": 2,
                   "twE": 0,
                   "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 3,
-                  "x": -49.999996185302734,
-                  "y": 30.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 3,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 4,
-                  "x": -49.999996185302734,
-                  "y": 30.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 4,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 5,
-                  "x": -49.999996185302734,
-                  "y": 30.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 5,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 5,
-                  "x": -49.999996185302734,
-                  "y": 30.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 12,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "color": {
-                    "a": 0,
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                  },
                   "bd_src": 1,
                   "bd_dst": 771
                 }
               ]
             },
             {
-              "name": "Layer2",
+              "name": "Layer3",
               "dl": 0.0,
               "frame_data": [
                 {
@@ -380,8 +233,8 @@
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
-                  "cX": 2.5,
-                  "cY": 2.5,
+                  "cX": 1.0,
+                  "cY": 1.0,
                   "kX": 0.0,
                   "kY": 0.0,
                   "fi": 0,
@@ -389,39 +242,47 @@
                   "tweenFrame": true,
                   "bd_src": 1,
                   "bd_dst": 771
-                },
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "baozhaTX",
+          "dr": 16,
+          "lp": false,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.4,
+          "mov_bone_data": [
+            {
+              "name": "Layer8",
+              "dl": 0.0,
+              "frame_data": [
                 {
-                  "dI": 1,
+                  "dI": 0,
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
-                  "cX": 2.5,
-                  "cY": 2.5,
+                  "cX": 1.0,
+                  "cY": 1.0,
                   "kX": 0.0,
                   "kY": 0.0,
-                  "fi": 1,
+                  "fi": 0,
                   "twE": 0,
                   "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
                   "bd_src": 1,
                   "bd_dst": 771
                 },
                 {
-                  "dI": 2,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 2.5,
-                  "cY": 2.5,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 2,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 3,
+                  "dI": 0,
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -436,22 +297,7 @@
                   "bd_dst": 771
                 },
                 {
-                  "dI": 4,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 2.5,
-                  "cY": 2.5,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 4,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 5,
+                  "dI": 1,
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -466,22 +312,7 @@
                   "bd_dst": 771
                 },
                 {
-                  "dI": 6,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 2.5,
-                  "cY": 2.5,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 6,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 7,
+                  "dI": 2,
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -496,7 +327,7 @@
                   "bd_dst": 771
                 },
                 {
-                  "dI": 7,
+                  "dI": 3,
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -504,7 +335,52 @@
                   "cY": 2.5,
                   "kX": 0.0,
                   "kY": 0.0,
-                  "fi": 12,
+                  "fi": 9,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 4,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 2.5,
+                  "cY": 2.5,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 11,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 5,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 2.5,
+                  "cY": 2.5,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 13,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 5,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 2.8,
+                  "cY": 2.8,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 15,
                   "twE": 0,
                   "tweenFrame": true,
                   "color": {
@@ -525,122 +401,74 @@
   ],
   "texture_data": [
     {
-      "name": "taqing_bow_1",
-      "width": 130.0,
-      "height": 130.0,
+      "name": "zhdanTX_0001_zhadanhuoguang",
+      "width": 72.0,
+      "height": 66.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "taqing_bow_2",
-      "width": 130.0,
-      "height": 130.0,
+      "name": "zhdanTX_0001",
+      "width": 105.0,
+      "height": 117.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "taqing_bow_3",
-      "width": 130.0,
-      "height": 130.0,
+      "name": "新建文件夹 (14)/zhdanTX_0000_1",
+      "width": 192.0,
+      "height": 192.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "taqing_bow_4",
-      "width": 130.0,
-      "height": 130.0,
+      "name": "新建文件夹 (14)/zhdanTX_0001_2",
+      "width": 192.0,
+      "height": 192.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "taqing_bow_5",
-      "width": 130.0,
-      "height": 130.0,
+      "name": "新建文件夹 (14)/zhdanTX_0002_3",
+      "width": 192.0,
+      "height": 192.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "taqing_bow_6",
-      "width": 130.0,
-      "height": 130.0,
+      "name": "新建文件夹 (14)/zhdanTX_0003_4",
+      "width": 192.0,
+      "height": 192.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "taqing_bow_7",
-      "width": 130.0,
-      "height": 130.0,
+      "name": "新建文件夹 (14)/zhdanTX_0004_5",
+      "width": 192.0,
+      "height": 192.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "taqing_bow_8",
-      "width": 130.0,
-      "height": 130.0,
-      "pX": 0.5,
-      "pY": 0.5,
-      "plistFile": ""
-    },
-    {
-      "name": "ga-mng01",
-      "width": 277.0,
-      "height": 261.0,
-      "pX": 0.5,
-      "pY": 0.5,
-      "plistFile": ""
-    },
-    {
-      "name": "ga-mng02",
-      "width": 277.0,
-      "height": 261.0,
-      "pX": 0.5,
-      "pY": 0.5,
-      "plistFile": ""
-    },
-    {
-      "name": "ga-mng03",
-      "width": 277.0,
-      "height": 261.0,
-      "pX": 0.5,
-      "pY": 0.5,
-      "plistFile": ""
-    },
-    {
-      "name": "ga-mng04",
-      "width": 277.0,
-      "height": 261.0,
-      "pX": 0.5,
-      "pY": 0.5,
-      "plistFile": ""
-    },
-    {
-      "name": "ga-mng05",
-      "width": 277.0,
-      "height": 261.0,
-      "pX": 0.5,
-      "pY": 0.5,
-      "plistFile": ""
-    },
-    {
-      "name": "ga-mng06",
-      "width": 277.0,
-      "height": 261.0,
+      "name": "新建文件夹 (14)/zhdanTX_0005_6",
+      "width": 192.0,
+      "height": 192.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     }
   ],
   "config_file_path": [
-    "zhadan02-TX0.plist"
+    "zhadanTX0.plist"
   ],
   "config_png_path": [
-    "zhadan02-TX0.png"
+    "zhadanTX0.png"
   ]
 }

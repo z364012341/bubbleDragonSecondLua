@@ -46,6 +46,9 @@ namespace bubble_second {
         //判断这个点是否在以上场的挂件附近
         bool isNearbyExistence(const cocos2d::Vec2& point);
         bool isNearByBorder(const cocos2d::Vec2& point);
+
+        void addWidgetTotal();
+        void cutWidgetTotal();
     private:
         std::map<ScoreWidgetType, cocos2d::Vector<ScoreWidget*>> score_widget_map_;
         std::vector<ScoreWidgetType> widget_update_sequence_;

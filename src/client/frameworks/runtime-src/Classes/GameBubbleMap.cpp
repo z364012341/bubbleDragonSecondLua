@@ -87,10 +87,13 @@ namespace bubble_second {
 
     void GameBubbleMap::disposeContactBubble(BaseBubble* prepare_bubble, const cocos2d::Vec2& contact_index)
     {
+
+        this->disposePreclingBubble(prepare_bubble, game_bubble_map_impl_->preclingBubble(prepare_bubble, contact_index));
         this->runBubbleEffect(prepare_bubble, contact_index);
         this->disposeWindmillRotation(prepare_bubble);
         //先粘附上去, 然后再进行消除判断
         BaseBubble* prepare_after_cling_bubble = game_bubble_map_impl_->clingBubble(prepare_bubble, contact_index);
+
         BubbleVector same_bubble_map = game_bubble_map_impl_->getSametypeBubbleWithIndex(prepare_after_cling_bubble->getBubbleIndex());
         if (this->canEliminate(same_bubble_map))
         {
@@ -107,6 +110,12 @@ namespace bubble_second {
             this->disposeClingBubble(prepare_bubble, prepare_after_cling_bubble);
             this->disposeAfterClinging(prepare_after_cling_bubble);
         }
+    }
+
+    void bubble_second::GameBubbleMap::disposePreclingBubble(BaseBubble * prepare_bubble, BaseBubble * precling_bubble)
+    {
+        prepare_bubble->setPosition(precling_bubble->getPosition());
+        this->dispatchCustomEvent(EVENT_BUBBLE_PRECLING, prepare_bubble);
     }
 
     void GameBubbleMap::disposeClingBubble(BaseBubble* prepare_bubble, BaseBubble* cling_bubble)

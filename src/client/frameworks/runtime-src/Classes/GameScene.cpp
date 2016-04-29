@@ -746,6 +746,10 @@ namespace bubble_second {
         dispatcher->addCustomEventListener(EVENT_BUBBLE_CONTACT_BLACKHOLE, [=](cocos2d::EventCustom * event) {
             this->setPropertyTouchEnabled(true);
         });
+        dispatcher->addCustomEventListener(EVENT_BUBBLE_PRECLING, [=](cocos2d::EventCustom * event) {
+            BaseBubble* bubble = static_cast<BaseBubble*>(event->getUserData());
+            bubble->setPosition(this->convertMapToCsbSpace(bubble->getPosition()));
+        });
     }
 
     void GameScene::removeEventListenerCustom()
@@ -794,7 +798,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_ADD_ELIMINATE_SCORE_LABEL);
         dispatcher->removeCustomEventListeners(EVENT_CAN_USED_PROPS);
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_CONTACT_BLACKHOLE);
-        //dispatcher->removeCustomEventListeners(EVENT_MUTIPLE_SEAL_BUBBLE_FLY);
+        dispatcher->removeCustomEventListeners(EVENT_BUBBLE_PRECLING);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -2051,6 +2055,7 @@ namespace bubble_second {
         //this->getGameCharacter()->playVictoryAnimation();
         //this->setSecondPrepareBubble(nullptr);
         //GamePlayController::getInstance()->setPrepareBubble(nullptr);
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_UPDATE_COMPLETED_TASK_LABEL);
 		this->setPropertyTouchEnabled(false);
         GamePlayController::getInstance()->disposeVictory();
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME*2), cocos2d::CallFunc::create([=]() {

@@ -170,15 +170,6 @@ namespace bubble_second {
 
         csb_node_->getChildByName(CHALLENGEMODE_BUTTON)->setPositionY(visibleHeight*BUTTON_POS_Y_PERCENT_3);
 
-        //cocos2d::Vector<cocos2d::Node*> buttonVector = csb_node_->getChildren();
-        //for (auto var : buttonVector)
-        //{
-        //    if (cocos2d::ui::Button* button = dynamic_cast<cocos2d::ui::Button*>(var))
-        //    {
-        //        //button->setZoomScale(GAME_BUTTON_ZOOM_SCALE);
-        //        ButtonEffectController::setButtonZoomScale(button, GAME_BUTTON_ZOOM_SCALE);
-        //    }
-        //}
         ButtonEffectController::setButtonsZoomScale(csb_node_);
     }
 
@@ -197,15 +188,9 @@ namespace bubble_second {
             {
                 break;
             }
-            //if (cell_y == 0.0f)
-            //{
-            //    cell_y += cell->getBackgroundHeight() / 2;
-            //}
             cell->setPosition(cell_x, cell_y);
             cell_position_vector_.push_back(cocos2d::Vec2(0.0f, cell_y));
             scrollview_->addChild(cell);
-            //cell_y += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
-            //scrollview_height += GAME_STAGE_SCROLLVIEW_CELL_HEIGHT;
             cell_y += cell->getBackgroundHeight();
             scrollview_height += cell->getBackgroundHeight();
             cell_vector_.pushBack(cell);

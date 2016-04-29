@@ -169,7 +169,7 @@ namespace bubble_second {
                 {
                     (*iter)->removeScoreWidget();
                     iter = score_widget_map_[var].erase(iter);
-                    --widget_total_;
+                    this->cutWidgetTotal();
                     ++time;
                     continue;
                 }
@@ -189,7 +189,8 @@ namespace bubble_second {
     {
         if (widget_total_ < 6)
         {
-            ++widget_total_;
+            //++widget_total_;
+            this->addWidgetTotal();
             const ScoreWidgetType& type = combo_to_type_[GameScoreController::getInstance()->getEliminateCombo()];
             ScoreWidget* widget = ScoreWidget::createWithType(type);
             widget->setSelfPosition(this->getScoreWidgetPosition());
@@ -216,9 +217,9 @@ namespace bubble_second {
                 for (auto iter = score_widget_map_[var].begin(); iter != score_widget_map_[var].end(); ++iter)
                 {
                     widget = *iter;
-                    score_widget_map_[var].erase(iter);
+                    score_widget_map_.at(var).erase(iter);
                     widget->updateScoreWidgetType();
-                    score_widget_map_[widget->getType()].pushBack(widget);
+                    score_widget_map_.at(widget->getType()).pushBack(widget);
                     widget = nullptr;
                     return nullptr;
                 }
@@ -280,6 +281,18 @@ namespace bubble_second {
     bool ScoreWidgetManager::isNearByBorder(const cocos2d::Vec2 & point)
     {
         return (WIDGET_POSITION_RANGE_LEFT_MIN<point.x && point.x<WIDGET_POSITION_RANGE_LEFT_MAX) || (WIDGET_POSITION_RANGE_RIGHT_MIN<point.x && point.x<WIDGET_POSITION_RANGE_RIGHT_MAX);
+    }
+
+    void ScoreWidgetManager::addWidgetTotal()
+    {
+        ++widget_total_;
+        CCLOG("++widget: %d", widget_total_);
+    }
+
+    void ScoreWidgetManager::cutWidgetTotal()
+    {
+        --widget_total_;
+        CCLOG("--widget: %d", widget_total_);
     }
 
     int ScoreWidgetManager::getScoreWidgetTotal()

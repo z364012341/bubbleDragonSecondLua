@@ -37,6 +37,7 @@ namespace bubble_second {
         void removeSpriteFromeMapWithIndex(const cocos2d::Vec2& index);
         //把小球粘附上去
         BaseBubble* clingBubble(BaseBubble* prepare_bubble, const cocos2d::Vec2& contact_index);
+        BaseBubble* preclingBubble(BaseBubble* prepare_bubble, const cocos2d::Vec2& contact_index);
         //获取需要播放撞击特效的小球
         BubbleVectorMap getEffectBubbles(BaseBubble* prepare_bubble, const cocos2d::Vec2& contact_index);
         //处理消除后的悬空小球

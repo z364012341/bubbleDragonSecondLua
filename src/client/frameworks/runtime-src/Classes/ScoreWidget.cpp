@@ -65,6 +65,7 @@ namespace bubble_second {
         {
             body->removeFromWorld();
         }
+        armature_->getAnimation()->stop();
         armature_->getAnimation()->play(SCOREWIDGET_ANIMATION_REMOVE_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
         armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
             if (movementType == cocostudio::COMPLETE)
@@ -153,7 +154,6 @@ namespace bubble_second {
     {  
         if (canPlayingContactAnimation())
         {
-
             this->setPlayContactAnimationEnabled(false);
             armature_->getAnimation()->play(SCOREWIDGET_ANIMATION_CONTACT_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
             armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {

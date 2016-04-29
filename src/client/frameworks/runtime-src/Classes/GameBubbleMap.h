@@ -87,6 +87,7 @@ namespace bubble_second {
         //void setStageType(const StageType& type);
         //StageType getStageType();
         //bool isWindmillStage();
+        void disposePreclingBubble(BaseBubble* prepare_bubble, BaseBubble* precling_bubble);
         void disposeClingBubble(BaseBubble* prepare_bubble, BaseBubble* cling_bubble);
         //处理大风车转转转
         void disposeWindmillRotation(BaseBubble* prepare_bubble);

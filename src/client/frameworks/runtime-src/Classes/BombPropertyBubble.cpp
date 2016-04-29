@@ -1,5 +1,8 @@
 #include "BombPropertyBubble.h"
-#include "cocostudio/CocoStudio.h"
+
+const std::string TWO_ROUND_BOMB_EFFECT_NAME = "zhadanTX"; //炸2圈特效的名字
+const std::string BOMB_BUBBLE_STANDBY_NAME = "ranshao";
+const std::string BOMB_BUBBLE_BOMB_BOMB_NAME = "baozhaTX";
 namespace bubble_second {
     BombPropertyBubble::BombPropertyBubble()
     {
@@ -37,18 +40,25 @@ namespace bubble_second {
         {
             return 0.0;
         }
-        using cocostudio::ArmatureDataManager;
-        using cocostudio::Armature;
-        Armature *armature = Armature::create(TWO_ROUND_BOMB_EFFECT_NAME);
-        armature->setPosition(this->getPosition());
-        armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-        armature->getAnimation()->setMovementEventCallFunc([=](Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+        //using cocostudio::ArmatureDataManager;
+        //using cocostudio::Armature;
+        //Armature *armature = Armature::create(TWO_ROUND_BOMB_EFFECT_NAME);
+        //armature->setPosition(this->getPosition());
+        //armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        //armature->getAnimation()->setMovementEventCallFunc([=](Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+        //    if (movementType == cocostudio::COMPLETE)
+        //    {
+        //        armature->removeFromParent();
+        //    }
+        //});
+        //parent_node->addChild(armature);
+        armature_->getAnimation()->play(BOMB_BUBBLE_BOMB_BOMB_NAME);
+        armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
             if (movementType == cocostudio::COMPLETE)
             {
                 armature->removeFromParent();
             }
         });
-        parent_node->addChild(armature);
 
         cocos2d::NodeGrid* node = cocos2d::NodeGrid::create();
         cocos2d::Node* game_layer = parent_node->getParent();
@@ -60,12 +70,18 @@ namespace bubble_second {
         auto action1 = cocos2d::Ripple3D::create(0, ACTION_3DGRID, point, 0, 0, 0);
         cocos2d::Sequence* seq = cocos2d::Sequence::create(action, action1, cocos2d::CallFunc::create([=]() {node->removeFromParent(); }), nullptr);
         node->runAction(seq);
-
-
         return TWO_ROUND_BOMB_EFFECT_DELAY_TIME;
     }
     void BombPropertyBubble::downFromAir()
     {
         this->bubbleEliminate();
+    }
+    void BombPropertyBubble::setBubbleTexture(BubbleType)
+    {
+        using cocostudio::ArmatureDataManager;
+        using cocostudio::Armature;
+        armature_ = Armature::create(TWO_ROUND_BOMB_EFFECT_NAME);
+        armature_->getAnimation()->play(BOMB_BUBBLE_STANDBY_NAME);
+        this->addChild(armature_, 1);
     }
 }

@@ -33,7 +33,7 @@ namespace bubble_second {
 
     void BubbleSightingPoint::addPhysicsBodyCanntWorld()
     {
-        cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createBox(cocos2d::Size(BUBBLE_BODY_DIAMETER, BUBBLE_BODY_DIAMETER +50),
+        cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createBox(cocos2d::Size(BUBBLE_BODY_DIAMETER, BUBBLE_BODY_DIAMETER),
             cocos2d::PhysicsMaterial(PHYSICS_SIGHTING_POINT_BODY_DENSITY, PHYSICS_SIGHTING_POINT_BODY_RESTITUTION, PHYSICS_SIGHTING_POINT_BODY_FRICTION));
         body->setDynamic(true);
 

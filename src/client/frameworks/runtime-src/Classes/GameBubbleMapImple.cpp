@@ -372,13 +372,24 @@ namespace bubble_second{
 
     BaseBubble* GameBubbleMapImple::clingBubble(BaseBubble* prepare_bubble, const cocos2d::Vec2& contact_index)
     {
+        //cocos2d::Vec2 bubble_should_index = this->getTheNearestEmptyIndex(this->convertGameSceneCsbToMapSpaceWithBubble(prepare_bubble),
+        //    contact_index);
+        //assert(bubble_sprite_map_[bubble_should_index.y].at(bubble_should_index.x) == nullptr);
+        //BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(prepare_bubble->getBubbleType(),
+        //    bubble_should_index, this->convertIndexToPoint(bubble_should_index));
+        //bubble_sprite_map_;
+        BaseBubble* bubble = this->preclingBubble(prepare_bubble, contact_index);
+        this->addBubbleToBubbleMap(bubble);
+        return bubble;
+    }
+
+    BaseBubble* GameBubbleMapImple::preclingBubble(BaseBubble * prepare_bubble, const cocos2d::Vec2 & contact_index)
+    {
         cocos2d::Vec2 bubble_should_index = this->getTheNearestEmptyIndex(this->convertGameSceneCsbToMapSpaceWithBubble(prepare_bubble),
             contact_index);
         assert(bubble_sprite_map_[bubble_should_index.y].at(bubble_should_index.x) == nullptr);
         BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(prepare_bubble->getBubbleType(),
             bubble_should_index, this->convertIndexToPoint(bubble_should_index));
-        //bubble_sprite_map_;
-        this->addBubbleToBubbleMap(bubble);
         return bubble;
     }
 

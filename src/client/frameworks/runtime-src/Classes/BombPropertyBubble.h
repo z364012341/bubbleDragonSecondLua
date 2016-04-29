@@ -1,6 +1,6 @@
 //*******************************************************************************
 //类名称   : BombPropertyBubble
-//功能     : <一炸炸两圈的炸弹道具>
+//功能     : <一炸炸两圈的炸弹道具, 发射出去的那个>
 //-------------------------------------------------------------------------------
 //备注     : <>
 //典型用法 : <>
@@ -11,6 +11,7 @@
 #define _BOMB_PROPERTY_BUBBLE_H_
 #include "cocos2d.h"
 #include "ColorBubble.h"
+#include "cocostudio/CocoStudio.h"
 namespace bubble_second {
     class BombPropertyBubble : public ColorBubble
     {
@@ -22,9 +23,12 @@ namespace bubble_second {
         void bubbleEliminate(int = 0) override;
         float playTheSpecialEffects() override;
         void downFromAir() override;
+        void setBubbleTexture(BubbleType) override;
     private:
         BombPropertyBubble();
         bool init();
+    private:
+        cocostudio::Armature *armature_ = nullptr;
     };
 }
 #endif //_BOMB_PROPERTY_BUBBLE_H_
