@@ -1368,6 +1368,7 @@ namespace bubble_second {
     {
         props_weapon_ = static_cast<BaseWeapon*>(event->getUserData());
         props_weapon_->setVisible(false);
+        props_weapon_->setRotation(-bubble_map_node_->getRotation());
         bubble_map_node_->addChild(props_weapon_);
         PropsSelectAlert* alert = PropsSelectAlert::create();
         csb_node_->addChild(alert, UI_ZORDER_MENU);
@@ -1385,7 +1386,6 @@ namespace bubble_second {
         this->setMenuTouchEnabled(false);
         this->recentbubbleCast();
         bubble_map_node_->pause();
-        //this->getScenePhysicsWorld()->pause
     }
 
     void GameScene::recentbubbleCast()
@@ -1418,8 +1418,6 @@ namespace bubble_second {
 
     void GameScene::setPropsWeaponPosition(const cocos2d::Vec2& point)
     {
-        //props_weapon_->setVisible(true);
-        //props_weapon_->setPosition(this->convertMapToCsbSpace(point));
         props_weapon_->selectBubble(point);
     }
 
@@ -1445,7 +1443,6 @@ namespace bubble_second {
     void GameScene::rotateSightingDevice(cocos2d::EventCustom* event)
     {
         float angle = *static_cast<float*>(event->getUserData());
-        //this->getGunsight()->setRotation(angle);
         auto device = dynamic_cast<BubbleSightingDevice*>(csb_node_->getChildByName(NAME_BUBBLE_SIGHTING_DEVICE));
         if (device)
         {

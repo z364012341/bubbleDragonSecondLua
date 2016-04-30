@@ -64,6 +64,8 @@ namespace bubble_second {
         void disposeWindmillBubbleContactBorder(BaseBubble* bubble);
         //处理+3特殊泡泡的道具
         void disposeUsedAddSpecialBubbleProps();
+        //处理最下中心小球
+        void disposeMinYCenterBubble(BaseBubble* contact_bubble);
     private:
         GameBubbleMap();
         bool init();

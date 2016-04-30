@@ -9,6 +9,9 @@
 #include "StageDataManager.h"
 #include "BubbleColorRender.h"
 const float WINDMILL_BUBBLE_ROTATION_FACTOR = 3000.0f; //风车转转转的速度系数
+const int RECENTLY_BUBBLE_FIND_HIGH_PRIORITY_SEQUENCE[] = { 5, 4, 6, 3, 7};
+const int RECENTLY_BUBBLE_FIND_LOW_PRIORITY_SEQUENCE[] = { 2, 8, 1, 9, 0, 10 };
+const int RECENTLY_BUBBLE_FIND_INDEX_OFFSET = 4;
 namespace bubble_second{
     GameBubbleMapImple::GameBubbleMapImple():special_bubble_(nullptr)
     {
@@ -710,15 +713,64 @@ namespace bubble_second{
 
     float GameBubbleMapImple::getBubblesMinPosition()
     {
-        for (int i = bubble_sprite_map_.size()+ MAP_TOP_ROW_INDEX - 1; i != MAP_TOP_ROW_INDEX; i--)
+        return this->convertIndexToPoint(cocos2d::Vec2(0, this->getBubblesMinIndexY())).y;
+    }
+
+    int GameBubbleMapImple::getBubblesMinIndexY()
+    {
+        for (int i = bubble_sprite_map_.size() + MAP_TOP_ROW_INDEX - 1; i != MAP_TOP_ROW_INDEX; i--)
         {
-            if (bubble_sprite_map_[i].size()!=0)
+            if (bubble_sprite_map_[i].size() != 0)
             {
-                return this->convertIndexToPoint(cocos2d::Vec2(0, i)).y;
+                return i;
             }
         }
-        return 0.0f;
+        return MAP_TOP_ROW_INDEX;
     }
+
+    BaseBubble * GameBubbleMapImple::getBubbleMinCenter()
+    {
+        int min_index_y = this->getBubblesMinIndexY();
+
+        for (int i = 0; i < RECENTLY_BUBBLE_FIND_INDEX_OFFSET; i++)
+        {
+            for (auto index_x : RECENTLY_BUBBLE_FIND_HIGH_PRIORITY_SEQUENCE)
+            {
+                if (bubble_sprite_map_[min_index_y - i].at(index_x) != nullptr)
+                {
+                    return bubble_sprite_map_[min_index_y - i].at(index_x);
+                }
+            }
+        }
+
+        for (int i = 0; i < RECENTLY_BUBBLE_FIND_INDEX_OFFSET; i++)
+        {
+            for (auto index_x : RECENTLY_BUBBLE_FIND_LOW_PRIORITY_SEQUENCE)
+            {
+                if (bubble_sprite_map_[min_index_y - i].at(index_x) != nullptr)
+                {
+                    return bubble_sprite_map_[min_index_y - i].at(index_x);
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    //BaseBubble * GameBubbleMapImple::getBubbleMinCenterWithIndexs(int indexs[])
+    //{
+    //    int min_index_y = this->getBubblesMinIndexY();
+    //    for (auto index_x : indexs)
+    //    {
+    //        for (int i = 0; i < RECENTLY_BUBBLE_FIND_INDEX_OFFSET; i++)
+    //        {
+    //            if (bubble_sprite_map_[min_index_y - i].at(index_x) != nullptr)
+    //            {
+    //                return bubble_sprite_map_[min_index_y - i].at(index_x);
+    //            }
+    //        }
+    //    }
+    //    return nullptr;
+    //}
 
     BubbleVector GameBubbleMapImple::getBubblesInVisibleSize()
     {

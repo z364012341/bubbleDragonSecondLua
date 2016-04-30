@@ -60,6 +60,11 @@ namespace bubble_second {
         BubbleVector getAroundColorBubblesWithIndex(const cocos2d::Vec2& index);
         //获取最下面的泡泡的位置
         float getBubblesMinPosition();
+        //最下索引
+        int getBubblesMinIndexY();
+        //获取离发射台近的泡泡
+        BaseBubble* getBubbleMinCenter();
+        //BaseBubble* getBubbleMinCenterWithIndexs(int indexs[]);
         //获取屏幕内的小球
         BubbleVector getBubblesInVisibleSize();
         //获取屏幕内的同色小球

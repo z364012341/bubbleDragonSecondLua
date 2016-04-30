@@ -585,4 +585,11 @@ namespace bubble_second {
         this->dispatchCustomEvent(EVENT_FIND_THREE_BUBBLE, &three_bubble);
     }
 
+    void GameBubbleMap::disposeMinYCenterBubble(BaseBubble* contact_bubble)
+    {
+        BaseBubble* bubble = game_bubble_map_impl_->isWindmillStage() ? contact_bubble: game_bubble_map_impl_->getBubbleMinCenter();
+        GamePlayController::getInstance()->setSelectBubble(bubble);
+        this->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, bubble);
+    }
+
 }
