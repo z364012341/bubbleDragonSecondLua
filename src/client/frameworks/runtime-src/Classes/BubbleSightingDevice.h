@@ -67,6 +67,10 @@ namespace bubble_second {
         virtual bool init();
         //控制point的显示
         void setSightingPointsVisibled();
+        //获取穿过的刚体位置
+        void setContactMinPosition(const std::vector<cocos2d::Vec2>& points);
+        cocos2d::Vec2 calculateContactMinPosition(const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2);
+        bool devicePhysicsRayCastCallbackFunc(cocos2d::PhysicsWorld& world, const cocos2d::PhysicsRayCastInfo& info, void* data);
     private:
         //加入刚体来进行是否碰到小球之后使剩余线消失的判断, 碰到边界剩余显示
         //void addPhysicsBody();
@@ -110,6 +114,8 @@ namespace bubble_second {
         float hypotenuse_offset_ = 0.0f; //斜边偏移, 让瞄准线的点有反弹效果
         cocos2d::Node* points_node_ = nullptr;
         //float relection_offset_ = 0.0f;
+        cocos2d::Vec2* min_position_ = &cocos2d::Vec2(0.0, 0.0);
+        //cocos2d::DrawNode* node_ = nullptr;
     };
 }
 #endif //_BUBBLE_SIGHTING_DEVICE_H_

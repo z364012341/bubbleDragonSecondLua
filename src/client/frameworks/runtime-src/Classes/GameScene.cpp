@@ -2143,6 +2143,11 @@ namespace bubble_second {
 #endif
     }
 
+    void GameScene::physicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2)
+    {
+        this->getScenePhysicsWorld()->rayCast(func, point1, point2, nullptr);
+    }
+
     void GameScene::defeat()
     {
         bubble_map_node_->stopAllActions();

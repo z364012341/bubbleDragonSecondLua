@@ -4,6 +4,7 @@
 #include "GamePlayController.h" 
 #include "BubbleSecondConstant.h"
 const int MAIN_SIGHTING_DEVICE_TARGET_ID = 0;
+//const std::string SIGHTING_POINTS_VISIBLE_SCHEDULE_KEY = "sighting_points_visible_schedule_key";
 namespace bubble_second {
     BubbleMainSightingDevice::BubbleMainSightingDevice()
     {
@@ -44,8 +45,12 @@ namespace bubble_second {
         int relection_offset = (int)(points.front().getDistance(GamePlayController::getInstance()->getShootingInitialPosition())) % (int)MAP_BUBBLE_DIAMETER;
         this->getNextSightingDevice()->setReflectionPointOffset(reflection_point_component_->getReflectionoffset());
         this->setDeviceRotation(reflection_point_component_->getReflectionAngles());
-        this->getNextSightingDevice()->setDevicePosition(reflection_point_component_->getReflectionPoints());
+        this->getNextSightingDevice()->setDevicePosition(points);
+        this->setContactMinPosition(points);
         this->getNextSightingDevice()->setDevicePointHidden(reflection_point_component_->getHiddenFlags());
+        //this->runAction(cocos2d::CallFunc::create([=]() {
+        //    this->setSightingPointsVisibled();
+        //}));
     }
     BubbleMainSightingDevice::~BubbleMainSightingDevice()
     {
@@ -71,9 +76,12 @@ namespace bubble_second {
     }
     void BubbleMainSightingDevice::turnOnSightingDevice()
     {
-        BubbleSightingDevice::turnOnSightingDevice();
-        this->setVisible(true);
- 
+        //this->setVisible(false);
+        //this->runAction(cocos2d::CallFunc::create([=]() {
+            BubbleSightingDevice::turnOnSightingDevice();
+            this->setVisible(true);
+        //}));
+        //this->setSightingPointsVisibled();
     }
     void BubbleMainSightingDevice::turnOffSightingDevice()
     {

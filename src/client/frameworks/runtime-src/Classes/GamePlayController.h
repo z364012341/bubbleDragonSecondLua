@@ -104,6 +104,8 @@ namespace bubble_second {
         float getPlayAreaMaxY();
         //获取发射的准确位置
         cocos2d::Vec2 getShootingInitialPosition();
+        //射线检测
+        void gamePhysicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2);
     private:
         //把准备的小球发射出去
 		void dispatchShootEvent(const cocos2d::Vec2& touch_location);

@@ -82,11 +82,16 @@ namespace bubble_second {
 
     void BubbleSightingDevice::turnOnSightingDevice()
     {
-        switch_flag_ = true;
+
+        //this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0), cocos2d::CallFunc::create([=]() {
+            switch_flag_ = true;
+            //this->setSightingPointsVisibled();
+        //})));
         if (nullptr != sight_device_)
         {
             sight_device_->turnOnSightingDevice();
         }
+
     }
 
     void BubbleSightingDevice::turnOffSightingDevice()
@@ -138,14 +143,17 @@ namespace bubble_second {
 
     void BubbleSightingDevice::setVisible(bool visible)
     {
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.05), cocos2d::CallFunc::create([=]() {     
+        //this->runAction(cocos2d::CallFunc::create([=]() {  
             cocos2d::Node::setVisible(visible && this->isDeviceOnStage());
+            //this->setSightingPointsVisibled();
+            //this->setSightingPointsVisibled();
+           //}));
             if (sight_device_ != nullptr)
             {
                 sight_device_->setVisible(visible);
             }
 
-        })));
+
 
     }
 
@@ -270,6 +278,7 @@ namespace bubble_second {
             }
         }
         return min_y;
+        //return min_position_->y;
     }
 
     bool BubbleSightingDevice::isSightingPointsNeedHidden(const cocos2d::Vec2& point)
@@ -293,6 +302,43 @@ namespace bubble_second {
             sight_device_->turnOffSightingDevice();
         }
 
+    }
+
+    void BubbleSightingDevice::setContactMinPosition(const std::vector<cocos2d::Vec2>& points)
+    {
+        if (this->getTargetID() < (int)points.size())
+        {
+            //cocos2d::Vec2 point1 = this->getParent()->convertToWorldSpace(this->getPosition());
+            //cocos2d::Vec2 point2 = this->getParent()->convertToWorldSpace(points.at(this->getTargetID()));
+            //min_position_ = this->convertToNodeSpace(this->calculateContactMinPosition(point1, point2));
+            //this->calculateContactMinPosition(point1, point2);
+            if (sight_device_)
+            {
+                sight_device_->setContactMinPosition(points);
+            }
+        }
+    }
+
+    cocos2d::Vec2 BubbleSightingDevice::calculateContactMinPosition(const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2)
+    {
+        cocos2d::Vec2 min_position = cocos2d::Vec2::ZERO;
+        //min_position_ = &cocos2d::Vec2(0.0, 0.0);
+        cocos2d::PhysicsRayCastCallbackFunc func = [=](cocos2d::PhysicsWorld& world, const cocos2d::PhysicsRayCastInfo& info, void* data)->bool
+        {
+            min_position_ = &cocos2d::Vec2(info.contact.x, info.contact.y);
+            return true;
+        };
+        //GamePlayController::getInstance()->gamePhysicsRayCast(CC_CALLBACK_3(BubbleSightingDevice::devicePhysicsRayCastCallbackFunc, this), point1, point2);
+        GamePlayController::getInstance()->gamePhysicsRayCast(func, point1, point2);
+        //auto p = this->convertToNodeSpace(min_position);
+        return min_position;
+    }
+
+    bool BubbleSightingDevice::devicePhysicsRayCastCallbackFunc(cocos2d::PhysicsWorld & world, const cocos2d::PhysicsRayCastInfo & info, void * data)
+    {
+        //auto p = this->convertToNodeSpaceAR(info.contact);
+        //min_position_ = this->convertToNodeSpace(info.contact);
+        return false;
     }
 
     bool BubbleSightingDevice::isContactBubble()

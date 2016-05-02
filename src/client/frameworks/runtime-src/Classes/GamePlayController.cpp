@@ -287,6 +287,11 @@ namespace bubble_second {
         return game_scene_delegate_->getPrepareBubbleOrigin();
     }
 
+    void GamePlayController::gamePhysicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2)
+    {
+        game_scene_delegate_->physicsRayCast(func, point1, point2);
+    }
+
     void GamePlayController::loadStageMap(int numble)
     {
         prepare_bubble_ = nullptr;
@@ -405,10 +410,9 @@ namespace bubble_second {
     {
         auto sight_point = dynamic_cast<BubbleSightingPoint*>(sight_node);
         sight_point->addContactCount();
-        if (BubbleSightingDevice* device = dynamic_cast<BubbleSightingDevice*>(sight_node->getParent()))
-        {
-            device->contactBubble();
-        }
+        BubbleSightingDevice* device = dynamic_cast<BubbleSightingDevice*>(sight_node->getParent()->getParent());
+        assert(device);
+        device->contactBubble();
     }
 
 
