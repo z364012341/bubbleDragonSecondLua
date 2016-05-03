@@ -1,6 +1,8 @@
 #include "BombBombBubble.h"
 #include "cocostudio/CocoStudio.h"
 #include "GameScoreController.h"
+#include "cocostudio\CocoStudio.h"
+const std::string BOMB_BOMB_BUBBLE_CENTER_FIRE_NAME = "huoqiuTX";
 namespace bubble_second {
     BombBombBubble::BombBombBubble()
     {
@@ -18,7 +20,16 @@ namespace bubble_second {
             return false;
         }
         this->setBubbleType(kBubbleBombBomb);
+        this->addCenterFire();
         return true;
+    }
+
+    void BombBombBubble::addCenterFire()
+    {
+        cocostudio::Armature* fire = cocostudio::Armature::create(BOMB_BOMB_BUBBLE_CENTER_FIRE_NAME);
+        fire->getAnimation()->playWithIndex(0);
+        fire->setPosition(this->getContentSize().width/2, this->getContentSize().height/2);
+        this->addChild(fire);
     }
 
     void BombBombBubble::downFromAir()

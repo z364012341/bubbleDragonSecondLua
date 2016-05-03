@@ -21,7 +21,8 @@ namespace bubble_second {
         void onEnter() override;
         void onExit() override;
         //void changePointsColor(BubbleType color) override;
-        void turnOnSightingDevice()override;
+        void turnOnMainSightingDevice(const cocos2d::Vec2 & touch_point);
+        //void turnOnSightingDevice()override;
         void turnOffSightingDevice()override;
     private:
         BubbleMainSightingDevice();

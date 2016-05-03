@@ -150,7 +150,8 @@ namespace bubble_second {
            //}));
             if (sight_device_ != nullptr)
             {
-                sight_device_->setVisible(visible);
+                bool f = this->isContactBubble();
+                sight_device_->setVisible(visible && !this->isContactBubble());
             }
 
 
@@ -304,42 +305,42 @@ namespace bubble_second {
 
     }
 
-    void BubbleSightingDevice::setContactMinPosition(const std::vector<cocos2d::Vec2>& points)
-    {
-        if (this->getTargetID() < (int)points.size())
-        {
-            //cocos2d::Vec2 point1 = this->getParent()->convertToWorldSpace(this->getPosition());
-            //cocos2d::Vec2 point2 = this->getParent()->convertToWorldSpace(points.at(this->getTargetID()));
-            //min_position_ = this->convertToNodeSpace(this->calculateContactMinPosition(point1, point2));
-            //this->calculateContactMinPosition(point1, point2);
-            if (sight_device_)
-            {
-                sight_device_->setContactMinPosition(points);
-            }
-        }
-    }
+    //void BubbleSightingDevice::setContactMinPosition(const std::vector<cocos2d::Vec2>& points)
+    //{
+    //    if (this->getTargetID() < (int)points.size())
+    //    {
+    //        //cocos2d::Vec2 point1 = this->getParent()->convertToWorldSpace(this->getPosition());
+    //        //cocos2d::Vec2 point2 = this->getParent()->convertToWorldSpace(points.at(this->getTargetID()));
+    //        //min_position_ = this->convertToNodeSpace(this->calculateContactMinPosition(point1, point2));
+    //        //this->calculateContactMinPosition(point1, point2);
+    //        if (sight_device_)
+    //        {
+    //            sight_device_->setContactMinPosition(points);
+    //        }
+    //    }
+    //}
 
-    cocos2d::Vec2 BubbleSightingDevice::calculateContactMinPosition(const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2)
-    {
-        cocos2d::Vec2 min_position = cocos2d::Vec2::ZERO;
-        //min_position_ = &cocos2d::Vec2(0.0, 0.0);
-        cocos2d::PhysicsRayCastCallbackFunc func = [=](cocos2d::PhysicsWorld& world, const cocos2d::PhysicsRayCastInfo& info, void* data)->bool
-        {
-            min_position_ = &cocos2d::Vec2(info.contact.x, info.contact.y);
-            return true;
-        };
-        //GamePlayController::getInstance()->gamePhysicsRayCast(CC_CALLBACK_3(BubbleSightingDevice::devicePhysicsRayCastCallbackFunc, this), point1, point2);
-        GamePlayController::getInstance()->gamePhysicsRayCast(func, point1, point2);
-        //auto p = this->convertToNodeSpace(min_position);
-        return min_position;
-    }
+    //cocos2d::Vec2 BubbleSightingDevice::calculateContactMinPosition(const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2)
+    //{
+    //    cocos2d::Vec2 min_position = cocos2d::Vec2::ZERO;
+    //    //min_position_ = &cocos2d::Vec2(0.0, 0.0);
+    //    cocos2d::PhysicsRayCastCallbackFunc func = [=](cocos2d::PhysicsWorld& world, const cocos2d::PhysicsRayCastInfo& info, void* data)->bool
+    //    {
+    //        min_position_ = &cocos2d::Vec2(info.contact.x, info.contact.y);
+    //        return true;
+    //    };
+    //    //GamePlayController::getInstance()->gamePhysicsRayCast(CC_CALLBACK_3(BubbleSightingDevice::devicePhysicsRayCastCallbackFunc, this), point1, point2);
+    //    GamePlayController::getInstance()->gamePhysicsRayCast(func, point1, point2);
+    //    //auto p = this->convertToNodeSpace(min_position);
+    //    return min_position;
+    //}
 
-    bool BubbleSightingDevice::devicePhysicsRayCastCallbackFunc(cocos2d::PhysicsWorld & world, const cocos2d::PhysicsRayCastInfo & info, void * data)
-    {
-        //auto p = this->convertToNodeSpaceAR(info.contact);
-        //min_position_ = this->convertToNodeSpace(info.contact);
-        return false;
-    }
+    //bool BubbleSightingDevice::devicePhysicsRayCastCallbackFunc(cocos2d::PhysicsWorld & world, const cocos2d::PhysicsRayCastInfo & info, void * data)
+    //{
+    //    //auto p = this->convertToNodeSpaceAR(info.contact);
+    //    //min_position_ = this->convertToNodeSpace(info.contact);
+    //    return false;
+    //}
 
     bool BubbleSightingDevice::isContactBubble()
     {

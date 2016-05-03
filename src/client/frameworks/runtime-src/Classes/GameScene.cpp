@@ -674,13 +674,13 @@ namespace bubble_second {
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_CUT_ELIMINATE_COMBO, CC_CALLBACK_1(GameScene::stopBigEliminateEffect, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        listener = cocos2d::EventListenerCustom::create(EVENT_TURN_ON_SIGHTING_DEVICE, [=](cocos2d::EventCustom*) {
-            if (this->getBubbleSightingDevice())
-            {
-                this->getBubbleSightingDevice()->turnOnSightingDevice();
-            }
-        });
-        dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        //listener = cocos2d::EventListenerCustom::create(EVENT_TURN_ON_SIGHTING_DEVICE, [=](cocos2d::EventCustom*) {
+        //    if (this->getBubbleSightingDevice())
+        //    {
+        //        this->getBubbleSightingDevice()->turnOnMainSightingDevice();
+        //    }
+        //});
+        //dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_TURN_OFF_SIGHTING_DEVICE, [=](cocos2d::EventCustom*) {
             if (this->getBubbleSightingDevice())
             {
@@ -778,7 +778,7 @@ namespace bubble_second {
         //dispatcher->removeCustomEventListeners(EVENT_ROTATE_SIGHTING_DEVICE);
         dispatcher->removeCustomEventListeners(UI_NAME_BIG_COMBO_ELIMINATE);
         dispatcher->removeCustomEventListeners(EVENT_CUT_ELIMINATE_COMBO);
-        dispatcher->removeCustomEventListeners(EVENT_TURN_ON_SIGHTING_DEVICE);
+        //dispatcher->removeCustomEventListeners(EVENT_TURN_ON_SIGHTING_DEVICE);
         dispatcher->removeCustomEventListeners(EVENT_TURN_OFF_SIGHTING_DEVICE);
         dispatcher->removeCustomEventListeners(EVENT_UPDATE_COMPLETED_TASK_LABEL);
         dispatcher->removeCustomEventListeners(EVENT_SELECT_BUBBLE);
@@ -2143,10 +2143,10 @@ namespace bubble_second {
 #endif
     }
 
-    void GameScene::physicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2)
-    {
-        this->getScenePhysicsWorld()->rayCast(func, point1, point2, nullptr);
-    }
+    //void GameScene::physicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2)
+    //{
+    //    this->getScenePhysicsWorld()->rayCast(func, point1, point2, nullptr);
+    //}
 
     void GameScene::defeat()
     {

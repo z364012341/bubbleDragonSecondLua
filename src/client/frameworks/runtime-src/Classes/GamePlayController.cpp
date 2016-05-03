@@ -86,7 +86,7 @@ namespace bubble_second {
         }
         auto touch_point = touch->getLocation();
         this->setTouchDirection(touch_point);
-        this->disposeSightingDevice(touch_point);
+        this->disposeSightingDevice(touch_point, true);
         return true;
     }
     void GamePlayController::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event)
@@ -287,10 +287,10 @@ namespace bubble_second {
         return game_scene_delegate_->getPrepareBubbleOrigin();
     }
 
-    void GamePlayController::gamePhysicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2)
-    {
-        game_scene_delegate_->physicsRayCast(func, point1, point2);
-    }
+    //void GamePlayController::gamePhysicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2)
+    //{
+    //    game_scene_delegate_->physicsRayCast(func, point1, point2);
+    //}
 
     void GamePlayController::loadStageMap(int numble)
     {
@@ -566,7 +566,7 @@ namespace bubble_second {
         this->setSelectBubble(nullptr);
     }
 
-    void GamePlayController::disposeSightingDevice(const cocos2d::Vec2& touch_point)
+    void GamePlayController::disposeSightingDevice(const cocos2d::Vec2& touch_point, bool touch_began)
     {
         //static int numble = 0;
         //if (numble >= 1)
@@ -585,8 +585,16 @@ namespace bubble_second {
             float angle = this->getTouchAngleForPrepareBubble(this->convertGLToNodeSpace(touch_point, prepare_bubble_->getParent()));
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ROTATE_SIGHTING_DEVICE, &angle);
             cocos2d::Vec2 touch_point = this->getRealTouchPoint(touch_location);
-            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_MAIN_ROTATE_SIGHTING_DEVICE, &touch_point);
-            this->turnOnSightingDevice();
+            if (touch_began)
+            {
+                this->turnOnSightingDevice(touch_point);
+            }
+            else
+            {
+                cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_MAIN_ROTATE_SIGHTING_DEVICE, &touch_point);
+            }
+
+            //this->turnOnSightingDevice();
         }
         else
         {
@@ -644,9 +652,9 @@ namespace bubble_second {
         return direction_;
     }
 
-    void GamePlayController::turnOnSightingDevice()
+    void GamePlayController::turnOnSightingDevice(cocos2d::Vec2 point)
     {
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_TURN_ON_SIGHTING_DEVICE);
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_TURN_ON_SIGHTING_DEVICE, &point);
     }
 
     void GamePlayController::turnOffSightingDevice()

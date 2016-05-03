@@ -31,7 +31,7 @@ namespace bubble_second {
         {
             BubbleSightingDevice* device = BubbleSightingDevice::create();
             device->setPositionX(BUBBLE_SIGHTING_DEVICE_GO_AWAY_Y);
-            this->getParent()->addChild(device);
+            this->getParent()->addChild(device, UI_ZORDER_SIGHTING_DEVICE);
             last_device->setNextSightingDevice(device);
             device->setTargetID(i);
             last_device = device;
@@ -46,7 +46,7 @@ namespace bubble_second {
         this->getNextSightingDevice()->setReflectionPointOffset(reflection_point_component_->getReflectionoffset());
         this->setDeviceRotation(reflection_point_component_->getReflectionAngles());
         this->getNextSightingDevice()->setDevicePosition(points);
-        this->setContactMinPosition(points);
+        //this->setContactMinPosition(points);
         this->getNextSightingDevice()->setDevicePointHidden(reflection_point_component_->getHiddenFlags());
         //this->runAction(cocos2d::CallFunc::create([=]() {
         //    this->setSightingPointsVisibled();
@@ -67,22 +67,37 @@ namespace bubble_second {
         cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_MAIN_ROTATE_SIGHTING_DEVICE, [=](cocos2d::EventCustom* event) {
             cocos2d::Vec2 touch_point = *static_cast<cocos2d::Vec2*>(event->getUserData());
             this->rotateDevice(touch_point);
+            this->turnOnSightingDevice();
+            this->setVisible(true);
+        });
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_TURN_ON_SIGHTING_DEVICE, [=](cocos2d::EventCustom* event) {
+            cocos2d::Vec2 touch_point = *static_cast<cocos2d::Vec2*>(event->getUserData());
+            this->turnOnMainSightingDevice(touch_point);
         });
     }
     void BubbleMainSightingDevice::onExit()
     {
         BubbleSightingDevice::onExit();
         cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_MAIN_ROTATE_SIGHTING_DEVICE);
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_TURN_ON_SIGHTING_DEVICE);
     }
-    void BubbleMainSightingDevice::turnOnSightingDevice()
+    void BubbleMainSightingDevice::turnOnMainSightingDevice(const cocos2d::Vec2 & touch_point)
     {
-        //this->setVisible(false);
-        //this->runAction(cocos2d::CallFunc::create([=]() {
-            BubbleSightingDevice::turnOnSightingDevice();
+        this->rotateDevice(touch_point);
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.01), cocos2d::CallFunc::create([=]() {
+            this->turnOnSightingDevice();
             this->setVisible(true);
-        //}));
-        //this->setSightingPointsVisibled();
+        })));
     }
+    //void BubbleMainSightingDevice::turnOnSightingDevice()
+    //{
+    //    //this->setVisible(false);
+    //    this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.01), cocos2d::CallFunc::create([=]() {
+    //        BubbleSightingDevice::turnOnSightingDevice();
+    //        this->setVisible(true);
+    //    })));
+    //    //this->setSightingPointsVisibled();
+    //}
     void BubbleMainSightingDevice::turnOffSightingDevice()
     {
         BubbleSightingDevice::turnOffSightingDevice();

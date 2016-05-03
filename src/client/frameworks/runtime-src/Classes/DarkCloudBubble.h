@@ -24,6 +24,9 @@ namespace bubble_second {
     private:
         DarkCloudBubble();
         bool init();
+        void addStandbyAction();
+        cocos2d::Sprite* getCenterDarkCloud();
+        void playEliminateEffect();
     };
 }
 #endif //_DARK_CLOUD_BUBBLE_H_

@@ -61,7 +61,7 @@ namespace bubble_second {
         //获取map最高点
         float getMapMaxPositionY();
         //射线检测
-        void physicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2& point1, const cocos2d::Vec2& point2);
+        //void physicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2& point1, const cocos2d::Vec2& point2);
     private:
         //获取发射台的位置
         cocos2d::Vec2 getGunsightPosition();

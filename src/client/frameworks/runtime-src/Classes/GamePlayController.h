@@ -84,7 +84,7 @@ namespace bubble_second {
         //处理使用魔法杖
         void disposeUseStaves();
         //旋转喵准器
-        void disposeSightingDevice(const cocos2d::Vec2& touch_location);
+        void disposeSightingDevice(const cocos2d::Vec2& touch_location, bool touch_began = false);
         //处理胜利
         void disposeVictory(); 
         //处理失败
@@ -105,7 +105,7 @@ namespace bubble_second {
         //获取发射的准确位置
         cocos2d::Vec2 getShootingInitialPosition();
         //射线检测
-        void gamePhysicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2);
+        //void gamePhysicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2);
     private:
         //把准备的小球发射出去
 		void dispatchShootEvent(const cocos2d::Vec2& touch_location);
@@ -137,7 +137,7 @@ namespace bubble_second {
         void setTouchDirection(const cocos2d::Vec2& touch_point);
 
         //控制瞄准开关
-        void turnOnSightingDevice();
+        void turnOnSightingDevice(cocos2d::Vec2 point);
         void turnOffSightingDevice();
     private://碰撞相关的成员函数
         GamePlayController();

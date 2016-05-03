@@ -33,6 +33,7 @@ const std::string STAVES_WEAPON_ARMATURE_NAME = "fazhang/fazhang.ExportJson";
 const std::string ADD_TEN_BUBBLE_NUMBLE_ARMATURE_NAME = "jiabudaoju/jiabudaoju.ExportJson";
 const std::string AIMING_LINE_COMMODITY_ARMATURE_NAME = "miaozhunxian/miaozhunxian.ExportJson";
 const std::string TWO_ROUND_BOMB_EFFECT_PATH = "zhadanTX/zhadanTX.ExportJson"; //炸2圈特效的路径
+const std::string BOMB_BOMB_BUBBLE_CENTER_FIRE_PATH = "huoqiuTX/huoqiuTX.ExportJson";
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()
@@ -87,6 +88,7 @@ namespace bubble_second {
         armature_path_.push_back(STAVES_WEAPON_ARMATURE_NAME);
         armature_path_.push_back(ADD_TEN_BUBBLE_NUMBLE_ARMATURE_NAME);
         armature_path_.push_back(AIMING_LINE_COMMODITY_ARMATURE_NAME);
+        armature_path_.push_back(BOMB_BOMB_BUBBLE_CENTER_FIRE_PATH);
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()

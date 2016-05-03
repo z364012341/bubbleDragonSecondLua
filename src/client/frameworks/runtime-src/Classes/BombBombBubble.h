@@ -25,6 +25,7 @@ namespace bubble_second {
     private:
         BombBombBubble();
         bool init();
+        void addCenterFire();
     };
 }
 #endif //_BOMB_BOMB_BUBBLE_H_
