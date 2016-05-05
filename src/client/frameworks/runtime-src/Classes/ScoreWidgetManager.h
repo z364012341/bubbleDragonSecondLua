@@ -39,6 +39,8 @@ namespace bubble_second {
         void changeScoreWidgetArmatureDisplay(cocostudio::Armature* armature, const ScoreWidgetType& type);
         //读取骨骼换皮数据
         void readBoneDateFromFile();
+        //获取变身动画
+        cocostudio::Armature* getWidgetUpdateArmature(const ScoreWidgetType type);
     private:
         ScoreWidgetManager();
         //添加时间监听

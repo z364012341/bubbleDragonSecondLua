@@ -21,7 +21,8 @@ namespace bubble_second {
         void downFromAir() override;
         //小球正常消除
         void bubbleEliminate(int combo = 0) override;
-        float playTheSpecialEffects() override;
+        //float playTheSpecialEffects() override;
+        void playEliminateEffect();
     private:
         BombBombBubble();
         bool init();

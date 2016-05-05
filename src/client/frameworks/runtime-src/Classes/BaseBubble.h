@@ -111,6 +111,7 @@ namespace bubble_second {
         std::map<std::string, std::function<void(const cocos2d::Vec2& point)>> key_to_handle_effect_;
     private:
         void initHandleEffect();
+        void topEliminateBubbleFly();
     private:
         BubbleType bubble_type_;
         cocos2d::Vec2 bubble_in_map_index_;

@@ -406,6 +406,7 @@ namespace bubble_second {
 
     void GameBubbleMap::disposeUsedPropertyBubble(BaseBubble* property_bubble, const cocos2d::Vec2& contact_index)
     {
+        this->disposePreclingBubble(property_bubble, game_bubble_map_impl_->preclingBubble(property_bubble, contact_index));
         this->runBubbleEffect(property_bubble, contact_index);
         this->disposeWindmillRotation(property_bubble);
         BaseBubble* bubble = game_bubble_map_impl_->clingBubble(property_bubble, contact_index);
@@ -483,6 +484,10 @@ namespace bubble_second {
         GameScoreController::getInstance()->setBubbleUseCount(data->getBubbleNumbleMax());
         BubbleColorRender* render = new BubbleColorRender(data->getBubbleColorRange());
         BubbleSpriteMap bubble_map = game_bubble_map_impl_->initBubbleSpriteVetctor(render, data->getBubblesData(), game_bubble_map_impl_->getStageType());
+        if (game_bubble_map_impl_->getStageType() == kTopEliminate)
+        {
+            this->dispatchCustomEvent(EVENT_TOP_ELIMINATE_BUBBLE_LOGO_LOADED, &game_bubble_map_impl_->getFirstRowPositions());
+        }
         if (game_bubble_map_impl_->isWindmillStage())
         {
             this->dispatchCustomEvent(EVENT_WINDMILL_MAP_BORDER_LOADED);

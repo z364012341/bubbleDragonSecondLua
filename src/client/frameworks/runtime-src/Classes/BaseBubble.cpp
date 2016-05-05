@@ -91,8 +91,10 @@ namespace bubble_second {
         //        cocos2d::Spawn* spawn = cocos2d::Spawn::createWithTwoActions(move, seq);
         //        this->getParent()->addChild(pop_score_label);
         //        pop_score_label->runAction(spawn);
-                this->removeFromParent();
-                this->disposeAirShootBubble();
+        this->topEliminateBubbleFly();
+        this->removeFromParent();
+        this->disposeAirShootBubble();
+
                 //GamePlayController::getInstance()->checkAirBubbles();
         //    }), NULL);
         //    this->runAction(seq_2);
@@ -173,6 +175,17 @@ namespace bubble_second {
     {
         key_to_handle_effect_[LONG_EFFECT_BUBBLE_KEY] = [=](const cocos2d::Vec2& point) {this->runLongContactEffect(point); };
         key_to_handle_effect_[SHORT_EFFECT_BUBBLE_KEY] = [=](const cocos2d::Vec2& point) {this->runShortContactEffect(point); };
+    }
+
+    void BaseBubble::topEliminateBubbleFly()
+    {
+        if (this->getBubbleIndex().y == 0)
+        {
+            cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createStageTypeSprite(kTopEliminate);
+            sp->setScale(2.5f);
+            sp->setPosition(this->getParent()->convertToWorldSpace(this->getPosition()));
+            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_TOP_ELIMINATE_BUBBLE_FLY, sp);
+        }
     }
 
     //std::map<std::string, std::function<void(const cocos2d::Vec2&point)>> bubble_second::BaseBubble::getEffectHandleMap()

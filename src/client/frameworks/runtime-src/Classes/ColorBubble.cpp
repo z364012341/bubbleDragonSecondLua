@@ -13,7 +13,7 @@
 const int STANBY_ACTION_TAG = 121;
 const float STANBY_ACTION_TIME = 0.5f;
 const float STANBY_ACTION_RANGE = 3.0f;
-const float BUBBLE_MOVE_SPEED = 1400.0f;
+const float BUBBLE_MOVE_SPEED = 1414.0f;
 const std::string COLOR_BUBBLE_FLASH_PATH = "bai.png";
 const std::string COLOR_BUBBLE_ELIMINATE_PARTICLE_PATH = "particle/qipaotx.plist";
 namespace bubble_second {
@@ -301,7 +301,8 @@ namespace bubble_second {
             actions.pushBack(cocos2d::CallFunc::create([=]() {
                 speed_normalized_ = (var - pre_point).getNormalized();
             }));
-            actions.pushBack(cocos2d::MoveTo::create(pre_point.getDistance(var)/ BUBBLE_MOVE_SPEED, var));
+            //float time = pre_point.getDistance(var) / BUBBLE_MOVE_SPEED;
+            actions.pushBack(cocos2d::EaseOut::create(cocos2d::MoveTo::create(pre_point.getDistance(var) / BUBBLE_MOVE_SPEED, var), 1.1f));
             pre_point = var;
         }
         this->runAction(cocos2d::Sequence::create(actions));

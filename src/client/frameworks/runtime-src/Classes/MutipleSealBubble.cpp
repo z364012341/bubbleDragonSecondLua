@@ -72,17 +72,31 @@ namespace bubble_second {
         //        armature->removeFromParent();
         //    }
         //});
-        this->setVisible(false);
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_MUTIPLE_SEAL_BUBBLE_FLY, this);
-        //this->removeFromParent();
+        //this->setVisible(false);
+        SpriteTextureController::getInstance()->setSpriteTexture("", this);
+        armature_->setPosition(cocos2d::Vec2::ZERO);
+        armature_->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+            if (movementType == cocostudio::COMPLETE)
+            {
+                armature_->retain();
+                armature_->setPosition(armature_->getParent()->convertToWorldSpace(armature_->getPosition()));
+                armature_->removeFromParent();
+
+                cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_MUTIPLE_SEAL_BUBBLE_FLY, armature_);
+                armature_->release();
+                BaseBubble::bubbleEliminate();
+            }
+        });
     }
 
-    cocostudio::Armature * MutipleSealBubble::getBubbleEliminateArmature()
-    {
-        cocostudio::Armature* armature = cocostudio::Armature::create(armature_->getName());
-        armature->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-        return armature;
-    }
+    //cocostudio::Armature * MutipleSealBubble::getBubbleEliminateArmature()
+    //{
+    //    //cocostudio::Armature* armature = cocostudio::Armature::create(armature_->getName());
+
+    //    //armature->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+    //    return armature_;
+    //}
 
     void MutipleSealBubble::bubbleEliminateFlyCallfunc()
     {

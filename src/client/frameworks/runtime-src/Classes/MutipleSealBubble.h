@@ -33,7 +33,7 @@ namespace bubble_second {
         void onEnter() override;
         void onExit() override;
         void bubbleEliminate(int combo = 0) override;
-        cocostudio::Armature * getBubbleEliminateArmature();
+        //cocostudio::Armature * getBubbleEliminateArmature();
         void bubbleEliminateFlyCallfunc();
         void downFromAir() override;
         void addBubbleStaticBody() override;

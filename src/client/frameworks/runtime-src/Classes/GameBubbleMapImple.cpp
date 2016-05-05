@@ -249,7 +249,20 @@ namespace bubble_second{
 
     cocos2d::Vec2 GameBubbleMapImple::convertGameSceneCsbToMapSpaceWithBubble(cocos2d::Node* bubble)
     {
-        GameScene* gamescene = dynamic_cast<GameScene*>(bubble->getParent()->getParent());
+        GameScene* gamescene = nullptr;
+        cocos2d::Node* parent = bubble->getParent();
+        while (1)
+        {
+            if (gamescene = dynamic_cast<GameScene*>(parent))
+            {
+                break;
+            }
+            else
+            {
+                parent = parent->getParent();
+            }
+        }
+        //GameScene* gamescene = dynamic_cast<GameScene*>(bubble->getParent()->getParent());
         return gamescene->convertCsbToMapSpace(bubble->getPosition());
     }
 
@@ -655,7 +668,8 @@ namespace bubble_second{
             return BubbleVectorMap();
         }
         assert(bubble);
-        cocos2d::Vec2 pre_convert_pos = this->convertGameSceneCsbToMapSpaceWithBubble(prepare_bubble);
+        //cocos2d::Vec2 pre_convert_pos = this->convertGameSceneCsbToMapSpaceWithBubble(prepare_bubble);
+        cocos2d::Vec2 pre_convert_pos = prepare_bubble->getPosition();;
         cocos2d::Vec2 nearest_index = this->getIndexNearestContactBubble(pre_convert_pos, contact_index);
         BubbleVector contact_around = this->getAroundBubbleWithIndex(contact_index);
         BubbleVector nearest_around = this->getAroundBubbleWithIndex(nearest_index);
@@ -854,5 +868,14 @@ namespace bubble_second{
     bool GameBubbleMapImple::isFallStage()
     {
         return is_fall_type_;
+    }
+    std::vector<cocos2d::Vec2> GameBubbleMapImple::getFirstRowPositions()
+    {
+        std::vector<cocos2d::Vec2> points;
+        for (size_t i = 0; i < MAP_EVEN_ROW_MAX; i++)
+        {
+            points.push_back(this->convertIndexToPoint(cocos2d::Vec2(i, 0)));
+        }
+        return points;
     }
 }

@@ -226,7 +226,6 @@ const int BUBBLE_MUTIPLE_SEAL_COMPONENT_NUMBLE_7 = 6;
 const cocos2d::Vec2 BUBBLE_MUTIPLE_SEAL_3_ANCHORPOINT(0.5, 0.75); //三重封印贴图的锚点
 const cocos2d::Vec2 BUBBLE_IN_RAINBOW_BUBBLE_POS(-50, 20); //彩虹封印里面小球的位置
 const float BUBBLE_IN_RAINBOW_BUBBLE_SCALE = 0.7f; //封印里面小球的缩放
-const float SCORE_WIDGET_BEZIER_FLYING_DURATION = 1.0f; //得分挂件的赛贝尔运动时间
 const int WINDMILL_BUBBLE_TAG = 243; //风车小球的tag
 const int TOP_ELIMINATE_GAME_TASK_NUMBLE = 6; //顶部消除玩法的目标数量
 const float WINDMILL_ROTATION_ACTIONS_DURATION = 1.0f; //动作的时间
@@ -396,6 +395,7 @@ const float PHYSICS_SIGHTING_POINT_BODY_FRICTION = 0.0f;   //刚体摩擦力
 const std::string EVENT_MAP_LOADED = "map_loaded";       //加载完小球地图
 const std::string EVENT_WINDMILL_MAP_BORDER_LOADED = "event_windmill_map_border_loaded";       //加载风车地图边界
 const std::string EVENT_FALL_MAP_BORDER_LOADED = "EVENT_FALL_MAP_BORDER_LOADED";       //加载下落地图边界
+const std::string EVENT_TOP_ELIMINATE_BUBBLE_LOGO_LOADED = "event_top_eliminate_bubble_logo_loaded"; //消除顶部玩法 顶部泡泡下面的logo
 const std::string EVENT_INITIAL_START_NUMBLES = "event_initial_start_numbles"; //初始化星星的分数
 const std::string EVENT_BUBBLE_ELIMINATED = "bubble_shoule_eliminated"; //需要消除小球
 const std::string EVENT_BUBBLE_CLING = "bubble_should_cling";  //附着小球
@@ -450,7 +450,8 @@ const std::string EVENT_CLOCK_CLEAR = "event_clock_clear"; //定时闹钟clear
 const std::string EVENT_BUBBLE_CONTACT_BLACKHOLE = "event_bubble_contact_blackhole"; //小球撞到黑洞
 const std::string EVENT_STAVES_SELECT_BUBBLE = "event_staves_select_bubble"; //法杖选择小球
 const std::string EVENT_BUBBLE_NO_FLASH = "event_bubble_no_flash"; //小球不闪光
-const std::string EVENT_MUTIPLE_SEAL_BUBBLE_FLY = "event_mutiple_seal_bubble_fly"; //解救动物飞飞飞
+const std::string EVENT_MUTIPLE_SEAL_BUBBLE_FLY = "event_mutiple_seal_bubble_fly"; //解救动物飞飞飞 
+const std::string EVENT_TOP_ELIMINATE_BUBBLE_FLY = "event_top_eliminate_bubble_fly"; 
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效

@@ -60,16 +60,16 @@ namespace bubble_second {
             }
         });
 
-        cocos2d::NodeGrid* node = cocos2d::NodeGrid::create();
-        cocos2d::Node* game_layer = parent_node->getParent();
-        game_layer->addChild(node, parent_node->getLocalZOrder());
-        node->setTarget(parent_node);
-        auto point = this->getPosition()*parent_node->getScale() + parent_node->getPosition(); //坐标转换
-        auto action = cocos2d::Ripple3D::create(TWO_ROUND_BOMB_EFFECT_RIPPLE2D_DURATION, ACTION_3DGRID, point, 
-            TWO_ROUND_BOMB_EFFECT_RIPPLE2D_RADIUS, TWO_ROUND_BOMB_EFFECT_RIPPLE2D_WAVES, TWO_ROUND_BOMB_EFFECT_RIPPLE2D_AMPLITUDE);
-        auto action1 = cocos2d::Ripple3D::create(0, ACTION_3DGRID, point, 0, 0, 0);
-        cocos2d::Sequence* seq = cocos2d::Sequence::create(action, action1, cocos2d::CallFunc::create([=]() {node->removeFromParent(); }), nullptr);
-        node->runAction(seq);
+        //cocos2d::NodeGrid* node = cocos2d::NodeGrid::create();
+        //cocos2d::Node* game_layer = parent_node->getParent();
+        //game_layer->addChild(node, parent_node->getLocalZOrder());
+        //node->setTarget(parent_node);
+        //auto point = this->getPosition()*parent_node->getScale() + parent_node->getPosition(); //坐标转换
+        //auto action = cocos2d::Ripple3D::create(TWO_ROUND_BOMB_EFFECT_RIPPLE2D_DURATION, ACTION_3DGRID, point, 
+        //    TWO_ROUND_BOMB_EFFECT_RIPPLE2D_RADIUS, TWO_ROUND_BOMB_EFFECT_RIPPLE2D_WAVES, TWO_ROUND_BOMB_EFFECT_RIPPLE2D_AMPLITUDE);
+        //auto action1 = cocos2d::Ripple3D::create(0, ACTION_3DGRID, point, 0, 0, 0);
+        //cocos2d::Sequence* seq = cocos2d::Sequence::create(action, action1, cocos2d::CallFunc::create([=]() {node->removeFromParent(); }), nullptr);
+        //node->runAction(seq);
         return TWO_ROUND_BOMB_EFFECT_DELAY_TIME;
     }
     void BombPropertyBubble::downFromAir()

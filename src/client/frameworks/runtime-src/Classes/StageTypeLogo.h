@@ -23,7 +23,11 @@ namespace bubble_second {
     private:
         StageTypeLogo();
         bool initWithType(const StageType& type);
-        void mutipleSealBubbleFly(cocos2d::EventCustom* event);
+        void completeTaskBubbleFly(cocos2d::EventCustom* event);
+        void playLogoFlash();
+    private:
+        cocos2d::Sprite* type_sprite_ = nullptr;
+        StageType stage_type_;
     };
 }
 #endif //_STAGE_TYPE_LOGO_H_

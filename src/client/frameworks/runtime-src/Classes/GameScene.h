@@ -250,6 +250,8 @@ namespace bubble_second {
         void runBubbleContactEffect(cocos2d::EventCustom* event);
         //添加小球地图
         void addBubbleMapUI(cocos2d::EventCustom* event);
+        //添加顶部消除泡泡的首行下面的标志
+        void addTopEliminateBubbleLogo(cocos2d::EventCustom * event);
         //添加风车地图
         void addWindmillBorder(cocos2d::EventCustom*);
         void addWindmillBorderFunc(cocos2d::Size size, cocos2d::Vec2 point, int test_bitmask = BITMASK_WINDMILL_BORDER_CONTACTTEST);

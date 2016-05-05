@@ -6,6 +6,7 @@ const float WIDGET_POSITION_RANGE_RIGHT_MAX = GAME_DESIGN_RESOLUTION_WIDTH / 2 -
 const float WIDGET_POSITION_RANGE_RIGHT_MIN = GAME_DESIGN_RESOLUTION_WIDTH / 2 - BUBBLE_RADIUS * 2 - SCORE_WIDGET_BODY_RADIUS - 5.0f;
 const float WIDGET_POSITION_RANGE_LEFT_MAX = -WIDGET_POSITION_RANGE_RIGHT_MIN;
 const float WIDGET_POSITION_RANGE_LEFT_MIN = -WIDGET_POSITION_RANGE_RIGHT_MAX;
+const std::string SCORE_WIDGET_UPDATE_ANIMATION_NAME = "yun3";
 const std::string SCORE_WIDGET_BONE_DATA_PLIST_PATH = "res/scoreWidgetBoneData.plist";
 namespace bubble_second {
     ScoreWidgetManager::ScoreWidgetManager():widget_total_(0)
@@ -13,8 +14,8 @@ namespace bubble_second {
         //this->addEventListenerCustom();
         combo_to_type_[0] = kScoreWidgetLow;
         combo_to_type_[1] = kScoreWidgetLow;
-        combo_to_type_[2] = kScoreWidgetLow;
-        combo_to_type_[3] = kScoreWidgetLow;
+        combo_to_type_[2] = kScoreWidgetMiddle;
+        combo_to_type_[3] = kScoreWidgetMiddle;
         combo_to_type_[4] = kScoreWidgetMiddle;
         combo_to_type_[5] = kScoreWidgetMiddle;
         combo_to_type_[6] = kScoreWidgetHigh;
@@ -140,6 +141,19 @@ namespace bubble_second {
     void ScoreWidgetManager::readBoneDateFromFile()
     {
         score_widget_bone_data_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(SCORE_WIDGET_BONE_DATA_PLIST_PATH);
+    }
+
+    cocostudio::Armature * ScoreWidgetManager::getWidgetUpdateArmature(const ScoreWidgetType type)
+    {
+        cocostudio::Armature* armature = cocostudio::Armature::create(SCORE_WIDGET_UPDATE_ANIMATION_NAME);
+        if (type == kScoreWidgetHigh)
+        {
+            armature->getBone("Layer1")->addDisplay(cocostudio::Skin::createWithSpriteFrameName("mifengTX2_0011_fen-1.png"), 0);
+            armature->getBone("Layer1")->addDisplay(cocostudio::Skin::createWithSpriteFrameName("mifengTX2_0010_fen-2.png"), 1);
+            armature->getBone("Layer1")->addDisplay(cocostudio::Skin::createWithSpriteFrameName("mifengTX2_0009_fen-3.png"), 2);
+            armature->getBone("Layer1")->addDisplay(cocostudio::Skin::createWithSpriteFrameName("mifengTX2_0008_fen-4.png"), 3);
+        }
+        return armature;
     }
 
     void ScoreWidgetManager::removeTwoScoreWidget()

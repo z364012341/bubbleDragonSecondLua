@@ -37,6 +37,7 @@
 #include "GameStandbyTimer.h"
 #include "StageTypeLogo.h"
 #include "AddBubbleNumbleCommodity.h"
+#include "GameBubbleMapImple.h"
 #include "BubbleMainSightingDevice.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
@@ -343,7 +344,6 @@ namespace bubble_second {
                 skillSprite->setScale(zoom);
                 this->addChild(skillSprite, UI_ZORDER_MENU_INFO);
             }
-
         }
         //{   //发射台上的漩涡
         //    cocos2d::Sprite* swirl = SpriteTextureController::getInstance()->createGameSpriteWithPath(GUNSIGHT_SWIRL_RED_PATH);
@@ -748,8 +748,14 @@ namespace bubble_second {
         });
         dispatcher->addCustomEventListener(EVENT_BUBBLE_PRECLING, [=](cocos2d::EventCustom * event) {
             BaseBubble* bubble = static_cast<BaseBubble*>(event->getUserData());
-            bubble->setPosition(this->convertMapToCsbSpace(bubble->getPosition()));
+            bubble->retain();
+            bubble->removeFromParent();
+            bubble_map_node_->addChild(bubble);
+            bubble->release();
+            //bubble->setPosition(this->convertMapToCsbSpace(bubble->getPosition()));
         });
+        listener = cocos2d::EventListenerCustom::create(EVENT_TOP_ELIMINATE_BUBBLE_LOGO_LOADED, CC_CALLBACK_1(GameScene::addTopEliminateBubbleLogo, this));
+        dispatcher->addEventListenerWithFixedPriority(listener, 1);
     }
 
     void GameScene::removeEventListenerCustom()
@@ -799,6 +805,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_CAN_USED_PROPS);
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_CONTACT_BLACKHOLE);
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_PRECLING);
+        dispatcher->removeCustomEventListeners(EVENT_TOP_ELIMINATE_BUBBLE_LOGO_LOADED);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1030,6 +1037,18 @@ namespace bubble_second {
         //*****************************************************************
     }
 
+    void GameScene::addTopEliminateBubbleLogo(cocos2d::EventCustom * event)
+    {
+        auto points = *static_cast<std::vector<cocos2d::Vec2>*>(event->getUserData());
+        for (auto point : points)
+        {
+            cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createStageTypeSprite(kTopEliminate);
+            sp->runAction(cocos2d::RepeatForever::create(cocos2d::RotateBy::create(2.0f, 180.0f)));
+            sp->setPosition(point);
+            bubble_map_node_->addChild(sp);
+        }
+    }
+
     void GameScene::addWindmillBorder(cocos2d::EventCustom *)
     {
         //auto func = [=](cocos2d::Size size, cocos2d::Vec2 point, int test_bitmask = BITMASK_WINDMILL_BORDER_CONTACTTEST) {
@@ -1140,7 +1159,11 @@ namespace bubble_second {
         //pop_score_label->setScale(POP_SCORE_INITIAL_SCALE);
         cocos2d::Vec2 point(data_map.at(EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_POS_X_KEY).asFloat(), 
             data_map.at(EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_POS_Y_KEY).asFloat());
-        pop_score_label->setPosition(this->convertMapToCsbSpace(point));
+        //if (point.y<0)
+        //{
+            point = this->convertMapToCsbSpace(point);
+        //}
+        pop_score_label->setPosition(point);
         csb_node_->addChild(pop_score_label);
         pop_score_label->popOnceLabelWithScore(data_map.at(EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_SCORE_KEY).asInt());
     }
@@ -2059,6 +2082,7 @@ namespace bubble_second {
             this->shootBubblesAfterVictory();
         })));
         bubble_map_node_->stopAllActions();
+        //bubble_map_node_->removeFromParent();
     }
 
     void GameScene::shootBubblesAfterVictory()

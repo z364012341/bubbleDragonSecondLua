@@ -3,6 +3,7 @@
 #include "GameScoreController.h"
 #include "cocostudio\CocoStudio.h"
 const std::string BOMB_BOMB_BUBBLE_CENTER_FIRE_NAME = "huoqiuTX";
+const std::string BOMB_BOMB_BUBBLE_PARTICLE_PATH = "particle/huoqiulizi.plist";
 namespace bubble_second {
     BombBombBubble::BombBombBubble()
     {
@@ -34,32 +35,22 @@ namespace bubble_second {
 
     void BombBombBubble::downFromAir()
     {
-        this->bubbleEliminate();
+        this->playEliminateEffect();
     }
 
     void BombBombBubble::bubbleEliminate(int combo)
     {
-        BaseBubble::bubbleEliminate();
+        this->playEliminateEffect();
     }
 
-    float BombBombBubble::playTheSpecialEffects()
+    void BombBombBubble::playEliminateEffect()
     {
-        using cocostudio::ArmatureDataManager;
-        using cocostudio::Armature;
-        if (cocos2d::Node* parent = this->getParent())
-        {
-            Armature *armature = Armature::create(ONE_ROUND_BOMB_EFFECT_NAME);
-            armature->setPosition(this->getPosition());
-            armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-            armature->getAnimation()->setMovementEventCallFunc([=](Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-                if (movementType == cocostudio::COMPLETE)
-                {
-                    armature->removeFromParent();
-                }
-            });
-            parent->addChild(armature);
-            return ONE_ROUND_BOMB_EFFECT_DELAY_TIME;
-        }
-        return 0.0f;
+        cocos2d::ParticleSystemQuad* particle = cocos2d::ParticleSystemQuad::create(BOMB_BOMB_BUBBLE_PARTICLE_PATH);
+        particle->setPosition(this->getPosition());
+        this->getParent()->addChild(particle);
+        BaseBubble::bubbleEliminate();
+        particle->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.5f), cocos2d::CallFunc::create([=]() {
+            particle->removeFromParent();
+        })));
     }
 }

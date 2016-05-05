@@ -34,6 +34,7 @@ const std::string ADD_TEN_BUBBLE_NUMBLE_ARMATURE_NAME = "jiabudaoju/jiabudaoju.E
 const std::string AIMING_LINE_COMMODITY_ARMATURE_NAME = "miaozhunxian/miaozhunxian.ExportJson";
 const std::string TWO_ROUND_BOMB_EFFECT_PATH = "zhadanTX/zhadanTX.ExportJson"; //炸2圈特效的路径
 const std::string BOMB_BOMB_BUBBLE_CENTER_FIRE_PATH = "huoqiuTX/huoqiuTX.ExportJson";
+const std::string SCORE_WIDGET_UPDATE_PATH = "yun3/yun3.ExportJson";
 namespace bubble_second {
 
     SpriteTextureController::SpriteTextureController()
@@ -89,6 +90,7 @@ namespace bubble_second {
         armature_path_.push_back(ADD_TEN_BUBBLE_NUMBLE_ARMATURE_NAME);
         armature_path_.push_back(AIMING_LINE_COMMODITY_ARMATURE_NAME);
         armature_path_.push_back(BOMB_BOMB_BUBBLE_CENTER_FIRE_PATH);
+        armature_path_.push_back(SCORE_WIDGET_UPDATE_PATH);
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()
@@ -147,10 +149,10 @@ namespace bubble_second {
         return this->createGameSpriteWithPath(stage_menu_stagetype_to_path_[type]);
     }
 
-    void SpriteTextureController::setStageTypeSprite(cocos2d::Sprite* sp, const StageType& type)
-    {
-        this->setSpriteTexture(stagetype_to_path_[type], sp);
-    }
+    //cocos2d::Sprite* SpriteTextureController::createStageTypeSprite(const StageType& type)
+    //{
+    //    this->setSpriteTexture(stagetype_to_path_[type], sp);
+    //}
 
     cocos2d::Sprite * SpriteTextureController::createGameBackgroundSprite(int cell_numble)
     {

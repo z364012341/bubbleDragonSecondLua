@@ -99,6 +99,7 @@ namespace bubble_second {
         //是否是下落类型
         void setFallFlag(bool flag);
         bool isFallStage();
+        std::vector<cocos2d::Vec2> getFirstRowPositions();
     private:
         static int getColFactorWithIndex(const cocos2d::Vec2& index);
         static cocos2d::Vec2 getUpLeftIndex(const cocos2d::Vec2& index);

@@ -12,6 +12,9 @@ const std::string SCOREWIDGET_ANIMATION_REMOVE_NAME = "siwang";
 const std::string BUBBLE_ANIMATION_LOOK_NAME_1 = "shangxiakan";
 const std::string BUBBLE_ANIMATION_LOOK_NAME_2 = "zuoyoukan";
 const float SCOREWIDGET_ARMATURE_SCALE = 0.5;
+//const std::string SCORE_WIDGET_UPDATE_ANIMATION_NAME = "yun3";
+const float SCORE_WIDGET_BEZIER_FLYING_DURATION = 1.0f; //得分挂件的赛贝尔运动时间
+
 namespace bubble_second {
     ScoreWidget::ScoreWidget() :widget_combo_(0), armature_(nullptr)
     {
@@ -65,14 +68,18 @@ namespace bubble_second {
         {
             body->removeFromWorld();
         }
-        armature_->getAnimation()->stop();
+        //armature_->getAnimation()->stop();
         armature_->getAnimation()->play(SCOREWIDGET_ANIMATION_REMOVE_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-        armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-            if (movementType == cocostudio::COMPLETE)
-            {
-                this->removeFromParent();
-            }
-        });
+        //armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+        //    if (movementType == cocostudio::COMPLETE)
+        //    {
+        //        this->removeFromParent();
+        //    }
+        //});
+        armature_->getAnimation()->setMovementEventCallFunc(nullptr);
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(2.0f), cocos2d::CallFunc::create([=]() {
+            this->removeFromParent();
+        })));
     }
     void ScoreWidget::setType(const ScoreWidgetType& type)
     {
@@ -98,8 +105,21 @@ namespace bubble_second {
 
     void ScoreWidget::updateScoreWidgetType()
     {
-        this->setType(type_update_to_type_[type_]);
-        this->comboClear();
+        if (this->getType() == kScoreWidgetHigh)
+        {
+            return;
+        }
+        cocostudio::Armature* armature = ScoreWidgetManager::getInstance()->getWidgetUpdateArmature(type_update_to_type_[type_]);
+        this->addChild(armature);
+        armature->getAnimation()->playWithIndex(0);
+        armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+            if (movementType == cocostudio::COMPLETE)
+            {
+                this->setType(type_update_to_type_[type_]);
+                this->comboClear();
+                armature->removeFromParent();
+            }
+        });
     }
 
     ScoreWidgetType ScoreWidget::getType()
