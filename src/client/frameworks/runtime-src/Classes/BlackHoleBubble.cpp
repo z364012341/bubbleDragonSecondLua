@@ -91,8 +91,7 @@ namespace bubble_second {
 
     void BlackHoleBubble::bubbleEliminate(int combo)
     {
-
-
+        swallow_vector_.back()->setVisible(false);
         cocos2d::ScaleTo* scale1 = cocos2d::ScaleTo::create(0.2f, 0.85f);
         cocos2d::ScaleTo* scale2 = cocos2d::ScaleTo::create(0.2f, 1.2f);
         cocos2d::Sequence* seq = cocos2d::Sequence::create(scale1, scale2, cocos2d::CallFunc::create([=]() {

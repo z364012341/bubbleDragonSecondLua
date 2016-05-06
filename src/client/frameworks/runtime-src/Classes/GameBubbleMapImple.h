@@ -64,7 +64,7 @@ namespace bubble_second {
         int getBubblesMinIndexY();
         //获取离发射台近的泡泡
         BaseBubble* getBubbleMinCenter();
-        //BaseBubble* getBubbleMinCenterWithIndexs(int indexs[]);
+        //BaseBubble* getBubbleMinCenterWithIndexs(const int* indexs);
         //获取屏幕内的小球
         BubbleVector getBubblesInVisibleSize();
         //获取屏幕内的同色小球

@@ -756,6 +756,9 @@ namespace bubble_second {
         });
         listener = cocos2d::EventListenerCustom::create(EVENT_TOP_ELIMINATE_BUBBLE_LOGO_LOADED, CC_CALLBACK_1(GameScene::addTopEliminateBubbleLogo, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        dispatcher->addCustomEventListener(EVENT_ESTIMATE_VICTORY, [=](cocos2d::EventCustom * event) {
+            this->estimateVictory();
+        });
     }
 
     void GameScene::removeEventListenerCustom()
@@ -806,6 +809,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_CONTACT_BLACKHOLE);
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_PRECLING);
         dispatcher->removeCustomEventListeners(EVENT_TOP_ELIMINATE_BUBBLE_LOGO_LOADED);
+        dispatcher->removeCustomEventListeners(EVENT_ESTIMATE_VICTORY);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1043,7 +1047,8 @@ namespace bubble_second {
         for (auto point : points)
         {
             cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createStageTypeSprite(kTopEliminate);
-            sp->runAction(cocos2d::RepeatForever::create(cocos2d::RotateBy::create(2.0f, 180.0f)));
+            sp->runAction(cocos2d::RepeatForever::create(cocos2d::RotateBy::create(3.0f, 360.0f)));
+            sp->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::createWithTwoActions(cocos2d::ScaleTo::create(1.0f, 0.6f), cocos2d::ScaleTo::create(1.0f, 1.0f))));
             sp->setPosition(point);
             bubble_map_node_->addChild(sp);
         }
@@ -1693,7 +1698,7 @@ namespace bubble_second {
         //BaseBubble* second_prepare_bubble = getSecondPrepareBubble();
         //if (second_prepare_bubble)
         //{
-            GamePlayController::getInstance()->prepareBubbleChangeType(this->getPrepareBubble(), getSecondPrepareBubble());
+            GamePlayController::getInstance()->prepareBubbleChangeType(getSecondPrepareBubble());
         //}
 		this->changeSightingDeviceColor();
     }
@@ -2064,6 +2069,11 @@ namespace bubble_second {
         char str[5];
         sprintf(str, "%d", numble);
         this->getCompletedTaskLabel()->setString(str);
+        this->estimateVictory();
+    }
+
+    void GameScene::estimateVictory()
+    {
         if (GameScoreController::getInstance()->gameVictory())
         {
             this->victory();
@@ -2075,7 +2085,13 @@ namespace bubble_second {
         //this->getGameCharacter()->playVictoryAnimation();
         //this->setSecondPrepareBubble(nullptr);
         //GamePlayController::getInstance()->setPrepareBubble(nullptr);
-        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_UPDATE_COMPLETED_TASK_LABEL);
+        //cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_UPDATE_COMPLETED_TASK_LABEL);
+        //cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_ESTIMATE_VICTORY);
+        if (!first_victory_flag_)
+        {
+            return;
+        }
+        first_victory_flag_ = false;
 		this->setPropertyTouchEnabled(false);
         GamePlayController::getInstance()->disposeVictory();
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME*2), cocos2d::CallFunc::create([=]() {

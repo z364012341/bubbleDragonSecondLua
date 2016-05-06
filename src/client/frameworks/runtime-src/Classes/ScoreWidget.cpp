@@ -77,7 +77,7 @@ namespace bubble_second {
         //    }
         //});
         armature_->getAnimation()->setMovementEventCallFunc(nullptr);
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(2.0f), cocos2d::CallFunc::create([=]() {
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(1.67f), cocos2d::CallFunc::create([=]() {
             this->removeFromParent();
         })));
     }

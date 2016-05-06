@@ -214,6 +214,7 @@ namespace bubble_second {
     void GameScoreController::setCompletedTaskNumble(int numble)
     {
         completed_task_numble_set_ = numble;
-        this->dispatchUpdateCompletedTaskEvent();
+        //this->dispatchUpdateCompletedTaskEvent();
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ESTIMATE_VICTORY);
     }
 }

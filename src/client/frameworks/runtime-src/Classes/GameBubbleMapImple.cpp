@@ -8,7 +8,7 @@
 #include "GameScoreController.h"
 #include "StageDataManager.h"
 #include "BubbleColorRender.h"
-const float WINDMILL_BUBBLE_ROTATION_FACTOR = 3000.0f; //风车转转转的速度系数
+const float WINDMILL_BUBBLE_ROTATION_FACTOR = 4000.0f; //风车转转转的速度系数
 const int RECENTLY_BUBBLE_FIND_HIGH_PRIORITY_SEQUENCE[] = { 5, 4, 6, 3, 7};
 const int RECENTLY_BUBBLE_FIND_LOW_PRIORITY_SEQUENCE[] = { 2, 8, 1, 9, 0, 10 };
 const int RECENTLY_BUBBLE_FIND_INDEX_OFFSET = 4;
@@ -401,11 +401,12 @@ namespace bubble_second{
 
     BaseBubble* GameBubbleMapImple::preclingBubble(BaseBubble * prepare_bubble, const cocos2d::Vec2 & contact_index)
     {
-        cocos2d::Vec2 bubble_should_index = this->getTheNearestEmptyIndex(this->convertGameSceneCsbToMapSpaceWithBubble(prepare_bubble),
-            contact_index);
+        cocos2d::Vec2 bubble_pos = prepare_bubble->getParent()->getName() == UI_NAME_GAME_PLAY_AREA_NODE ? this->convertGameSceneCsbToMapSpaceWithBubble(prepare_bubble) : prepare_bubble->getPosition();
+        cocos2d::Vec2 bubble_should_index = this->getTheNearestEmptyIndex(bubble_pos, contact_index);
         assert(bubble_sprite_map_[bubble_should_index.y].at(bubble_should_index.x) == nullptr);
         BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(prepare_bubble->getBubbleType(),
             bubble_should_index, this->convertIndexToPoint(bubble_should_index));
+        prepare_bubble->setBubbleIndex(bubble_should_index);
         return bubble;
     }
 
@@ -616,7 +617,10 @@ namespace bubble_second{
     int GameBubbleMapImple::getWindmillRotationDirection(const cocos2d::Vec2 & bubble_speed, const cocos2d::Vec2& to_center_speed)
     {
         int direction = 0;
-        if ((to_center_speed.x > 0 && bubble_speed.y<0) || (to_center_speed.x < 0 && bubble_speed.y>0))
+        if ((to_center_speed.x < 0 && to_center_speed.y>0) && (bubble_speed.x > 0 && bubble_speed.y>0) ||
+            (to_center_speed.x > 0 && to_center_speed.y>0) && (bubble_speed.x > 0 && bubble_speed.y<0) || 
+            (to_center_speed.x > 0 && to_center_speed.y<0) && (bubble_speed.x < 0 && bubble_speed.y<0) || 
+            (to_center_speed.x < 0 && to_center_speed.y<0) && (bubble_speed.x < 0 && bubble_speed.y>0))
         {
             direction = 1;
         }
@@ -630,10 +634,12 @@ namespace bubble_second{
     float GameBubbleMapImple::getWindmillContactVelocity(BaseBubble * prepare_bubble)
     {
         cocos2d::Vec2 windmill_pos = this->convertGameSceneMapToCsbSpaceWithBubble(this->getSpecialBubble());
-        cocos2d::Vec2 contact_vector = prepare_bubble->getPosition() - windmill_pos;    //指向圆心的向量
+        cocos2d::Vec2 bubble_pos = this->convertGameSceneMapToCsbSpaceWithBubble(prepare_bubble);
+
+        cocos2d::Vec2 contact_vector = bubble_pos - windmill_pos;    //指向圆心的向量
         cocos2d::Vec2 bubble_speed = dynamic_cast<ColorBubble*>(prepare_bubble)->getBubbleSpeed();  //小球速度向量
         cocos2d::Vec2 circle_line_speed = contact_vector.rotateByAngle(cocos2d::Vec2::ZERO, CC_DEGREES_TO_RADIANS(90.0f)).getNormalized(); //切线向量
-        float r = prepare_bubble->getPosition().getDistance(windmill_pos); //半径
+        float r = bubble_pos.getDistance(windmill_pos); //半径
         cocos2d::Vec2 line_vector_project = bubble_speed.project(circle_line_speed); //切线速度分量
         float line_speed = line_vector_project.length(); //求模
         return  line_speed * getWindmillRotationDirection(line_vector_project, contact_vector)*r;
@@ -745,23 +751,21 @@ namespace bubble_second{
     BaseBubble * GameBubbleMapImple::getBubbleMinCenter()
     {
         int min_index_y = this->getBubblesMinIndexY();
-
         for (int i = 0; i < RECENTLY_BUBBLE_FIND_INDEX_OFFSET; i++)
         {
             for (auto index_x : RECENTLY_BUBBLE_FIND_HIGH_PRIORITY_SEQUENCE)
             {
-                if (bubble_sprite_map_[min_index_y - i].at(index_x) != nullptr)
+                if (bubble_sprite_map_[min_index_y - i].at(index_x) != nullptr && bubble_sprite_map_[min_index_y - i].at(index_x)->getBubbleType() != kBubbleTransparent)
                 {
                     return bubble_sprite_map_[min_index_y - i].at(index_x);
                 }
             }
         }
-
         for (int i = 0; i < RECENTLY_BUBBLE_FIND_INDEX_OFFSET; i++)
         {
             for (auto index_x : RECENTLY_BUBBLE_FIND_LOW_PRIORITY_SEQUENCE)
             {
-                if (bubble_sprite_map_[min_index_y - i].at(index_x) != nullptr)
+                if (bubble_sprite_map_[min_index_y - i].at(index_x) != nullptr && bubble_sprite_map_[min_index_y - i].at(index_x)->getBubbleType() != kBubbleTransparent)
                 {
                     return bubble_sprite_map_[min_index_y - i].at(index_x);
                 }
@@ -770,16 +774,17 @@ namespace bubble_second{
         return nullptr;
     }
 
-    //BaseBubble * GameBubbleMapImple::getBubbleMinCenterWithIndexs(int indexs[])
+    //BaseBubble * GameBubbleMapImple::getBubbleMinCenterWithIndexs(const int* indexs)
     //{
     //    int min_index_y = this->getBubblesMinIndexY();
-    //    for (auto index_x : indexs)
+
+    //    for (int i = 0; i < RECENTLY_BUBBLE_FIND_INDEX_OFFSET; i++)
     //    {
-    //        for (int i = 0; i < RECENTLY_BUBBLE_FIND_INDEX_OFFSET; i++)
+    //        for (size_t i = 0; i < sizeof(indexs)/sizeof(int); i++)
     //        {
-    //            if (bubble_sprite_map_[min_index_y - i].at(index_x) != nullptr)
+    //            if (bubble_sprite_map_[min_index_y - i].at(indexs[i]) != nullptr && bubble_sprite_map_[min_index_y - i].at(indexs[i])->getBubbleType() != kBubbleTransparent)
     //            {
-    //                return bubble_sprite_map_[min_index_y - i].at(index_x);
+    //                return bubble_sprite_map_[min_index_y - i].at(indexs[i]);
     //            }
     //        }
     //    }

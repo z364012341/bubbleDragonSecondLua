@@ -24,6 +24,7 @@ namespace bubble_second {
         StageTypeLogo();
         bool initWithType(const StageType& type);
         void completeTaskBubbleFly(cocos2d::EventCustom* event);
+        void bubbleNodeFlyFlyFly(cocos2d::Node* node, bool update_immediately);
         void playLogoFlash();
     private:
         cocos2d::Sprite* type_sprite_ = nullptr;

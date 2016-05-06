@@ -400,6 +400,7 @@ const std::string EVENT_INITIAL_START_NUMBLES = "event_initial_start_numbles"; /
 const std::string EVENT_BUBBLE_ELIMINATED = "bubble_shoule_eliminated"; //需要消除小球
 const std::string EVENT_BUBBLE_CLING = "bubble_should_cling";  //附着小球
 const std::string EVENT_BUBBLE_PRECLING = "event_bubble_precling";  //预附着小球
+const std::string EVENT_ESTIMATE_VICTORY = "event_estimate_victory";  //判断是否胜利
 const std::string EVENT_WINDMILL_ROTATION = "windmill_rotation";  //风车转
 const std::string EVENT_CAN_USED_PROPS = "EVENT_CAN_USED_PROPS"; //可以使用道具啦
 const std::string EVENT_BUBBLE_AIR = "bubble_is_in_the_air";  //这些小球要掉下来

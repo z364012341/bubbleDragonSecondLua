@@ -301,8 +301,10 @@ namespace bubble_second {
         void playBigEliminateEffect(cocos2d::EventCustom*);
         //停止6连消的特效
         void stopBigEliminateEffect(cocos2d::EventCustom*);
-        //更新已完成的目标label
+        //更新已完成的目标label                                 
         void updateCompletedTaskLabel(cocos2d::EventCustom*);
+        //判断是否胜利
+        void estimateVictory();
         //更新小球数的label
         void updateBubbleUseCountLabel(cocos2d::EventCustom*);
         //增加1空坠泡泡数量
@@ -351,6 +353,7 @@ namespace bubble_second {
         StageType stage_type_;
         bool is_fall_stage_ = false;
         bool add_props_flag = true;
+        bool first_victory_flag_ = true;
 		cocos2d::ui::Button* pause_menu_ = nullptr;
         BaseBubble* prepare_bubble_ = nullptr;
 		BaseBubble* second_bubble_ = nullptr;

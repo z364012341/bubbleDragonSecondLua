@@ -27,6 +27,7 @@ namespace bubble_second {
         bool init();
         void setBubbleTexture(BubbleType type) override {};
         void addArmature(cocos2d::Node* ndoe, const cocos2d::Vec2& point);
+        //void addArmature();
         void addNoopComponent();
         void playStandbyAnimation();
         //ÊÇ·ñÎÞ²Ù×÷×´Ì¬

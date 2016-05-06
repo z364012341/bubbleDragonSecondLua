@@ -486,7 +486,8 @@ namespace bubble_second {
         BubbleSpriteMap bubble_map = game_bubble_map_impl_->initBubbleSpriteVetctor(render, data->getBubblesData(), game_bubble_map_impl_->getStageType());
         if (game_bubble_map_impl_->getStageType() == kTopEliminate)
         {
-            this->dispatchCustomEvent(EVENT_TOP_ELIMINATE_BUBBLE_LOGO_LOADED, &game_bubble_map_impl_->getFirstRowPositions());
+            auto data = game_bubble_map_impl_->getFirstRowPositions();
+            this->dispatchCustomEvent(EVENT_TOP_ELIMINATE_BUBBLE_LOGO_LOADED, &data);
         }
         if (game_bubble_map_impl_->isWindmillStage())
         {

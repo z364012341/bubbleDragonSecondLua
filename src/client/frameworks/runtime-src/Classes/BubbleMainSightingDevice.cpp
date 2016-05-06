@@ -84,7 +84,7 @@ namespace bubble_second {
     void BubbleMainSightingDevice::turnOnMainSightingDevice(const cocos2d::Vec2 & touch_point)
     {
         this->rotateDevice(touch_point);
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.01), cocos2d::CallFunc::create([=]() {
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.01f), cocos2d::CallFunc::create([=]() {
             this->turnOnSightingDevice();
             this->setVisible(true);
         })));
@@ -100,7 +100,9 @@ namespace bubble_second {
     //}
     void BubbleMainSightingDevice::turnOffSightingDevice()
     {
-        BubbleSightingDevice::turnOffSightingDevice();
-        this->setVisible(false);
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.01f), cocos2d::CallFunc::create([=]() {
+            BubbleSightingDevice::turnOffSightingDevice();
+            this->setVisible(false);
+        })));
     }
 }
