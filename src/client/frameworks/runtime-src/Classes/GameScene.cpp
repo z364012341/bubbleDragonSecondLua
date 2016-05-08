@@ -655,6 +655,7 @@ namespace bubble_second {
         listener = cocos2d::EventListenerCustom::create(EVENT_PROPS_SELECT_ALERT_CANCEL, [=](cocos2d::EventCustom*) {
             props_weapon_->removeFromParent();
             this->removePropsSelectAlert(nullptr);
+            this->setMenuTouchEnabled(true);
             dispatcher->dispatchCustomEvent(EVENT_BUBBLE_NO_FLASH);
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
@@ -1396,8 +1397,8 @@ namespace bubble_second {
     {
         props_weapon_ = static_cast<BaseWeapon*>(event->getUserData());
         props_weapon_->setVisible(false);
-        props_weapon_->setRotation(-bubble_map_node_->getRotation());
-        bubble_map_node_->addChild(props_weapon_);
+        //props_weapon_->setRotation(-bubble_map_node_->getRotation());
+        csb_node_->addChild(props_weapon_);
         PropsSelectAlert* alert = PropsSelectAlert::create();
         csb_node_->addChild(alert, UI_ZORDER_MENU);
         cocos2d::LayerColor* layer = cocos2d::LayerColor::create(PROPS_SELECT_ALERT_LAYER_COLOR, GAME_DESIGN_RESOLUTION_WIDTH,
@@ -1446,7 +1447,8 @@ namespace bubble_second {
 
     void GameScene::setPropsWeaponPosition(const cocos2d::Vec2& point)
     {
-        props_weapon_->selectBubble(point);
+        //props_weapon_->selectBubble(point);
+        props_weapon_->selectBubble(this->convertMapToCsbSpace(point));
     }
 
     void GameScene::useSelectProperties(cocos2d::EventCustom*)
@@ -1537,9 +1539,7 @@ namespace bubble_second {
         csb_node_->getChildByName(PROPS_SELECT_ALERT_LAYERCOLOR_NAME)->removeFromParent();
         wooden_hammer_property_->cancelUseItem();
         staves_property_->cancelUseItem();
-        //props_weapon_->removeFromParent();
         props_weapon_ = nullptr;
-        this->setMenuTouchEnabled(true);
         GamePlayController::getInstance()->findBubblesInVisibleSize();
         bubble_map_node_->resume();
     }
@@ -1670,36 +1670,14 @@ namespace bubble_second {
             {
                 ++color_bubble_numble;
             }
-            //if (var->getName() != PREPARE_BUBBLE_NAME)
-            //{
-            //    GamePlayController::getInstance()->subtractPrepareColor(var->getBubbleType());
-            //}
-            //else
-            //{
-            //    GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
-            //}
-            //cocos2d::Vector<cocos2d::FiniteTimeAction*> arrayOfActions;
-            //arrayOfActions.pushBack(cocos2d::DelayTime::create(combo));
-            //arrayOfActions.pushBack(cocos2d::CallFunc::create([=]() {
-            //    GamePlayController::getInstance()->disposeDarkCloudBubble(var->getBubbleIndex());
-            //    var->bubbleEliminate(combo);
-            //}));
-            //cocos2d::Sequence* seq = cocos2d::Sequence::create(arrayOfActions);
-            //var->runAction(seq);
             var->bubbleEliminateInSequence(combo, time);
         }
         GameScoreController::getInstance()->addScoreWithEliminateNumble(color_bubble_numble);
-        this->setPropertyTouchEnabled(true);
     }
 
     void GameScene::disposedPrepareBubbleType()
     {
-        //auto controller = GamePlayController::getInstance();
-        //BaseBubble* second_prepare_bubble = getSecondPrepareBubble();
-        //if (second_prepare_bubble)
-        //{
-            GamePlayController::getInstance()->prepareBubbleChangeType(getSecondPrepareBubble());
-        //}
+        GamePlayController::getInstance()->prepareBubbleChangeType(getSecondPrepareBubble());
 		this->changeSightingDeviceColor();
     }
 
@@ -1803,6 +1781,8 @@ namespace bubble_second {
         float time = this->playBubblesEffects(*sprites) + BUBBLS_ADJUST_MAP_DELAYETIME;
         this->runAction(cocos2d::Sequence::create(callfunc, cocos2d::DelayTime::create(time), cocos2d::CallFunc::create([=]() {
             controller->adjustGameScenePosition();
+            this->setMenuTouchEnabled(true);
+
         }), nullptr));
     }
 
