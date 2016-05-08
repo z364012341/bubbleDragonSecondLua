@@ -53,7 +53,9 @@ namespace bubble_second {
         void initialStacdbyEffectTime();
         void setStacdbyEffectTime(int time);
     private:
-        int score_;
+        int score_ = 0.0f;
+        int double_score_ = 0.0f;
+        int initial_score_ = 0.0f;
         EffectEnabled effect_flag_;
         int standby_effect_delaytime_max_;
        //cocos2d::ui::TextBMFont* score_label_ = nullptr;
