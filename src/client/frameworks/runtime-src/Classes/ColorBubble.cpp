@@ -268,11 +268,7 @@ namespace bubble_second {
 
     bool ColorBubble::isDarkCloudBubble()
     {
-        if (cloud_bubble_)
-        {
-            return true;
-        }
-        return false;
+        return cloud_bubble_ != nullptr;
     }
 
     void ColorBubble::destroyDarkCloud()
@@ -358,6 +354,11 @@ namespace bubble_second {
     cocos2d::Vec2 ColorBubble::getBubbleSpeed()
     {
         return speed_normalized_ * BUBBLE_MOVE_SPEED;
+    }
+
+    BubbleType ColorBubble::getBubbleType()
+    {
+        return this->isDarkCloudBubble()? kBubbleDarkCloud : BaseBubble::getBubbleType();
     }
 
     cocos2d::Vec2 ColorBubble::getImpulseByTouchlocation(cocos2d::Vec2 touch_location)

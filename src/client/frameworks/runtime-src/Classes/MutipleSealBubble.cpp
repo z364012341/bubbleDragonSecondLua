@@ -73,21 +73,23 @@ namespace bubble_second {
         //    }
         //});
         //this->setVisible(false);
-        SpriteTextureController::getInstance()->setSpriteTexture("", this);
-        armature_->setPosition(cocos2d::Vec2::ZERO);
-        armature_->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-        armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-            if (movementType == cocostudio::COMPLETE)
-            {
-                armature_->retain();
-                armature_->setPosition(armature_->getParent()->convertToWorldSpace(armature_->getPosition()));
-                armature_->removeFromParent();
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.8f), cocos2d::CallFunc::create([=]() {
+            SpriteTextureController::getInstance()->setSpriteTexture("", this);
+            armature_->setPosition(cocos2d::Vec2::ZERO);
+            armature_->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+            armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+                if (movementType == cocostudio::COMPLETE)
+                {
+                    armature_->retain();
+                    armature_->setPosition(armature_->getParent()->convertToWorldSpace(armature_->getPosition()));
+                    armature_->removeFromParent();
 
-                cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_MUTIPLE_SEAL_BUBBLE_FLY, armature_);
-                armature_->release();
-                BaseBubble::bubbleEliminate();
-            }
-        });
+                    cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_MUTIPLE_SEAL_BUBBLE_FLY, armature_);
+                    armature_->release();
+                    BaseBubble::bubbleEliminate();
+                }
+            });
+        })));
     }
 
     //cocostudio::Armature * MutipleSealBubble::getBubbleEliminateArmature()

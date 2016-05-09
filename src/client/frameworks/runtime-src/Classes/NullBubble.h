@@ -19,6 +19,7 @@ namespace bubble_second {
         void bubbleEliminate(int combo = 0) override;
         void downFromAir() override;
         bool needRemoveFromBubbleMap() override;
+        void addBubbleStaticBody() override;
     private:
         NullBubble();
         bool init();

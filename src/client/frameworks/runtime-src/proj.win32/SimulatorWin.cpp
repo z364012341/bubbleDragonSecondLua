@@ -321,8 +321,8 @@ int SimulatorWin::run()
 
     // create opengl view
     auto dict = ZCGConfigDataDict::getInstance();
-    float frameWidth = dict->getIntData(ZCGConfigDataDict::KEY_FRAME_WIDTH);
-    float frameHeight = dict->getIntData(ZCGConfigDataDict::KEY_FRAME_HEIGHT);
+    float frameWidth = dict->getIntData(KEY_FRAME_WIDTH);
+    float frameHeight = dict->getIntData(KEY_FRAME_HEIGHT);
     //Size frameSize = _project.getFrameSize();
     Size frameSize = Size(frameWidth, frameHeight);
     float frameScale = 1.0f;
@@ -353,7 +353,7 @@ int SimulatorWin::run()
     auto director = Director::getInstance();
     director->setOpenGLView(glview);
 
-    director->setAnimationInterval(1.0 / 60.0);
+    director->setAnimationInterval(1.0f / 60.0f);
 
     // set window position
     if (_project.getProjectDir().length())

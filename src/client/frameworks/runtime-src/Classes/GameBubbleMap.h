@@ -65,7 +65,8 @@ namespace bubble_second {
         //处理+3特殊泡泡的道具
         void disposeUsedAddSpecialBubbleProps();
         //处理最下中心小球
-        void disposeMinYCenterBubble(BaseBubble* contact_bubble);
+        void disposePhysicsCaseMinYCenterBubble(BaseBubble* contact_bubble);
+        void disposeMinYCenterBubble();
     private:
         GameBubbleMap();
         bool init();

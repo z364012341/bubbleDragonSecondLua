@@ -68,7 +68,7 @@ namespace bubble_second {
 
     void StageSelectionMenu::setMenuState()
     {
-        static bool debugFlag = ZCGConfigDataDict::getInstance()->getIntData(ZCGConfigDataDict::KEY_OPEN_CMD_SHOW) == 1;
+        static bool debugFlag = ZCGConfigDataDict::getInstance()->getIntData(KEY_OPEN_CMD_SHOW) == 1;
         int newest_stage_numble = UserDataManager::getInstance()->getStagePassCount()+1;
         if (stageData_.level_numble == newest_stage_numble)
         {

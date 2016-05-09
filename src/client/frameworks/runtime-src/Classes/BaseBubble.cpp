@@ -53,7 +53,7 @@ namespace bubble_second {
     {
         return bubble_in_map_index_;
     }
-    BubbleType BaseBubble::getBubbleType() const
+    BubbleType BaseBubble::getBubbleType()
     {
         return bubble_type_;
     }

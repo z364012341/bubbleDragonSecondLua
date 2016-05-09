@@ -10,6 +10,7 @@
 #include "BubbleColorRender.h"
 #include "GameScoreController.h"
 #include "StartNumbleModule.h"
+const float BUBBLE_ELIMINATE_DELAY_TIME = 0.06f;  //小球消除的延迟
 namespace bubble_second {
     GameBubbleMap::GameBubbleMap()
     {
@@ -93,7 +94,7 @@ namespace bubble_second {
         this->disposeWindmillRotation(prepare_bubble);
         //先粘附上去, 然后再进行消除判断
         BaseBubble* prepare_after_cling_bubble = game_bubble_map_impl_->clingBubble(prepare_bubble, contact_index);
-
+        this->disposeDarkCloudBubble(prepare_after_cling_bubble->getBubbleIndex());
         BubbleVector same_bubble_map = game_bubble_map_impl_->getSametypeBubbleWithIndex(prepare_after_cling_bubble->getBubbleIndex());
         if (this->canEliminate(same_bubble_map))
         {
@@ -106,7 +107,6 @@ namespace bubble_second {
         } //(same_bubble_map.size() >= 2)
         else
         {
-            this->disposeDarkCloudBubble(prepare_after_cling_bubble->getBubbleIndex());
             this->disposeClingBubble(prepare_bubble, prepare_after_cling_bubble);
             this->disposeAfterClinging(prepare_after_cling_bubble);
         }
@@ -591,9 +591,16 @@ namespace bubble_second {
         this->dispatchCustomEvent(EVENT_FIND_THREE_BUBBLE, &three_bubble);
     }
 
-    void GameBubbleMap::disposeMinYCenterBubble(BaseBubble* contact_bubble)
+    void GameBubbleMap::disposePhysicsCaseMinYCenterBubble(BaseBubble* contact_bubble)
     {
         BaseBubble* bubble = game_bubble_map_impl_->isWindmillStage() ? contact_bubble: game_bubble_map_impl_->getBubbleMinCenter();
+        GamePlayController::getInstance()->setSelectBubble(bubble);
+        this->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, bubble);
+    }
+
+    void GameBubbleMap::disposeMinYCenterBubble()
+    {
+        BaseBubble* bubble = game_bubble_map_impl_->getBubbleMinCenter();
         GamePlayController::getInstance()->setSelectBubble(bubble);
         this->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, bubble);
     }

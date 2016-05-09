@@ -13,7 +13,7 @@ const std::string BUBBLE_ANIMATION_LOOK_NAME_1 = "shangxiakan";
 const std::string BUBBLE_ANIMATION_LOOK_NAME_2 = "zuoyoukan";
 const float SCOREWIDGET_ARMATURE_SCALE = 0.5;
 //const std::string SCORE_WIDGET_UPDATE_ANIMATION_NAME = "yun3";
-const float SCORE_WIDGET_BEZIER_FLYING_DURATION = 1.0f; //得分挂件的赛贝尔运动时间
+const float SCORE_WIDGET_BEZIER_FLYING_DURATION = 0.8f; //得分挂件的赛贝尔运动时间
 
 namespace bubble_second {
     ScoreWidget::ScoreWidget() :widget_combo_(0), armature_(nullptr)
@@ -50,7 +50,8 @@ namespace bubble_second {
         std::vector<std::string> names;
         names.push_back(BUBBLE_ANIMATION_LOOK_NAME_1);
         names.push_back(BUBBLE_ANIMATION_LOOK_NAME_2);
-        this->addChild(GameNoneBubbleDownAnimationComponent::createRandomPlayAnimation(armature_, names, CC_CALLBACK_0(ScoreWidget::playStandbyAnimation, this)));
+        none_bubble_component_ = GameNoneBubbleDownAnimationComponent::createRandomPlayAnimation(armature_, names, CC_CALLBACK_0(ScoreWidget::playStandbyAnimation, this));
+        this->addChild(none_bubble_component_);
     }
 
     void ScoreWidget::initPopScoreLabel()
@@ -69,17 +70,18 @@ namespace bubble_second {
             body->removeFromWorld();
         }
         //armature_->getAnimation()->stop();
+        none_bubble_component_->removeFromParent();
         armature_->getAnimation()->play(SCOREWIDGET_ANIMATION_REMOVE_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-        //armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-        //    if (movementType == cocostudio::COMPLETE)
-        //    {
-        //        this->removeFromParent();
-        //    }
-        //});
-        armature_->getAnimation()->setMovementEventCallFunc(nullptr);
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(1.67f), cocos2d::CallFunc::create([=]() {
-            this->removeFromParent();
-        })));
+        armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+            if (movementType == cocostudio::COMPLETE)
+            {
+                this->removeFromParent();
+            }
+        });
+        //armature_->getAnimation()->setMovementEventCallFunc(nullptr);
+        //this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(1.67f), cocos2d::CallFunc::create([=]() {
+        //    this->removeFromParent();
+        //})));
     }
     void ScoreWidget::setType(const ScoreWidgetType& type)
     {
@@ -235,7 +237,8 @@ namespace bubble_second {
         config.controlPoint_1 = this->getPosition();
         config.controlPoint_2 = cocos2d::Vec2(0.0f, 0.0f);
         cocos2d::BezierTo* bezier = cocos2d::BezierTo::create(SCORE_WIDGET_BEZIER_FLYING_DURATION, config);
-        this->runAction(cocos2d::Sequence::createWithTwoActions(bezier, cocos2d::CallFunc::create([=]() {
+        this->setScale(2.0f);
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::Spawn::createWithTwoActions(bezier, cocos2d::ScaleTo::create(SCORE_WIDGET_BEZIER_FLYING_DURATION, 1.0f)), cocos2d::CallFunc::create([=]() {
             this->addPhysicsBody();
         })));
         this->playFlyingAnimation(SCORE_WIDGET_BEZIER_FLYING_DURATION);

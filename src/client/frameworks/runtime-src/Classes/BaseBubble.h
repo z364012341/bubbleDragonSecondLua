@@ -62,7 +62,7 @@ namespace bubble_second {
         void setBubbleType(int type);
         void setEliminateDelayTime(float time);
         float getEliminateDelayTime();
-        virtual BubbleType getBubbleType() const;
+        virtual BubbleType getBubbleType();
         //index
         void setBubbleIndex(cocos2d::Vec2);
         cocos2d::Vec2 getBubbleIndex() const;

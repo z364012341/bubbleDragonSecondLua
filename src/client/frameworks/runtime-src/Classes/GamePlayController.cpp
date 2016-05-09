@@ -535,8 +535,15 @@ namespace bubble_second {
         auto weapon_box = dynamic_cast<WeaponBox*>(bubble_node);
         if (weapon_box && !(weapon_box->isEqualType(kBubbleTransparent) || weapon_box->isEqualType(kBubbleWindmill)))
         {
-            bubble_map_->disposeMinYCenterBubble(dynamic_cast<BaseBubble*>(bubble_node));
+            //bubble_map_->disposePhysicsCaseMinYCenterBubble(dynamic_cast<BaseBubble*>(bubble_node));
+            this->setSelectBubble(weapon_box);
+            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, weapon_box);
         }
+    }
+
+    void bubble_second::GamePlayController::disposeMinYCenterBubble()
+    {
+        bubble_map_->disposeMinYCenterBubble();
     }
 
     void GamePlayController::findBubblesInVisibleSize()

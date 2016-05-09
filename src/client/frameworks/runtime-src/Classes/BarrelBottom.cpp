@@ -83,7 +83,7 @@ namespace bubble_second {
         {
             score_ = BARREL_BOTTOM_SCORE_FIFTH;
         }
-        double_score_ *= score_;
+        double_score_ = score_*2;
         initial_score_ = score_;
     }
 

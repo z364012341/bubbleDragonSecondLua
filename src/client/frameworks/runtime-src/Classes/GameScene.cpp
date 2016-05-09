@@ -72,7 +72,7 @@ namespace bubble_second {
         cocos2d::Scene* scene = cocos2d::Scene::createWithPhysics();
 
         //显示物理世界调试状态, 显示红色的框, 方便调试
-        if (ZCGConfigDataDict::getInstance()->getIntData(ZCGConfigDataDict::KEY_OPEN_CMD_SHOW) == 1)
+        if (ZCGConfigDataDict::getInstance()->getIntData(KEY_OPEN_CMD_SHOW) == 1)
         {
             scene->getPhysicsWorld()->setDebugDrawMask(cocos2d::PhysicsWorld::DEBUGDRAW_ALL);
         }
@@ -643,6 +643,10 @@ namespace bubble_second {
         listener = cocos2d::EventListenerCustom::create(EVENT_DESTROY_BUBBLE_CLOUD, CC_CALLBACK_1(GameScene::destroyBubbleDarkCloud, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_ADJUST_MAP_POSITION, CC_CALLBACK_1(GameScene::adjustMapPosition, this));
+        dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        listener = cocos2d::EventListenerCustom::create(EVENT_ADJUST_MAP_POSITION, [=](cocos2d::EventCustom* event) {
+            GameScoreController::getInstance()->dispatchUpdateCompletedTaskEvent();
+        });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_USE_BUBBLE_BOMB_PROPS, CC_CALLBACK_1(GameScene::useBubbleBombProps, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
@@ -1419,20 +1423,27 @@ namespace bubble_second {
 
     void GameScene::recentbubbleCast()
     {
-        cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createPolygon(RECENT_BUBBLE_CAST_SHAPE, sizeof(RECENT_BUBBLE_CAST_SHAPE) / sizeof(RECENT_BUBBLE_CAST_SHAPE[0]),
-            cocos2d::PhysicsMaterial(CAST_BODY_DENSITY, BUBBLE_STATIC_BODY_RESTITUTION, BUBBLE_BODY_FRICTION));
-        body->setDynamic(true);
-        body->setGroup(-1);
-        body->setGravityEnable(false);
-        body->setCategoryBitmask(BITMASK_BUBBLE_PREPARE_CATEGORY);
-        body->setCollisionBitmask(0);
-        body->setContactTestBitmask(BITMASK_BUBBLE_PREPARE_CONTACTTEST);
-        cocos2d::Node* node = cocos2d::Node::create();
-        node->setPhysicsBody(body);
-        node->setName(WOODEN_HAMMER_CAST_NODE_NAME);
-        node->setPosition(this->getGunsightPosition());
-        csb_node_->addChild(node);
-        body->applyImpulse(cocos2d::Vec2(0, RECENT_BUBBLE_CAST_IMPULSE_Y));
+        if (this->getStageType() != kWindmill)
+        {
+            GamePlayController::getInstance()->disposeMinYCenterBubble();
+        }
+        else
+        {
+            cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createPolygon(RECENT_BUBBLE_CAST_SHAPE, sizeof(RECENT_BUBBLE_CAST_SHAPE) / sizeof(RECENT_BUBBLE_CAST_SHAPE[0]),
+                cocos2d::PhysicsMaterial(CAST_BODY_DENSITY, BUBBLE_STATIC_BODY_RESTITUTION, BUBBLE_BODY_FRICTION));
+            body->setDynamic(true);
+            body->setGroup(-1);
+            body->setGravityEnable(false);
+            body->setCategoryBitmask(BITMASK_BUBBLE_PREPARE_CATEGORY);
+            body->setCollisionBitmask(0);
+            body->setContactTestBitmask(BITMASK_BUBBLE_PREPARE_CONTACTTEST);
+            cocos2d::Node* node = cocos2d::Node::create();
+            node->setPhysicsBody(body);
+            node->setName(WOODEN_HAMMER_CAST_NODE_NAME);
+            node->setPosition(this->getGunsightPosition());
+            csb_node_->addChild(node);
+            body->applyImpulse(cocos2d::Vec2(0, RECENT_BUBBLE_CAST_IMPULSE_Y));
+        }
     }
 
     void GameScene::selectBubble(cocos2d::EventCustom* event)
@@ -1782,7 +1793,6 @@ namespace bubble_second {
         this->runAction(cocos2d::Sequence::create(callfunc, cocos2d::DelayTime::create(time), cocos2d::CallFunc::create([=]() {
             controller->adjustGameScenePosition();
             this->setMenuTouchEnabled(true);
-
         }), nullptr));
     }
 

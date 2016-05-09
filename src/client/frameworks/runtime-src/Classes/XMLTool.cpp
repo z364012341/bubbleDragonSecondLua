@@ -3,6 +3,7 @@
 #include "tinyxml2\tinyxml2.h"
 #include "StageDataModule.h"
 #include "StartNumbleModule.h"
+#include "ZCGConfigDataDict.h"
 namespace bubble_second {
     XMLTool::XMLTool()
     {
@@ -22,6 +23,10 @@ namespace bubble_second {
         std::string str = "";
         intout >> str;
         std::string xmlPath = "res/stage" + str + ".xml";
+        if (ZCGConfigDataDict::getInstance()->getIntData(KEY_STAGE_VERSION) == 0)
+        {
+            xmlPath = "res/DEBUGstage(" + str + ").xml";
+        }
         if (!cocos2d::CCFileUtils::getInstance()->isFileExist(xmlPath))
         {
             return nullptr;

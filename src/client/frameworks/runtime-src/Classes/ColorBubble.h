@@ -71,6 +71,7 @@ namespace bubble_second {
         //获取速度向量
         cocos2d::Vec2 getSpeedNormalized();
         cocos2d::Vec2 getBubbleSpeed();
+        BubbleType getBubbleType() override;
     protected:
         ColorBubble();
         bool initWithTypeAndCloud(int type, int cloud = kBubbleNoCloud);

@@ -14,6 +14,7 @@
 #include "cocostudio\CocoStudio.h"
 namespace bubble_second {
     class PopScoreLabelComponent;
+    class GameNoneBubbleDownAnimationComponent;
     class ScoreWidget : public cocos2d::Node
     {
     public:
@@ -89,6 +90,7 @@ namespace bubble_second {
         cocos2d::Vec2 self_position_;
         cocostudio::Armature* armature_;
         PopScoreLabelComponent* label_component_ = nullptr;
+        GameNoneBubbleDownAnimationComponent* none_bubble_component_ = nullptr;
     };
 }
 #endif //_SCORE_WIDGET_H_
