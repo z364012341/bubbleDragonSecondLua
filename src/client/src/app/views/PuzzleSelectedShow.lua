@@ -8,10 +8,15 @@ end)
 
 function PuzzleSelectedShow:ctor(params)
     printf("PuzzleSelectedShow");
-
+    self:addPuzzlePageview();
 end
 
 function PuzzleSelectedShow:addPuzzlePageview()
-    -- body
+    self.pageview_ = ccui.PageView:create();
+    pageview_:setContentSize(cc.size(976, 1464));
+    self:addChild(self.pageview_);
+    local layout = ccui.Layout:create();
+    layout:addChild(GlobalFunction.createGameSpriteWithPath("puzzle_1.png"));
+    self.pageview_:addPage(layout);
 end
 return PuzzleSelectedShow

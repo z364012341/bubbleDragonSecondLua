@@ -20,12 +20,10 @@ namespace bubble_second {
         cocos2d::Node::onEnter();
         cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(UI_NAME_BIG_COMBO_ELIMINATE, [=](cocos2d::EventCustom*) {
             score_ = double_score_;
-            //dynamic_cast<cocostudio::Armature*>(this->getChildByName(BARREL_BOTTOM_STANDBY_EFFECT_NAME))->getAnimation()->setSpeedScale(BARREL_BOTTOM_STANDBY_EFFECT_SPEED_SCALE);
             standby_effect_delaytime_max_ = BARREL_BOTTOM_STANDBY_BIG_EFFECT_DELAYTIME_MAX;
         });
         cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CUT_ELIMINATE_COMBO, [=](cocos2d::EventCustom*) {
             score_ = initial_score_;
-            //dynamic_cast<cocostudio::Armature*>(this->getChildByName(BARREL_BOTTOM_STANDBY_EFFECT_NAME))->getAnimation()->setSpeedScale(1.0f);
             this->initialStacdbyEffectTime();
         });
     }
