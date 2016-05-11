@@ -9,7 +9,7 @@ end)
 local PuzzlePieceSingleEdges = require(PUZZLE_PIECE_SINGLE_EDGES_PATH);
 
 function PuzzlePieceEdges:ctor(left, right, top, bottom)
-    printf("PuzzlePieceEdges");
+    --printf("PuzzlePieceEdges");
     self:addEdged(left, right, top, bottom);
     self:setScale(PUZZLE_PIECE_SCALE);
 end

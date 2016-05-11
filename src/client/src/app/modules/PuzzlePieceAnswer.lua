@@ -11,7 +11,7 @@ local PuzzlePieceSingleEdges = require(PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PATH);
 -- local PuzzleBottomPlate = require(PUZZLE_BOTTOM_PLATE_PATH);
 
 function PuzzlePieceAnswer:ctor(params)
-    printf("PuzzlePieceAnswer");
+    --printf("PuzzlePieceAnswer");
     self:addAnswerEdges(params.left, params.right, params.top, params.bottom);
     self:initPosition(params.index_x, params.index_y, params.path);
     self:setScale(PUZZLE_PIECE_SCALE);

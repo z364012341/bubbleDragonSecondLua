@@ -179,7 +179,6 @@ namespace bubble_second {
         const float cell_x = visibleSize.width / 2;
         float cell_y = 0.0f;
         float scrollview_height = 0.0;
-        cocos2d::Layer *slayer = cocos2d::Layer::create();
         GameStageSelectionCell *cell = nullptr;
         while (true)
         {
@@ -198,12 +197,14 @@ namespace bubble_second {
         cocos2d::Sprite* bottom_sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_STAGE_SCROLLVIEW_BOTTOM_PATH);
         scrollview_bottom_height_ = bottom_sp->getBoundingBox().size.height;
         bottom_sp->setPosition(cell_x, scrollview_bottom_height_ / -2);
-        slayer->addChild(bottom_sp);
+        //cocos2d::Layer *slayer = cocos2d::Layer::create();
+        //slayer->addChild(bottom_sp);
         scrollview_->setInnerContainerSize(cocos2d::Size(750, scrollview_height));
-        scrollview_->addChild(slayer);
+        scrollview_->addChild(bottom_sp);
         //¹ö¶¯·½Ïò  
         scrollview_->setDirection(ScrollView::Direction::VERTICAL);
         scrollview_->setBounceEnabled(true);
+        scrollview_->setScrollBarEnabled(false);
         scrollview_->setContentSize(cocos2d::Size(cocos2d::Director::getInstance()->getVisibleSize()));
         scrollview_->addEventListener(CC_CALLBACK_2(GameStageSelectionScene::scrollViewMoveCallback, this));
         this->adjustingScrollviewPosition();
@@ -291,7 +292,7 @@ namespace bubble_second {
         EnterGameAlert* alert = EnterGameAlert::create(data.cell_numble, data.level_numble, type);
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-        alert->setScale(SmartScaleController::getInstance()->getFixedHeightZoom());
+        alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         this->getAlertRenderNode()->addChild(alert);
     }
 

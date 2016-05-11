@@ -9,7 +9,7 @@ end)
 -- local PuzzleBottomPlate = require(PUZZLE_BOTTOM_PLATE_PATH);
 -- local PuzzlePieceShadowAnswer = require(PUZZLE_PIECE_ANSWER_PATH);
 function PuzzlePieceShadow:ctor(left, right, top, bottom)
-    printf("PuzzlePieceShadow");
+    --printf("PuzzlePieceShadow");
     self:initBody(left, right, top, bottom);
     self:setScale(PUZZLE_PIECE_SCALE*0.95);
     self:setPosition(PUZZLE_PIECE_SHADOW_OFFSET_POSITION);

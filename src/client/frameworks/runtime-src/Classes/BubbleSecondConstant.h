@@ -17,8 +17,8 @@
     { \
         static __TYPE__ instance_; \
         return &instance_; \
-    } \
-    __TYPE__ & operator = (const __TYPE__ &) = delete;
+    }// \
+   // __TYPE__ & operator = (const __TYPE__ &) = delete;
 #define SINGLE_BUBBLE_SCORE(_COMBO_)          (5*(_COMBO_)+5)                                  //单个小球的消除得分
 #define BUBBLE_ELIMINATE_FORMULA(_NUM_,_COMBO_) ((_NUM_)*SINGLE_BUBBLE_SCORE(_COMBO_))             //消除得分计算公式
 #define RANDOM_DECIMALS(_MIN_, _MAX_) (cocos2d::random(_MIN_, _MAX_) + cocos2d::rand_0_1()) //生成一个一位随机小数

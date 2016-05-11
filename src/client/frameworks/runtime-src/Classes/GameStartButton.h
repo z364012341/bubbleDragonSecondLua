@@ -19,7 +19,8 @@ namespace bubble_second {
         CREATE_FUNC(GameStartButton);
         GameStartButton();
         ~GameStartButton();
-        void addButtonTouchEventListener(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
+        void addButtonClickEventListener(const cocos2d::ui::Widget::ccWidgetClickCallback& callback);
+        cocos2d::ui::Button* getStartButton();
     private:
         bool init();
     private:

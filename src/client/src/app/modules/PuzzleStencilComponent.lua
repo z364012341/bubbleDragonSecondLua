@@ -15,7 +15,7 @@ end)
 -- };
 
 function PuzzleStencilComponent:ctor(direction, insideOrOutside)
-    printf("PuzzleStencilComponent");
+    --printf("PuzzleStencilComponent");
     self:addPuzzleComponent(direction, insideOrOutside);
 end
 

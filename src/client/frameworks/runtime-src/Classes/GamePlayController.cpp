@@ -47,6 +47,7 @@ namespace bubble_second {
         key_to_handle_map_[kBubbleOrange] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubblePink] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleLightning] = &GamePlayController::disposeContactWithColorBubble;
+        key_to_handle_map_[kBubbleDarkCloud] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleAddNumbleBubble] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleBlackHole] = &GamePlayController::disposeContactWithBlackHoleBubble;
         key_to_handle_map_[kBubbleBombBomb] = &GamePlayController::disposeContactWithColorBubble;
@@ -99,7 +100,6 @@ namespace bubble_second {
         {
             return;
         }
-
         const cocos2d::Vec2 touch_location = this->convertGLToNodeSpace(touch->getLocation(), event->getCurrentTarget()->getChildByName(UI_NAME_GAME_PLAY_AREA_NODE));
         if (this->canShootingBubble(touch_location))
         { 

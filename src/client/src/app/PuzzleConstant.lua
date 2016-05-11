@@ -1,12 +1,12 @@
 cc.exports.GlobalFunction = {
 	createGameSpriteWithPath = function (path)
-		--return cc.Sprite:create(path);
-		return cc.Sprite:createWithSpriteFrameName(path);
+		return cc.Sprite:create(path);
+		--return cc.Sprite:createWithSpriteFrameName(path);
 	end,
 	setGameSpriteTextureWithPath = function (path, sprite)
-		-- sprite:setTexture(path);
-		local frame = cc.SpriteFrameCache:getInstance():getSpriteFrameByName(path);
-        sprite:setSpriteFrame(frame);
+		sprite:setTexture(path);
+		--local frame = cc.SpriteFrameCache:getInstance():getSpriteFrameByName(path);
+        --sprite:setSpriteFrame(frame);
 	end,
 	getPuzzlePiecePositionWithDirection = function (direction)
 		return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_POSITION];
@@ -27,11 +27,19 @@ cc.exports.PUZZLE_BOTTOM_PLATE_PATH = "app.modules.PuzzleBottomPlate";
 cc.exports.PUZZLE_PIECE_PATH = "app.modules.PuzzlePiece";
 cc.exports.PUZZLE_PIECES_COLLECTION_PATH = "app.modules.PuzzlePiecesCollection";
 cc.exports.PUZZLE_PLAY_SCENE_PATH = "app.views.PuzzlePlayScene";
+cc.exports.PUZZLE_PLAY_AREA_PATH = "app.views.PuzzlePlayArea";
+cc.exports.PUZZLE_PLAY_WIN_LAYER_PATH = "app.views.PuzzlePlayWinLayer";
 cc.exports.PUZZLE_PIECE_ANSWER_PATH = "app.modules.PuzzlePieceAnswer";
 cc.exports.PUZZLE_PIECE_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceSingleEdges";
 cc.exports.PUZZLE_PIECE_EDGES_PATH = "app.modules.PuzzlePieceEdges";
 cc.exports.PUZZLE_PIECE_SHADOW_PATH = "app.modules.PuzzlePieceShadow";
 cc.exports.PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceAnswerSingleEdges";
+cc.exports.PUZZLE_SELECTED_SHOW_PATH = "app.views.PuzzleSelectedShow";
+cc.exports.PUZZLE_SELECTED_SCENE_PATH = "app.views.PuzzleSelectedScene";
+cc.exports.PUZZLE_PIECES_SCROLLVIEW_PATH = "app.views.PuzzlePiecesScrollView";
+
+cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
+
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
 cc.exports.PUZZLE_COMPONENT_PATH = "puzzleStencil_2.png";
@@ -68,6 +76,8 @@ cc.exports.PUZZLE_PIECES_COLLECTION_INDEX_START = 1;
 cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_MIN = 0.3;
 cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_MAX = 1.7;
 cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE = 0.04;
+cc.exports.PUZZLE_INITIAL_SIZE = cc.size(976, 1464);
+cc.exports.PUZZLE_SHOW_LAYER_COLOR_C4B = cc.c4b(70, 48, 61, 255);
 
 cc.exports.puzzle = {
 	PUZZLE_DIRECTIOIN_RANDOM = {

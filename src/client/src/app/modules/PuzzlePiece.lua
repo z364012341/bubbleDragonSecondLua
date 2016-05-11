@@ -24,7 +24,7 @@ local PuzzlePieceShadow = require(PUZZLE_PIECE_SHADOW_PATH);
 --local PuzzlePiecesCollection = require(PUZZLE_PIECES_COLLECTION_PATH);
 --local numble = 0
 function PuzzlePiece:ctor(params)
-    printf("PuzzlePiece");
+    --printf("PuzzlePiece");
     self:addTouchEvent();
     self:initPuzzleRenderTexture(params);
     self:addPuzzlePieceShadow(params);
@@ -60,9 +60,17 @@ end
 function PuzzlePiece.onTouchBegan(touch, event)
     --printf("PuzzlePiece onTouchBegan");
     if PuzzlePiece.isTouchOnPuzzle(touch, event) then
-        local node = event:getCurrentTarget();
-        node._shadow:shadowGo();
-        node:setLocalZOrder(require(PUZZLE_PIECES_COLLECTION_PATH):getZOrderNumble());
+        local puzzle = event:getCurrentTarget();
+
+        puzzle:setLocalZOrder(require(PUZZLE_PIECES_COLLECTION_PATH):getZOrderNumble());
+        puzzle:retain();
+        local point = puzzle._moveNode:convertToNodeSpace(puzzle:getParent():convertToWorldSpace(cc.p(puzzle:getPosition())));
+        puzzle:removeFromParent();
+        puzzle._moveNode:addChild(puzzle);
+        puzzle:setPosition(point);
+        puzzle:release();
+        puzzle._shadow:shadowGo();
+        puzzle._moveNode:moveOutPuzzlePiece(puzzle);
         return true;
     end
     return false;
@@ -79,10 +87,15 @@ end
 
 function PuzzlePiece.onTouchEnded(touch, event)
     --printf("PuzzlePiece onTouchEnded");
-    event:getCurrentTarget()._shadow:shadowBack();
-    if event:getCurrentTarget():isToucnOnAnswer() then
-        event:getCurrentTarget():moveToAnswer();
+    local puzzle = event:getCurrentTarget();
+    puzzle._shadow:shadowBack();
+    if puzzle:isToucnOnAnswer() then
+        puzzle:moveToAnswer();
+    elseif cc.rectContainsPoint(puzzle._moveNode:getBoundingBox(), puzzle._moveNode:getParent():convertTouchToNodeSpace(touch)) then
+        puzzle._moveNode:insertPuzzlePiece(puzzle);
     end
+    --dump(puzzle._moveNode:getBoundingBox());
+    --dump(touch:getLocationInView());
 end
 
 function PuzzlePiece.isTouchOnPuzzle(touch, event)
@@ -99,15 +112,25 @@ end
 
 function PuzzlePiece:moveToAnswer()
     local answer = self:getPuzzlePieceAnswer();
-    local answerPoint = answer:getParent():convertToWorldSpace(cc.p(answer:getPosition()));
-    self:setPosition(self:getParent():convertToNodeSpace(answerPoint));
+    --local answerPoint = answer:getParent():convertToWorldSpace(cc.p(answer:getPosition()));
+    --self:setPosition(self:getParent():convertToNodeSpace(answerPoint));
     self._shadow:removeFromParent();
-    self:setLocalZOrder(0);
+    --self:setLocalZOrder(0);
+    self:retain();
+    self:removeFromParent();
+    answer:getParent():addChild(self);
+    self:setPosition(cc.p(answer:getPosition()));
+    self:release();
+    self:setScale(1);
     cc.Director:getInstance():getEventDispatcher():removeEventListenersForTarget(self);
 end
 
 function PuzzlePiece:setPuzzlePieceAnswer(answer)
     self._answer = answer;
+end
+
+function PuzzlePiece:setPuzzlePieceMoveNode(node)
+    self._moveNode = node;
 end
 
 function PuzzlePiece:getPuzzlePieceAnswer()

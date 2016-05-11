@@ -10,7 +10,7 @@ local PuzzleStencilComponent = require(PUZZLE_STENCIL_COMPONENT_PATH);
 
 
 function PuzzleStencil:ctor(left, right, top, bottom)
-    printf("PuzzleStencil");
+    --printf("PuzzleStencil");
     self:initHandle();
     self:initPuzzleComponent(left, right, top, bottom);
     self:setScale(PUZZLE_PIECE_SCALE);
@@ -42,7 +42,7 @@ function PuzzleStencil:addOutsideComponent(componentDirection)
 end
 
 function PuzzleStencil:addInsideComponent(componentDirection)
-    print("inside component do nothing!");
+    --print("inside component do nothing!");
 end
 
 function PuzzleStencil:addPlainComponent(componentDirection)

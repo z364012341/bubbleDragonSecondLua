@@ -8,7 +8,7 @@ local PuzzleBottomPlate = class("PuzzleBottomPlate", function (index_x, index_y,
 end)
 
 function PuzzleBottomPlate:ctor(index_x, index_y)
-    printf("PuzzleBottomPlate");
+    --printf("PuzzleBottomPlate");
     assert(type(index_x) == "number")
     assert(type(index_y) == "number")
     self:setAnchorPoint(0, 0);

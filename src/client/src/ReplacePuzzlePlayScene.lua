@@ -1,1 +1,1 @@
-cc.Director:getInstance():replaceScene(require(PUZZLE_PLAY_SCENE_PATH):createScene());
+cc.Director:getInstance():replaceScene(require(PUZZLE_SELECTED_SCENE_PATH):createScene());

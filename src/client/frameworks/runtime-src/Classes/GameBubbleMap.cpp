@@ -381,9 +381,9 @@ namespace bubble_second {
         this->eliminateBubbles(vector);
     }
 
-    void GameBubbleMap::disposeDarkCloudBubble(const cocos2d::Vec2& contact_index)
+    void GameBubbleMap::disposeDarkCloudBubble(const cocos2d::Vec2& bubble_index)
     {
-        cocos2d::Vector<ColorBubble*> vector = game_bubble_map_impl_->getAroundDarkCloudBubbleWithIndex(contact_index);
+        cocos2d::Vector<ColorBubble*> vector = game_bubble_map_impl_->getAroundDarkCloudBubbleWithIndex(bubble_index);
         this->dispatchCustomEvent(EVENT_DESTROY_BUBBLE_CLOUD, &vector);
     }
 

@@ -11,7 +11,7 @@ local PuzzlePieceSingleEdges = require(PUZZLE_PIECE_SINGLE_EDGES_PATH);
 
 -- PuzzlePieceAnswerSingleEdges.LING_ANCHOR_POINT = PUZZLE_COMPONENT_ANCHOR; 
 function PuzzlePieceAnswerSingleEdges:ctor(direction, insideOrOutside)
-    printf("PuzzlePieceAnswerSingleEdges");
+    --printf("PuzzlePieceAnswerSingleEdges");
     --local path = insideOrOutside == PUZZLE_STENCIL_COMPONENT_PLAIN and 
     --  PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PLAIN_PATH or PUZZLE_PIECE_ANSWER_SINGLE_EDGES_NOT_PLAIN_PATH;
     local singleEdges = PuzzlePieceSingleEdges:create(direction, insideOrOutside);

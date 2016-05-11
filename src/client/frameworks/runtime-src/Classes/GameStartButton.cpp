@@ -17,9 +17,15 @@ namespace bubble_second {
     {
     }
 
-    void GameStartButton::addButtonTouchEventListener(const cocos2d::ui::Widget::ccWidgetTouchCallback & callback)
+    void GameStartButton::addButtonClickEventListener(const cocos2d::ui::Widget::ccWidgetClickCallback & callback)
     {
-        button_->addTouchEventListener(callback);
+        //button_->addTouchEventListener(callback);
+        button_->addClickEventListener(callback);
+    }
+
+    cocos2d::ui::Button * GameStartButton::getStartButton()
+    {
+        return button_;
     }
 
     bool GameStartButton::init()

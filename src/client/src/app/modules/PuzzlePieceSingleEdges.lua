@@ -11,7 +11,7 @@ end)
 
 -- PuzzlePieceSingleEdges.LING_ANCHOR_POINT = PUZZLE_COMPONENT_ANCHOR; 
 function PuzzlePieceSingleEdges:ctor(direction, insideOrOutside)
-    printf("PuzzlePieceSingleEdges");
+    --printf("PuzzlePieceSingleEdges");
     self._edgesSprite = {};
     if insideOrOutside == PUZZLE_STENCIL_COMPONENT_PLAIN then
     	self._edgesSprite = GlobalFunction.createGameSpriteWithPath(PUZZLE_PLAIN_EDGES_PATH);

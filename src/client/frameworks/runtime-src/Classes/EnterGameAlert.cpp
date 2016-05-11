@@ -82,12 +82,12 @@ namespace bubble_second {
     {
         GameStartButton* button = GameStartButton::create();
 		alert_csb_node_->getChildByName(ENTER_GAME_ALERT_START_NODE_NAME)->addChild(button);
-		button->addButtonTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
-		    if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-		    {
+		button->addButtonClickEventListener([=](Ref* target) {
+		    //if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+		    //{
 		        cocos2d::Scene* scene = GameScene::createScene(cell_numble, level);
 		        cocos2d::Director::getInstance()->replaceScene(scene);
-		    }
+		    //}
 		});
     }
 

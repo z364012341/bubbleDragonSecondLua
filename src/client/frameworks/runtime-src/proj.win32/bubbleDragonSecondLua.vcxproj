@@ -264,8 +264,10 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\LightningBubble.h" />
     <ClInclude Include="..\Classes\LoadingScene.h" />
     <ClInclude Include="..\Classes\lua_GameStageSelectionScene_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_GameStartButton_auto.hpp" />
     <ClInclude Include="..\Classes\lua_LoadingScene_auto.hpp" />
     <ClInclude Include="..\Classes\lua_module_register.h" />
+    <ClInclude Include="..\Classes\lua_SmartScaleController_auto.hpp" />
     <ClInclude Include="..\Classes\MutipleSealBubble.h" />
     <ClInclude Include="..\Classes\NullBubble.h" />
     <ClInclude Include="..\Classes\PopScoreLabelComponent.h" />
@@ -277,6 +279,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\SceneReplaceController.h" />
     <ClInclude Include="..\Classes\ScoreProgressMenu.h" />
     <ClInclude Include="..\Classes\ScoreProgressStar.h" />
+    <ClInclude Include="..\Classes\ScoreProgressStart.h" />
     <ClInclude Include="..\Classes\ScoreWidget.h" />
     <ClInclude Include="..\Classes\ScoreWidgetManager.h" />
     <ClInclude Include="..\Classes\SimpleControlSwitch.h" />
@@ -382,7 +385,9 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\LightningBubble.cpp" />
     <ClCompile Include="..\Classes\LoadingScene.cpp" />
     <ClCompile Include="..\Classes\lua_GameStageSelectionScene_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_GameStartButton_auto.cpp" />
     <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_SmartScaleController_auto.cpp" />
     <ClCompile Include="..\Classes\MutipleSealBubble.cpp" />
     <ClCompile Include="..\Classes\NullBubble.cpp" />
     <ClCompile Include="..\Classes\PopScoreLabelComponent.cpp" />
@@ -394,6 +399,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\SceneReplaceController.cpp" />
     <ClCompile Include="..\Classes\ScoreProgressMenu.cpp" />
     <ClCompile Include="..\Classes\ScoreProgressStar.cpp" />
+    <ClCompile Include="..\Classes\ScoreProgressStart.cpp" />
     <ClCompile Include="..\Classes\ScoreWidget.cpp" />
     <ClCompile Include="..\Classes\ScoreWidgetManager.cpp" />
     <ClCompile Include="..\Classes\SimpleControlSwitch.cpp" />

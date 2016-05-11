@@ -19,13 +19,14 @@ local PuzzlePieceAnswer = require(PUZZLE_PIECE_ANSWER_PATH);
 local PuzzlePiece = require(PUZZLE_PIECE_PATH);
 PuzzlePiecesCollection._ZOrderNumble = 1;
 function PuzzlePiecesCollection:ctor(puzzlePath)
-    printf("PuzzlePiecesCollection");
+    --printf("PuzzlePiecesCollection");
     self._relativeDirection = {};
     PuzzlePiecesCollection._ZOrderNumble = 1;
     self:initIndexMax(GlobalFunction.createGameSpriteWithPath(puzzlePath):getContentSize());
     --printf(indexMaxX);
     --printf(indexMaxY);
-    self._puzzleNode = cc.Node:create();
+    self._puzzleNode = {};
+    --self._answerNode = cc.Node:create();
     self._answerNode = cc.Node:create();
     for indexY = 1, self._indexMaxY do
     	for indexX = 1, self._indexMaxX do
@@ -39,10 +40,11 @@ function PuzzlePiecesCollection:ctor(puzzlePath)
 		        bottom = self:calculateBottomDirection(indexX, indexY),  --下边凹凸方向
 		    };
 		    local clippingNode = PuzzlePiece:create(params);
-		    self._puzzleNode:addChild(clippingNode);
+		    --self._puzzleNode:addChild(clippingNode);
 		    local answer = PuzzlePieceAnswer:create(params);
 		    clippingNode:setPuzzlePieceAnswer(answer);
 		    self._answerNode:addChild(answer);
+		    table.insert(self._puzzleNode, clippingNode);
     	end
     end
 end
@@ -57,7 +59,7 @@ function PuzzlePiecesCollection:initIndexMax(size)
 end
 
 function PuzzlePiecesCollection:calculateLaftDirection(indexX)
-	printf("PuzzlePiecesCollection:calculateRightDirection");
+	--printf("PuzzlePiecesCollection:calculateRightDirection");
 	if indexX == PUZZLE_PIECES_COLLECTION_INDEX_START then
 		return PUZZLE_STENCIL_COMPONENT_PLAIN;
 	else
