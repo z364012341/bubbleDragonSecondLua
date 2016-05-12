@@ -33,7 +33,11 @@ function PuzzlePiecesScrollView:init(puzzleTable)
 		self.scrollView_:addChild(puzzle);
 		puzzle:setPuzzlePieceMoveNode(self);
 	end
-	self.scrollView_:setInnerContainerSize(cc.size(pos_x, PUZZLE_PIECES_DESK_HEIGHT));
+	self.scrollView_:setInnerContainerSize(cc.size(self:calculatePuzzlePiecePositionX(#puzzleTable), PUZZLE_PIECES_DESK_HEIGHT));
+	self.scrollView_:addEventListener(function ( pSender,  eventType)
+		pSender:getInnerContainer():setPositionY(0);
+	end);
+
 	self:addChild(self.scrollView_);
 	self:setContentSize(self.scrollView_:getContentSize());
 end

@@ -199,7 +199,7 @@ namespace bubble_second {
         bottom_sp->setPosition(cell_x, scrollview_bottom_height_ / -2);
         //cocos2d::Layer *slayer = cocos2d::Layer::create();
         //slayer->addChild(bottom_sp);
-        scrollview_->setInnerContainerSize(cocos2d::Size(750, scrollview_height));
+        scrollview_->setInnerContainerSize(cocos2d::Size(cocos2d::Director::getInstance()->getVisibleSize().width, scrollview_height));
         scrollview_->addChild(bottom_sp);
         //¹ö¶¯·½Ïò  
         scrollview_->setDirection(ScrollView::Direction::VERTICAL);
