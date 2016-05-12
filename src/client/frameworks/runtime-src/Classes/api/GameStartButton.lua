@@ -12,6 +12,13 @@
         
 --------------------------------
 -- 
+-- @function [parent=#GameStartButton] addButtonClickEventListener 
+-- @param self
+-- @param #function callback
+-- @return GameStartButton#GameStartButton self (return value: bs.GameStartButton)
+        
+--------------------------------
+-- 
 -- @function [parent=#GameStartButton] createButtonContinueForm 
 -- @param self
 -- @return GameStartButton#GameStartButton ret (return value: bs.GameStartButton)

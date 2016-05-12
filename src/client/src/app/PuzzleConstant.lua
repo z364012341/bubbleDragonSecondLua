@@ -18,6 +18,10 @@ cc.exports.GlobalFunction = {
 	    else
 	        return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_ROTATION];
 	    end
+	end,
+	getVisibleCenterPosition = function ()
+		local size = cc.Director:getInstance():getVisibleSize();
+		return	cc.p(size.width*0.5, size.height*0.5);
 	end
 }
 
@@ -28,7 +32,7 @@ cc.exports.PUZZLE_PIECE_PATH = "app.modules.PuzzlePiece";
 cc.exports.PUZZLE_PIECES_COLLECTION_PATH = "app.modules.PuzzlePiecesCollection";
 cc.exports.PUZZLE_PLAY_SCENE_PATH = "app.views.PuzzlePlayScene";
 cc.exports.PUZZLE_PLAY_AREA_PATH = "app.views.PuzzlePlayArea";
-cc.exports.PUZZLE_PLAY_WIN_LAYER_PATH = "app.views.PuzzlePlayWinLayer";
+cc.exports.PUZZLE_PLAY_AREA_INNER_CONTAINER = "app.views.PuzzlePlayAreaInnerContainer";
 cc.exports.PUZZLE_PIECE_ANSWER_PATH = "app.modules.PuzzlePieceAnswer";
 cc.exports.PUZZLE_PIECE_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceSingleEdges";
 cc.exports.PUZZLE_PIECE_EDGES_PATH = "app.modules.PuzzlePieceEdges";
@@ -37,6 +41,7 @@ cc.exports.PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceAnswe
 cc.exports.PUZZLE_SELECTED_SHOW_PATH = "app.views.PuzzleSelectedShow";
 cc.exports.PUZZLE_SELECTED_SCENE_PATH = "app.views.PuzzleSelectedScene";
 cc.exports.PUZZLE_PIECES_SCROLLVIEW_PATH = "app.views.PuzzlePiecesScrollView";
+cc.exports.PUZZLE_GAME_PAUSE_ALERT_PATH = "app.views.PuzzleGamePauseAlert";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 
@@ -75,7 +80,6 @@ cc.exports.PUZZLE_STENCIL_COMPONENT_PLAIN = "component_plain";
 cc.exports.PUZZLE_PIECES_COLLECTION_INDEX_START = 1;
 cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_MIN = 0.3;
 cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_MAX = 1.7;
-cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE = 0.04;
 cc.exports.PUZZLE_INITIAL_SIZE = cc.size(976, 1464);
 cc.exports.PUZZLE_SHOW_LAYER_COLOR_C4B = cc.c4b(70, 48, 61, 255);
 

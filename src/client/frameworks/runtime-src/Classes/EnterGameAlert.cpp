@@ -80,7 +80,7 @@ namespace bubble_second {
 
     void EnterGameAlert::initStartButton(int cell_numble, int level)
     {
-        GameStartButton* button = GameStartButton::create();
+        GameStartButton* button = GameStartButton::createButtonStartForm();
 		alert_csb_node_->getChildByName(ENTER_GAME_ALERT_START_NODE_NAME)->addChild(button);
 		button->addButtonClickEventListener([=](Ref* target) {
 		    //if (type == cocos2d::ui::Widget::TouchEventType::ENDED)

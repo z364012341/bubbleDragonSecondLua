@@ -17,5 +17,4 @@ int register_all_SmartScaleController(lua_State* tolua_S);
 
 
 
-
 #endif // __SmartScaleController_h__

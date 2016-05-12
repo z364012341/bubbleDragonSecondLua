@@ -61,7 +61,6 @@ function PuzzlePiece.onTouchBegan(touch, event)
     --printf("PuzzlePiece onTouchBegan");
     if PuzzlePiece.isTouchOnPuzzle(touch, event) then
         local puzzle = event:getCurrentTarget();
-
         puzzle:setLocalZOrder(require(PUZZLE_PIECES_COLLECTION_PATH):getZOrderNumble());
         puzzle:retain();
         local point = puzzle._moveNode:convertToNodeSpace(puzzle:getParent():convertToWorldSpace(cc.p(puzzle:getPosition())));

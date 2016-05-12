@@ -99,7 +99,7 @@ namespace bubble_second {
 
     void GameVictoryAlert::setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback)
     {
-        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(ALERT_REPLAY_NODE_NAME)->getChildByName(ALERT_REPLAY_BUTTON_NAME))->addTouchEventListener(callback);
+        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(ALERT_REPLAY_NODE_NAME))->addTouchEventListener(callback);
     }
 
 }

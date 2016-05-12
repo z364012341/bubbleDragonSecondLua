@@ -7,7 +7,40 @@ const std::string START_BUTTON_TOP_CSB = "GameStartMenuTop.csb";
 const std::string START_BUTTON_BOTTOM_CSB = "GameStartMenuBottom.csb";
 const std::string START_BUTTON_CLIPPINT_STENCIL_PATH = "startBubbleBG1.png";
 const std::string ENTER_GAME_ALERT_START_BUTTON_NAME = "startButton";
+const std::string ENTER_GAME_ALERT_TRIANGLE_NAME = "startButtonTriangle_21";
+const std::string ENTER_GAME_ALERT_CONTINUE_NAME = "continueLabel";
 namespace bubble_second {
+    GameStartButton * GameStartButton::createButtonContinueForm()
+    {
+        GameStartButton *pRet = new(std::nothrow) GameStartButton();
+        if (pRet && pRet->init(ENTER_GAME_ALERT_CONTINUE_NAME))
+        { 
+            pRet->autorelease(); 
+            return pRet; 
+        }
+        else 
+        { 
+            delete pRet;
+            pRet = nullptr; 
+            return nullptr; 
+        } 
+        
+    }
+    GameStartButton * GameStartButton::createButtonStartForm()
+    {
+        GameStartButton *pRet = new(std::nothrow) GameStartButton();
+        if (pRet && pRet->init(ENTER_GAME_ALERT_TRIANGLE_NAME))
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = nullptr;
+            return nullptr;
+        }
+    }
     GameStartButton::GameStartButton()
     {
     }
@@ -28,13 +61,14 @@ namespace bubble_second {
         return button_;
     }
 
-    bool GameStartButton::init()
+    bool GameStartButton::init(const std::string& logo_name)
     {
         if (!cocos2d::Node::init())
         {
             return false;
         }
         cocos2d::Node* button_top = cocos2d::CSLoader::createNode(START_BUTTON_TOP_CSB);
+        button_top->getChildByName(logo_name)->setVisible(true);
         auto action = cocos2d::CSLoader::createTimeline(START_BUTTON_TOP_CSB);
         button_top->runAction(action);
         action->gotoFrameAndPlay(0, true);

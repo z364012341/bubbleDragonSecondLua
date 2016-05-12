@@ -12,7 +12,7 @@
 #include "cocos2d.h"
 #include "BubbleSecondConstant.h"
 namespace bubble_second {
-    class SmartScaleController : public cocos2d::Ref
+    class SmartScaleController
     {
     public:
         GETINSTANCE_FUNC(SmartScaleController);

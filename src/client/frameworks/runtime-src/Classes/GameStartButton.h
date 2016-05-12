@@ -16,13 +16,15 @@ namespace bubble_second {
     class GameStartButton  : public cocos2d::Node
     {
     public:
-        CREATE_FUNC(GameStartButton);
+        //CREATE_FUNC(GameStartButton);
+        static GameStartButton* createButtonContinueForm();
+        static GameStartButton* createButtonStartForm();
         GameStartButton();
         ~GameStartButton();
         void addButtonClickEventListener(const cocos2d::ui::Widget::ccWidgetClickCallback& callback);
         cocos2d::ui::Button* getStartButton();
     private:
-        bool init();
+        bool init(const std::string& logo_name);
     private:
         cocos2d::ui::Button* button_ = nullptr;
     };

@@ -2276,13 +2276,9 @@ namespace bubble_second {
                 this->gameResume();
             }
         });
-        alert->setContinueCallback([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
-            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-            {
+        alert->setContinueCallback([=](cocos2d::Ref*) {
                 this->gameResume();
                 alert->removeFromParent();
-            }
-
         });
         bubble_map_node_->pause();
         this->gamePause();

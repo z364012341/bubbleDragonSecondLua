@@ -7,6 +7,8 @@
 #include "lua_GameStageSelectionScene_auto.hpp"
 #include "lua_GameStartButton_auto.hpp"
 #include "lua_SmartScaleController_auto.hpp"
+#include "lua_ButtonEffectController_auto.hpp"
+#include "lua_GameAlertMask_auto.hpp"
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
 #include "ide-support/CodeIDESupport.h"
 #endif
@@ -57,7 +59,7 @@ static int register_all_packages()
 bool AppDelegate::applicationDidFinishLaunching()
 {
     // set default FPS
-    Director::getInstance()->setAnimationInterval(1.0 / 60.0f);
+    Director::getInstance()->setAnimationInterval(1.0f / 60.0f);
 
     // register lua module
     auto engine = LuaEngine::getInstance();
@@ -77,6 +79,8 @@ bool AppDelegate::applicationDidFinishLaunching()
 	register_all_GameStageSelectionScene(engine->getLuaStack()->getLuaState());
     register_all_GameStartButton(engine->getLuaStack()->getLuaState());
     register_all_SmartScaleController(engine->getLuaStack()->getLuaState());
+    register_all_ButtonEffectController(engine->getLuaStack()->getLuaState());
+    register_all_GameAlertMask(engine->getLuaStack()->getLuaState());
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
     auto runtimeEngine = RuntimeEngine::getInstance();

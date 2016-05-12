@@ -3,25 +3,25 @@
 -- Date: 2016-03-04 12:06:13
 -- 作用: 拼图的layer, 最下面的那层
 
-local PuzzlePlayWinLayer = class("PuzzlePlayWinLayer", function ()
+local PuzzlePlayAreaInnerContainer = class("PuzzlePlayAreaInnerContainer", function ()
     return cc.Node:create();
 end)
-
-function PuzzlePlayWinLayer:ctor()
-    --printf("PuzzlePlayWinLayer");
+local PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE = 0.02;
+function PuzzlePlayAreaInnerContainer:ctor()
+    --printf("PuzzlePlayAreaInnerContainer");
     local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create("puzzle_1.png")
     local puzzleNode = collection:getPuzzleNode();
     --puzzleNode:setPosition(200, 200);
     --puzzleNode:setScale(0.6);
     --self:addChild(puzzleNode);
 
-    local answerNode = collection:getAnswerNode();
+    self.answerNode_ = collection:getAnswerNode();
     local event = cc.EventCustom:new(EVENT_PUZZLE_ANSWER_LOAD);
     event._usedata = puzzleNode;
     self:getEventDispatcher():dispatchEvent(event);
     --answerNode:setPosition(0, 300);
     --answerNode:setScale(0.6);
-    self:addChild(answerNode, -1);
+    self:addChild(self.answerNode_, -1);
     self:addBackMenu();
     self:addTouchesListerner();
 --[[
@@ -39,14 +39,14 @@ function PuzzlePlayWinLayer:ctor()
 --]]
 end
 
--- function PuzzlePlayWinLayer:createScene()
+-- function PuzzlePlayAreaInnerContainer:createScene()
 --     local scene = cc.Scene:create()
---     local layer = PuzzlePlayWinLayer:create()
+--     local layer = PuzzlePlayAreaInnerContainer:create()
 --     scene:addChild(layer)
 --     return scene
 -- end
 
-function PuzzlePlayWinLayer:addBackMenu()
+function PuzzlePlayAreaInnerContainer:addBackMenu()
     local item = cc.MenuItemSprite:create(cc.Sprite:create("001.png"), cc.Sprite:create("001.png"));
     item:registerScriptTapHandler(function (event)
         cc.Director:getInstance():replaceScene(bs.GameStageSelectionScene:createScene());
@@ -58,10 +58,10 @@ function PuzzlePlayWinLayer:addBackMenu()
     --self:setScale(0.6);
 end
 
-function PuzzlePlayWinLayer:addTouchesListerner()
+function PuzzlePlayAreaInnerContainer:addTouchesListerner()
     local listener = cc.EventListenerTouchAllAtOnce:create();
     --listener:setSwallowTouches(true);
-    listener:registerScriptHandler(self.onTouchBegan,cc.Handler.EVENT_TOUCHES_BEGAN);
+    --listener:registerScriptHandler(self.onTouchBegan,cc.Handler.EVENT_TOUCHES_BEGAN);
     listener:registerScriptHandler(self.onTouchMoved,cc.Handler.EVENT_TOUCHES_MOVED);
     --listener:registerScriptHandler(self.onTouchEnded,cc.Handler.EVENT_TOUCHES_ENDED);
     cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self);
@@ -74,16 +74,28 @@ function PuzzlePlayWinLayer:addTouchesListerner()
     cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(mouseListener, self);
 end
 
-function PuzzlePlayWinLayer.onTouchBegan(touches, event)
-    --printf("PuzzlePlayWinLayer onTouchBegan");
+function PuzzlePlayAreaInnerContainer.onTouchBegan(touches, event)
+    --printf("PuzzlePlayAreaInnerContainer onTouchBegan");
     -- printf(#touches);
     -- if #touches > 1 then
-        return true;
+
     -- end
-    -- return false;
+    --return false;
+    -- local layer = event:getCurrentTarget();
+    -- dump(layer.answerNode_:getBoundingBox());
+    -- if cc.rectContainsPoint(layer.answerNode_:getBoundingBox(), layer.answerNode_:getParent():convertTouchToNodeSpace(touches[1])) then
+
+    --     return true;
+    -- else
+    --     return false
+    -- end
 end
 
-function PuzzlePlayWinLayer.onTouchMoved(touches, event)
+function PuzzlePlayAreaInnerContainer.onTouchMoved(touches, event)
+    -- local layer = event:getCurrentTarget();
+    -- if cc.rectContainsPoint(layer.answerNode_:getBoundingBox(), layer.answerNode_:getParent():convertTouchToNodeSpace(touches[1])) then
+    --     return;
+    -- end
     if #touches == 1 then
         event:getCurrentTarget():touchToMove(touches);
         return;
@@ -100,11 +112,11 @@ function PuzzlePlayWinLayer.onTouchMoved(touches, event)
     -- target:setPosition(newPoint);
 end
 
-function PuzzlePlayWinLayer.onTouchEnded(touches, event)
-    --printf("PuzzlePiece onTouchEnded");
-end
+-- function PuzzlePlayAreaInnerContainer.onTouchEnded(touches, event)
+--     --printf("PuzzlePiece onTouchEnded");
+-- end
 
-function PuzzlePlayWinLayer:calculateZoomScale(preDistance, locDistance)
+function PuzzlePlayAreaInnerContainer:calculateZoomScale(preDistance, locDistance)
     local scale = self:getScale();
     if locDistance>preDistance then
         scale = scale + PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE;
@@ -116,7 +128,7 @@ function PuzzlePlayWinLayer:calculateZoomScale(preDistance, locDistance)
     return scale;
 end
 
-function PuzzlePlayWinLayer:pinchToZoom(touches)
+function PuzzlePlayAreaInnerContainer:pinchToZoom(touches)
     local dis1 = cc.pGetDistance(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
     local dis2 = cc.pGetDistance(touches[1]:getLocation(), touches[2]:getLocation());
     --local target = event:getCurrentTarget();
@@ -128,10 +140,10 @@ function PuzzlePlayWinLayer:pinchToZoom(touches)
     self:setPosition(newPoint);
 end
 
-function PuzzlePlayWinLayer:touchToMove(touches)
+function PuzzlePlayAreaInnerContainer:touchToMove(touches)
     local dis = touches[1]:getDelta()
     local zoomScale = self:getScale();
     self:setPositionX(self:getPositionX() + dis.x);
     self:setPositionY(self:getPositionY() + dis.y);
 end
-return PuzzlePlayWinLayer
+return PuzzlePlayAreaInnerContainer

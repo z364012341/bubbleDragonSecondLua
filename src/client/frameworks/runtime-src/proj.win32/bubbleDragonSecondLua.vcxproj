@@ -263,6 +263,8 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\LayerManager.h" />
     <ClInclude Include="..\Classes\LightningBubble.h" />
     <ClInclude Include="..\Classes\LoadingScene.h" />
+    <ClInclude Include="..\Classes\lua_ButtonEffectController_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_GameAlertMask_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameStageSelectionScene_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameStartButton_auto.hpp" />
     <ClInclude Include="..\Classes\lua_LoadingScene_auto.hpp" />
@@ -384,6 +386,8 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\LayerManager.cpp" />
     <ClCompile Include="..\Classes\LightningBubble.cpp" />
     <ClCompile Include="..\Classes\LoadingScene.cpp" />
+    <ClCompile Include="..\Classes\lua_ButtonEffectController_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_GameAlertMask_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameStageSelectionScene_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameStartButton_auto.cpp" />
     <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp" />

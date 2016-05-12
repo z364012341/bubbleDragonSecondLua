@@ -8,8 +8,10 @@ local PuzzlePiecesScrollView = class("PuzzlePiecesScrollView", function (puzzleT
 end)
 local PUZZLE_PIECES_DESK_HEIGHT = 250;
 local PUZZLE_PIECES_POS_Y = 110;
-local PUZZLE_PIECES_INITIAL_POS_X = 150;
+local PUZZLE_PIECES_INITIAL_POS_X = 100;
+local PUZZLE_PIECES_POS_X_DELTA = 185;
 local PUZZLE_PIECES_SCALE = 0.55;
+
 
 function PuzzlePiecesScrollView:ctor(puzzleTable)
 	self.puzzle_table_ = puzzleTable;
@@ -17,17 +19,17 @@ function PuzzlePiecesScrollView:ctor(puzzleTable)
 end
 
 function PuzzlePiecesScrollView:init(puzzleTable)
-	local pos_x = PUZZLE_PIECES_INITIAL_POS_X;
+	--local pos_x = PUZZLE_PIECES_INITIAL_POS_X;
 	self.scrollView_ = ccui.ScrollView:create();
 	self.scrollView_:setPosition(0, 0);
 	self.scrollView_:setContentSize(cc.size(cc.Director:getInstance():getVisibleSize().width, PUZZLE_PIECES_DESK_HEIGHT));
 	self.scrollView_:setBounceEnabled(true);
 	self.scrollView_:setScrollBarEnabled(false);
 	self.scrollView_:setDirection(cc.SCROLLVIEW_DIRECTION_HORIZONTAL);
-	for _, puzzle in ipairs(puzzleTable) do
-		puzzle:setPosition(cc.p(pos_x, PUZZLE_PIECES_POS_Y));
+	for i, puzzle in ipairs(puzzleTable) do
+		puzzle:setPosition(self:getPuzzlePiecePositionWithIndex(i));
 		puzzle:setScale(PUZZLE_PIECES_SCALE);
-		pos_x = pos_x + PUZZLE_STENCIL_WIDTH;
+		--pos_x = pos_x + PUZZLE_PIECES_POS_X_DELTA;
 		self.scrollView_:addChild(puzzle);
 		puzzle:setPuzzlePieceMoveNode(self);
 	end
@@ -54,19 +56,29 @@ function PuzzlePiecesScrollView:moveOutPuzzlePiece(puzzle)
 	-- end
 end
 
+function PuzzlePiecesScrollView:calculatePuzzlePiecePositionX( index )
+	return PUZZLE_PIECES_POS_X_DELTA*(index-1) + PUZZLE_PIECES_INITIAL_POS_X;
+end
+
+function PuzzlePiecesScrollView:getPuzzlePiecePositionWithIndex( index )
+	return cc.p(self:calculatePuzzlePiecePositionX(index), PUZZLE_PIECES_POS_Y);
+end
 function PuzzlePiecesScrollView:adjustPuzzlePiecesPosition()
 	for i,v in ipairs(self.puzzle_table_) do
 		local x = PUZZLE_STENCIL_WIDTH*(i-1) + PUZZLE_PIECES_INITIAL_POS_X;
 		self.puzzle_table_[i]:stopAllActions();
-		self.puzzle_table_[i]:runAction(cc.MoveTo:create(0.5, cc.p(x, PUZZLE_PIECES_POS_Y)));
+		self.puzzle_table_[i]:runAction(cc.MoveTo:create(0.3, self:getPuzzlePiecePositionWithIndex(i)));
 	end
 end
 
-function PuzzlePiecesScrollView:insertPuzzlePiece(puzzle)
-	if #self.puzzle_table_ == 0 then
+function PuzzlePiecesScrollView:insertPuzzlePiece( puzzle )
+	if self:insertPuzzleToTable(puzzle) ~= true or #self.puzzle_table_ == 0 then
 		table.insert(self.puzzle_table_, puzzle);
-		return;
 	end
+	self:adjustPuzzlePiecesPosition();
+end
+
+function PuzzlePiecesScrollView:insertPuzzleToTable( puzzle )
 	local point = self.scrollView_:getInnerContainer():convertToNodeSpace(puzzle:getParent():convertToWorldSpace(cc.p(puzzle:getPosition())));
 	for i,v in ipairs(self.puzzle_table_) do
 		if point.x < v:getPositionX() then
@@ -76,10 +88,9 @@ function PuzzlePiecesScrollView:insertPuzzlePiece(puzzle)
 			puzzle:setPosition(point);
 			self.scrollView_:addChild(puzzle);
 			puzzle:release();
-			break;
+			return true
 		end
 	end
-
-	self:adjustPuzzlePiecesPosition();
+	return false;
 end
 return PuzzlePiecesScrollView

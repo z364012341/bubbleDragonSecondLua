@@ -3,13 +3,13 @@
 #include "ui\UIButton.h"
 #include "GameAlertMask.h"
 #include "BubbleSecondConstant.h"
-//#include "GameTextInfo.h"
+#include "GameStartButton.h"
 //#include "CenteredMenuItemSprite.h"
 //#include "GameVolControlView.h"
 const std::string GAME_PAUSE_ALERT_CSB_PATH = "GamePauseAlert.csb";
 const std::string GAME_PAUSE_ALERT_REPALY_NODE = "FileNode_1";
 const std::string GAME_PAUSE_ALERT_RETUREN_NODE = "returnNode";
-const std::string GAME_PAUSE_ALERT_CONTINUE_NODE = "FileNode_4";
+//const std::string GAME_PAUSE_ALERT_CONTINUE_NODE = "FileNode_4";
 namespace bubble_second {
     GamePauseAlert::GamePauseAlert()
     {
@@ -21,7 +21,7 @@ namespace bubble_second {
 
     void GamePauseAlert::setReturnCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback & callback)
     {
-        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_RETUREN_NODE)->getChildByName(ALERT_REPLAY_BUTTON_NAME))->addTouchEventListener(callback);
+        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_RETUREN_NODE))->addTouchEventListener(callback);
     }
 
     bool GamePauseAlert::init()
@@ -30,7 +30,6 @@ namespace bubble_second {
         {
             return false;
         }
-
         this->addChild(GameAlertMask::create());
         this->loadView();
         return true;
@@ -40,17 +39,19 @@ namespace bubble_second {
     {
         csb_node_ = cocos2d::CSLoader::createNode(GAME_PAUSE_ALERT_CSB_PATH);
         this->addChild(csb_node_);
+        continue_button_ = GameStartButton::createButtonContinueForm();
+        csb_node_->addChild(continue_button_);
         ButtonEffectController::setButtonsZoomScale(csb_node_);
     }
 
     void GamePauseAlert::setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback)
     {
-        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_REPALY_NODE)->getChildByName(ALERT_REPLAY_BUTTON_NAME))->addTouchEventListener(callback);
+        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_REPALY_NODE))->addTouchEventListener(callback);
     }
 
-    void GamePauseAlert::setContinueCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback & callback)
+    void GamePauseAlert::setContinueCallback(const cocos2d::ui::Widget::ccWidgetClickCallback & callback)
     {
-        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_CONTINUE_NODE)->getChildByName(ALERT_REPLAY_BUTTON_NAME))->addTouchEventListener(callback);
+        continue_button_->addButtonClickEventListener(callback);
     }
 
 }

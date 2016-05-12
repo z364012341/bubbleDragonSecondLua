@@ -28,6 +28,7 @@ function PuzzlePiecesCollection:ctor(puzzlePath)
     self._puzzleNode = {};
     --self._answerNode = cc.Node:create();
     self._answerNode = cc.Node:create();
+    --self._answerNode:setContentSize(cc.size(self._indexMaxX*PUZZLE_STENCIL_WIDTH, self._indexMaxY*PUZZLE_STENCIL_HEIGHT));
     for indexY = 1, self._indexMaxY do
     	for indexX = 1, self._indexMaxX do
     		local params = {

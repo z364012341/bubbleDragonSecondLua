@@ -16,4 +16,6 @@ int register_all_GameStartButton(lua_State* tolua_S);
 
 
 
+
+
 #endif // __GameStartButton_h__

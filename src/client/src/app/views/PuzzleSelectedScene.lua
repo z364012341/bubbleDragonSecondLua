@@ -28,6 +28,7 @@ end
 
 function PuzzleSelectedScene:init()
     self.csb_node_ = cc.CSLoader:createNode(PUZZLE_SELECTED_SCENE_CSB_PATH);
+    bs.ButtonEffectController:setButtonsZoomScale(self.csb_node_);
     local size = cc.Director:getInstance():getVisibleSize();
     self.csb_node_:getChildByName(PUZZLE_SHOW_NODE_NAME):setPosition(cc.p(size.width/2, size.height*0.55));
     self.csb_node_:getChildByName(PUZZLE_SHOW_NODE_NAME):setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
@@ -56,7 +57,7 @@ function PuzzleSelectedScene:initBackButton()
     end);
 end
 function PuzzleSelectedScene:addStartButton()
-    local button = bs.GameStartButton:create();
+    local button = bs.GameStartButton:createButtonStartForm();
     local size = cc.Director:getInstance():getVisibleSize();
     button:setPosition(cc.p(size.width*0.5, size.height*0.1));
     self.csb_node_:addChild(button);

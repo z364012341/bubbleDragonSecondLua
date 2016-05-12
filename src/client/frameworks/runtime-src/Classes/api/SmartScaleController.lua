@@ -5,12 +5,6 @@
 
 --------------------------------
 -- 
--- @function [parent=#SmartScaleController] getFixedHeightZoom 
--- @param self
--- @return float#float ret (return value: float)
-        
---------------------------------
--- 
 -- @function [parent=#SmartScaleController] getFixedWidthZoom 
 -- @param self
 -- @return float#float ret (return value: float)
@@ -23,10 +17,9 @@
         
 --------------------------------
 -- 
--- @function [parent=#SmartScaleController] operator= 
+-- @function [parent=#SmartScaleController] getFixedHeightZoom 
 -- @param self
--- @param #bs.SmartScaleController 
--- @return SmartScaleController#SmartScaleController ret (return value: bs.SmartScaleController)
+-- @return float#float ret (return value: float)
         
 --------------------------------
 -- 

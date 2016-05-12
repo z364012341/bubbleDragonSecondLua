@@ -597,7 +597,7 @@ const cocos2d::Vec2 GAME_VICTORY_ALERT_SAMSUNG_POSITION(0.0f, 180.0f); //ÈýÐÇÎ»Ö
 const float GAME_VICTORY_ALERT_ADD_SCORE_LABEL_POSITION_PERCENT_X = 0.5f; //+180½ð±Ò
 const float GAME_VICTORY_ALERT_ADD_FATIGUE_LABEL_POSITION_PERCENT_X = 0.8f; //+1ÌåÁ¦
 const float GAME_SAMSUNG_TWO_SIDES_ROTATIOIN = 25.0f;
-const std::string ALERT_REPLAY_BUTTON_NAME = "Button_1";
+//const std::string ALERT_REPLAY_BUTTON_NAME = "Button_1";
 //GameBaseAlert
 const std::string GAME_BASE_ALERT_NAME = "GAME_BASE_ALERT_NAME";
 //GamePauseAlert
