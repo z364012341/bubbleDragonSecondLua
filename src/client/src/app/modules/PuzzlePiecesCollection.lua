@@ -28,7 +28,7 @@ function PuzzlePiecesCollection:ctor(puzzlePath)
     self._puzzleNode = {};
     --self._answerNode = cc.Node:create();
     self._answerNode = cc.Node:create();
-    --self._answerNode:setContentSize(cc.size(self._indexMaxX*PUZZLE_STENCIL_WIDTH, self._indexMaxY*PUZZLE_STENCIL_HEIGHT));
+    self._answerNode:setContentSize(cc.size(self._indexMaxX*PUZZLE_STENCIL_WIDTH, self._indexMaxY*PUZZLE_STENCIL_HEIGHT));
     for indexY = 1, self._indexMaxY do
     	for indexX = 1, self._indexMaxX do
     		local params = {
@@ -40,12 +40,12 @@ function PuzzlePiecesCollection:ctor(puzzlePath)
 		        top = self:calculateTopDirection(indexX, indexY),    --上边凹凸方向
 		        bottom = self:calculateBottomDirection(indexX, indexY),  --下边凹凸方向
 		    };
-		    local clippingNode = PuzzlePiece:create(params);
+		    local puzzles = PuzzlePiece:create(params);
 		    --self._puzzleNode:addChild(clippingNode);
 		    local answer = PuzzlePieceAnswer:create(params);
-		    clippingNode:setPuzzlePieceAnswer(answer);
+		    puzzles:setPuzzlePieceAnswer(answer);
 		    self._answerNode:addChild(answer);
-		    table.insert(self._puzzleNode, clippingNode);
+		    table.insert(self._puzzleNode, puzzles);
     	end
     end
 end
@@ -57,6 +57,7 @@ end
 function PuzzlePiecesCollection:initIndexMax(size)
     self._indexMaxX = math.floor(size.width/PUZZLE_STENCIL_WIDTH);
     self._indexMaxY = math.floor(size.height/PUZZLE_STENCIL_HEIGHT);
+    --printf("111111111111111 indexX" .. self._indexMaxX .. "Y" .. self._indexMaxY);
 end
 
 function PuzzlePiecesCollection:calculateLaftDirection(indexX)

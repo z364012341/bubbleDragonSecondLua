@@ -1,5 +1,5 @@
 #include "GameCharacter.h"
-//#include "GameCharacterFactory.h"
+#include "GameScoreController.h"
 //#include "SpriteTextureController.h"
 #include "GamePlayController.h"
 #include "GameCharactorNameManager.h"
@@ -306,6 +306,10 @@ namespace bubble_second {
 
     void GameCharacter::playExchangeBubbleAnimation()
     {
+        if (GameScoreController::getInstance()->getBubbleUseCount()<=1)
+        {
+            return;
+        }
         this->playAnimationWithNameAndCallfunc(CHARACTER_LAOHU_RELOAD_BUBBLE_ANIMATION_NAME, CC_CALLBACK_0(GameCharacter::playStandbyAnimation1, this));
     }
 

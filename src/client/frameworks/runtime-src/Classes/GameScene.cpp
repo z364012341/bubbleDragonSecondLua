@@ -1296,6 +1296,7 @@ namespace bubble_second {
         //{
         //    return;
         //}
+        
         this->removeExchangeBubbleListener();
         BaseProperty* property = static_cast<BaseProperty*>(event->getUserData());
         auto controller = GamePlayController::getInstance();

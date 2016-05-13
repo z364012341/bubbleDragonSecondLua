@@ -122,7 +122,7 @@ namespace bubble_second {
 
     bool GameScoreController::isNoShootBubbleInAir()
     {
-        return prepare_bubble_in_air_numble_ == 0;
+        return prepare_bubble_in_air_numble_ <= 0;
     }
 
     bool GameScoreController::gameVictory()
@@ -132,6 +132,7 @@ namespace bubble_second {
 
     bool GameScoreController::gameDefeat()
     {
+        //auto b = this->isNoShootBubbleInAir();
         return noUseBubbleCount() && !this->gameVictory() && this->isNoShootBubbleInAir();
     }
 

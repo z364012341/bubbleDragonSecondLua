@@ -44,6 +44,7 @@ cc.exports.PUZZLE_PIECES_SCROLLVIEW_PATH = "app.views.PuzzlePiecesScrollView";
 cc.exports.PUZZLE_GAME_PAUSE_ALERT_PATH = "app.views.PuzzleGamePauseAlert";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
+cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";
 
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
@@ -66,7 +67,7 @@ cc.exports.PUZZLE_COMPONENT_POSITION = "component_position";
 --cc.exports.PUZZLE_COMPONENT_ROTATION_INSIDE = "component_rotation_inside";
 --cc.exports.PUZZLE_COMPONENT_ROTATION_OUTSIDE = "component_rotation_outside";
 cc.exports.PUZZLE_STENCIL_WIDTH = 240;
-cc.exports.PUZZLE_STENCIL_HEIGHT = 240;
+cc.exports.PUZZLE_STENCIL_HEIGHT = PUZZLE_STENCIL_WIDTH;
 cc.exports.PUZZLE_STENCIL_LENGTH = 588;
 cc.exports.PUZZLE_COMPONENT_ANCHOR = {x = 0, y = 0.5};
 cc.exports.PUZZLE_EDGES_ANCHOR = {x = 5/189, y = 0.5};

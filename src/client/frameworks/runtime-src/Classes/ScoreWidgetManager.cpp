@@ -300,13 +300,13 @@ namespace bubble_second {
     void ScoreWidgetManager::addWidgetTotal()
     {
         ++widget_total_;
-        CCLOG("++widget: %d", widget_total_);
+        //CCLOG("++widget: %d", widget_total_);
     }
 
     void ScoreWidgetManager::cutWidgetTotal()
     {
         --widget_total_;
-        CCLOG("--widget: %d", widget_total_);
+        //CCLOG("--widget: %d", widget_total_);
     }
 
     int ScoreWidgetManager::getScoreWidgetTotal()

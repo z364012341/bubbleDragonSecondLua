@@ -31,7 +31,7 @@ namespace bubble_second {
         //void addGameBackgroundTexture(int cell_numble);
         //cocos2d::Sprite* createGameBlurBackground();
         //½ØÆÁ
-        //void screenShot(const bool bIsSave);
+        //cocos2d::Sprite* getScreenShot();
     private:
         SpriteTextureController();
         void readGameSceneBackgroundFile();

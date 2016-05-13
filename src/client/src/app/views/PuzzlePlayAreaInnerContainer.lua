@@ -7,8 +7,18 @@ local PuzzlePlayAreaInnerContainer = class("PuzzlePlayAreaInnerContainer", funct
     return cc.Node:create();
 end)
 local PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE = 0.02;
+local ANSWERS_NODE_ZORDER = -1;
 function PuzzlePlayAreaInnerContainer:ctor()
     --printf("PuzzlePlayAreaInnerContainer");
+    local function onNodeEvent(event)
+        if event == "enter" then
+            self:onEnter();
+        elseif event == "exit" then
+            self:onExit();
+        end
+        self:registerScriptHandler(onNodeEvent);
+    end
+    self:registerScriptHandler(onNodeEvent);
     local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create("puzzle_1.png")
     local puzzleNode = collection:getPuzzleNode();
     --puzzleNode:setPosition(200, 200);
@@ -19,10 +29,8 @@ function PuzzlePlayAreaInnerContainer:ctor()
     local event = cc.EventCustom:new(EVENT_PUZZLE_ANSWER_LOAD);
     event._usedata = puzzleNode;
     self:getEventDispatcher():dispatchEvent(event);
-    --answerNode:setPosition(0, 300);
-    --answerNode:setScale(0.6);
-    self:addChild(self.answerNode_, -1);
-    self:addBackMenu();
+
+    self:addChild(self.answerNode_, ANSWERS_NODE_ZORDER);
     self:addTouchesListerner();
 --[[
     local clippingNode = require(PUZZLE_PIECE_PATH):create({
@@ -37,25 +45,6 @@ function PuzzlePlayAreaInnerContainer:ctor()
     clippingNode:setPosition(300, 300);
     self:addChild(clippingNode);
 --]]
-end
-
--- function PuzzlePlayAreaInnerContainer:createScene()
---     local scene = cc.Scene:create()
---     local layer = PuzzlePlayAreaInnerContainer:create()
---     scene:addChild(layer)
---     return scene
--- end
-
-function PuzzlePlayAreaInnerContainer:addBackMenu()
-    local item = cc.MenuItemSprite:create(cc.Sprite:create("001.png"), cc.Sprite:create("001.png"));
-    item:registerScriptTapHandler(function (event)
-        cc.Director:getInstance():replaceScene(bs.GameStageSelectionScene:createScene());
-    end);
-    local menu = cc.Menu:create();
-    menu:addChild(item);
-    menu:setPosition(0, 0);
-    self:addChild(menu);
-    --self:setScale(0.6);
 end
 
 function PuzzlePlayAreaInnerContainer:addTouchesListerner()
@@ -145,5 +134,36 @@ function PuzzlePlayAreaInnerContainer:touchToMove(touches)
     local zoomScale = self:getScale();
     self:setPositionX(self:getPositionX() + dis.x);
     self:setPositionY(self:getPositionY() + dis.y);
+end
+function PuzzlePlayAreaInnerContainer:getAnswersThumbnail()
+    self.answerNode_:retain();
+    self:saveAnswerNodeData();
+    self.answerNode_:removeFromParent();
+    return self.answerNode_;
+end
+function PuzzlePlayAreaInnerContainer:pushAnswersThumbnail()
+    self.answerNode_:retain();
+    self.answerNode_:removeFromParent();
+    self.answerNode_:setScale(self.answer_node_scale_save_);
+    self.answerNode_:setPosition(self.answer_node_pos_save_);
+    self:addChild(self.answerNode_, ANSWERS_NODE_ZORDER);
+    self.answerNode_:release();
+end
+function PuzzlePlayAreaInnerContainer:saveAnswerNodeData()
+    self.answer_node_pos_save_ = cc.p(self.answerNode_:getPosition());
+    self.answer_node_scale_save_ = self.answerNode_:getScale();
+end
+
+function PuzzlePlayAreaInnerContainer:onEnter()
+    local function pushAnswersThumbnail( event )
+        --printf("111111111111111111");
+        self:pushAnswersThumbnail();
+    end
+    self._listener1 = cc.EventListenerCustom:create(EVENT_PUSH_ANSWERS_THUMBNAIL, pushAnswersThumbnail);
+    self:getEventDispatcher():addEventListenerWithFixedPriority(self._listener1, 1);
+end
+function PuzzlePlayAreaInnerContainer:onExit()
+    local eventDispatcher = self:getEventDispatcher();
+    eventDispatcher:removeEventListener(self._listener1);
 end
 return PuzzlePlayAreaInnerContainer

@@ -36,7 +36,6 @@ const std::string TWO_ROUND_BOMB_EFFECT_PATH = "zhadanTX/zhadanTX.ExportJson"; /
 const std::string BOMB_BOMB_BUBBLE_CENTER_FIRE_PATH = "huoqiuTX/huoqiuTX.ExportJson";
 const std::string SCORE_WIDGET_UPDATE_PATH = "yun3/yun3.ExportJson";
 namespace bubble_second {
-
     SpriteTextureController::SpriteTextureController()
     {
         stagetype_to_path_[kTopEliminate] = STAGETYPE_TEXTURE_TOPELIMINATE_PATH;
@@ -255,6 +254,10 @@ namespace bubble_second {
         }
 
         //cocos2d::RenderTexture* textureScreen = cocos2d::RenderTexture::create(100, 100);
+        //cocos2d::Texture2D* t = new cocos2d::Texture2D;
+        //t->initWithImage(textureScreen->newImage(true));
+        //textureScreen->newImage(true);
+        //cocos2d::Sprite::createWithTexture(t);
         //cocos2d::Sprite* sp = cocos2d::Sprite::createWithTexture(textureScreen->getSprite());
         //cocos2d::Sprite::createWithTexture(textureScreen->getSprite()->getTexture());
     }
@@ -295,6 +298,19 @@ namespace bubble_second {
     //        textureScreen->saveToFile("ScreenShot.png", cocos2d::Image::Format::PNG, true, nullptr);
     //    }
     //    //cocos2d::utils::captureScreen([=](bool succeed, const std::string& outputFile) {}, "ScreenShot.png");
+    //}     
+    //cocos2d::Sprite * SpriteTextureController::getScreenShot()
+    //{
+    //    cocos2d::Size sizeWin = cocos2d::Director::getInstance()->getWinSize();
+    //    cocos2d::RenderTexture* textureScreen = cocos2d::RenderTexture::create(sizeWin.width, sizeWin.height, cocos2d::Texture2D::PixelFormat::RGBA8888);
+    //    //清除数据并开始获取  
+    //    //textureScreen->beginWithClear(0.0f, 0.0f, 0.0f, 0.0f);
+    //    textureScreen->begin();
+    //    //遍历场景节点对象，填充纹理到texure中  
+    //    cocos2d::Director::getInstance()->getRunningScene()->visit();
+    //    //结束获取  
+    //    textureScreen->end();
+    //    return nullptr;
     //}
 
 }

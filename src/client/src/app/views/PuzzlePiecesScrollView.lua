@@ -33,7 +33,8 @@ function PuzzlePiecesScrollView:init(puzzleTable)
 		self.scrollView_:addChild(puzzle);
 		puzzle:setPuzzlePieceMoveNode(self);
 	end
-	self.scrollView_:setInnerContainerSize(cc.size(self:calculatePuzzlePiecePositionX(#puzzleTable), PUZZLE_PIECES_DESK_HEIGHT));
+	local inner_width = self:calculatePuzzlePiecePositionX(#puzzleTable) + PUZZLE_PIECES_POS_X_DELTA/2
+	self.scrollView_:setInnerContainerSize(cc.size(inner_width, PUZZLE_PIECES_DESK_HEIGHT));
 	self.scrollView_:addEventListener(function ( pSender,  eventType)
 		pSender:getInnerContainer():setPositionY(0);
 	end);
@@ -73,8 +74,11 @@ function PuzzlePiecesScrollView:adjustPuzzlePiecesPosition()
 		self.puzzle_table_[i]:stopAllActions();
 		self.puzzle_table_[i]:runAction(cc.MoveTo:create(0.3, self:getPuzzlePiecePositionWithIndex(i)));
 	end
-end
 
+end
+function PuzzlePiecesScrollView:adjustScrollViewInnerContainerSize()
+	-- body
+end
 function PuzzlePiecesScrollView:insertPuzzlePiece( puzzle )
 	if self:insertPuzzleToTable(puzzle) ~= true or #self.puzzle_table_ == 0 then
 		table.insert(self.puzzle_table_, puzzle);

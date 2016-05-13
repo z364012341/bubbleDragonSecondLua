@@ -13,20 +13,20 @@ function PuzzlePlayArea:ctor()
     self:init();
 end
 
-function PuzzlePlayArea:createScene()
-    local scene = cc.Scene:create()
-    local layer = PuzzlePlayArea:create()
-    scene:addChild(layer)
-    return scene
-end
+-- function PuzzlePlayArea:createScene()
+--     local scene = cc.Scene:create()
+--     local layer = PuzzlePlayArea:create()
+--     scene:addChild(layer)
+--     return scene
+-- end
 function PuzzlePlayArea:init()
     local win_clip = cc.ClippingNode:create(self:getBackgroundColorLayer());
     self:addChild(win_clip);
     local background = self:getBackgroundColorLayer();
     self:addChild(background, -1); 
-    local puzzle_win = PuzzlePlayAreaInnerContainer:create();
-    puzzle_win:setPosition(cc.p(background:getPosition()));
-    win_clip:addChild(puzzle_win);
+    self.play_area_ = PuzzlePlayAreaInnerContainer:create();
+    self.play_area_:setPosition(cc.p(background:getPosition()));
+    win_clip:addChild(self.play_area_);
     self:addAreaWindowsEdge();
 end
 
@@ -35,14 +35,16 @@ function PuzzlePlayArea:getBackgroundColorLayer()
     colorLayer:setPosition(cc.p(colorLayer:getContentSize().width/-2, colorLayer:getContentSize().height/-2));
     return colorLayer;
 end
-
+function PuzzlePlayArea:getWindowsEdge()
+    return GlobalFunction.createGameSpriteWithPath(PUZZLE_AREA_EDGE_PATH);
+end
 function PuzzlePlayArea:addAreaWindowsEdge()
-    self.win_edge_ = GlobalFunction.createGameSpriteWithPath(PUZZLE_AREA_EDGE_PATH);
-    self:addChild(self.win_edge_, 1);
+    local win_edge = self:getWindowsEdge();
+    self:addChild(win_edge, 1);
     local listener = cc.EventListenerTouchOneByOne:create();
     listener:setSwallowTouches(true);
     local function onTouchBegan(touch, event)
-        if cc.rectContainsPoint(self.win_edge_:getBoundingBox(), self.win_edge_:getParent():convertTouchToNodeSpace(touch)) then
+        if cc.rectContainsPoint(win_edge:getBoundingBox(), win_edge:getParent():convertTouchToNodeSpace(touch)) then
             return false;
         end
         return true;
@@ -50,21 +52,37 @@ function PuzzlePlayArea:addAreaWindowsEdge()
     listener:registerScriptHandler(onTouchBegan,cc.Handler.EVENT_TOUCH_BEGAN);
     --listener:registerScriptHandler(self.onTouchMoved,cc.Handler.EVENT_TOUCH_MOVED);
     --listener:registerScriptHandler(self.onTouchEnded,cc.Handler.EVENT_TOUCH_ENDED);
-    cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self.win_edge_);
+    cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, win_edge);
 end
 function PuzzlePlayArea:getThumbnail()
-    --local size = self.win_edge_:getContentSize();
+    --local size = win_edge:getContentSize();
     --local x, y = self:getPosition();
-    local size = cc.Director:getInstance():getVisibleSize();
-    local puzzleRender = cc.RenderTexture:create(size.width, size.height, cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888, 0x88F0);
-    puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0); 
-    --puzzleRender:setPosition(size.width/2, size.height/2);
-    self:visit(); 
-    puzzleRender:endToLua();
-    --self:setPosition(cc.p(x, y));
-    local render_sp = cc.Sprite:createWithTexture(puzzleRender:getSprite():getTexture());
-    render_sp:setFlippedY(true);
-    render_sp:setContentSize(size);
-    return render_sp;
+    -- local size = cc.Director:getInstance():getVisibleSize();
+    -- local puzzleRender = cc.RenderTexture:create(size.width, size.height, cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888, 0x88F0);
+    -- puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0); 
+    -- --puzzleRender:setPosition(size.width/2, size.height/2);
+    -- self:visit(); 
+    -- puzzleRender:endToLua();
+    -- --self:setPosition(cc.p(x, y));
+    -- local render_sp = cc.Sprite:createWithTexture(puzzleRender:getSprite():getTexture());
+    -- render_sp:setFlippedY(true);
+    -- render_sp:setContentSize(size);
+    -- return render_sp;
+
+    --local answers_thumbnail = self.play_area_:getAnswersThumbnail();
+    local color_layer = self:getBackgroundColorLayer();
+    --color_layer:setPosition(cc.p(0, 0));
+    local node = cc.Node:create();
+    node:addChild(color_layer);
+    local thumbnail = self.play_area_:getAnswersThumbnail();
+    thumbnail:setScale(color_layer:getContentSize().height / thumbnail:getContentSize().height);
+    local thumbnail_x = thumbnail:getContentSize().width*thumbnail:getScale()/-2;
+    local thumbnail_y = thumbnail:getContentSize().height*thumbnail:getScale()/-2;
+    thumbnail:setPosition(cc.p(thumbnail_x, thumbnail_y));
+
+    node:addChild(thumbnail, 1);
+    thumbnail:release();
+    node:addChild(self:getWindowsEdge());
+    return node;
 end
 return PuzzlePlayArea
