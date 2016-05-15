@@ -546,6 +546,11 @@ namespace bubble_second {
         bubble_map_->disposeMinYCenterBubble();
     }
 
+    void GamePlayController::disposeGameDefeat()
+    {
+        bubble_map_->disposeGameDefeat();
+    }
+
     void GamePlayController::findBubblesInVisibleSize()
     {
         bubble_map_->findBubblesInVisibleSize();

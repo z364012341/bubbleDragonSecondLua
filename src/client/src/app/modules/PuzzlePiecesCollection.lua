@@ -22,6 +22,7 @@ function PuzzlePiecesCollection:ctor(puzzlePath)
     --printf("PuzzlePiecesCollection");
     self._relativeDirection = {};
     PuzzlePiecesCollection._ZOrderNumble = 1;
+    --dump(puzzlePath);
     self:initIndexMax(GlobalFunction.createGameSpriteWithPath(puzzlePath):getContentSize());
     --printf(indexMaxX);
     --printf(indexMaxY);

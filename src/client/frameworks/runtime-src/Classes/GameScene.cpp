@@ -1754,6 +1754,10 @@ namespace bubble_second {
         auto sprites = static_cast<BubbleVector*>(event->getUserData());
         auto controller = GamePlayController::getInstance();
         BubbleVector vector = *sprites;
+        if (vector.empty())
+        {
+            GamePlayController::getInstance()->disposeGameDefeat();
+        }
         cocos2d::CallFunc* callfunc = cocos2d::CallFunc::create([=]() {
             for (auto var : vector)
             {
@@ -2128,6 +2132,7 @@ namespace bubble_second {
         int count = GameScoreController::getInstance()->getBubbleUseCount();
 		this->runAction(cocos2d::Repeat::create(seq, count));
         //开个定时器预防万一不弹出胜利面板
+        //cocos2d::Director::getInstance()->getScheduler()->pauseTarget
         this->schedule([=](float) {
             this->popVictoryAlert();
             this->unschedule(GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY);
@@ -2426,6 +2431,7 @@ namespace bubble_second {
         if (this->isNeedNotDisplayedBarrelScoreLabel())
         {
             this->notDisplayedBarrelScoreLabel();
+            GamePlayController::getInstance()->disposeGameDefeat();
         }
     }
 

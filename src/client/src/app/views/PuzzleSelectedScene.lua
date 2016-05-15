@@ -9,13 +9,18 @@ end)
 local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
 local PUZZLE_SELECTED_SCENE_CSB_PATH = "PuzzleSelectionLayer.csb";
 local PUZZLE_SHOW_NODE_NAME = "Node_1";
+local PUZZLE_SHOW_TOP_NODE_NAME = "Node_2";
+local LANDSCAPE_NODE_NAME = "Sprite_19";
+local TREASURE_MAP_NODE_NAME = "Sprite_20";
+local SELECTED_TYPE_NAME = "Button_4";
 local BACK_BUTTON_NAME = "backButton";
 local PAGEVIEW_POSITION_NODE_NAME = "pagePos";
+local SCROLL_LEFT_BUTTON_NAME = "Button_6";
+local SCROLL_RIGHT_BUTTON_NAME = "Button_7";
 local COLOR_LAYER_WIDTH = 470;
 local COLOR_LAYER_HEIGHT = 700;
 
 function PuzzleSelectedScene:ctor()
-    --printf("PuzzleSelectedScene");
     self:init();
 end
 
@@ -34,13 +39,14 @@ function PuzzleSelectedScene:init()
     self.csb_node_:getChildByName(PUZZLE_SHOW_NODE_NAME):setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     self:addChild(self.csb_node_);
     local colorLayer = cc.LayerColor:create(PUZZLE_SHOW_LAYER_COLOR_C4B, COLOR_LAYER_WIDTH, COLOR_LAYER_HEIGHT);
-    --colorLayer:setScale(bs.SmartScaleController:getInstance():getFixedHeightZoom());
     colorLayer:setPosition(cc.p(colorLayer:getContentSize().width/-2, colorLayer:getContentSize().height/-2));
     self.csb_node_:getChildByName(PUZZLE_SHOW_NODE_NAME):addChild(colorLayer, -1);
 
     self:initBackButton();
     self:addPageView();
     self:addStartButton();
+    self:initSelectedTypeButton();
+    self:initScrollPageButton()
 end
 
 function PuzzleSelectedScene:addPageView()
@@ -63,6 +69,25 @@ function PuzzleSelectedScene:addStartButton()
     self.csb_node_:addChild(button);
     button:getStartButton():addClickEventListener(function ( ... )
         cc.Director:getInstance():replaceScene(require(PUZZLE_PLAY_SCENE_PATH):createScene());
+    end);
+end
+function PuzzleSelectedScene:initSelectedTypeButton()
+    local top_node = self.csb_node_:getChildByName(PUZZLE_SHOW_NODE_NAME):getChildByName(PUZZLE_SHOW_TOP_NODE_NAME);
+    local landscape_sp = top_node:getChildByName(LANDSCAPE_NODE_NAME);
+    local treasure_map_sp = top_node:getChildByName(TREASURE_MAP_NODE_NAME);
+    local button = top_node:getChildByName(SELECTED_TYPE_NAME);
+    button:addClickEventListener(function ( ... )
+        treasure_map_sp:setVisible(not treasure_map_sp:isVisible());
+        landscape_sp:setVisible(not landscape_sp:isVisible());
+        cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_CHANGE_PAGEVIEW_TYPE);
+    end);
+end
+function PuzzleSelectedScene:initScrollPageButton()
+    self.csb_node_:getChildByName(PUZZLE_SHOW_NODE_NAME):getChildByName(SCROLL_LEFT_BUTTON_NAME):addClickEventListener(function ( ... )
+        cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_SELECTED_SCROLL_LEFT);
+    end);
+    self.csb_node_:getChildByName(PUZZLE_SHOW_NODE_NAME):getChildByName(SCROLL_RIGHT_BUTTON_NAME):addClickEventListener(function ( ... )
+        cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_SELECTED_SCROLL_RIGHT);
     end);
 end
 return PuzzleSelectedScene

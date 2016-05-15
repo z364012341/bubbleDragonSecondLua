@@ -1,50 +1,36 @@
-cc.exports.GlobalFunction = {
-	createGameSpriteWithPath = function (path)
-		return cc.Sprite:create(path);
-		--return cc.Sprite:createWithSpriteFrameName(path);
-	end,
-	setGameSpriteTextureWithPath = function (path, sprite)
-		sprite:setTexture(path);
-		--local frame = cc.SpriteFrameCache:getInstance():getSpriteFrameByName(path);
-        --sprite:setSpriteFrame(frame);
-	end,
-	getPuzzlePiecePositionWithDirection = function (direction)
-		return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_POSITION];
-	end,
-	getPuzzlePiecePositionWithRotation = function (direction, insideOrOutside)
-		--assert(direction and insideOrOutside);
-	    if insideOrOutside == PUZZLE_STENCIL_COMPONENT_OUTSIDE then
-	        return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_ROTATION]+180;
-	    else
-	        return puzzle.PUZZLE_COMPONENT_DIRECTION_TO_DATA[direction][PUZZLE_COMPONENT_ROTATION];
-	    end
-	end,
-	getVisibleCenterPosition = function ()
-		local size = cc.Director:getInstance():getVisibleSize();
-		return	cc.p(size.width*0.5, size.height*0.5);
-	end
-}
-
 cc.exports.PUZZLE_STENCIL_COMPONENT_PATH = "app.modules.PuzzleStencilComponent";
 cc.exports.PUZZLE_STENCIL_PATH = "app.modules.PuzzleStencil";
 cc.exports.PUZZLE_BOTTOM_PLATE_PATH = "app.modules.PuzzleBottomPlate";
 cc.exports.PUZZLE_PIECE_PATH = "app.modules.PuzzlePiece";
 cc.exports.PUZZLE_PIECES_COLLECTION_PATH = "app.modules.PuzzlePiecesCollection";
-cc.exports.PUZZLE_PLAY_SCENE_PATH = "app.views.PuzzlePlayScene";
-cc.exports.PUZZLE_PLAY_AREA_PATH = "app.views.PuzzlePlayArea";
-cc.exports.PUZZLE_PLAY_AREA_INNER_CONTAINER = "app.views.PuzzlePlayAreaInnerContainer";
 cc.exports.PUZZLE_PIECE_ANSWER_PATH = "app.modules.PuzzlePieceAnswer";
 cc.exports.PUZZLE_PIECE_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceSingleEdges";
 cc.exports.PUZZLE_PIECE_EDGES_PATH = "app.modules.PuzzlePieceEdges";
 cc.exports.PUZZLE_PIECE_SHADOW_PATH = "app.modules.PuzzlePieceShadow";
 cc.exports.PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceAnswerSingleEdges";
+cc.exports.PUZZLE_DEFEAT_COUNTDOWN_COMPONENT_PATH = "app.modules.PuzzleDefeatCountdownComponent";
+
+cc.exports.PUZZLE_PLAY_AREA_INNER_CONTAINER = "app.views.PuzzlePlayAreaInnerContainer";
 cc.exports.PUZZLE_SELECTED_SHOW_PATH = "app.views.PuzzleSelectedShow";
 cc.exports.PUZZLE_SELECTED_SCENE_PATH = "app.views.PuzzleSelectedScene";
 cc.exports.PUZZLE_PIECES_SCROLLVIEW_PATH = "app.views.PuzzlePiecesScrollView";
 cc.exports.PUZZLE_GAME_PAUSE_ALERT_PATH = "app.views.PuzzleGamePauseAlert";
+cc.exports.PUZZLE_PLAY_SCENE_PATH = "app.views.PuzzlePlayScene";
+cc.exports.PUZZLE_PLAY_AREA_PATH = "app.views.PuzzlePlayArea";
+cc.exports.PUZZLE_GAME_DEFEAT_ALERT_PATH = "app.views.PuzzleGameDefeatAlert";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";
+cc.exports.EVENT_CHANGE_PAGEVIEW_TYPE = "event_change_pageview_type";
+cc.exports.EVENT_PUZZLE_SELECTED_SCROLL_LEFT = "event_puzzle_selected_scroll_left";
+cc.exports.EVENT_PUZZLE_SELECTED_SCROLL_RIGHT = "event_puzzle_selected_scroll_right";
+cc.exports.EVENT_PAUSE = "event_pause";
+cc.exports.EVENT_REPLAY = "event_replay";
+cc.exports.EVENT_RETURN = "event_return";
+cc.exports.EVENT_CONTINUE = "event_continue";
+cc.exports.EVENT_PUZZLE_GAME_DEFEAT = "event_puzzle_game_defeat";
+cc.exports.EVENT_PUZZLE_ANSWER_ADD = "event_puzzle_answer_add";
+cc.exports.EVENT_PUZZLE_GAME_VICTORY = "event_puzzle_game_victory";
 
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";

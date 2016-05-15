@@ -10,6 +10,9 @@
     <Filter Include="resource">
       <UniqueIdentifier>{2d1d0979-58cd-4ab6-b91c-13650158f1fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\lua">
+      <UniqueIdentifier>{235c7c02-4057-4853-8fd1-c19d885822fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -27,9 +30,6 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ide-support\CodeIDESupport.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ide-support\lua_debugger.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ide-support\RuntimeLuaImpl.h">
@@ -194,12 +194,6 @@
     <ClInclude Include="..\Classes\LoadingScene.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\lua_LoadingScene_auto.hpp">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\lua_module_register.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MutipleSealBubble.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -284,9 +278,6 @@
     <ClInclude Include="..\Classes\BaseBubble.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\lua_GameStageSelectionScene_auto.hpp">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\EnterGamePropsView.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -336,19 +327,34 @@
     <ClInclude Include="..\Classes\BubbleMainSightingDevice.h" />
     <ClInclude Include="..\Classes\GameNoneBubbleDownAnimationComponent.h" />
     <ClInclude Include="..\Classes\GameStartButton.h" />
-    <ClInclude Include="..\Classes\lua_GameStartButton_auto.hpp">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\lua_SmartScaleController_auto.hpp">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ScoreProgressStart.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\lua_ButtonEffectController_auto.hpp">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\lua_GameAlertMask_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_ButtonEffectController_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ide-support\lua_debugger.h">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_GameStageSelectionScene_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_GameStartButton_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_LoadingScene_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_module_register.h">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_SmartScaleController_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_ControlButtonController_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -360,9 +366,6 @@
     <ClCompile Include="SimulatorWin.cpp" />
     <ClCompile Include="stdafx.cpp">
       <Filter>win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ide-support\lua_debugger.c">
-      <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ide-support\RuntimeLuaImpl.cpp">
       <Filter>Classes</Filter>
@@ -523,9 +526,6 @@
     <ClCompile Include="..\Classes\LoadingScene.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MutipleSealBubble.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -610,9 +610,6 @@
     <ClCompile Include="..\Classes\BaseBubble.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\lua_GameStageSelectionScene_auto.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\EnterGamePropsView.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -662,19 +659,31 @@
     <ClCompile Include="..\Classes\BubbleMainSightingDevice.cpp" />
     <ClCompile Include="..\Classes\GameNoneBubbleDownAnimationComponent.cpp" />
     <ClCompile Include="..\Classes\GameStartButton.cpp" />
-    <ClCompile Include="..\Classes\lua_GameStartButton_auto.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\lua_SmartScaleController_auto.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ScoreProgressStart.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\lua_ButtonEffectController_auto.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\lua_GameAlertMask_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_ButtonEffectController_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ide-support\lua_debugger.c">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_GameStageSelectionScene_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_GameStartButton_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_SmartScaleController_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_ControlButtonController_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

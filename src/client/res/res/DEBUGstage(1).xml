@@ -233,5 +233,5 @@
 		<data type="16" row="23" col="0" cloud="0" path="" />
 		<data type="9" row="10" col="6" cloud="0" path="" />
 	</bubbles>
-	<info bubbleNum="2" type="1" start1="30000" start2="100000" start3="150000" colors="1110000" />
+	<info bubbleNum="20" type="1" start1="30000" start2="100000" start3="150000" colors="1110000" />
 </include>

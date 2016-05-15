@@ -10,6 +10,9 @@ local PuzzlePlayArea = require(PUZZLE_PLAY_AREA_PATH);
 local PuzzlePiecesScrollView = require(PUZZLE_PIECES_SCROLLVIEW_PATH);
 local PuzzleGamePauseAlert = require(PUZZLE_GAME_PAUSE_ALERT_PATH);
 local PuzzleSelectedScene = require(PUZZLE_SELECTED_SCENE_PATH);
+local PuzzleDefeatCountdownComponent = require(PUZZLE_DEFEAT_COUNTDOWN_COMPONENT_PATH);
+local PuzzleGameDefeatAlert = require(PUZZLE_GAME_DEFEAT_ALERT_PATH);
+
 local PUZZLE_PLAY_SCENE_CSB_PATH = "PuzzlePlayLayer.csb";
 local CSB_DESK_NAME = "pintutaizi_2";
 local PAUSE_BUTTON_NAME = "Button_1";
@@ -42,6 +45,8 @@ function PuzzlePlayScene:init()
 	self:loadCsb();
 	self:initPauseButton();
 	self:initZOrder();
+	self.countdown_ = PuzzleDefeatCountdownComponent:create();
+	self:addChild(self.countdown_);
 end
 function PuzzlePlayScene:loadCsb()
     self.csb_node_ = cc.CSLoader:createNode(PUZZLE_PLAY_SCENE_CSB_PATH);
@@ -56,7 +61,6 @@ function PuzzlePlayScene:initPauseButton()
 	button:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
 	button:addClickEventListener(function (...)
 		self:popPauseAlert();
-		--self:screenShoot();
     end);
 end
 function PuzzlePlayScene:initZOrder()
@@ -73,105 +77,76 @@ function PuzzlePlayScene:addPuzzleScrollView( puzzleTable )
 	self.csb_node_:addChild(PuzzlePiecesScrollView:create(puzzleTable), PUZZLE_PIECES_SCROLLVIEW_ZORDER);
 end
 function PuzzlePlayScene:onEnter()
+	self.listener_ = {};
 	local function addPuzzleAnswer( event )
-		--printf("111111111111111111");
 		self:addPuzzleScrollView(event._usedata);
 	end
-    self._listener1 = cc.EventListenerCustom:create(EVENT_PUZZLE_ANSWER_LOAD, addPuzzleAnswer);
-    self:getEventDispatcher():addEventListenerWithFixedPriority(self._listener1, 1);
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_ANSWER_LOAD, addPuzzleAnswer));
+
+	local function gameContinue( event )
+		cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUSH_ANSWERS_THUMBNAIL);
+    	self.alert_:removeFromParent();
+    	self.alert_ = nil;
+    	self.screen_sp_:removeFromParent();
+    	self.countdown_:resume();
+	end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_CONTINUE, gameContinue));
+
+	local function gameReturn( event )
+        cc.Director:getInstance():replaceScene(PuzzleSelectedScene:createScene());
+	end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_RETURN, gameReturn));
+
+	local function gameRePlay( event )
+        cc.Director:getInstance():replaceScene(self:createScene());
+	end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_REPLAY, gameRePlay));
+
+	local function gameDefeat( event )
+        self:popDefeatAlert();
+	end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_GAME_DEFEAT, gameDefeat));
+
+    local function gameVictory( event )
+        self:popDefeatAlert();
+    end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_GAME_VICTORY, gameVictory));
+
+    for _, listener in ipairs(self.listener_) do
+    	self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
+    end
 	self:addPuzzlePlayArea();
 end
 function PuzzlePlayScene:onExit()
     local eventDispatcher = self:getEventDispatcher();
-    eventDispatcher:removeEventListener(self._listener1);
+    for _, listener in ipairs(self.listener_) do
+    	eventDispatcher:removeEventListener(listener);
+    end
 end
 function PuzzlePlayScene:popPauseAlert()
-	-- local screen_sp = self:getScreenShot();
-	-- --dump(screen_sp);
-	-- screen_sp:setPosition(GlobalFunction.getVisibleCenterPosition());
-	-- self:addChild(screen_sp);
-
-	-- local alert = PuzzleGamePauseAlert:create();
-	-- alert:setContinueButtonCallback(function (...)
- --    	alert:removeFromParent();
-	-- end);
-
-	-- --local callfunc = cc.CallFunc:create(function ()
-	-- 	local thumbnail = self.puzzle_area_:getThumbnail();
-	-- 	thumbnail:setScale(0.65);
-	-- 	thumbnail:setPositionY(40);
-	-- 	alert:addChild(thumbnail, -1);
-	-- 	alert:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
-	-- 	alert:setPosition(GlobalFunction.getVisibleCenterPosition());
-	--     self:addChild(alert);
-	-- --end);
-	-- --self:runAction(cc.Sequence:create(cc.DelayTime:create(0.01), callfunc, nil));
+	self.countdown_:pause();
+	self:popAlert(PuzzleGamePauseAlert);
+end
+function PuzzlePlayScene:popDefeatAlert()
+	self:popAlert(PuzzleGameDefeatAlert);
+end
+function PuzzlePlayScene:popAlert( alert_class )
     cc.utils:captureScreen(function ( succeed, outputFile )
     	if succeed then
-    		local screen_sp = cc.Sprite:create(outputFile);
-			screen_sp:setPosition(GlobalFunction.getVisibleCenterPosition());
-			screen_sp:setScale(cc.Director:getInstance():getOpenGLView():getDesignResolutionSize().width / screen_sp:getContentSize().width);
-			self:addChild(screen_sp);
+    		self.screen_sp_ = cc.Sprite:create(outputFile);
+			self.screen_sp_:setPosition(GlobalFunction.getVisibleCenterPosition());
+			self.screen_sp_:setScale(cc.Director:getInstance():getOpenGLView():getDesignResolutionSize().width / self.screen_sp_:getContentSize().width);
+			self:addChild(self.screen_sp_);
 
-			local alert = PuzzleGamePauseAlert:create();
-			alert:setContinueButtonCallback(function (...)
-				cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUSH_ANSWERS_THUMBNAIL);
-		    	alert:removeFromParent();
-		    	screen_sp:removeFromParent();
-			end);
-			alert:setReturnButtonCallback(function (...)
-        		cc.Director:getInstance():replaceScene(PuzzleSelectedScene:createScene());
-			end);
-			alert:setReplayButtonCallback(function (...)
-        		cc.Director:getInstance():replaceScene(self:createScene());
-			end);
+			self.alert_ = alert_class:create();
+
 			local thumbnail = self.puzzle_area_:getThumbnail();
 			thumbnail:setScale(0.55);
-			thumbnail:setPosition(cc.p(alert:getCsbNode():getChildByName(THUMBNAIL_POS_NODE_NAME):getPosition()));
-			alert:addChild(thumbnail);
-			--alert:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
-			alert:setPosition(GlobalFunction.getVisibleCenterPosition());
-		    self:addChild(alert);
+			thumbnail:setPosition(cc.p(self.alert_:getCsbNode():getChildByName(THUMBNAIL_POS_NODE_NAME):getPosition()));
+			self.alert_:addChild(thumbnail);
+			self.alert_:setPosition(GlobalFunction.getVisibleCenterPosition());
+		    self:addChild(self.alert_);
 	    end
     end, "ScreenShot.png");
 end
--- function PuzzlePlayScene:getScreenShot()
---     local size = cc.Director:getInstance():getVisibleSize();
---     local puzzleRender = cc.RenderTexture:create(size.width, size.height, cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888, 0x88F0);
---     puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0); 
---     self.csb_node_:visit(); 
---     puzzleRender:endToLua();
---     local render_sp = cc.Sprite:createWithTexture(puzzleRender:getSprite():getTexture());
---     render_sp:setFlippedY(true);
---     --render_sp:setScale(1/bs.SmartScaleController:getInstance():getPlayAreaZoom());
---     --self:addChild(render_sp, SCREEN_SHOT_ZORDER);
---     --cc.utils:captureScreen(function (succeed, outputFile)
---     	-- body
---     --end, "screenShoot.png")
---     --puzzleRender:saveToFile("ScreenShot.png")
-
---     return render_sp;
--- end
--- function PuzzlePlayScene:screenShoot()
---     cc.utils:captureScreen(function ( succeed, outputFile )
---     	if succeed then
---     		local screen_sp = cc.Sprite:create(outputFile);
--- 			screen_sp:setPosition(GlobalFunction.getVisibleCenterPosition());
--- 			self:addChild(screen_sp);
-
--- 			local alert = PuzzleGamePauseAlert:create();
--- 			alert:setContinueButtonCallback(function (...)
--- 		    	alert:removeFromParent();
--- 			end);
-
--- 			local thumbnail = self.puzzle_area_:getThumbnail();
--- 				thumbnail:setScale(0.65);
--- 				thumbnail:setPositionY(40);
--- 				alert:addChild(thumbnail, -1);
--- 				alert:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
--- 				alert:setPosition(GlobalFunction.getVisibleCenterPosition());
--- 			    self:addChild(alert);
--- 	    	end
---     end, "ScreenShot.png");
--- end
 return PuzzlePlayScene

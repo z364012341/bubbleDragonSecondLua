@@ -473,7 +473,7 @@ namespace bubble_second {
         {
             return;
         }
-        disposeGameDefeat();
+        //disposeGameDefeat();
     }
 
     void GameBubbleMap::loadStageDataWithNumble(int numble)

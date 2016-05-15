@@ -12,7 +12,8 @@ cc.FileUtils:getInstance():addSearchPath("res/animation/", false);
 cc.FileUtils:getInstance():addSearchPath("res/stage/", false);
 require "config"
 require "cocos.init"
-require("app.PuzzleConstant")
+require("app.PuzzleMacro")
+require("app.PuzzleGlobalFunction")
 local function main()
     --local sceneGame = require("app.views.PuzzlePlayScene"):create()
     --local hello = bs.LoadingScene:createScene()

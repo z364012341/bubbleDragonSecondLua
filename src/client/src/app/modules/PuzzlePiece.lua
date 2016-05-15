@@ -50,7 +50,7 @@ end
 
 function PuzzlePiece:addTouchEvent()
     local listener = cc.EventListenerTouchOneByOne:create();
-    listener:setSwallowTouches(true);
+    listener:setSwallowTouches(false);
     listener:registerScriptHandler(self.onTouchBegan,cc.Handler.EVENT_TOUCH_BEGAN);
     listener:registerScriptHandler(self.onTouchMoved,cc.Handler.EVENT_TOUCH_MOVED);
     listener:registerScriptHandler(self.onTouchEnded,cc.Handler.EVENT_TOUCH_ENDED);
@@ -93,6 +93,7 @@ function PuzzlePiece.onTouchEnded(touch, event)
     elseif cc.rectContainsPoint(puzzle._moveNode:getBoundingBox(), puzzle._moveNode:getParent():convertTouchToNodeSpace(touch)) then
         puzzle._moveNode:insertPuzzlePiece(puzzle);
     end
+    puzzle._moveNode:adjustPuzzlePiecesPosition();
     --dump(puzzle._moveNode:getBoundingBox());
     --dump(touch:getLocationInView());
 end

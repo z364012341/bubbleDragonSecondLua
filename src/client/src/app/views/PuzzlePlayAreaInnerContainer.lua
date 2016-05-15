@@ -9,7 +9,6 @@ end)
 local PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE = 0.02;
 local ANSWERS_NODE_ZORDER = -1;
 function PuzzlePlayAreaInnerContainer:ctor()
-    --printf("PuzzlePlayAreaInnerContainer");
     local function onNodeEvent(event)
         if event == "enter" then
             self:onEnter();
@@ -19,11 +18,8 @@ function PuzzlePlayAreaInnerContainer:ctor()
         self:registerScriptHandler(onNodeEvent);
     end
     self:registerScriptHandler(onNodeEvent);
-    local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create("puzzle_1.png")
+    local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create(require(PUZZLE_SELECTED_SHOW_PATH).selected_puzzle_path)
     local puzzleNode = collection:getPuzzleNode();
-    --puzzleNode:setPosition(200, 200);
-    --puzzleNode:setScale(0.6);
-    --self:addChild(puzzleNode);
 
     self.answerNode_ = collection:getAnswerNode();
     local event = cc.EventCustom:new(EVENT_PUZZLE_ANSWER_LOAD);
@@ -49,61 +45,21 @@ end
 
 function PuzzlePlayAreaInnerContainer:addTouchesListerner()
     local listener = cc.EventListenerTouchAllAtOnce:create();
-    --listener:setSwallowTouches(true);
-    --listener:registerScriptHandler(self.onTouchBegan,cc.Handler.EVENT_TOUCHES_BEGAN);
     listener:registerScriptHandler(self.onTouchMoved,cc.Handler.EVENT_TOUCHES_MOVED);
-    --listener:registerScriptHandler(self.onTouchEnded,cc.Handler.EVENT_TOUCHES_ENDED);
     cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self);
-
-
     local mouseListener = cc.EventListenerMouse:create();
     mouseListener:registerScriptHandler(function(event)
         self:setScale(math.max(0.1, self:getScale() + event:getScrollY()*-0.1));
     end,cc.Handler.EVENT_MOUSE_SCROLL);
     cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(mouseListener, self);
 end
-
-function PuzzlePlayAreaInnerContainer.onTouchBegan(touches, event)
-    --printf("PuzzlePlayAreaInnerContainer onTouchBegan");
-    -- printf(#touches);
-    -- if #touches > 1 then
-
-    -- end
-    --return false;
-    -- local layer = event:getCurrentTarget();
-    -- dump(layer.answerNode_:getBoundingBox());
-    -- if cc.rectContainsPoint(layer.answerNode_:getBoundingBox(), layer.answerNode_:getParent():convertTouchToNodeSpace(touches[1])) then
-
-    --     return true;
-    -- else
-    --     return false
-    -- end
-end
-
 function PuzzlePlayAreaInnerContainer.onTouchMoved(touches, event)
-    -- local layer = event:getCurrentTarget();
-    -- if cc.rectContainsPoint(layer.answerNode_:getBoundingBox(), layer.answerNode_:getParent():convertTouchToNodeSpace(touches[1])) then
-    --     return;
-    -- end
     if #touches == 1 then
         event:getCurrentTarget():touchToMove(touches);
         return;
     end 
     event:getCurrentTarget():pinchToZoom(touches);
-    -- local dis1 = cc.pGetDistance(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
-    -- local dis2 = cc.pGetDistance(touches[1]:getLocation(), touches[2]:getLocation());
-    -- local target = event:getCurrentTarget();
-    -- local middlePoint = cc.pMidpoint(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
-    -- local pointInLayer = target:convertToNodeSpace(middlePoint);
-    -- target:setScale(target:calculateZoomScale(dis1, dis2));
-    -- local pointAfterScale = target:convertToWorldSpace(pointInLayer);
-    -- local newPoint = cc.pAdd(cc.pSub(middlePoint, pointAfterScale), cc.p(target:getPosition()));
-    -- target:setPosition(newPoint);
 end
-
--- function PuzzlePlayAreaInnerContainer.onTouchEnded(touches, event)
---     --printf("PuzzlePiece onTouchEnded");
--- end
 
 function PuzzlePlayAreaInnerContainer:calculateZoomScale(preDistance, locDistance)
     local scale = self:getScale();
@@ -120,7 +76,6 @@ end
 function PuzzlePlayAreaInnerContainer:pinchToZoom(touches)
     local dis1 = cc.pGetDistance(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
     local dis2 = cc.pGetDistance(touches[1]:getLocation(), touches[2]:getLocation());
-    --local target = event:getCurrentTarget();
     local middlePoint = cc.pMidpoint(touches[1]:getPreviousLocation(), touches[2]:getPreviousLocation());
     local pointInLayer = self:convertToNodeSpace(middlePoint);
     self:setScale(self:calculateZoomScale(dis1, dis2));
@@ -156,7 +111,6 @@ end
 
 function PuzzlePlayAreaInnerContainer:onEnter()
     local function pushAnswersThumbnail( event )
-        --printf("111111111111111111");
         self:pushAnswersThumbnail();
     end
     self._listener1 = cc.EventListenerCustom:create(EVENT_PUSH_ANSWERS_THUMBNAIL, pushAnswersThumbnail);
