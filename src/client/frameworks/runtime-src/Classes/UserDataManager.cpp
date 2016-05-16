@@ -1,6 +1,12 @@
 #include "UserDataManager.h"
 #include "StageDataManager.h"
-
+//UserDataManager
+const std::string GAME_STAGE_DATA_PATH = "stageData.plist";
+const std::string GAME_USER_DATA_PATH = "userData.plist";
+const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageData.plist";
+const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
+const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
+const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT";
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
@@ -113,6 +119,7 @@ namespace bubble_second {
     {
         this->readStageFile();
         this->readUserDataFile();
+        this->readPuzzleStageData();
         unlock_stage_numble_ = this->getStagePassCount();
     }
     std::string UserDataManager::getStageDataPath() const
@@ -122,6 +129,10 @@ namespace bubble_second {
     std::string UserDataManager::getUserDataPath() const
     {
         return cocos2d::FileUtils::getInstance()->getWritablePath() + GAME_USER_DATA_PATH;
+    }
+    std::string UserDataManager::getPuzzleStageDataPath() const
+    {
+        return cocos2d::FileUtils::getInstance()->getWritablePath() + GAME_PUZZLE_STAGE_DATA_PATH;
     }
     int UserDataManager::getStagePassCount()
     {
@@ -134,5 +145,36 @@ namespace bubble_second {
     bool UserDataManager::isUnlockWithStageNumble(int stage_numble)
     {
         return stage_numble <= unlock_stage_numble_;
+    }
+    void UserDataManager::insertPuzzleStageData(const std::string & key, int consumingTime)
+    {
+        if (puzzle_stage_data_.find(key) == puzzle_stage_data_.end() || puzzle_stage_data_[key].asInt()>consumingTime)
+        {
+            puzzle_stage_data_[key] = cocos2d::Value(consumingTime);
+            this->savePuzzleStageData();
+        }
+    }
+    void UserDataManager::savePuzzleStageData()
+    {
+        std::string path = getPuzzleStageDataPath();
+        cocos2d::FileUtils::getInstance()->writeValueMapToFile(puzzle_stage_data_, path);
+    }
+    void UserDataManager::readPuzzleStageData()
+    {
+        auto file_utils = cocos2d::FileUtils::getInstance();
+        std::string path = this->getPuzzleStageDataPath();
+        if (file_utils->isFileExist(path))
+        {
+            puzzle_stage_data_ = file_utils->getValueMapFromFile(path);
+        }
+    }
+    int UserDataManager::getPuzzleStageDataWithKey(const std::string & key)
+    {
+        //if (puzzle_stage_data_.find(key) != puzzle_stage_data_.end())
+        //{
+            return puzzle_stage_data_.at(key).asInt();
+        //}
+        //return 99999;
+
     }
 }

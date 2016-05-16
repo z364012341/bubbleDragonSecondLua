@@ -38,11 +38,17 @@ namespace bubble_second {
         //+1解锁关卡
         void addUnlockStageNumble();
         bool isUnlockWithStageNumble(int stage_numble);
+        //拼图关卡数据
+        void insertPuzzleStageData(const std::string& key, int consumingTime);
+        void savePuzzleStageData();
+        void readPuzzleStageData();
+        int getPuzzleStageDataWithKey(const std::string& key);
     private:
         ~UserDataManager();
         void writeStageDataToFile();
         std::string getStageDataPath() const;
         std::string getUserDataPath() const;
+        std::string getPuzzleStageDataPath() const;
         void readStageFile();
         void readUserDataFile();
     private:
@@ -50,6 +56,7 @@ namespace bubble_second {
         int present_cell_ = 0;
         cocos2d::ValueMap user_data_;
         int unlock_stage_numble_ = 0;
+        cocos2d::ValueMap puzzle_stage_data_;
     };
 }
 #endif //_USER_DATA_MANAGER_H_

@@ -12,6 +12,9 @@ local PuzzleGamePauseAlert = require(PUZZLE_GAME_PAUSE_ALERT_PATH);
 local PuzzleSelectedScene = require(PUZZLE_SELECTED_SCENE_PATH);
 local PuzzleDefeatCountdownComponent = require(PUZZLE_DEFEAT_COUNTDOWN_COMPONENT_PATH);
 local PuzzleGameDefeatAlert = require(PUZZLE_GAME_DEFEAT_ALERT_PATH);
+local PuzzleTimeDisplay = require(PUZZLE_TIME_DISPLAY_PATH);
+local PuzzleGameVictoryAlert = require(PUZZLE_GAME_VICTORY_ALERT_PATH);
+local PuzzleVictoryCountdownComponent = require(PUZZLE_VICTORY_COUNTDOWN_COMPONENT_PATH);
 
 local PUZZLE_PLAY_SCENE_CSB_PATH = "PuzzlePlayLayer.csb";
 local CSB_DESK_NAME = "pintutaizi_2";
@@ -21,6 +24,7 @@ local THUMBNAIL_POS_NODE_NAME = "thumbnail_pos";
 local PUZZLE_PIECES_SCROLLVIEW_ZORDER = 1;
 local PUZZLE_PLAY_AREA_ZORDER = -1;
 local BACKGROUND_ZORDER = PUZZLE_PLAY_AREA_ZORDER-1;
+local TOP_WIDGET_POS_Y_PERCENT = 0.95;
 function PuzzlePlayScene:ctor()
     --printf("PuzzlePlayScene");
     local function onNodeEvent(event)
@@ -29,7 +33,6 @@ function PuzzlePlayScene:ctor()
         elseif event == "exit" then
             self:onExit();
     	end
-    	self:registerScriptHandler(onNodeEvent);
     end
     self:registerScriptHandler(onNodeEvent);
     self:init();
@@ -45,8 +48,16 @@ function PuzzlePlayScene:init()
 	self:loadCsb();
 	self:initPauseButton();
 	self:initZOrder();
+    self:addTimeClock();
 	self.countdown_ = PuzzleDefeatCountdownComponent:create();
 	self:addChild(self.countdown_);
+    self:addChild(PuzzleVictoryCountdownComponent:create());
+end
+function PuzzlePlayScene:addTimeClock()
+    local clock = PuzzleTimeDisplay:create();
+    local size = cc.Director:getInstance():getVisibleSize();
+    clock:setPosition(cc.p(size.width*0.5, size.height*TOP_WIDGET_POS_Y_PERCENT));
+    self.csb_node_:addChild(clock);
 end
 function PuzzlePlayScene:loadCsb()
     self.csb_node_ = cc.CSLoader:createNode(PUZZLE_PLAY_SCENE_CSB_PATH);
@@ -56,7 +67,7 @@ end
 function PuzzlePlayScene:initPauseButton()
 	local size = cc.Director:getInstance():getVisibleSize();
 	local button = self.csb_node_:getChildByName(PAUSE_BUTTON_NAME);
-	button:setPosition(cc.p(size.width*0.92, size.height*0.95));
+	button:setPosition(cc.p(size.width*0.92, size.height*TOP_WIDGET_POS_Y_PERCENT));
 	bs.ButtonEffectController:setButtonZoomScale(button);
 	button:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
 	button:addClickEventListener(function (...)
@@ -79,12 +90,13 @@ end
 function PuzzlePlayScene:onEnter()
 	self.listener_ = {};
 	local function addPuzzleAnswer( event )
-		self:addPuzzleScrollView(event._usedata);
+		self:addPuzzleScrollView(GlobalFunction.getCustomEventUserData(event));
 	end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_ANSWER_LOAD, addPuzzleAnswer));
 
 	local function gameContinue( event )
 		cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUSH_ANSWERS_THUMBNAIL);
+
     	self.alert_:removeFromParent();
     	self.alert_ = nil;
     	self.screen_sp_:removeFromParent();
@@ -93,7 +105,8 @@ function PuzzlePlayScene:onEnter()
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_CONTINUE, gameContinue));
 
 	local function gameReturn( event )
-        cc.Director:getInstance():replaceScene(PuzzleSelectedScene:createScene());
+        --cc.Director:getInstance():replaceScene(PuzzleSelectedScene:createScene());
+        cc.Director:getInstance():popScene();
 	end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_RETURN, gameReturn));
 
@@ -108,7 +121,7 @@ function PuzzlePlayScene:onEnter()
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_GAME_DEFEAT, gameDefeat));
 
     local function gameVictory( event )
-        self:popDefeatAlert();
+        self:popVictoryAlert();
     end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_GAME_VICTORY, gameVictory));
 
@@ -125,25 +138,31 @@ function PuzzlePlayScene:onExit()
 end
 function PuzzlePlayScene:popPauseAlert()
 	self.countdown_:pause();
-	self:popAlert(PuzzleGamePauseAlert);
+	self:popAlert(PuzzleGamePauseAlert, self.countdown_:getRemainTime());
 end
 function PuzzlePlayScene:popDefeatAlert()
 	self:popAlert(PuzzleGameDefeatAlert);
 end
-function PuzzlePlayScene:popAlert( alert_class )
+function PuzzlePlayScene:popVictoryAlert()
+    self.countdown_:pause();
+    bs.UserDataManager:getInstance():insertPuzzleStageData(require(PUZZLE_SELECTED_SHOW_PATH):getSelectedPicturePath(), 
+        self.countdown_:getTimeConsuming());
+    self:popAlert(PuzzleGameVictoryAlert, self.countdown_:getTimeConsuming());
+end
+function PuzzlePlayScene:popAlert( alert_class , params)
     cc.utils:captureScreen(function ( succeed, outputFile )
     	if succeed then
+            cc.Director:getInstance():getTextureCache():reloadTexture(outputFile);
     		self.screen_sp_ = cc.Sprite:create(outputFile);
 			self.screen_sp_:setPosition(GlobalFunction.getVisibleCenterPosition());
 			self.screen_sp_:setScale(cc.Director:getInstance():getOpenGLView():getDesignResolutionSize().width / self.screen_sp_:getContentSize().width);
 			self:addChild(self.screen_sp_);
 
-			self.alert_ = alert_class:create();
+			self.alert_ = alert_class:create(params);
 
 			local thumbnail = self.puzzle_area_:getThumbnail();
 			thumbnail:setScale(0.55);
-			thumbnail:setPosition(cc.p(self.alert_:getCsbNode():getChildByName(THUMBNAIL_POS_NODE_NAME):getPosition()));
-			self.alert_:addChild(thumbnail);
+			self.alert_:getCsbNode():getChildByName(THUMBNAIL_POS_NODE_NAME):addChild(thumbnail);
 			self.alert_:setPosition(GlobalFunction.getVisibleCenterPosition());
 		    self:addChild(self.alert_);
 	    end

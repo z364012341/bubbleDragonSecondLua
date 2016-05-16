@@ -3,21 +3,31 @@
 -- Date: 2016-03-04 12:06:13
 -- 作用: 拼图游戏的暂停面板
 
-local PuzzleGamePauseAlert = class("PuzzleGamePauseAlert", function ()
+local PuzzleGamePauseAlert = class("PuzzleGamePauseAlert", function (remainingTime)
     return cc.Node:create();
 end)
+local PuzzleTimeDisplay = require(PUZZLE_TIME_DISPLAY_PATH);
 local PUZZLE_GAME_PAUSE_ALERT_CSB_PATH = "PuzzlePauseAlert.csb";
 local CONTINUE_BUTTON_NODE_NAME = "Node_1";
 local RETURN_BUTTON_NODE_NAME = "returnButton";
 local REPLAY_BUTTON_NODE_NAME = "replayButton";
+local REMAINING_TIME_NODE_NAME = "remainingTime";
 local MASK_ZORDER = -1;
 local SCREEN_SHOT_ZORDER = MASK_ZORDER-1;
-function PuzzleGamePauseAlert:ctor()
-    self:init();
+function PuzzleGamePauseAlert:ctor(remainingTime)
+    self:init(remainingTime);
 end
-function PuzzleGamePauseAlert:init()
+function PuzzleGamePauseAlert:init(remainingTime)
     self:loadCSB();
     self:addMaskBackground();
+    self:addRemainingTimeLabel(remainingTime);
+end
+
+function PuzzleGamePauseAlert:addRemainingTimeLabel(remainingTime)
+    local time_display = PuzzleTimeDisplay:create();
+    time_display:setScale(0.8);
+    time_display:setTimeString(remainingTime);
+    self.csb_node_:getChildByName(REMAINING_TIME_NODE_NAME):addChild(time_display);
 end
 function PuzzleGamePauseAlert:loadCSB()
     self.csb_node_ = cc.CSLoader:createNode(PUZZLE_GAME_PAUSE_ALERT_CSB_PATH);

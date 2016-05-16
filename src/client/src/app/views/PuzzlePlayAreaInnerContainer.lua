@@ -18,13 +18,14 @@ function PuzzlePlayAreaInnerContainer:ctor()
         self:registerScriptHandler(onNodeEvent);
     end
     self:registerScriptHandler(onNodeEvent);
-    local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create(require(PUZZLE_SELECTED_SHOW_PATH).selected_puzzle_path)
+    local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create(require(PUZZLE_SELECTED_SHOW_PATH):getSelectedPicturePath())
     local puzzleNode = collection:getPuzzleNode();
 
+    self:getEventDispatcher():dispatchEvent(GlobalFunction.createCustomEvent(EVENT_PUZZLE_ANSWER_LOAD, puzzleNode));
     self.answerNode_ = collection:getAnswerNode();
-    local event = cc.EventCustom:new(EVENT_PUZZLE_ANSWER_LOAD);
-    event._usedata = puzzleNode;
-    self:getEventDispatcher():dispatchEvent(event);
+    -- local event = cc.EventCustom:new(EVENT_PUZZLE_ANSWER_LOAD);
+    -- event._userData = puzzleNode;
+    -- event:setUserData(puzzleNode);
 
     self:addChild(self.answerNode_, ANSWERS_NODE_ZORDER);
     self:addTouchesListerner();

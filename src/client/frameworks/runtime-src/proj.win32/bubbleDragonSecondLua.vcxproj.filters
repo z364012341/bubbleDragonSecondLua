@@ -355,6 +355,7 @@
     <ClInclude Include="..\Classes\lua_ControlButtonController_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\lua_UserDataManager_auto.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -684,6 +685,7 @@
     <ClCompile Include="..\Classes\lua_ControlButtonController_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\lua_UserDataManager_auto.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

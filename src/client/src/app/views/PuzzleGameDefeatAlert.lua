@@ -9,8 +9,6 @@ end)
 local PUZZLE_DEFEAT_ALERT_CSB_PATH = "PuzzleDefeatAlert.csb";
 local RETURN_BUTTON_NODE_NAME = "returnButton";
 local REPLAY_BUTTON_NODE_NAME = "replayButton";
-local MASK_ZORDER = -1;
-local SCREEN_SHOT_ZORDER = MASK_ZORDER-1;
 function PuzzleGameDefeatAlert:ctor()
     self:init();
 end
@@ -30,7 +28,7 @@ function PuzzleGameDefeatAlert:loadCSB()
     bs.ButtonEffectController:setButtonsZoomScale(self.csb_node_);
 end
 function PuzzleGameDefeatAlert:addMaskBackground()
-    self:addChild(bs.GameAlertMask:create(), MASK_ZORDER);
+    self:addChild(bs.GameAlertMask:create(), -1);
 end
 
 function PuzzleGameDefeatAlert:getCsbNode()

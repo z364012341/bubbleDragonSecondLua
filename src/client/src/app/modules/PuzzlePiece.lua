@@ -49,12 +49,12 @@ function PuzzlePiece:initPuzzleRenderTexture(params)
 end
 
 function PuzzlePiece:addTouchEvent()
-    local listener = cc.EventListenerTouchOneByOne:create();
-    listener:setSwallowTouches(false);
-    listener:registerScriptHandler(self.onTouchBegan,cc.Handler.EVENT_TOUCH_BEGAN);
-    listener:registerScriptHandler(self.onTouchMoved,cc.Handler.EVENT_TOUCH_MOVED);
-    listener:registerScriptHandler(self.onTouchEnded,cc.Handler.EVENT_TOUCH_ENDED);
-    cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self);
+    self.touch_listener_ = cc.EventListenerTouchOneByOne:create();
+    self.touch_listener_:setSwallowTouches(false);
+    self.touch_listener_:registerScriptHandler(self.onTouchBegan,cc.Handler.EVENT_TOUCH_BEGAN);
+    self.touch_listener_:registerScriptHandler(self.onTouchMoved,cc.Handler.EVENT_TOUCH_MOVED);
+    self.touch_listener_:registerScriptHandler(self.onTouchEnded,cc.Handler.EVENT_TOUCH_ENDED);
+    cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(self.touch_listener_, self);
 end
 
 function PuzzlePiece.onTouchBegan(touch, event)
@@ -88,11 +88,13 @@ function PuzzlePiece.onTouchEnded(touch, event)
     --printf("PuzzlePiece onTouchEnded");
     local puzzle = event:getCurrentTarget();
     puzzle._shadow:shadowBack();
+    local isOnMoveNode = puzzle.isTouchOnMoveNode(touch, event);
     if puzzle:isToucnOnAnswer() then
         puzzle:moveToAnswer();
-    elseif cc.rectContainsPoint(puzzle._moveNode:getBoundingBox(), puzzle._moveNode:getParent():convertTouchToNodeSpace(touch)) then
+    elseif isOnMoveNode then
         puzzle._moveNode:insertPuzzlePiece(puzzle);
     end
+    puzzle.touch_listener_:setSwallowTouches(not isOnMoveNode);
     puzzle._moveNode:adjustPuzzlePiecesPosition();
     --dump(puzzle._moveNode:getBoundingBox());
     --dump(touch:getLocationInView());
@@ -103,6 +105,10 @@ function PuzzlePiece.isTouchOnPuzzle(touch, event)
     return cc.pGetDistance(node:convertTouchToNodeSpace(touch), cc.p(0, 0)) < PUZZLE_STENCIL_WIDTH / 2;
 end
 
+function PuzzlePiece.isTouchOnMoveNode(touch, event)
+    local puzzle = event:getCurrentTarget();
+    return cc.rectContainsPoint(puzzle._moveNode:getBoundingBox(), puzzle._moveNode:getParent():convertTouchToNodeSpace(touch));
+end
 function PuzzlePiece:isToucnOnAnswer()
     local puzzlePoint = self:getParent():convertToWorldSpace(cc.p(self:getPosition()));
     local answer = self:getPuzzlePieceAnswer();
@@ -123,6 +129,7 @@ function PuzzlePiece:moveToAnswer()
     self:release();
     self:setScale(1);
     cc.Director:getInstance():getEventDispatcher():removeEventListenersForTarget(self);
+    cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_ANSWER_ADD);
 end
 
 function PuzzlePiece:setPuzzlePieceAnswer(answer)

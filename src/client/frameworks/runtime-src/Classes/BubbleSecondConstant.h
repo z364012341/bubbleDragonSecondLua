@@ -626,12 +626,6 @@ const float ENTER_GAME_ALERT_BEGIN_BUTTON_POSITION_Y = -240.0f;
 const std::string ENTER_GAME_ALERT_PROPS_LABEL_BACKGROUND_PATH = GAME_DEFEAT_ALERT_COMMODITY_BACKGROUND_PATH;
 const float ENTER_GAME_ALERT_PROPS_LABEL_FONTSIZE = 35.0f;
 const float MOUSE_SCROLL_Y_SENSITIVITY = 50.0f; //鼠标滚动系数
-//UserDataManager
-const std::string GAME_STAGE_DATA_PATH = "stageData.plist";
-const std::string GAME_USER_DATA_PATH = "userData.plist";
-const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
-const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
-const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT"; 
 //EnterGamePropsView
 const std::string ENTER_GAME_PROPS_VIEW_SIGHT_PROPS_PATH = "fzx.png"; //瞄准线
 const std::string ENTER_GAME_PROPS_VIEW_ADD_SPECIAL_BUBBLE_PROPS_PATH = "yaoshui.png"; //加特殊泡泡

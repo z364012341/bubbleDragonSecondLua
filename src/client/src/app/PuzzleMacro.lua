@@ -9,6 +9,7 @@ cc.exports.PUZZLE_PIECE_EDGES_PATH = "app.modules.PuzzlePieceEdges";
 cc.exports.PUZZLE_PIECE_SHADOW_PATH = "app.modules.PuzzlePieceShadow";
 cc.exports.PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceAnswerSingleEdges";
 cc.exports.PUZZLE_DEFEAT_COUNTDOWN_COMPONENT_PATH = "app.modules.PuzzleDefeatCountdownComponent";
+cc.exports.PUZZLE_VICTORY_COUNTDOWN_COMPONENT_PATH = "app.modules.PuzzleVictoryCountdownComponent";
 
 cc.exports.PUZZLE_PLAY_AREA_INNER_CONTAINER = "app.views.PuzzlePlayAreaInnerContainer";
 cc.exports.PUZZLE_SELECTED_SHOW_PATH = "app.views.PuzzleSelectedShow";
@@ -18,6 +19,8 @@ cc.exports.PUZZLE_GAME_PAUSE_ALERT_PATH = "app.views.PuzzleGamePauseAlert";
 cc.exports.PUZZLE_PLAY_SCENE_PATH = "app.views.PuzzlePlayScene";
 cc.exports.PUZZLE_PLAY_AREA_PATH = "app.views.PuzzlePlayArea";
 cc.exports.PUZZLE_GAME_DEFEAT_ALERT_PATH = "app.views.PuzzleGameDefeatAlert";
+cc.exports.PUZZLE_GAME_VICTORY_ALERT_PATH = "app.views.PuzzleGameVictoryAlert";
+cc.exports.PUZZLE_TIME_DISPLAY_PATH = "app.views.PuzzleTimeDisplay";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";
@@ -31,6 +34,7 @@ cc.exports.EVENT_CONTINUE = "event_continue";
 cc.exports.EVENT_PUZZLE_GAME_DEFEAT = "event_puzzle_game_defeat";
 cc.exports.EVENT_PUZZLE_ANSWER_ADD = "event_puzzle_answer_add";
 cc.exports.EVENT_PUZZLE_GAME_VICTORY = "event_puzzle_game_victory";
+cc.exports.EVENT_UPDATE_TIME_LABEL = "event_update_time_label";
 
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";

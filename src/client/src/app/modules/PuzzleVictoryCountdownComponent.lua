@@ -12,7 +12,6 @@ function PuzzleVictoryCountdownComponent:ctor()
         elseif event == "exit" then
             self:onExit();
     	end
-    	self:registerScriptHandler(onNodeEvent);
     end
     self:registerScriptHandler(onNodeEvent);
     self.current_answer_numble_ = 0;
@@ -20,7 +19,7 @@ end
 function PuzzleVictoryCountdownComponent:onEnter()
 	self.listener_ = {};
 	local function addPuzzleAnswerNumble( event )
-        self.answer_numble_ = #event._usedata;
+        self.answer_numble_ = #GlobalFunction.getCustomEventUserData(event);
 	end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_ANSWER_LOAD, addPuzzleAnswerNumble));
 

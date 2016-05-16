@@ -2,10 +2,10 @@
 -- Author: 黄泽昊
 -- 功能: 拼图的选择pageview部分
 
-local PuzzleSelectedShow = class("PuzzleSelectedShow", function (params)
+local PuzzleSelectedShow = class("PuzzleSelectedShow", function ()
     return cc.Node:create();
 end)
-PuzzleSelectedShow.selected_puzzle_path = "";
+PuzzleSelectedShow.selected_puzzle_path_ = "";
 local TREASURE_MAP_PAGEVIEW_NAME = "treasure_map_pageview";
 local LANDSCAPE_PAGEVIEW_NAME = "landscape_pageview";
 local PAGEVIEW_INITAIL_DATA = {
@@ -18,14 +18,13 @@ local PAGEVIEW_INITAIL_DATA = {
 		VISIBLE = false;
 	},
 }
-function PuzzleSelectedShow:ctor(params)
+function PuzzleSelectedShow:ctor()
     local function onNodeEvent(event)
         if event == "enter" then
             self:onEnter();
         elseif event == "exit" then
             self:onExit();
     	end
-    	self:registerScriptHandler(onNodeEvent);
     end
     self:registerScriptHandler(onNodeEvent);
     self:addTreasureMapPuzzlePageview();
@@ -98,6 +97,9 @@ function PuzzleSelectedShow:onExit()
     for _, listener in ipairs(self.listener_) do
     	eventDispatcher:removeEventListener(listener);
     end
-	PuzzleSelectedShow.selected_puzzle_path = self:getCurrentPagePath();
+	PuzzleSelectedShow.selected_puzzle_path_ = self:getCurrentPagePath();
+end
+function PuzzleSelectedShow:getSelectedPicturePath()
+    return PuzzleSelectedShow.selected_puzzle_path_
 end
 return PuzzleSelectedShow

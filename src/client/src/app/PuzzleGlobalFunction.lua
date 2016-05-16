@@ -22,5 +22,13 @@ cc.exports.GlobalFunction = {
 	getVisibleCenterPosition = function ()
 		local size = cc.Director:getInstance():getVisibleSize();
 		return	cc.p(size.width*0.5, size.height*0.5);
+	end,
+	createCustomEvent = function ( name, userData )
+	    local event = cc.EventCustom:new(name);
+	    event._userData = userData;
+	    return event;
+	end,
+	getCustomEventUserData = function ( event )
+		return event._userData;
 	end
 }

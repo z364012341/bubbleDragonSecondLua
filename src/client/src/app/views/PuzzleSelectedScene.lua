@@ -68,7 +68,7 @@ function PuzzleSelectedScene:addStartButton()
     button:setPosition(cc.p(size.width*0.5, size.height*0.1));
     self.csb_node_:addChild(button);
     button:getStartButton():addClickEventListener(function ( ... )
-        cc.Director:getInstance():replaceScene(require(PUZZLE_PLAY_SCENE_PATH):createScene());
+        cc.Director:getInstance():pushScene(require(PUZZLE_PLAY_SCENE_PATH):createScene());
     end);
 end
 function PuzzleSelectedScene:initSelectedTypeButton()
