@@ -11,11 +11,11 @@ local LANDSCAPE_PAGEVIEW_NAME = "landscape_pageview";
 local PAGEVIEW_INITAIL_DATA = {
 	[TREASURE_MAP_PAGEVIEW_NAME] = {
 		PAGE_PATH = {"puzzle_1.png", "puzzle_1.png"},
-		VISIBLE = true;
+		VISIBLE = false;
 	},
 	[LANDSCAPE_PAGEVIEW_NAME] = {
 		PAGE_PATH = {"puzzle_3.png"},
-		VISIBLE = false;
+		VISIBLE = true;
 	},
 }
 function PuzzleSelectedShow:ctor()

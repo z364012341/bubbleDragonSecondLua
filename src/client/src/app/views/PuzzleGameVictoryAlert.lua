@@ -28,7 +28,7 @@ function PuzzleGameVictoryAlert:loadCSB()
     self:addChild(self.csb_node_);
     local continue_button = bs.GameStartButton:createButtonContinueForm();
     continue_button:getStartButton():addClickEventListener(function ( ... )
-        cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_RETURN);
+        cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_VICTORY_RETURN);
     end);
     self.csb_node_:getChildByName(RETURN_BUTTON_NODE_NAME):addChild(continue_button);
     self.csb_node_:getChildByName(REPLAY_BUTTON_NAME):addClickEventListener(function ( ... )

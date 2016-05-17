@@ -6,6 +6,7 @@
 local PuzzleSelectedScene = class("PuzzleSelectedScene", function ()
     return cc.Layer:create();
 end)
+PuzzleSelectedScene.need_page_down_ = false;
 local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
 local PUZZLE_SELECTED_SCENE_CSB_PATH = "PuzzleSelectionLayer.csb";
 local PUZZLE_SHOW_NODE_NAME = "Node_1";
@@ -21,6 +22,14 @@ local COLOR_LAYER_WIDTH = 470;
 local COLOR_LAYER_HEIGHT = 700;
 
 function PuzzleSelectedScene:ctor()
+    local function onNodeEvent(event)
+        if event == "enterTransitionFinish" and self.need_page_down_ then
+            self:dispatchPageDownEvent();
+        elseif  event == "exit" then
+            PuzzleSelectedScene.need_page_down_ = false;
+        end
+    end
+    self:registerScriptHandler(onNodeEvent);
     self:init();
 end
 
@@ -87,7 +96,13 @@ function PuzzleSelectedScene:initScrollPageButton()
         cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_SELECTED_SCROLL_LEFT);
     end);
     self.csb_node_:getChildByName(PUZZLE_SHOW_NODE_NAME):getChildByName(SCROLL_RIGHT_BUTTON_NAME):addClickEventListener(function ( ... )
-        cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_SELECTED_SCROLL_RIGHT);
+        self:dispatchPageDownEvent();
     end);
+end
+function PuzzleSelectedScene:dispatchPageDownEvent()
+    cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_SELECTED_SCROLL_RIGHT);
+end
+function PuzzleSelectedScene:setPageDownFlag( flag )
+    PuzzleSelectedScene.need_page_down_ = flag;
 end
 return PuzzleSelectedScene

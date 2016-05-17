@@ -70,8 +70,24 @@ function PuzzlePlayScene:initPauseButton()
 	button:setPosition(cc.p(size.width*0.92, size.height*TOP_WIDGET_POS_Y_PERCENT));
 	bs.ButtonEffectController:setButtonZoomScale(button);
 	button:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
+    -- button:addTouchEventListener(function ( pSender, touchType )
+    --     if touchType == ccui.TouchEventType.began then
+    --         local size = cc.Director:getInstance():getVisibleSize();
+    --         local puzzleRender = cc.RenderTexture:create(size.width, size.height, cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888, 0x88F0);
+    --         puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0); 
+    --         self:visit(); 
+    --         puzzleRender:endToLua();
+    --         self.screen_sp_ = cc.Sprite:createWithTexture(puzzleRender:getSprite():getTexture());
+    --         self.screen_sp_:setFlippedY(true);
+    --         self.screen_sp_:setAnchorPoint(cc.p(0, 0));
+    --         self.screen_sp_:setVisible(false);
+    --         self:addChild(self.screen_sp_);
+    --     elseif touchType == ccui.TouchEventType.ended then
+    --         self:popPauseAlert();
+    --     end
+    -- end);
 	button:addClickEventListener(function (...)
-		self:popPauseAlert();
+	   self:popPauseAlert();
     end);
 end
 function PuzzlePlayScene:initZOrder()
@@ -82,7 +98,10 @@ function PuzzlePlayScene:addPuzzlePlayArea()
     self.csb_node_:addChild(self.puzzle_area_, PUZZLE_PLAY_AREA_ZORDER);
     self.puzzle_area_:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     local size = cc.Director:getInstance():getVisibleSize();
-    self.puzzle_area_:setPosition(cc.p(size.width/2, size.height*0.6));
+    self.puzzle_area_:setPosition(self:getPuzzlePlayAreaPosition());
+end
+function PuzzlePlayScene:getPuzzlePlayAreaPosition()
+    return cc.p(cc.Director:getInstance():getVisibleSize().width/2, cc.Director:getInstance():getVisibleSize().height*0.6)
 end
 function PuzzlePlayScene:addPuzzleScrollView( puzzleTable )
 	self.csb_node_:addChild(PuzzlePiecesScrollView:create(puzzleTable), PUZZLE_PIECES_SCROLLVIEW_ZORDER);
@@ -105,10 +124,16 @@ function PuzzlePlayScene:onEnter()
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_CONTINUE, gameContinue));
 
 	local function gameReturn( event )
-        --cc.Director:getInstance():replaceScene(PuzzleSelectedScene:createScene());
+        PuzzleSelectedScene:setPageDownFlag(false);
         cc.Director:getInstance():popScene();
 	end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_RETURN, gameReturn));
+
+    local function gameVictoryReturn( event )
+        PuzzleSelectedScene:setPageDownFlag(true);
+        cc.Director:getInstance():popScene();
+    end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_VICTORY_RETURN, gameVictoryReturn));
 
 	local function gameRePlay( event )
         cc.Director:getInstance():replaceScene(self:createScene());
@@ -150,22 +175,26 @@ function PuzzlePlayScene:popVictoryAlert()
     self:popAlert(PuzzleGameVictoryAlert, self.countdown_:getTimeConsuming());
 end
 function PuzzlePlayScene:popAlert( alert_class , params)
-    cc.utils:captureScreen(function ( succeed, outputFile )
-    	if succeed then
-            cc.Director:getInstance():getTextureCache():reloadTexture(outputFile);
-    		self.screen_sp_ = cc.Sprite:create(outputFile);
-			self.screen_sp_:setPosition(GlobalFunction.getVisibleCenterPosition());
-			self.screen_sp_:setScale(cc.Director:getInstance():getOpenGLView():getDesignResolutionSize().width / self.screen_sp_:getContentSize().width);
-			self:addChild(self.screen_sp_);
-
-			self.alert_ = alert_class:create(params);
-
-			local thumbnail = self.puzzle_area_:getThumbnail();
-			thumbnail:setScale(0.55);
-			self.alert_:getCsbNode():getChildByName(THUMBNAIL_POS_NODE_NAME):addChild(thumbnail);
-			self.alert_:setPosition(GlobalFunction.getVisibleCenterPosition());
-		    self:addChild(self.alert_);
-	    end
-    end, "ScreenShot.png");
+    local size = cc.Director:getInstance():getVisibleSize();
+    local puzzleRender = cc.RenderTexture:create(size.width, size.height, cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888, 0x88F0);
+    puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0); 
+    self:visit(); 
+    puzzleRender:endToLua();
+    self.screen_sp_ = cc.Sprite:createWithTexture(puzzleRender:getSprite():getTexture());
+    self.screen_sp_:setFlippedY(true);
+    self.screen_sp_:setAnchorPoint(cc.p(0, 0));
+    self.screen_sp_:setVisible(false);
+    self:addChild(self.screen_sp_);
+    local function callfunc()
+        self.screen_sp_:setVisible(true);
+        self.alert_ = alert_class:create(params);
+        local thumbnail = self.puzzle_area_:getThumbnail();
+        thumbnail:setScale(0.56);
+        self.alert_:getCsbNode():getChildByName(THUMBNAIL_POS_NODE_NAME):addChild(thumbnail);
+        self.alert_:setPosition(GlobalFunction.getVisibleCenterPosition());
+        self:addChild(self.alert_);
+    end
+    self:runAction(cc.Sequence:create(cc.DelayTime:create(0.01), cc.CallFunc:create(callfunc)));
+    --self:runAction(cc.CallFunc:create(callfunc));
 end
 return PuzzlePlayScene

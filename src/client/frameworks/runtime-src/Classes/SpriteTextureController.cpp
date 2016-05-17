@@ -218,6 +218,7 @@ namespace bubble_second {
         {
             cocostudio::ArmatureDataManager::getInstance()->addArmatureFileInfo(var);
         }
+        //cocos2d::utils::captureScreen();
     }
 
     void SpriteTextureController::removeArmatureFile()

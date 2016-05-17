@@ -49,6 +49,7 @@ function PuzzlePiecesCollection:ctor(puzzlePath)
 		    table.insert(self._puzzleNode, puzzles);
     	end
     end
+    self:shufflePuzzles();
 end
 
 function PuzzlePiecesCollection:getZOrderNumble()
@@ -115,5 +116,11 @@ end
 
 function PuzzlePiecesCollection:getPuzzleNode()
 	return self._puzzleNode;
+end
+function PuzzlePiecesCollection:shufflePuzzles()
+	for i,pzzle in ipairs(self._puzzleNode) do
+		local random_i = math.random(1, #self._puzzleNode);
+		self._puzzleNode[i], self._puzzleNode[random_i] = self._puzzleNode[random_i], self._puzzleNode[i];
+	end
 end
 return PuzzlePiecesCollection

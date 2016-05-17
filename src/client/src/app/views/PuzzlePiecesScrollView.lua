@@ -88,7 +88,7 @@ function PuzzlePiecesScrollView:adjustScrollViewInnerContainerSize()
 	if point.x < inner_min_pos_x then
 		self.scrollView_:getInnerContainer():stopAllActions();
 		self.scrollView_:getInnerContainer():runAction(cc.MoveTo:create(PUZZLE_PIECES_MOVE_DURATION, cc.p(inner_min_pos_x, 0)));
-	else
+	elseif point.x > 0 then
 		self.scrollView_:scrollToLeft(PUZZLE_PIECES_MOVE_DURATION, false);
 	end
 end

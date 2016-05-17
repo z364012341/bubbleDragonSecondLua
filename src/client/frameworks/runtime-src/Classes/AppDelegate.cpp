@@ -11,6 +11,7 @@
 #include "lua_GameAlertMask_auto.hpp"
 #include "lua_ControlButtonController_auto.hpp"
 #include "lua_UserDataManager_auto.hpp"
+#include "stdlib.h"
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
 #include "ide-support/CodeIDESupport.h"
 #endif
@@ -62,7 +63,14 @@ bool AppDelegate::applicationDidFinishLaunching()
 {
     // set default FPS
     Director::getInstance()->setAnimationInterval(1.0f / 60.0f);
+    //获取系统时间
+    //struct timeval now;
+    //gettimeofday(&now, NULL);
 
+    ////初始化随机种子
+    ////timeval是个结构体，里边有俩个变量，一个是以秒为单位的，一个是以微妙为单位的 
+    //unsigned rand_seed = (unsigned)(now.tv_sec * 1000 + now.tv_usec / 1000);    //都转化为毫秒 
+    //srand(rand_seed);
     // register lua module
     auto engine = LuaEngine::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);

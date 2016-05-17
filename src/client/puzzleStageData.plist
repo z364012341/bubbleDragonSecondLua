@@ -4,6 +4,8 @@
 <plist version="1.0">
     <dict>
         <key>puzzle_1.png</key>
-        <integer>28</integer>
+        <integer>27</integer>
+        <key>puzzle_3.png</key>
+        <integer>25</integer>
     </dict>
 </plist>

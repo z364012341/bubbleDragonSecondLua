@@ -30,6 +30,7 @@ cc.exports.EVENT_PUZZLE_SELECTED_SCROLL_RIGHT = "event_puzzle_selected_scroll_ri
 cc.exports.EVENT_PAUSE = "event_pause";
 cc.exports.EVENT_REPLAY = "event_replay";
 cc.exports.EVENT_RETURN = "event_return";
+cc.exports.EVENT_VICTORY_RETURN = "event_victory_return";
 cc.exports.EVENT_CONTINUE = "event_continue";
 cc.exports.EVENT_PUZZLE_GAME_DEFEAT = "event_puzzle_game_defeat";
 cc.exports.EVENT_PUZZLE_ANSWER_ADD = "event_puzzle_answer_add";
