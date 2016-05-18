@@ -34,5 +34,10 @@ function PuzzlePieceAnswer:initPosition(index_x, index_y)
 	local posY = PUZZLE_STENCIL_HEIGHT * (-0.5 + index_y);
 	self:setPosition(posX, posY);
 end
-
+function PuzzlePieceAnswer:blink()
+    --self:setBlendFunc(gl.ZERO,gl.ONE_MINUS_SRC_ALPHA)
+end
+function PuzzlePieceAnswer:noBlink()
+    printf("22222222222");
+end
 return PuzzlePieceAnswer

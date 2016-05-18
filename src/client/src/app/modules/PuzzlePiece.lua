@@ -23,8 +23,17 @@ local PuzzlePieceEdges = require(PUZZLE_PIECE_EDGES_PATH);
 local PuzzlePieceShadow = require(PUZZLE_PIECE_SHADOW_PATH);
 --local PuzzlePiecesCollection = require(PUZZLE_PIECES_COLLECTION_PATH);
 --local numble = 0
+PuzzlePiece.need_blink_answer_ = false;
 function PuzzlePiece:ctor(params)
-    --printf("PuzzlePiece");
+    local function onNodeEvent(event)
+        if event == "enter" then
+            self:onEnter();
+        elseif event == "exit" then
+            self:onExit();
+        end
+    end
+    self:registerScriptHandler(onNodeEvent);
+
     self:addTouchEvent();
     self:initPuzzleRenderTexture(params);
     self:addPuzzlePieceShadow(params);
@@ -70,6 +79,9 @@ function PuzzlePiece.onTouchBegan(touch, event)
         puzzle:release();
         puzzle._shadow:shadowGo();
         puzzle._moveNode:moveOutPuzzlePiece(puzzle);
+        if puzzle.need_blink_answer_ then
+            puzzle:blinkAnswer();
+        end
         return true;
     end
     return false;
@@ -96,6 +108,7 @@ function PuzzlePiece.onTouchEnded(touch, event)
     end
     puzzle.touch_listener_:setSwallowTouches(not isOnMoveNode);
     puzzle._moveNode:adjustPuzzlePiecesPosition();
+    puzzle:noBlinkAnswer();
     --dump(puzzle._moveNode:getBoundingBox());
     --dump(touch:getLocationInView());
 end
@@ -158,5 +171,29 @@ function PuzzlePiece:addPuzzlePieceShadow(params)
     self._shadow = PuzzlePieceShadow:create(params.left, params.right, params.top, params.bottom);
     self:addChild(self._shadow, -1);
 end
+function PuzzlePiece:blinkAnswer()
+    self:getPuzzlePieceAnswer():blink();
+end
+function PuzzlePiece:noBlinkAnswer()
+    self:getPuzzlePieceAnswer():noBlink();
+end
+function PuzzlePiece:onEnter()
+    self.listener_ = {};
+    -- local function blink( event )
+    --     self:addPuzzleScrollView(GlobalFunction.getCustomEventUserData(event));
+    -- end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_SEARCH_PROP, function ( event )
+        self.need_blink_answer_ = true;
+    end));
 
+    for _, listener in ipairs(self.listener_) do
+        self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
+    end
+end
+function PuzzlePiece:onExit()
+    local eventDispatcher = self:getEventDispatcher();
+    for _, listener in ipairs(self.listener_) do
+        eventDispatcher:removeEventListener(listener);
+    end
+end
 return PuzzlePiece
