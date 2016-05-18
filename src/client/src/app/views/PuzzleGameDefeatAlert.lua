@@ -3,18 +3,21 @@
 -- Date: 2016-03-04 12:06:13
 -- 作用: 拼图游戏的暂停面板
 
-local PuzzleGameDefeatAlert = class("PuzzleGameDefeatAlert", function ()
+local PuzzleGameDefeatAlert = class("PuzzleGameDefeatAlert", function (time_consuming)
     return cc.Node:create();
 end)
 local PUZZLE_DEFEAT_ALERT_CSB_PATH = "PuzzleDefeatAlert.csb";
 local RETURN_BUTTON_NODE_NAME = "returnButton";
 local REPLAY_BUTTON_NODE_NAME = "replayButton";
-function PuzzleGameDefeatAlert:ctor()
-    self:init();
+local TIME_CONSUMING_NODE_NAME = "Node_1";
+local PuzzleTimeDisplay = require(PUZZLE_TIME_DISPLAY_PATH);
+function PuzzleGameDefeatAlert:ctor(time_consuming)
+    self:init(time_consuming);
 end
-function PuzzleGameDefeatAlert:init()
+function PuzzleGameDefeatAlert:init(time_consuming)
     self:loadCSB();
     self:addMaskBackground();
+    self:addTimeConsumingLabel(time_consuming);
 end
 function PuzzleGameDefeatAlert:loadCSB()
     self.csb_node_ = cc.CSLoader:createNode(PUZZLE_DEFEAT_ALERT_CSB_PATH);
@@ -33,5 +36,11 @@ end
 
 function PuzzleGameDefeatAlert:getCsbNode()
     return self.csb_node_;
+end
+function PuzzleGameDefeatAlert:addTimeConsumingLabel(time_consuming)
+    local time_display = PuzzleTimeDisplay:create();
+    time_display:setTimeString(time_consuming);
+    time_display:setScale(0.75);
+    self.csb_node_:getChildByName(TIME_CONSUMING_NODE_NAME):addChild(time_display);
 end
 return PuzzleGameDefeatAlert

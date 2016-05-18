@@ -111,9 +111,8 @@ function PuzzlePiece.isTouchOnMoveNode(touch, event)
 end
 function PuzzlePiece:isToucnOnAnswer()
     local puzzlePoint = self:getParent():convertToWorldSpace(cc.p(self:getPosition()));
-    local answer = self:getPuzzlePieceAnswer();
-    local answerPoint = answer:getParent():convertToWorldSpace(cc.p(answer:getPosition()));
-    return cc.pGetDistance(puzzlePoint, answerPoint) < 90;
+    local answerPoint = self:getPuzzlePieceAnswer():convertToNodeSpace(puzzlePoint);
+    return cc.pGetDistance(cc.p(0,0), answerPoint) < PUZZLE_STENCIL_WIDTH;
 end
 
 function PuzzlePiece:moveToAnswer()

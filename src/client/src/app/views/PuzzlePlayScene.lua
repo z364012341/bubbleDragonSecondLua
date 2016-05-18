@@ -15,12 +15,15 @@ local PuzzleGameDefeatAlert = require(PUZZLE_GAME_DEFEAT_ALERT_PATH);
 local PuzzleTimeDisplay = require(PUZZLE_TIME_DISPLAY_PATH);
 local PuzzleGameVictoryAlert = require(PUZZLE_GAME_VICTORY_ALERT_PATH);
 local PuzzleVictoryCountdownComponent = require(PUZZLE_VICTORY_COUNTDOWN_COMPONENT_PATH);
-
+local PuzzleSmallEyesProp = require(PUZZLE_SMALL_EYES_PROP_PATH);
+local PuzzleSearchProp = require(PUZZLE_SEARCH_PROP_PATH);
 local PUZZLE_PLAY_SCENE_CSB_PATH = "PuzzlePlayLayer.csb";
 local CSB_DESK_NAME = "pintutaizi_2";
 local PAUSE_BUTTON_NAME = "Button_1";
+local SMALL_EYES_BUTTON_NAME = "Node_2";
 local BACKGROUND_NAME = "pintubeijing02_1";
 local THUMBNAIL_POS_NODE_NAME = "thumbnail_pos";
+local SEARCH_PROP_POS_NODE_NAME = "Node_3";
 local PUZZLE_PIECES_SCROLLVIEW_ZORDER = 1;
 local PUZZLE_PLAY_AREA_ZORDER = -1;
 local BACKGROUND_ZORDER = PUZZLE_PLAY_AREA_ZORDER-1;
@@ -47,11 +50,19 @@ end
 function PuzzlePlayScene:init()
 	self:loadCsb();
 	self:initPauseButton();
+    self:addSmallEyesButton();
 	self:initZOrder();
     self:addTimeClock();
 	self.countdown_ = PuzzleDefeatCountdownComponent:create();
 	self:addChild(self.countdown_);
     self:addChild(PuzzleVictoryCountdownComponent:create());
+    self:addPuzzleProps();
+end
+function PuzzlePlayScene:addPuzzleProps()
+    local search_node = self.csb_node_:getChildByName(SEARCH_PROP_POS_NODE_NAME);
+    search_node:addChild(PuzzleSearchProp:create());
+    search_node:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
+    search_node:setPositionY(search_node:getPositionY()*bs.SmartScaleController:getInstance():getPlayAreaZoom());
 end
 function PuzzlePlayScene:addTimeClock()
     local clock = PuzzleTimeDisplay:create();
@@ -65,9 +76,8 @@ function PuzzlePlayScene:loadCsb()
     self.csb_node_:getChildByName(CSB_DESK_NAME):setScaleY(bs.SmartScaleController:getInstance():getPlayAreaZoom());
 end
 function PuzzlePlayScene:initPauseButton()
-	local size = cc.Director:getInstance():getVisibleSize();
 	local button = self.csb_node_:getChildByName(PAUSE_BUTTON_NAME);
-	button:setPosition(cc.p(size.width*0.92, size.height*TOP_WIDGET_POS_Y_PERCENT));
+	button:setPositionY(cc.Director:getInstance():getVisibleSize().height*TOP_WIDGET_POS_Y_PERCENT);
 	bs.ButtonEffectController:setButtonZoomScale(button);
 	button:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     -- button:addTouchEventListener(function ( pSender, touchType )
@@ -89,6 +99,12 @@ function PuzzlePlayScene:initPauseButton()
 	button:addClickEventListener(function (...)
 	   self:popPauseAlert();
     end);
+end
+function PuzzlePlayScene:addSmallEyesButton()
+    local pos_node = self.csb_node_:getChildByName(SMALL_EYES_BUTTON_NAME);
+    pos_node:setPositionY(cc.Director:getInstance():getVisibleSize().height*TOP_WIDGET_POS_Y_PERCENT);
+    pos_node:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
+    pos_node:addChild(PuzzleSmallEyesProp:create());
 end
 function PuzzlePlayScene:initZOrder()
 	self.csb_node_:getChildByName(BACKGROUND_NAME):setLocalZOrder(BACKGROUND_ZORDER);
@@ -119,7 +135,7 @@ function PuzzlePlayScene:onEnter()
     	self.alert_:removeFromParent();
     	self.alert_ = nil;
     	self.screen_sp_:removeFromParent();
-    	self.countdown_:resume();
+        self:gameResum();
 	end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_CONTINUE, gameContinue));
 
@@ -161,12 +177,15 @@ function PuzzlePlayScene:onExit()
     	eventDispatcher:removeEventListener(listener);
     end
 end
+function PuzzlePlayScene:gameResum()
+    cc.Director:getInstance():getActionManager():resumeTargets(self.pause_nodes_);
+end
 function PuzzlePlayScene:popPauseAlert()
-	self.countdown_:pause();
+    self.pause_nodes_ = cc.Director:getInstance():getActionManager():pauseAllRunningActions();
 	self:popAlert(PuzzleGamePauseAlert, self.countdown_:getRemainTime());
 end
 function PuzzlePlayScene:popDefeatAlert()
-	self:popAlert(PuzzleGameDefeatAlert);
+	self:popAlert(PuzzleGameDefeatAlert, self.countdown_:getTimeConsuming());
 end
 function PuzzlePlayScene:popVictoryAlert()
     self.countdown_:pause();

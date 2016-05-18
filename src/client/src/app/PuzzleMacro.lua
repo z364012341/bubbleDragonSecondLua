@@ -21,6 +21,9 @@ cc.exports.PUZZLE_PLAY_AREA_PATH = "app.views.PuzzlePlayArea";
 cc.exports.PUZZLE_GAME_DEFEAT_ALERT_PATH = "app.views.PuzzleGameDefeatAlert";
 cc.exports.PUZZLE_GAME_VICTORY_ALERT_PATH = "app.views.PuzzleGameVictoryAlert";
 cc.exports.PUZZLE_TIME_DISPLAY_PATH = "app.views.PuzzleTimeDisplay";
+cc.exports.PUZZLE_SMALL_EYES_PROP_PATH = "app.views.PuzzleSmallEyesProp";
+cc.exports.PUZZLE_PROPS_BACKGROUND_PATH = "app.views.PuzzlePropsBackground";
+cc.exports.PUZZLE_SEARCH_PROP_PATH = "app.views.PuzzleSearchProp";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";
@@ -36,6 +39,8 @@ cc.exports.EVENT_PUZZLE_GAME_DEFEAT = "event_puzzle_game_defeat";
 cc.exports.EVENT_PUZZLE_ANSWER_ADD = "event_puzzle_answer_add";
 cc.exports.EVENT_PUZZLE_GAME_VICTORY = "event_puzzle_game_victory";
 cc.exports.EVENT_UPDATE_TIME_LABEL = "event_update_time_label";
+cc.exports.EVENT_USE_SMALL_EYES = "event_use_small_eyes";
+cc.exports.EVENT_USE_SEARCH_PROP = "event_use_search_prop";
 
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
@@ -57,7 +62,7 @@ cc.exports.PUZZLE_COMPONENT_ROTATION = "component_rotation";
 cc.exports.PUZZLE_COMPONENT_POSITION = "component_position";
 --cc.exports.PUZZLE_COMPONENT_ROTATION_INSIDE = "component_rotation_inside";
 --cc.exports.PUZZLE_COMPONENT_ROTATION_OUTSIDE = "component_rotation_outside";
-cc.exports.PUZZLE_STENCIL_WIDTH = 240;
+cc.exports.PUZZLE_STENCIL_WIDTH = 244;
 cc.exports.PUZZLE_STENCIL_HEIGHT = PUZZLE_STENCIL_WIDTH;
 cc.exports.PUZZLE_STENCIL_LENGTH = 588;
 cc.exports.PUZZLE_COMPONENT_ANCHOR = {x = 0, y = 0.5};
@@ -65,6 +70,8 @@ cc.exports.PUZZLE_EDGES_ANCHOR = {x = 5/189, y = 0.5};
 cc.exports.PUZZLE_PIECE_SHADOW_ANCHOR = {x = 0.5, y = 1};
 cc.exports.PUZZLE_PIECE_SHADOW_OFFSET_POSITION = {x = 20, y = -20};
 cc.exports.PUZZLE_PIECE_SCALE = PUZZLE_STENCIL_WIDTH / PUZZLE_STENCIL_LENGTH;
+cc.exports.PROP_SMALL_EYES_TIME = 2;
+
 
 cc.exports.PUZZLE_STENCIL_COMPONENT_INSIDE = "component_inside";
 cc.exports.PUZZLE_STENCIL_COMPONENT_OUTSIDE = "component_outside";

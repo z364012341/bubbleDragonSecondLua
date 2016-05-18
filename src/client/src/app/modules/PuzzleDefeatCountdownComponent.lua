@@ -7,7 +7,7 @@ local PuzzleDefeatCountdownComponent = class("PuzzleDefeatCountdownComponent", f
 end)
 
 function PuzzleDefeatCountdownComponent:ctor()
-	self.initail_time_ = 900;
+	self.initail_time_ = 233;
 	self.time_consuming_ = self.initail_time_ ;
 	local function onNodeEvent(event)
         if event == "enter" then

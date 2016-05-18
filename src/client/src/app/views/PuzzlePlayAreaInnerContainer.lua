@@ -6,8 +6,11 @@
 local PuzzlePlayAreaInnerContainer = class("PuzzlePlayAreaInnerContainer", function ()
     return cc.Node:create();
 end)
+local PuzzlePiecesCollection = require(PUZZLE_PIECES_COLLECTION_PATH);
+local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
 local PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE = 0.02;
 local ANSWERS_NODE_ZORDER = -1;
+local ANSWERS_BACKGROUND_ZORDER = ANSWERS_NODE_ZORDER-1;
 function PuzzlePlayAreaInnerContainer:ctor()
     local function onNodeEvent(event)
         if event == "enter" then
@@ -15,35 +18,27 @@ function PuzzlePlayAreaInnerContainer:ctor()
         elseif event == "exit" then
             self:onExit();
         end
-        self:registerScriptHandler(onNodeEvent);
     end
     self:registerScriptHandler(onNodeEvent);
-    local collection = require(PUZZLE_PIECES_COLLECTION_PATH):create(require(PUZZLE_SELECTED_SHOW_PATH):getSelectedPicturePath())
+    self:init();
+end
+function PuzzlePlayAreaInnerContainer:init()
+    local collection = PuzzlePiecesCollection:create(PuzzleSelectedShow:getSelectedPicturePath());
     local puzzleNode = collection:getPuzzleNode();
 
     self:getEventDispatcher():dispatchEvent(GlobalFunction.createCustomEvent(EVENT_PUZZLE_ANSWER_LOAD, puzzleNode));
     self.answerNode_ = collection:getAnswerNode();
     self:setContentSize(self.answerNode_:getContentSize());
-    -- local event = cc.EventCustom:new(EVENT_PUZZLE_ANSWER_LOAD);
-    -- event._userData = puzzleNode;
-    -- event:setUserData(puzzleNode);
     self.answerNode_:setPositionX(self.answerNode_:getContentSize().width/-2);
     self.answerNode_:setPositionY(self.answerNode_:getContentSize().height/-2);
     self:addChild(self.answerNode_, ANSWERS_NODE_ZORDER);
-    --self:addTouchesListerner();
---[[
-    local clippingNode = require(PUZZLE_PIECE_PATH):create({
-        index_x = 1, --拼图碎片的x索引
-        index_y = 2, --拼图碎片的y索引
-        path = "puzzle_1.png",    --底板的资源路径
-        left = PUZZLE_STENCIL_COMPONENT_INSIDE,    --左边凹凸方向
-        right = PUZZLE_STENCIL_COMPONENT_OUTSIDE,   --右边凹凸方向
-        top = PUZZLE_STENCIL_COMPONENT_PLAIN,     --上边凹凸方向
-        bottom = PUZZLE_STENCIL_COMPONENT_PLAIN  --下边凹凸方向
-    });
-    clippingNode:setPosition(300, 300);
-    self:addChild(clippingNode);
---]]
+
+    self:addAnswersBackground();
+end
+function PuzzlePlayAreaInnerContainer:addAnswersBackground()
+    self.answer_background_ = GlobalFunction.createGameSpriteWithPath(PuzzleSelectedShow:getSelectedPicturePath());
+    self.answer_background_:setOpacity(0);
+    self:addChild(self.answer_background_, ANSWERS_BACKGROUND_ZORDER);
 end
 
 -- function PuzzlePlayAreaInnerContainer:addTouchesListerner()
@@ -111,16 +106,30 @@ function PuzzlePlayAreaInnerContainer:saveAnswerNodeData()
     self.answer_node_pos_save_ = cc.p(self.answerNode_:getPosition());
     self.answer_node_scale_save_ = self.answerNode_:getScale();
 end
-
+function PuzzlePlayAreaInnerContainer:useSmallEyesProp()
+    local action = cc.Sequence:create(cc.FadeIn:create(PROP_SMALL_EYES_TIME), cc.FadeOut:create(PROP_SMALL_EYES_TIME), nil);
+    self.answer_background_:runAction(action);
+end
 function PuzzlePlayAreaInnerContainer:onEnter()
+    self.listener_ = {};
     local function pushAnswersThumbnail( event )
         self:pushAnswersThumbnail();
     end
-    self._listener1 = cc.EventListenerCustom:create(EVENT_PUSH_ANSWERS_THUMBNAIL, pushAnswersThumbnail);
-    self:getEventDispatcher():addEventListenerWithFixedPriority(self._listener1, 1);
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUSH_ANSWERS_THUMBNAIL, pushAnswersThumbnail));
+
+    local function useSmallEyesProp( event )
+        self:useSmallEyesProp();
+    end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_SMALL_EYES, useSmallEyesProp));
+
+    for _, listener in ipairs(self.listener_) do
+        self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
+    end
 end
 function PuzzlePlayAreaInnerContainer:onExit()
     local eventDispatcher = self:getEventDispatcher();
-    eventDispatcher:removeEventListener(self._listener1);
+    for _, listener in ipairs(self.listener_) do
+        eventDispatcher:removeEventListener(listener);
+    end
 end
 return PuzzlePlayAreaInnerContainer

@@ -1,6 +1,6 @@
 #include "ScoreProgressMenu.h"
 #include "cocostudio\CocoStudio.h"
-#include "ui\UIImageView.h"
+//#include "ui\UIImageView.h"
 #include "ScoreProgressStar.h"
 #include "SpriteTextureController.h"
 const std::string PROGRESS_TIMER_PATH = "jindutiao.png";//½ø¶ÈÌõ

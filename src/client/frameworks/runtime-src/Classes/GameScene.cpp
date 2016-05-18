@@ -261,8 +261,8 @@ namespace bubble_second {
         }
         {
             cocos2d::Sprite* bottom_ui_bg = SpriteTextureController::getInstance()->createGameSpriteWithPath(BOTTOM_UI_BACKGROUND_PATH);
-            bottom_ui_bg->setPosition(cocos2d::Vec2(0.0f, 0.0f));
-            bottom_ui_bg->setAnchorPoint(cocos2d::Vec2(0.0f, 0.0f));
+            bottom_ui_bg->setPosition(cocos2d::Vec2(visible_size.width/2, 0.0f));
+            bottom_ui_bg->setAnchorPoint(cocos2d::Vec2(0.5f, 0.0f));
             bottom_ui_bg->setScaleX(smart_scale->getFixedWidthZoom());
             cocos2d::Rect bottom_ui_bg_rect = bottom_ui_bg->getBoundingBox();
             float scale_y = csb_node_->getPositionY() / BOTTOM_UI_BACKGROUND_HEIGHT;
