@@ -8,13 +8,14 @@ end)
 PuzzleSelectedShow.selected_puzzle_path_ = "";
 local TREASURE_MAP_PAGEVIEW_NAME = "treasure_map_pageview";
 local LANDSCAPE_PAGEVIEW_NAME = "landscape_pageview";
+local SHOW_CONTENT_SIZE = cc.size(402, 604);
 local PAGEVIEW_INITAIL_DATA = {
 	[TREASURE_MAP_PAGEVIEW_NAME] = {
-		PAGE_PATH = {"puzzle_1.png", "puzzle_1.png"},
+		PAGE_PATH = {"puzzle_1.png", "puzzle_11-1.png", "puzzle_11-2.png"},
 		VISIBLE = false;
 	},
 	[LANDSCAPE_PAGEVIEW_NAME] = {
-		PAGE_PATH = {"puzzle_3.png"},
+		PAGE_PATH = {"puzzle_3.png","puzzle_3-1.png", "puzzle_3-2.png", "puzzle_3-3.png"},
 		VISIBLE = true;
 	},
 }
@@ -43,13 +44,14 @@ end
 function PuzzleSelectedShow:createPageWithPath( path )
     local layout = ccui.Layout:create();
     local sp = GlobalFunction.createGameSpriteWithPath(path);
-    sp:setAnchorPoint(cc.p(0, 0));
+    sp:setScale(GlobalFunction.calculateMinSizeScale(SHOW_CONTENT_SIZE, sp:getContentSize()));
+    sp:setPosition(cc.p(SHOW_CONTENT_SIZE.width/2, SHOW_CONTENT_SIZE.height/2));
     layout:addChild(sp);
     return layout;
 end
 function PuzzleSelectedShow:createPageViewWithTypeName( name )
     local pageview= ccui.PageView:create();
-    pageview:setContentSize(PUZZLE_INITIAL_SIZE);
+    pageview:setContentSize(SHOW_CONTENT_SIZE);
     --self:addChild(pageview);
 	for _, path in ipairs(PAGEVIEW_INITAIL_DATA[name].PAGE_PATH) do
 	    pageview:addPage(self:createPageWithPath(path));

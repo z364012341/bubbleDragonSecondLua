@@ -23,6 +23,7 @@ local PuzzlePieceEdges = require(PUZZLE_PIECE_EDGES_PATH);
 local PuzzlePieceShadow = require(PUZZLE_PIECE_SHADOW_PATH);
 --local PuzzlePiecesCollection = require(PUZZLE_PIECES_COLLECTION_PATH);
 --local numble = 0
+local PUZZLE_RENDER_SPRITE_NAME = "puzzle_render_sprite_name";
 PuzzlePiece.need_blink_answer_ = false;
 function PuzzlePiece:ctor(params)
     local function onNodeEvent(event)
@@ -52,6 +53,7 @@ function PuzzlePiece:initPuzzleRenderTexture(params)
     self.node_:visit(); 
     puzzleRender:endToLua();
     local render_sp = cc.Sprite:createWithTexture(puzzleRender:getSprite():getTexture());
+    render_sp:setName(PUZZLE_RENDER_SPRITE_NAME);
     render_sp:setScaleY(-1);
     self:addChild(render_sp);
     self.node_:removeFromParent();
@@ -172,10 +174,21 @@ function PuzzlePiece:addPuzzlePieceShadow(params)
     self:addChild(self._shadow, -1);
 end
 function PuzzlePiece:blinkAnswer()
-    self:getPuzzlePieceAnswer():blink();
+    --self:getPuzzlePieceAnswer():blink();
+    self.blink_edges_ = GlobalFunction.copyGameSprite(self:getChildByName(PUZZLE_RENDER_SPRITE_NAME));
+    self.blink_edges_:setBlendFunc({src = gl.SRC_ALPHA, dst = gl.ONE})
+    self.blink_edges_:setPosition(cc.p(self:getPuzzlePieceAnswer():getPosition()));
+    self:getPuzzlePieceAnswer():getParent():addChild(self.blink_edges_, -1);
+    self.blink_edges_:setScaleY(-1);
+    self.blink_edges_:setOpacity(0);
+    self.blink_edges_:runAction(cc.RepeatForever:create(cc.Sequence:create(cc.FadeIn:create(0.5), cc.FadeOut:create(0.5), nil)));
 end
 function PuzzlePiece:noBlinkAnswer()
-    self:getPuzzlePieceAnswer():noBlink();
+    --self:getPuzzlePieceAnswer():noBlink();
+    if self.blink_edges_ ~= nil then
+        self.blink_edges_:removeFromParent();
+        self.blink_edges_ = nil;
+    end
 end
 function PuzzlePiece:onEnter()
     self.listener_ = {};
@@ -185,7 +198,9 @@ function PuzzlePiece:onEnter()
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_SEARCH_PROP, function ( event )
         self.need_blink_answer_ = true;
     end));
-
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_END_SEARCH_PROP, function ( event )
+        self.need_blink_answer_ = false;
+    end));
     for _, listener in ipairs(self.listener_) do
         self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
     end

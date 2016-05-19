@@ -38,7 +38,8 @@ function PuzzlePlayArea:initPlayArea()
     self.play_area_:setScale(self:calculatePuzzleScale());
 end
 function PuzzlePlayArea:calculatePuzzleScale()
-    return math.min(COLOR_LAYER_WIDTH/self.play_area_:getContentSize().width, COLOR_LAYER_HEIGHT/self.play_area_:getContentSize().height)*0.96;
+    return GlobalFunction.calculateMinSizeScale(cc.size(COLOR_LAYER_WIDTH, COLOR_LAYER_HEIGHT), self.play_area_:getContentSize())*0.96;
+    --return math.min(COLOR_LAYER_WIDTH/self.play_area_:getContentSize().width, COLOR_LAYER_HEIGHT/self.play_area_:getContentSize().height)*0.96;
 end
 function PuzzlePlayArea:getBackgroundColorLayer()
     local colorLayer = cc.LayerColor:create(PUZZLE_SHOW_LAYER_COLOR_C4B, COLOR_LAYER_WIDTH, COLOR_LAYER_HEIGHT);

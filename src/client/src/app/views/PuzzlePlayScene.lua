@@ -17,6 +17,8 @@ local PuzzleGameVictoryAlert = require(PUZZLE_GAME_VICTORY_ALERT_PATH);
 local PuzzleVictoryCountdownComponent = require(PUZZLE_VICTORY_COUNTDOWN_COMPONENT_PATH);
 local PuzzleSmallEyesProp = require(PUZZLE_SMALL_EYES_PROP_PATH);
 local PuzzleSearchProp = require(PUZZLE_SEARCH_PROP_PATH);
+local PuzzleBigEyesProp = require(PUZZLE_BIG_EYES_PROP_PATH);
+local PuzzleAddTimeProp = require(PUZZLE_ADD_TIME_PROP_PATH);
 local PUZZLE_PLAY_SCENE_CSB_PATH = "PuzzlePlayLayer.csb";
 local CSB_DESK_NAME = "pintutaizi_2";
 local PAUSE_BUTTON_NAME = "Button_1";
@@ -24,6 +26,8 @@ local SMALL_EYES_BUTTON_NAME = "Node_2";
 local BACKGROUND_NAME = "pintubeijing02_1";
 local THUMBNAIL_POS_NODE_NAME = "thumbnail_pos";
 local SEARCH_PROP_POS_NODE_NAME = "Node_3";
+local BIG_EYES_PROP_POS_NODE_NAME = "Node_4";
+local ADD_TIME_POS_NODE_NAME = "Node_5";
 local PUZZLE_PIECES_SCROLLVIEW_ZORDER = 1;
 local PUZZLE_PLAY_AREA_ZORDER = -1;
 local BACKGROUND_ZORDER = PUZZLE_PLAY_AREA_ZORDER-1;
@@ -56,14 +60,17 @@ function PuzzlePlayScene:init()
 	self.countdown_ = PuzzleDefeatCountdownComponent:create();
 	self:addChild(self.countdown_);
     self:addChild(PuzzleVictoryCountdownComponent:create());
-    self:addPuzzleProps();
+    self:addPuzzleProps(PuzzleSearchProp, SEARCH_PROP_POS_NODE_NAME);
+    self:addPuzzleProps(PuzzleBigEyesProp, BIG_EYES_PROP_POS_NODE_NAME);
+    self:addPuzzleProps(PuzzleAddTimeProp, ADD_TIME_POS_NODE_NAME);
 end
-function PuzzlePlayScene:addPuzzleProps()
-    local search_node = self.csb_node_:getChildByName(SEARCH_PROP_POS_NODE_NAME);
-    search_node:addChild(PuzzleSearchProp:create());
+function PuzzlePlayScene:addPuzzleProps(class, pos_name)
+    local search_node = self.csb_node_:getChildByName(pos_name);
+    search_node:addChild(class:create());
     search_node:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     search_node:setPositionY(search_node:getPositionY()*bs.SmartScaleController:getInstance():getPlayAreaZoom());
 end
+
 function PuzzlePlayScene:addTimeClock()
     local clock = PuzzleTimeDisplay:create();
     local size = cc.Director:getInstance():getVisibleSize();

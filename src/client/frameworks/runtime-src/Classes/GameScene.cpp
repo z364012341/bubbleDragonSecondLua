@@ -266,7 +266,7 @@ namespace bubble_second {
             bottom_ui_bg->setScaleX(smart_scale->getFixedWidthZoom());
             cocos2d::Rect bottom_ui_bg_rect = bottom_ui_bg->getBoundingBox();
             float scale_y = csb_node_->getPositionY() / BOTTOM_UI_BACKGROUND_HEIGHT;
-            bottom_ui_bg->setScaleY(scale_y);
+            bottom_ui_bg->setScaleY(scale_y);  
             this->addChild(bottom_ui_bg, UI_ZORDER_MENU);
         }
         {//²ÊÇòµÀ¾ß

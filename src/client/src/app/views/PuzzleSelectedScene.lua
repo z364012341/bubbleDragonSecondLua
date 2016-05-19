@@ -60,7 +60,7 @@ end
 
 function PuzzleSelectedScene:addPageView()
     local puzzle_show = PuzzleSelectedShow:create();
-    puzzle_show:setScale(0.4126);
+    --puzzle_show:setScale(0.4126);
     self.csb_node_:getChildByName(PUZZLE_SHOW_NODE_NAME):getChildByName(PAGEVIEW_POSITION_NODE_NAME):addChild(puzzle_show);
 end
 function PuzzleSelectedScene:initBackButton()

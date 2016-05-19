@@ -18,6 +18,7 @@ function PuzzlePieceAnswer:ctor(params)
 end
 
 function PuzzlePieceAnswer:addAnswerEdges(left, right, top, bottom)
+    self.edges_table_ = {};
     self:addSingleEdges(PUZZLE_COMPONENT_LEFT, left);
     self:addSingleEdges(PUZZLE_COMPONENT_RIGHT, right);
     self:addSingleEdges(PUZZLE_COMPONENT_TOP, top);
@@ -26,6 +27,7 @@ end
 
 function PuzzlePieceAnswer:addSingleEdges(direction, insideOrOutside)
 	local node = PuzzlePieceSingleEdges:create(direction, insideOrOutside);
+    table.insert(self.edges_table_, node);
 	self:addChild(node);
 end
 
@@ -34,10 +36,17 @@ function PuzzlePieceAnswer:initPosition(index_x, index_y)
 	local posY = PUZZLE_STENCIL_HEIGHT * (-0.5 + index_y);
 	self:setPosition(posX, posY);
 end
-function PuzzlePieceAnswer:blink()
-    --self:setBlendFunc(gl.ZERO,gl.ONE_MINUS_SRC_ALPHA)
-end
-function PuzzlePieceAnswer:noBlink()
-    printf("22222222222");
-end
+-- function PuzzlePieceAnswer:blink()
+--     --self:setBlendFunc(gl.ZERO,gl.ONE_MINUS_SRC_ALPHA)
+--     --printf(#self.edges_table_);
+--     for _, edge in ipairs(self.edges_table_) do
+--         --printf(_, edge);
+--         edge:blink();
+--     end
+-- end
+-- function PuzzlePieceAnswer:noBlink()
+--     for _, edge in ipairs(self.edges_table_) do
+--         edge:noBlink();
+--     end
+-- end
 return PuzzlePieceAnswer

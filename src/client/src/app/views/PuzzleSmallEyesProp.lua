@@ -5,10 +5,13 @@
 local PuzzleSmallEyesProp = class("PuzzleSmallEyesProp", function ()
     return cc.Node:create();
 end)
+local PuzzlePropCoolingTimerComponent = require(PUZZLE_PROP_COOLING_TIMER_COMPONENT_PATH);
 local PROP_TEXTURE_PATH = "anniuchakan.PNG";
 local PROP_PROGRESS_TIMER_PATH = "small_eyes_gray.png";
 local COOLING_SEQUENCE_TAG = 123
+PuzzleSmallEyesProp.selfisCooling_ = nil;
 function PuzzleSmallEyesProp:ctor()
+    PuzzleSmallEyesProp.selfisCooling_ = false;
     self:init();
 end
 function PuzzleSmallEyesProp:init()
@@ -19,7 +22,7 @@ function PuzzleSmallEyesProp:addPropButton()
         GlobalFunction.createGameSpriteWithPath(PROP_TEXTURE_PATH));
     menuItem:setPosition(cc.p(0, 0));
     menuItem:registerScriptTapHandler(function ( sender )
-        if self:getActionByTag(COOLING_SEQUENCE_TAG) ~= nil then
+        if self.selfisCooling_ then
             return;
         end
         cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_USE_SMALL_EYES);
@@ -31,20 +34,11 @@ function PuzzleSmallEyesProp:addPropButton()
     self:addChild(menu);
 end
 function PuzzleSmallEyesProp:propCooling()
-
-    local progressTimer = cc.ProgressTimer:create(GlobalFunction.createGameSpriteWithPath(PROP_PROGRESS_TIMER_PATH));
-    progressTimer:setReverseProgress(true);
-    progressTimer:setPercentage(100);
-    progressTimer:setPosition(cc.p(-4, 4));
-    self:addChild(progressTimer); 
-
-    local percent_seq = cc.Sequence:create(cc.CallFunc:create(function ()
-        progressTimer:setPercentage(progressTimer:getPercentage()-1);
-    end), cc.DelayTime:create(PROP_SMALL_EYES_TIME*2/100), nil);
-    local seq = cc.Sequence:create(cc.Repeat:create(percent_seq, 100), cc.CallFunc:create(function ()
-        progressTimer:removeFromParent();
-    end));
-    seq:setTag(COOLING_SEQUENCE_TAG);
-    self:runAction(seq); 
+    self.selfisCooling_ = true;
+    local timer = PuzzlePropCoolingTimerComponent:create(PROP_PROGRESS_TIMER_PATH, PROP_SMALL_EYES_TIME*2, function (  )
+        self.selfisCooling_ = false;
+    end);
+    timer:setPosition(cc.p(-4, 4))
+    self:addChild(timer);
 end
 return PuzzleSmallEyesProp

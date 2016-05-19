@@ -1,7 +1,7 @@
 #include "SpriteTextureController.h"
-#include "CenteredMenuItemSprite.h"
+
 #include "cocostudio\CocoStudio.h"
-#include "SpriteBlur.h"
+//#include "SpriteBlur.h"
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_1_PATH = "laohu/laohu.ExportJson"; //老虎的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_2_PATH = "laohu2/laohu2.ExportJson"; //老虎2的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_3_PATH = "laohu3/laohu3.ExportJson"; //老虎3的动画
@@ -166,6 +166,16 @@ namespace bubble_second {
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("gameRes.plist");
         this->addArmatureFile();
         cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("puzzle_ui.plist");
+    }
+
+    void SpriteTextureController::setGrayShader(cocos2d::Sprite * sprite)
+    {
+        auto fileUtiles = cocos2d::FileUtils::getInstance();
+        std::string fragmentFullPath = fileUtiles->fullPathForFilename(GREY_SCALE_FSH_PATH.c_str());
+        std::string fragSource = fileUtiles->getStringFromFile(fragmentFullPath);
+        cocos2d::GLProgram* shader_program = cocos2d::GLProgram::createWithByteArrays(cocos2d::ccPositionTextureColor_noMVP_vert, fragSource.c_str());
+        cocos2d::GLProgramState* program_state = cocos2d::GLProgramState::getOrCreateWithGLProgram(shader_program);
+        sprite->setGLProgramState(program_state);
     }
 
     //void SpriteTextureController::addGameBackgroundTexture(int cell_numble)

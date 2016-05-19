@@ -24,6 +24,9 @@ cc.exports.PUZZLE_TIME_DISPLAY_PATH = "app.views.PuzzleTimeDisplay";
 cc.exports.PUZZLE_SMALL_EYES_PROP_PATH = "app.views.PuzzleSmallEyesProp";
 cc.exports.PUZZLE_PROPS_BACKGROUND_PATH = "app.views.PuzzlePropsBackground";
 cc.exports.PUZZLE_SEARCH_PROP_PATH = "app.views.PuzzleSearchProp";
+cc.exports.PUZZLE_PROP_COOLING_TIMER_COMPONENT_PATH = "app.views.PuzzlePropCoolingTimerComponent";
+cc.exports.PUZZLE_BIG_EYES_PROP_PATH = "app.views.PuzzleBigEyesProp";
+cc.exports.PUZZLE_ADD_TIME_PROP_PATH = "app.views.PuzzleAddTimeProp";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";
@@ -41,7 +44,9 @@ cc.exports.EVENT_PUZZLE_GAME_VICTORY = "event_puzzle_game_victory";
 cc.exports.EVENT_UPDATE_TIME_LABEL = "event_update_time_label";
 cc.exports.EVENT_USE_SMALL_EYES = "event_use_small_eyes";
 cc.exports.EVENT_USE_SEARCH_PROP = "event_use_search_prop";
-
+cc.exports.EVENT_END_SEARCH_PROP = "event_end_search_prop";
+cc.exports.EVENT_USE_BIG_EYES_PROP = "event_use_big_eyes_prop";
+cc.exports.EVENT_USE_ADD_TIME_PROP = "event_use_add_time_prop";
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
 cc.exports.PUZZLE_COMPONENT_PATH = "puzzleStencil_2.png";

@@ -3,6 +3,10 @@ cc.exports.GlobalFunction = {
 		return cc.Sprite:create(path);
 		--return cc.Sprite:createWithSpriteFrameName(path);
 	end,
+	copyGameSprite = function (sprite)
+		local sp = cc.Sprite:createWithTexture(sprite:getTexture());
+		return sp;
+	end,
 	setGameSpriteTextureWithPath = function (path, sprite)
 		sprite:setTexture(path);
 		--local frame = cc.SpriteFrameCache:getInstance():getSpriteFrameByName(path);
@@ -30,5 +34,8 @@ cc.exports.GlobalFunction = {
 	end,
 	getCustomEventUserData = function ( event )
 		return event._userData;
+	end,
+	calculateMinSizeScale = function ( size_1, size_2 )
+		return math.min(size_1.width/size_2.width, size_1.height/size_2.height);
 	end
 }

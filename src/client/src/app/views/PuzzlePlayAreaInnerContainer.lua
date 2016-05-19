@@ -2,7 +2,23 @@
 -- Author: 黄泽昊
 -- Date: 2016-03-04 12:06:13
 -- 作用: 拼图的layer, 最下面的那层
-
+local vertDefaultSource = "\n".."\n" ..
+                  "attribute vec4 a_position;\n" ..
+                  "attribute vec2 a_texCoord;\n" ..
+                  "attribute vec4 a_color;\n\n" ..
+                  "\n#ifdef GL_ES\n" .. 
+                  "varying lowp vec4 v_fragmentColor;\n" ..
+                  "varying mediump vec2 v_texCoord;\n" ..
+                  "\n#else\n" ..
+                  "varying vec4 v_fragmentColor;" ..
+                  "varying vec2 v_texCoord;" ..
+                  "\n#endif\n" ..
+                  "void main()\n" ..
+                  "{\n" .. 
+                  "   gl_Position = CC_MVPMatrix * a_position;\n"..
+                  "   v_fragmentColor = a_color;\n"..
+                  "   v_texCoord = a_texCoord;\n" ..
+                  "} \n"
 local PuzzlePlayAreaInnerContainer = class("PuzzlePlayAreaInnerContainer", function ()
     return cc.Node:create();
 end)
@@ -112,15 +128,28 @@ function PuzzlePlayAreaInnerContainer:useSmallEyesProp()
 end
 function PuzzlePlayAreaInnerContainer:onEnter()
     self.listener_ = {};
-    local function pushAnswersThumbnail( event )
+    -- local function pushAnswersThumbnail( event )
+    --     self:pushAnswersThumbnail();
+    -- end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUSH_ANSWERS_THUMBNAIL, function ( event )
         self:pushAnswersThumbnail();
-    end
-    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUSH_ANSWERS_THUMBNAIL, pushAnswersThumbnail));
+    end));
 
-    local function useSmallEyesProp( event )
+    -- local function useSmallEyesProp( event )
+    --     self:useSmallEyesProp();
+    -- end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_SMALL_EYES, function ( event )
         self:useSmallEyesProp();
-    end
-    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_SMALL_EYES, useSmallEyesProp));
+    end));
+
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_BIG_EYES_PROP, function ( event )
+        local answer_sp = GlobalFunction.createGameSpriteWithPath(PuzzleSelectedShow:getSelectedPicturePath());
+        answer_sp:setOpacity(150);
+        --answer_sp:setGLProgramState(cc.GLProgramState:getOrCreateWithGLProgram(cc.GLProgram:createWithByteArrays(vertDefaultSource, 
+        --    cc.FileUtils:getInstance():getStringFromFile("shaders/example_GreyScale.fsh"))));
+        bs.SpriteTextureController:getInstance():setGrayShader(answer_sp);
+        self:addChild(answer_sp, ANSWERS_BACKGROUND_ZORDER-1);
+    end));
 
     for _, listener in ipairs(self.listener_) do
         self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
