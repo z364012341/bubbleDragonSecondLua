@@ -19,7 +19,7 @@ function PuzzleSearchProp:ctor()
         end
     end
     self:registerScriptHandler(onNodeEvent);
-    self.selfisCooling_ = false;
+    -- self.selfisCooling_ = false;
     self:init();
 end
 function PuzzleSearchProp:init()
@@ -32,7 +32,7 @@ function PuzzleSearchProp:onEnter()
 
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_SEARCH_PROP, function ( event )
 	    local timer = PuzzlePropCoolingTimerComponent:create(PROP_SEARCH_COOLING_GRAY_PATH, PROP_SEARCH_TIME);
-	    timer:setPosition(cc.p(-4, 4))
+	    timer:setPosition(cc.p(-3, 4))
 	    self:addChild(timer);
     end));
 

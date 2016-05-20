@@ -144,11 +144,17 @@ function PuzzlePlayAreaInnerContainer:onEnter()
 
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_BIG_EYES_PROP, function ( event )
         local answer_sp = GlobalFunction.createGameSpriteWithPath(PuzzleSelectedShow:getSelectedPicturePath());
-        answer_sp:setOpacity(150);
-        --answer_sp:setGLProgramState(cc.GLProgramState:getOrCreateWithGLProgram(cc.GLProgram:createWithByteArrays(vertDefaultSource, 
-        --    cc.FileUtils:getInstance():getStringFromFile("shaders/example_GreyScale.fsh"))));
+        answer_sp:setPosition(answer_sp:getContentSize().width/2, answer_sp:getContentSize().height/2);
         bs.SpriteTextureController:getInstance():setGrayShader(answer_sp);
-        self:addChild(answer_sp, ANSWERS_BACKGROUND_ZORDER-1);
+        local render = cc.RenderTexture:create(answer_sp:getContentSize().width, answer_sp:getContentSize().height);
+        render:beginWithClear(0,0,0,0);
+        answer_sp:visit();
+        render:endToLua(); 
+        local render_sp = cc.Sprite:createWithTexture(render:getSprite():getTexture());
+        render_sp:setFlipY(true);
+        render_sp:setOpacity(0);
+        render_sp:runAction(cc.Sequence:create(cc.DelayTime:create(1.24), cc.FadeIn:create(1.1), nil));--动画的播放时间2.25
+        self:addChild(render_sp, ANSWERS_BACKGROUND_ZORDER-1);
     end));
 
     for _, listener in ipairs(self.listener_) do

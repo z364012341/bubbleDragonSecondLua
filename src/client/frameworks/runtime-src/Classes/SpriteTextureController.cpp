@@ -35,6 +35,11 @@ const std::string AIMING_LINE_COMMODITY_ARMATURE_NAME = "miaozhunxian/miaozhunxi
 const std::string TWO_ROUND_BOMB_EFFECT_PATH = "zhadanTX/zhadanTX.ExportJson"; //炸2圈特效的路径
 const std::string BOMB_BOMB_BUBBLE_CENTER_FIRE_PATH = "huoqiuTX/huoqiuTX.ExportJson";
 const std::string SCORE_WIDGET_UPDATE_PATH = "yun3/yun3.ExportJson";
+const std::string PUZZLE_SEARCH_PROP_PATH = "fangdajing/fangdajing.ExportJson";
+const std::string PUZZLE_BIG_EYES_PROP_PATH = "yanjingTX/yanjingTX.ExportJson";
+const std::string PUZZLE_ADD_TIME_PROP_PATH = "pintunaozhong/pintunaozhong.ExportJson";
+const std::string PUZZLE_MOVE_ANSWER_PATH = "pintuTX3/pintuTX3.ExportJson";
+
 namespace bubble_second {
     SpriteTextureController::SpriteTextureController()
     {
@@ -90,6 +95,10 @@ namespace bubble_second {
         armature_path_.push_back(AIMING_LINE_COMMODITY_ARMATURE_NAME);
         armature_path_.push_back(BOMB_BOMB_BUBBLE_CENTER_FIRE_PATH);
         armature_path_.push_back(SCORE_WIDGET_UPDATE_PATH);
+        armature_path_.push_back(PUZZLE_SEARCH_PROP_PATH);
+        armature_path_.push_back(PUZZLE_BIG_EYES_PROP_PATH);
+        armature_path_.push_back(PUZZLE_ADD_TIME_PROP_PATH);
+        armature_path_.push_back(PUZZLE_MOVE_ANSWER_PATH);
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()

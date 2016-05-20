@@ -18,14 +18,13 @@ function PuzzlePropsBackground:init(event_use_name, event_end_name, time)
     self:addBackgroundShadow()
 end
 function PuzzlePropsBackground:addBackground(event_use_name,  event_end_name, time)
-    local menuItem = cc.MenuItemSprite:create(GlobalFunction.createGameSpriteWithPath(BACKGROUND_PATH), 
+    local menuItem = cc.MenuItemSprite:create(GlobalFunction.createGameSpriteWithPath(BACKGROUND_PATH),
     GlobalFunction.createGameSpriteWithPath(BACKGROUND_PATH));
     menuItem:setPosition(cc.p(0, 0));
-    local function callback( sender )
+    local function callback( ... )
         if self.isCooling_ then
             return
         end
-        cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(event_use_name);
         self.isCooling_ = true;
         if event_end_name ~= nil then
             self:runAction(cc.Sequence:create(cc.DelayTime:create(time), cc.CallFunc:create(function ()
@@ -33,6 +32,8 @@ function PuzzlePropsBackground:addBackground(event_use_name,  event_end_name, ti
                 cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(event_end_name);
             end), nil));
         end
+        --注意一定要先运行动作在发送消息, 因为播放动画会暂停
+        cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(event_use_name);
     end
     menuItem:registerScriptTapHandler(callback);
     local menu = cc.Menu:create();

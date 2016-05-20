@@ -19,11 +19,9 @@ function PuzzlePiecesScrollView:ctor(puzzleTable)
 end
 
 function PuzzlePiecesScrollView:init()
-	--local pos_x = PUZZLE_PIECES_INITIAL_POS_X;
 	self.scrollView_ = ccui.ScrollView:create();
-	--self.scrollView_:setSwallowTouches(true);
 	self.scrollView_:setPosition(0, 0);
-	self.scrollView_:setContentSize(cc.size(cc.Director:getInstance():getVisibleSize().width, 
+	self.scrollView_:setContentSize(cc.size(cc.Director:getInstance():getVisibleSize().width,
 		PUZZLE_PIECES_DESK_HEIGHT*bs.SmartScaleController:getInstance():getPlayAreaZoom()));
 	self.scrollView_:setBounceEnabled(true);
 	self.scrollView_:setScrollBarEnabled(false);
@@ -45,7 +43,6 @@ function PuzzlePiecesScrollView:init()
 end
 
 function PuzzlePiecesScrollView:moveOutPuzzlePiece(puzzle)
-	--local index = 0;
 	for i,v in ipairs(self.puzzle_table_) do
 		if v == puzzle then
 			table.remove(self.puzzle_table_, i);
@@ -54,7 +51,7 @@ function PuzzlePiecesScrollView:moveOutPuzzlePiece(puzzle)
 			return;
 		end
 	end
-			
+
 	-- for i=index,#self.puzzle_table_ do
 	-- 	local x = PUZZLE_STENCIL_WIDTH*(i-1) + PUZZLE_PIECES_INITIAL_POS_X;
 	-- 	self.puzzle_table_[i]:stopAllActions();
@@ -85,12 +82,18 @@ function PuzzlePiecesScrollView:adjustScrollViewInnerContainerSize()
 	self.scrollView_:setInnerContainerSize(cc.size(inner_width, PUZZLE_PIECES_DESK_HEIGHT));
 	self.scrollView_:setInnerContainerPosition(point);
 	local inner_min_pos_x = -inner_width+self.scrollView_:getContentSize().width;
-	if point.x < inner_min_pos_x then
+	if point.x < inner_min_pos_x and #self.puzzle_table_ > 3 then
 		self.scrollView_:getInnerContainer():stopAllActions();
 		self.scrollView_:getInnerContainer():runAction(cc.MoveTo:create(PUZZLE_PIECES_MOVE_DURATION, cc.p(inner_min_pos_x, 0)));
 	elseif point.x > 0 then
 		self.scrollView_:scrollToLeft(PUZZLE_PIECES_MOVE_DURATION, false);
 	end
+	-- if point.x > 0 then
+	-- 	self.scrollView_:scrollToLeft(PUZZLE_PIECES_MOVE_DURATION, false);
+	-- elseif point.x < inner_min_pos_x and #self.puzzle_table_ < 4 then
+	-- 	self.scrollView_:getInnerContainer():stopAllActions();
+	-- 	self.scrollView_:getInnerContainer():runAction(cc.MoveTo:create(PUZZLE_PIECES_MOVE_DURATION, cc.p(inner_min_pos_x, 0)));
+	-- end
 end
 function PuzzlePiecesScrollView:insertPuzzlePiece( puzzle )
 	local point = self.scrollView_:getInnerContainer():convertToNodeSpace(puzzle:getParent():convertToWorldSpace(cc.p(puzzle:getPosition())));

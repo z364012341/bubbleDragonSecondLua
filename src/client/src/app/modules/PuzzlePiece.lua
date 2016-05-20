@@ -2,7 +2,7 @@
 -- Author: 黄泽昊
 -- Date: 2016-03-04 14:16:18
 -- 功能: 一块拼图碎片
---[[params = 
+--[[params =
 	{
         index_x = 1, --拼图碎片的x索引
         index_y = 1, --拼图碎片的y索引
@@ -24,6 +24,7 @@ local PuzzlePieceShadow = require(PUZZLE_PIECE_SHADOW_PATH);
 --local PuzzlePiecesCollection = require(PUZZLE_PIECES_COLLECTION_PATH);
 --local numble = 0
 local PUZZLE_RENDER_SPRITE_NAME = "puzzle_render_sprite_name";
+local PUZZLE_MOVE_ANSWER_ANIMATION_NAME = "pintuTX3";
 PuzzlePiece.need_blink_answer_ = false;
 function PuzzlePiece:ctor(params)
     local function onNodeEvent(event)
@@ -48,9 +49,9 @@ function PuzzlePiece:initPuzzleRenderTexture(params)
     self:addPuzzlePieceEdges(params)
     --GL_DEPTH24_STENCIL8 = 0x88F0
     local puzzleRender = cc.RenderTexture:create(400, 400, cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888, 0x88F0);
-    puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0); 
+    puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0);
     self.node_:setPosition(200, 200);
-    self.node_:visit(); 
+    self.node_:visit();
     puzzleRender:endToLua();
     local render_sp = cc.Sprite:createWithTexture(puzzleRender:getSprite():getTexture());
     render_sp:setName(PUZZLE_RENDER_SPRITE_NAME);
@@ -101,7 +102,7 @@ end
 function PuzzlePiece.onTouchEnded(touch, event)
     --printf("PuzzlePiece onTouchEnded");
     local puzzle = event:getCurrentTarget();
-    puzzle._shadow:shadowBack();
+
     local isOnMoveNode = puzzle.isTouchOnMoveNode(touch, event);
     if puzzle:isToucnOnAnswer() then
         puzzle:moveToAnswer();
@@ -111,6 +112,7 @@ function PuzzlePiece.onTouchEnded(touch, event)
     puzzle.touch_listener_:setSwallowTouches(not isOnMoveNode);
     puzzle._moveNode:adjustPuzzlePiecesPosition();
     puzzle:noBlinkAnswer();
+    puzzle._shadow:shadowBack();
     --dump(puzzle._moveNode:getBoundingBox());
     --dump(touch:getLocationInView());
 end
@@ -144,6 +146,19 @@ function PuzzlePiece:moveToAnswer()
     self:setScale(1);
     cc.Director:getInstance():getEventDispatcher():removeEventListenersForTarget(self);
     cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_ANSWER_ADD);
+    self:playMoveAnswerAnimation();
+end
+
+function PuzzlePiece:playMoveAnswerAnimation()
+    local armature = ccs.Armature:create(PUZZLE_MOVE_ANSWER_ANIMATION_NAME);
+    armature:setScale(2.8);
+    --armature:addChild(bs.GameAlertMask:create());
+    armature:setPosition(cc.p(0, 0));
+    self:addChild(armature);
+    armature:getAnimation():playWithIndex(0);
+    armature:getAnimation():setMovementEventCallFunc(function ( armature, movementType, movementID)
+        armature:removeFromParent();
+    end);
 end
 
 function PuzzlePiece:setPuzzlePieceAnswer(answer)

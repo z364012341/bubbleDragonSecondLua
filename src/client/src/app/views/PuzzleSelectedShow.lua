@@ -11,11 +11,11 @@ local LANDSCAPE_PAGEVIEW_NAME = "landscape_pageview";
 local SHOW_CONTENT_SIZE = cc.size(402, 604);
 local PAGEVIEW_INITAIL_DATA = {
 	[TREASURE_MAP_PAGEVIEW_NAME] = {
-		PAGE_PATH = {"puzzle_1.png", "puzzle_11-1.png", "puzzle_11-2.png"},
+		PAGE_PATH = {"puzzle(1).png", "puzzle(2).png", "puzzle(3).png","puzzle(4).png", "puzzle(5).png", "puzzle(6).png","puzzle(7).png", "puzzle(8).png", "puzzle(9).png"},
 		VISIBLE = false;
 	},
 	[LANDSCAPE_PAGEVIEW_NAME] = {
-		PAGE_PATH = {"puzzle_3.png","puzzle_3-1.png", "puzzle_3-2.png", "puzzle_3-3.png"},
+		PAGE_PATH = {"puzzle_landscape (1).png", "puzzle_landscape (2).png", "puzzle_landscape (3).png","puzzle_landscape (4).png", "puzzle_landscape (5).png", "puzzle_landscape (6).png","puzzle_landscape (7).png", "puzzle_landscape (8).png", "puzzle_landscape (9).png"},
 		VISIBLE = true;
 	},
 }
@@ -60,6 +60,9 @@ function PuzzleSelectedShow:createPageViewWithTypeName( name )
     pageview:setName(name);
     pageview:setCurrentPageIndex(0);
     pageview:setTouchEnabled(false);
+    -- pageview:addEventListener(function (sender, eventType)
+    --     dump(eventType);
+    -- end);
     return pageview;
 end
 function PuzzleSelectedShow:changePageViewType()

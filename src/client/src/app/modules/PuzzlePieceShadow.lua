@@ -48,6 +48,7 @@ function PuzzlePieceShadow:shadowGo()
 end
 
 function PuzzlePieceShadow:shadowBack()
+    -- printf("shadowBack");
     local moveTo = cc.MoveTo:create(0.2, cc.p(20, -20));
     self:runAction(moveTo);
 end

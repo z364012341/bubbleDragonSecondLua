@@ -1,7 +1,7 @@
 --
 -- Author: 黄泽昊
 -- Date: 2016-03-04 12:06:13
--- 作用: 
+-- 作用:
 
 local PuzzlePlayScene = class("PuzzlePlayScene", function ()
     return cc.Layer:create();
@@ -28,7 +28,11 @@ local THUMBNAIL_POS_NODE_NAME = "thumbnail_pos";
 local SEARCH_PROP_POS_NODE_NAME = "Node_3";
 local BIG_EYES_PROP_POS_NODE_NAME = "Node_4";
 local ADD_TIME_POS_NODE_NAME = "Node_5";
+local PROP_SEARCH_ANIMATION_NAME = "fangdajing";
+local PROP_BIG_EYES_ANIMATION_NAME = "yanjingTX";
+local PROP_ADD_TIME_ANIMATION_NAME = "pintunaozhong";
 local PUZZLE_PIECES_SCROLLVIEW_ZORDER = 1;
+--local PROPS_ARMATURE_ZORDER = PUZZLE_PIECES_SCROLLVIEW_ZORDER+1;
 local PUZZLE_PLAY_AREA_ZORDER = -1;
 local BACKGROUND_ZORDER = PUZZLE_PLAY_AREA_ZORDER-1;
 local TOP_WIDGET_POS_Y_PERCENT = 0.95;
@@ -91,8 +95,8 @@ function PuzzlePlayScene:initPauseButton()
     --     if touchType == ccui.TouchEventType.began then
     --         local size = cc.Director:getInstance():getVisibleSize();
     --         local puzzleRender = cc.RenderTexture:create(size.width, size.height, cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888, 0x88F0);
-    --         puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0); 
-    --         self:visit(); 
+    --         puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0);
+    --         self:visit();
     --         puzzleRender:endToLua();
     --         self.screen_sp_ = cc.Sprite:createWithTexture(puzzleRender:getSprite():getTexture());
     --         self.screen_sp_:setFlippedY(true);
@@ -128,6 +132,22 @@ function PuzzlePlayScene:getPuzzlePlayAreaPosition()
 end
 function PuzzlePlayScene:addPuzzleScrollView( puzzleTable )
 	self.csb_node_:addChild(PuzzlePiecesScrollView:create(puzzleTable), PUZZLE_PIECES_SCROLLVIEW_ZORDER);
+end
+function PuzzlePlayScene:popPropsAnimation( animation_name )
+    self:gamePause();
+    --local button_mask = bs.GameAlertMask:create();
+    --self:addChild(button_mask);
+    local armature = ccs.Armature:create(animation_name);
+    armature:setScale(1.5);
+    armature:addChild(bs.GameAlertMask:create());
+    armature:setPosition(cc.p(cc.Director:getInstance():getVisibleSize().width/2, cc.Director:getInstance():getVisibleSize().height*0.4));
+    self:addChild(armature);
+    armature:getAnimation():playWithIndex(0);
+    armature:getAnimation():setMovementEventCallFunc(function ( armature, movementType, movementID)
+        --printf("PuzzlePlayScene:popPropsAnimation");
+        self:gameResum();
+        armature:removeFromParent();
+    end);
 end
 function PuzzlePlayScene:onEnter()
 	self.listener_ = {};
@@ -173,6 +193,15 @@ function PuzzlePlayScene:onEnter()
     end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_GAME_VICTORY, gameVictory));
 
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_SEARCH_PROP, function ( event )
+        self:popPropsAnimation(PROP_SEARCH_ANIMATION_NAME);
+    end));
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_BIG_EYES_PROP, function ( event )
+        self:popPropsAnimation(PROP_BIG_EYES_ANIMATION_NAME);
+    end));
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_ADD_TIME_PROP, function ( event )
+        self:popPropsAnimation(PROP_ADD_TIME_ANIMATION_NAME);
+    end));
     for _, listener in ipairs(self.listener_) do
     	self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
     end
@@ -185,10 +214,15 @@ function PuzzlePlayScene:onExit()
     end
 end
 function PuzzlePlayScene:gameResum()
+    --printf("gameResum");
     cc.Director:getInstance():getActionManager():resumeTargets(self.pause_nodes_);
 end
-function PuzzlePlayScene:popPauseAlert()
+function PuzzlePlayScene:gamePause()
+    --printf("pause");
     self.pause_nodes_ = cc.Director:getInstance():getActionManager():pauseAllRunningActions();
+end
+function PuzzlePlayScene:popPauseAlert()
+    self:gamePause();
 	self:popAlert(PuzzleGamePauseAlert, self.countdown_:getRemainTime());
 end
 function PuzzlePlayScene:popDefeatAlert()
@@ -196,15 +230,15 @@ function PuzzlePlayScene:popDefeatAlert()
 end
 function PuzzlePlayScene:popVictoryAlert()
     self.countdown_:pause();
-    bs.UserDataManager:getInstance():insertPuzzleStageData(require(PUZZLE_SELECTED_SHOW_PATH):getSelectedPicturePath(), 
+    bs.UserDataManager:getInstance():insertPuzzleStageData(require(PUZZLE_SELECTED_SHOW_PATH):getSelectedPicturePath(),
         self.countdown_:getTimeConsuming());
     self:popAlert(PuzzleGameVictoryAlert, self.countdown_:getTimeConsuming());
 end
 function PuzzlePlayScene:popAlert( alert_class , params)
     local size = cc.Director:getInstance():getVisibleSize();
     local puzzleRender = cc.RenderTexture:create(size.width, size.height, cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888, 0x88F0);
-    puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0); 
-    self:visit(); 
+    puzzleRender:beginWithClear(0.0, 0.0, 0.0, 0.0);
+    self:visit();
     puzzleRender:endToLua();
     self.screen_sp_ = cc.Sprite:createWithTexture(puzzleRender:getSprite():getTexture());
     self.screen_sp_:setFlippedY(true);
