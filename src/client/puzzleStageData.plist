@@ -3,9 +3,13 @@
 
 <plist version="1.0">
     <dict>
+        <key>puzzle_landscape (1).png</key>
+        <integer>5</integer>
         <key>puzzle_1.png</key>
         <integer>27</integer>
         <key>puzzle_3.png</key>
         <integer>25</integer>
+        <key>puzzle_landscape (2).png</key>
+        <integer>36</integer>
     </dict>
 </plist>

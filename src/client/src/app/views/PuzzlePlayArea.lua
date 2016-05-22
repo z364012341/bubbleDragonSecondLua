@@ -10,6 +10,7 @@ local PuzzlePlayAreaInnerContainer = require(PUZZLE_PLAY_AREA_INNER_CONTAINER);
 local PUZZLE_AREA_EDGE_PATH = "pintudi.PNG";
 local COLOR_LAYER_WIDTH = 656;
 local COLOR_LAYER_HEIGHT = 805;
+
 function PuzzlePlayArea:ctor()
     --printf("PuzzlePlayArea");
     self:init();
@@ -38,7 +39,11 @@ function PuzzlePlayArea:initPlayArea()
     self.play_area_:setScale(self:calculatePuzzleScale());
 end
 function PuzzlePlayArea:calculatePuzzleScale()
-    return GlobalFunction.calculateMinSizeScale(cc.size(COLOR_LAYER_WIDTH, COLOR_LAYER_HEIGHT), self.play_area_:getContentSize())*0.96;
+    --return GlobalFunction.calculateMinSizeScale(cc.size(COLOR_LAYER_WIDTH, COLOR_LAYER_HEIGHT), self.play_area_:getContentSize())*0.96;
+    return self:calculatePuzzleScaleWithSize(self.play_area_:getContentSize());
+end
+function PuzzlePlayArea:calculatePuzzleScaleWithSize(size)
+    return GlobalFunction.calculateMinSizeScale(cc.size(COLOR_LAYER_WIDTH, COLOR_LAYER_HEIGHT), size)*0.96;
     --return math.min(COLOR_LAYER_WIDTH/self.play_area_:getContentSize().width, COLOR_LAYER_HEIGHT/self.play_area_:getContentSize().height)*0.96;
 end
 function PuzzlePlayArea:getBackgroundColorLayer()
@@ -81,16 +86,40 @@ function PuzzlePlayArea:getThumbnail()
     local color_layer = self:getBackgroundColorLayer();
     local node = cc.Node:create();
     node:addChild(color_layer);
-    local thumbnail = self.play_area_:getAnswersThumbnail();
+    --local thumbnail = self.play_area_:getAnswersThumbnail();
+    local thumbnail = self:getThumbnailWithoutBackground();
+    --thumbnail:retain();
+    --thumbnail:removeFromParent();
     thumbnail:setScale(self:calculatePuzzleScale());
     local thumbnail_x = thumbnail:getContentSize().width*thumbnail:getScale()/-2;
     local thumbnail_y = thumbnail:getContentSize().height*thumbnail:getScale()/-2;
     thumbnail:setPosition(cc.p(thumbnail_x, thumbnail_y));
     node:addChild(thumbnail, 1);
-    thumbnail:release();
+    --thumbnail:release();
     node:addChild(self:createWindowsEdge());
 
     return node;
     --]]
+end
+
+function PuzzlePlayArea:getThumbnailWithoutBackground()
+    local node = cc.Node:create();
+    local thumbnail = self.play_area_:getAnswersThumbnail();
+    thumbnail:retain();
+    thumbnail:removeFromParent();
+    node:addChild(thumbnail);
+    thumbnail:release();
+    return node;
+end
+function PuzzlePlayArea:getAnswersThumbnail()
+    -- local bg = GlobalFunction.createGameSpriteWithPath(ANSWER_FLASH_BACKGROUND);
+    -- local answer_size = self.answerNode_:getContentSize();
+    -- bg:setScale(answer_size.width / ANSWER_FLASH_INNER_SIZE.width*0.8, self.answerNode_:getContentSize().height / ANSWER_FLASH_INNER_SIZE.height*0.8);
+    -- self.answerNode_:addChild(bg);
+    -- self.answerNode_:runAction(cc.Sequence:create(cc.ScaleBy:create(2, 2), cc.CallFunc:create(function (  )
+    --     printf("111111111");
+    -- end)));
+    --self.play_area_:
+    return self.play_area_:getAnswersThumbnail()
 end
 return PuzzlePlayArea

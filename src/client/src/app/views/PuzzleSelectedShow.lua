@@ -5,20 +5,10 @@
 local PuzzleSelectedShow = class("PuzzleSelectedShow", function ()
     return cc.Node:create();
 end)
+local PuzzleSelectedPageView = require(PUZZLE_SELECTED_PAGEVIEW_PATH);
 PuzzleSelectedShow.selected_puzzle_path_ = "";
-local TREASURE_MAP_PAGEVIEW_NAME = "treasure_map_pageview";
-local LANDSCAPE_PAGEVIEW_NAME = "landscape_pageview";
-local SHOW_CONTENT_SIZE = cc.size(402, 604);
-local PAGEVIEW_INITAIL_DATA = {
-	[TREASURE_MAP_PAGEVIEW_NAME] = {
-		PAGE_PATH = {"puzzle(1).png", "puzzle(2).png", "puzzle(3).png","puzzle(4).png", "puzzle(5).png", "puzzle(6).png","puzzle(7).png", "puzzle(8).png", "puzzle(9).png"},
-		VISIBLE = false;
-	},
-	[LANDSCAPE_PAGEVIEW_NAME] = {
-		PAGE_PATH = {"puzzle_landscape (1).png", "puzzle_landscape (2).png", "puzzle_landscape (3).png","puzzle_landscape (4).png", "puzzle_landscape (5).png", "puzzle_landscape (6).png","puzzle_landscape (7).png", "puzzle_landscape (8).png", "puzzle_landscape (9).png"},
-		VISIBLE = true;
-	},
-}
+
+
 function PuzzleSelectedShow:ctor()
     local function onNodeEvent(event)
         if event == "enter" then
@@ -41,29 +31,25 @@ function PuzzleSelectedShow:addLandscapePuzzlePageview()
     self.landscape_pageview_ = self:createPageViewWithTypeName(LANDSCAPE_PAGEVIEW_NAME);
     self:addChild(self.landscape_pageview_);
 end
-function PuzzleSelectedShow:createPageWithPath( path )
-    local layout = ccui.Layout:create();
-    local sp = GlobalFunction.createGameSpriteWithPath(path);
-    sp:setScale(GlobalFunction.calculateMinSizeScale(SHOW_CONTENT_SIZE, sp:getContentSize()));
-    sp:setPosition(cc.p(SHOW_CONTENT_SIZE.width/2, SHOW_CONTENT_SIZE.height/2));
-    layout:addChild(sp);
-    return layout;
-end
+
 function PuzzleSelectedShow:createPageViewWithTypeName( name )
-    local pageview= ccui.PageView:create();
-    pageview:setContentSize(SHOW_CONTENT_SIZE);
-    --self:addChild(pageview);
-	for _, path in ipairs(PAGEVIEW_INITAIL_DATA[name].PAGE_PATH) do
-	    pageview:addPage(self:createPageWithPath(path));
-	end
-	pageview:setVisible(PAGEVIEW_INITAIL_DATA[name].VISIBLE);
-    pageview:setName(name);
-    pageview:setCurrentPageIndex(0);
-    pageview:setTouchEnabled(false);
-    -- pageview:addEventListener(function (sender, eventType)
-    --     dump(eventType);
-    -- end);
-    return pageview;
+ --    local pageview= ccui.PageView:create();
+ --    pageview:setContentSize(SHOW_CONTENT_SIZE);
+ --    --self:addChild(pageview);
+	-- for _, path in ipairs(PAGEVIEW_INITAIL_DATA[name].PAGE_PATH) do
+	--     pageview:addPage(self:createPageWithPath(path));
+	-- end
+	-- pageview:setVisible(PAGEVIEW_INITAIL_DATA[name].VISIBLE);
+ --    pageview:setName(name);
+ --    pageview:setCurrentPageIndex(0);
+ --    pageview:setTouchEnabled(false);
+
+ --    local guide_point = PuzzleSelectedPageViewPoint:create(#PAGEVIEW_INITAIL_DATA[name].PAGE_PATH);
+ --    guide_point:setPosition();
+ --    --guide_point:setPosition(cc.p(100, -50));
+ --    --pageview:addChild(guide_point);
+ --    return pageview, guide_point;
+    return PuzzleSelectedPageView:create(name);
 end
 function PuzzleSelectedShow:changePageViewType()
 	self.treasure_map_pageview_:setVisible(not self.treasure_map_pageview_:isVisible());
@@ -84,12 +70,12 @@ function PuzzleSelectedShow:onEnter()
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_CHANGE_PAGEVIEW_TYPE, changePageViewType));
 
 	local function scrollLeft( event )
-		self.current_pageview_:scrollToPage(self.current_pageview_:getCurrentPageIndex()-1);
+		self.current_pageview_:scrollLeft();
 	end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_SELECTED_SCROLL_LEFT, scrollLeft));
 
 	local function scrollRight( event )
-		self.current_pageview_:scrollToPage(self.current_pageview_:getCurrentPageIndex()+1);
+		self.current_pageview_:scrollRight();
 	end
 	table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_SELECTED_SCROLL_RIGHT, scrollRight));
 
