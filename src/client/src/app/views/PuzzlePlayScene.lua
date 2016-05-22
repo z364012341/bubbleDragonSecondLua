@@ -251,7 +251,7 @@ function PuzzlePlayScene:popVictoryAlert()
     node:setScale(distance / answer:getContentSize().width);
     local flash_bg = GlobalFunction.createGameSpriteWithPath(ANSWER_FLASH_BACKGROUND);
     local answer_size = answer:getContentSize();
-    flash_bg:setScale(answer_size.width / ANSWER_FLASH_INNER_SIZE.width*ANSWER_FLASH_INITAIL_SCALE, 
+    flash_bg:setScale(answer_size.width / ANSWER_FLASH_INNER_SIZE.width*ANSWER_FLASH_INITAIL_SCALE,
         answer:getContentSize().height / ANSWER_FLASH_INNER_SIZE.height*ANSWER_FLASH_INITAIL_SCALE);
     node:addChild(flash_bg, -1);
     node:setPosition(self:convertToNodeSpace(point));
