@@ -105,9 +105,9 @@ end
 --     self:setPositionY(self:getPositionY() + dis.y);
 -- end
 function PuzzlePlayAreaInnerContainer:getAnswersThumbnail()
-    self.answerNode_:retain();
+    --self.answerNode_:retain();
     self:saveAnswerNodeData();
-    self.answerNode_:removeFromParent();
+    --self.answerNode_:removeFromParent();
     return self.answerNode_;
 end
 function PuzzlePlayAreaInnerContainer:pushAnswersThumbnail()
@@ -126,6 +126,9 @@ function PuzzlePlayAreaInnerContainer:useSmallEyesProp()
     local action = cc.Sequence:create(cc.FadeIn:create(PROP_SMALL_EYES_TIME), cc.FadeOut:create(PROP_SMALL_EYES_TIME), nil);
     self.answer_background_:runAction(action);
 end
+-- function PuzzlePlayAreaInnerContainer:playAnswersZoomInAction()
+
+-- end
 function PuzzlePlayAreaInnerContainer:onEnter()
     self.listener_ = {};
     -- local function pushAnswersThumbnail( event )
@@ -155,6 +158,10 @@ function PuzzlePlayAreaInnerContainer:onEnter()
         render_sp:setOpacity(0);
         render_sp:runAction(cc.Sequence:create(cc.DelayTime:create(1.24), cc.FadeIn:create(1.1), nil));--动画的播放时间2.25
         self:addChild(render_sp, ANSWERS_BACKGROUND_ZORDER-1);
+    end));
+
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_ANSWER_ZOOM_IN_ACTION, function ( event )
+        self:playAnswersZoomInAction();
     end));
 
     for _, listener in ipairs(self.listener_) do

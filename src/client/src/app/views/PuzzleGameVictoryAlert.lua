@@ -10,9 +10,13 @@ local PUZZLE_VICTORY_ALERT_CSB_PATH = "PuzzleVictoryAlert.csb";
 local REPLAY_BUTTON_NAME = "replayButton";
 local RETURN_BUTTON_NODE_NAME = "returnButton";
 local PuzzleTimeDisplay = require(PUZZLE_TIME_DISPLAY_PATH);
+local PuzzlePlayArea = require(PUZZLE_PLAY_AREA_PATH);
 local TIME_CONSUMING_NODE_NAME = "time_consuming_node";
+local THUMBNAIL_POS_NODE_NAME = "thumbnail_pos";
 local TIME_BEST_CONSUMING_NODE_NAME = "Node_5";
+local inlayAnswers_DURATION
 local TIME_LABEL_SCALE = 0.75;
+local ALERT_SHARE_BUTTON_POS = cc.p(187, -155);
 function PuzzleGameVictoryAlert:ctor(time_consuming)
     self:init(time_consuming);
 end
@@ -35,6 +39,14 @@ function PuzzleGameVictoryAlert:loadCSB()
         cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_REPLAY);
     end);
     bs.ButtonEffectController:setButtonsZoomScale(self.csb_node_);
+
+    local colorlayer = PuzzlePlayArea:getBackgroundColorLayer();
+    -- dump(colorlayer);
+    colorlayer:setScale(PUZZLE_ALERT_THUMBNAIL_SCALE);
+    self:addChildToThumbnailPosNode(colorlayer);
+    local edge = PuzzlePlayArea:createWindowsEdge();
+    edge:setScale(PUZZLE_ALERT_THUMBNAIL_SCALE);
+    self:addChildToThumbnailPosNode(edge);
 end
 function PuzzleGameVictoryAlert:addMaskBackground()
     self:addChild(bs.GameAlertMask:create(), -1);
@@ -52,7 +64,26 @@ function PuzzleGameVictoryAlert:addBestTimeConsumingLabel()
     time_display:setScale(TIME_LABEL_SCALE);
     self.csb_node_:getChildByName(TIME_BEST_CONSUMING_NODE_NAME):addChild(time_display);
 end
-function PuzzleGameVictoryAlert:getCsbNode()
-    return self.csb_node_;
+function PuzzleGameVictoryAlert:getThumbnailPosNode()
+    return self.csb_node_:getChildByName(THUMBNAIL_POS_NODE_NAME);
+end
+function PuzzleGameVictoryAlert:addChildToThumbnailPosNode( node )
+    self:getThumbnailPosNode():addChild(node);
+end
+function PuzzleGameVictoryAlert:inlayAnswers(flash_answers_node, callFunc)
+    local point = flash_answers_node:getParent():convertToWorldSpace(cc.p(flash_answers_node:getPosition()));
+    flash_answers_node:retain();
+    flash_answers_node:removeFromParent();
+    self:addChildToThumbnailPosNode(flash_answers_node);
+    flash_answers_node:release();
+    flash_answers_node:setPosition(self:getThumbnailPosNode():convertToNodeSpace(point));
+
+    flash_answers_node:runAction(cc.Sequence:create(cc.MoveTo:create(0.5, cc.p(0,0)), callFunc, cc.CallFunc:create(function ()
+        local share_button = bs.GameShareButton:create();
+        share_button:setPosition(ALERT_SHARE_BUTTON_POS);
+        self.csb_node_:addChild(share_button);
+    end) , nil));
+    flash_answers_node:runAction(cc.ScaleTo:create(0.5, PuzzlePlayArea:calculatePuzzleScaleWithSize(flash_answers_node:getContentSize())*PUZZLE_ALERT_THUMBNAIL_SCALE));
+
 end
 return PuzzleGameVictoryAlert

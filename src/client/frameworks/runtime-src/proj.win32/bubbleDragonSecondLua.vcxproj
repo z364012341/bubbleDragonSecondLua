@@ -247,6 +247,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\GameScoreController.h" />
     <ClInclude Include="..\Classes\GameSettingAlert.h" />
+    <ClInclude Include="..\Classes\GameShareButton.h" />
     <ClInclude Include="..\Classes\GameStageSelectionCell.h" />
     <ClInclude Include="..\Classes\GameStageSelectionScene.h" />
     <ClInclude Include="..\Classes\GameStageVehicle.h" />
@@ -266,6 +267,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\lua_ButtonEffectController_auto.hpp" />
     <ClInclude Include="..\Classes\lua_ControlButtonController_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameAlertMask_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_GameShareButton_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameStageSelectionScene_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameStartButton_auto.hpp" />
     <ClInclude Include="..\Classes\lua_LoadingScene_auto.hpp" />
@@ -376,6 +378,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\GameScoreController.cpp" />
     <ClCompile Include="..\Classes\GameSettingAlert.cpp" />
+    <ClCompile Include="..\Classes\GameShareButton.cpp" />
     <ClCompile Include="..\Classes\GameStageSelectionCell.cpp" />
     <ClCompile Include="..\Classes\GameStageSelectionScene.cpp" />
     <ClCompile Include="..\Classes\GameStageVehicle.cpp" />
@@ -394,6 +397,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\lua_ButtonEffectController_auto.cpp" />
     <ClCompile Include="..\Classes\lua_ControlButtonController_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameAlertMask_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_GameShareButton_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameStageSelectionScene_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameStartButton_auto.cpp" />
     <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp" />

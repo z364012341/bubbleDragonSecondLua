@@ -29,6 +29,8 @@ cc.exports.PUZZLE_SEARCH_PROP_PATH = "app.views.PuzzleSearchProp";
 cc.exports.PUZZLE_PROP_COOLING_TIMER_COMPONENT_PATH = "app.views.PuzzlePropCoolingTimerComponent";
 cc.exports.PUZZLE_BIG_EYES_PROP_PATH = "app.views.PuzzleBigEyesProp";
 cc.exports.PUZZLE_ADD_TIME_PROP_PATH = "app.views.PuzzleAddTimeProp";
+cc.exports.PUZZLE_SELECTED_PAGEVIEW_POINT_PATH = "app.views.PuzzleSelectedPageViewPoint";
+cc.exports.PUZZLE_SELECTED_PAGEVIEW_PATH = "app.views.PuzzleSelectedPageView";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";
@@ -49,6 +51,7 @@ cc.exports.EVENT_USE_SEARCH_PROP = "event_use_search_prop";
 cc.exports.EVENT_END_SEARCH_PROP = "event_end_search_prop";
 cc.exports.EVENT_USE_BIG_EYES_PROP = "event_use_big_eyes_prop";
 cc.exports.EVENT_USE_ADD_TIME_PROP = "event_use_add_time_prop";
+-- cc.exports.EVENT_ANSWER_ZOOM_IN_ACTION = "event_answer_zoom_in_action";
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
 cc.exports.PUZZLE_COMPONENT_PATH = "puzzleStencil_2.png";
@@ -79,6 +82,7 @@ cc.exports.PUZZLE_PIECE_SHADOW_OFFSET_POSITION = {x = 20, y = -20};
 cc.exports.PUZZLE_PIECE_SCALE = PUZZLE_STENCIL_WIDTH / PUZZLE_STENCIL_LENGTH;
 cc.exports.PROP_SMALL_EYES_TIME = 2;
 
+cc.exports.PUZZLE_ALERT_THUMBNAIL_SCALE = 0.56
 
 cc.exports.PUZZLE_STENCIL_COMPONENT_INSIDE = "component_inside";
 cc.exports.PUZZLE_STENCIL_COMPONENT_OUTSIDE = "component_outside";
@@ -114,4 +118,16 @@ cc.exports.puzzle = {
 	   [PUZZLE_STENCIL_COMPONENT_OUTSIDE] = PUZZLE_PIECE_SHADOW_FULL_PATH,
 	   [PUZZLE_STENCIL_COMPONENT_INSIDE] = PUZZLE_PIECE_SHADOW_LACK_PATH
 	}
+}
+cc.exports.TREASURE_MAP_PAGEVIEW_NAME = "treasure_map_pageview";
+cc.exports.LANDSCAPE_PAGEVIEW_NAME = "landscape_pageview";
+cc.exports.PAGEVIEW_INITAIL_DATA = {
+	[TREASURE_MAP_PAGEVIEW_NAME] = {
+		PAGE_PATH = {"puzzle(2).png", "puzzle(3).png","puzzle(4).png", "puzzle(5).png", "puzzle(6).png","puzzle(7).png", "puzzle(8).png", "puzzle(9).png"},
+		VISIBLE = false;
+	},
+	[LANDSCAPE_PAGEVIEW_NAME] = {
+		PAGE_PATH = {"puzzle_landscape (1).png", "puzzle_landscape (2).png", "puzzle_landscape (3).png","puzzle_landscape (4).png", "puzzle_landscape (5).png", "puzzle_landscape (6).png","puzzle_landscape (7).png", "puzzle_landscape (8).png", "puzzle_landscape (9).png"},
+		VISIBLE = true;
+	},
 }

@@ -11,6 +11,7 @@ local PUZZLE_GAME_PAUSE_ALERT_CSB_PATH = "PuzzlePauseAlert.csb";
 local CONTINUE_BUTTON_NODE_NAME = "Node_1";
 local RETURN_BUTTON_NODE_NAME = "returnButton";
 local REPLAY_BUTTON_NODE_NAME = "replayButton";
+local THUMBNAIL_POS_NODE_NAME = "thumbnail_pos";
 local REMAINING_TIME_NODE_NAME = "remainingTime";
 local MASK_ZORDER = -1;
 local SCREEN_SHOT_ZORDER = MASK_ZORDER-1;
@@ -53,7 +54,10 @@ function PuzzleGamePauseAlert:addMaskBackground()
     self:addChild(bs.GameAlertMask:create(), MASK_ZORDER);
 end
 
-function PuzzleGamePauseAlert:getCsbNode()
-    return self.csb_node_;
+function PuzzleGamePauseAlert:getThumbnailPosNode()
+    return self.csb_node_:getChildByName(THUMBNAIL_POS_NODE_NAME);
+end
+function PuzzleGamePauseAlert:addChildToThumbnailPosNode( node )
+    self:getThumbnailPosNode():addChild(node);
 end
 return PuzzleGamePauseAlert

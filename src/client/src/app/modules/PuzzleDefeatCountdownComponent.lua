@@ -89,8 +89,9 @@ function PuzzleDefeatCountdownComponent:onExit()
     for _, listener in ipairs(self.listener_) do
         eventDispatcher:removeEventListener(listener);
     end
-    scheduler:unscheduleScriptEntry(self.scheduler_id_1_);
-    scheduler:unscheduleScriptEntry(self.scheduler_id_2_);
+    -- dump(self.scheduler_id_1_);
+    -- cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.scheduler_id_1_);
+    -- cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.scheduler_id_2_);
 
 end
 return PuzzleDefeatCountdownComponent

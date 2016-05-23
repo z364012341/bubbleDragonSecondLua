@@ -112,7 +112,7 @@ function PuzzlePiece.onTouchEnded(touch, event)
     puzzle.touch_listener_:setSwallowTouches(not isOnMoveNode);
     puzzle._moveNode:adjustPuzzlePiecesPosition();
     puzzle:noBlinkAnswer();
-    puzzle._shadow:shadowBack();
+    puzzle:moveBackShadow();
     --dump(puzzle._moveNode:getBoundingBox());
     --dump(touch:getLocationInView());
 end
@@ -137,6 +137,7 @@ function PuzzlePiece:moveToAnswer()
     --local answerPoint = answer:getParent():convertToWorldSpace(cc.p(answer:getPosition()));
     --self:setPosition(self:getParent():convertToNodeSpace(answerPoint));
     self._shadow:removeFromParent();
+    self._shadow = nil;
     --self:setLocalZOrder(0);
     self:retain();
     self:removeFromParent();
@@ -148,7 +149,11 @@ function PuzzlePiece:moveToAnswer()
     cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_ANSWER_ADD);
     self:playMoveAnswerAnimation();
 end
-
+function PuzzlePiece:moveBackShadow()
+    if self._shadow ~= nil then
+        self._shadow:shadowBack();
+    end
+end
 function PuzzlePiece:playMoveAnswerAnimation()
     local armature = ccs.Armature:create(PUZZLE_MOVE_ANSWER_ANIMATION_NAME);
     armature:setScale(2.8);

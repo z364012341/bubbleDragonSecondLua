@@ -25,7 +25,6 @@ local CSB_DESK_NAME = "pintutaizi_2";
 local PAUSE_BUTTON_NAME = "Button_1";
 local SMALL_EYES_BUTTON_NAME = "Node_2";
 local BACKGROUND_NAME = "pintubeijing02_1";
-local THUMBNAIL_POS_NODE_NAME = "thumbnail_pos";
 local SEARCH_PROP_POS_NODE_NAME = "Node_3";
 local BIG_EYES_PROP_POS_NODE_NAME = "Node_4";
 local ADD_TIME_POS_NODE_NAME = "Node_5";
@@ -37,6 +36,9 @@ local PUZZLE_PIECES_SCROLLVIEW_ZORDER = 1;
 local PUZZLE_PLAY_AREA_ZORDER = -1;
 local BACKGROUND_ZORDER = PUZZLE_PLAY_AREA_ZORDER-1;
 local TOP_WIDGET_POS_Y_PERCENT = 0.95;
+local ANSWER_FLASH_BACKGROUND = "pintuguang_0000_8.png";
+local ANSWER_FLASH_INNER_SIZE = cc.size(728, 1096);
+local ANSWER_FLASH_INITAIL_SCALE = 0.98;
 function PuzzlePlayScene:ctor()
     --printf("PuzzlePlayScene");
     local function onNodeEvent(event)
@@ -240,7 +242,40 @@ function PuzzlePlayScene:popVictoryAlert()
     self.countdown_:pause();
     bs.UserDataManager:getInstance():insertPuzzleStageData(require(PUZZLE_SELECTED_SHOW_PATH):getSelectedPicturePath(),
         self.countdown_:getTimeConsuming());
-    self:popAlert(PuzzleGameVictoryAlert, self.countdown_:getTimeConsuming());
+    --self:popAlert(PuzzleGameVictoryAlert, self.countdown_:getTimeConsuming());
+    --cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_ANSWER_ZOOM_IN_ACTION);
+    local answer = self.puzzle_area_:getAnswersThumbnail();
+    --answer:setScale(1);
+    local point = answer:convertToWorldSpace(cc.p(answer:getContentSize().width/2, answer:getContentSize().height/2));
+    local point_00 = answer:convertToWorldSpace(cc.p(0, 0));
+    local point_01 = answer:convertToWorldSpace(cc.p(answer:getContentSize().width, 0));
+    local distance = cc.pGetDistance(point_00, point_01);
+    local node = cc.Node:create();
+    node:setContentSize(answer:getContentSize());
+    answer:retain();
+    answer:removeFromParent();
+    node:addChild(answer, 2);
+    answer:release();
+    node:setScale(distance / answer:getContentSize().width);
+    local flash_bg = GlobalFunction.createGameSpriteWithPath(ANSWER_FLASH_BACKGROUND);
+    local answer_size = answer:getContentSize();
+    flash_bg:setScale(answer_size.width / ANSWER_FLASH_INNER_SIZE.width*ANSWER_FLASH_INITAIL_SCALE,
+        answer:getContentSize().height / ANSWER_FLASH_INNER_SIZE.height*ANSWER_FLASH_INITAIL_SCALE);
+    node:addChild(flash_bg, -1);
+    node:setPosition(self:convertToNodeSpace(point));
+    self:addChild(node);
+
+    node:runAction(cc.Sequence:create(cc.ScaleBy:create(0.5, 1.7), cc.CallFunc:create(
+        function ()
+            self.alert_ = PuzzleGameVictoryAlert:create(self.countdown_:getTimeConsuming());
+            self.alert_:setPosition(GlobalFunction.getVisibleCenterPosition());
+            self:addChild(self.alert_);
+            -- self.alert_:setVisible(false);
+            self.alert_:inlayAnswers(node, cc.CallFunc:create(function ()
+                flash_bg:removeFromParent();
+            end));
+        end), nil));
+    flash_bg:runAction(cc.ScaleBy:create(0.5, 1.05));
 end
 function PuzzlePlayScene:popAlert( alert_class , params)
     local size = cc.Director:getInstance():getVisibleSize();
@@ -257,12 +292,13 @@ function PuzzlePlayScene:popAlert( alert_class , params)
         self.screen_sp_:setVisible(true);
         self.alert_ = alert_class:create(params);
         local thumbnail = self.puzzle_area_:getThumbnail();
-        thumbnail:setScale(0.56);
-        self.alert_:getCsbNode():getChildByName(THUMBNAIL_POS_NODE_NAME):addChild(thumbnail);
+        thumbnail:setScale(PUZZLE_ALERT_THUMBNAIL_SCALE);
+        self.alert_:addChildToThumbnailPosNode(thumbnail);
         self.alert_:setPosition(GlobalFunction.getVisibleCenterPosition());
         self:addChild(self.alert_);
     end
     self:runAction(cc.Sequence:create(cc.DelayTime:create(0.01), cc.CallFunc:create(callfunc)));
     --self:runAction(cc.CallFunc:create(callfunc));
 end
+
 return PuzzlePlayScene

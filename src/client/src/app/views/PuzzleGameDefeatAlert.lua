@@ -9,6 +9,7 @@ end)
 local PUZZLE_DEFEAT_ALERT_CSB_PATH = "PuzzleDefeatAlert.csb";
 local RETURN_BUTTON_NODE_NAME = "returnButton";
 local REPLAY_BUTTON_NODE_NAME = "replayButton";
+local THUMBNAIL_POS_NODE_NAME = "thumbnail_pos";
 local TIME_CONSUMING_NODE_NAME = "Node_1";
 local PuzzleTimeDisplay = require(PUZZLE_TIME_DISPLAY_PATH);
 function PuzzleGameDefeatAlert:ctor(time_consuming)
@@ -34,8 +35,11 @@ function PuzzleGameDefeatAlert:addMaskBackground()
     self:addChild(bs.GameAlertMask:create(), -1);
 end
 
-function PuzzleGameDefeatAlert:getCsbNode()
-    return self.csb_node_;
+function PuzzleGameDefeatAlert:getThumbnailPosNode()
+    return self.csb_node_:getChildByName(THUMBNAIL_POS_NODE_NAME);
+end
+function PuzzleGameDefeatAlert:addChildToThumbnailPosNode( node )
+    self:getThumbnailPosNode():addChild(node);
 end
 function PuzzleGameDefeatAlert:addTimeConsumingLabel(time_consuming)
     local time_display = PuzzleTimeDisplay:create();
