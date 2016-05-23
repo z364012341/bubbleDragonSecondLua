@@ -19,6 +19,7 @@ local PuzzleSmallEyesProp = require(PUZZLE_SMALL_EYES_PROP_PATH);
 local PuzzleSearchProp = require(PUZZLE_SEARCH_PROP_PATH);
 local PuzzleBigEyesProp = require(PUZZLE_BIG_EYES_PROP_PATH);
 local PuzzleAddTimeProp = require(PUZZLE_ADD_TIME_PROP_PATH);
+local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
 local PUZZLE_PLAY_SCENE_CSB_PATH = "PuzzlePlayLayer.csb";
 local CSB_DESK_NAME = "pintutaizi_2";
 local PAUSE_BUTTON_NAME = "Button_1";
@@ -60,9 +61,6 @@ function PuzzlePlayScene:init()
 	self:initPauseButton();
     self:addSmallEyesButton();
 	self:initZOrder();
-    self:addTimeClock();
-	self.countdown_ = PuzzleDefeatCountdownComponent:create();
-	self:addChild(self.countdown_);
     self:addChild(PuzzleVictoryCountdownComponent:create());
     self:addPuzzleProps(PuzzleSearchProp, SEARCH_PROP_POS_NODE_NAME);
     self:addPuzzleProps(PuzzleBigEyesProp, BIG_EYES_PROP_POS_NODE_NAME);
@@ -74,7 +72,16 @@ function PuzzlePlayScene:addPuzzleProps(class, pos_name)
     search_node:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     search_node:setPositionY(search_node:getPositionY()*bs.SmartScaleController:getInstance():getPlayAreaZoom());
 end
-
+function PuzzlePlayScene:initGameTime()
+    local time = bs.PuzzleStageDataManager:getInstance():getGameTimeWithkey(PuzzleSelectedShow:getSelectedPicturePath());
+    if time > 0 then
+        self:addTimeClock();
+        self.countdown_ = PuzzleDefeatCountdownComponent:create();
+    else
+        self.countdown_ = PuzzleDefeatCountdownComponent:create();
+    end
+    self:addChild(self.countdown_);
+end
 function PuzzlePlayScene:addTimeClock()
     local clock = PuzzleTimeDisplay:create();
     local size = cc.Director:getInstance():getVisibleSize();
@@ -206,6 +213,7 @@ function PuzzlePlayScene:onEnter()
     	self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
     end
 	self:addPuzzlePlayArea();
+        self:initGameTime();
 end
 function PuzzlePlayScene:onExit()
     local eventDispatcher = self:getEventDispatcher();

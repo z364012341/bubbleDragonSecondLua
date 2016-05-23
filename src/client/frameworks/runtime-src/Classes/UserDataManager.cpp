@@ -3,7 +3,7 @@
 //UserDataManager
 const std::string GAME_STAGE_DATA_PATH = "stageData.plist";
 const std::string GAME_USER_DATA_PATH = "userData.plist";
-const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageData.plist";
+const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageBestScore.plist";
 const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
 const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
 const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT";

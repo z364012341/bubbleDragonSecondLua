@@ -2,7 +2,7 @@
 -- Author: 黄泽昊
 -- 功能: 失败倒计时组件
 
-local PuzzleDefeatCountdownComponent = class("PuzzleDefeatCountdownComponent", function ()
+local PuzzleDefeatCountdownComponent = class("PuzzleDefeatCountdownComponent", function (game_time)
     return cc.Node:create();
 end)
 local ADD_TIME_NUMBLE = 20;
@@ -10,8 +10,9 @@ local ANIMATION_TOTAL_TIME = 2.91;
 local ANIMATION_DELAYTIME = 0.83;
 local ANIMATION_ADD_TOTAL_TIME = 1.41
 local ANIMATION_PER_ADD_DELAYTIME = ANIMATION_ADD_TOTAL_TIME / ADD_TIME_NUMBLE;
-function PuzzleDefeatCountdownComponent:ctor()
-	self:setInitailTime(233);
+function PuzzleDefeatCountdownComponent:ctor(game_time)
+    dump(game_time);
+	self:setInitailTime(game_time);
     --self.prop_add_time_ = 0
     self:setRemainTime(self:getInitailTime());
    	local function onNodeEvent(event)

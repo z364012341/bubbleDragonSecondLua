@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"/>
+
+<plist version="1.0">
+    <dict>
+        <key>puzzle(1).png</key>
+        <integer>0</integer>
+        <key>puzzle(2).png</key>
+        <integer>233</integer>
+        <key>puzzle(3).png</key>
+        <integer>233</integer>
+        <key>puzzle(4).png</key>
+        <integer>233</integer>
+        <key>puzzle(5).png</key>
+        <integer>233</integer>
+        <key>puzzle(6).png</key>
+        <integer>233</integer>
+        <key>puzzle(7).png</key>
+        <integer>233</integer>
+        <key>puzzle(8).png</key>
+        <integer>233</integer>
+        <key>puzzle(9).png</key>
+        <integer>233</integer>
+        <key>puzzle_landscape (1).png</key>
+        <integer>0</integer>
+        <key>puzzle_landscape (1).jpg</key>
+        <integer>0</integer>
+        <key>puzzle_landscape (2).png</key>
+        <integer>233</integer>
+        <key>puzzle_landscape (3).png</key>
+        <integer>233</integer>
+        <key>puzzle_landscape (4).png</key>
+        <integer>233</integer>
+        <key>puzzle_landscape (5).png</key>
+        <integer>233</integer>
+        <key>puzzle_landscape (6).png</key>
+        <integer>233</integer>
+        <key>puzzle_landscape (7).png</key>
+        <integer>233</integer>
+        <key>puzzle_landscape (8).png</key>
+        <integer>233</integer>
+        <key>puzzle_landscape (9).png</key>
+        <integer>233</integer>
+
+    </dict>
+</plist>

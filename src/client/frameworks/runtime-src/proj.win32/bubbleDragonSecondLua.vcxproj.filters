@@ -359,6 +359,10 @@
     <ClInclude Include="..\Classes\lua_SpriteTextureController_auto.hpp">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\PuzzleStageDataManager.h" />
+    <ClInclude Include="..\Classes\lua_PuzzleStageDataManager_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -691,6 +695,10 @@
     <ClCompile Include="..\Classes\lua_UserDataManager_auto.cpp" />
     <ClCompile Include="..\Classes\lua_SpriteTextureController_auto.cpp">
       <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PuzzleStageDataManager.cpp" />
+    <ClCompile Include="..\Classes\lua_PuzzleStageDataManager_auto.cpp">
+      <Filter>Classes\lua</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,7 @@
 #include "lua_ControlButtonController_auto.hpp"
 #include "lua_UserDataManager_auto.hpp"
 #include "lua_SpriteTextureController_auto.hpp"
+#include "lua_PuzzleStageDataManager_auto.hpp"
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
 #include "ide-support/CodeIDESupport.h"
 #endif
@@ -94,6 +95,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     register_all_ControlButtonController(engine->getLuaStack()->getLuaState());
     register_all_UserDataManager(engine->getLuaStack()->getLuaState());
     register_all_SpriteTextureController(engine->getLuaStack()->getLuaState());
+    register_all_PuzzleStageDataManager(engine->getLuaStack()->getLuaState());
+
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
     auto runtimeEngine = RuntimeEngine::getInstance();

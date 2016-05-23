@@ -15,7 +15,7 @@ local PAGEVIEW_INITAIL_DATA = {
 		VISIBLE = false;
 	},
 	[LANDSCAPE_PAGEVIEW_NAME] = {
-		PAGE_PATH = {"puzzle_landscape (1).png", "puzzle_landscape (2).png", "puzzle_landscape (3).png","puzzle_landscape (4).png", "puzzle_landscape (5).png", "puzzle_landscape (6).png","puzzle_landscape (7).png", "puzzle_landscape (8).png", "puzzle_landscape (9).png"},
+		PAGE_PATH = {"puzzle_landscape (1).jpg", "puzzle_landscape (2).png", "puzzle_landscape (3).png","puzzle_landscape (4).png", "puzzle_landscape (5).png", "puzzle_landscape (6).png","puzzle_landscape (7).png", "puzzle_landscape (8).png", "puzzle_landscape (9).png"},
 		VISIBLE = true;
 	},
 }

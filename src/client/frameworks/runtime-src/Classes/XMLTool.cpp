@@ -22,10 +22,10 @@ namespace bubble_second {
         intout << stageNumble;
         std::string str = "";
         intout >> str;
-        std::string xmlPath = "res/stage" + str + ".xml";
+        std::string xmlPath = "res/bobble/stage" + str + ".xml";
         if (ZCGConfigDataDict::getInstance()->getIntData(KEY_STAGE_VERSION) == 0)
         {
-            xmlPath = "res/DEBUGstage(" + str + ").xml";
+            xmlPath = "res/bobble/DEBUGstage(" + str + ").xml";
         }
         if (!cocos2d::CCFileUtils::getInstance()->isFileExist(xmlPath))
         {

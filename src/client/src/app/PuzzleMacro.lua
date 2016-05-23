@@ -10,8 +10,10 @@ cc.exports.PUZZLE_PIECE_SHADOW_PATH = "app.modules.PuzzlePieceShadow";
 cc.exports.PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PATH = "app.modules.PuzzlePieceAnswerSingleEdges";
 cc.exports.PUZZLE_DEFEAT_COUNTDOWN_COMPONENT_PATH = "app.modules.PuzzleDefeatCountdownComponent";
 cc.exports.PUZZLE_VICTORY_COUNTDOWN_COMPONENT_PATH = "app.modules.PuzzleVictoryCountdownComponent";
+cc.exports.PUZZLE_GAME_PLAY_TIMER_COMPONENT_PATH = "app.modules.PuzzleGamePlayTimerComponent";
 
 cc.exports.PUZZLE_PLAY_AREA_INNER_CONTAINER = "app.views.PuzzlePlayAreaInnerContainer";
+--local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
 cc.exports.PUZZLE_SELECTED_SHOW_PATH = "app.views.PuzzleSelectedShow";
 cc.exports.PUZZLE_SELECTED_SCENE_PATH = "app.views.PuzzleSelectedScene";
 cc.exports.PUZZLE_PIECES_SCROLLVIEW_PATH = "app.views.PuzzlePiecesScrollView";
@@ -52,9 +54,9 @@ cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
 cc.exports.PUZZLE_COMPONENT_PATH = "puzzleStencil_2.png";
 cc.exports.PUZZLE_PLAIN_EDGES_PATH = "edges_2.png";
 cc.exports.PUZZLE_NOT_PLAIN_EDGES_PATH = "edges_1.png";
-cc.exports.PUZZLE_PIECE_SHADOW_FULL_PATH = "puzzle_shadow_1.png"; 
-cc.exports.PUZZLE_PIECE_SHADOW_LACK_PATH = "puzzle_shadow_2.png"; 
-cc.exports.PUZZLE_PIECE_SHADOW_COMPONENT_PATH = "puzzle_shadow_3.png"; 
+cc.exports.PUZZLE_PIECE_SHADOW_FULL_PATH = "puzzle_shadow_1.png";
+cc.exports.PUZZLE_PIECE_SHADOW_LACK_PATH = "puzzle_shadow_2.png";
+cc.exports.PUZZLE_PIECE_SHADOW_COMPONENT_PATH = "puzzle_shadow_3.png";
 --cc.exports.PUZZLE_PIECE_ANSWER_SINGLE_EDGES_PLAIN_PATH = "edges_2.png";
 --cc.exports.PUZZLE_PIECE_ANSWER_SINGLE_EDGES_NOT_PLAIN_PATH = "edges_1.png";
 
@@ -110,6 +112,6 @@ cc.exports.puzzle = {
 	PUZZLE_PIECE_SHADOW_DIRECTION_TO_PATH = {
 	   [PUZZLE_STENCIL_COMPONENT_PLAIN] = PUZZLE_PIECE_SHADOW_FULL_PATH,
 	   [PUZZLE_STENCIL_COMPONENT_OUTSIDE] = PUZZLE_PIECE_SHADOW_FULL_PATH,
-	   [PUZZLE_STENCIL_COMPONENT_INSIDE] = PUZZLE_PIECE_SHADOW_LACK_PATH  
+	   [PUZZLE_STENCIL_COMPONENT_INSIDE] = PUZZLE_PIECE_SHADOW_LACK_PATH
 	}
 }

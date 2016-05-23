@@ -24,6 +24,10 @@ function PuzzleGamePauseAlert:init(remainingTime)
 end
 
 function PuzzleGamePauseAlert:addRemainingTimeLabel(remainingTime)
+    if remainingTime == nil then
+        self.csb_node_:getChildByName("wenzishengyushijian_7"):setVisible(false);
+        return;
+    end
     local time_display = PuzzleTimeDisplay:create();
     time_display:setScale(0.8);
     time_display:setTimeString(remainingTime);
