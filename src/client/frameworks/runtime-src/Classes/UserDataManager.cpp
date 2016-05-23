@@ -7,6 +7,9 @@ const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageBestScore.plist";
 const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
 const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
 const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT";
+const std::string PUZZLE_SEARCH_PROP_KEY = "p1";
+const std::string PUZZLE_BIG_EYES_PROP_KEY = "p2";
+const std::string PUZZLE_ADD_TIME_PROP_KEY = "p3";
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
@@ -32,6 +35,14 @@ namespace bubble_second {
         {
             user_data_ = file_utils->getValueMapFromFile(path);
         }
+    }
+    int UserDataManager::getPropsNumbleWithKey(const std::string & key)
+    {
+        if (stage_data_.find(key) != stage_data_.end())
+        {
+            return stage_data_.at(key).asInt();
+        }
+        return 0;
     }
     int UserDataManager::getStartNumbleWithLevel(int level)
     {
@@ -119,7 +130,7 @@ namespace bubble_second {
     {
         this->readStageFile();
         this->readUserDataFile();
-        this->readPuzzleStageData();
+        this->readPuzzleStageBestScore();
         unlock_stage_numble_ = this->getStagePassCount();
     }
     std::string UserDataManager::getStageDataPath() const
@@ -159,7 +170,7 @@ namespace bubble_second {
         std::string path = getPuzzleStageDataPath();
         cocos2d::FileUtils::getInstance()->writeValueMapToFile(puzzle_stage_data_, path);
     }
-    void UserDataManager::readPuzzleStageData()
+    void UserDataManager::readPuzzleStageBestScore()
     {
         auto file_utils = cocos2d::FileUtils::getInstance();
         std::string path = this->getPuzzleStageDataPath();
@@ -168,7 +179,7 @@ namespace bubble_second {
             puzzle_stage_data_ = file_utils->getValueMapFromFile(path);
         }
     }
-    int UserDataManager::getPuzzleStageDataWithKey(const std::string & key)
+    int UserDataManager::getPuzzleStageBestScoreWithKey(const std::string & key)
     {
         //if (puzzle_stage_data_.find(key) != puzzle_stage_data_.end())
         //{
@@ -176,5 +187,17 @@ namespace bubble_second {
         //}
         //return 99999;
 
+    }
+    int UserDataManager::getPuzzleSearchPropNumble()
+    {
+        return this->getPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY);
+    }
+    int UserDataManager::getPuzzleBigEyesPropNumble()
+    {
+        return this->getPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY);
+    }
+    int UserDataManager::getPuzzleAddTimePropNumble()
+    {
+        return this->getPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY);
     }
 }

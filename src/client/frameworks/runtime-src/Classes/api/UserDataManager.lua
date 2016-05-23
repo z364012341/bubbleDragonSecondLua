@@ -5,23 +5,15 @@
 
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] saveUserData 
+-- @function [parent=#UserDataManager] getPuzzleSearchPropNumble 
 -- @param self
--- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
-        
---------------------------------
--- 
--- @function [parent=#UserDataManager] getPuzzleStageDataWithKey 
--- @param self
--- @param #string key
 -- @return int#int ret (return value: int)
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] isUnlockWithStageNumble 
+-- @function [parent=#UserDataManager] getPuzzleBigEyesPropNumble 
 -- @param self
--- @param #int stage_numble
--- @return bool#bool ret (return value: bool)
+-- @return int#int ret (return value: int)
         
 --------------------------------
 -- 
@@ -32,9 +24,9 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] readPuzzleStageData 
+-- @function [parent=#UserDataManager] isCompletedGame 
 -- @param self
--- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+-- @return bool#bool ret (return value: bool)
         
 --------------------------------
 -- 
@@ -44,10 +36,21 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] updateStageData 
+-- @function [parent=#UserDataManager] getUserNickname 
 -- @param self
--- @param #int level
--- @param #int start_numble
+-- @return string#string ret (return value: string)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] isUnlockWithStageNumble 
+-- @param self
+-- @param #int stage_numble
+-- @return bool#bool ret (return value: bool)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] readDataFile 
+-- @param self
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
@@ -60,16 +63,29 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] setUserNickname 
+-- @function [parent=#UserDataManager] getPuzzleStageBestScoreWithKey 
 -- @param self
--- @param #string name
+-- @param #string key
+-- @return int#int ret (return value: int)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] getStagePassCount 
+-- @param self
+-- @return int#int ret (return value: int)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] saveUserData 
+-- @param self
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] getPresentCell 
+-- @function [parent=#UserDataManager] setUserNickname 
 -- @param self
--- @return int#int ret (return value: int)
+-- @param #string name
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
 -- 
@@ -80,15 +96,10 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] isSoundEffectEnable 
+-- @function [parent=#UserDataManager] getStartNumbleWithLevel 
 -- @param self
--- @return bool#bool ret (return value: bool)
-        
---------------------------------
--- 
--- @function [parent=#UserDataManager] readDataFile 
--- @param self
--- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+-- @param #int level
+-- @return int#int ret (return value: int)
         
 --------------------------------
 -- 
@@ -99,15 +110,8 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] isCompletedGame 
+-- @function [parent=#UserDataManager] getPuzzleAddTimePropNumble 
 -- @param self
--- @return bool#bool ret (return value: bool)
-        
---------------------------------
--- 
--- @function [parent=#UserDataManager] getStartNumbleWithLevel 
--- @param self
--- @param #int level
 -- @return int#int ret (return value: int)
         
 --------------------------------
@@ -118,21 +122,35 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] getUserNickname 
+-- @function [parent=#UserDataManager] readPuzzleStageBestScore 
 -- @param self
--- @return string#string ret (return value: string)
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] updateStageData 
+-- @param self
+-- @param #int level
+-- @param #int start_numble
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] getPresentCell 
+-- @param self
+-- @return int#int ret (return value: int)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] isSoundEffectEnable 
+-- @param self
+-- @return bool#bool ret (return value: bool)
         
 --------------------------------
 -- 
 -- @function [parent=#UserDataManager] addUnlockStageNumble 
 -- @param self
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
-        
---------------------------------
--- 
--- @function [parent=#UserDataManager] getStagePassCount 
--- @param self
--- @return int#int ret (return value: int)
         
 --------------------------------
 -- 

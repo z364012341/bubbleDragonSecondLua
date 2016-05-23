@@ -330,7 +330,6 @@
     <ClInclude Include="..\Classes\ScoreProgressStart.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\lua_GameAlertMask_auto.hpp" />
     <ClInclude Include="..\Classes\lua_ButtonEffectController_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
@@ -355,12 +354,25 @@
     <ClInclude Include="..\Classes\lua_ControlButtonController_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\lua_UserDataManager_auto.hpp" />
-    <ClInclude Include="..\Classes\lua_SpriteTextureController_auto.hpp">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\PuzzleStageDataManager.h" />
     <ClInclude Include="..\Classes\lua_PuzzleStageDataManager_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameShareButton.h" />
+    <ClInclude Include="..\Classes\lua_GameAlertMask_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_GameShareButton_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_UserDataManager_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_SpriteTextureController_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PropsNumbleShow.h" />
+    <ClInclude Include="..\Classes\lua_PropsNumbleShow_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
   </ItemGroup>
@@ -670,7 +682,6 @@
     <ClCompile Include="..\Classes\ScoreProgressStart.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\lua_GameAlertMask_auto.cpp" />
     <ClCompile Include="..\Classes\lua_ButtonEffectController_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
@@ -692,12 +703,25 @@
     <ClCompile Include="..\Classes\lua_ControlButtonController_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\lua_UserDataManager_auto.cpp" />
-    <ClCompile Include="..\Classes\lua_SpriteTextureController_auto.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\PuzzleStageDataManager.cpp" />
     <ClCompile Include="..\Classes\lua_PuzzleStageDataManager_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameShareButton.cpp" />
+    <ClCompile Include="..\Classes\lua_GameAlertMask_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_GameShareButton_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_UserDataManager_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_SpriteTextureController_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PropsNumbleShow.cpp" />
+    <ClCompile Include="..\Classes\lua_PropsNumbleShow_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
   </ItemGroup>

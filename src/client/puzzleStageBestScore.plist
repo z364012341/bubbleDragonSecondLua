@@ -3,11 +3,7 @@
 
 <plist version="1.0">
     <dict>
-        <key>SOUND_EFFECT</key>
-        <true/>
-        <key>GAME_MUSIC</key>
-        <true/>
-        <key>user_nickname</key>
-        <string></string>
+        <key>puzzle_landscape (1).jpg</key>
+        <integer>6</integer>
     </dict>
 </plist>

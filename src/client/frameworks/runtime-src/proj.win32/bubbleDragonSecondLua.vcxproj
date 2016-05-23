@@ -272,6 +272,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\lua_GameStartButton_auto.hpp" />
     <ClInclude Include="..\Classes\lua_LoadingScene_auto.hpp" />
     <ClInclude Include="..\Classes\lua_module_register.h" />
+    <ClInclude Include="..\Classes\lua_PropsNumbleShow_auto.hpp" />
     <ClInclude Include="..\Classes\lua_PuzzleStageDataManager_auto.hpp" />
     <ClInclude Include="..\Classes\lua_SmartScaleController_auto.hpp" />
     <ClInclude Include="..\Classes\lua_SpriteTextureController_auto.hpp" />
@@ -280,6 +281,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\NullBubble.h" />
     <ClInclude Include="..\Classes\PopScoreLabelComponent.h" />
     <ClInclude Include="..\Classes\PropertiesFactory.h" />
+    <ClInclude Include="..\Classes\PropsNumbleShow.h" />
     <ClInclude Include="..\Classes\PropsSelectAlert.h" />
     <ClInclude Include="..\Classes\PuzzleStageDataManager.h" />
     <ClInclude Include="..\Classes\RainbowCharactor.h" />
@@ -401,6 +403,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\lua_GameStageSelectionScene_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameStartButton_auto.cpp" />
     <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_PropsNumbleShow_auto.cpp" />
     <ClCompile Include="..\Classes\lua_PuzzleStageDataManager_auto.cpp" />
     <ClCompile Include="..\Classes\lua_SmartScaleController_auto.cpp" />
     <ClCompile Include="..\Classes\lua_SpriteTextureController_auto.cpp" />
@@ -409,6 +412,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\NullBubble.cpp" />
     <ClCompile Include="..\Classes\PopScoreLabelComponent.cpp" />
     <ClCompile Include="..\Classes\PropertiesFactory.cpp" />
+    <ClCompile Include="..\Classes\PropsNumbleShow.cpp" />
     <ClCompile Include="..\Classes\PropsSelectAlert.cpp" />
     <ClCompile Include="..\Classes\PuzzleStageDataManager.cpp" />
     <ClCompile Include="..\Classes\RainbowCharactor.cpp" />

@@ -1,27 +1,27 @@
 //*******************************************************************************
-//类名称   : BombBombProperty
-//功能     : <大当量炸弹道具, 一炸炸两圈>
+//类名称   : PropsNumbleShow
+//功能     : <游戏的战斗场景>
 //-------------------------------------------------------------------------------
 //备注     : <>
 //典型用法 : <>
 //-------------------------------------------------------------------------------
 //作者     : <黄泽昊>, [yyy], [zzz] ...（作者和逗号分割的修改者列表）
 //*******************************************************************************
-#ifndef _BOMB_BOMB_PROPERTY_H_
-#define _BOMB_BOMB_PROPERTY_H_
-#include "BaseProperty.h"
+#ifndef _PROPS_NUMBLE_SHOW_H_
+#define _PROPS_NUMBLE_SHOW_H_
+#include "cocos2d.h"
+#include "ui\UITextAtlas.h"
 namespace bubble_second {
-    class BombBombProperty : public BaseProperty
+    class PropsNumbleShow : public cocos2d::Node
     {
     public:
-        CREATE_FUNC(BombBombProperty);
-        ~BombBombProperty();
-    protected:
-        void useItem() override;
-        void cancelUseItem() override;
+        CREATE_FUNC(PropsNumbleShow);
+        ~PropsNumbleShow();
     private:
-        BombBombProperty();
+        PropsNumbleShow();
         bool init();
+    private:
+        cocos2d::ui::TextAtlas* props_numble_label_ = nullptr;
     };
 }
-#endif //_BOMB_BOMB_PROPERTY_H_
+#endif //_PROPS_NUMBLE_SHOW_H_

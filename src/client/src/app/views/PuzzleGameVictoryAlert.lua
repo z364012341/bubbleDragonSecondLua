@@ -77,13 +77,13 @@ function PuzzleGameVictoryAlert:inlayAnswers(flash_answers_node, callFunc)
     self:addChildToThumbnailPosNode(flash_answers_node);
     flash_answers_node:release();
     flash_answers_node:setPosition(self:getThumbnailPosNode():convertToNodeSpace(point));
-
-    flash_answers_node:runAction(cc.Sequence:create(cc.MoveTo:create(0.5, cc.p(0,0)), callFunc, cc.CallFunc:create(function ()
+    local duration = 0.15
+    flash_answers_node:runAction(cc.Sequence:create(cc.MoveTo:create(duration, cc.p(0,0)), callFunc--[[, cc.CallFunc:create(function ()
         local share_button = bs.GameShareButton:create();
         share_button:setPosition(ALERT_SHARE_BUTTON_POS);
         self.csb_node_:addChild(share_button);
-    end) , nil));
-    flash_answers_node:runAction(cc.ScaleTo:create(0.5, PuzzlePlayArea:calculatePuzzleScaleWithSize(flash_answers_node:getContentSize())*PUZZLE_ALERT_THUMBNAIL_SCALE));
+    end)]] , nil));
+    flash_answers_node:runAction(cc.EaseOut:create(cc.ScaleTo:create(duration, PuzzlePlayArea:calculatePuzzleScaleWithSize(flash_answers_node:getContentSize())*PUZZLE_ALERT_THUMBNAIL_SCALE), 1.5));
 
 end
 return PuzzleGameVictoryAlert

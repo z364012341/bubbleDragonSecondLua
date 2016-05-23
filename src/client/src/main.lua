@@ -27,7 +27,7 @@ local function main()
     math.randomseed(os.time());
     cc.Director:getInstance():runWithScene(bs.LoadingScene:createScene());
 
-    --cc.Director:getInstance():runWithScene(require(PUZZLE_PLAY_SCENE_PATH):createScene());
+    --cc.Director:getInstance():runWithScene(require(PUZZLE_SELECTED_SCENE_PATH):createScene());
 end
 
 local status, msg = xpcall(main, __G__TRACKBACK__)

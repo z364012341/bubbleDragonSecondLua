@@ -2,9 +2,7 @@
 #include "GamePlayController.h"
 const float PROPS_BUTTON_POS_X = 100.0f;
 const float PROPS_BUTTON_POS_Y = 35.0f;
-const std::string PROPS_NUMBLE_LABEL_PATH = "fonts/shuzibiaoqian.png";
-const int PROPS_NUMBLE_LABEL_ITEM_WIDTH = 16;
-const int PROPS_NUMBLE_LABEL_ITEM_HEIGHT = 30;
+
 namespace bubble_second {
     BaseProperty::BaseProperty()
     {

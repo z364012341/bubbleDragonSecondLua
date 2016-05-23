@@ -41,8 +41,11 @@ namespace bubble_second {
         //拼图关卡数据
         void insertPuzzleStageData(const std::string& key, int consumingTime);
         void savePuzzleStageData();
-        void readPuzzleStageData();
-        int getPuzzleStageDataWithKey(const std::string& key);
+        void readPuzzleStageBestScore();
+        int getPuzzleStageBestScoreWithKey(const std::string& key);
+        int getPuzzleSearchPropNumble();
+        int getPuzzleBigEyesPropNumble();
+        int getPuzzleAddTimePropNumble();
     private:
         ~UserDataManager();
         void writeStageDataToFile();
@@ -51,6 +54,8 @@ namespace bubble_second {
         std::string getPuzzleStageDataPath() const;
         void readStageFile();
         void readUserDataFile();
+        //获取道具数量
+        int getPropsNumbleWithKey(const std::string& key);
     private:
         cocos2d::ValueMap stage_data_;
         int present_cell_ = 0;

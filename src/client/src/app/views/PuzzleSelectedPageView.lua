@@ -35,9 +35,17 @@ end
 function PuzzleSelectedPageView:createPageWithPath( path )
     local layout = ccui.Layout:create();
     local sp = GlobalFunction.createGameSpriteWithPath(path);
-    sp:setScale(GlobalFunction.calculateMinSizeScale(SHOW_CONTENT_SIZE, sp:getContentSize()));
+    local sp_size = sp:getContentSize();
+    local scale = SHOW_CONTENT_SIZE.height / sp:getContentSize().height;
+    if sp_size.width*scale > SHOW_CONTENT_SIZE.width then
+        local rext_x = (sp_size.width - SHOW_CONTENT_SIZE.width/scale)/2;
+        local rect = {x = rext_x, y = 0, width = SHOW_CONTENT_SIZE.width/scale, height =  sp_size.height};
+        sp:setTextureRect(rect);
+    end
+    sp:setScale(SHOW_CONTENT_SIZE.height / sp:getContentSize().height);
     sp:setPosition(cc.p(SHOW_CONTENT_SIZE.width/2, SHOW_CONTENT_SIZE.height/2));
     layout:addChild(sp);
+    layout:setContentSize(SHOW_CONTENT_SIZE);
     return layout;
 end
 function PuzzleSelectedPageView:scrollToPage(index)

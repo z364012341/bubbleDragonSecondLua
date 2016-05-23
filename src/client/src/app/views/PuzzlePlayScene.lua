@@ -20,6 +20,7 @@ local PuzzleSearchProp = require(PUZZLE_SEARCH_PROP_PATH);
 local PuzzleBigEyesProp = require(PUZZLE_BIG_EYES_PROP_PATH);
 local PuzzleAddTimeProp = require(PUZZLE_ADD_TIME_PROP_PATH);
 local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
+local PuzzleGamePlayTimerComponent = require(PUZZLE_GAME_PLAY_TIMER_COMPONENT_PATH);
 local PUZZLE_PLAY_SCENE_CSB_PATH = "PuzzlePlayLayer.csb";
 local CSB_DESK_NAME = "pintutaizi_2";
 local PAUSE_BUTTON_NAME = "Button_1";
@@ -78,9 +79,9 @@ function PuzzlePlayScene:initGameTime()
     local time = bs.PuzzleStageDataManager:getInstance():getGameTimeWithkey(PuzzleSelectedShow:getSelectedPicturePath());
     if time > 0 then
         self:addTimeClock();
-        self.countdown_ = PuzzleDefeatCountdownComponent:create();
+        self.countdown_ = PuzzleDefeatCountdownComponent:create(time);
     else
-        self.countdown_ = PuzzleDefeatCountdownComponent:create();
+        self.countdown_ = PuzzleGamePlayTimerComponent:create();
     end
     self:addChild(self.countdown_);
 end
@@ -215,7 +216,7 @@ function PuzzlePlayScene:onEnter()
     	self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
     end
 	self:addPuzzlePlayArea();
-        self:initGameTime();
+    self:initGameTime();
 end
 function PuzzlePlayScene:onExit()
     local eventDispatcher = self:getEventDispatcher();
@@ -264,8 +265,7 @@ function PuzzlePlayScene:popVictoryAlert()
     node:addChild(flash_bg, -1);
     node:setPosition(self:convertToNodeSpace(point));
     self:addChild(node);
-
-    node:runAction(cc.Sequence:create(cc.ScaleBy:create(0.5, 1.7), cc.CallFunc:create(
+    node:runAction(cc.Sequence:create(cc.EaseOut:create(cc.ScaleBy:create(0.3, 1.7), 1.5), cc.DelayTime:create(0.05) , cc.CallFunc:create(
         function ()
             self.alert_ = PuzzleGameVictoryAlert:create(self.countdown_:getTimeConsuming());
             self.alert_:setPosition(GlobalFunction.getVisibleCenterPosition());

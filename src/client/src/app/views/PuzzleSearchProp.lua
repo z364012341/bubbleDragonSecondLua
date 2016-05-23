@@ -25,6 +25,8 @@ end
 function PuzzleSearchProp:init()
     self:addChild(PuzzlePropsBackground:create(EVENT_USE_SEARCH_PROP, EVENT_END_SEARCH_PROP, PROP_SEARCH_TIME));
     self:addChild(GlobalFunction.createGameSpriteWithPath(PROP_SEARCH_PATH));
+    local numble_label = bs.PropsNumbleShow:create();
+    self:addChild(numble_label, 1);
 end
 
 function PuzzleSearchProp:onEnter()

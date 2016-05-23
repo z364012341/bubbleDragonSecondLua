@@ -123,11 +123,12 @@ cc.exports.TREASURE_MAP_PAGEVIEW_NAME = "treasure_map_pageview";
 cc.exports.LANDSCAPE_PAGEVIEW_NAME = "landscape_pageview";
 cc.exports.PAGEVIEW_INITAIL_DATA = {
 	[TREASURE_MAP_PAGEVIEW_NAME] = {
-		PAGE_PATH = {"puzzle(2).png", "puzzle(3).png","puzzle(4).png", "puzzle(5).png", "puzzle(6).png","puzzle(7).png", "puzzle(8).png", "puzzle(9).png"},
+		PAGE_PATH = {"puzzle(1).jpg", "puzzle(2).jpg"},
 		VISIBLE = false;
 	},
 	[LANDSCAPE_PAGEVIEW_NAME] = {
-		PAGE_PATH = {"puzzle_landscape (1).png", "puzzle_landscape (2).png", "puzzle_landscape (3).png","puzzle_landscape (4).png", "puzzle_landscape (5).png", "puzzle_landscape (6).png","puzzle_landscape (7).png", "puzzle_landscape (8).png", "puzzle_landscape (9).png"},
+		PAGE_PATH = {"puzzle_landscape (1).jpg", "puzzle_landscape (2).jpg", "puzzle_landscape (3).jpg","puzzle_landscape (4).jpg",
+		 "puzzle_landscape (5).jpg", "puzzle_landscape (6).jpg","puzzle_landscape (7).jpg", "puzzle_landscape (8).jpg", "puzzle_landscape (9).jpg"},
 		VISIBLE = true;
 	},
 }

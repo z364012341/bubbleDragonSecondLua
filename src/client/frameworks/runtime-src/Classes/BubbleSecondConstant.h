@@ -639,6 +639,10 @@ const std::string GAME_SETTING_ALERT_HELP_MENU_BACKGROUND_PATH = GAME_DEFEAT_ALE
 const std::string GAME_SETTING_ALERT_HELP_MENU_PATH = "bangz.png";
 const std::string GAME_SETTING_ALERT_PROPS_MENU_PATH = "daoju.png";
 const std::string GAME_SETTING_ALERT_ABOUT_MENU_PATH = "guanyu.png";
+//PropsNumbleShow
+const std::string PROPS_NUMBLE_LABEL_PATH = "fonts/shuzibiaoqian.png";
+const int PROPS_NUMBLE_LABEL_ITEM_WIDTH = 16;
+const int PROPS_NUMBLE_LABEL_ITEM_HEIGHT = 30;
 //GamePropsNumbleView
 const std::string GAME_PROPS_NUMBLE_VIEW_TICK_PATH = "duigou.png";
 const float GAME_PROPS_NUMBLE_VIEW_TICK_POS_Y = 5.0f;
