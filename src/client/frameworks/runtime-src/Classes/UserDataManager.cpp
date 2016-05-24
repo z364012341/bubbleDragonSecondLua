@@ -38,11 +38,20 @@ namespace bubble_second {
     }
     int UserDataManager::getPropsNumbleWithKey(const std::string & key)
     {
-        if (stage_data_.find(key) != stage_data_.end())
+        if (user_data_.find(key) != user_data_.end())
         {
-            return stage_data_.at(key).asInt();
+            return user_data_.at(key).asInt();
         }
         return 0;
+    }
+    void UserDataManager::setPropsNumbleWithKey(const std::string & key, int numble)
+    {
+        user_data_[key] = numble;
+        this->saveUserData();
+    }
+    void UserDataManager::cutPropsNumbleWithKey(const std::string& key)
+    {
+        this->setPropsNumbleWithKey(key, this->getPropsNumbleWithKey(key)-1);
     }
     int UserDataManager::getStartNumbleWithLevel(int level)
     {
@@ -188,16 +197,52 @@ namespace bubble_second {
         //return 99999;
 
     }
+    const std::string UserDataManager::getPuzzleSearchPropKey()
+    {
+        return PUZZLE_SEARCH_PROP_KEY;
+    }
+    const std::string UserDataManager::getPuzzleBigEyesPropKey()
+    {
+        return PUZZLE_BIG_EYES_PROP_KEY;
+    }
+    const std::string UserDataManager::getPuzzleAddTimePropKey()
+    {
+        return PUZZLE_ADD_TIME_PROP_KEY;
+    }
+    /*void UserDataManager::addPuzzleSearchPropNumble(int numble)
+    {
+        this->setPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY, this->getPuzzleSearchPropNumble() + numble);
+    }
     int UserDataManager::getPuzzleSearchPropNumble()
     {
         return this->getPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY);
+    }
+    void UserDataManager::addPuzzleBigEyesPropNumble(int numble)
+    {
+        this->setPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY, this->getPuzzleBigEyesPropNumble() + numble);
     }
     int UserDataManager::getPuzzleBigEyesPropNumble()
     {
         return this->getPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY);
     }
+    void UserDataManager::addPuzzleAddTimePropNumble(int numble)
+    {
+        this->setPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY, this->getPuzzleAddTimePropNumble() + numble);
+    }
     int UserDataManager::getPuzzleAddTimePropNumble()
     {
         return this->getPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY);
     }
+    void UserDataManager::cutPuzzleSearchPropNumble()
+    {
+        this->setPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY, this->getPuzzleSearchPropNumble() - 1);
+    }
+    void UserDataManager::cutPuzzleBigEyesPropNumble()
+    {
+        this->setPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY, this->getPuzzleAddTimePropNumble() - 1);
+    }
+    void UserDataManager::cutPuzzleAddTimePropNumble()
+    {
+        this->setPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY, this->getPuzzleAddTimePropNumble() - 1);
+    }*/
 }

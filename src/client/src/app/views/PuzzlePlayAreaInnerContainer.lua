@@ -6,7 +6,7 @@ local vertDefaultSource = "\n".."\n" ..
                   "attribute vec4 a_position;\n" ..
                   "attribute vec2 a_texCoord;\n" ..
                   "attribute vec4 a_color;\n\n" ..
-                  "\n#ifdef GL_ES\n" .. 
+                  "\n#ifdef GL_ES\n" ..
                   "varying lowp vec4 v_fragmentColor;\n" ..
                   "varying mediump vec2 v_texCoord;\n" ..
                   "\n#else\n" ..
@@ -14,7 +14,7 @@ local vertDefaultSource = "\n".."\n" ..
                   "varying vec2 v_texCoord;" ..
                   "\n#endif\n" ..
                   "void main()\n" ..
-                  "{\n" .. 
+                  "{\n" ..
                   "   gl_Position = CC_MVPMatrix * a_position;\n"..
                   "   v_fragmentColor = a_color;\n"..
                   "   v_texCoord = a_texCoord;\n" ..
@@ -71,7 +71,7 @@ end
 --     if #touches == 1 then
 --         event:getCurrentTarget():touchToMove(touches);
 --         return;
---     end 
+--     end
 --     event:getCurrentTarget():pinchToZoom(touches);
 -- end
 
@@ -81,7 +81,7 @@ end
 --         scale = scale + PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE;
 --     else
 --         scale = scale - PUZZLE_PLAY_SCENE_ZOOM_SCALE_PER_NUMBLE;
---     end 
+--     end
 --     scale = math.min(scale, PUZZLE_PLAY_SCENE_ZOOM_SCALE_MAX);
 --     scale = math.max(scale, PUZZLE_PLAY_SCENE_ZOOM_SCALE_MIN);
 --     return scale;
@@ -152,17 +152,17 @@ function PuzzlePlayAreaInnerContainer:onEnter()
         local render = cc.RenderTexture:create(answer_sp:getContentSize().width, answer_sp:getContentSize().height);
         render:beginWithClear(0,0,0,0);
         answer_sp:visit();
-        render:endToLua(); 
+        render:endToLua();
         local render_sp = cc.Sprite:createWithTexture(render:getSprite():getTexture());
-        render_sp:setFlipY(true);
+        render_sp:setFlippedY(true);
         render_sp:setOpacity(0);
         render_sp:runAction(cc.Sequence:create(cc.DelayTime:create(1.24), cc.FadeIn:create(1.1), nil));--动画的播放时间2.25
         self:addChild(render_sp, ANSWERS_BACKGROUND_ZORDER-1);
     end));
 
-    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_ANSWER_ZOOM_IN_ACTION, function ( event )
-        self:playAnswersZoomInAction();
-    end));
+    -- table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_ANSWER_ZOOM_IN_ACTION, function ( event )
+    --     self:playAnswersZoomInAction();
+    -- end));
 
     for _, listener in ipairs(self.listener_) do
         self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);

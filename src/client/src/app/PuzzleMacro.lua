@@ -19,6 +19,7 @@ cc.exports.PUZZLE_SELECTED_SCENE_PATH = "app.views.PuzzleSelectedScene";
 cc.exports.PUZZLE_PIECES_SCROLLVIEW_PATH = "app.views.PuzzlePiecesScrollView";
 cc.exports.PUZZLE_GAME_PAUSE_ALERT_PATH = "app.views.PuzzleGamePauseAlert";
 cc.exports.PUZZLE_PLAY_SCENE_PATH = "app.views.PuzzlePlayScene";
+--local PuzzlePlayArea = require(PUZZLE_PLAY_AREA_PATH);
 cc.exports.PUZZLE_PLAY_AREA_PATH = "app.views.PuzzlePlayArea";
 cc.exports.PUZZLE_GAME_DEFEAT_ALERT_PATH = "app.views.PuzzleGameDefeatAlert";
 cc.exports.PUZZLE_GAME_VICTORY_ALERT_PATH = "app.views.PuzzleGameVictoryAlert";
@@ -47,10 +48,15 @@ cc.exports.EVENT_PUZZLE_ANSWER_ADD = "event_puzzle_answer_add";
 cc.exports.EVENT_PUZZLE_GAME_VICTORY = "event_puzzle_game_victory";
 cc.exports.EVENT_UPDATE_TIME_LABEL = "event_update_time_label";
 cc.exports.EVENT_USE_SMALL_EYES = "event_use_small_eyes";
+cc.exports.EVENT_TOUCH_SEARCH_PROP = "event_touch_search_prop";
 cc.exports.EVENT_USE_SEARCH_PROP = "event_use_search_prop";
 cc.exports.EVENT_END_SEARCH_PROP = "event_end_search_prop";
 cc.exports.EVENT_USE_BIG_EYES_PROP = "event_use_big_eyes_prop";
+cc.exports.EVENT_TOUCH_BIG_EYES_PROP = "event_touch_big_eyes_prop";
+cc.exports.EVENT_TOUCH_ADD_TIME_PROP = "event_touch_add_time_prop";
 cc.exports.EVENT_USE_ADD_TIME_PROP = "event_use_add_time_prop";
+cc.exports.EVENT_PUZZLE_TOUCH = "event_puzzle_touch";
+cc.exports.EVENT_ADJUST_PUZZLE_PIECES_SCALE = "event_adjust_puzzle_pieces_scale";
 -- cc.exports.EVENT_ANSWER_ZOOM_IN_ACTION = "event_answer_zoom_in_action";
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
@@ -80,6 +86,7 @@ cc.exports.PUZZLE_EDGES_ANCHOR = {x = 5/189, y = 0.5};
 cc.exports.PUZZLE_PIECE_SHADOW_ANCHOR = {x = 0.5, y = 1};
 cc.exports.PUZZLE_PIECE_SHADOW_OFFSET_POSITION = {x = 20, y = -20};
 cc.exports.PUZZLE_PIECE_SCALE = PUZZLE_STENCIL_WIDTH / PUZZLE_STENCIL_LENGTH;
+cc.exports.PUZZLE_PIECE_RAISED_WIDTH = 184 * PUZZLE_PIECE_SCALE
 cc.exports.PROP_SMALL_EYES_TIME = 2;
 
 cc.exports.PUZZLE_ALERT_THUMBNAIL_SCALE = 0.56

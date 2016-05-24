@@ -40,4 +40,7 @@ end
 --     bg:setScale();
 
 -- end
+function PuzzlePieceAnswer:getWidthInWorld()
+    return cc.pGetDistance(self:convertToWorldSpace(cc.p(PUZZLE_STENCIL_LENGTH/-2, 0)), self:convertToWorldSpace(cc.p(PUZZLE_STENCIL_LENGTH/2, 0)));
+end
 return PuzzlePieceAnswer

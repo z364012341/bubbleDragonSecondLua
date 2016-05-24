@@ -23,16 +23,18 @@ function PuzzleDefeatCountdownComponent:ctor(game_time)
         end
     end
     self:registerScriptHandler(onNodeEvent);
-
-	self:runAction(cc.RepeatForever:create(cc.Sequence:create(cc.DelayTime:create(1), cc.CallFunc:create(function ()
+end
+function PuzzleDefeatCountdownComponent:beginCountDown(  )
+    printf("11111111111111111111");
+    self:runAction(cc.RepeatForever:create(cc.Sequence:create(cc.DelayTime:create(1), cc.CallFunc:create(function ()
         self:setRemainTime(self:getRemainTime() -1);
-		--self:getEventDispatcher():dispatchEvent(GlobalFunction.createCustomEvent(EVENT_UPDATE_TIME_LABEL, self.remain_time_));
-		self:updateTimeLabel();
-		if self:getRemainTime() == 0 then
-			self:stopAllActions();
-			cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_GAME_DEFEAT);
-		end
-	end), nil)));
+        --self:getEventDispatcher():dispatchEvent(GlobalFunction.createCustomEvent(EVENT_UPDATE_TIME_LABEL, self.remain_time_));
+        self:updateTimeLabel();
+        if self:getRemainTime() == 0 then
+            self:stopAllActions();
+            cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_GAME_DEFEAT);
+        end
+    end), nil)));
 end
 function PuzzleDefeatCountdownComponent:getInitailTime()
     return self.initail_time_;
@@ -58,8 +60,15 @@ function PuzzleDefeatCountdownComponent:updateTimeLabel()
 end
 function PuzzleDefeatCountdownComponent:onEnter()
 	self:updateTimeLabel();
-    self.listener_ = {};
 
+    self.begin_listener_ = cc.EventListenerCustom:create(EVENT_PUZZLE_TOUCH, function (event)
+        self:beginCountDown();
+        self:getEventDispatcher():removeEventListener(self.begin_listener_);
+    end);
+    self:getEventDispatcher():addEventListenerWithFixedPriority(self.begin_listener_, 1);
+
+
+    self.listener_ = {};
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_ADD_TIME_PROP, function ( event )
         local scheduler, numble = cc.Director:getInstance():getScheduler(), 0;
         --local numble = 0;

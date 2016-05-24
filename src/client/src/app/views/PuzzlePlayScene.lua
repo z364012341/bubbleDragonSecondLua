@@ -21,13 +21,16 @@ local PuzzleBigEyesProp = require(PUZZLE_BIG_EYES_PROP_PATH);
 local PuzzleAddTimeProp = require(PUZZLE_ADD_TIME_PROP_PATH);
 local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
 local PuzzleGamePlayTimerComponent = require(PUZZLE_GAME_PLAY_TIMER_COMPONENT_PATH);
+-- local PuzzlePropsNumbleComponent = require(PUZZLE_PROPS_NUMBLE_COMPONENT_PATH);
 local PUZZLE_PLAY_SCENE_CSB_PATH = "PuzzlePlayLayer.csb";
 local CSB_DESK_NAME = "pintutaizi_2";
 local PAUSE_BUTTON_NAME = "Button_1";
 local SMALL_EYES_BUTTON_NAME = "Node_2";
 local BACKGROUND_NAME = "pintubeijing02_1";
-local SEARCH_PROP_POS_NODE_NAME = "Node_3";
-local BIG_EYES_PROP_POS_NODE_NAME = "Node_4";
+local SEARCH_PROP_POS_NODE_NAME_1 = "Node_3";
+local SEARCH_PROP_POS_NODE_NAME_2 = "Node_1";
+local BIG_EYES_PROP_POS_NODE_NAME_1 = "Node_4";
+local BIG_EYES_PROP_POS_NODE_NAME_2 = "Node_6";
 local ADD_TIME_POS_NODE_NAME = "Node_5";
 local PROP_SEARCH_ANIMATION_NAME = "fangdajing";
 local PROP_BIG_EYES_ANIMATION_NAME = "yanjingTX";
@@ -65,9 +68,7 @@ function PuzzlePlayScene:init()
     self:addSmallEyesButton();
 	self:initZOrder();
     self:addChild(PuzzleVictoryCountdownComponent:create());
-    self:addPuzzleProps(PuzzleSearchProp, SEARCH_PROP_POS_NODE_NAME);
-    self:addPuzzleProps(PuzzleBigEyesProp, BIG_EYES_PROP_POS_NODE_NAME);
-    self:addPuzzleProps(PuzzleAddTimeProp, ADD_TIME_POS_NODE_NAME);
+    -- self:addChild(PuzzlePropsNumbleComponent:create());
 end
 function PuzzlePlayScene:addPuzzleProps(class, pos_name)
     local search_node = self.csb_node_:getChildByName(pos_name);
@@ -78,9 +79,14 @@ end
 function PuzzlePlayScene:initGameTime()
     local time = bs.PuzzleStageDataManager:getInstance():getGameTimeWithkey(PuzzleSelectedShow:getSelectedPicturePath());
     if time > 0 then
+        self:addPuzzleProps(PuzzleSearchProp, SEARCH_PROP_POS_NODE_NAME_1);
+        self:addPuzzleProps(PuzzleBigEyesProp, BIG_EYES_PROP_POS_NODE_NAME_1);
+        self:addPuzzleProps(PuzzleAddTimeProp, ADD_TIME_POS_NODE_NAME);
         self:addTimeClock();
         self.countdown_ = PuzzleDefeatCountdownComponent:create(time);
     else
+        self:addPuzzleProps(PuzzleSearchProp, SEARCH_PROP_POS_NODE_NAME_2);
+        self:addPuzzleProps(PuzzleBigEyesProp, BIG_EYES_PROP_POS_NODE_NAME_2);
         self.countdown_ = PuzzleGamePlayTimerComponent:create();
     end
     self:addChild(self.countdown_);
@@ -217,6 +223,7 @@ function PuzzlePlayScene:onEnter()
     end
 	self:addPuzzlePlayArea();
     self:initGameTime();
+    self:getEventDispatcher():dispatchCustomEvent(EVENT_ADJUST_PUZZLE_PIECES_SCALE);
 end
 function PuzzlePlayScene:onExit()
     local eventDispatcher = self:getEventDispatcher();

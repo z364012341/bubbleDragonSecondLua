@@ -20,19 +20,31 @@ function PuzzleBigEyesProp:ctor()
     self:init();
 end
 function PuzzleBigEyesProp:init()
-    self:addChild(PuzzlePropsBackground:create(EVENT_USE_BIG_EYES_PROP), -1);
+    self.isCooling_ = false;
+    self:addChild(PuzzlePropsBackground:create(EVENT_TOUCH_BIG_EYES_PROP), -1);
     self:addChild(GlobalFunction.createGameSpriteWithPath(PROP_BIG_EYES_PATH), 1);
+    self.numble_show_ = bs.PropsNumbleShow:create(bs.UserDataManager:getPuzzleBigEyesPropKey());
+    self:addChild(self.numble_show_, 1);
 end
 
 function PuzzleBigEyesProp:onEnter()
     self.listener_ = {};
 
-    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_BIG_EYES_PROP, function ( event )
-        printf("EVENT_USE_BIG_EYES_PROP");
-        -- local particle = cc.ParticleSystemQuad:create(USING_PARTICLE_PATH);
-        -- particle:setScale(2);
-        -- particle:setPosition(cc.p(0,0));
-        -- self:addChild(particle);
+    -- table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_BIG_EYES_PROP, function ( event )
+
+    --     -- local particle = cc.ParticleSystemQuad:create(USING_PARTICLE_PATH);
+    --     -- particle:setScale(2);
+    --     -- particle:setPosition(cc.p(0,0));
+    --     -- self:addChild(particle);
+    -- end));
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_TOUCH_BIG_EYES_PROP, function ( event )
+        if self.isCooling_ == true then
+            return;
+        end
+        if self.numble_show_:cutPropNumble() then
+            self.isCooling_ = true;
+            self:getEventDispatcher():dispatchCustomEvent(EVENT_USE_BIG_EYES_PROP);
+        end
     end));
 
     for _, listener in ipairs(self.listener_) do

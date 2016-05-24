@@ -15,13 +15,22 @@ namespace bubble_second {
     class PropsNumbleShow : public cocos2d::Node
     {
     public:
-        CREATE_FUNC(PropsNumbleShow);
+        //CREATE_FUNC(PropsNumbleShow);
+        static PropsNumbleShow* create(const std::string& prop_key);
         ~PropsNumbleShow();
+        void addPropNumble(int numble = 1);
+        bool cutPropNumble();
+        void setPropNumble(int numble);
     private:
         PropsNumbleShow();
-        bool init();
+        bool init(const std::string& prop_key);
+        void updateLabel();
+        bool isNoneProp();
     private:
         cocos2d::ui::TextAtlas* props_numble_label_ = nullptr;
+        cocos2d::Sprite* plus_sprite_ = nullptr;
+        std::string prop_key_ = "";
+        //int numble_ = 0;
     };
 }
 #endif //_PROPS_NUMBLE_SHOW_H_

@@ -35,12 +35,31 @@ function PuzzlePiece:ctor(params)
         end
     end
     self:registerScriptHandler(onNodeEvent);
-
+    self:savePuzzleDirection(params);
     self:addTouchEvent();
     self:initPuzzleRenderTexture(params);
     self:addPuzzlePieceShadow(params);
 end
-
+function PuzzlePiece:savePuzzleDirection( params )
+    self.left_ = params.left;
+    self.right_ = params.right;
+    -- self.top_ = params.top;
+    -- self.bottom_ = params.bottom;
+end
+function PuzzlePiece:getLeftWidth()
+    return self:getDirectionWidth(self.left_);
+end
+function PuzzlePiece:getRightWidth()
+    return self:getDirectionWidth(self.right_);
+end
+function PuzzlePiece:getDirectionWidth(direction)
+    --dump(direction);
+    if direction == PUZZLE_STENCIL_COMPONENT_OUTSIDE then
+        return PUZZLE_STENCIL_WIDTH/2 +PUZZLE_PIECE_RAISED_WIDTH;
+    else
+        return PUZZLE_STENCIL_WIDTH/2;
+    end
+end
 function PuzzlePiece:initPuzzleRenderTexture(params)
     self.node_ = cc.Node:create();
     self:addChild(self.node_);
@@ -72,6 +91,7 @@ end
 function PuzzlePiece.onTouchBegan(touch, event)
     --printf("PuzzlePiece onTouchBegan");
     if PuzzlePiece.isTouchOnPuzzle(touch, event) then
+        cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUZZLE_TOUCH);
         local puzzle = event:getCurrentTarget();
         puzzle:setLocalZOrder(require(PUZZLE_PIECES_COLLECTION_PATH):getZOrderNumble());
         puzzle:retain();
@@ -209,6 +229,17 @@ function PuzzlePiece:noBlinkAnswer()
         self.blink_edges_:removeFromParent();
         self.blink_edges_ = nil;
     end
+end
+function PuzzlePiece:getAnswerWidth()
+    local answer = self:getPuzzlePieceAnswer();
+    return answer:getWidthInWorld();
+    -- return cc.pGetDistance(answer:convertToWorldSpace(cc.p(PUZZLE_STENCIL_LENGTH/-2, 0)), answer:convertToWorldSpace(cc.p(PUZZLE_STENCIL_LENGTH/2, 0)));
+end
+function PuzzlePiece:saveNewPosition(point)
+    self.new_position_ = point;
+end
+function PuzzlePiece:getNewPosition()
+    return self.new_position_;
 end
 function PuzzlePiece:onEnter()
     self.listener_ = {};

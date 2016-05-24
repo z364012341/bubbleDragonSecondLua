@@ -15,6 +15,9 @@ namespace bubble_second {
     {
     public:
         GETINSTANCE_FUNC(UserDataManager);
+        static const std::string getPuzzleSearchPropKey();
+        static const std::string getPuzzleBigEyesPropKey();
+        static const std::string getPuzzleAddTimePropKey();
         UserDataManager();
         //获取已通过关卡的数量
         int getStagePassCount();
@@ -43,9 +46,23 @@ namespace bubble_second {
         void savePuzzleStageData();
         void readPuzzleStageBestScore();
         int getPuzzleStageBestScoreWithKey(const std::string& key);
-        int getPuzzleSearchPropNumble();
-        int getPuzzleBigEyesPropNumble();
-        int getPuzzleAddTimePropNumble();
+        //int getPuzzleSearchPropNumble();
+        //int getPuzzleBigEyesPropNumble();
+        //int getPuzzleAddTimePropNumble();
+
+        //void addPuzzleSearchPropNumble(int numble = 1);
+        //void addPuzzleBigEyesPropNumble(int numble = 1);
+        //void addPuzzleAddTimePropNumble(int numble = 1);
+
+        //void cutPuzzleSearchPropNumble();
+        //void cutPuzzleBigEyesPropNumble();
+        //void cutPuzzleAddTimePropNumble();
+
+
+        int getPropsNumbleWithKey(const std::string& key);
+        void setPropsNumbleWithKey(const std::string& key, int numble);
+        void cutPropsNumbleWithKey(const std::string& key);
+
     private:
         ~UserDataManager();
         void writeStageDataToFile();
@@ -55,7 +72,8 @@ namespace bubble_second {
         void readStageFile();
         void readUserDataFile();
         //获取道具数量
-        int getPropsNumbleWithKey(const std::string& key);
+        //int getPropsNumbleWithKey(const std::string& key);
+        //void setPropsNumbleWithKey(const std::string& key, int numble);
     private:
         cocos2d::ValueMap stage_data_;
         int present_cell_ = 0;

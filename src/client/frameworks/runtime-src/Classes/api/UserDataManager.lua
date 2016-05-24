@@ -5,15 +5,16 @@
 
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] getPuzzleSearchPropNumble 
+-- @function [parent=#UserDataManager] savePuzzleStageData 
 -- @param self
--- @return int#int ret (return value: int)
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] getPuzzleBigEyesPropNumble 
+-- @function [parent=#UserDataManager] cutPropsNumbleWithKey 
 -- @param self
--- @return int#int ret (return value: int)
+-- @param #string key
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
 -- 
@@ -82,6 +83,14 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] setPropsNumbleWithKey 
+-- @param self
+-- @param #string key
+-- @param #int numble
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] setUserNickname 
 -- @param self
 -- @param #string name
@@ -110,15 +119,10 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] getPuzzleAddTimePropNumble 
+-- @function [parent=#UserDataManager] getPropsNumbleWithKey 
 -- @param self
+-- @param #string key
 -- @return int#int ret (return value: int)
-        
---------------------------------
--- 
--- @function [parent=#UserDataManager] savePuzzleStageData 
--- @param self
--- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
 -- 
@@ -151,6 +155,24 @@
 -- @function [parent=#UserDataManager] addUnlockStageNumble 
 -- @param self
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] getPuzzleAddTimePropKey 
+-- @param self
+-- @return string#string ret (return value: string)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] getPuzzleSearchPropKey 
+-- @param self
+-- @return string#string ret (return value: string)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] getPuzzleBigEyesPropKey 
+-- @param self
+-- @return string#string ret (return value: string)
         
 --------------------------------
 -- 
