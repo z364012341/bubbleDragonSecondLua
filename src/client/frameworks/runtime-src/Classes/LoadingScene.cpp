@@ -7,6 +7,7 @@
 #include "SmartScaleController.h"
 #include "ScoreWidgetManager.h"
 #include "PuzzleStageDataManager.h"
+#include "PuzzleStoreItemFactory.h"
 namespace bubble_second {
     cocos2d::Scene * LoadingScene::createScene()
     {
@@ -45,6 +46,7 @@ namespace bubble_second {
         SpriteTextureController::getInstance()->addResourcesTexture();
         ScoreWidgetManager::getInstance()->readBoneDateFromFile();
         PuzzleStageDataManager::getInstance()->loadPuzzleStageData();
+        PuzzleStoreItemFactory::getInstance()->loadItemData();
         cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
     }
 

@@ -46,18 +46,6 @@ namespace bubble_second {
         void savePuzzleStageData();
         void readPuzzleStageBestScore();
         int getPuzzleStageBestScoreWithKey(const std::string& key);
-        //int getPuzzleSearchPropNumble();
-        //int getPuzzleBigEyesPropNumble();
-        //int getPuzzleAddTimePropNumble();
-
-        //void addPuzzleSearchPropNumble(int numble = 1);
-        //void addPuzzleBigEyesPropNumble(int numble = 1);
-        //void addPuzzleAddTimePropNumble(int numble = 1);
-
-        //void cutPuzzleSearchPropNumble();
-        //void cutPuzzleBigEyesPropNumble();
-        //void cutPuzzleAddTimePropNumble();
-
 
         int getPropsNumbleWithKey(const std::string& key);
         void setPropsNumbleWithKey(const std::string& key, int numble);
@@ -71,9 +59,8 @@ namespace bubble_second {
         std::string getPuzzleStageDataPath() const;
         void readStageFile();
         void readUserDataFile();
-        //获取道具数量
-        //int getPropsNumbleWithKey(const std::string& key);
-        //void setPropsNumbleWithKey(const std::string& key, int numble);
+        std::string getMD5Str(const std::string& input_str);
+        std::string encryptionPropsNumble();
     private:
         cocos2d::ValueMap stage_data_;
         int present_cell_ = 0;

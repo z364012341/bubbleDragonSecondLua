@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>0</key>
+		<dict>
+      <!-- 要显示的商品图标的名字 search, bigEyes, addTime-->
+			<key>showName</key>
+      <string>search</string>
+      <!-- 商品名字 -->
+      <key>storeName</key>
+      <string>快速提示:</string>
+      <!-- 商品描述 -->
+      <key>description</key>
+      <string>帮你瞬间找到拼图块位置</string>
+      <!-- 商品数量 -->
+      <key>numble</key>
+      <string>3</string>
+      <!-- 商品总价格 单位:元 -->
+      <key>cost</key>
+      <string>5</string>
+		</dict>
+  <key>1</key>
+		<dict>
+			<key>showName</key>
+      <string>search</string>
+      <key>storeName</key>
+      <string>天空之眼:</string>
+      <key>description</key>
+      <string>影子图一直存在</string>
+      <key>numble</key>
+      <string>3</string>
+      <key>cost</key>
+      <string>5</string>
+		</dict>
+  <key>2</key>
+		<dict>
+			<key>showName</key>
+      <string>search</string>
+      <key>storeName</key>
+      <string>时间倒流:</string>
+      <key>description</key>
+      <string>游戏剩余时间增加20秒</string>
+      <key>numble</key>
+      <string>3</string>
+      <key>cost</key>
+      <string>5</string>
+		</dict>
+  </dict>
+</plist>

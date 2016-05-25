@@ -274,9 +274,11 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\lua_module_register.h" />
     <ClInclude Include="..\Classes\lua_PropsNumbleShow_auto.hpp" />
     <ClInclude Include="..\Classes\lua_PuzzleStageDataManager_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_PuzzleStoreItemFactory_auto.hpp" />
     <ClInclude Include="..\Classes\lua_SmartScaleController_auto.hpp" />
     <ClInclude Include="..\Classes\lua_SpriteTextureController_auto.hpp" />
     <ClInclude Include="..\Classes\lua_UserDataManager_auto.hpp" />
+    <ClInclude Include="..\Classes\md5.h" />
     <ClInclude Include="..\Classes\MutipleSealBubble.h" />
     <ClInclude Include="..\Classes\NullBubble.h" />
     <ClInclude Include="..\Classes\PopScoreLabelComponent.h" />
@@ -284,6 +286,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\PropsNumbleShow.h" />
     <ClInclude Include="..\Classes\PropsSelectAlert.h" />
     <ClInclude Include="..\Classes\PuzzleStageDataManager.h" />
+    <ClInclude Include="..\Classes\PuzzleStoreItemFactory.h" />
     <ClInclude Include="..\Classes\RainbowCharactor.h" />
     <ClInclude Include="..\Classes\RainbowSealBubble.h" />
     <ClInclude Include="..\Classes\RainbowSealManager.h" />
@@ -405,9 +408,11 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp" />
     <ClCompile Include="..\Classes\lua_PropsNumbleShow_auto.cpp" />
     <ClCompile Include="..\Classes\lua_PuzzleStageDataManager_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_PuzzleStoreItemFactory_auto.cpp" />
     <ClCompile Include="..\Classes\lua_SmartScaleController_auto.cpp" />
     <ClCompile Include="..\Classes\lua_SpriteTextureController_auto.cpp" />
     <ClCompile Include="..\Classes\lua_UserDataManager_auto.cpp" />
+    <ClCompile Include="..\Classes\md5.cpp" />
     <ClCompile Include="..\Classes\MutipleSealBubble.cpp" />
     <ClCompile Include="..\Classes\NullBubble.cpp" />
     <ClCompile Include="..\Classes\PopScoreLabelComponent.cpp" />
@@ -415,6 +420,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\PropsNumbleShow.cpp" />
     <ClCompile Include="..\Classes\PropsSelectAlert.cpp" />
     <ClCompile Include="..\Classes\PuzzleStageDataManager.cpp" />
+    <ClCompile Include="..\Classes\PuzzleStoreItemFactory.cpp" />
     <ClCompile Include="..\Classes\RainbowCharactor.cpp" />
     <ClCompile Include="..\Classes\RainbowSealBubble.cpp" />
     <ClCompile Include="..\Classes\RainbowSealManager.cpp" />

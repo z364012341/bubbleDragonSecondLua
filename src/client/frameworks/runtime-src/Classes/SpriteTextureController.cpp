@@ -58,7 +58,7 @@ namespace bubble_second {
         armature_path_.push_back(ONE_ROUND_BOMB_EFFECT_PATH);
         armature_path_.push_back(TWO_ROUND_BOMB_EFFECT_PATH);
         armature_path_.push_back(BLACK_HOLE_BUBBLE_EFFECT_PATH);
-        armature_path_.push_back(BARREL_BOTTOM_EFFECT_PATH);
+        //armature_path_.push_back(BARREL_BOTTOM_EFFECT_PATH);
         armature_path_.push_back(COLOR_BUBBLE_ELIMINATE_EFFECT_PATH);
         armature_path_.push_back(BALL_LIGHTNING_BUBBLE_EFFECT_PATH);
         //armature_path_.push_back(BARREL_BOTTOM_STANDBY_EFFECT_PATH);

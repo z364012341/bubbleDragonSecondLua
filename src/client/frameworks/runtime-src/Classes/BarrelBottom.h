@@ -60,6 +60,7 @@ namespace bubble_second {
         int standby_effect_delaytime_max_;
        //cocos2d::ui::TextBMFont* score_label_ = nullptr;
         PopScoreLabelComponent* label_component_ = nullptr;
+        std::string pop_score_particle_path_ = "";
     };
 }
 #endif //_BARREL_BOTTOM_H_

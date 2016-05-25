@@ -375,6 +375,13 @@
     <ClInclude Include="..\Classes\lua_PropsNumbleShow_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\md5.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PuzzleStoreItemFactory.h" />
+    <ClInclude Include="..\Classes\lua_PuzzleStoreItemFactory_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -722,6 +729,13 @@
     </ClCompile>
     <ClCompile Include="..\Classes\PropsNumbleShow.cpp" />
     <ClCompile Include="..\Classes\lua_PropsNumbleShow_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\md5.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PuzzleStoreItemFactory.cpp" />
+    <ClCompile Include="..\Classes\lua_PuzzleStoreItemFactory_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
   </ItemGroup>

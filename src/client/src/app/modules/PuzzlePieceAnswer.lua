@@ -35,11 +35,6 @@ function PuzzlePieceAnswer:initPosition(index_x, index_y)
 	local posY = PUZZLE_STENCIL_HEIGHT * (-0.5 + index_y);
 	self:setPosition(posX, posY);
 end
--- function PuzzlePieceAnswer:playZoomInAction()
---     local bg = GlobalFunction.createGameSpriteWithPath(ANSWER_FLASH_BACKGROUND);
---     bg:setScale();
-
--- end
 function PuzzlePieceAnswer:getWidthInWorld()
     return cc.pGetDistance(self:convertToWorldSpace(cc.p(PUZZLE_STENCIL_LENGTH/-2, 0)), self:convertToWorldSpace(cc.p(PUZZLE_STENCIL_LENGTH/2, 0)));
 end

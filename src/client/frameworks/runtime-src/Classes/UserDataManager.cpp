@@ -1,6 +1,7 @@
 #include "UserDataManager.h"
 #include "StageDataManager.h"
-//UserDataManager
+#include "md5.h"
+#include "XMLTool.h"
 const std::string GAME_STAGE_DATA_PATH = "stageData.plist";
 const std::string GAME_USER_DATA_PATH = "userData.plist";
 const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageBestScore.plist";
@@ -10,6 +11,8 @@ const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT";
 const std::string PUZZLE_SEARCH_PROP_KEY = "p1";
 const std::string PUZZLE_BIG_EYES_PROP_KEY = "p2";
 const std::string PUZZLE_ADD_TIME_PROP_KEY = "p3";
+const std::string PROP_MD5_KEY = "md5";
+const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
@@ -34,7 +37,22 @@ namespace bubble_second {
         if (file_utils->isFileExist(path))
         {
             user_data_ = file_utils->getValueMapFromFile(path);
+            if (user_data_[PROP_MD5_KEY].asString() != this->encryptionPropsNumble())
+            {
+                exit(-1);
+            }
         }
+    }
+    std::string UserDataManager::getMD5Str(const std::string & input_str)
+    {
+        return MD5(input_str).hexdigest();
+    }
+    std::string UserDataManager::encryptionPropsNumble()
+    {
+        std::string str = XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY)) +
+            XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY)) +
+            XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY));
+        return this->getMD5Str(PROP_MD5_SECRET_KEY+ str);
     }
     int UserDataManager::getPropsNumbleWithKey(const std::string & key)
     {
@@ -110,7 +128,9 @@ namespace bubble_second {
     void UserDataManager::saveUserData()
     {
         std::string path = getUserDataPath();
+        user_data_[PROP_MD5_KEY] = this->encryptionPropsNumble();
         cocos2d::FileUtils::getInstance()->writeValueMapToFile(user_data_, path);
+
     }
     bool UserDataManager::isCompletedGame()
     {
@@ -209,40 +229,5 @@ namespace bubble_second {
     {
         return PUZZLE_ADD_TIME_PROP_KEY;
     }
-    /*void UserDataManager::addPuzzleSearchPropNumble(int numble)
-    {
-        this->setPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY, this->getPuzzleSearchPropNumble() + numble);
-    }
-    int UserDataManager::getPuzzleSearchPropNumble()
-    {
-        return this->getPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY);
-    }
-    void UserDataManager::addPuzzleBigEyesPropNumble(int numble)
-    {
-        this->setPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY, this->getPuzzleBigEyesPropNumble() + numble);
-    }
-    int UserDataManager::getPuzzleBigEyesPropNumble()
-    {
-        return this->getPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY);
-    }
-    void UserDataManager::addPuzzleAddTimePropNumble(int numble)
-    {
-        this->setPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY, this->getPuzzleAddTimePropNumble() + numble);
-    }
-    int UserDataManager::getPuzzleAddTimePropNumble()
-    {
-        return this->getPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY);
-    }
-    void UserDataManager::cutPuzzleSearchPropNumble()
-    {
-        this->setPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY, this->getPuzzleSearchPropNumble() - 1);
-    }
-    void UserDataManager::cutPuzzleBigEyesPropNumble()
-    {
-        this->setPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY, this->getPuzzleAddTimePropNumble() - 1);
-    }
-    void UserDataManager::cutPuzzleAddTimePropNumble()
-    {
-        this->setPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY, this->getPuzzleAddTimePropNumble() - 1);
-    }*/
+    
 }

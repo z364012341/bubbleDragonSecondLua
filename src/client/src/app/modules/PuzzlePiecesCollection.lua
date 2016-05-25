@@ -59,11 +59,9 @@ end
 function PuzzlePiecesCollection:initIndexMax(size)
     self._indexMaxX = math.floor(size.width/PUZZLE_STENCIL_WIDTH);
     self._indexMaxY = math.floor(size.height/PUZZLE_STENCIL_HEIGHT);
-    --printf("111111111111111 indexX" .. self._indexMaxX .. "Y" .. self._indexMaxY);
 end
 
 function PuzzlePiecesCollection:calculateLaftDirection(indexX)
-	--printf("PuzzlePiecesCollection:calculateRightDirection");
 	if indexX == PUZZLE_PIECES_COLLECTION_INDEX_START then
 		return PUZZLE_STENCIL_COMPONENT_PLAIN;
 	else

@@ -6,6 +6,9 @@
 #include "PopScoreLabelComponent.h"
 const std::string BARREL_SCORE_LABEL_FNT_PATH = "fonts/tongshuzi-export.fnt";
 const float POP_SCORE_LABEL_POS_Y = 85.0f;
+const std::string BARREL_PARTICLE_BLUE = "particle/guanzipenjiantexiao2.plist";
+const std::string BARREL_PARTICLE_YELLOW = "particle/guanzipenjiantexiao3.plist";
+const std::string BARREL_PARTICLE_PURPLE = "particle/guanzipenjiantexiao4.plist";
 namespace bubble_second {
     BarrelBottom::BarrelBottom()
     {
@@ -64,22 +67,27 @@ namespace bubble_second {
         if (UI_NAME_BARREL_BOTTOM_FIRST == name)
         {
             score_ = BARREL_BOTTOM_SCORE_FIRST;
+            pop_score_particle_path_ =  BARREL_PARTICLE_YELLOW;
         }
         else if (UI_NAME_BARREL_BOTTOM_SECOND == name)
         {
             score_ = BARREL_BOTTOM_SCORE_SECOND;
+            pop_score_particle_path_ = BARREL_PARTICLE_BLUE;
         }
         else if (UI_NAME_BARREL_BOTTOM_THIRD == name)
         {
             score_ = BARREL_BOTTOM_SCORE_THIRD;
+            pop_score_particle_path_ = BARREL_PARTICLE_PURPLE;
         }
         else if (UI_NAME_BARREL_BOTTOM_FOURTH == name)
         {
             score_ = BARREL_BOTTOM_SCORE_FOURTH;
+            pop_score_particle_path_ = BARREL_PARTICLE_BLUE;
         }
         else if (UI_NAME_BARREL_BOTTOM_FIFTH == name)
         {
             score_ = BARREL_BOTTOM_SCORE_FIFTH;
+            pop_score_particle_path_ = BARREL_PARTICLE_YELLOW;
         }
         double_score_ = score_*2;
         initial_score_ = score_;
@@ -99,24 +107,26 @@ namespace bubble_second {
 
     void BarrelBottom::playEffect()
     {
-        using cocostudio::ArmatureDataManager;
-        using cocostudio::Armature;
-        if (effect_flag_)
-        {
-            effect_flag_ = false;
-            Armature* armature = Armature::create(BARREL_BOTTOM_EFFECT_NAME);
-            armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-            armature->getAnimation()->setMovementEventCallFunc([=](Armature* armature, cocostudio::MovementEventType type, const std::string&) {
-                if (type == cocostudio::COMPLETE)
-                {
-                    armature->removeFromParent();
-                    effect_flag_ = true;
-                }
-            });
-            //armature->setPositionY(BARREL_BOTTOM_EFFECT_POSITION_Y);
-            //armature->setPosition(-20, -20);
-            this->addChild(armature);
-        }
+        //using cocostudio::ArmatureDataManager;
+        //using cocostudio::Armature;
+        //if (effect_flag_)
+        //{
+        //    effect_flag_ = false;
+        //    Armature* armature = Armature::create(BARREL_BOTTOM_EFFECT_NAME);
+        //    armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        //    armature->getAnimation()->setMovementEventCallFunc([=](Armature* armature, cocostudio::MovementEventType type, const std::string&) {
+        //        if (type == cocostudio::COMPLETE)
+        //        {
+        //            armature->removeFromParent();
+        //            effect_flag_ = true;
+        //        }
+        //    });
+        //    this->addChild(armature);
+        //}
+        cocos2d::ParticleSystemQuad* particle = cocos2d::ParticleSystemQuad::create(pop_score_particle_path_);
+        particle->setPosition(cocos2d::Vec2::ZERO);
+        this->addChild(particle, -1);
+        particle->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(1), cocos2d::CallFunc::create([=]() {particle->removeFromParent(); })));
     }
 
     //void BarrelBottom::playStandbyEffect()

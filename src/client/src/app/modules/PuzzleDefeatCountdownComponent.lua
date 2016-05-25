@@ -25,7 +25,6 @@ function PuzzleDefeatCountdownComponent:ctor(game_time)
     self:registerScriptHandler(onNodeEvent);
 end
 function PuzzleDefeatCountdownComponent:beginCountDown(  )
-    printf("11111111111111111111");
     self:runAction(cc.RepeatForever:create(cc.Sequence:create(cc.DelayTime:create(1), cc.CallFunc:create(function ()
         self:setRemainTime(self:getRemainTime() -1);
         --self:getEventDispatcher():dispatchEvent(GlobalFunction.createCustomEvent(EVENT_UPDATE_TIME_LABEL, self.remain_time_));
@@ -71,7 +70,6 @@ function PuzzleDefeatCountdownComponent:onEnter()
     self.listener_ = {};
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_ADD_TIME_PROP, function ( event )
         local scheduler, numble = cc.Director:getInstance():getScheduler(), 0;
-        --local numble = 0;
         self.scheduler_id_1_ = nil;
         local function addTimeFunc( ... )
                 self.scheduler_id_2_ = nil
@@ -98,9 +96,5 @@ function PuzzleDefeatCountdownComponent:onExit()
     for _, listener in ipairs(self.listener_) do
         eventDispatcher:removeEventListener(listener);
     end
-    -- dump(self.scheduler_id_1_);
-    -- cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.scheduler_id_1_);
-    -- cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.scheduler_id_2_);
-
 end
 return PuzzleDefeatCountdownComponent

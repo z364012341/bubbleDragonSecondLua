@@ -21,7 +21,6 @@ local PuzzleBigEyesProp = require(PUZZLE_BIG_EYES_PROP_PATH);
 local PuzzleAddTimeProp = require(PUZZLE_ADD_TIME_PROP_PATH);
 local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
 local PuzzleGamePlayTimerComponent = require(PUZZLE_GAME_PLAY_TIMER_COMPONENT_PATH);
--- local PuzzlePropsNumbleComponent = require(PUZZLE_PROPS_NUMBLE_COMPONENT_PATH);
 local PUZZLE_PLAY_SCENE_CSB_PATH = "PuzzlePlayLayer.csb";
 local CSB_DESK_NAME = "pintutaizi_2";
 local PAUSE_BUTTON_NAME = "Button_1";
@@ -36,7 +35,6 @@ local PROP_SEARCH_ANIMATION_NAME = "fangdajing";
 local PROP_BIG_EYES_ANIMATION_NAME = "yanjingTX";
 local PROP_ADD_TIME_ANIMATION_NAME = "pintunaozhong";
 local PUZZLE_PIECES_SCROLLVIEW_ZORDER = 1;
---local PROPS_ARMATURE_ZORDER = PUZZLE_PIECES_SCROLLVIEW_ZORDER+1;
 local PUZZLE_PLAY_AREA_ZORDER = -1;
 local BACKGROUND_ZORDER = PUZZLE_PLAY_AREA_ZORDER-1;
 local TOP_WIDGET_POS_Y_PERCENT = 0.95;
@@ -44,7 +42,6 @@ local ANSWER_FLASH_BACKGROUND = "pintuguang_0000_8.png";
 local ANSWER_FLASH_INNER_SIZE = cc.size(728, 1096);
 local ANSWER_FLASH_INITAIL_SCALE = 0.98;
 function PuzzlePlayScene:ctor()
-    --printf("PuzzlePlayScene");
     local function onNodeEvent(event)
         if event == "enter" then
             self:onEnter();
@@ -68,7 +65,6 @@ function PuzzlePlayScene:init()
     self:addSmallEyesButton();
 	self:initZOrder();
     self:addChild(PuzzleVictoryCountdownComponent:create());
-    -- self:addChild(PuzzlePropsNumbleComponent:create());
 end
 function PuzzlePlayScene:addPuzzleProps(class, pos_name)
     local search_node = self.csb_node_:getChildByName(pos_name);
@@ -151,8 +147,6 @@ function PuzzlePlayScene:addPuzzleScrollView( puzzleTable )
 end
 function PuzzlePlayScene:popPropsAnimation( animation_name )
     self:gamePause();
-    --local button_mask = bs.GameAlertMask:create();
-    --self:addChild(button_mask);
     local armature = ccs.Armature:create(animation_name);
     armature:setScale(1.5);
     armature:addChild(bs.GameAlertMask:create());
@@ -160,7 +154,6 @@ function PuzzlePlayScene:popPropsAnimation( animation_name )
     self:addChild(armature);
     armature:getAnimation():playWithIndex(0);
     armature:getAnimation():setMovementEventCallFunc(function ( armature, movementType, movementID)
-        --printf("PuzzlePlayScene:popPropsAnimation");
         self:gameResum();
         armature:removeFromParent();
     end);
@@ -250,10 +243,7 @@ function PuzzlePlayScene:popVictoryAlert()
     self.countdown_:pause();
     bs.UserDataManager:getInstance():insertPuzzleStageData(require(PUZZLE_SELECTED_SHOW_PATH):getSelectedPicturePath(),
         self.countdown_:getTimeConsuming());
-    --self:popAlert(PuzzleGameVictoryAlert, self.countdown_:getTimeConsuming());
-    --cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_ANSWER_ZOOM_IN_ACTION);
     local answer = self.puzzle_area_:getAnswersThumbnail();
-    --answer:setScale(1);
     local point = answer:convertToWorldSpace(cc.p(answer:getContentSize().width/2, answer:getContentSize().height/2));
     local point_00 = answer:convertToWorldSpace(cc.p(0, 0));
     local point_01 = answer:convertToWorldSpace(cc.p(answer:getContentSize().width, 0));
@@ -277,7 +267,6 @@ function PuzzlePlayScene:popVictoryAlert()
             self.alert_ = PuzzleGameVictoryAlert:create(self.countdown_:getTimeConsuming());
             self.alert_:setPosition(GlobalFunction.getVisibleCenterPosition());
             self:addChild(self.alert_);
-            -- self.alert_:setVisible(false);
             self.alert_:inlayAnswers(node, cc.CallFunc:create(function ()
                 flash_bg:removeFromParent();
             end));
@@ -305,7 +294,6 @@ function PuzzlePlayScene:popAlert( alert_class , params)
         self:addChild(self.alert_);
     end
     self:runAction(cc.Sequence:create(cc.DelayTime:create(0.01), cc.CallFunc:create(callfunc)));
-    --self:runAction(cc.CallFunc:create(callfunc));
 end
 
 return PuzzlePlayScene

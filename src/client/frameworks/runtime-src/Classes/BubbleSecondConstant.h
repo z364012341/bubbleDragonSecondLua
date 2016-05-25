@@ -259,8 +259,8 @@ const float TWO_ROUND_BOMB_EFFECT_DELAY_TIME = LIGHTNING_BUBBLE_EFFECT_DELAY_TIM
 
 //const GLubyte BLACK_HOLE_SWALLOW_OPACITY_CUT = 50;
 const GLubyte TEXTURE_OPACITY = 255;
-const std::string BARREL_BOTTOM_EFFECT_PATH = "diaoluo-TX/diaoluo-TX.ExportJson"; //小球掉到桶消除特效的路径
-const std::string BARREL_BOTTOM_EFFECT_NAME = "diaoluo-TX"; //小球掉到桶消除特效的名字
+//const std::string BARREL_BOTTOM_EFFECT_PATH = "diaoluo-TX/diaoluo-TX.ExportJson"; //小球掉到桶消除特效的路径
+//const std::string BARREL_BOTTOM_EFFECT_NAME = "diaoluo-TX"; //小球掉到桶消除特效的名字
 //const float BARREL_BOTTOM_EFFECT_POSITION_Y = 0.0f;
 const std::string COLOR_BUBBLE_ELIMINATE_EFFECT_PATH = "PPX-TX/PPX-TX.ExportJson"; //普通小球消除特效的路径
 const std::string COLOR_BUBBLE_ELIMINATE_EFFECT_NAME = "PPX-TX"; //普通小球消除特效的路径
