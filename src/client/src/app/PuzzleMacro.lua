@@ -32,6 +32,8 @@ cc.exports.PUZZLE_BIG_EYES_PROP_PATH = "app.views.PuzzleBigEyesProp";
 cc.exports.PUZZLE_ADD_TIME_PROP_PATH = "app.views.PuzzleAddTimeProp";
 cc.exports.PUZZLE_SELECTED_PAGEVIEW_POINT_PATH = "app.views.PuzzleSelectedPageViewPoint";
 cc.exports.PUZZLE_SELECTED_PAGEVIEW_PATH = "app.views.PuzzleSelectedPageView";
+--local PuzzleStoreAlert = require(PUZZLE_STORE_ALERT_PATH);
+cc.exports.PUZZLE_STORE_ALERT_PATH = "app.views.PuzzleStoreAlert";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";
@@ -57,6 +59,7 @@ cc.exports.EVENT_TOUCH_ADD_TIME_PROP = "event_touch_add_time_prop";
 cc.exports.EVENT_USE_ADD_TIME_PROP = "event_use_add_time_prop";
 cc.exports.EVENT_PUZZLE_TOUCH = "event_puzzle_touch";
 cc.exports.EVENT_ADJUST_PUZZLE_PIECES_SCALE = "event_adjust_puzzle_pieces_scale";
+cc.exports.EVENT_POP_PUZZLE_STORE_ALERT = "event_pop_game_store";
 -- cc.exports.EVENT_ANSWER_ZOOM_IN_ACTION = "event_answer_zoom_in_action";
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";

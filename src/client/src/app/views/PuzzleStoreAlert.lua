@@ -1,7 +1,6 @@
 --
 -- Author: 黄泽昊
--- Date: 2016-03-04 12:06:13
--- 作用: 拼图游戏的暂停面板
+-- 作用: 拼图游戏的商城面板
 
 local PuzzleStoreAlert = class("PuzzleStoreAlert", function ()
     return cc.Node:create();
@@ -24,13 +23,23 @@ function PuzzleStoreAlert:loadCSB()
     self.csb_node_:getChildByName(CLOSE_BUTTON_NAME):addClickEventListener(function ( ... )
         cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_CONTINUE);
     end);
-
+    --self:initListView();
 end
 function PuzzleStoreAlert:initListView()
-    -- body
+    local listView = self.csb_node_:getChildByName(LISTVIEW_NAME);
+    listView:setScrollBarEnabled(false);
+    --dump(bs.PuzzleStoreItemFactory:getInstance():getItemTotal());
+    for i = 1,bs.PuzzleStoreItemFactory:getInstance():getItemTotal() do
+        local custom_item = ccui.Layout:create()
+        local layer = bs.PuzzleStoreItemFactory:getInstance():createItemWithIndex(i-1);
+        --layer:setScale(0.8);
+        custom_item:setContentSize(layer:getContentSize())
+        custom_item:addChild(layer);
+        listView:pushBackCustomItem(custom_item)
+    end
 end
 function PuzzleStoreAlert:addMaskBackground()
-    self:addChild(bs.GameAlertMask:create(), MASK_ZORDER);
+    self:addChild(bs.GameAlertMask:create(), -1);
 end
 
 return PuzzleStoreAlert

@@ -329,7 +329,8 @@ namespace bubble_second {
             runtimeEngine->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
             runtimeEngine->start();
 #else
-			cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua");
+			//cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua");
+        cocos2d::LuaEngine::getInstance()->executeString("cc.Director:getInstance():replaceScene(require(PUZZLE_SELECTED_SCENE_PATH):createScene());");
 #endif
     }
 

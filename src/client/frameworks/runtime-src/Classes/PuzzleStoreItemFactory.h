@@ -19,6 +19,7 @@ namespace bubble_second {
         cocos2d::Node* createItemWithIndex(int index);
         ~PuzzleStoreItemFactory();
         void loadItemData();
+        int getItemTotal();
     private:
         PuzzleStoreItemFactory();
     private:

@@ -59,4 +59,8 @@ namespace bubble_second {
         assert(cocos2d::FileUtils::getInstance()->isFileExist(PUZZLE_STORE_ITEM_DATA_PATH));
         item_data_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(PUZZLE_STORE_ITEM_DATA_PATH);  
     }
+    int PuzzleStoreItemFactory::getItemTotal()
+    {
+        return item_data_.size();
+    }
 }

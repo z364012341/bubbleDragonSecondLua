@@ -72,7 +72,8 @@ namespace bubble_second {
     {
         if (this->isNoneProp())
         {
-            this->addPropNumble(3);
+            //this->addPropNumble(3);
+            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_GAME_STORE);
             return false;
         }
         UserDataManager::getInstance()->cutPropsNumbleWithKey(prop_key_);

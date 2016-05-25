@@ -21,6 +21,7 @@ local PuzzleBigEyesProp = require(PUZZLE_BIG_EYES_PROP_PATH);
 local PuzzleAddTimeProp = require(PUZZLE_ADD_TIME_PROP_PATH);
 local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
 local PuzzleGamePlayTimerComponent = require(PUZZLE_GAME_PLAY_TIMER_COMPONENT_PATH);
+local PuzzleStoreAlert = require(PUZZLE_STORE_ALERT_PATH);
 local PUZZLE_PLAY_SCENE_CSB_PATH = "PuzzlePlayLayer.csb";
 local CSB_DESK_NAME = "pintutaizi_2";
 local PAUSE_BUTTON_NAME = "Button_1";
@@ -166,11 +167,15 @@ function PuzzlePlayScene:onEnter()
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_ANSWER_LOAD, addPuzzleAnswer));
 
 	local function gameContinue( event )
-		cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUSH_ANSWERS_THUMBNAIL);
-
-    	self.alert_:removeFromParent();
-    	self.alert_ = nil;
-    	self.screen_sp_:removeFromParent();
+        if self.alert_ ~= nil then
+        	self.alert_:removeFromParent();
+        	self.alert_ = nil;
+        end
+        if self.screen_sp_ ~= nil then
+            cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUSH_ANSWERS_THUMBNAIL);
+        	self.screen_sp_:removeFromParent();
+            self.screen_sp_ = nil;
+        end
         self:gameResum();
 	end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_CONTINUE, gameContinue));
@@ -210,6 +215,9 @@ function PuzzlePlayScene:onEnter()
     end));
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_USE_ADD_TIME_PROP, function ( event )
         self:popPropsAnimation(PROP_ADD_TIME_ANIMATION_NAME);
+    end));
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_POP_PUZZLE_STORE_ALERT, function ( event )
+        self:popStoreAlert();
     end));
     for _, listener in ipairs(self.listener_) do
     	self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
@@ -295,5 +303,10 @@ function PuzzlePlayScene:popAlert( alert_class , params)
     end
     self:runAction(cc.Sequence:create(cc.DelayTime:create(0.01), cc.CallFunc:create(callfunc)));
 end
-
+function PuzzlePlayScene:popStoreAlert()
+    self:gamePause();
+    self.alert_ = PuzzleStoreAlert:create();
+    self.alert_:setPosition(GlobalFunction.getVisibleCenterPosition());
+    self:addChild(self.alert_);
+end
 return PuzzlePlayScene

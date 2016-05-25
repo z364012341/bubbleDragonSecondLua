@@ -18,6 +18,12 @@
         
 --------------------------------
 -- 
+-- @function [parent=#PuzzleStoreItemFactory] getItemTotal 
+-- @param self
+-- @return int#int ret (return value: int)
+        
+--------------------------------
+-- 
 -- @function [parent=#PuzzleStoreItemFactory] getInstance 
 -- @param self
 -- @return PuzzleStoreItemFactory#PuzzleStoreItemFactory ret (return value: bs.PuzzleStoreItemFactory)

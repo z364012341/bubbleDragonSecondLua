@@ -438,7 +438,8 @@ const std::string EVENT_BUBBLE_CONTACT_BLACKHOLE = "event_bubble_contact_blackho
 const std::string EVENT_STAVES_SELECT_BUBBLE = "event_staves_select_bubble"; //法杖选择小球
 const std::string EVENT_BUBBLE_NO_FLASH = "event_bubble_no_flash"; //小球不闪光
 const std::string EVENT_MUTIPLE_SEAL_BUBBLE_FLY = "event_mutiple_seal_bubble_fly"; //解救动物飞飞飞 
-const std::string EVENT_TOP_ELIMINATE_BUBBLE_FLY = "event_top_eliminate_bubble_fly"; 
+const std::string EVENT_TOP_ELIMINATE_BUBBLE_FLY = "event_top_eliminate_bubble_fly";
+const std::string EVENT_POP_GAME_STORE = "event_pop_game_store";
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效
