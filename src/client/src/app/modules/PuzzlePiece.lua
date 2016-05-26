@@ -149,7 +149,8 @@ end
 function PuzzlePiece:isToucnOnAnswer()
     local puzzlePoint = self:getParent():convertToWorldSpace(cc.p(self:getPosition()));
     local answerPoint = self:getPuzzlePieceAnswer():convertToNodeSpace(puzzlePoint);
-    return cc.pGetDistance(cc.p(0,0), answerPoint) < PUZZLE_STENCIL_WIDTH;
+    --printf("distance" .. cc.pGetDistance(cc.p(0,0), answerPoint));
+    return cc.pGetDistance(cc.p(0,0), answerPoint) < PUZZLE_STENCIL_LENGTH/2;
 end
 
 function PuzzlePiece:moveToAnswer()
@@ -176,7 +177,7 @@ function PuzzlePiece:moveBackShadow()
 end
 function PuzzlePiece:playMoveAnswerAnimation()
     local armature = ccs.Armature:create(PUZZLE_MOVE_ANSWER_ANIMATION_NAME);
-    armature:setScale(2.8);
+    armature:setScale(PUZZLE_STENCIL_WIDTH / armature:getContentSize().width*1.3);
     --armature:addChild(bs.GameAlertMask:create());
     armature:setPosition(cc.p(0, 0));
     self:addChild(armature);

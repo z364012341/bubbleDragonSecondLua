@@ -60,7 +60,7 @@ function PuzzleGameVictoryAlert:addTimeConsumingLabel(time_consuming)
 end
 function PuzzleGameVictoryAlert:addBestTimeConsumingLabel()
     local time_display = PuzzleTimeDisplay:create();
-    time_display:setTimeString(bs.UserDataManager:getInstance():getPuzzleStageDataWithKey(require(PUZZLE_SELECTED_SHOW_PATH):getSelectedPicturePath()));
+    time_display:setTimeString(bs.UserDataManager:getInstance():getPuzzleStageBestScoreWithKey(require(PUZZLE_SELECTED_SHOW_PATH):getSelectedPicturePath()));
     time_display:setScale(TIME_LABEL_SCALE);
     self.csb_node_:getChildByName(TIME_BEST_CONSUMING_NODE_NAME):addChild(time_display);
 end
