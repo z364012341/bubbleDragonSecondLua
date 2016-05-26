@@ -30,4 +30,17 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>sktTools</name>
+			<type>2</type>
+			<locationURI>COCOS2DX/extensions/sktTools/android/java/src</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>COCOS2DX</name>
+			<value>$%7BPARENT-7-PROJECT_LOC%7D/backers/cocos2d-x-2.2.2</value>
+		</variable>
+	</variableList>
 </projectDescription>

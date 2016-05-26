@@ -6,12 +6,6 @@
 
 --------------------------------
 -- 
--- @function [parent=#PropsNumbleShow] addPropNumble 
--- @param self
--- @return PropsNumbleShow#PropsNumbleShow self (return value: bs.PropsNumbleShow)
-        
---------------------------------
--- 
 -- @function [parent=#PropsNumbleShow] cutPropNumble 
 -- @param self
 -- @return bool#bool ret (return value: bool)
@@ -29,5 +23,17 @@
 -- @param self
 -- @param #string prop_key
 -- @return PropsNumbleShow#PropsNumbleShow ret (return value: bs.PropsNumbleShow)
+        
+--------------------------------
+-- 
+-- @function [parent=#PropsNumbleShow] onEnter 
+-- @param self
+-- @return PropsNumbleShow#PropsNumbleShow self (return value: bs.PropsNumbleShow)
+        
+--------------------------------
+-- 
+-- @function [parent=#PropsNumbleShow] onExit 
+-- @param self
+-- @return PropsNumbleShow#PropsNumbleShow self (return value: bs.PropsNumbleShow)
         
 return nil

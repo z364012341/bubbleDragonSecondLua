@@ -34,6 +34,15 @@ import java.util.ArrayList;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import skt.tools.PhoneUtils;
+import skt.tools.StatisticsLog;
+import skt.tools.PhoneUtils.OperatorName;
+
+
+
+import com.skt.sdk.channel.Channel;
+import com.skt.sdk.channel.impl.ChannelFactory;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -55,6 +64,10 @@ import android.widget.Toast;
 public class AppActivity extends Cocos2dxActivity{
 
     static String hostIPAdress = "0.0.0.0";
+	public static AppActivity myMainActivity = null;
+	static final String RECIVE_LOG_URL = "http://42.96.170.133:10017/fishLog/newLog";
+	public Channel channel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +105,14 @@ public class AppActivity extends Cocos2dxActivity{
             }
             hostIPAdress = getHostIpAddress();
         }
+        
+        myMainActivity = this;
+        OperatorName curOperator = PhoneUtils.getOperatorName(this);
+        String channelId = Channel.getSonChannelID(this);
+//		StatisticsLog.init(this, RECIVE_LOG_URL, channelId);
+
+		channel = ChannelFactory.getChannel(curOperator, this);
+		
     }
     private boolean isNetworkConnected() {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);  

@@ -19,6 +19,7 @@ end
 
 function PuzzleStoreAlert:loadCSB()
     self.csb_node_ = cc.CSLoader:createNode(STORE_CSB_PATH);
+    bs.ButtonEffectController:setButtonsZoomScale(self.csb_node_)
     self:addChild(self.csb_node_);
     self.csb_node_:getChildByName(CLOSE_BUTTON_NAME):addClickEventListener(function ( ... )
         cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_CONTINUE);

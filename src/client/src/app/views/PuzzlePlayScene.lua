@@ -167,14 +167,14 @@ function PuzzlePlayScene:onEnter()
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_PUZZLE_ANSWER_LOAD, addPuzzleAnswer));
 
 	local function gameContinue( event )
+        if self.screen_sp_ ~= nil then
+            cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUSH_ANSWERS_THUMBNAIL);
+            self.screen_sp_:removeFromParent();
+            self.screen_sp_ = nil;
+        end
         if self.alert_ ~= nil then
         	self.alert_:removeFromParent();
         	self.alert_ = nil;
-        end
-        if self.screen_sp_ ~= nil then
-            cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_PUSH_ANSWERS_THUMBNAIL);
-        	self.screen_sp_:removeFromParent();
-            self.screen_sp_ = nil;
         end
         self:gameResum();
 	end

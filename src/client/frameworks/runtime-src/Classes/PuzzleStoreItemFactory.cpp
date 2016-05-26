@@ -5,6 +5,8 @@
 #include "ui\UIButton.h"
 #include "ui\UIScale9Sprite.h"
 #include "ButtonEffectController.h"
+#include "GameJNIHelper.h"
+#include "UserDataManager.h"
 const std::string PUZZLE_STORE_ITEM_DATA_PATH = "res/puzzleStoreItemData.plist";
 const std::string PUZZLE_STORE_ITEM_CAB_PATH = "PuzzleStoreitem.csb";
 const std::string BUY_BUTTON_CAB_PATH = "PuzzleStoreItemBuyLabel.csb";
@@ -13,6 +15,7 @@ const std::string STORE_NUMBLE_KEY = "numble";
 const std::string STORE_NAME_KEY = "storeName";
 const std::string STORE_DESCRIPTION_KEY = "description";
 const std::string STORE_COST_KEY = "cost";
+const std::string TARGET_ID_KEY = "targetID";
 const std::string STORE_NUMBLE_NAME = "BitmapFontLabel_2_0";
 const std::string STORE_NAME_LABEL_NAME = "BitmapFontLabel_1";
 const std::string STORE_DESCRIPTION_LABEL_NAME = "BitmapFontLabel_1_0";
@@ -48,6 +51,10 @@ namespace bubble_second {
         ButtonEffectController::setButtonZoomScale(button);
         button->getRendererNormal()->addChild(button_label_node);
         button_label_node->setPosition(cocos2d::Vec2(button->getRendererNormal()->getContentSize().width/2, button->getRendererNormal()->getContentSize().height / 2));
+        button->addClickEventListener([=](cocos2d::Ref*) {
+            UserDataManager::getInstance()->setBuyPropsKeyAndNumble(data.at(SHOWNAME_KEY).asString(), data.at(STORE_NUMBLE_KEY).asInt());
+            GameJNIHelper::getInstance()->payWithTargetID(data.at(TARGET_ID_KEY).asInt());
+        });
         return csb_node;
     }
 

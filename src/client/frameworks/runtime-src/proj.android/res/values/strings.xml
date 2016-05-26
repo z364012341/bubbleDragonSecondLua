@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">bubbleDragonSecondLua</string>
+    <string name="servicephone">010-84543920</string>
+    <string name="appid">300009690183</string>
+    <string name="appKey">2632F299805F76A0BE39F9FE20F49B28</string>
 </resources>

@@ -63,11 +63,11 @@ namespace bubble_second {
     PropsNumbleShow::~PropsNumbleShow()
     {
     }
-    void PropsNumbleShow::addPropNumble(int numble)
-    {
-        UserDataManager::getInstance()->setPropsNumbleWithKey(prop_key_, UserDataManager::getInstance()->getPropsNumbleWithKey(prop_key_) + numble);
-        this->updateLabel();
-    }
+    //void PropsNumbleShow::addPropNumble(int numble)
+    //{
+    //    UserDataManager::getInstance()->setPropsNumbleWithKey(prop_key_, UserDataManager::getInstance()->getPropsNumbleWithKey(prop_key_) + numble);
+    //    this->updateLabel();
+    //}
     bool PropsNumbleShow::cutPropNumble()
     {
         if (this->isNoneProp())
@@ -84,5 +84,18 @@ namespace bubble_second {
     {
         UserDataManager::getInstance()->setPropsNumbleWithKey(prop_key_, numble);
         this->updateLabel();
+    }
+    void PropsNumbleShow::onEnter()
+    {
+        cocos2d::Node::onEnter();
+        listener_ = cocos2d::EventListenerCustom::create(EVENT_BUBBLE_ELIMINATED, [=](cocos2d::EventCustom* event) {
+            this->updateLabel();
+        });
+        cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 2);
+    }
+    void PropsNumbleShow::onExit()
+    {
+        cocos2d::Node::onExit();
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
     }
 }

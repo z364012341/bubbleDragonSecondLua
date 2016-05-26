@@ -18,9 +18,11 @@ namespace bubble_second {
         //CREATE_FUNC(PropsNumbleShow);
         static PropsNumbleShow* create(const std::string& prop_key);
         ~PropsNumbleShow();
-        void addPropNumble(int numble = 1);
+        //void addPropNumble(int numble = 1);
         bool cutPropNumble();
         void setPropNumble(int numble);
+        void onEnter() override;
+        void onExit() override;
     private:
         PropsNumbleShow();
         bool init(const std::string& prop_key);
@@ -30,7 +32,8 @@ namespace bubble_second {
         cocos2d::ui::TextAtlas* props_numble_label_ = nullptr;
         cocos2d::Sprite* plus_sprite_ = nullptr;
         std::string prop_key_ = "";
-        //int numble_ = 0;
+        cocos2d::EventListenerCustom* listener_ = nullptr;
+        
     };
 }
 #endif //_PROPS_NUMBLE_SHOW_H_

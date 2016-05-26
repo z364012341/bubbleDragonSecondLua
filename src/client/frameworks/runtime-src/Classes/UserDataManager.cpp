@@ -8,18 +8,26 @@ const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageBestScore.plist";
 const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
 const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
 const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT";
-const std::string PUZZLE_SEARCH_PROP_KEY = "p1";
-const std::string PUZZLE_BIG_EYES_PROP_KEY = "p2";
-const std::string PUZZLE_ADD_TIME_PROP_KEY = "p3";
+const std::string PUZZLE_SEARCH_PROP_KEY = "search";
+const std::string PUZZLE_BIG_EYES_PROP_KEY = "bigEyes";
+const std::string PUZZLE_ADD_TIME_PROP_KEY = "addTime";
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_BUY_PROPS_PAY_SUCCESS, [=](cocos2d::EventCustom* event) {
+            this->addPropsNumbleWithKey(buy_props_key_, buy_props_numble_);
+        });
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_BUY_PROPS_PAY_FAIL, [=](cocos2d::EventCustom* event) {
+            this->setBuyPropsKeyAndNumble("", 0);
+        });
     }
 
     UserDataManager::~UserDataManager()
     {
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_BUY_PROPS_PAY_SUCCESS);
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_BUY_PROPS_PAY_FAIL);
     }
     void UserDataManager::readStageFile()
     {
@@ -67,9 +75,18 @@ namespace bubble_second {
         user_data_[key] = numble;
         this->saveUserData();
     }
+    void UserDataManager::addPropsNumbleWithKey(const std::string & key, int numble)
+    {
+        this->setPropsNumbleWithKey(key, this->getPropsNumbleWithKey(key) + numble);
+    }
     void UserDataManager::cutPropsNumbleWithKey(const std::string& key)
     {
         this->setPropsNumbleWithKey(key, this->getPropsNumbleWithKey(key)-1);
+    }
+    void UserDataManager::setBuyPropsKeyAndNumble(const std::string & key, int numble)
+    {
+        buy_props_key_ = key;
+        buy_props_numble_ = numble;
     }
     int UserDataManager::getStartNumbleWithLevel(int level)
     {

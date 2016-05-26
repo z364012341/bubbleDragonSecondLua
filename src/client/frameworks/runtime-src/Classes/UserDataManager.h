@@ -49,8 +49,10 @@ namespace bubble_second {
 
         int getPropsNumbleWithKey(const std::string& key);
         void setPropsNumbleWithKey(const std::string& key, int numble);
+        void addPropsNumbleWithKey(const std::string& key, int numble);
         void cutPropsNumbleWithKey(const std::string& key);
 
+        void setBuyPropsKeyAndNumble(const std::string& key, int numble);
     private:
         ~UserDataManager();
         void writeStageDataToFile();
@@ -67,6 +69,8 @@ namespace bubble_second {
         cocos2d::ValueMap user_data_;
         int unlock_stage_numble_ = 0;
         cocos2d::ValueMap puzzle_stage_data_;
+        std::string buy_props_key_ = "";
+        int buy_props_numble_ = 0;
     };
 }
 #endif //_USER_DATA_MANAGER_H_

@@ -81,7 +81,7 @@ cc.exports.PUZZLE_COMPONENT_ROTATION = "component_rotation";
 cc.exports.PUZZLE_COMPONENT_POSITION = "component_position";
 --cc.exports.PUZZLE_COMPONENT_ROTATION_INSIDE = "component_rotation_inside";
 --cc.exports.PUZZLE_COMPONENT_ROTATION_OUTSIDE = "component_rotation_outside";
-cc.exports.PUZZLE_STENCIL_WIDTH = 244;
+cc.exports.PUZZLE_STENCIL_WIDTH = 120;
 cc.exports.PUZZLE_STENCIL_HEIGHT = PUZZLE_STENCIL_WIDTH;
 cc.exports.PUZZLE_STENCIL_LENGTH = 588;
 cc.exports.PUZZLE_COMPONENT_ANCHOR = {x = 0, y = 0.5};
