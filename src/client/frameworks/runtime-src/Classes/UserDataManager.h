@@ -61,7 +61,7 @@ namespace bubble_second {
         void buyNewbieGift();
         bool canBuyNewbieGift();
         //…Ë÷√…Ã∆∑target
-        void setStoreOneTimeFlag(bool flag);
+        //void setStoreOneTimeFlag(bool flag);
     private:
         ~UserDataManager();
         void writeStageDataToFile();
