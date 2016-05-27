@@ -4,6 +4,56 @@
 #include "LuaBasicConversions.h"
 
 
+int lua_UserDataManager_UserDataManager_setBuyPropsKeyAndNumble(lua_State* tolua_S)
+{
+    int argc = 0;
+    bubble_second::UserDataManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"bs.UserDataManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (bubble_second::UserDataManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_UserDataManager_UserDataManager_setBuyPropsKeyAndNumble'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        cocos2d::ValueMap arg0;
+
+        ok &= luaval_to_ccvaluemap(tolua_S, 2, &arg0, "bs.UserDataManager:setBuyPropsKeyAndNumble");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_UserDataManager_UserDataManager_setBuyPropsKeyAndNumble'", nullptr);
+            return 0;
+        }
+        cobj->setBuyPropsKeyAndNumble(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "bs.UserDataManager:setBuyPropsKeyAndNumble",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_UserDataManager_UserDataManager_setBuyPropsKeyAndNumble'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_UserDataManager_UserDataManager_savePuzzleStageData(lua_State* tolua_S)
 {
     int argc = 0;
@@ -492,6 +542,53 @@ int lua_UserDataManager_UserDataManager_getPuzzleStageBestScoreWithKey(lua_State
 
     return 0;
 }
+int lua_UserDataManager_UserDataManager_canBuyNewbieGift(lua_State* tolua_S)
+{
+    int argc = 0;
+    bubble_second::UserDataManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"bs.UserDataManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (bubble_second::UserDataManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_UserDataManager_UserDataManager_canBuyNewbieGift'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_UserDataManager_UserDataManager_canBuyNewbieGift'", nullptr);
+            return 0;
+        }
+        bool ret = cobj->canBuyNewbieGift();
+        tolua_pushboolean(tolua_S,(bool)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "bs.UserDataManager:canBuyNewbieGift",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_UserDataManager_UserDataManager_canBuyNewbieGift'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_UserDataManager_UserDataManager_getStagePassCount(lua_State* tolua_S)
 {
     int argc = 0;
@@ -839,6 +936,59 @@ int lua_UserDataManager_UserDataManager_setPresentCell(lua_State* tolua_S)
 
     return 0;
 }
+int lua_UserDataManager_UserDataManager_addPropsNumbleWithKey(lua_State* tolua_S)
+{
+    int argc = 0;
+    bubble_second::UserDataManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"bs.UserDataManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (bubble_second::UserDataManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_UserDataManager_UserDataManager_addPropsNumbleWithKey'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        std::string arg0;
+        int arg1;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "bs.UserDataManager:addPropsNumbleWithKey");
+
+        ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "bs.UserDataManager:addPropsNumbleWithKey");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_UserDataManager_UserDataManager_addPropsNumbleWithKey'", nullptr);
+            return 0;
+        }
+        cobj->addPropsNumbleWithKey(arg0, arg1);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "bs.UserDataManager:addPropsNumbleWithKey",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_UserDataManager_UserDataManager_addPropsNumbleWithKey'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_UserDataManager_UserDataManager_getPropsNumbleWithKey(lua_State* tolua_S)
 {
     int argc = 0;
@@ -885,6 +1035,53 @@ int lua_UserDataManager_UserDataManager_getPropsNumbleWithKey(lua_State* tolua_S
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_UserDataManager_UserDataManager_getPropsNumbleWithKey'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_UserDataManager_UserDataManager_buyNewbieGift(lua_State* tolua_S)
+{
+    int argc = 0;
+    bubble_second::UserDataManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"bs.UserDataManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (bubble_second::UserDataManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_UserDataManager_UserDataManager_buyNewbieGift'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_UserDataManager_UserDataManager_buyNewbieGift'", nullptr);
+            return 0;
+        }
+        cobj->buyNewbieGift();
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "bs.UserDataManager:buyNewbieGift",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_UserDataManager_UserDataManager_buyNewbieGift'.",&tolua_err);
 #endif
 
     return 0;
@@ -1314,6 +1511,7 @@ int lua_register_UserDataManager_UserDataManager(lua_State* tolua_S)
 
     tolua_beginmodule(tolua_S,"UserDataManager");
         tolua_function(tolua_S,"new",lua_UserDataManager_UserDataManager_constructor);
+        tolua_function(tolua_S,"setBuyPropsKeyAndNumble",lua_UserDataManager_UserDataManager_setBuyPropsKeyAndNumble);
         tolua_function(tolua_S,"savePuzzleStageData",lua_UserDataManager_UserDataManager_savePuzzleStageData);
         tolua_function(tolua_S,"cutPropsNumbleWithKey",lua_UserDataManager_UserDataManager_cutPropsNumbleWithKey);
         tolua_function(tolua_S,"setGameMusicEnable",lua_UserDataManager_UserDataManager_setGameMusicEnable);
@@ -1324,6 +1522,7 @@ int lua_register_UserDataManager_UserDataManager(lua_State* tolua_S)
         tolua_function(tolua_S,"readDataFile",lua_UserDataManager_UserDataManager_readDataFile);
         tolua_function(tolua_S,"insertPuzzleStageData",lua_UserDataManager_UserDataManager_insertPuzzleStageData);
         tolua_function(tolua_S,"getPuzzleStageBestScoreWithKey",lua_UserDataManager_UserDataManager_getPuzzleStageBestScoreWithKey);
+        tolua_function(tolua_S,"canBuyNewbieGift",lua_UserDataManager_UserDataManager_canBuyNewbieGift);
         tolua_function(tolua_S,"getStagePassCount",lua_UserDataManager_UserDataManager_getStagePassCount);
         tolua_function(tolua_S,"saveUserData",lua_UserDataManager_UserDataManager_saveUserData);
         tolua_function(tolua_S,"setPropsNumbleWithKey",lua_UserDataManager_UserDataManager_setPropsNumbleWithKey);
@@ -1331,7 +1530,9 @@ int lua_register_UserDataManager_UserDataManager(lua_State* tolua_S)
         tolua_function(tolua_S,"setSoundEffect",lua_UserDataManager_UserDataManager_setSoundEffect);
         tolua_function(tolua_S,"getStartNumbleWithLevel",lua_UserDataManager_UserDataManager_getStartNumbleWithLevel);
         tolua_function(tolua_S,"setPresentCell",lua_UserDataManager_UserDataManager_setPresentCell);
+        tolua_function(tolua_S,"addPropsNumbleWithKey",lua_UserDataManager_UserDataManager_addPropsNumbleWithKey);
         tolua_function(tolua_S,"getPropsNumbleWithKey",lua_UserDataManager_UserDataManager_getPropsNumbleWithKey);
+        tolua_function(tolua_S,"buyNewbieGift",lua_UserDataManager_UserDataManager_buyNewbieGift);
         tolua_function(tolua_S,"readPuzzleStageBestScore",lua_UserDataManager_UserDataManager_readPuzzleStageBestScore);
         tolua_function(tolua_S,"updateStageData",lua_UserDataManager_UserDataManager_updateStageData);
         tolua_function(tolua_S,"getPresentCell",lua_UserDataManager_UserDataManager_getPresentCell);

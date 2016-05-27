@@ -17,13 +17,18 @@ namespace bubble_second {
     public:
         GETINSTANCE_FUNC(PuzzleStoreItemFactory);
         cocos2d::Node* createItemWithIndex(int index);
+        cocos2d::Node* createGiftsItemWithIndex(int index);
+        cocos2d::Node* createNewbieAlert();
         ~PuzzleStoreItemFactory();
         void loadItemData();
         int getItemTotal();
+        int getGiftsItemTotal();
     private:
         PuzzleStoreItemFactory();
+        void loadGiftData();
     private:
         cocos2d::ValueMap item_data_;
+        cocos2d::ValueMap gifts_item_data_;
     };
 }
 #endif //PuzzleStoreItemFactory

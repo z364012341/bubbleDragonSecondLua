@@ -1,5 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
+
+
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := cocos2dlua_shared
@@ -10,9 +12,9 @@ FILE_LIST := \
 ../../Classes/ide-support/SimpleConfigParser.cpp \
 ../../Classes/ide-support/RuntimeLuaImpl.cpp \
 ../../Classes/ide-support/lua_debugger.c \
-hellolua/main.cpp 
-FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/*.cpp)  
-FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/*.hpp)  
+hellolua/main.cpp
+FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/*.hpp)
 LOCAL_SRC_FILES := $(FILE_LIST:$(LOCAL_PATH)/%=%)
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

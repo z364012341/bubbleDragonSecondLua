@@ -8,19 +8,24 @@ const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageBestScore.plist";
 const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
 const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
 const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT";
-const std::string PUZZLE_SEARCH_PROP_KEY = "search";
-const std::string PUZZLE_BIG_EYES_PROP_KEY = "bigEyes";
-const std::string PUZZLE_ADD_TIME_PROP_KEY = "addTime";
+
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
         cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_BUY_PROPS_PAY_SUCCESS, [=](cocos2d::EventCustom* event) {
-            this->addPropsNumbleWithKey(buy_props_key_, buy_props_numble_);
+            if (buy_props_save_.begin()->second.asInt() == PUZZLE_NEWBIE_GIFT_TARGET_ID)
+            {
+                this->buyNewbieGift();
+            }
+            for (auto var : buy_props_save_)
+            {
+                this->addPropsNumbleWithKey(var.first, var.second.asInt());
+            }
         });
         cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_BUY_PROPS_PAY_FAIL, [=](cocos2d::EventCustom* event) {
-            this->setBuyPropsKeyAndNumble("", 0);
+            buy_props_save_.clear();
         });
     }
 
@@ -83,10 +88,18 @@ namespace bubble_second {
     {
         this->setPropsNumbleWithKey(key, this->getPropsNumbleWithKey(key)-1);
     }
-    void UserDataManager::setBuyPropsKeyAndNumble(const std::string & key, int numble)
+    void UserDataManager::setBuyPropsKeyAndNumble(cocos2d::ValueMap data)
     {
-        buy_props_key_ = key;
-        buy_props_numble_ = numble;
+        buy_props_save_ = data;
+    }
+    void UserDataManager::buyNewbieGift()
+    {
+        cocos2d::UserDefault::getInstance()->setBoolForKey("buyNewbieGift", true);
+        cocos2d::UserDefault::getInstance()->flush();
+    }
+    bool UserDataManager::canBuyNewbieGift()
+    {
+        return !cocos2d::UserDefault::getInstance()->getBoolForKey("buyNewbieGift");
     }
     int UserDataManager::getStartNumbleWithLevel(int level)
     {

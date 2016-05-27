@@ -5,6 +5,13 @@
 
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] setBuyPropsKeyAndNumble 
+-- @param self
+-- @param #map_table data
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] savePuzzleStageData 
 -- @param self
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
@@ -71,6 +78,12 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] canBuyNewbieGift 
+-- @param self
+-- @return bool#bool ret (return value: bool)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] getStagePassCount 
 -- @param self
 -- @return int#int ret (return value: int)
@@ -119,10 +132,24 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] addPropsNumbleWithKey 
+-- @param self
+-- @param #string key
+-- @param #int numble
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] getPropsNumbleWithKey 
 -- @param self
 -- @param #string key
 -- @return int#int ret (return value: int)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] buyNewbieGift 
+-- @param self
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
 -- 

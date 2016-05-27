@@ -383,6 +383,10 @@
       <Filter>Classes\lua</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameJNIHelper.h" />
+    <ClInclude Include="..\Classes\PuzzleLoadingScene.h" />
+    <ClInclude Include="..\Classes\lua_PuzzleLoadingScene_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -740,6 +744,10 @@
       <Filter>Classes\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameJNIHelper.cpp" />
+    <ClCompile Include="..\Classes\PuzzleLoadingScene.cpp" />
+    <ClCompile Include="..\Classes\lua_PuzzleLoadingScene_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

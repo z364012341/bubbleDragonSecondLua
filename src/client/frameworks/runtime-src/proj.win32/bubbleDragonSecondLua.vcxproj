@@ -274,6 +274,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\lua_LoadingScene_auto.hpp" />
     <ClInclude Include="..\Classes\lua_module_register.h" />
     <ClInclude Include="..\Classes\lua_PropsNumbleShow_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_PuzzleLoadingScene_auto.hpp" />
     <ClInclude Include="..\Classes\lua_PuzzleStageDataManager_auto.hpp" />
     <ClInclude Include="..\Classes\lua_PuzzleStoreItemFactory_auto.hpp" />
     <ClInclude Include="..\Classes\lua_SmartScaleController_auto.hpp" />
@@ -286,6 +287,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\PropertiesFactory.h" />
     <ClInclude Include="..\Classes\PropsNumbleShow.h" />
     <ClInclude Include="..\Classes\PropsSelectAlert.h" />
+    <ClInclude Include="..\Classes\PuzzleLoadingScene.h" />
     <ClInclude Include="..\Classes\PuzzleStageDataManager.h" />
     <ClInclude Include="..\Classes\PuzzleStoreItemFactory.h" />
     <ClInclude Include="..\Classes\RainbowCharactor.h" />
@@ -409,6 +411,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\lua_GameStartButton_auto.cpp" />
     <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp" />
     <ClCompile Include="..\Classes\lua_PropsNumbleShow_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_PuzzleLoadingScene_auto.cpp" />
     <ClCompile Include="..\Classes\lua_PuzzleStageDataManager_auto.cpp" />
     <ClCompile Include="..\Classes\lua_PuzzleStoreItemFactory_auto.cpp" />
     <ClCompile Include="..\Classes\lua_SmartScaleController_auto.cpp" />
@@ -421,6 +424,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\PropertiesFactory.cpp" />
     <ClCompile Include="..\Classes\PropsNumbleShow.cpp" />
     <ClCompile Include="..\Classes\PropsSelectAlert.cpp" />
+    <ClCompile Include="..\Classes\PuzzleLoadingScene.cpp" />
     <ClCompile Include="..\Classes\PuzzleStageDataManager.cpp" />
     <ClCompile Include="..\Classes\PuzzleStoreItemFactory.cpp" />
     <ClCompile Include="..\Classes\RainbowCharactor.cpp" />

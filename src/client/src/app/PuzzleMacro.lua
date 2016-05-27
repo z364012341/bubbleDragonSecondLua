@@ -15,6 +15,7 @@ cc.exports.PUZZLE_GAME_PLAY_TIMER_COMPONENT_PATH = "app.modules.PuzzleGamePlayTi
 cc.exports.PUZZLE_PLAY_AREA_INNER_CONTAINER = "app.views.PuzzlePlayAreaInnerContainer";
 --local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
 cc.exports.PUZZLE_SELECTED_SHOW_PATH = "app.views.PuzzleSelectedShow";
+--local PuzzleSelectedScene = require(PUZZLE_SELECTED_SCENE_PATH);
 cc.exports.PUZZLE_SELECTED_SCENE_PATH = "app.views.PuzzleSelectedScene";
 cc.exports.PUZZLE_PIECES_SCROLLVIEW_PATH = "app.views.PuzzlePiecesScrollView";
 cc.exports.PUZZLE_GAME_PAUSE_ALERT_PATH = "app.views.PuzzleGamePauseAlert";
@@ -34,6 +35,8 @@ cc.exports.PUZZLE_SELECTED_PAGEVIEW_POINT_PATH = "app.views.PuzzleSelectedPageVi
 cc.exports.PUZZLE_SELECTED_PAGEVIEW_PATH = "app.views.PuzzleSelectedPageView";
 --local PuzzleStoreAlert = require(PUZZLE_STORE_ALERT_PATH);
 cc.exports.PUZZLE_STORE_ALERT_PATH = "app.views.PuzzleStoreAlert";
+--local PuzzleStartScene = require(PUZZLE_START_SCENE_PATH);
+cc.exports.PUZZLE_START_SCENE_PATH = "app.views.PuzzleStartScene";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";

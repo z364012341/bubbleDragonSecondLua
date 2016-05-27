@@ -8,6 +8,7 @@ local PuzzleSelectedScene = class("PuzzleSelectedScene", function ()
 end)
 PuzzleSelectedScene.need_page_down_ = false;
 local PuzzleSelectedShow = require(PUZZLE_SELECTED_SHOW_PATH);
+-- local PuzzleStartScene = require(PUZZLE_START_SCENE_PATH);
 local PUZZLE_SELECTED_SCENE_CSB_PATH = "PuzzleSelectionLayer.csb";
 local PUZZLE_SHOW_NODE_NAME = "Node_1";
 local PUZZLE_SHOW_TOP_NODE_NAME = "Node_2";
@@ -68,7 +69,7 @@ function PuzzleSelectedScene:initBackButton()
     local button = self.csb_node_:getChildByName(BACK_BUTTON_NAME);
     button:setPosition(cc.p(size.width*0.09, size.height*0.93));
     button:addClickEventListener(function ( ... )
-        cc.Director:getInstance():replaceScene(bs.GameStageSelectionScene:createScene());
+        cc.Director:getInstance():replaceScene(require(PUZZLE_START_SCENE_PATH):createScene());
     end);
 end
 function PuzzleSelectedScene:addStartButton()

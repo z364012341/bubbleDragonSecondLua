@@ -16,6 +16,7 @@
 #include "lua_PuzzleStageDataManager_auto.hpp"
 #include "lua_PropsNumbleShow_auto.hpp"
 #include "lua_PuzzleStoreItemFactory_auto.hpp"
+#include "lua_PuzzleLoadingScene_auto.hpp"
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
 #include "ide-support/CodeIDESupport.h"
 #endif
@@ -102,6 +103,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     register_all_GameShareButton(engine->getLuaStack()->getLuaState());
     register_all_PropsNumbleShow(engine->getLuaStack()->getLuaState());
     register_all_PuzzleStoreItemFactory(engine->getLuaStack()->getLuaState());
+    register_all_PuzzleLoadingScene(engine->getLuaStack()->getLuaState());
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
     auto runtimeEngine = RuntimeEngine::getInstance();

@@ -10,6 +10,10 @@
 #ifndef _USER_DATA_MANAGER_H_
 #define _USER_DATA_MANAGER_H_
 #include "BubbleSecondConstant.h"
+const std::string PUZZLE_SEARCH_PROP_KEY = "search";
+const std::string PUZZLE_BIG_EYES_PROP_KEY = "bigEyes";
+const std::string PUZZLE_ADD_TIME_PROP_KEY = "addTime";
+const int PUZZLE_NEWBIE_GIFT_TARGET_ID = 113;
 namespace bubble_second {
     class UserDataManager
     {
@@ -52,7 +56,10 @@ namespace bubble_second {
         void addPropsNumbleWithKey(const std::string& key, int numble);
         void cutPropsNumbleWithKey(const std::string& key);
 
-        void setBuyPropsKeyAndNumble(const std::string& key, int numble);
+        void setBuyPropsKeyAndNumble(cocos2d::ValueMap data);
+
+        void buyNewbieGift();
+        bool canBuyNewbieGift();
     private:
         ~UserDataManager();
         void writeStageDataToFile();
@@ -69,8 +76,7 @@ namespace bubble_second {
         cocos2d::ValueMap user_data_;
         int unlock_stage_numble_ = 0;
         cocos2d::ValueMap puzzle_stage_data_;
-        std::string buy_props_key_ = "";
-        int buy_props_numble_ = 0;
+        cocos2d::ValueMap buy_props_save_;
     };
 }
 #endif //_USER_DATA_MANAGER_H_
