@@ -2,20 +2,21 @@
 #include "StageDataManager.h"
 #include "md5.h"
 #include "XMLTool.h"
+#include "GameBuyStoreMannager.h"
 const std::string GAME_STAGE_DATA_PATH = "stageData.plist";
 const std::string GAME_USER_DATA_PATH = "userData.plist";
 const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageBestScore.plist";
 const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
 const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
 const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT";
-
+const std::string HAVED_BUY_NEWBIE_GIFT_KEY = "buyNewbieGift";
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
         cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_BUY_PROPS_PAY_SUCCESS, [=](cocos2d::EventCustom* event) {
-            if (buy_props_save_.begin()->second.asInt() == PUZZLE_NEWBIE_GIFT_TARGET_ID)
+            if (GameBuyStoreMannager::getInstance()->isBuyPuzzleNewbiwGift())
             {
                 this->buyNewbieGift();
             }
@@ -23,6 +24,7 @@ namespace bubble_second {
             {
                 this->addPropsNumbleWithKey(var.first, var.second.asInt());
             }
+
         });
         cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_BUY_PROPS_PAY_FAIL, [=](cocos2d::EventCustom* event) {
             buy_props_save_.clear();
@@ -94,12 +96,12 @@ namespace bubble_second {
     }
     void UserDataManager::buyNewbieGift()
     {
-        cocos2d::UserDefault::getInstance()->setBoolForKey("buyNewbieGift", true);
+        cocos2d::UserDefault::getInstance()->setBoolForKey(HAVED_BUY_NEWBIE_GIFT_KEY.c_str(), true);
         cocos2d::UserDefault::getInstance()->flush();
     }
     bool UserDataManager::canBuyNewbieGift()
     {
-        return !cocos2d::UserDefault::getInstance()->getBoolForKey("buyNewbieGift");
+        return !cocos2d::UserDefault::getInstance()->getBoolForKey(HAVED_BUY_NEWBIE_GIFT_KEY.c_str());
     }
     int UserDataManager::getStartNumbleWithLevel(int level)
     {

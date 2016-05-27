@@ -387,6 +387,7 @@
     <ClInclude Include="..\Classes\lua_PuzzleLoadingScene_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\GameBuyStoreMannager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -748,6 +749,7 @@
     <ClCompile Include="..\Classes\lua_PuzzleLoadingScene_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameBuyStoreMannager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

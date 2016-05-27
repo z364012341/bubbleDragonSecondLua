@@ -13,7 +13,7 @@
 const std::string PUZZLE_SEARCH_PROP_KEY = "search";
 const std::string PUZZLE_BIG_EYES_PROP_KEY = "bigEyes";
 const std::string PUZZLE_ADD_TIME_PROP_KEY = "addTime";
-const int PUZZLE_NEWBIE_GIFT_TARGET_ID = 113;
+
 namespace bubble_second {
     class UserDataManager
     {
@@ -60,6 +60,8 @@ namespace bubble_second {
 
         void buyNewbieGift();
         bool canBuyNewbieGift();
+        //…Ë÷√…Ã∆∑target
+        void setStoreOneTimeFlag(bool flag);
     private:
         ~UserDataManager();
         void writeStageDataToFile();
@@ -70,6 +72,7 @@ namespace bubble_second {
         void readUserDataFile();
         std::string getMD5Str(const std::string& input_str);
         std::string encryptionPropsNumble();
+        
     private:
         cocos2d::ValueMap stage_data_;
         int present_cell_ = 0;
@@ -77,6 +80,7 @@ namespace bubble_second {
         int unlock_stage_numble_ = 0;
         cocos2d::ValueMap puzzle_stage_data_;
         cocos2d::ValueMap buy_props_save_;
+        
     };
 }
 #endif //_USER_DATA_MANAGER_H_

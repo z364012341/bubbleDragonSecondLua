@@ -231,6 +231,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GameBaseAlert.h" />
     <ClInclude Include="..\Classes\GameBubbleMap.h" />
     <ClInclude Include="..\Classes\GameBubbleMapImple.h" />
+    <ClInclude Include="..\Classes\GameBuyStoreMannager.h" />
     <ClInclude Include="..\Classes\GameCharacter.h" />
     <ClInclude Include="..\Classes\GameCharacterFactory.h" />
     <ClInclude Include="..\Classes\GameCharactorNameManager.h" />
@@ -370,6 +371,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GameBaseAlert.cpp" />
     <ClCompile Include="..\Classes\GameBubbleMap.cpp" />
     <ClCompile Include="..\Classes\GameBubbleMapImple.cpp" />
+    <ClCompile Include="..\Classes\GameBuyStoreMannager.cpp" />
     <ClCompile Include="..\Classes\GameCharacter.cpp" />
     <ClCompile Include="..\Classes\GameCharacterFactory.cpp" />
     <ClCompile Include="..\Classes\GameCharactorNameManager.cpp" />

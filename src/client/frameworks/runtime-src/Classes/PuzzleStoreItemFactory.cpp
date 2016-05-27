@@ -5,9 +5,10 @@
 #include "ui\UIButton.h"
 #include "ui\UIScale9Sprite.h"
 #include "ButtonEffectController.h"
-#include "GameJNIHelper.h"
+//#include "GameJNIHelper.h"
 #include "UserDataManager.h"
 #include "GameAlertMask.h"
+#include "GameBuyStoreMannager.h"
 const std::string PUZZLE_STORE_ITEM_DATA_PATH = "res/puzzleStoreItemData.plist";
 const std::string PUZZLE_STORE_GIFTS_ITEM_DATA_PATH = "res/puzzleStoreGiftsItemData.plist";
 const std::string PUZZLE_STORE_ITEM_CAB_PATH = "PuzzleStoreitem.csb";
@@ -63,7 +64,7 @@ namespace bubble_second {
             cocos2d::ValueMap buy_data;
             buy_data[data.at(SHOWNAME_KEY).asString()] = data.at(STORE_NUMBLE_KEY).asInt();
             UserDataManager::getInstance()->setBuyPropsKeyAndNumble(buy_data);
-            GameJNIHelper::getInstance()->payWithTargetID(data.at(TARGET_ID_KEY).asInt());
+            GameBuyStoreMannager::getInstance()->buyProps(data.at(TARGET_ID_KEY).asInt());
         });
 
         return csb_node;
@@ -97,7 +98,7 @@ namespace bubble_second {
         button_label_node->setPosition(cocos2d::Vec2(button->getRendererNormal()->getContentSize().width / 2, button->getRendererNormal()->getContentSize().height / 2));
         button->addClickEventListener([=](cocos2d::Ref*) {
             UserDataManager::getInstance()->setBuyPropsKeyAndNumble(numble_map);
-            GameJNIHelper::getInstance()->payWithTargetID(data.at(TARGET_ID_KEY).asInt());
+            GameBuyStoreMannager::getInstance()->buyProps(data.at(TARGET_ID_KEY).asInt());
         });
         return csb_node;
     }
@@ -122,7 +123,8 @@ namespace bubble_second {
             buy_data[PUZZLE_BIG_EYES_PROP_KEY] = 1;
             buy_data[PUZZLE_ADD_TIME_PROP_KEY] = 1;
             UserDataManager::getInstance()->setBuyPropsKeyAndNumble(buy_data);
-            GameJNIHelper::getInstance()->payWithTargetID(PUZZLE_NEWBIE_GIFT_TARGET_ID);
+            GameBuyStoreMannager::getInstance()->buyProps(PUZZLE_NEWBIE_GIFT_TARGET_ID);
+            //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent("event_buy_props_pay_success");
         });
         csb_node->addChild(GameAlertMask::create(), -1);
         return csb_node;

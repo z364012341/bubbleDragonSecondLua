@@ -29,6 +29,7 @@ namespace bubble_second {
     private:
         cocos2d::ValueMap item_data_;
         cocos2d::ValueMap gifts_item_data_;
+
     };
 }
 #endif //PuzzleStoreItemFactory
