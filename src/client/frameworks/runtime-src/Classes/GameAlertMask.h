@@ -11,6 +11,7 @@
 #define _GAME_ALERT_MASK_H_
 #include "BubbleSecondConstant.h"
 #include "ui\UIButton.h"
+const float BACKGROUND_FADEOUT_DURATION = 0.5f;
 namespace bubble_second {
     class GameAlertMask : public cocos2d::Node
     {

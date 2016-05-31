@@ -17,7 +17,7 @@ namespace bubble_second {
     }
     void GameBuyStoreMannager::buyProps(int target)
     {
-        GameJNIHelper::getInstance()->payWithTargetID(PUZZLE_NEWBIE_GIFT_TARGET_ID);
+        GameJNIHelper::getInstance()->payWithTargetID(target);
         this->setCurrentPropsTarget(target);
     }
     bool GameBuyStoreMannager::isBuyPuzzleNewbiwGift()

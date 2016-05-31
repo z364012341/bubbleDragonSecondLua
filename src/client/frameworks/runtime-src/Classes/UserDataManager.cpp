@@ -65,7 +65,7 @@ namespace bubble_second {
     std::string UserDataManager::encryptionPropsNumble()
     {
         std::string str = XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY)) +
-            XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY)) +
+            XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY)) +
             XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY));
         return this->getMD5Str(PROP_MD5_SECRET_KEY+ str);
     }

@@ -36,9 +36,10 @@
 #include "PopScoreLabelComponent.h"
 #include "GameStandbyTimer.h"
 #include "StageTypeLogo.h"
-#include "AddBubbleNumbleCommodity.h"
+#include "EnterGamePropsView.h"
 #include "GameBubbleMapImple.h"
 #include "BubbleMainSightingDevice.h"
+#include "GameAlertMask.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -66,6 +67,7 @@ const std::string UI_NAME_BUBBLE_USE_COUNT = "bubble_numble_label";//Ð¡ÇòÊ¹ÓÃÊýµ
 const std::string UI_NAME_SECOND_BUBBLE_STORE = "second_bubble_store";        //ß÷×¼Æ÷ÅÔ±ßµÄÐ¡²Ý
 const int BARRELHEADEDGE_BODY_RADIUS = 20;  //Í°±ß¸ÕÌå°ë¾¶
 const float POP_VICTORY_ALERT_DELAYTIME = 1.5f;
+const std::string BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY = "bubble_sighting_device_perform_schedule_key"; //ß÷×¼Æ÷±íÑÝµÄ¶¨Ê±Æ÷µÄkey
 namespace bubble_second {
     cocos2d::Scene* GameScene::createScene(int cell_numble, int numble)
     {
@@ -764,6 +766,19 @@ namespace bubble_second {
         dispatcher->addCustomEventListener(EVENT_ESTIMATE_VICTORY, [=](cocos2d::EventCustom * event) {
             this->estimateVictory();
         });
+        dispatcher->addCustomEventListener(EVENT_END_ADD_BUBBLT_ANIMATION, [=](cocos2d::EventCustom * event) {
+            GameScoreController::getInstance()->addBubbleUseCount(EnterPropsViewManager::getInstance()->getAddBubbleNumblePropsNumble());
+            this->usedAddSpecialBubbleProps();
+        });
+        dispatcher->addCustomEventListener(EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION, [=](cocos2d::EventCustom * event) {
+            GamePlayController::getInstance()->usedAddSpecialBubbleProps();    
+            this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(ENTER_PROPS_ACTION_DURATION), cocos2d::CallFunc::create([=]() {
+                this->usedAimingLineProps();
+            })));
+        });
+        dispatcher->addCustomEventListener(EVENT_END_AIMING_LINE_ANIMATION, [=](cocos2d::EventCustom * event) {
+            this->performBubbltSightingDevice();
+        });
     }
 
     void GameScene::removeEventListenerCustom()
@@ -815,6 +830,9 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_PRECLING);
         dispatcher->removeCustomEventListeners(EVENT_TOP_ELIMINATE_BUBBLE_LOGO_LOADED);
         dispatcher->removeCustomEventListeners(EVENT_ESTIMATE_VICTORY);
+        dispatcher->removeCustomEventListeners(EVENT_END_ADD_BUBBLT_ANIMATION);
+        dispatcher->removeCustomEventListeners(EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION);
+        dispatcher->removeCustomEventListeners(EVENT_END_AIMING_LINE_ANIMATION);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1204,7 +1222,8 @@ namespace bubble_second {
         sprite->removeFromParent();
         this->addBubblePhysicsBodyToMap(bubble);
         this->setPropertyTouchEnabled(true);
-        GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
+        GameScoreController::getInstance()->cutPrepareBubbleAirNumble();   
+        GamePlayController::getInstance()->disposeCheckGameDefeat();
     }
 
     void GameScene::windmillBubbleRotation(cocos2d::EventCustom* event)
@@ -1502,24 +1521,80 @@ namespace bubble_second {
         return  GAME_PLAY_HEIGHT;
     }
 
+    void bubble_second::GameScene::addEnterPropsAnimation(const std::string & animation_name, const std::string & end_event_name)
+    {
+        cocos2d::Node* node = EnterGamePropsView::createCommodityArmature(animation_name, end_event_name);
+        auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+        node->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+        this->addChild(node);
+    }
+
     void GameScene::usedAddBubbleNumbleProps()
     {
-        //GameScoreController::getInstance()->addBubbleUseCount(EnterPropsViewManager::getInstance()->getAddBubbleNumblePropsNumble());
-        //cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_COMMODITY_TEN_BUBBLE_PATH);
-        //sp->setPosition(this->getBubbleUseCountLabel()->getPosition());
-        //csb_node_->addChild(sp, 5);
-        //cocos2d::ScaleBy* scale = cocos2d::ScaleBy::create(ENTER_PROPS_ACTION_DURATION, 2.0f);
-        //cocos2d::FadeOut* fade = cocos2d::FadeOut::create(ENTER_PROPS_ACTION_DURATION);
-        //cocos2d::Spawn* spawn = cocos2d::Spawn::createWithTwoActions(scale, fade);
-        //cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(spawn, cocos2d::CallFunc::create([=]() {
-        //    sp->removeFromParent();
-        //}));
-        //sp->runAction(seq);
+        if (EnterPropsViewManager::getInstance()->getPropsSwitchEnable(ADD_BUBBLE_NUMBLE_COMMODITY_NAME))
+        {
+            this->addEnterPropsAnimation(ADD_BUBBLE_NUMBLE_ANIMATION_NAME, EVENT_END_ADD_BUBBLT_ANIMATION);
+        }
+        else
+        {
+            this->usedAddSpecialBubbleProps();
+        }
+    }
 
-        cocos2d::Node* node = AddBubbleNumbleCommodity::createCommodityArmature();
-        auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-        node->setPosition(visibleSize.width/2, visibleSize.height/2);
-        this->addChild(node);
+    void bubble_second::GameScene::usedAddSpecialBubbleProps()
+    {
+        if (EnterPropsViewManager::getInstance()->getPropsSwitchEnable(ADD_SPECIAL_COMMODITY_NAME))
+        {
+            this->addEnterPropsAnimation(ADD_SPECIAL_ANIMATION_NAME, EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION);
+        }
+        else
+        {
+            this->usedAimingLineProps();
+        }
+    }
+    void bubble_second::GameScene::usedAimingLineProps()
+    {
+        if (EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME))
+        {
+            this->addEnterPropsAnimation(AIMING_LINE_COMMODITY_ANIMATION_NAME, EVENT_END_AIMING_LINE_ANIMATION);
+        }
+        else
+        {
+            this->removeEnterPropsMask();
+        }
+    }
+    void bubble_second::GameScene::performBubbltSightingDevice()
+    {
+        static float angle = 0;
+        static float angle_delta = 0.1f;
+        //static cocos2d::Vec2 point;
+        //cocos2d::Vec2 origin_point = this->getPrepareBubbleOrigin();
+        //point = this->getPrepareBubbleOrigin() + cocos2d::Vec2(0.0, 10.0f);
+        angle = 0;
+        angle_delta = -1.6f;
+        main_sighting_device_->turnOnMainSightingDevice(this->getPrepareBubbleOrigin() + cocos2d::Vec2(-0.1, 10.0f));
+        this->schedule([=](float) {
+            angle = angle - angle_delta;
+            CCLOG("%f", angle);
+            if (angle > -0.1f && angle < 0.1f)
+            {
+                return;
+            }
+            cocos2d::Vec2 point2 = (this->getPrepareBubbleOrigin() + cocos2d::Vec2(0.0, 10.0f)).rotateByAngle(this->getPrepareBubbleOrigin(), CC_DEGREES_TO_RADIANS(angle));
+
+            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_MAIN_ROTATE_SIGHTING_DEVICE, &point2);
+            //main_sighting_device_->rotateDevice();
+            if (angle > 45)
+            {
+                angle_delta *= -1;
+            }
+            if (angle < -45)
+            {
+                this->unschedule(BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY);
+                main_sighting_device_->turnOffSightingDevice();
+                this->removeEnterPropsMask();
+            }
+        }, BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY);
     }
 
     bool GameScene::isFirstHandle()
@@ -1756,7 +1831,7 @@ namespace bubble_second {
         BubbleVector vector = *sprites;
         if (vector.empty())
         {
-            GamePlayController::getInstance()->disposeGameDefeat();
+            GamePlayController::getInstance()->disposeCheckGameDefeat();
         }
         cocos2d::CallFunc* callfunc = cocos2d::CallFunc::create([=]() {
             for (auto var : vector)
@@ -2146,16 +2221,23 @@ namespace bubble_second {
 
     void GameScene::usedEnterProps()
     {
-        EnterPropsViewManager* props_manager = EnterPropsViewManager::getInstance();
-        GamePlayController* play_controller = GamePlayController::getInstance();
-        if (props_manager->getPropsSwitchEnable(ADD_SPECIAL_COMMODITY_NAME))
-        {
-            play_controller->usedAddSpecialBubbleProps();
-        }
-        if (props_manager->getPropsSwitchEnable(ADD_BUBBLE_NUMBLE_COMMODITY_NAME))
-        {
-            this->usedAddBubbleNumbleProps();
-        }
+        //EnterPropsViewManager* props_manager = EnterPropsViewManager::getInstance();
+        //GamePlayController* play_controller = GamePlayController::getInstance();
+        //if (props_manager->getPropsSwitchEnable(ADD_SPECIAL_COMMODITY_NAME))
+        //{
+        //    play_controller->usedAddSpecialBubbleProps();
+        //}
+        props_touch_mask_ = GameAlertMask::createTransparentMask();
+        cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
+        props_touch_mask_->setPosition(cocos2d::Vec2(visible_size.width/2, visible_size.height/2));
+        this->addChild(props_touch_mask_, UI_ZORDER_ALERT);
+        this->usedAddBubbleNumbleProps();
+
+    }
+
+    void bubble_second::GameScene::removeEnterPropsMask()
+    {
+        props_touch_mask_->removeFromParent();
     }
 
     void GameScene::addKeyboardEventListener()
@@ -2225,7 +2307,7 @@ namespace bubble_second {
             cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
         });
         this->runAction(cocos2d::CallFunc::create([=]() {
-            this->addChild(alert, 2);
+            this->addChild(alert, UI_ZORDER_ALERT);
         }));
     }
 
@@ -2245,7 +2327,7 @@ namespace bubble_second {
             alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
             cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
             alert->setPosition(visible_size.width / 2, visible_size.height / 2);
-            this->addChild(alert, 2);
+            this->addChild(alert, UI_ZORDER_ALERT);
             alert->setReplayCallback([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
                 if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
                 {
@@ -2267,7 +2349,7 @@ namespace bubble_second {
         alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visible_size.width / 2, visible_size.height / 2);
-        this->addChild(alert, 2);
+        this->addChild(alert, UI_ZORDER_ALERT);
         alert->setReturnCallback([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
             {
@@ -2431,7 +2513,7 @@ namespace bubble_second {
         if (this->isNeedNotDisplayedBarrelScoreLabel())
         {
             this->notDisplayedBarrelScoreLabel();
-            GamePlayController::getInstance()->disposeGameDefeat();
+            GamePlayController::getInstance()->disposeCheckGameDefeat();
         }
     }
 
@@ -2445,9 +2527,10 @@ namespace bubble_second {
         //{
         //    color_vector.push_back(kBubbleLightning);
         //}
+        auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         for (auto var : vector)
         {
-            dynamic_cast<ColorBubble*>(var)->changeRandomSpecialBubble(this->convertCsbToMapSpace(this->getGunsightPosition()), 
+            dynamic_cast<ColorBubble*>(var)->changeRandomSpecialBubble(bubble_map_node_->convertToNodeSpace(cocos2d::Vec2(visibleSize.width / 2, visibleSize.height / 2)),
                 StageDataManager::getInstance()->getStageTypeWithNumble(this->getPresentStageNumble()));
         }
     }

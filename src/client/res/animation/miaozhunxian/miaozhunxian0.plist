@@ -4,62 +4,81 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>yun_0002_1.png</key>
+			<key>1.png</key>
 			<dict>
 				<key>width</key>
-				<integer>264</integer>
+				<integer>159</integer>
 				<key>height</key>
-				<integer>261</integer>
+				<integer>147</integer>
 				<key>originalWidth</key>
-				<integer>435</integer>
+				<integer>159</integer>
 				<key>originalHeight</key>
-				<integer>428</integer>
+				<integer>147</integer>
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
-				<real>-2.5</real>
+				<real>0</real>
 				<key>offsetY</key>
-				<real>10.5</real>
+				<real>0</real>
 			</dict>
-			<key>yun_0001_2.png</key>
+			<key>2.png</key>
 			<dict>
 				<key>width</key>
-				<integer>350</integer>
+				<integer>227</integer>
 				<key>height</key>
-				<integer>343</integer>
+				<integer>238</integer>
 				<key>originalWidth</key>
-				<integer>435</integer>
+				<integer>227</integer>
 				<key>originalHeight</key>
-				<integer>428</integer>
+				<integer>238</integer>
 				<key>x</key>
-				<integer>266</integer>
+				<integer>161</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
-				<real>-5.5</real>
+				<real>0</real>
 				<key>offsetY</key>
-				<real>14.5</real>
+				<real>0</real>
 			</dict>
-			<key>yun_0000_3.png</key>
+			<key>3.png</key>
 			<dict>
 				<key>width</key>
-				<integer>416</integer>
+				<integer>236</integer>
 				<key>height</key>
-				<integer>414</integer>
+				<integer>236</integer>
 				<key>originalWidth</key>
-				<integer>435</integer>
+				<integer>236</integer>
 				<key>originalHeight</key>
-				<integer>428</integer>
+				<integer>236</integer>
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>345</integer>
+				<integer>240</integer>
 				<key>offsetX</key>
-				<real>1.5</real>
+				<real>0</real>
 				<key>offsetY</key>
-				<real>3</real>
+				<real>0</real>
+			</dict>
+			<key>4.png</key>
+			<dict>
+				<key>width</key>
+				<integer>249</integer>
+				<key>height</key>
+				<integer>232</integer>
+				<key>originalWidth</key>
+				<integer>249</integer>
+				<key>originalHeight</key>
+				<integer>232</integer>
+				<key>x</key>
+				<integer>238</integer>
+				<key>y</key>
+				<integer>240</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
 			</dict>
 			<key>fuzhuxian.png</key>
 			<dict>
@@ -72,7 +91,7 @@
 				<key>originalHeight</key>
 				<integer>108</integer>
 				<key>x</key>
-				<integer>618</integer>
+				<integer>390</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
@@ -93,7 +112,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>761</integer>
+				<integer>478</integer>
 				<key>offsetX</key>
 				<real>1</real>
 				<key>offsetY</key>

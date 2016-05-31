@@ -39,8 +39,6 @@ namespace bubble_second {
         void deviceGoAway();
         //停止点运动
         void stopDevicePoint();
-        //表演瞄准线
-        void  performSightingDevice();
         //发射点出去
         void sightingPointMove();
 

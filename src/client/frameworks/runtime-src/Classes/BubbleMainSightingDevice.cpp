@@ -105,4 +105,13 @@ namespace bubble_second {
             this->setVisible(false);
         })));
     }
+    void BubbleMainSightingDevice::performSightingDevice()
+    {
+        // this->turnOnDeviceOnce();
+        //this->stopDevicePoint();
+        //this->turnOnMainSightingDevice();
+        //this->schedule([=](float) {
+        //    float angle = this->getRotation();
+        //}, "unused_key");
+    }
 }

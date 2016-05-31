@@ -546,7 +546,7 @@ namespace bubble_second {
         bubble_map_->disposeMinYCenterBubble();
     }
 
-    void GamePlayController::disposeGameDefeat()
+    void GamePlayController::disposeCheckGameDefeat()
     {
         bubble_map_->disposeGameDefeat();
     }
@@ -597,6 +597,7 @@ namespace bubble_second {
             float angle = this->getTouchAngleForPrepareBubble(this->convertGLToNodeSpace(touch_point, prepare_bubble_->getParent()));
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ROTATE_SIGHTING_DEVICE, &angle);
             cocos2d::Vec2 touch_point = this->getRealTouchPoint(touch_location);
+            CCLOG("%f, %f", touch_point.x, touch_point.y);
             if (touch_began)
             {
                 this->turnOnSightingDevice(touch_point);

@@ -442,6 +442,9 @@ const std::string EVENT_TOP_ELIMINATE_BUBBLE_FLY = "event_top_eliminate_bubble_f
 const std::string EVENT_POP_GAME_STORE = "event_pop_game_store";
 const std::string EVENT_BUY_PROPS_PAY_SUCCESS = "event_buy_props_pay_success";
 const std::string EVENT_BUY_PROPS_PAY_FAIL = "event_buy_props_pay_fail";
+const std::string EVENT_END_ADD_BUBBLT_ANIMATION = "event_end_add_bubblt_animation";
+const std::string EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION = "event_end_add_special_bubblt_animation";
+const std::string EVENT_END_AIMING_LINE_ANIMATION = "event_end_aiming_line_animation";
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效
@@ -673,7 +676,7 @@ const std::string COMMODITY_COIN_KEY = "coin";
 const std::string COMMODITY_DIAMOND_KEY = "diamond";
 const std::string GAME_TEXT_SELECT_PROPS_LABEL_KEY = "choose_props";
 //ColorBubble
-const float ENTER_PROPS_ACTION_DURATION = 1.0f; //进场道具的动画时间
+const float ENTER_PROPS_ACTION_DURATION = 0.5f; //进场道具的动画时间
 //EnterPropsViewManager
 const int ADD_BUBBLE_NUMBLE_PROPS_NUMBLE = 10;
 //zorder
@@ -700,6 +703,8 @@ const int UI_ZORDER_GUNSIGHT_SWIRL = UI_ZORDER_GUNSIGHT + 1; //炮台上的旋风
 const int UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_ONCE = UI_ZORDER_BACKGROUND; //六连消时候后面的播放一次的特效
 const int UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_REPEAT = UI_ZORDER_MENU; //六连消时候后面的连续播放的特效
 const int UI_ZORDER_MENU_INFO = 1;    //分数信息之类的
+const int UI_ZORDER_ALERT = UI_ZORDER_MENU_INFO + 1;    //分数信息之类的
+
 //const float UI_GLOBALZORDER_LIGHTING_EFFECT_BACKGROUND = 1.1f; //闪电特效的黑色背景
 //const float UI_GLOBALZORDER_LIGHTING_EFFECT = 10.5f; //闪电特效
 //碰撞掩码

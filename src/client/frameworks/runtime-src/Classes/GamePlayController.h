@@ -109,7 +109,7 @@ namespace bubble_second {
         //道具中心小球
         void disposeMinYCenterBubble();
         //判断失败
-        void disposeGameDefeat();
+        void disposeCheckGameDefeat();
     private:
         //把准备的小球发射出去
 		void dispatchShootEvent(const cocos2d::Vec2& touch_location);

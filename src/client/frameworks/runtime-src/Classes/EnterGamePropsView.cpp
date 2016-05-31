@@ -1,5 +1,5 @@
 #include "EnterGamePropsView.h"
-//#include "SpriteTextureController.h"
+#include "GameAlertMask.h"
 //#include "GamePropsNumbleView.h"
 #include "EnterPropsViewManager.h"
 #include "cocostudio\CocoStudio.h"
@@ -23,6 +23,26 @@ namespace bubble_second {
     //}
     EnterGamePropsView::EnterGamePropsView()
     {
+    }
+
+    cocos2d::Node * EnterGamePropsView::createCommodityArmature(const std::string& animation_name, const std::string& end_event_name)
+    {
+        cocos2d::Node* node = cocos2d::Node::create();
+        GameAlertMask* mask = GameAlertMask::create();
+        node->addChild(mask);
+        cocostudio::Armature* armature = cocostudio::Armature::create(animation_name);
+        armature->getAnimation()->playWithIndex(0);
+        armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+            if (movementType == cocostudio::COMPLETE)
+            {
+                mask->backgroundFadeOut(BACKGROUND_FADEOUT_DURATION, cocos2d::CallFunc::create([=]() {
+                    node->removeFromParent();
+                    cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(end_event_name);
+                }));
+            }
+        });
+        node->addChild(armature);
+        return node;
     }
 
     EnterGamePropsView::~EnterGamePropsView()

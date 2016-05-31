@@ -65,6 +65,7 @@ namespace bubble_second {
             buy_data[data.at(SHOWNAME_KEY).asString()] = data.at(STORE_NUMBLE_KEY).asInt();
             UserDataManager::getInstance()->setBuyPropsKeyAndNumble(buy_data);
             GameBuyStoreMannager::getInstance()->buyProps(data.at(TARGET_ID_KEY).asInt());
+            //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent("event_buy_props_pay_success");
         });
 
         return csb_node;
@@ -99,6 +100,7 @@ namespace bubble_second {
         button->addClickEventListener([=](cocos2d::Ref*) {
             UserDataManager::getInstance()->setBuyPropsKeyAndNumble(numble_map);
             GameBuyStoreMannager::getInstance()->buyProps(data.at(TARGET_ID_KEY).asInt());
+            //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent("event_buy_props_pay_success");
         });
         return csb_node;
     }

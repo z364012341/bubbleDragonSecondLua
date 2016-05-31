@@ -24,12 +24,16 @@ namespace bubble_second {
         void turnOnMainSightingDevice(const cocos2d::Vec2 & touch_point);
         //void turnOnSightingDevice()override;
         void turnOffSightingDevice()override;
+        //±íÑÝÃé×¼Ïß
+        void  performSightingDevice();
+
     private:
         BubbleMainSightingDevice();
         bool init();
+        void rotateDevice(const cocos2d::Vec2& touch_point);
         //void turnOnDeviceOnce(int device_numble = 0) override;
         void initRemainDevice();
-        void rotateDevice(const cocos2d::Vec2& touch_point);
+        //void rotateDevice(const cocos2d::Vec2& touch_point);
     private:
         BubbleReflectionPointComponent* reflection_point_component_ = nullptr;
         //cocos2d::Vector<BubbleSightingDevice*> remaind_device_;

@@ -39,6 +39,7 @@ const std::string PUZZLE_SEARCH_PROP_PATH = "fangdajing/fangdajing.ExportJson";
 const std::string PUZZLE_BIG_EYES_PROP_PATH = "yanjingTX/yanjingTX.ExportJson";
 const std::string PUZZLE_ADD_TIME_PROP_PATH = "pintunaozhong/pintunaozhong.ExportJson";
 const std::string PUZZLE_MOVE_ANSWER_PATH = "pintuTX3/pintuTX3.ExportJson";
+const std::string ADD_SPECIAL_PROP_ARMATURE_PATH = "pingzidaoju/pingzidaoju.ExportJson"; //+3特殊道具动画
 
 namespace bubble_second {
     SpriteTextureController::SpriteTextureController()
@@ -99,6 +100,8 @@ namespace bubble_second {
         armature_path_.push_back(PUZZLE_BIG_EYES_PROP_PATH);
         armature_path_.push_back(PUZZLE_ADD_TIME_PROP_PATH);
         armature_path_.push_back(PUZZLE_MOVE_ANSWER_PATH);
+        armature_path_.push_back(ADD_SPECIAL_PROP_ARMATURE_PATH);
+        armature_path_.push_back("miaozhunxian/miaozhunxian.ExportJson");  //瞄准线道具动画
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()

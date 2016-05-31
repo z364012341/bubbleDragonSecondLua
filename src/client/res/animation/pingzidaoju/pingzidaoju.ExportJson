@@ -4,17 +4,17 @@
     {
       "strVersion": "1.6.0.0",
       "version": 1.6,
-      "name": "diaoluo-TX",
+      "name": "pingzidaoju",
       "bone_data": [
         {
-          "name": "Layer6",
+          "name": "Layer1",
           "parent": "",
-          "dI": 0,
-          "x": 459.99993896484375,
-          "y": 52.227752685546875,
-          "z": 5,
-          "cX": 1.0,
-          "cY": 1.0,
+          "dI": 3,
+          "x": -3.0,
+          "y": 239.3466796875,
+          "z": 8,
+          "cX": 1.50000012,
+          "cY": 1.50000012,
           "kX": 0.0,
           "kY": 0.0,
           "arrow_x": 0.0,
@@ -23,7 +23,49 @@
           "bl": 0,
           "display_data": [
             {
-              "name": "diaoluo-01.png",
+              "name": "1.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "2.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "3.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "4.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -39,177 +81,57 @@
           ]
         },
         {
-          "name": "Layer5",
+          "name": "Layer12",
           "parent": "",
-          "dI": 0,
-          "x": 127.49998474121094,
-          "y": 50.561088562011719,
+          "dI": 1,
+          "x": -10.348434448242188,
+          "y": -0.87783432006835938,
           "z": 4,
-          "cX": 1.0,
-          "cY": 1.0,
-          "kX": 0.0,
-          "kY": 0.0,
-          "arrow_x": 0.0,
-          "arrow_y": 0.0,
-          "effectbyskeleton": false,
-          "bl": 0,
+          "cX": 1.30000007,
+          "cY": 1.30000007,
+          "kX": -1.60203612,
+          "kY": 1.60203612,
+          "arrow_x": 128.06251525878906,
+          "arrow_y": 2.34343133342918E-06,
+          "effectbyskeleton": true,
+          "bl": 128,
           "display_data": [
             {
-              "name": "diaoluo-01.png",
+              "name": "fuzhuxian.png",
               "displayType": 0,
               "skin_data": [
                 {
-                  "x": 0.0,
-                  "y": 0.0,
+                  "x": 57.3820457,
+                  "y": -6.31049442,
                   "cX": 1.0,
                   "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
+                  "kX": 1.49866211,
+                  "kY": -1.49866211
+                }
+              ]
+            },
+            {
+              "name": "daoju02.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 57.3820457,
+                  "y": -6.31049442,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.8058951,
+                  "kY": -0.8058951
                 }
               ]
             }
           ]
         },
         {
-          "name": "Layer4",
+          "name": "Layer15",
           "parent": "",
           "dI": 0,
-          "x": 220.0,
-          "y": 93.819076538085938,
-          "z": 3,
-          "cX": 1.0,
-          "cY": 1.0,
-          "kX": 0.0,
-          "kY": 0.0,
-          "arrow_x": 0.0,
-          "arrow_y": 0.0,
-          "effectbyskeleton": false,
-          "bl": 0,
-          "display_data": [
-            {
-              "name": "diaoluo-01.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Layer3",
-          "parent": "",
-          "dI": -1000,
-          "x": -1.9999618530273438,
-          "y": 59.673309326171875,
-          "z": 2,
-          "cX": 1.0,
-          "cY": 1.0,
-          "kX": 0.0,
-          "kY": 0.0,
-          "arrow_x": 0.0,
-          "arrow_y": 0.0,
-          "effectbyskeleton": false,
-          "bl": 0,
-          "display_data": [
-            {
-              "name": "diaoluo-07.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "diaoluo-06.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "diaoluo-02.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "diaoluo-03.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "diaoluo-04.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            },
-            {
-              "name": "diaoluo-05.png",
-              "displayType": 0,
-              "skin_data": [
-                {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Layer2",
-          "parent": "",
-          "dI": 0,
-          "x": 0.0,
-          "y": 151.67333984375,
+          "x": -10.000078201293945,
+          "y": 83.911056518554688,
           "z": 1,
           "cX": 1.0,
           "cY": 1.0,
@@ -221,7 +143,7 @@
           "bl": 0,
           "display_data": [
             {
-              "name": "diaoluo-01.png",
+              "name": "result_lv_line@2x.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -241,212 +163,23 @@
   ],
   "animation_data": [
     {
-      "name": "diaoluo-TX",
+      "name": "pingzidaoju",
       "mov_data": [
         {
-          "name": "Animation1",
-          "dr": 13,
-          "lp": true,
+          "name": "shiyong",
+          "dr": 47,
+          "lp": false,
           "to": 0,
           "drTW": 0,
           "twE": 0,
-          "sc": 0.2,
+          "sc": 0.4,
           "mov_bone_data": [
             {
-              "name": "Layer6",
+              "name": "Layer1",
               "dl": 0.0,
               "frame_data": [
                 {
-                  "dI": 0,
-                  "x": -424.2423095703125,
-                  "y": 29.797981262207031,
-                  "z": 0,
-                  "cX": 0.0320469365,
-                  "cY": 0.491667122,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 0,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": -424.2423095703125,
-                  "y": 136.7979736328125,
-                  "z": 0,
-                  "cX": 0.0320469365,
-                  "cY": 0.491667122,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 7,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "color": {
-                    "a": 0,
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                  },
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": -1000,
-                  "x": -424.2423095703125,
-                  "y": 136.7979736328125,
-                  "z": 0,
-                  "cX": 0.0320469365,
-                  "cY": 0.491667122,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 8,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "color": {
-                    "a": 0,
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                  },
-                  "bd_src": 1,
-                  "bd_dst": 771
-                }
-              ]
-            },
-            {
-              "name": "Layer5",
-              "dl": 0.0,
-              "frame_data": [
-                {
-                  "dI": 0,
-                  "x": -106.36358642578125,
-                  "y": -0.18181991577148438,
-                  "z": 0,
-                  "cX": 0.04166809,
-                  "cY": 0.3018768,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 0,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": -106.36358642578125,
-                  "y": 79.81817626953125,
-                  "z": 0,
-                  "cX": 0.04166809,
-                  "cY": 0.3018768,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 7,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "color": {
-                    "a": 0,
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                  },
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": -1000,
-                  "x": -106.36358642578125,
-                  "y": 79.81817626953125,
-                  "z": 0,
-                  "cX": 0.04166809,
-                  "cY": 0.3018768,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 8,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "color": {
-                    "a": 0,
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                  },
-                  "bd_src": 1,
-                  "bd_dst": 771
-                }
-              ]
-            },
-            {
-              "name": "Layer4",
-              "dl": 0.0,
-              "frame_data": [
-                {
-                  "dI": 0,
-                  "x": -240.24998474121094,
-                  "y": -26.916664123535156,
-                  "z": 0,
-                  "cX": 0.0280574728,
-                  "cY": 0.392283857,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 0,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": -240.24998474121094,
-                  "y": 60.083335876464844,
-                  "z": 0,
-                  "cX": 0.09999993,
-                  "cY": 0.399999917,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 7,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "color": {
-                    "a": 0,
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                  },
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": -1000,
-                  "x": -240.24998474121094,
-                  "y": 60.083335876464844,
-                  "z": 0,
-                  "cX": 0.09999993,
-                  "cY": 0.399999917,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 8,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "color": {
-                    "a": 0,
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                  },
-                  "bd_src": 1,
-                  "bd_dst": 771
-                }
-              ]
-            },
-            {
-              "name": "Layer3",
-              "dl": 0.0,
-              "frame_data": [
-                {
-                  "dI": -1000,
+                  "dI": 3,
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -457,6 +190,429 @@
                   "fi": 0,
                   "twE": 0,
                   "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": -1000,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 37,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 38,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 40,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 2,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 42,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 3,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 44,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 3,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 46,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer12",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.15,
+                  "cY": 0.95,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 5,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.3,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 6,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.3,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 7,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 10,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.483650774,
+                  "kY": 0.483650774,
+                  "fi": 14,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.293482333,
+                  "kY": -0.293482333,
+                  "fi": 18,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.483650774,
+                  "kY": 0.483650774,
+                  "fi": 21,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.2736029,
+                  "kY": -0.2736029,
+                  "fi": 24,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.334076673,
+                  "kY": 0.334076673,
+                  "fi": 27,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 30,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 0.6999999,
+                  "cY": 1.2,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 34,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 0.6999999,
+                  "cY": 1.2,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 35,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 37,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 138.0,
+                  "z": 0,
+                  "cX": 1.2,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 39,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 138.0,
+                  "z": 0,
+                  "cX": 1.2,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 41,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 138.0,
+                  "z": 0,
+                  "cX": 1.2,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 46,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer15",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
                   "bd_src": 1,
                   "bd_dst": 771
                 },
@@ -470,123 +626,6 @@
                   "kX": 0.0,
                   "kY": 0.0,
                   "fi": 4,
-                  "twE": 0,
-                  "tweenFrame": false,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 1,
-                  "x": 0.0,
-                  "y": 26.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 5,
-                  "twE": 0,
-                  "tweenFrame": false,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 5,
-                  "x": 0.0,
-                  "y": 51.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 6,
-                  "twE": 0,
-                  "tweenFrame": false,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 4,
-                  "x": 0.0,
-                  "y": 63.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 7,
-                  "twE": 0,
-                  "tweenFrame": false,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 3,
-                  "x": 0.76923078298568726,
-                  "y": 77.230766296386719,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 8,
-                  "twE": 0,
-                  "tweenFrame": false,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 2,
-                  "x": 0.0,
-                  "y": 92.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 9,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 2,
-                  "x": 0.0,
-                  "y": 120.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 12,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "color": {
-                    "a": 0,
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                  },
-                  "bd_src": 1,
-                  "bd_dst": 771
-                }
-              ]
-            },
-            {
-              "name": "Layer2",
-              "dl": 0.0,
-              "frame_data": [
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 0,
                   "twE": 0,
                   "tweenFrame": true,
                   "color": {
@@ -605,9 +644,24 @@
                   "z": 0,
                   "cX": 1.0,
                   "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 7,
+                  "kX": -0.74231106,
+                  "kY": 0.74231106,
+                  "fi": 16,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -1.07191217,
+                  "kY": 1.07191217,
+                  "fi": 30,
                   "twE": 0,
                   "tweenFrame": true,
                   "color": {
@@ -620,15 +674,15 @@
                   "bd_dst": 771
                 },
                 {
-                  "dI": -1000,
+                  "dI": 0,
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
                   "cX": 1.0,
                   "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 8,
+                  "kX": -1.07191217,
+                  "kY": 1.07191217,
+                  "fi": 46,
                   "twE": 0,
                   "tweenFrame": true,
                   "color": {
@@ -649,66 +703,58 @@
   ],
   "texture_data": [
     {
-      "name": "diaoluo-01",
-      "width": 139.0,
-      "height": 288.0,
+      "name": "result_lv_line@2x",
+      "width": 978.0,
+      "height": 978.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "diaoluo-07",
-      "width": 90.0,
-      "height": 99.0,
+      "name": "daoju02",
+      "width": 121.0,
+      "height": 122.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "diaoluo-06",
-      "width": 81.0,
-      "height": 154.0,
+      "name": "1",
+      "width": 159.0,
+      "height": 147.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "diaoluo-02",
-      "width": 34.0,
-      "height": 167.0,
+      "name": "2",
+      "width": 0.0,
+      "height": 0.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "diaoluo-03",
-      "width": 57.0,
-      "height": 194.0,
+      "name": "3",
+      "width": 236.0,
+      "height": 236.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "diaoluo-04",
-      "width": 105.0,
-      "height": 217.0,
-      "pX": 0.5,
-      "pY": 0.5,
-      "plistFile": ""
-    },
-    {
-      "name": "diaoluo-05",
-      "width": 103.0,
-      "height": 198.0,
+      "name": "4",
+      "width": 249.0,
+      "height": 232.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     }
   ],
   "config_file_path": [
-    "diaoluo-TX0.plist"
+    "pingzidaoju0.plist"
   ],
   "config_png_path": [
-    "diaoluo-TX0.png"
+    "pingzidaoju0.png"
   ]
 }

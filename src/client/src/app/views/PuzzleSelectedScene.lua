@@ -69,7 +69,8 @@ function PuzzleSelectedScene:initBackButton()
     local button = self.csb_node_:getChildByName(BACK_BUTTON_NAME);
     button:setPosition(cc.p(size.width*0.09, size.height*0.93));
     button:addClickEventListener(function ( ... )
-        cc.Director:getInstance():replaceScene(require(PUZZLE_START_SCENE_PATH):createScene());
+        --cc.Director:getInstance():replaceScene(require(PUZZLE_START_SCENE_PATH):createScene());
+        cc.Director:getInstance():replaceScene(bs.GameStageSelectionScene:createScene());
     end);
 end
 function PuzzleSelectedScene:addStartButton()

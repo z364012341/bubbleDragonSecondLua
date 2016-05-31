@@ -14,6 +14,7 @@ namespace bubble_second {
     class AddSpecialCommodity : public EnterGamePropsView
     {
     public:
+        //static cocos2d::Node* createCommodityArmature();
         CREATE_FUNC(AddSpecialCommodity);
         AddSpecialCommodity();
         ~AddSpecialCommodity();

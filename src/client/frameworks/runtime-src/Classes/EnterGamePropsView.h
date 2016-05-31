@@ -14,6 +14,9 @@
 #include "ui\UITextBMFont.h"
 #include "EnterPropsViewManager.h"
 #include "GameTextInfo.h"
+const std::string ADD_BUBBLE_NUMBLE_ANIMATION_NAME = "jiabudaoju";
+const std::string ADD_SPECIAL_ANIMATION_NAME = "pingzidaoju";
+const std::string AIMING_LINE_COMMODITY_ANIMATION_NAME = "miaozhunxian";
 namespace bubble_second {
     //class GamePropsNumbleView;
     class EnterGamePropsView : public cocos2d::Node
@@ -23,6 +26,7 @@ namespace bubble_second {
         //传入道具的展示
     //    static EnterGamePropsView* create(cocos2d::Sprite* props);
     //    void addCostView(const cocos2d::Value& value);
+        static cocos2d::Node* createCommodityArmature(const std::string& animation_name, const std::string& end_event_name);
         virtual ~EnterGamePropsView();
     //    void addMenuCallback(const cocos2d::ccMenuCallback& callback);
     protected:

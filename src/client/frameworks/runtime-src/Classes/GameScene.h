@@ -22,6 +22,7 @@ namespace bubble_second {
     class GameCharacter;
     class ScoreProgressMenu;
     class BarrelScoreLabelNode;
+    class GameAlertMask;
     //struct StageData
     //{
     //    int cell_numble = 0;
@@ -103,6 +104,7 @@ namespace bubble_second {
         void replayGame();
         //处理进场前使用的道具
         void usedEnterProps();
+        void removeEnterPropsMask();
         //添加键盘事件
         void addKeyboardEventListener();
     private:
@@ -226,8 +228,15 @@ namespace bubble_second {
         void popDefeatAlert();
         void popVictoryAlert();
         void popPauseAlert();
+        //添加进场道具动画
+        void addEnterPropsAnimation(const std::string& animation_name, const std::string& end_event_name);
         //使用+10数量道具
         void usedAddBubbleNumbleProps();
+        //使用加3特殊泡泡
+        void usedAddSpecialBubbleProps();
+        //使用瞄准线道具
+        void usedAimingLineProps();
+        void performBubbltSightingDevice();
         //是否是第一次
         bool isFirstHandle();
         void setFirstHandleFlag(bool flag);
@@ -361,6 +370,7 @@ namespace bubble_second {
         BarrelScoreLabelNode* barrel_score_node_ = nullptr;
         cocos2d::Vector<cocos2d::Node*> pause_nodes_;
         BubbleMainSightingDevice* main_sighting_device_ = nullptr;
+        GameAlertMask* props_touch_mask_ = nullptr;
     };
 }
 #endif //_GAME_SCENE_H_
