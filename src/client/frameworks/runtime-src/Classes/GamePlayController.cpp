@@ -65,7 +65,7 @@ namespace bubble_second {
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, PROPS_BOMB_BOMB_NAME, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeBubbleCast, WOODEN_HAMMER_CAST_NODE_NAME, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeSightingPointContactBubble, NAME_BUBBLE_SIGHTING_POINT, MAP_BUBBLE_NAME);
-        this->addContactHandleWithTwoNames(&GamePlayController::disposeWindmillBubbleBorder, UI_NAME_WINDMILL_BORDER, PREPARE_BUBBLE_NAME);
+        this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWindmillBorder, UI_NAME_WINDMILL_BORDER, PREPARE_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeWindmillBubbleBorder, UI_NAME_WINDMILL_BORDER, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWindmillBorder, UI_NAME_WINDMILL_BORDER, PROPS_BOMB_BOMB_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWindmillBorder, UI_NAME_WINDMILL_BORDER, COLOR_BOMB_BUBBLE_NAME);
@@ -424,7 +424,10 @@ namespace bubble_second {
 
     void bubble_second::GamePlayController::disposeContactWindmillBorder(cocos2d::Node * border_node, cocos2d::Node * other_node)
     {
+        assert(dynamic_cast<BaseBubble*>(other_node));
         dynamic_cast<BaseBubble*>(other_node)->bubbleEliminate();
+        //CCLOG("%d", GameScoreController::getInstance()->prepare_bubble_in_air_numble_);
+        this->disposeCheckGameDefeat();
     }
 
     void GamePlayController::disposeFallBubbleBorder(cocos2d::Node * border_node, cocos2d::Node * other_node)
@@ -597,7 +600,7 @@ namespace bubble_second {
             float angle = this->getTouchAngleForPrepareBubble(this->convertGLToNodeSpace(touch_point, prepare_bubble_->getParent()));
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ROTATE_SIGHTING_DEVICE, &angle);
             cocos2d::Vec2 touch_point = this->getRealTouchPoint(touch_location);
-            CCLOG("%f, %f", touch_point.x, touch_point.y);
+            //CCLOG("%f, %f", touch_point.x, touch_point.y);
             if (touch_began)
             {
                 this->turnOnSightingDevice(touch_point);

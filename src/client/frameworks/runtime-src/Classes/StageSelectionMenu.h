@@ -30,6 +30,8 @@ namespace bubble_second {
         void preUnlockStage();
         void unlockStage();
         void playUnlockStageAnimation();
+        //保存当前关卡
+        void setCurrentStageData();
     private:
         StageSelectionMenu();
         bool init(int cell_numble, int level, const StageType& type);

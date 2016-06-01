@@ -69,7 +69,7 @@ const int BARRELHEADEDGE_BODY_RADIUS = 20;  //桶边刚体半径
 const float POP_VICTORY_ALERT_DELAYTIME = 1.5f;
 const std::string BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY = "bubble_sighting_device_perform_schedule_key"; //喵准器表演的定时器的key
 namespace bubble_second {
-    cocos2d::Scene* GameScene::createScene(int cell_numble, int numble)
+    cocos2d::Scene* GameScene::createScene()
     {
         cocos2d::Scene* scene = cocos2d::Scene::createWithPhysics();
 
@@ -79,16 +79,15 @@ namespace bubble_second {
             scene->getPhysicsWorld()->setDebugDrawMask(cocos2d::PhysicsWorld::DEBUGDRAW_ALL);
         }
         scene->getPhysicsWorld()->setGravity(PHYSICS_WORLD_GRAVITY_VEC2*SmartScaleController::getInstance()->getPlayAreaZoom());
-        StageData data(cell_numble, numble);
-        GameScene* layer = GameScene::createWithStageNumble(data);
+        GameScene* layer = GameScene::create();
         scene->addChild(layer);
         return scene;
     }
 
-    GameScene * bubble_second::GameScene::createWithStageNumble(StageData stage_data)
+    GameScene * bubble_second::GameScene::create()
     {
         GameScene *pRet = new(std::nothrow) GameScene();
-        if (pRet && pRet->initWithStageNumble(stage_data))
+        if (pRet && pRet->init())
         {
             pRet->autorelease();
             return pRet;
@@ -108,15 +107,15 @@ namespace bubble_second {
         RainbowSealManager::getInstance()->clear();
     }
 
-    bool GameScene::initWithStageNumble(StageData stage_data)
+    bool GameScene::init()
     {
         if (!Layer::init())
         {
             return false;
         }
-        this->addGameBackground(stage_data.cell_numble);
-        this->setPresentStageData(stage_data);
-        this->setStageType(StageDataManager::getInstance()->getStageTypeWithNumble(this->getPresentStageNumble()));
+        this->addGameBackground(StageDataManager::getInstance()->getCurrentCell());
+        //this->setPresentStageData(stage_data);
+        //this->setStageType(StageDataManager::getInstance()->getCurrentStageType());
         this->clearController();
         property_bubble_ = nullptr;
         props_weapon_ = nullptr;
@@ -329,7 +328,7 @@ namespace bubble_second {
             //    dynamic_cast<cocos2d::Sprite*>(top_right_ui->getChildByName(GAME_STAGE_TYPE_SPRITE_NAME)), 
             //    this->getStageType());
             //StageTypeLogo* logo = StageTypeLogo::create(this->getStageType());
-            top_right_ui->getChildByName(GAME_STAGE_TYPE_SPRITE_NAME)->addChild(StageTypeLogo::create(this->getStageType()));
+            top_right_ui->getChildByName(GAME_STAGE_TYPE_SPRITE_NAME)->addChild(StageTypeLogo::create(StageDataManager::getInstance()->getCurrentStageType()));
             //菜单按钮
 			pause_menu_ = dynamic_cast<cocos2d::ui::Button*>(top_right_ui->getChildByName(UI_NAME_GAME_PLAYING_MENU));
 			ButtonEffectController::setButtonZoomScale(pause_menu_);
@@ -418,23 +417,23 @@ namespace bubble_second {
 
     int GameScene::getPresentStageNumble()
     {
-        return stage_data_.level_numble;
+        return StageDataManager::getInstance()->getCurrentLevel();
     }
 
-    void GameScene::setPresentStageData(StageData numble)
-    {
-        stage_data_ = numble;
-    }
+    //void GameScene::setPresentStageData(StageData numble)
+    //{
+    //    stage_data_ = numble;
+    //}
 
-    int GameScene::getPresentStageCellNumble()
-    {
-        return stage_data_.cell_numble;
-    }
+    //int GameScene::getPresentStageCellNumble()
+    //{
+    //    return stage_data_.cell_numble;
+    //}
 
-    StageData GameScene::getPresentStageData()
-    {
-        return stage_data_;
-    }
+    //StageData GameScene::getPresentStageData()
+    //{
+    //    return stage_data_;
+    //}
 
     cocos2d::ui::TextBMFont* GameScene::getScoreUI()
     {
@@ -446,7 +445,7 @@ namespace bubble_second {
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         //创建一个物理世界, 大小和屏幕的尺寸相同, 使用默认材质, debug框的宽度为3个像素
         float zoom = SmartScaleController::getInstance()->getPlayAreaZoom();
-        cocos2d::Size world_size = cocos2d::Size(GAME_DESIGN_RESOLUTION_WIDTH, bubble_map_node_->getPositionY() + BUBBLE_RADIUS)*zoom;
+        cocos2d::Size world_size = cocos2d::Size(GAME_DESIGN_RESOLUTION_WIDTH + PHYSICS_WORLD_BODY_BORDER, bubble_map_node_->getPositionY() + BUBBLE_RADIUS+ PHYSICS_WORLD_BODY_BORDER)*zoom;
         auto body = cocos2d::PhysicsBody::createEdgeBox(world_size,
             cocos2d::PhysicsMaterial(PHYSICS_WORLD_BODY_DENSITY, PHYSICS_WORLD_BODY_RESTITUTION, PHYSICS_WORLD_FRICTION), PHYSICS_WORLD_BODY_BORDER*zoom);
         //将图形和刚刚创建的世界绑定
@@ -779,6 +778,12 @@ namespace bubble_second {
         dispatcher->addCustomEventListener(EVENT_END_AIMING_LINE_ANIMATION, [=](cocos2d::EventCustom * event) {
             this->performBubbltSightingDevice();
         });
+        dispatcher->addCustomEventListener(EVENT_GAME_REPLAY, [=](cocos2d::EventCustom * event) {
+            this->replayGame();
+        });
+        dispatcher->addCustomEventListener(EVENT_GAME_DEFEAT_RETURN, [=](cocos2d::EventCustom * event) {
+            cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
+        });
     }
 
     void GameScene::removeEventListenerCustom()
@@ -833,6 +838,8 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_END_ADD_BUBBLT_ANIMATION);
         dispatcher->removeCustomEventListeners(EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION);
         dispatcher->removeCustomEventListeners(EVENT_END_AIMING_LINE_ANIMATION);
+        dispatcher->removeCustomEventListeners(EVENT_GAME_REPLAY);
+        dispatcher->removeCustomEventListeners(EVENT_GAME_DEFEAT_RETURN);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1013,15 +1020,15 @@ namespace bubble_second {
 		return score_progress_;
     }
 
-    void GameScene::setStageType(StageType type)
-    {
-        stage_type_ = type;
-    }
+    //void GameScene::setStageType(StageType type)
+    //{
+    //    stage_type_ = type;
+    //}
 
-    StageType GameScene::getStageType()
-    {
-        return stage_type_;
-    }
+    //StageType GameScene::getStageType()
+    //{
+    //    return stage_type_;
+    //}
 
     void GameScene::setUIZOrderWithNameAndNumber(const std::string & child_name, int localZOrder)
     {
@@ -1443,7 +1450,7 @@ namespace bubble_second {
 
     void GameScene::recentbubbleCast()
     {
-        if (this->getStageType() != kWindmill)
+        if (StageDataManager::getInstance()->getCurrentStageType() != kWindmill)
         {
             GamePlayController::getInstance()->disposeMinYCenterBubble();
         }
@@ -1572,10 +1579,10 @@ namespace bubble_second {
         //point = this->getPrepareBubbleOrigin() + cocos2d::Vec2(0.0, 10.0f);
         angle = 0;
         angle_delta = -1.6f;
-        main_sighting_device_->turnOnMainSightingDevice(this->getPrepareBubbleOrigin() + cocos2d::Vec2(-0.1, 10.0f));
+        main_sighting_device_->turnOnMainSightingDevice(this->getPrepareBubbleOrigin() + cocos2d::Vec2(-0.1f, 10.0f));
         this->schedule([=](float) {
             angle = angle - angle_delta;
-            CCLOG("%f", angle);
+            //CCLOG("%f", angle);
             if (angle > -0.1f && angle < 0.1f)
             {
                 return;
@@ -2216,7 +2223,7 @@ namespace bubble_second {
 
     void GameScene::replayGame()
     {
-        cocos2d::Director::getInstance()->replaceScene(GameScene::createScene(this->getPresentStageCellNumble(), this->getPresentStageNumble()));
+        cocos2d::Director::getInstance()->replaceScene(GameScene::createScene());
     }
 
     void GameScene::usedEnterProps()
@@ -2296,19 +2303,19 @@ namespace bubble_second {
 
     void GameScene::popDefeatAlert()
     {
-        GameDefeatAlert* alert = GameDefeatAlert::createWithLevelNumble(this->getPresentStageNumble());
+        GameDefeatAlert* alert = GameDefeatAlert::create();
         alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visible_size.width / 2, visible_size.height / 2);
-        alert->setReplayCallback([=](cocos2d::Ref*) {
-            this->replayGame();
-        });
-        alert->setCancelCallback([=](cocos2d::Ref*) {
-            cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
-        });
-        this->runAction(cocos2d::CallFunc::create([=]() {
+        //alert->setReplayCallback([=](cocos2d::Ref*) {
+        //    this->replayGame();
+        //});
+        //alert->setCancelCallback([=](cocos2d::Ref*) {
+        //    cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
+        //});
+        //this->runAction(cocos2d::CallFunc::create([=]() {
             this->addChild(alert, UI_ZORDER_ALERT);
-        }));
+        //}));
     }
 
     void GameScene::popVictoryAlert()
@@ -2337,7 +2344,7 @@ namespace bubble_second {
             alert->setNextCallback([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
                 if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
                 {
-                    cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createSceneWithStageData(this->getPresentStageData()));
+                    cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createSceneNextStage());
                 }
                 });
         })));
@@ -2502,14 +2509,14 @@ namespace bubble_second {
         //static int numble = 0;
         //++numble;
 		//CCLOG("total: %d", numble);
-		//CCLOG("++%d", total_air_bubbles_numble_);
+		CCLOG("++%d", total_air_bubbles_numble_);
         this->displayBarrelScoreLabel();
     }
 
     void GameScene::cutOneAirBubblesNumble(cocos2d::EventCustom*)
     {
         --total_air_bubbles_numble_;
-		//CCLOG("--%d", total_air_bubbles_numble_);
+		CCLOG("--%d", total_air_bubbles_numble_);
         if (this->isNeedNotDisplayedBarrelScoreLabel())
         {
             this->notDisplayedBarrelScoreLabel();

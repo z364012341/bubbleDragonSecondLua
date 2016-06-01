@@ -17,13 +17,14 @@ namespace bubble_second {
     class EnterGameAlert : public cocos2d::Node
     {
     public:
-        static EnterGameAlert* create(int cell_numble, int level, const StageType& type);
+        //static EnterGameAlert* create(int cell_numble, int level, const StageType& type);
+        CREATE_FUNC(EnterGameAlert);
         ~EnterGameAlert();
         //void onExit() override;
         //void setBeginCallback(const cocos2d::ccMenuCallback& callback);
     private:
         EnterGameAlert();
-        bool init(int cell_numble, int level, const StageType& type);
+        bool init();
         void loadView();
         void initStartButton(int cell_numble, int level);
         void initCloseButton();

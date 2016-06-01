@@ -4,6 +4,12 @@
 #include "cocos2d.h"
 #include "GameScoreController.h"
 #include "PopScoreLabelComponent.h"
+//桶底部刚体
+const cocos2d::Size PHYSICS_BARREL_BOTTOM_BODY_SIZE = cocos2d::Size(120, 50);
+const int PHYSICS_BARREL_BOTTOM_BORDER = 2;
+const float PHYSICS_BARREL_BOTTOM_BODY_DENSITY = 0.0f; //桶边刚体密度
+const float PHYSICS_BARREL_BOTTOM_BODY_RESTITUTION = 0.0f;   //桶边刚体反弹力
+const float PHYSICS_BARREL_BOTTOM_BODY_FRICTION = 50000.0f; //桶边刚体摩擦力
 const std::string BARREL_SCORE_LABEL_FNT_PATH = "fonts/tongshuzi-export.fnt";
 const float POP_SCORE_LABEL_POS_Y = 85.0f;
 const std::string BARREL_PARTICLE_BLUE = "particle/guanzipenjiantexiao2.plist";

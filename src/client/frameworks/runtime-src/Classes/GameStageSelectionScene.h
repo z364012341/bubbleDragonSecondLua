@@ -21,7 +21,7 @@ namespace bubble_second {
     {
     public:
         static cocos2d::Scene* createScene();
-        static cocos2d::Scene* createSceneWithStageData(StageData data);
+        static cocos2d::Scene* createSceneNextStage();
         CREATE_FUNC(GameStageSelectionScene);
         ~GameStageSelectionScene();
         //void scrollViewDidScroll(ScrollView* view);
@@ -45,9 +45,9 @@ namespace bubble_second {
         //键盘事件
         void addKeyboardEventListener();
         //弹出进入alert
-        void popEnterGameAlert(StageData data);
+        void popEnterGameAlert();
         //过关后进入下一关的接口
-        void enterNextStage(StageData data);
+        void enterNextStage();
         //设置按钮
         //void addSettingMenu();
         //拼图按钮

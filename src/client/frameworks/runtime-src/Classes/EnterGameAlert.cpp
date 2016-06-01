@@ -9,6 +9,7 @@
 #include "ButtonEffectController.h"
 #include "ui\UIScale9Sprite.h"
 #include "StageNumbleBoardController.h"
+#include "StageDataManager.h"
 const std::string ENTER_GAME_ALERT_CSB = "EnterGameAlert.csb";
 //const std::string START_BUTTON_TOP_CSB = "GameStartMenuTop.csb";
 //const std::string START_BUTTON_BOTTOM_CSB = "GameStartMenuBottom.csb";
@@ -20,21 +21,21 @@ const std::string ENTER_GAME_ALERT_STAGE_NUMBLE_BOARD_NAME = "stageNumbleBoard";
 const std::string ENTER_GAME_ALERT_STAGE_TYPE_LABEL_NAME = "stageTypeLabel";
 const cocos2d::Vec2 COMMODITY_NODE_POS(-5.0f, -238.7f);
 namespace bubble_second {
-    EnterGameAlert * EnterGameAlert::create(int cell_numble, int level, const StageType & type)
-    {
-        EnterGameAlert *pRet = new(std::nothrow) EnterGameAlert();
-        if (pRet && pRet->init(cell_numble, level, type))
-        {
-            pRet->autorelease();
-            return pRet;
-        }
-        else
-        {
-            delete pRet;
-            pRet = NULL;
-            return NULL;
-        }
-    }
+    //EnterGameAlert * EnterGameAlert::create(int cell_numble, int level, const StageType & type)
+    //{
+    //    EnterGameAlert *pRet = new(std::nothrow) EnterGameAlert();
+    //    if (pRet && pRet->init())
+    //    {
+    //        pRet->autorelease();
+    //        return pRet;
+    //    }
+    //    else
+    //    {
+    //        delete pRet;
+    //        pRet = NULL;
+    //        return NULL;
+    //    }
+    //}
     EnterGameAlert::EnterGameAlert()
     {
     }
@@ -53,7 +54,7 @@ namespace bubble_second {
     //{
     //    begin_item_->setCallback(callback);
     //}
-    bool EnterGameAlert::init(int cell_numble, int level, const StageType & type)
+    bool EnterGameAlert::init()
     {
         if (!cocos2d::Node::init())
         {
@@ -61,10 +62,10 @@ namespace bubble_second {
         }
         this->addChild(GameAlertMask::create());
         this->loadView();
-        this->initStartButton(cell_numble, level);
+        this->initStartButton(StageDataManager::getInstance()->getCurrentCell(), StageDataManager::getInstance()->getCurrentLevel());
         this->initCloseButton();
-        this->initStageNumbleLabel(level);
-        this->initStageTypeLabel(type);
+        this->initStageNumbleLabel(StageDataManager::getInstance()->getCurrentLevel());
+        this->initStageTypeLabel(StageDataManager::getInstance()->getCurrentStageType());
         cocos2d::Node* node = EnterPropsViewManager::getInstance()->createEnterPropsAlert();
         node->setPosition(COMMODITY_NODE_POS);
         this->addChild(node);
@@ -85,7 +86,7 @@ namespace bubble_second {
 		button->addButtonClickEventListener([=](Ref* target) {
 		    //if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
 		    //{
-		        cocos2d::Scene* scene = GameScene::createScene(cell_numble, level);
+		        cocos2d::Scene* scene = GameScene::createScene();
 		        cocos2d::Director::getInstance()->replaceScene(scene);
 		    //}
 		});

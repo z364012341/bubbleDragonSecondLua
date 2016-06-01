@@ -52,6 +52,31 @@ namespace bubble_second {
         return numble <= stage_data_map_.size();
     }
 
+    void StageDataManager::setCurrentCell(int numble)
+    {
+        current_cell_ = numble;
+    }
+
+    int StageDataManager::getCurrentCell()
+    {
+        return current_cell_;
+    }
+
+    void StageDataManager::setCurrentLevel(int numble)
+    {
+        current_level_ = numble;
+    }
+
+    int StageDataManager::getCurrentLevel()
+    {
+        return current_level_;
+    }
+
+    StageType StageDataManager::getCurrentStageType()
+    {
+        return this->getStageTypeWithNumble(this->getCurrentLevel());
+    }
+
     void StageDataManager::addStageDataModule(StageDataModule* module)
     {
         stage_data_map_.pushBack(module);

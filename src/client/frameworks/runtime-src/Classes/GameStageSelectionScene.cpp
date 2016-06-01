@@ -95,11 +95,11 @@ namespace bubble_second {
         scene->addChild(layer);
         return scene;
     }
-    cocos2d::Scene * GameStageSelectionScene::createSceneWithStageData(StageData data)
+    cocos2d::Scene * GameStageSelectionScene::createSceneNextStage()
     {
         cocos2d::Scene* scene = cocos2d::Scene::create();
         GameStageSelectionScene* layer = GameStageSelectionScene::create();
-        layer->enterNextStage(data);
+        layer->enterNextStage();
         scene->addChild(layer);
         return scene;
     }
@@ -230,7 +230,7 @@ namespace bubble_second {
     {
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         auto listener = cocos2d::EventListenerCustom::create(EVENT_POP_ENTER_GAME_ALERT, [=](cocos2d::EventCustom* event) {
-            this->popEnterGameAlert(*static_cast<StageData*>(event->getUserData()));
+            this->popEnterGameAlert();
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         dispatcher->addCustomEventListener(EVENT_SETTING_ALERT_CLOSE, [=](cocos2d::EventCustom* event) {
@@ -238,8 +238,7 @@ namespace bubble_second {
             setting_armature_->removeFromParent();
         });
         dispatcher->addCustomEventListener(EVENT_UNLOCK_STAGE_MENU, [=](cocos2d::EventCustom* event) {
-            StageData data = *static_cast<StageData*>(event->getUserData());
-            this->popEnterGameAlert(data);
+            this->popEnterGameAlert();
         });
     }
 
@@ -282,23 +281,23 @@ namespace bubble_second {
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
     }
 
-    void GameStageSelectionScene::popEnterGameAlert(StageData data)
+    void GameStageSelectionScene::popEnterGameAlert()
     {
-        if (!StageDataManager::getInstance()->isInStageNumbleRange(data.level_numble))
+        if (!StageDataManager::getInstance()->isInStageNumbleRange(StageDataManager::getInstance()->getCurrentLevel()))
         {
             return;
         }
-        StageType type = StageDataManager::getInstance()->getStageTypeWithNumble(data.level_numble);
-        EnterGameAlert* alert = EnterGameAlert::create(data.cell_numble, data.level_numble, type);
+        //StageType type = StageDataManager::getInstance()->getStageTypeWithNumble(data.level_numble);
+        EnterGameAlert* alert = EnterGameAlert::create();
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
         alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         this->getAlertRenderNode()->addChild(alert);
     }
 
-    void GameStageSelectionScene::enterNextStage(StageData data)
+    void GameStageSelectionScene::enterNextStage()
     {
-		if (UserDataManager::getInstance()->isUnlockWithStageNumble(data.level_numble))
+		if (UserDataManager::getInstance()->isUnlockWithStageNumble(StageDataManager::getInstance()->getCurrentLevel()))
 		{
 			return;
 		}
@@ -306,16 +305,18 @@ namespace bubble_second {
         StageMenuManager::getInstance()->getCurentStagemenu()->preUnlockStage();
 
         stage_vehicle_->moveVehicle(cocos2d::CallFunc::create([=]() {
-            StageData next_data;
-            if (cell_vector_.at(data.cell_numble)->isInCell(data.level_numble))
+            //StageData next_data;
+            if (cell_vector_.at(StageDataManager::getInstance()->getCurrentCell())->isInCell(StageDataManager::getInstance()->getCurrentLevel()))
             {
-                next_data.cell_numble = data.cell_numble;
+                //next_data.cell_numble = data.cell_numble;
+                StageDataManager::getInstance()->setCurrentCell(StageDataManager::getInstance()->getCurrentCell());
             }
             else
             {
-                next_data.cell_numble = data.cell_numble + 1;
-        }
-            next_data.level_numble = data.level_numble + 1;
+                StageDataManager::getInstance()->setCurrentCell(StageDataManager::getInstance()->getCurrentCell()+1);
+            }
+            //next_data.level_numble = data.level_numble + 1;
+            StageDataManager::getInstance()->setCurrentLevel(StageDataManager::getInstance()->getCurrentLevel() + 1);
             StageMenuManager::getInstance()->getCurentStagemenu()->unlockStage();
             //this->popEnterGameAlert(next_data);
     }));

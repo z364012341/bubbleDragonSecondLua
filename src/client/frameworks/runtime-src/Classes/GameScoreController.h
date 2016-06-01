@@ -56,6 +56,8 @@ namespace bubble_second {
         void addPrepareBubbleAirNumble();
         void cutPrepareBubbleAirNumble();
         void dispatchUpdateCompletedTaskEvent();
+
+        int prepare_bubble_in_air_numble_;
     private:
         //void addEventListenerCustom();
         //总得分初始化
@@ -82,7 +84,7 @@ namespace bubble_second {
         int completed_task_numble_set_;
         int bubble_use_count_;
         bool use_count_enable_;
-        int prepare_bubble_in_air_numble_;
+        
     };
 }
 #endif //_GAME_SCORE_CONTROLLER_H_

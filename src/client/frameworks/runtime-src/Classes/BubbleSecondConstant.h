@@ -342,7 +342,7 @@ const float PHYSICS_WORLD_BODY_DENSITY = 0.0f; //世界边界密度
 const float PHYSICS_WORLD_BODY_RESTITUTION = 1.0f; //世界边界反弹力
 const float PHYSICS_WORLD_FRICTION = 0.0f; //世界边界摩擦力
 const float PTM_RATIO = 32.0f; //物理世界像素和厘米换算
-const float PHYSICS_WORLD_BODY_BORDER = 3;   //世界边界的宽度
+const float PHYSICS_WORLD_BODY_BORDER = 10;   //世界边界的宽度
 //const int PHYSICS_WORLD_BODY_TAG = 233;   //世界边界的宽度
 //风车边界缸体
 const float PHYSICS_WINDMILL_BORDER_BODY_WIDTH = PHYSICS_WORLD_BODY_BORDER;
@@ -356,17 +356,12 @@ const cocos2d::Vec2 PHYSICS_WINDMILL_BORDER_BODY_LEFT_POSITION(0.0f, 710.0f);
 const cocos2d::Vec2 PHYSICS_WINDMILL_BORDER_BODY_RIGHT_POSITION(GAME_DESIGN_RESOLUTION_WIDTH, 720.0f);
 const cocos2d::Vec2 PHYSICS_WINDMILL_BORDER_BODY_TOP_POSITION(GAME_DESIGN_RESOLUTION_WIDTH / 2, 1165.0f);
 const cocos2d::Vec2 PHYSICS_WINDMILL_BORDER_BODY_BOTTOM_POSITION(GAME_DESIGN_RESOLUTION_WIDTH / 2, 290.0f);
-const cocos2d::Vec2 PHYSICS_WINDMILL_BORDER_BODY_BOTTOM2_POSITION(GAME_DESIGN_RESOLUTION_WIDTH / 2, 220.0f);
+const cocos2d::Vec2 PHYSICS_WINDMILL_BORDER_BODY_BOTTOM2_POSITION(GAME_DESIGN_RESOLUTION_WIDTH / 2, 200.0f);
 //桶边刚体
 const float PHYSICS_BARRELHEADEDGE_BODY_DENSITY = 0.0f;   //桶边刚体密度
 const float PHYSICS_BARRELHEADEDGE_BODY_RESTITUTION = 1.2f; //桶边刚体反弹力
 const float PHYSICS_BARRELHEADEDGE_BODY_FRICTION = 0.0f; //桶边刚体摩擦力
-//桶底部刚体
-const cocos2d::Size PHYSICS_BARREL_BOTTOM_BODY_SIZE = cocos2d::Size(120, 5);
-const int PHYSICS_BARREL_BOTTOM_BORDER = 2;
-const float PHYSICS_BARREL_BOTTOM_BODY_DENSITY = 0.0f; //桶边刚体密度
-const float PHYSICS_BARREL_BOTTOM_BODY_RESTITUTION = 0.0f;   //桶边刚体反弹力
-const float PHYSICS_BARREL_BOTTOM_BODY_FRICTION = 50000.0f; //桶边刚体摩擦力
+
 //得分挂件刚体
 const float PHYSICS_SCORE_WIDGET_BODY_DENSITY = 0.0f;  //得分挂件刚体密度
 const float PHYSICS_SCORE_WIDGET_BODY_RESTITUTION = 1.2f;   //得分挂件刚体反弹力
@@ -445,6 +440,8 @@ const std::string EVENT_BUY_PROPS_PAY_FAIL = "event_buy_props_pay_fail";
 const std::string EVENT_END_ADD_BUBBLT_ANIMATION = "event_end_add_bubblt_animation";
 const std::string EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION = "event_end_add_special_bubblt_animation";
 const std::string EVENT_END_AIMING_LINE_ANIMATION = "event_end_aiming_line_animation";
+const std::string EVENT_GAME_REPLAY = "event_game_replay";
+const std::string EVENT_GAME_DEFEAT_RETURN = "event_game_defeat_return";
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效

@@ -14,7 +14,7 @@
 #include "ui\UITextAtlas.h"
 #include "ui\UITextBMFont.h"
 #include "ui\UIButton.h"
-#include "StageData.h"
+//#include "StageData.h"
 namespace bubble_second {
     class BaseProperty;
     class BaseWeapon;
@@ -31,9 +31,9 @@ namespace bubble_second {
     class GameScene : public cocos2d::Layer
     {
     public:
-        static cocos2d::Scene* createScene(int cell_numble, int numble);
-        static GameScene* createWithStageNumble(StageData stage_data);
-        bool initWithStageNumble(StageData stage_data);
+        static cocos2d::Scene* createScene();
+        static GameScene* create();
+        bool init();
         GameScene();
         ~GameScene();
     public:
@@ -51,9 +51,9 @@ namespace bubble_second {
         //获取小草
         cocos2d::Node* getSecondBubbleStoreNode();
         int getPresentStageNumble();
-        void setPresentStageData(StageData numble);
-        int getPresentStageCellNumble();
-        StageData getPresentStageData();
+        //void setPresentStageData(StageData numble);
+        //int getPresentStageCellNumble();
+        //StageData getPresentStageData();
         //游戏暂停开始
         void gamePause();
         void gameResume();
@@ -147,8 +147,8 @@ namespace bubble_second {
         //获取分数进度条
         ScoreProgressMenu* getScoreProgressMenu();
         //关卡类型
-        void setStageType(StageType type);
-        StageType getStageType();
+        //void setStageType(StageType type);
+        //StageType getStageType();
     private:
         //添加背景
         void addGameBackground(int cell_numble);
@@ -357,9 +357,9 @@ namespace bubble_second {
         //bool barrel_score_display_flag_;
         GameCharacter* game_character_;
         //int present_stage_numble_ = 0;
-        StageData stage_data_;
+        //StageData stage_data_;
         int total_air_bubbles_numble_ = 0;
-        StageType stage_type_;
+        //StageType stage_type_;
         bool is_fall_stage_ = false;
         bool add_props_flag = true;
         bool first_victory_flag_ = true;

@@ -6,6 +6,7 @@
 #include "ZCGConfigDataDict.h"
 #include "GameStageSelectionScene.h"
 #include "StageMenuManager.h"
+#include "StageDataManager.h"
 #include "ui\UITextBMFont.h"
 #include "cocostudio\CocoStudio.h"
 const cocos2d::Vec2 STAGE_SELECTION_MENU_STAGETYPE_TEXTURE_POSITION(-2.0f, 10.0f);
@@ -117,7 +118,8 @@ namespace bubble_second {
         listener->onTouchEnded = [=](cocos2d::Touch *touch, cocos2d::Event *event) {
             if (this->isButtonEnable())
             {
-                cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_ENTER_GAME_ALERT, &stageData_);
+                this->setCurrentStageData();
+                cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_ENTER_GAME_ALERT);
             }
         };
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
@@ -266,8 +268,14 @@ namespace bubble_second {
                 armature->removeFromParent();
                 pre_unlock_particle_->removeFromParent();
                 this->turnOnBlink();
+                this->setCurrentStageData();
                 cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_UNLOCK_STAGE_MENU, &stageData_);
             }
         });
+    }
+    void StageSelectionMenu::setCurrentStageData()
+    {
+        StageDataManager::getInstance()->setCurrentCell(stageData_.cell_numble);
+        StageDataManager::getInstance()->setCurrentLevel(stageData_.level_numble);
     }
 }
