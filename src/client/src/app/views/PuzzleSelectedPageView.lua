@@ -56,9 +56,11 @@ function PuzzleSelectedPageView:getCurrentPageIndex(index)
 	return self.pageview_:getCurrentPageIndex();
 end
 function PuzzleSelectedPageView:scrollLeft()
+        --printf("scrollLeft");
 	if self:getCurrentPageIndex()-1 < 0 then
 		return;
 	end
+    --printf("scrollLeft" .. tostring(self:getCurrentPageIndex()-1));
 	self:scrollToPage(self:getCurrentPageIndex()-1);
 end
 function PuzzleSelectedPageView:scrollRight()

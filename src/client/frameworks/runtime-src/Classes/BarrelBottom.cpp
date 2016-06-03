@@ -130,7 +130,7 @@ namespace bubble_second {
         //    this->addChild(armature);
         //}
         cocos2d::ParticleSystemQuad* particle = cocos2d::ParticleSystemQuad::create(pop_score_particle_path_);
-        particle->setPosition(cocos2d::Vec2::ZERO);
+        particle->setPosition(cocos2d::Vec2(0.0f, -30.0f));
         this->addChild(particle, -1);
         particle->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(1), cocos2d::CallFunc::create([=]() {particle->removeFromParent(); })));
     }

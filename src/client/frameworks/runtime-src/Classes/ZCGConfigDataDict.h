@@ -7,6 +7,7 @@ const int KEY_FRAME_HEIGHT = 1002;
 const int KEY_OPEN_CMD_SHOW = 1003;
 const int KEY_GAME_VERSION = 1004;
 const int KEY_STAGE_VERSION = 1005;
+const int KEY_PHYSICS_DEBUG_DRAW = 1006;
 class ZCGConfigDataDict
 {
 public:

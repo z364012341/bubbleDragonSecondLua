@@ -23,6 +23,8 @@ namespace bubble_second {
         std::string getCurrentArmatureName2();
         std::string getCurrentArmatureName3();
         std::string getCurrentArmatureNameVictory();
+        void readNamesData();
+        void setCurrentArmatureNameWithIndex(int index);
     private:
         GameCharactorNameManager();
     private:

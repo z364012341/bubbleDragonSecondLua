@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"/>
+
+<plist version="1.0">
+    <dict>
+        <key>tutu</key>
+        <dict>
+            <key>armature_1</key>
+            <string>tuzi1</string>
+            <key>armature_2</key>
+            <string>tuzi2</string>
+            <key>armature_3</key>
+            <string>tuzi3</string>
+            <key>armature_victory</key>
+            <string>tuzishengli</string>
+        </dict>
+        <key>aoao</key>
+        <dict>
+            <key>armature_1</key>
+            <string>laohu</string>
+            <key>armature_2</key>
+            <string>laohu2</string>
+            <key>armature_3</key>
+            <string>laohu3</string>
+            <key>armature_victory</key>
+            <string>laohu-shengli</string>
+        </dict>
+        <key>miaopass</key>
+        <dict>
+            <key>armature_1</key>
+            <string>xiaomao1</string>
+            <key>armature_2</key>
+            <string>xiaomao2</string>
+            <key>armature_3</key>
+            <string>xiaomao3</string>
+            <key>armature_victory</key>
+            <string>shenglimao</string>
+        </dict>
+        <key>zhizhi</key>
+        <dict>
+            <key>armature_1</key>
+            <string>laoshu1</string>
+            <key>armature_2</key>
+            <string>laoshu2</string>
+            <key>armature_3</key>
+            <string>laoshu3</string>
+            <key>armature_victory</key>
+            <string>laoshushengli</string>
+        </dict>
+    </dict>
+</plist>

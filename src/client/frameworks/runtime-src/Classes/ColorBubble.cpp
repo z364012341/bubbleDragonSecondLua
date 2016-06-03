@@ -91,7 +91,7 @@ namespace bubble_second {
         {
             impulse.x = -impulse.x;
             angular_v = -angular_v;
-        }
+        }  
         body->applyImpulse(impulse*zoom);
         body->setAngularVelocity(angular_v);
 		this->dispatchCustomAddAirBubbleNumbleEvent();

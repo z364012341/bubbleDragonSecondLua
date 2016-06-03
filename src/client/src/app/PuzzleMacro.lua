@@ -37,6 +37,8 @@ cc.exports.PUZZLE_SELECTED_PAGEVIEW_PATH = "app.views.PuzzleSelectedPageView";
 cc.exports.PUZZLE_STORE_ALERT_PATH = "app.views.PuzzleStoreAlert";
 --local PuzzleStartScene = require(PUZZLE_START_SCENE_PATH);
 cc.exports.PUZZLE_START_SCENE_PATH = "app.views.PuzzleStartScene";
+--local PuzzleLotteryAlert = require(PUZZLE_LOTTERY_ALERT_PATH);
+cc.exports.PUZZLE_LOTTERY_ALERT_PATH = "app.views.PuzzleLotteryAlert";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";
@@ -136,12 +138,15 @@ cc.exports.TREASURE_MAP_PAGEVIEW_NAME = "treasure_map_pageview";
 cc.exports.LANDSCAPE_PAGEVIEW_NAME = "landscape_pageview";
 cc.exports.PAGEVIEW_INITAIL_DATA = {
 	[TREASURE_MAP_PAGEVIEW_NAME] = {
-		PAGE_PATH = {"puzzle(1).jpg", "puzzle(2).jpg"},
+		PAGE_PATH = {"puzzle_treasure_map (1).jpg", "puzzle_treasure_map (2).jpg", "puzzle_treasure_map (3).jpg", "puzzle_treasure_map (4).jpg",
+		"puzzle_treasure_map (5).jpg","puzzle_treasure_map (6).jpg", "puzzle_treasure_map (7).jpg", "puzzle_treasure_map (8).jpg",
+		"puzzle_treasure_map (9).jpg","puzzle_treasure_map (10).jpg", "puzzle_treasure_map (11).jpg", "puzzle_treasure_map (12).jpg"},
 		VISIBLE = false;
 	},
 	[LANDSCAPE_PAGEVIEW_NAME] = {
 		PAGE_PATH = {"puzzle_landscape (1).jpg", "puzzle_landscape (2).jpg", "puzzle_landscape (3).jpg","puzzle_landscape (4).jpg",
-		 "puzzle_landscape (5).jpg", "puzzle_landscape (6).jpg","puzzle_landscape (7).jpg", "puzzle_landscape (8).jpg", "puzzle_landscape (9).jpg"},
+		 "puzzle_landscape (5).jpg", "puzzle_landscape (6).jpg","puzzle_landscape (7).jpg", "puzzle_landscape (8).jpg", "puzzle_landscape (9).jpg",
+		 "puzzle_landscape (10).jpg", "puzzle_landscape (11).jpg", "puzzle_landscape (12).jpg"},
 		VISIBLE = true;
 	},
 }

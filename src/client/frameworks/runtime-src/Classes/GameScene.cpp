@@ -74,7 +74,7 @@ namespace bubble_second {
         cocos2d::Scene* scene = cocos2d::Scene::createWithPhysics();
 
         //显示物理世界调试状态, 显示红色的框, 方便调试
-        if (ZCGConfigDataDict::getInstance()->getIntData(KEY_OPEN_CMD_SHOW) == 1)
+        if (ZCGConfigDataDict::getInstance()->getIntData(KEY_PHYSICS_DEBUG_DRAW) == 1)
         {
             scene->getPhysicsWorld()->setDebugDrawMask(cocos2d::PhysicsWorld::DEBUGDRAW_ALL);
         }
@@ -2223,7 +2223,8 @@ namespace bubble_second {
 
     void GameScene::replayGame()
     {
-        cocos2d::Director::getInstance()->replaceScene(GameScene::createScene());
+        //cocos2d::Director::getInstance()->replaceScene(GameScene::createScene());
+        cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createSceneReplayStage());
     }
 
     void GameScene::usedEnterProps()

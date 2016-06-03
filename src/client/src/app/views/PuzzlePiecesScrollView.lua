@@ -59,7 +59,8 @@ function PuzzlePiecesScrollView:calculatePuzzlePiecePositionX( index )
 	if index == 1 then
 		return self.puzzle_table_[1]:getLeftWidth()*self.puzzle_scale_;
 	end
-	local x = self.puzzle_table_[index-1]:getNewPosition().x + (self.puzzle_table_[index]:getLeftWidth()+
+	local x = self.puzzle_table_[index-1]:getNewPosition().x +
+	(self.puzzle_table_[index]:getLeftWidth()+
 		self.puzzle_table_[index-1]:getRightWidth())*self.puzzle_scale_ ;
 	return x
 end
@@ -77,6 +78,9 @@ function PuzzlePiecesScrollView:adjustPuzzlePiecesPosition()
 	self:adjustScrollViewInnerContainerSize();
 end
 function PuzzlePiecesScrollView:adjustScrollViewInnerContainerSize()
+	if #self.puzzle_table_ == 0 then
+		return
+	end
 	local inner_width = self:calculatePuzzlePiecePositionX(#self.puzzle_table_) + self.pos_delta_/2;
 	local point = cc.p(self.scrollView_:getInnerContainerPosition());
 	self.scrollView_:setInnerContainerSize(cc.size(inner_width, PUZZLE_PIECES_DESK_HEIGHT));

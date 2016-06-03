@@ -11,6 +11,7 @@ local REPLAY_BUTTON_NAME = "replayButton";
 local RETURN_BUTTON_NODE_NAME = "returnButton";
 local PuzzleTimeDisplay = require(PUZZLE_TIME_DISPLAY_PATH);
 local PuzzlePlayArea = require(PUZZLE_PLAY_AREA_PATH);
+local PuzzleLotteryAlert = require(PUZZLE_LOTTERY_ALERT_PATH);
 local TIME_CONSUMING_NODE_NAME = "time_consuming_node";
 local THUMBNAIL_POS_NODE_NAME = "thumbnail_pos";
 local TIME_BEST_CONSUMING_NODE_NAME = "Node_5";
@@ -78,11 +79,15 @@ function PuzzleGameVictoryAlert:inlayAnswers(flash_answers_node, callFunc)
     flash_answers_node:release();
     flash_answers_node:setPosition(self:getThumbnailPosNode():convertToNodeSpace(point));
     local duration = 0.15
-    flash_answers_node:runAction(cc.Sequence:create(cc.MoveTo:create(duration, cc.p(0,0)), callFunc--[[, cc.CallFunc:create(function ()
-        local share_button = bs.GameShareButton:create();
-        share_button:setPosition(ALERT_SHARE_BUTTON_POS);
-        self.csb_node_:addChild(share_button);
-    end)]] , nil));
+    flash_answers_node:runAction(cc.Sequence:create(cc.MoveTo:create(duration, cc.p(0,0)), callFunc, cc.CallFunc:create(function ()
+        -- 分享按钮, 暂时没有这个功能
+        --******************************
+        -- local share_button = bs.GameShareButton:create();
+        -- share_button:setPosition(ALERT_SHARE_BUTTON_POS);
+        -- self.csb_node_:addChild(share_button);
+        --******************************
+        self:addChild(PuzzleLotteryAlert:create());
+    end) , nil));
     flash_answers_node:runAction(cc.EaseOut:create(cc.ScaleTo:create(duration, PuzzlePlayArea:calculatePuzzleScaleWithSize(flash_answers_node:getContentSize())*PUZZLE_ALERT_THUMBNAIL_SCALE), 1.5));
 
 end

@@ -103,6 +103,14 @@ namespace bubble_second {
         scene->addChild(layer);
         return scene;
     }
+    cocos2d::Scene * GameStageSelectionScene::createSceneReplayStage()
+    {
+        cocos2d::Scene* scene = cocos2d::Scene::create();
+        GameStageSelectionScene* layer = GameStageSelectionScene::create();
+        scene->addChild(layer);
+        layer->popEnterGameAlert();
+        return scene;
+    }
     bool GameStageSelectionScene::init()
     {
         if (!cocos2d::Layer::init())

@@ -10,6 +10,8 @@ const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
 const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
 const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT";
 const std::string HAVED_BUY_NEWBIE_GIFT_KEY = "buyNewbieGift";
+const std::string GAME_CHARACTOR_UNLOCK_NUMBLE_KEY = "unlockCharactorNumble";
+const std::string LAST_GAME_CHARACTOR_INDEX_KEY = "lastCharactor";
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
 namespace bubble_second {
@@ -102,6 +104,23 @@ namespace bubble_second {
     bool UserDataManager::canBuyNewbieGift()
     {
         return !cocos2d::UserDefault::getInstance()->getBoolForKey(HAVED_BUY_NEWBIE_GIFT_KEY.c_str());
+    }
+    int UserDataManager::getGameCharactorUnlockNumble()
+    {
+        if (user_data_.find(GAME_CHARACTOR_UNLOCK_NUMBLE_KEY) != user_data_.end())
+        {
+            return user_data_.at(GAME_CHARACTOR_UNLOCK_NUMBLE_KEY).asInt();
+        }
+        return 4; //先返回一个默认值, 增加解锁系统的时候在更改
+    }
+    int UserDataManager::getLastGameCharactorIndex()
+    {
+        return cocos2d::UserDefault::getInstance()->getIntegerForKey(LAST_GAME_CHARACTOR_INDEX_KEY.c_str());
+    }
+    void UserDataManager::setLastGameCharactorIndex(int index)
+    {
+        cocos2d::UserDefault::getInstance()->setIntegerForKey(LAST_GAME_CHARACTOR_INDEX_KEY.c_str(), index);
+        cocos2d::UserDefault::getInstance()->flush();
     }
     int UserDataManager::getStartNumbleWithLevel(int level)
     {

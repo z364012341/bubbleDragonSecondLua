@@ -60,8 +60,11 @@ namespace bubble_second {
 
         void buyNewbieGift();
         bool canBuyNewbieGift();
-        //设置商品target
-        //void setStoreOneTimeFlag(bool flag);
+        //获取人物解锁数量
+        int getGameCharactorUnlockNumble();
+        //人物上一次选择的人物序号
+        int getLastGameCharactorIndex();
+        void setLastGameCharactorIndex(int index);
     private:
         ~UserDataManager();
         void writeStageDataToFile();

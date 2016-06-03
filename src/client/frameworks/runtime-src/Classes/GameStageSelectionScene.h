@@ -22,6 +22,7 @@ namespace bubble_second {
     public:
         static cocos2d::Scene* createScene();
         static cocos2d::Scene* createSceneNextStage();
+        static cocos2d::Scene* createSceneReplayStage();
         CREATE_FUNC(GameStageSelectionScene);
         ~GameStageSelectionScene();
         //void scrollViewDidScroll(ScrollView* view);

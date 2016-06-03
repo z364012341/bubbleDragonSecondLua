@@ -102,6 +102,15 @@ namespace bubble_second {
         armature_path_.push_back(PUZZLE_MOVE_ANSWER_PATH);
         armature_path_.push_back(ADD_SPECIAL_PROP_ARMATURE_PATH);
         armature_path_.push_back("miaozhunxian/miaozhunxian.ExportJson");  //瞄准线道具动画
+        armature_path_.push_back("laoshu1/laoshu1.ExportJson");  //老鼠人物的动画
+        armature_path_.push_back("laoshu2/laoshu2.ExportJson");
+        armature_path_.push_back("laoshu3/laoshu3.ExportJson");
+        armature_path_.push_back("laoshushengli/laoshushengli.ExportJson");
+        armature_path_.push_back("tuzi1/tuzi1.ExportJson");  //兔子人物的动画
+        armature_path_.push_back("tuzi2/tuzi2.ExportJson");
+        armature_path_.push_back("tuzi3/tuzi3.ExportJson");
+        armature_path_.push_back("tuzishengli/tuzishengli.ExportJson");
+        armature_path_.push_back("pintulibao/pintulibao.ExportJson");
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()
@@ -177,7 +186,7 @@ namespace bubble_second {
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("StudioResPlist.plist");
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("gameRes.plist");
         this->addArmatureFile();
-        cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("puzzle_ui.plist");
+        //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("puzzle_ui.plist");
     }
 
     void SpriteTextureController::setGrayShader(cocos2d::Sprite * sprite)

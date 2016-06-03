@@ -64,13 +64,13 @@ namespace bubble_second {
 
     void ScoreProgressStar::setStartSpriteShader(const std::string & shader_path)
     {
-        //auto fileUtiles = cocos2d::FileUtils::getInstance();
-        //std::string fragmentFullPath = fileUtiles->fullPathForFilename(shader_path.c_str());
-        //std::string fragSource = fileUtiles->getStringFromFile(fragmentFullPath);
-        //cocos2d::GLProgram* shader_program = cocos2d::GLProgram::createWithByteArrays(cocos2d::ccPositionTextureColor_noMVP_vert, fragSource.c_str());
-        //cocos2d::GLProgramState* program_state = cocos2d::GLProgramState::getOrCreateWithGLProgram(shader_program);
-        //this->setGLProgramState(program_state);
-        SpriteTextureController::getInstance()->setGrayShader(this);
+        auto fileUtiles = cocos2d::FileUtils::getInstance();
+        std::string fragmentFullPath = fileUtiles->fullPathForFilename(shader_path.c_str());
+        std::string fragSource = fileUtiles->getStringFromFile(fragmentFullPath);
+        cocos2d::GLProgram* shader_program = cocos2d::GLProgram::createWithByteArrays(cocos2d::ccPositionTextureColor_noMVP_vert, fragSource.c_str());
+        cocos2d::GLProgramState* program_state = cocos2d::GLProgramState::getOrCreateWithGLProgram(shader_program);
+        this->setGLProgramState(program_state);
+        //SpriteTextureController::getInstance()->setGrayShader(this);
     }
 
     void ScoreProgressStar::startTurnOn()

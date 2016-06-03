@@ -90,6 +90,9 @@ namespace bubble_second {
         csb_node_ = cocos2d::CSLoader::createNode(GAME_VICTORY_ALERT_CSB_PATH);
         this->addChild(csb_node_);
         ButtonEffectController::setButtonsZoomScale(csb_node_);
+        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName("Button_1"))->addClickEventListener([=](cocos2d::Ref*) {
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_GAME_DEFEAT_RETURN);
+        });
     }
 
     void GameVictoryAlert::setNextCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback)
