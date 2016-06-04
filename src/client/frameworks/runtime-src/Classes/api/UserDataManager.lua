@@ -12,6 +12,12 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] buyNewbieGift 
+-- @param self
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] savePuzzleStageData 
 -- @param self
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
@@ -32,6 +38,12 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] getLastGameCharactorIndex 
+-- @param self
+-- @return int#int ret (return value: int)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] isCompletedGame 
 -- @param self
 -- @return bool#bool ret (return value: bool)
@@ -41,12 +53,6 @@
 -- @function [parent=#UserDataManager] isGameMusicEnable 
 -- @param self
 -- @return bool#bool ret (return value: bool)
-        
---------------------------------
--- 
--- @function [parent=#UserDataManager] getUserNickname 
--- @param self
--- @return string#string ret (return value: string)
         
 --------------------------------
 -- 
@@ -104,20 +110,6 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] setUserNickname 
--- @param self
--- @param #string name
--- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
-        
---------------------------------
--- 
--- @function [parent=#UserDataManager] setSoundEffect 
--- @param self
--- @param #bool flag
--- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
-        
---------------------------------
--- 
 -- @function [parent=#UserDataManager] getStartNumbleWithLevel 
 -- @param self
 -- @param #int level
@@ -147,8 +139,9 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] buyNewbieGift 
+-- @function [parent=#UserDataManager] setSoundEffectEnable 
 -- @param self
+-- @param #bool flag
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
@@ -173,6 +166,12 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] getGameCharactorUnlockNumble 
+-- @param self
+-- @return int#int ret (return value: int)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] isSoundEffectEnable 
 -- @param self
 -- @return bool#bool ret (return value: bool)
@@ -181,6 +180,13 @@
 -- 
 -- @function [parent=#UserDataManager] addUnlockStageNumble 
 -- @param self
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] setLastGameCharactorIndex 
+-- @param self
+-- @param #int index
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------

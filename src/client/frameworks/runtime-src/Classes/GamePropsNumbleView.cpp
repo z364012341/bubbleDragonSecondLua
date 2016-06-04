@@ -1,6 +1,6 @@
 #include "GamePropsNumbleView.h"
 #include "SpriteTextureController.h"
-#include "CenteredMenuItemSprite.h"
+#include "ButtonEffectController.h"
 namespace bubble_second {
     GamePropsNumbleView::GamePropsNumbleView()
     {
@@ -52,15 +52,17 @@ namespace bubble_second {
     }
     void GamePropsNumbleView::addAdditionButton()
     {
-        addition_item_ = SpriteTextureController::getInstance()->createMenuItemSprite(PROPS_NUMBLE_ENABLED_PATH);
-        addition_item_->setScale(GAME_PROPS_NUMBLE_VIEW_BACKGROUND_SCALE);
+        //addition_Button_ = SpriteTextureController::getInstance()->createMenuItemSprite(PROPS_NUMBLE_ENABLED_PATH);
+        addition_Button_ = cocos2d::ui::Button::create(PROPS_NUMBLE_ENABLED_PATH);
+        ButtonEffectController::setButtonZoomScale(addition_Button_);
+        addition_Button_->setScale(GAME_PROPS_NUMBLE_VIEW_BACKGROUND_SCALE);
         //addition_item_->setCallback([=](cocos2d::Ref*) {
         //    CCLOG("!!!!!!!!!!!!!!!!!!!!!!");
         //});
-        addition_item_->setPosition(-2.0f, 1.7f);
-        cocos2d::Menu* menu = cocos2d::Menu::createWithItem(addition_item_);
-        menu->setPosition(cocos2d::Vec2::ZERO);
-        this->addChild(menu, 1);
+        addition_Button_->setPosition(cocos2d::Vec2(-2.0f, 1.7f));
+        //cocos2d::Menu* menu = cocos2d::Menu::createWithItem(addition_Button_);
+        //menu->setPosition(cocos2d::Vec2::ZERO);
+        this->addChild(addition_Button_, 1);
     }
     void GamePropsNumbleView::addTickTexture()
     {
@@ -73,7 +75,7 @@ namespace bubble_second {
     {
         props_label_->setString(numble_value_.asString());
         bool flag = isNoProps();
-        addition_item_->setVisible(flag);
+        addition_Button_->setVisible(flag);
         background_->setVisible(!flag);
         //props_label_->setVisible(!flag);
         //tick_->setVisible(!flag);

@@ -442,6 +442,9 @@ const std::string EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION = "event_end_add_specia
 const std::string EVENT_END_AIMING_LINE_ANIMATION = "event_end_aiming_line_animation";
 const std::string EVENT_GAME_REPLAY = "event_game_replay";
 const std::string EVENT_GAME_DEFEAT_RETURN = "event_game_defeat_return";
+const std::string EVENT_GAME_DEFEAT_BUY_ALERT_RETURN = "event_game_defeat_buy_alert_return";
+const std::string EVENT_DEFEAT_BUY_CONTINUE_PLAY = "event_defeat_buy_continue_play";
+const std::string EVENT_END_CHARACTOR_BUY_CONTINUE = "event_end_charactor_buy_continue";
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效

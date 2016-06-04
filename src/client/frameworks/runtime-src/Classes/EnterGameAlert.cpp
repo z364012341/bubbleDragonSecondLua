@@ -120,9 +120,9 @@ namespace bubble_second {
         assert(charactor_pageview_);
         charactor_pageview_->setOpacity(0);
         charactor_pageview_->runAction(cocos2d::FadeIn::create(1.0f));
-        charactor_pageview_->setCurPageIndex(UserDataManager::getInstance()->getLastGameCharactorIndex());
+        charactor_pageview_->setCurrentPageIndex(UserDataManager::getInstance()->getLastGameCharactorIndex());
         //int unlock_numble = UserDataManager::getInstance()->getGameCharactorUnlockNumble();
-        cocos2d::Vector<cocos2d::ui::Layout*> pages = charactor_pageview_->getPages();
+        cocos2d::Vector<cocos2d::ui::Widget*> pages = charactor_pageview_->getItems();
         for (int i = UserDataManager::getInstance()->getGameCharactorUnlockNumble(); i != pages.size(); i++)
         {
             cocos2d::Vector<cocos2d::Node*> children = pages.at(i)->getChildren();
@@ -156,7 +156,7 @@ namespace bubble_second {
     void EnterGameAlert::setDirectionalButtonsEnable(int pageview_index)
     {
         left_button_->setEnabled(pageview_index != 0);
-        right_button_->setEnabled(pageview_index != charactor_pageview_->getPages().size() - 1);
+        right_button_->setEnabled(pageview_index != charactor_pageview_->getItems().size() - 1);
 
     }
 

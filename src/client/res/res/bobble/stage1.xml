@@ -38,5 +38,5 @@
 		<data type="1" row="1" col="1" cloud="0" path="" />
 		<data type="2" row="0" col="2" cloud="0" path="" />
 	</bubbles>
-	<info bubbleNum="25" type="1" start1="2400" start2="7000" start3="15000" colors="1110000" />
+	<info bubbleNum="5" type="1" start1="2400" start2="7000" start3="15000" colors="1110000" />
 </include>

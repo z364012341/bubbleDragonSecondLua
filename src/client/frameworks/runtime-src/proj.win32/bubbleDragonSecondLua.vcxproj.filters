@@ -21,8 +21,6 @@
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="SimulatorWin.h" />
     <ClInclude Include="stdafx.h">
       <Filter>win32</Filter>
     </ClInclude>
@@ -95,9 +93,6 @@
     <ClInclude Include="..\Classes\BubbleSightingPoint.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CenteredMenuItemSprite.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ColorBombBubble.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -110,9 +105,6 @@
     <ClInclude Include="..\Classes\CommonFunc.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CsbNodeManager.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\DarkCloudBubble.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -122,9 +114,6 @@
     <ClInclude Include="..\Classes\EnterPropsViewManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameBaseAlert.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GameBubbleMap.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -132,9 +121,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameCharacter.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameCharacterFactory.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameDefeatAlert.h">
@@ -174,18 +160,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameVictoryAlert.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameVolControlView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameVoluemSwitch.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\LayerManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\LightningBubble.h">
@@ -311,22 +285,9 @@
     <ClInclude Include="..\Classes\StageData.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\BarrelScoreLabelNode.h" />
-    <ClInclude Include="..\Classes\PopScoreLabelComponent.h" />
-    <ClInclude Include="..\Classes\GameStandbyTimer.h" />
-    <ClInclude Include="..\Classes\GameNoopAnimationComponent.h" />
-    <ClInclude Include="..\Classes\GameClingAnimationComponent.h" />
-    <ClInclude Include="..\Classes\GameDefeatAnimationComponent.h" />
-    <ClInclude Include="..\Classes\GameCharactorNameManager.h" />
     <ClInclude Include="..\Classes\ScoreProgressStar.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\StageNumbleBoardController.h" />
-    <ClInclude Include="..\Classes\StageTypeLogo.h" />
-    <ClInclude Include="..\Classes\BubbleReflectionPointComponent.h" />
-    <ClInclude Include="..\Classes\BubbleMainSightingDevice.h" />
-    <ClInclude Include="..\Classes\GameNoneBubbleDownAnimationComponent.h" />
-    <ClInclude Include="..\Classes\GameStartButton.h" />
     <ClInclude Include="..\Classes\ScoreProgressStart.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -351,14 +312,9 @@
     <ClInclude Include="..\Classes\lua_SmartScaleController_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\lua_ControlButtonController_auto.hpp">
-      <Filter>Classes\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\PuzzleStageDataManager.h" />
     <ClInclude Include="..\Classes\lua_PuzzleStageDataManager_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameShareButton.h" />
     <ClInclude Include="..\Classes\lua_GameAlertMask_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
@@ -371,23 +327,86 @@
     <ClInclude Include="..\Classes\lua_SpriteTextureController_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\PropsNumbleShow.h" />
     <ClInclude Include="..\Classes\lua_PropsNumbleShow_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\md5.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\PuzzleStoreItemFactory.h" />
     <ClInclude Include="..\Classes\lua_PuzzleStoreItemFactory_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameJNIHelper.h" />
-    <ClInclude Include="..\Classes\PuzzleLoadingScene.h" />
     <ClInclude Include="..\Classes\lua_PuzzleLoadingScene_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameBuyStoreMannager.h" />
+    <ClInclude Include="..\Classes\BarrelScoreLabelNode.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BubbleMainSightingDevice.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BubbleReflectionPointComponent.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameBuyStoreMannager.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameCharactorNameManager.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameClingAnimationComponent.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameDefeatAnimationComponent.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameJNIHelper.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameNoneBubbleDownAnimationComponent.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameNoopAnimationComponent.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameShareButton.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameStandbyTimer.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameStartButton.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PopScoreLabelComponent.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PropsNumbleShow.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PuzzleLoadingScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PuzzleStageDataManager.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PuzzleStoreItemFactory.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="SimulatorWin.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageNumbleBoardController.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageTypeLogo.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameHelpAlert.h" />
+    <ClInclude Include="..\Classes\GameAboutAlert.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -396,7 +415,6 @@
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="SimulatorWin.cpp" />
     <ClCompile Include="stdafx.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -460,9 +478,6 @@
     <ClCompile Include="..\Classes\BubbleSightingPoint.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CenteredMenuItemSprite.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ColorBombBubble.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -475,9 +490,6 @@
     <ClCompile Include="..\Classes\CommonFunc.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CsbNodeManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\DarkCloudBubble.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -487,9 +499,6 @@
     <ClCompile Include="..\Classes\EnterPropsViewManager.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameBaseAlert.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameBubbleMap.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -497,9 +506,6 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameCharacter.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameCharacterFactory.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameDefeatAlert.cpp">
@@ -539,18 +545,6 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameVictoryAlert.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameVolControlView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameVoluemSwitch.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\LayerManager.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\LightningBubble.cpp">
@@ -676,22 +670,9 @@
     <ClCompile Include="..\Classes\StageData.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BarrelScoreLabelNode.cpp" />
-    <ClCompile Include="..\Classes\PopScoreLabelComponent.cpp" />
-    <ClCompile Include="..\Classes\GameStandbyTimer.cpp" />
-    <ClCompile Include="..\Classes\GameNoopAnimationComponent.cpp" />
-    <ClCompile Include="..\Classes\GameClingAnimationComponent.cpp" />
-    <ClCompile Include="..\Classes\GameDefeatAnimationComponent.cpp" />
-    <ClCompile Include="..\Classes\GameCharactorNameManager.cpp" />
     <ClCompile Include="..\Classes\ScoreProgressStar.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\StageNumbleBoardController.cpp" />
-    <ClCompile Include="..\Classes\StageTypeLogo.cpp" />
-    <ClCompile Include="..\Classes\BubbleReflectionPointComponent.cpp" />
-    <ClCompile Include="..\Classes\BubbleMainSightingDevice.cpp" />
-    <ClCompile Include="..\Classes\GameNoneBubbleDownAnimationComponent.cpp" />
-    <ClCompile Include="..\Classes\GameStartButton.cpp" />
     <ClCompile Include="..\Classes\ScoreProgressStart.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -713,14 +694,9 @@
     <ClCompile Include="..\Classes\lua_SmartScaleController_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\lua_ControlButtonController_auto.cpp">
-      <Filter>Classes\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\PuzzleStageDataManager.cpp" />
     <ClCompile Include="..\Classes\lua_PuzzleStageDataManager_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameShareButton.cpp" />
     <ClCompile Include="..\Classes\lua_GameAlertMask_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
@@ -733,23 +709,83 @@
     <ClCompile Include="..\Classes\lua_SpriteTextureController_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\PropsNumbleShow.cpp" />
     <ClCompile Include="..\Classes\lua_PropsNumbleShow_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\md5.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\PuzzleStoreItemFactory.cpp" />
     <ClCompile Include="..\Classes\lua_PuzzleStoreItemFactory_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameJNIHelper.cpp" />
-    <ClCompile Include="..\Classes\PuzzleLoadingScene.cpp" />
     <ClCompile Include="..\Classes\lua_PuzzleLoadingScene_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameBuyStoreMannager.cpp" />
+    <ClCompile Include="..\Classes\BarrelScoreLabelNode.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BubbleMainSightingDevice.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BubbleReflectionPointComponent.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameBuyStoreMannager.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameCharactorNameManager.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameClingAnimationComponent.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameDefeatAnimationComponent.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameJNIHelper.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameNoneBubbleDownAnimationComponent.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameNoopAnimationComponent.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameShareButton.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameStandbyTimer.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameStartButton.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PopScoreLabelComponent.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PropsNumbleShow.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PuzzleLoadingScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PuzzleStageDataManager.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PuzzleStoreItemFactory.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="SimulatorWin.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageNumbleBoardController.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageTypeLogo.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameHelpAlert.cpp" />
+    <ClCompile Include="..\Classes\GameAboutAlert.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
@@ -757,6 +793,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\game.ico" />
+    <Image Include="res\game.ico">
+      <Filter>Classes</Filter>
+    </Image>
   </ItemGroup>
 </Project>

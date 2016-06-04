@@ -18,29 +18,13 @@ const std::string ADD_BUBBLE_NUMBLE_ANIMATION_NAME = "jiabudaoju";
 const std::string ADD_SPECIAL_ANIMATION_NAME = "pingzidaoju";
 const std::string AIMING_LINE_COMMODITY_ANIMATION_NAME = "miaozhunxian";
 namespace bubble_second {
-    //class GamePropsNumbleView;
     class EnterGamePropsView : public cocos2d::Node
     {
     public:
-        //CREATE_FUNC(EnterGamePropsView);
-        //传入道具的展示
-    //    static EnterGamePropsView* create(cocos2d::Sprite* props);
-    //    void addCostView(const cocos2d::Value& value);
         static cocos2d::Node* createCommodityArmature(const std::string& animation_name, const std::string& end_event_name);
         virtual ~EnterGamePropsView();
-    //    void addMenuCallback(const cocos2d::ccMenuCallback& callback);
     protected:
         EnterGamePropsView();
-    //    bool init(cocos2d::Sprite* props);
-    //private:
-    //    void addBackground();
-    //    void addPropsTexture(cocos2d::Sprite* props);
-    //    void addPropsNumbleView();
-    //private:
-    //    cocos2d::MenuItemSprite* background_ = nullptr;
-    //    GamePropsNumbleView* props_numble_view_ = nullptr;
-    //    cocos2d::Value props_value_;
-    //    cocos2d::ccMenuCallback menu_callback_ = nullptr;
         bool init(const std::string& csb_path);
         void setCostLabelStringWithKey(const std::string& key);
     private:

@@ -68,6 +68,7 @@ const std::string UI_NAME_SECOND_BUBBLE_STORE = "second_bubble_store";        //
 const int BARRELHEADEDGE_BODY_RADIUS = 20;  //桶边刚体半径
 const float POP_VICTORY_ALERT_DELAYTIME = 1.5f;
 const std::string BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY = "bubble_sighting_device_perform_schedule_key"; //喵准器表演的定时器的key
+const std::string GAME_DEFEAT_BUY_PROPS_ALERT_NAME = "game_defeat_buy_props_alert_name";
 namespace bubble_second {
     cocos2d::Scene* GameScene::createScene()
     {
@@ -784,6 +785,10 @@ namespace bubble_second {
         dispatcher->addCustomEventListener(EVENT_GAME_DEFEAT_RETURN, [=](cocos2d::EventCustom * event) {
             cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
         });
+        dispatcher->addCustomEventListener(EVENT_GAME_DEFEAT_BUY_ALERT_RETURN, [=](cocos2d::EventCustom * event) {
+            this->popDefeatAlert();
+        });
+        dispatcher->addCustomEventListener(EVENT_END_CHARACTOR_BUY_CONTINUE, CC_CALLBACK_1(GameScene::gameDefeatBuyContinue, this));
     }
 
     void GameScene::removeEventListenerCustom()
@@ -840,6 +845,8 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_END_AIMING_LINE_ANIMATION);
         dispatcher->removeCustomEventListeners(EVENT_GAME_REPLAY);
         dispatcher->removeCustomEventListeners(EVENT_GAME_DEFEAT_RETURN);
+        dispatcher->removeCustomEventListeners(EVENT_GAME_DEFEAT_BUY_ALERT_RETURN);
+        dispatcher->removeCustomEventListeners(EVENT_END_CHARACTOR_BUY_CONTINUE);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1201,6 +1208,15 @@ namespace bubble_second {
         pop_score_label->setPosition(point);
         csb_node_->addChild(pop_score_label);
         pop_score_label->popOnceLabelWithScore(data_map.at(EVENT_ADD_ELIMINATE_SCORE_LABEL_DATA_SCORE_KEY).asInt());
+    }
+
+    void GameScene::gameDefeatBuyContinue(cocos2d::EventCustom *)
+    {
+        bubble_map_node_->resume();
+        this->setPropertyTouchEnabled(true);
+        //GamePlayController::getInstance()->setBubbleShootEnabled(true);
+        GameScoreController::getInstance()->addBubbleUseCount(ADD_BUBBLE_NUMBLE_PROPS_NUMBLE);
+        //this->addPrepareBubble();
     }
 
     //void GameScene::mutipleSealBubbleFly(cocos2d::EventCustom * event)
@@ -2276,7 +2292,7 @@ namespace bubble_second {
 
     void GameScene::defeat()
     {
-        bubble_map_node_->stopAllActions();
+        bubble_map_node_->pause();
         this->setPropertyTouchEnabled(false);
         GamePlayController::getInstance()->disposeDefeat();
         this->getGameCharacter()->playDefeatAnimation();
@@ -2292,14 +2308,11 @@ namespace bubble_second {
 			return;
 		}
         GameDefeatBuyPropsAlert* buy_alert = GameDefeatBuyPropsAlert::create();
+        buy_alert->setName(GAME_DEFEAT_BUY_PROPS_ALERT_NAME);
         buy_alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
         buy_alert->setPosition(visible_size.width / 2, visible_size.height / 2);
         this->addChild(buy_alert, 2);
-        buy_alert->setCancelCallback([=](cocos2d::Ref*) {
-            this->popDefeatAlert();
-            buy_alert->removeFromParent();
-        });
     }
 
     void GameScene::popDefeatAlert()

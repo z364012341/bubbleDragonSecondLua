@@ -9,7 +9,7 @@ namespace bubble_second {
     void GameVolControlView::onExit()
     {
         cocos2d::Node::onExit();
-        UserDataManager::getInstance()->setSoundEffect(effect_switch_->getSwitchState());
+        UserDataManager::getInstance()->setSoundEffectEnable(effect_switch_->getSwitchState());
         UserDataManager::getInstance()->setGameMusicEnable(music_switch_->getSwitchState());
     }
     GameVolControlView::GameVolControlView()

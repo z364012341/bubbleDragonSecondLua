@@ -17,6 +17,9 @@ const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_2 = "rengqiu-02";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_3 = "rengqiu-03";
 const std::string CHARACTER_LAOHU_SHOOT_BUBBLE_ANIMATION_NAME_4 = "rengqiu-04";
 const std::string CHARACTER_LAOHU_RELOAD_BUBBLE_ANIMATION_NAME = "jieqiu-01";
+const std::string CHARACTER_DEFEAT_CONTINUE_PLAY_ANIMATION_1_NAME = "jixuyouxi-01";
+const std::string CHARACTER_DEFEAT_CONTINUE_PLAY_ANIMATION_2_NAME = "jixuyouxi-02-01";
+const std::string CHARACTER_DEFEAT_CONTINUE_PLAY_ANIMATION_3_NAME = "jixuyouxi-02-02";
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_1 = 40.0f;
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_2 = -10.0f;
 const float CHARACTER_SHOOT_BUBBLE_ANIMATION_ANGLE_3 = -40.0f;
@@ -68,6 +71,7 @@ namespace bubble_second {
 		dispatcher->addCustomEventListener(EVENT_SHOOT_PREPARE_BUBBLE, CC_CALLBACK_1(GameCharacter::playShootBubbleAnimation, this));
         dispatcher->addCustomEventListener(EVENT_ROTATE_SIGHTING_DEVICE, CC_CALLBACK_1(GameCharacter::changeCharacterAngle, this));
         dispatcher->addCustomEventListener(EVENT_EXCHANGE_BUBBLE, [=](cocos2d::EventCustom* event) {this->playExchangeBubbleAnimation(); });
+        dispatcher->addCustomEventListener(EVENT_DEFEAT_BUY_CONTINUE_PLAY, [=](cocos2d::EventCustom* event) {this->playDefeatContinuePlayAnimation(); });
 	}
 
 	void GameCharacter::removeEventListenerCustom()
@@ -75,6 +79,7 @@ namespace bubble_second {
 		auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
 		dispatcher->removeCustomEventListeners(EVENT_SHOOT_PREPARE_BUBBLE);
         dispatcher->removeCustomEventListeners(EVENT_ROTATE_SIGHTING_DEVICE);
+        dispatcher->removeCustomEventListeners(EVENT_DEFEAT_BUY_CONTINUE_PLAY);
 	}
 
 	void GameCharacter::addCharacterArmature()
@@ -171,7 +176,19 @@ namespace bubble_second {
         armature->getAnimation()->stop();
         armature->getAnimation()->playWithNames(names, SPECIAL_BUBBLE_EFFECT_DURATION, false);
         armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-            if (movementType == cocostudio::COMPLETE && movementID == names.back())
+            //美术做的动画有动画名字有多有少的..比较蛋疼,., 需要判断一下结束的动画
+            std::vector<std::string> armature_names = armature->getAnimation()->getAnimationData()->movementNames;
+            std::string end_name = "";
+            for (int i = names.size()-1; i >= 0; i--)
+            {
+                if (std::find(armature_names.begin(), armature_names.end(), names[i]) != armature_names.end())
+                {
+                    end_name = names[i];
+                    break;
+                }
+            }
+            assert(end_name != "");
+            if (movementType == cocostudio::COMPLETE && movementID == end_name)
             {
                 callfunc();
             }
@@ -363,6 +380,19 @@ namespace bubble_second {
 				armature->getAnimation()->play(CHARACTER_DEFEAT_ANIMATION_NAME_3, SPECIAL_BUBBLE_EFFECT_DURATION, true);
 			}
 		});
+    }
+
+    void GameCharacter::playDefeatContinuePlayAnimation()
+    {
+        std::vector<std::string> names;
+        names.push_back(CHARACTER_DEFEAT_CONTINUE_PLAY_ANIMATION_1_NAME);
+        names.push_back(CHARACTER_DEFEAT_CONTINUE_PLAY_ANIMATION_2_NAME);
+        names.push_back(CHARACTER_DEFEAT_CONTINUE_PLAY_ANIMATION_3_NAME);
+        this->playAnimationWithNamesAndCallfunc(names, [=]() {
+            this->setDefeatFlag(false);
+            this->playStandbyAnimation1();
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_END_CHARACTOR_BUY_CONTINUE);
+        });
     }
 
     cocostudio::Armature * GameCharacter::getCharactorArmature1()

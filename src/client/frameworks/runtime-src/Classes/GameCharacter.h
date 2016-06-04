@@ -38,6 +38,7 @@ namespace bubble_second {
         //void playLegendaryAnimation();
         void playVictoryAnimation();
         void playDefeatAnimation();
+        void playDefeatContinuePlayAnimation();
 	protected:
 		void onEnter() override;
 		void onExit() override;

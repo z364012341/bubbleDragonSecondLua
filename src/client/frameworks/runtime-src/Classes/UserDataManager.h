@@ -30,12 +30,12 @@ namespace bubble_second {
         int getStartNumbleWithLevel(int level);
         void setPresentCell(int cell_numble);
         int getPresentCell();
-        void setUserNickname(const std::string& name);
-        std::string getUserNickname() const;
+        //void setUserNickname(const std::string& name);
+        //std::string getUserNickname() const;
         void setGameMusicEnable(bool flag);
         //是否播放音乐
         bool isGameMusicEnable();
-        void setSoundEffect(bool flag);
+        void setSoundEffectEnable(bool flag);
         //是否播放特效声音
         bool isSoundEffectEnable();
         //保存玩家数据

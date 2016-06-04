@@ -6,7 +6,7 @@
 const std::string GAME_STAGE_DATA_PATH = "stageData.plist";
 const std::string GAME_USER_DATA_PATH = "userData.plist";
 const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageBestScore.plist";
-const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
+//const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
 const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
 const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT";
 const std::string HAVED_BUY_NEWBIE_GIFT_KEY = "buyNewbieGift";
@@ -140,41 +140,35 @@ namespace bubble_second {
     {
         return present_cell_;
     }
-    void UserDataManager::setUserNickname(const std::string & name)
-    {
-        user_data_[USER_DATA_NICKNAME_KEY] = name;
-    }
-    std::string UserDataManager::getUserNickname() const
-    {
-        if (user_data_.find(USER_DATA_NICKNAME_KEY) != user_data_.end())
-        {
-            return user_data_.at(USER_DATA_NICKNAME_KEY).asString();
-        }
-        return "";
-    }
+    //void UserDataManager::setUserNickname(const std::string & name)
+    //{
+    //    user_data_[USER_DATA_NICKNAME_KEY] = name;
+    //}
+    //std::string UserDataManager::getUserNickname() const
+    //{
+    //    if (user_data_.find(USER_DATA_NICKNAME_KEY) != user_data_.end())
+    //    {
+    //        return user_data_.at(USER_DATA_NICKNAME_KEY).asString();
+    //    }
+    //    return "";
+    //}
     void UserDataManager::setGameMusicEnable(bool flag)
     {
-        user_data_[USER_DATA_MUSIC_KEY] = flag;
+        cocos2d::UserDefault::getInstance()->setBoolForKey(USER_DATA_MUSIC_KEY.c_str(), flag);
+        cocos2d::UserDefault::getInstance()->flush();
     }
     bool UserDataManager::isGameMusicEnable()
     {
-        if (user_data_.find(USER_DATA_MUSIC_KEY) != user_data_.end())
-        {
-            return user_data_.at(USER_DATA_MUSIC_KEY).asBool();
-        }
-        return false;
+        return cocos2d::UserDefault::getInstance()->getBoolForKey(USER_DATA_MUSIC_KEY.c_str());
     }
-    void UserDataManager::setSoundEffect(bool flag)
+    void UserDataManager::setSoundEffectEnable(bool flag)
     {
-        user_data_[USER_DATA_SOUND_EFFECT_KEY] = flag;
+        cocos2d::UserDefault::getInstance()->setBoolForKey(USER_DATA_SOUND_EFFECT_KEY.c_str(), flag);
+        cocos2d::UserDefault::getInstance()->flush();
     }
     bool UserDataManager::isSoundEffectEnable()
     {
-        if (user_data_.find(USER_DATA_SOUND_EFFECT_KEY) != user_data_.end())
-        {
-            return user_data_.at(USER_DATA_SOUND_EFFECT_KEY).asBool();
-        }
-        return false;
+        return cocos2d::UserDefault::getInstance()->getBoolForKey(USER_DATA_SOUND_EFFECT_KEY.c_str());
     }
     void UserDataManager::saveUserData()
     {
