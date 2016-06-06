@@ -20,6 +20,7 @@ const std::string STAGE_SCROLLVIEW_NAME = "StageScrollView";
 const std::string SETTING_BUTTON_NAME = "SettingButton";
 const std::string SETTING_BUTTON_LINE_NAME = "shengzi_3";
 const std::string PUZZLE_BUTTON_NAME = "Puzzle";
+const std::string DECALS_BUTTON_NAME = "Button_2_0";
 const std::string STRENGTH_INFO = "StrengthInfo";
 const std::string COIN_INFO = "CoinInfo";
 const std::string DIAMOND_INFO = "DiamondInfo";
@@ -144,13 +145,15 @@ namespace bubble_second {
         });
 
         Button* puzzleButton = dynamic_cast<Button*>(csb_node_->getChildByName(PUZZLE_BUTTON_NAME));
-        puzzleButton->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
-            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-            {
-                this->gotoPuzzleGame();
-            }
+        assert(puzzleButton);
+        puzzleButton->addClickEventListener([=](Ref* target) {
+            this->gotoPuzzleGame();
         });
-
+        Button* decalsButton = dynamic_cast<Button*>(csb_node_->getChildByName(DECALS_BUTTON_NAME));
+        assert(decalsButton);
+        decalsButton->addClickEventListener([=](Ref*) {
+            this->popDecalsBookAlert();
+        });
         this->layout();
     }
 
@@ -349,6 +352,19 @@ namespace bubble_second {
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
         this->getAlertRenderNode()->addChild(alert);
+    }
+
+    void GameStageSelectionScene::popDecalsBookAlert()
+    {
+#if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
+        // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
+        auto runtimeEngine = RuntimeEngine::getInstance();
+        runtimeEngine->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
+        runtimeEngine->start();
+#else
+        //cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua");
+        cocos2d::LuaEngine::getInstance()->executeScriptFile("src/app/popDecalsBookAlert.lua");
+#endif
     }
 
     cocos2d::Node * GameStageSelectionScene::getAlertRenderNode()

@@ -18,7 +18,7 @@
 #include "PropsSelectAlert.h"
 #include "BaseWeapon.h"
 #include "StavesProperty.h"
-#include "BubbleSightingDevice.h"
+//#include "BubbleSightingDevice.h"
 #include "BigBackgroundEffect.h"
 #include "RainbowSealManager.h"
 #include "ScoreProgressMenu.h"
@@ -578,14 +578,14 @@ namespace bubble_second {
 
     void GameScene::addTouchEventListener()
     {
-        auto listener = cocos2d::EventListenerTouchOneByOne::create();
-        listener->setSwallowTouches(false);
+        touch_listener_ = cocos2d::EventListenerTouchOneByOne::create();
+        touch_listener_->setSwallowTouches(false);
         GamePlayController* game_controller = GamePlayController::getInstance();
-        listener->onTouchBegan = CC_CALLBACK_2(GamePlayController::onTouchBegan, game_controller);
-        listener->onTouchMoved = CC_CALLBACK_2(GamePlayController::onTouchMoved, game_controller);
-        listener->onTouchEnded = CC_CALLBACK_2(GamePlayController::onTouchEnded, game_controller);
+        touch_listener_->onTouchBegan = CC_CALLBACK_2(GamePlayController::onTouchBegan, game_controller);
+        touch_listener_->onTouchMoved = CC_CALLBACK_2(GamePlayController::onTouchMoved, game_controller);
+        touch_listener_->onTouchEnded = CC_CALLBACK_2(GamePlayController::onTouchEnded, game_controller);
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
-        dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+        dispatcher->addEventListenerWithSceneGraphPriority(touch_listener_, this);
         //设置物理碰撞监听器
         auto contactListener = cocos2d::EventListenerPhysicsContact::create();
         //设置监听器的碰撞开始函数  
@@ -1081,6 +1081,7 @@ namespace bubble_second {
     void GameScene::addTopEliminateBubbleLogo(cocos2d::EventCustom * event)
     {
         auto points = *static_cast<std::vector<cocos2d::Vec2>*>(event->getUserData());
+
         for (auto point : points)
         {
             cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createStageTypeSprite(kTopEliminate);
@@ -1088,6 +1089,7 @@ namespace bubble_second {
             sp->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::createWithTwoActions(cocos2d::ScaleTo::create(1.0f, 0.6f), cocos2d::ScaleTo::create(1.0f, 1.0f))));
             sp->setPosition(point);
             bubble_map_node_->addChild(sp);
+            top_eliminate_logos_.pushBack(sp);
         }
     }
 
@@ -1237,6 +1239,11 @@ namespace bubble_second {
     {
         BubbleVector* bubble_vector = static_cast<BubbleVector*>(event->getUserData());
         BaseBubble* sprite = bubble_vector->at(0);
+        //if (GameScoreController::getInstance()->gameVictory())
+        //{
+        //    sprite->downFromAir();
+        //    return;
+        //}
         BaseBubble* bubble = bubble_vector->at(1);
         //auto controller = GamePlayController::getInstance();
         GamePlayController::getInstance()->addPrepareColor(bubble->getBubbleType());
@@ -2175,11 +2182,6 @@ namespace bubble_second {
 
     void GameScene::victory()
     {
-        //this->getGameCharacter()->playVictoryAnimation();
-        //this->setSecondPrepareBubble(nullptr);
-        //GamePlayController::getInstance()->setPrepareBubble(nullptr);
-        //cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_UPDATE_COMPLETED_TASK_LABEL);
-        //cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_ESTIMATE_VICTORY);
         if (!first_victory_flag_)
         {
             return;
@@ -2187,11 +2189,31 @@ namespace bubble_second {
         first_victory_flag_ = false;
 		this->setPropertyTouchEnabled(false);
         GamePlayController::getInstance()->disposeVictory();
+        this->getEventDispatcher()->removeEventListener(touch_listener_);
+        this->removeBubbleMapLine();
+        this->removeTopEliminateLogos();
+        this->getBubbleSightingDevice()->turnOffSightingDevice();
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME*2), cocos2d::CallFunc::create([=]() {
             this->shootBubblesAfterVictory();
         })));
         bubble_map_node_->stopAllActions();
-        //bubble_map_node_->removeFromParent();
+
+    }
+
+    void GameScene::removeBubbleMapLine()
+    {
+        if (cocos2d::Node* line = bubble_map_node_->getChildByName(BUBBLE_MAP_LINE_NAME))
+        {
+            line->removeFromParent();
+        }
+    }
+
+    void GameScene::removeTopEliminateLogos()
+    {
+        for (auto var : top_eliminate_logos_)
+        {
+            var->removeFromParent();
+        }
     }
 
     void GameScene::shootBubblesAfterVictory()

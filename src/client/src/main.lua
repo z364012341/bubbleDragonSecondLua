@@ -8,6 +8,7 @@ cc.FileUtils:getInstance():addSearchPath("res/ui/gameRes/", false);
 cc.FileUtils:getInstance():addSearchPath("res/ui/menuRes/", false);
 cc.FileUtils:getInstance():addSearchPath("res/ui/daochu/", false);
 cc.FileUtils:getInstance():addSearchPath("res/puzzle_ui/", false);
+cc.FileUtils:getInstance():addSearchPath("res/decals_ui/", false);
 cc.FileUtils:getInstance():addSearchPath("res/animation/", false);
 cc.FileUtils:getInstance():addSearchPath("res/stage/", false);
 require "config"

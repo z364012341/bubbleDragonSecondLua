@@ -39,6 +39,14 @@ cc.exports.PUZZLE_STORE_ALERT_PATH = "app.views.PuzzleStoreAlert";
 cc.exports.PUZZLE_START_SCENE_PATH = "app.views.PuzzleStartScene";
 --local PuzzleLotteryAlert = require(PUZZLE_LOTTERY_ALERT_PATH);
 cc.exports.PUZZLE_LOTTERY_ALERT_PATH = "app.views.PuzzleLotteryAlert";
+--local DecalsExhibitionBackground = require(DECALS_EXHIBITION_BACKGROUND_PATH);
+cc.exports.DECALS_EXHIBITION_BACKGROUND_PATH = "app.views.DecalsExhibitionBackground";
+--local DecalsExhibitionPageView = require(DECALS_EXHIBITION_PAGEVIEW_PATH);
+cc.exports.DECALS_EXHIBITION_PAGEVIEW_PATH = "app.views.DecalsExhibitionPageView";
+--local DecalsExhibitionAlert = require(DECALS_EXHIBITION_ALERT_PATH);
+cc.exports.DECALS_EXHIBITION_ALERT_PATH = "app.views.DecalsExhibitionAlert";
+--local DecalsExhibitionNode = require(DECALS_EXHIBITION_NODE_PATH);
+cc.exports.DECALS_EXHIBITION_NODE_PATH = "app.views.DecalsExhibitionNode";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";

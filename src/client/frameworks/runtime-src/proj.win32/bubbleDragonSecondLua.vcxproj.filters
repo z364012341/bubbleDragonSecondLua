@@ -407,6 +407,10 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameHelpAlert.h" />
     <ClInclude Include="..\Classes\GameAboutAlert.h" />
+    <ClInclude Include="..\Classes\ExhibitionNumble.h" />
+    <ClInclude Include="..\Classes\lua_ExhibitionNumble_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -786,6 +790,10 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameHelpAlert.cpp" />
     <ClCompile Include="..\Classes\GameAboutAlert.cpp" />
+    <ClCompile Include="..\Classes\ExhibitionNumble.cpp" />
+    <ClCompile Include="..\Classes\lua_ExhibitionNumble_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

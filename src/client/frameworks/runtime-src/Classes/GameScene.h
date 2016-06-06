@@ -222,6 +222,8 @@ namespace bubble_second {
         void notDisplayedBarrelScoreLabel();
         //Ê¤Àû
         void victory();
+        void removeBubbleMapLine();
+        void removeTopEliminateLogos();
         //Ê§°Ü
         void defeat();
         void popDefeatBuyAlert();
@@ -371,6 +373,8 @@ namespace bubble_second {
         cocos2d::Vector<cocos2d::Node*> pause_nodes_;
         BubbleMainSightingDevice* main_sighting_device_ = nullptr;
         GameAlertMask* props_touch_mask_ = nullptr;
+        cocos2d::EventListenerTouchOneByOne* touch_listener_ = nullptr;
+        cocos2d::Vector<cocos2d::Sprite*> top_eliminate_logos_;
     };
 }
 #endif //_GAME_SCENE_H_

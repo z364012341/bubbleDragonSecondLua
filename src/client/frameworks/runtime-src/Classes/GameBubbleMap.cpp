@@ -124,6 +124,10 @@ namespace bubble_second {
         bubble_vector.pushBack(prepare_bubble);
         bubble_vector.pushBack(cling_bubble);
         this->dispatchCustomEvent(EVENT_BUBBLE_CLING, &bubble_vector);
+        if (GameScoreController::getInstance()->gameVictory())
+        {
+            this->dispatchCustomEvent(EVENT_BUBBLE_AIR, &bubble_vector);
+        }
     }
 
     bool GameBubbleMap::canEliminate(const BubbleVector& vector)

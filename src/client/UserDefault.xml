@@ -2,5 +2,5 @@
 <userDefaultRoot>
     <lastCharactor>3</lastCharactor>
     <GAME_MUSIC>false</GAME_MUSIC>
-    <SOUND_EFFECT>false</SOUND_EFFECT>
+    <SOUND_EFFECT>true</SOUND_EFFECT>
 </userDefaultRoot>

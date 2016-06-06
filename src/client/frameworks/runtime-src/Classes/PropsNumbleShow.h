@@ -10,8 +10,9 @@
 #ifndef _PROPS_NUMBLE_SHOW_H_
 #define _PROPS_NUMBLE_SHOW_H_
 #include "cocos2d.h"
-#include "ui\UITextAtlas.h"
+//#include "ui\UITextAtlas.h"
 namespace bubble_second {
+    class ExhibitionNumble;
     class PropsNumbleShow : public cocos2d::Node
     {
     public:
@@ -26,10 +27,11 @@ namespace bubble_second {
     private:
         PropsNumbleShow();
         bool init(const std::string& prop_key);
+        
         void updateLabel();
         bool isNoneProp();
     private:
-        cocos2d::ui::TextAtlas* props_numble_label_ = nullptr;
+        ExhibitionNumble* props_numble_label_ = nullptr;
         cocos2d::Sprite* plus_sprite_ = nullptr;
         std::string prop_key_ = "";
         cocos2d::EventListenerCustom* listener_ = nullptr;

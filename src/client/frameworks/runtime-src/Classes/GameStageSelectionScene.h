@@ -54,6 +54,9 @@ namespace bubble_second {
         //拼图按钮
         void gotoPuzzleGame();
         void popSettingAlert();
+        //弹出贴纸书
+        void popDecalsBookAlert();
+
         cocos2d::Node* getAlertRenderNode();
         //进入场景调整滚动视图位置
         void adjustingScrollviewPosition();

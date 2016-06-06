@@ -1,6 +1,5 @@
 --
 -- Author: 黄泽昊
--- Date: 2016-03-04 12:06:13
 -- 作用: 选择pageview
 
 local PuzzleSelectedPageView = class("PuzzleSelectedPageView", function (name)
