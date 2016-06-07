@@ -65,6 +65,9 @@ namespace bubble_second {
         //人物上一次选择的人物序号
         int getLastGameCharactorIndex();
         void setLastGameCharactorIndex(int index);
+        //读取贴纸用户数据
+        void readDecalsData();
+        cocos2d::ValueVector getCharactorDecalsData();
     private:
         ~UserDataManager();
         void writeStageDataToFile();
@@ -75,7 +78,8 @@ namespace bubble_second {
         void readUserDataFile();
         std::string getMD5Str(const std::string& input_str);
         std::string encryptionPropsNumble();
-        
+
+        std::string getDecalsDataPath() const;
     private:
         cocos2d::ValueMap stage_data_;
         int present_cell_ = 0;
@@ -83,6 +87,7 @@ namespace bubble_second {
         int unlock_stage_numble_ = 0;
         cocos2d::ValueMap puzzle_stage_data_;
         cocos2d::ValueMap buy_props_save_;
+        cocos2d::ValueMap decals_data_;
         
     };
 }

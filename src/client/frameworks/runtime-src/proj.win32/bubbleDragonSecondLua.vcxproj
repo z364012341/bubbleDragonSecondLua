@@ -222,6 +222,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\ColorBubble.h" />
     <ClInclude Include="..\Classes\CommonFunc.h" />
     <ClInclude Include="..\Classes\DarkCloudBubble.h" />
+    <ClInclude Include="..\Classes\DecalsFactory.h" />
     <ClInclude Include="..\Classes\EnterGameAlert.h" />
     <ClInclude Include="..\Classes\EnterGamePropsView.h" />
     <ClInclude Include="..\Classes\EnterPropsViewManager.h" />
@@ -262,6 +263,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\LightningBubble.h" />
     <ClInclude Include="..\Classes\LoadingScene.h" />
     <ClInclude Include="..\Classes\lua_ButtonEffectController_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_DecalsFactory_auto.hpp" />
     <ClInclude Include="..\Classes\lua_ExhibitionNumble_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameAlertMask_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameShareButton_auto.hpp" />
@@ -357,6 +359,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\ColorBubble.cpp" />
     <ClCompile Include="..\Classes\CommonFunc.cpp" />
     <ClCompile Include="..\Classes\DarkCloudBubble.cpp" />
+    <ClCompile Include="..\Classes\DecalsFactory.cpp" />
     <ClCompile Include="..\Classes\EnterGameAlert.cpp" />
     <ClCompile Include="..\Classes\EnterGamePropsView.cpp" />
     <ClCompile Include="..\Classes\EnterPropsViewManager.cpp" />
@@ -396,6 +399,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\LightningBubble.cpp" />
     <ClCompile Include="..\Classes\LoadingScene.cpp" />
     <ClCompile Include="..\Classes\lua_ButtonEffectController_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_DecalsFactory_auto.cpp" />
     <ClCompile Include="..\Classes\lua_ExhibitionNumble_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameAlertMask_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameShareButton_auto.cpp" />

@@ -56,6 +56,12 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] getCharactorDecalsData 
+-- @param self
+-- @return array_table#array_table ret (return value: array_table)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] isUnlockWithStageNumble 
 -- @param self
 -- @param #int stage_numble
@@ -120,6 +126,12 @@
 -- @function [parent=#UserDataManager] setPresentCell 
 -- @param self
 -- @param #int cell_numble
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] readDecalsData 
+-- @param self
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------

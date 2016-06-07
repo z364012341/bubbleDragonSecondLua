@@ -10,10 +10,8 @@
 #ifndef _SPRITE_TEXTURE_CONTROLLER_H_
 #define _SPRITE_TEXTURE_CONTROLLER_H_
 #include "BubbleSecondConstant.h"
-//#include "CenteredMenuItemSprite.h"
 const std::string GAME_COIN_PATH = "jinbi.PNG"; //½ð±Ò
 namespace bubble_second {
-    //class CenteredMenuItemSprite;
     class SpriteTextureController
     {
     public:

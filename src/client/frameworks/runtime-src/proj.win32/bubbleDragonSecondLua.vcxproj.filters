@@ -411,6 +411,10 @@
     <ClInclude Include="..\Classes\lua_ExhibitionNumble_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\DecalsFactory.h" />
+    <ClInclude Include="..\Classes\lua_DecalsFactory_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -792,6 +796,10 @@
     <ClCompile Include="..\Classes\GameAboutAlert.cpp" />
     <ClCompile Include="..\Classes\ExhibitionNumble.cpp" />
     <ClCompile Include="..\Classes\lua_ExhibitionNumble_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DecalsFactory.cpp" />
+    <ClCompile Include="..\Classes\lua_DecalsFactory_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
   </ItemGroup>

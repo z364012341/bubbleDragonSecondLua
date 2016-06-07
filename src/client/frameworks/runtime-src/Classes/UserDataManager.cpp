@@ -5,6 +5,7 @@
 #include "GameBuyStoreMannager.h"
 const std::string GAME_STAGE_DATA_PATH = "stageData.plist";
 const std::string GAME_USER_DATA_PATH = "userData.plist";
+const std::string DECALS_USER_DATA_PATH = "decalsUserData.plist";
 const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageBestScore.plist";
 //const std::string USER_DATA_NICKNAME_KEY = "user_nickname";
 const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
@@ -14,6 +15,7 @@ const std::string GAME_CHARACTOR_UNLOCK_NUMBLE_KEY = "unlockCharactorNumble";
 const std::string LAST_GAME_CHARACTOR_INDEX_KEY = "lastCharactor";
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
+const std::string DECALS_CHARACTOR_KEY = "decals_charactor";
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
@@ -70,6 +72,27 @@ namespace bubble_second {
             XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY)) +
             XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY));
         return this->getMD5Str(PROP_MD5_SECRET_KEY+ str);
+    }
+    void UserDataManager::readDecalsData()
+    {
+        auto file_utils = cocos2d::FileUtils::getInstance();
+        std::string path = this->getDecalsDataPath();
+        if (file_utils->isFileExist(path))
+        {
+            decals_data_ = file_utils->getValueMapFromFile(path);
+        }
+    }
+    cocos2d::ValueVector UserDataManager::getCharactorDecalsData()
+    {
+        if (decals_data_.find(DECALS_CHARACTOR_KEY) == decals_data_.end())
+        {
+            return cocos2d::ValueVector(0);
+        }
+        return decals_data_[DECALS_CHARACTOR_KEY].asValueVector();
+    }
+    std::string UserDataManager::getDecalsDataPath() const
+    {
+        return cocos2d::FileUtils::getInstance()->getWritablePath() + DECALS_USER_DATA_PATH;
     }
     int UserDataManager::getPropsNumbleWithKey(const std::string & key)
     {
@@ -205,6 +228,7 @@ namespace bubble_second {
         this->readStageFile();
         this->readUserDataFile();
         this->readPuzzleStageBestScore();
+        this->readDecalsData();
         unlock_stage_numble_ = this->getStagePassCount();
     }
     std::string UserDataManager::getStageDataPath() const
