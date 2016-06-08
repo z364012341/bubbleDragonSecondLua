@@ -8,29 +8,26 @@
             <dict>
                 <key>path</key>
                 <string>decals (2).png</string>
-                <key>goods</key>
-                <array>
-                    <integer>1</integer>
-                    <integer>3</integer>
-                </array>
+                <key>x</key>
+                <integer>1</integer>
+                <key>y</key>
+                <integer>3</integer>
             </dict>
             <dict>
                 <key>path</key>
                 <string>decals (3).png</string>
-                <key>goods</key>
-                <array>
-                    <integer>5</integer>
-                    <integer>1</integer>
-                </array>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>3</integer>
             </dict>
             <dict>
                 <key>path</key>
                 <string>decals (4).png</string>
-                <key>goods</key>
-                <array>
-                    <integer>6</integer>
-                    <integer>4</integer>
-                </array>
+                <key>x</key>
+                <integer>2</integer>
+                <key>y</key>
+                <integer>3</integer>
             </dict>
         </array>
     </dict>

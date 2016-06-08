@@ -11,6 +11,7 @@ local DECALS_CHARACTOR_BACKGROUND_COLOR = cc.c4b(255, 166, 166, 255);
 local DECALS_WIDTH = 400;
 local DECALS_HEIGHT = 640;
 function DecalsExhibitionBackground:ctor(col, row)
+    printf(col, row);
     assert(col==1 or col == 2);
     self:init(col, row);
 end
@@ -74,7 +75,7 @@ function DecalsExhibitionBackground:getPositionWithIndex(x, y)
     return cc.p(self.background_:getContentSize().width/self.col_*(x-0.5), self.background_:getContentSize().height/self.row_*(self.row_-y+0.5));
 end
 function DecalsExhibitionBackground:addDecal(path, numble)
-    local index = bs.DecalsFactory:getInstance():convertDecalNumbleToIndex(numble);
+    local index = bs.DecalsFactory:getInstance():convertDecalNumbleToIndex(numble, path);
     local sp = bs.DecalsFactory:getInstance():createDecal(path, index.x, index.y);
     sp:setPosition(self:getPositionWithIndex(index.x, index.y));
     self.background_:addChild(sp, 1);

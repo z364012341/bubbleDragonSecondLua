@@ -158,3 +158,6 @@ cc.exports.PAGEVIEW_INITAIL_DATA = {
 		VISIBLE = true;
 	},
 }
+-- cc.exports.DECALS_BACKGROUND_DATA = {
+-- 	CHARACTOR_DECALS = {{path = "decals (1).png", x = 1, y = 3},{path = "decals (1).png",x = 2, y = 3},{path = "decals (1).png",x = 2, y = 3}}
+-- };

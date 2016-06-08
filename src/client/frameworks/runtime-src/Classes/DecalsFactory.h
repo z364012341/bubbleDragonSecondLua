@@ -18,11 +18,15 @@ namespace bubble_second {
         ~DecalsFactory();
         cocos2d::Sprite* createDecal(const std::string& path, int index_x, int index_y);
         cocos2d::Sprite* createDecalWithNumble(const std::string& path, int numble);
-        cocos2d::Vec2 convertDecalNumbleToIndex(int numble);
+        cocos2d::Vec2 convertDecalNumbleToIndex(int numble, const std::string & path);
+        void loadDecalsData();
+        cocos2d::ValueVector getDecalsCharactorData();
+        cocos2d::Vec2 getDecalsMaxIndexWithPath(const std::string& path);
     private:
         DecalsFactory();
     private:
         std::map<int, cocos2d::Vec2> numble_to_index_;
+        cocos2d::ValueMap decals_data_;
     };
 }
 #endif //_DECALS_FACTORY_H_

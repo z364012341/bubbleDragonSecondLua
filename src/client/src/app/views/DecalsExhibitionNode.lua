@@ -6,6 +6,8 @@ local DecalsExhibitionNode = class("DecalsExhibitionNode", function ()
     return cc.Node:create();
 end)
 local DECALS_EXHIBITION_ALERT_CSB_PATH = "DecalsExhibitionNode.csb";
+local LEFT_BUTTON_NAME = "Button_6";
+local RIGHT_BUTTON_NAME = "Button_7";
 local DecalsExhibitionPageView = require(DECALS_EXHIBITION_PAGEVIEW_PATH);
 function DecalsExhibitionNode:ctor()
     self:init();
@@ -19,6 +21,14 @@ function DecalsExhibitionNode:loadCSB()
     assert(csb_node);
     bs.ButtonEffectController:setButtonsZoomScale(csb_node);
     self:addChild(csb_node);
-    csb_node:addChild(DecalsExhibitionPageView:create());
+    local exhibition_pageview = DecalsExhibitionPageView:create();
+    csb_node:addChild(exhibition_pageview);
+    csb_node:getChildByName(LEFT_BUTTON_NAME):addClickEventListener(function ( ... )
+        exhibition_pageview:scrollLeft();
+    end);
+    csb_node:getChildByName(RIGHT_BUTTON_NAME):addClickEventListener(function ( ... )
+        exhibition_pageview:scrollRight();
+    end);
 end
+
 return DecalsExhibitionNode

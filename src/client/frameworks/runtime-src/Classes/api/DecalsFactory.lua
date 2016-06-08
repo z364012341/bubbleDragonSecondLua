@@ -5,6 +5,27 @@
 
 --------------------------------
 -- 
+-- @function [parent=#DecalsFactory] getDecalsMaxIndexWithPath 
+-- @param self
+-- @param #string path
+-- @return vec2_table#vec2_table ret (return value: vec2_table)
+        
+--------------------------------
+-- 
+-- @function [parent=#DecalsFactory] convertDecalNumbleToIndex 
+-- @param self
+-- @param #int numble
+-- @param #string path
+-- @return vec2_table#vec2_table ret (return value: vec2_table)
+        
+--------------------------------
+-- 
+-- @function [parent=#DecalsFactory] getDecalsCharactorData 
+-- @param self
+-- @return array_table#array_table ret (return value: array_table)
+        
+--------------------------------
+-- 
 -- @function [parent=#DecalsFactory] createDecal 
 -- @param self
 -- @param #string path
@@ -14,18 +35,17 @@
         
 --------------------------------
 -- 
+-- @function [parent=#DecalsFactory] loadDecalsData 
+-- @param self
+-- @return DecalsFactory#DecalsFactory self (return value: bs.DecalsFactory)
+        
+--------------------------------
+-- 
 -- @function [parent=#DecalsFactory] createDecalWithNumble 
 -- @param self
 -- @param #string path
 -- @param #int numble
 -- @return Sprite#Sprite ret (return value: cc.Sprite)
-        
---------------------------------
--- 
--- @function [parent=#DecalsFactory] convertDecalNumbleToIndex 
--- @param self
--- @param #int numble
--- @return vec2_table#vec2_table ret (return value: vec2_table)
         
 --------------------------------
 -- 

@@ -1,6 +1,7 @@
 #include "DecalsFactory.h"
 //#include "SpriteTextureController.h"
-
+const std::string DECALS_DATA_PATH = "res/decalsdata.plist";
+const std::string DECALS_CHARACTOR_DATA_KEY = "decals_charactor";
 namespace bubble_second {
     DecalsFactory::DecalsFactory()
     {
@@ -32,18 +33,45 @@ namespace bubble_second {
     {
         assert(index_x>0 && index_y>0);
         cocos2d::Sprite* sp = cocos2d::Sprite::create(path);
-        float x_offset = sp->getContentSize().width / 2;
-        float y_offset = sp->getContentSize().height / 3;
-
+        cocos2d::Vec2 max_index = this->getDecalsMaxIndexWithPath(path);
+        float x_offset = sp->getContentSize().width / max_index.x;
+        float y_offset = sp->getContentSize().height / max_index.y;
         sp->setTextureRect(cocos2d::Rect(x_offset*(index_x-1), y_offset*(index_y - 1), x_offset, y_offset));
         return sp;
     }
     cocos2d::Sprite * DecalsFactory::createDecalWithNumble(const std::string & path, int numble)
     {
-        return this->createDecal(path, this->convertDecalNumbleToIndex(numble).x, this->convertDecalNumbleToIndex(numble).y);
+        return this->createDecal(path, this->convertDecalNumbleToIndex(numble, path).x, this->convertDecalNumbleToIndex(numble, path).y);
     }
-    cocos2d::Vec2 DecalsFactory::convertDecalNumbleToIndex(int numble)
+    cocos2d::Vec2 DecalsFactory::convertDecalNumbleToIndex(int numble, const std::string & path)
     {
-        return numble_to_index_[numble];
+        cocos2d::Vec2 max_index = this->getDecalsMaxIndexWithPath(path);
+
+        int x = numble % (int)max_index.x == 0 ? max_index.x : numble % (int)max_index.x;
+        int y = ceil(numble/ max_index.x);
+        return cocos2d::Vec2(x, y);
+    }
+    void DecalsFactory::loadDecalsData()
+    {
+        assert(cocos2d::FileUtils::getInstance()->isFileExist(DECALS_DATA_PATH));
+        decals_data_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(DECALS_DATA_PATH);
+    }
+    cocos2d::ValueVector DecalsFactory::getDecalsCharactorData()
+    {
+        return decals_data_[DECALS_CHARACTOR_DATA_KEY].asValueVector();
+    }
+    cocos2d::Vec2 DecalsFactory::getDecalsMaxIndexWithPath(const std::string & path)
+    {
+        for (auto type_vector : decals_data_)
+        {
+            for (auto data : type_vector.second.asValueVector())
+            {
+                if (data.asValueMap()["path"].asString() == path)
+                {
+                    return cocos2d::Vec2(data.asValueMap()["x"].asInt(), data.asValueMap()["y"].asInt());
+                }
+            }
+        }
+        return cocos2d::Vec2(-1, -1);
     }
 }
