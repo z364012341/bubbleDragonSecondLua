@@ -178,6 +178,12 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] getTreasureDecalsData 
+-- @param self
+-- @return array_table#array_table ret (return value: array_table)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] getGameCharactorUnlockNumble 
 -- @param self
 -- @return int#int ret (return value: int)

@@ -33,5 +33,32 @@
                 </array>
             </dict>
         </array>
+        <key>decals_treasure</key>
+        <array>
+            <dict>
+                <key>path</key>
+                <string>decals (2).png</string>
+                <key>goods</key>
+                <array>
+                    <integer>1</integer>
+                </array>
+            </dict>
+            <dict>
+                <key>path</key>
+                <string>decals (3).png</string>
+                <key>goods</key>
+                <array>
+                    <integer>5</integer>
+                </array>
+            </dict>
+            <dict>
+                <key>path</key>
+                <string>decals (4).png</string>
+                <key>goods</key>
+                <array>
+                    <integer>6</integer>
+                </array>
+            </dict>
+        </array>
     </dict>
 </plist>

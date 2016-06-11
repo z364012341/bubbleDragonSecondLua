@@ -310,6 +310,53 @@ int lua_DecalsFactory_DecalsFactory_createDecalWithNumble(lua_State* tolua_S)
 
     return 0;
 }
+int lua_DecalsFactory_DecalsFactory_getTreasureCharactorData(lua_State* tolua_S)
+{
+    int argc = 0;
+    bubble_second::DecalsFactory* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"bs.DecalsFactory",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (bubble_second::DecalsFactory*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_DecalsFactory_DecalsFactory_getTreasureCharactorData'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_DecalsFactory_DecalsFactory_getTreasureCharactorData'", nullptr);
+            return 0;
+        }
+        cocos2d::ValueVector ret = cobj->getTreasureCharactorData();
+        ccvaluevector_to_luaval(tolua_S, ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "bs.DecalsFactory:getTreasureCharactorData",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_DecalsFactory_DecalsFactory_getTreasureCharactorData'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_DecalsFactory_DecalsFactory_getInstance(lua_State* tolua_S)
 {
     int argc = 0;
@@ -362,6 +409,7 @@ int lua_register_DecalsFactory_DecalsFactory(lua_State* tolua_S)
         tolua_function(tolua_S,"createDecal",lua_DecalsFactory_DecalsFactory_createDecal);
         tolua_function(tolua_S,"loadDecalsData",lua_DecalsFactory_DecalsFactory_loadDecalsData);
         tolua_function(tolua_S,"createDecalWithNumble",lua_DecalsFactory_DecalsFactory_createDecalWithNumble);
+        tolua_function(tolua_S,"getTreasureCharactorData",lua_DecalsFactory_DecalsFactory_getTreasureCharactorData);
         tolua_function(tolua_S,"getInstance", lua_DecalsFactory_DecalsFactory_getInstance);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(bubble_second::DecalsFactory).name();

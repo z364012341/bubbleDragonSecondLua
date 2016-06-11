@@ -16,6 +16,7 @@ const std::string LAST_GAME_CHARACTOR_INDEX_KEY = "lastCharactor";
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
 const std::string DECALS_CHARACTOR_KEY = "decals_charactor";
+const std::string DECALS_TREASURE_KEY = "decals_treasure";
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
@@ -89,6 +90,14 @@ namespace bubble_second {
             return cocos2d::ValueVector(0);
         }
         return decals_data_[DECALS_CHARACTOR_KEY].asValueVector();
+    }
+    cocos2d::ValueVector UserDataManager::getTreasureDecalsData()
+    {
+        if (decals_data_.find(DECALS_TREASURE_KEY) == decals_data_.end())
+        {
+            return cocos2d::ValueVector(0);
+        }
+        return decals_data_[DECALS_TREASURE_KEY].asValueVector();
     }
     std::string UserDataManager::getDecalsDataPath() const
     {

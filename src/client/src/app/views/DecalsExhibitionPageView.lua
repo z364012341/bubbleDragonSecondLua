@@ -2,12 +2,13 @@
 -- Author: 黄泽昊
 -- 作用: 选择pageview
 
-local DecalsExhibitionPageView = class("DecalsExhibitionPageView", function ()
+local DecalsExhibitionPageView = class("DecalsExhibitionPageView", function (decals_type)
     return cc.Node:create();
 end)
 local PAGEVIEW_CONTENT_SIZE = cc.size(425, 664);
 local DecalsExhibitionBackground = require(DECALS_EXHIBITION_BACKGROUND_PATH);
-function DecalsExhibitionPageView:ctor()
+local PuzzleSelectedPageViewPoint = require(PUZZLE_SELECTED_PAGEVIEW_POINT_PATH);
+function DecalsExhibitionPageView:ctor(decals_type)
     -- local function onNodeEvent(event)
     --     if event == "enter" then
     --         self:onEnter();
@@ -15,15 +16,17 @@ function DecalsExhibitionPageView:ctor()
     --         self:onExit();
     --     end
     -- end
+    self.decals_type_ = decals_type;
     self:init();
 end
 function DecalsExhibitionPageView:init()
     local pageview= ccui.PageView:create();
 
     pageview:setContentSize(PAGEVIEW_CONTENT_SIZE);
-    local decalsData = bs.UserDataManager:getInstance():getCharactorDecalsData();
-    dump(bs.DecalsFactory:getInstance():getDecalsCharactorData());
-    for i,v in ipairs(bs.DecalsFactory:getInstance():getDecalsCharactorData()) do
+    local decalsData = self.decals_type_ == DECALS_TYPE_CHARACTOR and bs.UserDataManager:getInstance():getCharactorDecalsData() or bs.UserDataManager:getInstance():getTreasureDecalsData();
+    local charactorData = self.decals_type_ == DECALS_TYPE_CHARACTOR and bs.DecalsFactory:getInstance():getDecalsCharactorData() or bs.DecalsFactory:getInstance():getTreasureCharactorData();
+    self:addPageViewPoints(#charactorData);
+    for i,v in ipairs(charactorData) do
         pageview:addPage(self:createPageWithData(v.x, v.y, decalsData[i]));
     end
     pageview:setCurrentPageIndex(0);
@@ -32,10 +35,16 @@ function DecalsExhibitionPageView:init()
     self.pageview_ = pageview;
     self:addChild(self.pageview_);
 end
+function DecalsExhibitionPageView:addPageViewPoints(numble)
+    self.pageview_points = PuzzleSelectedPageViewPoint:create(numble);
+    self.pageview_points:setPointMoveDelayTime(0);
+    self.pageview_points:setPosition(cc.p(0, -460));
+    self:addChild(self.pageview_points);
+end
 function DecalsExhibitionPageView:createPageWithData(x, y, table_data)
     local layout = ccui.Layout:create();
     layout:setContentSize(PAGEVIEW_CONTENT_SIZE);
-    local bg = DecalsExhibitionBackground:create(x,y);
+    local bg = DecalsExhibitionBackground:create(x, y, self.decals_type_);
     --dump(table_data);
     if table_data ~= nil then
         bg:addDecalsWithData(table_data);
@@ -46,9 +55,14 @@ function DecalsExhibitionPageView:createPageWithData(x, y, table_data)
 end
 function DecalsExhibitionPageView:scrollLeft()
     self.pageview_:setCurrentPageIndex(self.pageview_:getCurrentPageIndex()-1);
+    self:updataPageViewPointsIndex();
 end
 function DecalsExhibitionPageView:scrollRight()
     self.pageview_:setCurrentPageIndex(self.pageview_:getCurrentPageIndex()+1);
+    self:updataPageViewPointsIndex();
+end
+function DecalsExhibitionPageView:updataPageViewPointsIndex()
+    self.pageview_points:scrollToPage(self.pageview_);
 end
 -- function DecalsExhibitionPageView:onEnter()
 --     self.listener_ = {};

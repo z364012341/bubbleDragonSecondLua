@@ -1,24 +1,26 @@
 -- Author: 黄泽昊
 -- 作用: 贴纸的展示的背景
 
-local DecalsExhibitionBackground = class("DecalsExhibitionBackground", function (col, row)
+local DecalsExhibitionBackground = class("DecalsExhibitionBackground", function (col, row, decals_type)
     return cc.Node:create();
 end)
 local CHARACTOR_BACKGROUND_PATH = "decals_bg.png";
 local DECALS_PORTRAIT_LINE_PATH = "charactor_line.png";
 local DECALS_HORIZONTAL_LINE_PATH = "decals_horizontal_line.png";
 local DECALS_CHARACTOR_BACKGROUND_COLOR = cc.c4b(255, 166, 166, 255);
+local DECALS_TREASURE_BACKGROUND_COLOR = cc.c4b(213, 162, 245, 255);
 local DECALS_WIDTH = 400;
 local DECALS_HEIGHT = 640;
-function DecalsExhibitionBackground:ctor(col, row)
+function DecalsExhibitionBackground:ctor(col, row, decals_type)
     printf(col, row);
     assert(col==1 or col == 2);
-    self:init(col, row);
-end
-function DecalsExhibitionBackground:init(col, row)
     self.col_ = col;
     self.row_ = row;
-    self:addBackground(col);
+    self.decals_type_ = decals_type;
+    self:init(col, row);
+end
+function DecalsExhibitionBackground:init(col, row, decals_type)
+    self:addBackground();
     self:addIndexLabel(col, row);
     self:addLine();
     -- self:addDecal(1,1);
@@ -39,8 +41,9 @@ function DecalsExhibitionBackground:addBackground()
     local bg = GlobalFunction.createGameSpriteWithPath(CHARACTOR_BACKGROUND_PATH);
     self:addChild(bg);
 
-
-    self.background_ = cc.LayerColor:create(DECALS_CHARACTOR_BACKGROUND_COLOR, DECALS_WIDTH, DECALS_HEIGHT);
+    local color = self.decals_type_ == DECALS_TYPE_CHARACTOR and DECALS_CHARACTOR_BACKGROUND_COLOR or DECALS_TREASURE_BACKGROUND_COLOR;
+    dump(self.decals_type_);
+    self.background_ = cc.LayerColor:create(color, DECALS_WIDTH, DECALS_HEIGHT);
     self.background_:setPosition(cc.p((bg:getContentSize().width-DECALS_WIDTH)/2, (bg:getContentSize().height-DECALS_HEIGHT)/2));
     bg:addChild(self.background_);
 

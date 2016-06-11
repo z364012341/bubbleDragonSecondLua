@@ -2,6 +2,7 @@
 //#include "SpriteTextureController.h"
 const std::string DECALS_DATA_PATH = "res/decalsdata.plist";
 const std::string DECALS_CHARACTOR_DATA_KEY = "decals_charactor";
+const std::string DECALS_TREASURE_DATA_KEY = "decals_treasure";
 namespace bubble_second {
     DecalsFactory::DecalsFactory()
     {
@@ -59,6 +60,10 @@ namespace bubble_second {
     cocos2d::ValueVector DecalsFactory::getDecalsCharactorData()
     {
         return decals_data_[DECALS_CHARACTOR_DATA_KEY].asValueVector();
+    }
+    cocos2d::ValueVector DecalsFactory::getTreasureCharactorData()
+    {
+        return decals_data_[DECALS_TREASURE_DATA_KEY].asValueVector();
     }
     cocos2d::Vec2 DecalsFactory::getDecalsMaxIndexWithPath(const std::string & path)
     {

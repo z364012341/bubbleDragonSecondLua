@@ -49,6 +49,12 @@
         
 --------------------------------
 -- 
+-- @function [parent=#DecalsFactory] getTreasureCharactorData 
+-- @param self
+-- @return array_table#array_table ret (return value: array_table)
+        
+--------------------------------
+-- 
 -- @function [parent=#DecalsFactory] getInstance 
 -- @param self
 -- @return DecalsFactory#DecalsFactory ret (return value: bs.DecalsFactory)

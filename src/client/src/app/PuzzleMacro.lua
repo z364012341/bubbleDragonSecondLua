@@ -116,6 +116,11 @@ cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_MAX = 1.7;
 cc.exports.PUZZLE_INITIAL_SIZE = cc.size(976, 1464);
 cc.exports.PUZZLE_SHOW_LAYER_COLOR_C4B = cc.c4b(70, 48, 61, 255);
 
+
+
+cc.exports.DECALS_TYPE_CHARACTOR = "charactor_decals";
+cc.exports.DECALS_TYPE_TREASEURE = "charactor_treasure";
+
 cc.exports.puzzle = {
 	PUZZLE_DIRECTIOIN_RANDOM = {
 		PUZZLE_STENCIL_COMPONENT_INSIDE,

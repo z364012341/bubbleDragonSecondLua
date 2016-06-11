@@ -68,6 +68,7 @@ namespace bubble_second {
         //读取贴纸用户数据
         void readDecalsData();
         cocos2d::ValueVector getCharactorDecalsData();
+        cocos2d::ValueVector getTreasureDecalsData();
     private:
         ~UserDataManager();
         void writeStageDataToFile();
