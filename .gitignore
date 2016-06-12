@@ -7,6 +7,7 @@
 /src/client/publish
 /src/client/simulator/android
 /src/client/frameworks/runtime-src/proj.win32/Debug.win32
+/src/client/frameworks/runtime-src/proj.android
 /src/client/frameworks/runtime-src/proj.android/obj/local
 /src/client/frameworks/runtime-src/proj.android/assets
 /src/client/frameworks/runtime-src/proj.android/bin
