@@ -47,6 +47,8 @@ cc.exports.DECALS_EXHIBITION_PAGEVIEW_PATH = "app.views.DecalsExhibitionPageView
 cc.exports.DECALS_EXHIBITION_ALERT_PATH = "app.views.DecalsExhibitionAlert";
 --local DecalsExhibitionNode = require(DECALS_EXHIBITION_NODE_PATH);
 cc.exports.DECALS_EXHIBITION_NODE_PATH = "app.views.DecalsExhibitionNode";
+--local DecalsLotteryScene = require(DECALS_LOTTERY_SCENE_PATH);
+cc.exports.DECALS_LOTTERY_SCENE_PATH = "app.views.DecalsLotteryScene";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";

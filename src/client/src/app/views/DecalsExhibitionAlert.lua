@@ -5,6 +5,8 @@
 local DecalsExhibitionAlert = class("DecalsExhibitionAlert", function ()
     return cc.Node:create();
 end)
+local DecalsLotteryScene = require(DECALS_LOTTERY_SCENE_PATH);
+
 local DECALS_EXHIBITION_ALERT_CSB_PATH = "DecalsBookLayer.csb";
 --local DECALS_EXHIBITION_NODE_NAME = "FileNode_1";
 local DECALS_BOOK_BACKGROUND_NODE_NAME = "FileNode_2";
@@ -29,6 +31,8 @@ function DecalsExhibitionAlert:loadCSB()
     bs.ButtonEffectController:setButtonsZoomScale(csb_node);
     self:addChild(csb_node);
     --csb_node:getChildByName(DECALS_EXHIBITION_NODE_NAME):setScaleX(bs.SmartScaleController:getInstance():getPlayAreaZoom());
+    csb_node:getChildByName(DECALS_BOOK_BACKGROUND_NODE_NAME):setScaleY(bs.SmartScaleController:getInstance():getPlayAreaZoom());
+    csb_node:getChildByName(DECALS_BOOK_BACKGROUND_NODE_NAME):setPositionY(cc.Director:getInstance():getVisibleSize().height*0.13);
     local charactor_button = csb_node:getChildByName(DECALS_BOOK_BACKGROUND_NODE_NAME):getChildByName("charactor_lab");
     local treasure_button = csb_node:getChildByName(DECALS_BOOK_BACKGROUND_NODE_NAME):getChildByName("treasure_lag");
     --charactor_button:setScaleX(bs.SmartScaleController:getInstance():getPlayAreaZoom());
@@ -51,12 +55,17 @@ function DecalsExhibitionAlert:loadCSB()
     end);
 
     local return_button = csb_node:getChildByName("return_button");
-    return_button:setScaleX(bs.SmartScaleController:getInstance():getPlayAreaZoom() * return_button:getScaleX());
+    -- return_button:setPosition(cc.p(cc.Director:getInstance():getVisibleSize().width*0.11, cc.Director:getInstance():getVisibleSize().height*0.06));
+    return_button:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom() * return_button:getScale());
     return_button:addClickEventListener(function ( ... )
         self:removeFromParent();
     end);
-    csb_node:getChildByName("lottery_button"):setScaleX(bs.SmartScaleController:getInstance():getPlayAreaZoom());
 
+    local lottery_button = csb_node:getChildByName("lottery_button");
+    lottery_button:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
+    lottery_button:addClickEventListener(function ( ... )
+        cc.Director:getInstance():pushScene(DecalsLotteryScene:createScene());
+    end);
 
 end
 function DecalsExhibitionAlert:addCharactorExhibition()
@@ -64,16 +73,20 @@ function DecalsExhibitionAlert:addCharactorExhibition()
     local node = DecalsExhibitionNode:create(DECALS_TYPE_CHARACTOR);
     node:setPosition(cc.p(charactor_bg:getContentSize().width/2, charactor_bg:getContentSize().height/2));
     charactor_bg:addChild(node);
-    charactor_bg:getChildByName("charactor_label_8"):setScaleX(bs.SmartScaleController:getInstance():getPlayAreaZoom());
-    self.charactor_background_ = charactor_bg
+    self.charactor_background_ = charactor_bg;
+
+    self.charactor_label_ = self.csb_node_:getChildByName(DECALS_BOOK_BACKGROUND_NODE_NAME):getChildByName("charactor_label_8");
+    self.charactor_label_:setScaleX(bs.SmartScaleController:getInstance():getPlayAreaZoom());
 end
 function DecalsExhibitionAlert:addTreasureExhibition()
     local treasure_bg = self.csb_node_:getChildByName(DECALS_BOOK_BACKGROUND_NODE_NAME):getChildByName(DECALS_BOOK_TREASURE_BACKGROUND_NAME)
     local node = DecalsExhibitionNode:create(DECALS_TYPE_TREASEURE);
     node:setPosition(cc.p(treasure_bg:getContentSize().width/2, treasure_bg:getContentSize().height/2));
     treasure_bg:addChild(node);
-    treasure_bg:getChildByName("treasure_label"):setScaleX(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     self.treasure_background_ = treasure_bg;
+
+    self.treasure_label_ = self.csb_node_:getChildByName(DECALS_BOOK_BACKGROUND_NODE_NAME):getChildByName("treasure_label");
+    self.treasure_label_:setScaleX(bs.SmartScaleController:getInstance():getPlayAreaZoom());
 end
 function DecalsExhibitionAlert:changeButtonUnselectedScale(button)
     button:setScaleX(bs.SmartScaleController:getInstance():getPlayAreaZoom() * LAB_BUTTON_UNSELECTED_SCALE);
@@ -100,6 +113,8 @@ function DecalsExhibitionAlert:setExhibitionDisplay(charactor_flag)
     self.charactor_background_:getParent():addChild(node);
 
     self.charactor_background_:setVisible(charactor_flag);
+    self.charactor_label_:setVisible(charactor_flag);
+    self.treasure_label_:setVisible(not  charactor_flag);
     self.treasure_background_:setVisible(not  charactor_flag);
 end
 return DecalsExhibitionAlert
