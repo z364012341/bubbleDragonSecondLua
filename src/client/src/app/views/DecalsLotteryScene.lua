@@ -9,6 +9,7 @@ local DecalsLotteryCardsShow = require(DECALS_LOTTERY_CARDS_SHOW_PATH);
 local DECALS_LATTERY_SCENE_CSB_PATH = "DecalsLotteryLayer.csb";
 local CARDS_BACKGROUND_NAME = "Image_1";
 local BACKGROUND_TOP_UI_NAME = "lottery_top_4";
+local BUTTON_NODE_NAME = "buttonNode";
 function DecalsLotteryScene:createScene()
     local scene = cc.Scene:create()
     local layer = DecalsLotteryScene:create()
@@ -55,12 +56,26 @@ function DecalsLotteryScene:loadCSB()
     cards_bg:getChildByName(BACKGROUND_TOP_UI_NAME):setPositionY(bg_height);
     self.lottery_times_label_ = cards_bg:getChildByName(BACKGROUND_TOP_UI_NAME):getChildByName("BitmapFontLabel_1");
     self.lottery_times_label_:setString(tostring(self.lottery_times_));
-    self.cards_background_ = cards_bg
+
+    local button_node = csb_node:getChildByName(BUTTON_NODE_NAME);
+    button_node:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
+    button_node:setPositionY(cc.Director:getInstance():getVisibleSize().height*0.161);
+    self.free_shuffle_button = button_node:getChildByName("Button_2_0");
+    self.lottery_begin_button = button_node:getChildByName("Button_2");
+    self.lottery_begin_button:addClickEventListener(function (  )
+        self:lotteryBegin();
+    end);
+    self.cards_background_ = cards_bg;
+end
+function DecalsLotteryScene:lotteryBegin()
+    self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_BEGIN);
+
 end
 function DecalsLotteryScene:addCards()
     local cards_show = DecalsLotteryCardsShow:create();
     cards_show:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     cards_show:setPosition(cc.p(self.cards_background_:getContentSize().width/2, self.cards_background_:getContentSize().height/2));
+    self.cards_show_ = cards_show;
     self.cards_background_:addChild(cards_show);
 end
 function DecalsLotteryScene:onEnter()

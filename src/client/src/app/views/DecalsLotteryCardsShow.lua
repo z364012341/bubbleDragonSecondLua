@@ -35,6 +35,11 @@ function DecalsLotteryCardsShow:init()
 		table.insert(self.cards_, card);
 	end
 end
+-- function DecalsLotteryCardsShow:lotteryBegin( )
+-- 	for _,card in ipairs(self.cards_) do
+-- 		card:selectBegin();
+-- 	end
+-- end
 function DecalsLotteryCardsShow:lotteryAgain()
 	self:removeSelectedCard();
 	self:removeRandomCard();

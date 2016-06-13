@@ -8,10 +8,19 @@ end)
 local CARD_FRONT_PATH = "card_front.PNG";
 local CARD_BACK_PATH = "card_back.PNG";
 function DecalsLotteryCard:ctor()
+    local function onNodeEvent(event)
+        if event == "enter" then
+            self:onEnter();
+        elseif event == "exit" then
+            self:onExit();
+        end
+    end
+    self:registerScriptHandler(onNodeEvent);
+
     self.isSelectedCard_ = false;
     self:init();
     self:addTouchEvent();
-    self:setCardState(false);
+    self:setCardState(true);
 end
 function DecalsLotteryCard:init()
     self.card_front_ = GlobalFunction.createGameSpriteWithPath(CARD_FRONT_PATH);
@@ -21,6 +30,7 @@ function DecalsLotteryCard:init()
     self:addChild(self.card_back_);
 
 end
+
 function DecalsLotteryCard:setCardState(front_flag)
     self.isFront_ = front_flag;
     self.card_front_:setVisible(front_flag);
@@ -76,5 +86,21 @@ function DecalsLotteryCard:selectBegin()
 end
 function DecalsLotteryCard:isSelectedCard()
     return self.isSelectedCard_;
+end
+function DecalsLotteryCard:onEnter()
+    self.listener_ = {};
+    local function selectBegin( event )
+        self:selectBegin();
+    end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_BEGIN, selectBegin));
+    for _, listener in ipairs(self.listener_) do
+        self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
+    end
+end
+function DecalsLotteryCard:onExit()
+    local eventDispatcher = self:getEventDispatcher();
+    for _, listener in ipairs(self.listener_) do
+        eventDispatcher:removeEventListener(listener);
+    end
 end
 return DecalsLotteryCard

@@ -82,6 +82,7 @@ cc.exports.EVENT_ADJUST_PUZZLE_PIECES_SCALE = "event_adjust_puzzle_pieces_scale"
 cc.exports.EVENT_POP_PUZZLE_STORE_ALERT = "event_pop_game_store";
 cc.exports.EVENT_DECALS_LOTTERY_SELECT_CARD = "event_decals_lottery_select_card";
 cc.exports.EVENT_DECALS_LOTTERY_AGAIN = "event_decals_lottery_again";
+cc.exports.EVENT_DECALS_LOTTERY_BEGIN = "event_decals_lottery_begin";
 -- cc.exports.EVENT_ANSWER_ZOOM_IN_ACTION = "event_answer_zoom_in_action";
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";
