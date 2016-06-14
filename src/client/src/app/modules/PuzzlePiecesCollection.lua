@@ -116,9 +116,10 @@ function PuzzlePiecesCollection:getPuzzleNode()
 	return self._puzzleNode;
 end
 function PuzzlePiecesCollection:shufflePuzzles()
-	for i,pzzle in ipairs(self._puzzleNode) do
-		local random_i = math.random(1, #self._puzzleNode);
-		self._puzzleNode[i], self._puzzleNode[random_i] = self._puzzleNode[random_i], self._puzzleNode[i];
-	end
+	-- for i,pzzle in ipairs(self._puzzleNode) do
+	-- 	local random_i = math.random(1, #self._puzzleNode);
+	-- 	self._puzzleNode[i], self._puzzleNode[random_i] = self._puzzleNode[random_i], self._puzzleNode[i];
+	-- end
+GlobalFunction.shuffleTable(self._puzzleNode);
 end
 return PuzzlePiecesCollection

@@ -60,16 +60,23 @@ function DecalsLotteryScene:loadCSB()
     local button_node = csb_node:getChildByName(BUTTON_NODE_NAME);
     button_node:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     button_node:setPositionY(cc.Director:getInstance():getVisibleSize().height*0.161);
+    self.button_node_ = button_node;
     self.free_shuffle_button = button_node:getChildByName("Button_2_0");
     self.lottery_begin_button = button_node:getChildByName("Button_2");
-    self.lottery_begin_button:addClickEventListener(function (  )
+    self.lottery_begin_button:addClickEventListener(function (...)
         self:lotteryBegin();
+    end);
+    self.lottery_again_begain_button = button_node:getChildByName("Button_2_0_0");
+    self.lottery_again_begain_button:addClickEventListener(function (...)
+        self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_AGAIN);
+        self.lottery_again_begain_button:setVisible(false);
     end);
     self.cards_background_ = cards_bg;
 end
 function DecalsLotteryScene:lotteryBegin()
     self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_BEGIN);
-
+    self.free_shuffle_button:setVisible(false);
+    self.lottery_begin_button:setVisible(false);
 end
 function DecalsLotteryScene:addCards()
     local cards_show = DecalsLotteryCardsShow:create();
@@ -85,6 +92,17 @@ function DecalsLotteryScene:onEnter()
         self.lottery_times_label_:setString(tostring(self.lottery_times_));
     end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_AGAIN, updateTimesLabel));
+
+    local function lotteryAgainBegin( event )
+        self.lottery_again_begain_button:setVisible(true);
+    end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_AGAIN_BEGIN, lotteryAgainBegin));
+
+    -- local function lotteryEnd( event )
+    --     self.button_node_:setVisible(false);
+    -- end
+    -- table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_END, lotteryEnd));
+
     for _, listener in ipairs(self.listener_) do
         self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
     end

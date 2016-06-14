@@ -41,30 +41,56 @@ end
 -- 	end
 -- end
 function DecalsLotteryCardsShow:lotteryAgain()
-	self:removeSelectedCard();
-	self:removeRandomCard();
+	--self:removeSelectedCard();
+	--self:removeRandomCard();
 	for i,card in ipairs(self.cards_) do
-		card:selectBegin();
-		card:runAction(cc.Sequence:create(cc.MoveTo:create(0.5, cc.p(0,0)), cc.MoveTo:create(0.5, CARDS_POINTS[#self.cards_][i]), nil));
+		card:selectBegin(CARDS_POINTS[#self.cards_][i]);
 	end
 end
-function DecalsLotteryCardsShow:removeSelectedCard()
+function DecalsLotteryCardsShow:removeTwoCards()
+	local selected_card = self:findAndRemoveSelectedCard();
+	selected_card:setLocalZOrder(1);
+	selected_card:runAction(cc.RepeatForever:create(cc.RotateBy:create(0.5, 360)));
+
+	-- local end_point = GlobalFunction.getVisibleCenterPosition();
+	local end_point = selected_card:getParent():convertToNodeSpace(cc.p(cc.Director:getInstance():getVisibleSize().width, 0));
+	local bezier_table = {cc.p(selected_card:getPosition()), cc.p(300,selected_card:getPositionY()),end_point};
+	local ease_bezier = cc.EaseSineIn:create(cc.BezierTo:create(0.75, bezier_table));
+	selected_card:runAction(cc.ScaleTo:create(0.75, 0.2));
+	selected_card:runAction(cc.Sequence:create(ease_bezier, cc.CallFunc:create(function (  )
+		selected_card:removeFromParent();
+		local rm_index = math.random(1, #self.cards_);
+		local rm_card = self.cards_[rm_index];
+		table.remove(self.cards_, rm_index);
+		GlobalFunction.shuffleTable(self.cards_);
+		for i,card in ipairs(self.cards_) do
+			card:runAction(cc.Sequence:create(cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, cc.p(0,0)), cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, CARDS_POINTS[#self.cards_][i]), nil));
+		end
+		rm_card:runAction(cc.Sequence:create(cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, cc.p(0,0)), cc.CallFunc:create(function ()
+			rm_card:removeFromParent();
+		end)));
+		self:runAction(cc.Sequence:create(cc.DelayTime:create(CARDS_MOVETO_CENTER_DURATION*2), cc.CallFunc:create(function ()
+	        self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_AGAIN_BEGIN);
+		end)));
+	end)));
+end
+function DecalsLotteryCardsShow:isLotteryEnd()
+	return #self.cards_ == 2;
+end
+function DecalsLotteryCardsShow:findAndRemoveSelectedCard()
 	for i,card in ipairs(self.cards_) do
 		if card:isSelectedCard() then
-			self:removeCard(i);
-			return;
+			table.remove(self.cards_, i);
+			return card;
 		end
 	end
 end
-function DecalsLotteryCardsShow:removeRandomCard()
-	local index = math.random(1, #self.cards_);
-	self:removeCard(index);
-end
-function DecalsLotteryCardsShow:removeCard(index)
-	assert(self.cards_[index]);
-	self.cards_[index]:removeFromParent();
-	table.remove(self.cards_, index);
-end
+
+-- function DecalsLotteryCardsShow:removeCard(index)
+-- 	assert(self.cards_[index]);
+-- 	self.cards_[index]:removeFromParent();
+-- 	table.remove(self.cards_, index);
+-- end
 function DecalsLotteryCardsShow:onEnter()
     self.listener_ = {};
     local function selectCardCallback( event )
@@ -78,6 +104,15 @@ function DecalsLotteryCardsShow:onEnter()
     	self:lotteryAgain();
     end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_AGAIN, lotteryAgain));
+
+    local function lotteryRemoveTwoCard( event )
+    	if self:isLotteryEnd() then
+    		return;
+    	end
+    	self:removeTwoCards();
+    end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_REMOVE_CARD, lotteryRemoveTwoCard));
+
     for _, listener in ipairs(self.listener_) do
         self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
     end

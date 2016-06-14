@@ -37,5 +37,11 @@ cc.exports.GlobalFunction = {
 	end,
 	calculateMinSizeScale = function ( size_1, size_2 )
 		return math.min(size_1.width/size_2.width, size_1.height/size_2.height);
+	end,
+	shuffleTable = function ( table )
+		for i,_ in ipairs(table) do
+			local random_i = math.random(1, #table);
+			table[i], table[random_i] = table[random_i], table[i];
+		end
 	end
 }
