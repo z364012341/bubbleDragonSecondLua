@@ -7,18 +7,24 @@ local DecalsLotteryCard = class("DecalsLotteryCard", function ()
 end)
 local CARD_FRONT_PATH = "card_front.PNG";
 local CARD_BACK_PATH = "card_back.PNG";
+local CARD_SHUFFLE_MOVE_SPEED = 4000;
+local SELECT_ARMATURE_NAME = "choujiangkapianguang";
+local SELECT_ANIMATION_1_NAME = "fanpai-01";
+local SELECT_ANIMATION_2_NAME = "fanpai-02";
+
 function DecalsLotteryCard:ctor()
-    local function onNodeEvent(event)
-        if event == "enter" then
-            self:onEnter();
-        elseif event == "exit" then
-            self:onExit();
-        end
-    end
-    self:registerScriptHandler(onNodeEvent);
+    --local function onNodeEvent(event)
+    --     if event == "enter" then
+    --         self:onEnter();
+    --     elseif event == "exit" then
+    --         self:onExit();
+    --     end
+    -- end
+    -- self:registerScriptHandler(onNodeEvent);
 
     self.touch_enabled_ = false;
     self.isSelectedCard_ = false;
+    self.is_decal_card_ = false;
     self:init();
     self:addTouchEvent();
 end
@@ -63,9 +69,9 @@ function DecalsLotteryCard:addTouchEvent()
         if not self.touch_enabled_ then
             return false;
         end
-        local touch_point = self.card_back_:convertTouchToNodeSpace(touch);
+        local touch_point = self.card_back_:getParent():convertTouchToNodeSpace(touch);
         local size = self.card_back_:getContentSize();
-        if touch_point.x >= 0 and touch_point.x <= size.width and touch_point.y >= 0 and touch_point.y <= size.height  then
+        if cc.rectContainsPoint(self.card_back_:getBoundingBox(), touch_point)  then
             self:selectCard();
             return true;
         end
@@ -79,6 +85,24 @@ function DecalsLotteryCard:selectCard()
     self.isSelectedCard_ = true;
     self:setCardState(true);
     self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_SELECT_CARD);
+
+    -- armature_1:getAnimation():play(SELECT_ANIMATION_1_NAME);
+
+
+    -- armature_2:getAnimation():play(SELECT_ANIMATION_2_NAME);
+
+    self:runAction(cc.Sequence:create(cc.DelayTime:create(DECALS_LOTTERY_CARD_FLIPX_DURATION), cc.CallFunc:create(function ()
+        local armature_1 = ccs.Armature:create(SELECT_ARMATURE_NAME);
+        self:addChild(armature_1, 1);
+        armature_1:getAnimation():play(SELECT_ANIMATION_1_NAME);
+        local armature_2 = ccs.Armature:create(SELECT_ARMATURE_NAME);
+        self:addChild(armature_2, -1);
+        armature_2:getAnimation():play(SELECT_ANIMATION_2_NAME);
+    end)));
+
+    -- self.select_armatures_ = {};
+    -- table.insert(self.select_armatures_, armature_1);
+    -- table.insert(self.select_armatures_, armature_2);
 end
 function DecalsLotteryCard:turnOverFrontDelay()
     local duration = DECALS_LOTTERY_CARD_FLIPX_DURATION*1.5
@@ -89,6 +113,9 @@ function DecalsLotteryCard:turnOverFrontDelay()
     else
         self:runAction(cc.Sequence:create(cc.DelayTime:create(duration+DECALS_LOTTERY_CARD_FLIPX_DURATION), cc.CallFunc:create(function ()
             self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_REMOVE_CARD);
+            -- for _,armature in ipairs(self.select_armatures_) do
+            --     armature:removeFromParent();
+            -- end
         end), nil));
     end
 end
@@ -97,37 +124,108 @@ function DecalsLotteryCard:selectEnd()
     self:setCardTouchEnabled(false);
 end
 function DecalsLotteryCard:selectBegin(point)
-    if point == nil then
-        self:setCardState(false);
-        return;
-    else
-        self:setCardState(false, false);
-    end
+    -- if point == nil then
+        -- self:setCardState(false);
+        --return;
+    -- else
+    self:setCardState(false, false);
+    -- end
     self:runAction(cc.Sequence:create(cc.DelayTime:create(DECALS_LOTTERY_CARD_FLIPX_DURATION+CARDS_MOVETO_CENTER_DURATION),
-     cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, cc.p(0,0)), cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, point), cc.CallFunc:create(function ()
-        self:setCardTouchEnabled(true);
+      --[[cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION,cc.p(0,0)), cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, point),]] cc.CallFunc:create(function ()
+        --self:setCardTouchEnabled(true);
+        self:playShuffleEffect(point);
     end)));
 end
+function DecalsLotteryCard:playShuffleEffect(end_point)
+    local bg_size = self:getParent():getParent():getContentSize();
+    local card_size = self.card_front_:getContentSize();
+    local percent = self:getParent():getCardsShuffleRangePercent();
+    local max_x = (bg_size.width - card_size.width*bs.SmartScaleController:getInstance():getPlayAreaZoom())/2*percent;
+    local max_y = (bg_size.height - card_size.height*bs.SmartScaleController:getInstance():getPlayAreaZoom())/2*0.9*percent;
+    local min_x = -max_x;
+    local min_y = -max_y;
+    local point_select = {function ()
+        return cc.p(math.random(min_x, max_x), min_y);
+    end,
+    function ()
+        return cc.p(math.random(min_x, max_x), max_y);
+    end,
+    function ()
+        return cc.p(min_x, math.random(min_y, max_y));
+    end,
+    function ()
+        return cc.p(max_x, math.random(min_y, max_y));
+    end}
+
+    local move_func = nil;
+    local shuffle_move_seq = nil;
+    move_func = function ()
+        local next_point = point_select[math.random(1, #point_select)]();
+        -- local distance = cc.pGetDistance(cc.p(self:getPosition()), next_point);
+        local duration = cc.pGetDistance(cc.p(self:getPosition()), next_point)/CARD_SHUFFLE_MOVE_SPEED;
+        shuffle_move_seq = cc.Sequence:create(cc.MoveTo:create(duration, next_point), cc.CallFunc:create(function ()
+            move_func();
+        end));
+        self:runAction(shuffle_move_seq);
+    end
+    move_func();
+    self:runAction(cc.Sequence:create(cc.DelayTime:create(1),
+        cc.CallFunc:create(function ()
+            self:stopAction(shuffle_move_seq);
+        end),
+        cc.MoveTo:create(0.1, cc.p(0,0)),
+        cc.MoveTo:create(0.3, end_point),
+        cc.CallFunc:create(function ()
+            self:setCardTouchEnabled(true);
+        end))
+    );
+end
+-- function DecalsLotteryCard:calculateNextPointDuration(next_point)
+--     return cc.pGetDistance(cc.p(self:getPosition()), next_point)/CARD_SHUFFLE_MOVE_SPEED
+-- end
+-- function DecalsLotteryCard:getMoveToNextPointAction(next_point)
+--     return cc.MoveTo:create(self:calculateNextPointDuration(next_point), next_point);
+-- end
 function DecalsLotteryCard:setCardTouchEnabled(flag)
     self.touch_enabled_ = flag;
 end
 function DecalsLotteryCard:isSelectedCard()
     return self.isSelectedCard_;
 end
-function DecalsLotteryCard:onEnter()
-    self.listener_ = {};
-    local function selectBegin( event )
-        self:selectBegin();
-    end
-    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_BEGIN, selectBegin));
-    for _, listener in ipairs(self.listener_) do
-        self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
+function DecalsLotteryCard:addDecalItem()
+    local item = bs.DecalsFactory:getInstance():createCharactorNextDecal();
+    item:setScale(self.card_front_:getContentSize().width/item:getContentSize().width*0.75*item:getScale());
+    item:setPosition(cc.p(self.card_front_:getContentSize().width/2, self.card_front_:getContentSize().height/2));
+    self.card_front_:addChild(item);
+
+    self.is_decal_card_ = true;
+end
+function DecalsLotteryCard:addRandomAwardItem()
+    local award_data = DECALS_LOTTERY_AWARDS[math.random(1, #DECALS_LOTTERY_AWARDS)];
+    for key,numble in pairs(award_data) do
+        local item = bs.SpriteTextureController:getInstance():createPropSpriteWithKey(key);
+        item:setScale(self.card_front_:getContentSize().width/item:getContentSize().width*0.75*item:getScale());
+        item:setPosition(cc.p(self.card_front_:getContentSize().width/2, self.card_front_:getContentSize().height/2));
+        self.card_front_:addChild(item);
     end
 end
-function DecalsLotteryCard:onExit()
-    local eventDispatcher = self:getEventDispatcher();
-    for _, listener in ipairs(self.listener_) do
-        eventDispatcher:removeEventListener(listener);
-    end
+function DecalsLotteryCard:isDecalCard()
+    return self.is_decal_card_;
 end
+-- function DecalsLotteryCard:onEnter()
+--     self.listener_ = {};
+--     local function selectBegin( event )
+--         self:selectBegin();
+--     end
+--     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_BEGIN, selectBegin));
+--     for _, listener in ipairs(self.listener_) do
+--         self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
+--     end
+-- end
+-- function DecalsLotteryCard:onExit()
+--     local eventDispatcher = self:getEventDispatcher();
+--     for _, listener in ipairs(self.listener_) do
+--         eventDispatcher:removeEventListener(listener);
+--     end
+-- end
 return DecalsLotteryCard

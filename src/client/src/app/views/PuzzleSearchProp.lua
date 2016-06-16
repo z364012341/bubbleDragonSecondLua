@@ -26,8 +26,9 @@ function PuzzleSearchProp:init()
     --EVENT_TOUCH_SEARCH_PROP
     self.isCooling_ = false;
     self:addChild(PuzzlePropsBackground:create(EVENT_TOUCH_SEARCH_PROP));
-    self:addChild(GlobalFunction.createGameSpriteWithPath(PROP_SEARCH_PATH));
+    self:addChild(bs.SpriteTextureController:getInstance():createPropSpriteWithKey(bs.UserDataManager:getPuzzleSearchPropKey()));
     self.numble_show_ = bs.PropsNumbleShow:create(bs.UserDataManager:getPuzzleSearchPropKey());
+    self.numble_show_:setPosition(PUZZLE_PROPS_NUMBLE_LABEL_POSITION);
     --self.numble_show_:setPropNumble(1);
     self:addChild(self.numble_show_, 1);
 end

@@ -1,7 +1,7 @@
 #include "SpriteTextureController.h"
-
+#include "UserDataManager.h"
 #include "cocostudio\CocoStudio.h"
-//#include "SpriteBlur.h"
+
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_1_PATH = "laohu/laohu.ExportJson"; //老虎的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_2_PATH = "laohu2/laohu2.ExportJson"; //老虎2的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_3_PATH = "laohu3/laohu3.ExportJson"; //老虎3的动画
@@ -35,9 +35,9 @@ const std::string AIMING_LINE_COMMODITY_ARMATURE_NAME = "miaozhunxian/miaozhunxi
 const std::string TWO_ROUND_BOMB_EFFECT_PATH = "zhadanTX/zhadanTX.ExportJson"; //炸2圈特效的路径
 const std::string BOMB_BOMB_BUBBLE_CENTER_FIRE_PATH = "huoqiuTX/huoqiuTX.ExportJson";
 const std::string SCORE_WIDGET_UPDATE_PATH = "yun3/yun3.ExportJson";
-const std::string PUZZLE_SEARCH_PROP_PATH = "fangdajing/fangdajing.ExportJson";
-const std::string PUZZLE_BIG_EYES_PROP_PATH = "yanjingTX/yanjingTX.ExportJson";
-const std::string PUZZLE_ADD_TIME_PROP_PATH = "pintunaozhong/pintunaozhong.ExportJson";
+//const std::string PUZZLE_SEARCH_PROP_PATH = "fangdajing/fangdajing.ExportJson";
+//const std::string PUZZLE_BIG_EYES_PROP_PATH = "yanjingTX/yanjingTX.ExportJson";
+//const std::string PUZZLE_ADD_TIME_PROP_PATH = "pintunaozhong/pintunaozhong.ExportJson"; 
 const std::string PUZZLE_MOVE_ANSWER_PATH = "pintuTX3/pintuTX3.ExportJson";
 const std::string ADD_SPECIAL_PROP_ARMATURE_PATH = "pingzidaoju/pingzidaoju.ExportJson"; //+3特殊道具动画
 
@@ -53,7 +53,18 @@ namespace bubble_second {
         stage_menu_stagetype_to_path_[kRescueAnimal] = STAGETYPE_TEXTURE_RESCUEANIMAL_PATH;
         stage_menu_stagetype_to_path_[kDestroyRainbowSeal] = STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH;
         stage_menu_stagetype_to_path_[kWindmill] = STAGETYPE_TEXTURE_WINDMILL_PATH;
-        this->readGameSceneBackgroundFile();
+
+        prop_key_to_path_[PUZZLE_SEARCH_PROP_KEY] = PUZZLE_SEARCH_PROP_PATH;
+        prop_key_to_path_[PUZZLE_BIG_EYES_PROP_KEY] = PUZZLE_BIG_EYES_PROP_PATH;
+        prop_key_to_path_[PUZZLE_ADD_TIME_PROP_KEY] = PUZZLE_ADD_TIME_PROP_PATH;
+        //prop_key_to_path_[BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY] = ;
+        //prop_key_to_path_[BUBBLE_AIMING_LINE_PROP_KEY] = ;
+        //prop_key_to_path_[BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY] = ;
+        prop_key_to_path_[BUBBLE_WOODEN_HAMMER_PROP_KEY] = PROPS_WOODEN_HAMMER_PATH;
+        prop_key_to_path_[BUBBLE_COLOR_BOMB_PROP_KEY] = PROPS_COLOR_BOMB_PATH;
+        prop_key_to_path_[BUBBLE_BIG_BOMB_BOMB_PROP_KEY] = PROPS_BOMB_BOMB_PATH;
+        prop_key_to_path_[BUBBLE_STAVES_PROP_KEY] = PROPS_STAVES_PATH;
+
 
         armature_path_.push_back(LIGHTNING_BUBBLE_EFFECT_PATH);
         armature_path_.push_back(ONE_ROUND_BOMB_EFFECT_PATH);
@@ -96,9 +107,9 @@ namespace bubble_second {
         armature_path_.push_back(AIMING_LINE_COMMODITY_ARMATURE_NAME);
         armature_path_.push_back(BOMB_BOMB_BUBBLE_CENTER_FIRE_PATH);
         armature_path_.push_back(SCORE_WIDGET_UPDATE_PATH);
-        armature_path_.push_back(PUZZLE_SEARCH_PROP_PATH);
-        armature_path_.push_back(PUZZLE_BIG_EYES_PROP_PATH);
-        armature_path_.push_back(PUZZLE_ADD_TIME_PROP_PATH);
+        armature_path_.push_back("fangdajing/fangdajing.ExportJson");
+        armature_path_.push_back("yanjingTX/yanjingTX.ExportJson");
+        armature_path_.push_back("pintunaozhong/pintunaozhong.ExportJson");
         armature_path_.push_back(PUZZLE_MOVE_ANSWER_PATH);
         armature_path_.push_back(ADD_SPECIAL_PROP_ARMATURE_PATH);
         armature_path_.push_back("miaozhunxian/miaozhunxian.ExportJson");  //瞄准线道具动画
@@ -111,6 +122,7 @@ namespace bubble_second {
         armature_path_.push_back("tuzi3/tuzi3.ExportJson");
         armature_path_.push_back("tuzishengli/tuzishengli.ExportJson");
         armature_path_.push_back("pintulibao/pintulibao.ExportJson");
+        armature_path_.push_back("choujiangkapianguang/choujiangkapianguang.ExportJson");
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()
@@ -185,6 +197,7 @@ namespace bubble_second {
     {    
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("StudioResPlist.plist");
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("gameRes.plist");
+        this->readGameSceneBackgroundFile();
         this->addArmatureFile();
         //cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile("puzzle_ui.plist");
     }
@@ -344,5 +357,9 @@ namespace bubble_second {
     //    textureScreen->end();
     //    return nullptr;
     //}
-
+    cocos2d::Sprite* SpriteTextureController::createPropSpriteWithKey(const std::string& key)
+    {
+        assert(prop_key_to_path_.find(key) != prop_key_to_path_.end());
+        return this->createGameSpriteWithPath(prop_key_to_path_[key]);
+    }
 }

@@ -1,5 +1,9 @@
 #include "BaseProperty.h"
 #include "GamePlayController.h"
+#include "XMLTool.h"
+#include "ButtonEffectController.h"
+#include "ui\UIScale9Sprite.h"
+#include "PropsNumbleShow.h"
 const float PROPS_BUTTON_POS_X = 100.0f;
 const float PROPS_BUTTON_POS_Y = 35.0f;
 
@@ -57,7 +61,7 @@ namespace bubble_second {
         }
     }
 
-    bool BaseProperty::init()
+    bool BaseProperty::initWithPropKey(const std::string& key)
     {
         if (!Sprite::init())
         {
@@ -65,10 +69,13 @@ namespace bubble_second {
         }
         use_state_ = kNotUsed;
         touch_flag_ = true;
+        property_key_ = key;
         SpriteTextureController::getInstance()->setSpriteTexture(PROPS_ITEM_BACKGROUND_PATH, this);
-        this->addNumbleButton();
+        this->initIcon();
+        this->addNumbleLabel();
         this->initHandle();
         this->addTouchEventListener();
+        //this->setPropertyEnabled(true);
         cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_HAVE_USED_PROPS, 
             CC_CALLBACK_1(BaseProperty::haveUsedProperty, this));
         return true;
@@ -99,8 +106,8 @@ namespace bubble_second {
         //{
         //    this->removeTouchEventListener();
         //}
-        touch_enable_ = flag;
-        menu_->setEnabled(flag);
+        touch_enable_ = flag && !props_numble_label_->isNoneProp();
+        //button_->setEnabled(flag);
     }
 
     bool BaseProperty::isPropertyEnabled()
@@ -113,28 +120,28 @@ namespace bubble_second {
         cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListenersForTarget(this);
     }
 
-    void BaseProperty::addNumbleButton()
-    {
-        cocos2d::Sprite* normal_sprite = SpriteTextureController::getInstance()->createGameSpriteWithPath(PROPS_NUMBLE_ENABLED_PATH);
-        cocos2d::Sprite* select_sprite = SpriteTextureController::getInstance()->createGameSpriteWithPath(PROPS_NUMBLE_ENABLED_PATH);
-        select_sprite->setScale(PROPS_BUTTON_SELECT_SCALE);
-        cocos2d::Sprite* disabled_sprite = SpriteTextureController::getInstance()->createGameSpriteWithPath(PROPS_NUMBLE_DISABLED_PATH);
-        button_ = cocos2d::MenuItemSprite::create(normal_sprite, select_sprite, disabled_sprite);
-        button_->setScale(PROPS_BUTTON_SPRITE_SCALE);
-        menu_ = cocos2d::Menu::createWithItem(button_);
-        menu_->setPosition(cocos2d::Vec2(PROPS_BUTTON_POS_X, PROPS_BUTTON_POS_Y));
-        this->addChild(menu_, 1);
-        button_->setEnabled(false);
-        this->addNumbleLabel(disabled_sprite);
-    }
+    //void BaseProperty::addNumbleButton()
+    //{
+    //    //button_ = cocos2d::ui::Button::create(PROPS_NUMBLE_ENABLED_PATH, "", PROPS_NUMBLE_DISABLED_PATH);
+    //    //ButtonEffectController::setButtonZoomScale(button_);
+    //    //button_->setScale(PROPS_BUTTON_SPRITE_SCALE);
+    //    //button_->setPosition(cocos2d::Vec2(PROPS_BUTTON_POS_X, PROPS_BUTTON_POS_Y));
+    //    //this->addChild(button_, 1);
+    //    this->addNumbleLabel();
 
-    void bubble_second::BaseProperty::addNumbleLabel(cocos2d::Sprite * bgSprite)
+
+
+    //}
+
+    void bubble_second::BaseProperty::addNumbleLabel()
     {
-        props_numble_label_ = cocos2d::ui::TextAtlas::create(
-            "9", PROPS_NUMBLE_LABEL_PATH, PROPS_NUMBLE_LABEL_ITEM_WIDTH, PROPS_NUMBLE_LABEL_ITEM_HEIGHT, ".");
-        props_numble_label_->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
-        props_numble_label_->setPosition(cocos2d::Vec2(bgSprite->getContentSize().width / 2, bgSprite->getContentSize().height / 2));
-        bgSprite->addChild(props_numble_label_, UI_ZORDER_MENU_INFO);
+        //props_numble_label_ = cocos2d::ui::TextAtlas::create(
+        //    "9", PROPS_NUMBLE_LABEL_PATH, PROPS_NUMBLE_LABEL_ITEM_WIDTH, PROPS_NUMBLE_LABEL_ITEM_HEIGHT, ".");
+        props_numble_label_ = PropsNumbleShow::create(property_key_);
+        //props_numble_label_->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
+        props_numble_label_->setPosition(cocos2d::Vec2(PROPS_BUTTON_POS_X, PROPS_BUTTON_POS_Y));
+        this->addChild(props_numble_label_, UI_ZORDER_MENU_INFO+1);
+        //this->updateNumbleLabel();
     }
 
     void BaseProperty::initHandle()
@@ -155,10 +162,10 @@ namespace bubble_second {
         dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     }
 
-    void BaseProperty::initIconWithPath(const std::string& path)
+    void BaseProperty::initIcon()
     {
-        cocos2d::Sprite* iter_sprite = SpriteTextureController::getInstance()->createGameSpriteWithPath(path);
-        cocos2d::Size size = this->getBoundingBox().size;
+        cocos2d::Sprite* iter_sprite = SpriteTextureController::getInstance()->createPropSpriteWithKey(property_key_);
+        cocos2d::Size size = this->getContentSize();
         iter_sprite->setPosition(cocos2d::Vec2(size.width / 2, size.height / 2));
         this->addChild(iter_sprite);
     }
@@ -167,4 +174,16 @@ namespace bubble_second {
     {
         this->setPropsState(kNotUsed);
     }
+
+    //void BaseProperty::setNumbleLabelStringWithNumble(int numble)
+    //{
+    //    props_numble_label_->set(XMLTool::convertIntToString(numble));
+    //}
+    //void BaseProperty::updateNumbleLabel()
+    //{
+    //    assert(property_key_ != "");
+    //    int numble = UserDataManager::getInstance()->getPropsNumbleWithKey(property_key_);
+    //    button_->setEnabled(numble == 0);
+    //    this->setNumbleLabelStringWithNumble(numble);
+    //}
 }

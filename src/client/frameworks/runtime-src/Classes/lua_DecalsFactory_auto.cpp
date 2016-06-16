@@ -54,6 +54,53 @@ int lua_DecalsFactory_DecalsFactory_getDecalsMaxIndexWithPath(lua_State* tolua_S
 
     return 0;
 }
+int lua_DecalsFactory_DecalsFactory_createCharactorNextDecal(lua_State* tolua_S)
+{
+    int argc = 0;
+    bubble_second::DecalsFactory* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"bs.DecalsFactory",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (bubble_second::DecalsFactory*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_DecalsFactory_DecalsFactory_createCharactorNextDecal'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_DecalsFactory_DecalsFactory_createCharactorNextDecal'", nullptr);
+            return 0;
+        }
+        cocos2d::Sprite* ret = cobj->createCharactorNextDecal();
+        object_to_luaval<cocos2d::Sprite>(tolua_S, "cc.Sprite",(cocos2d::Sprite*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "bs.DecalsFactory:createCharactorNextDecal",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_DecalsFactory_DecalsFactory_createCharactorNextDecal'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_DecalsFactory_DecalsFactory_convertDecalNumbleToIndex(lua_State* tolua_S)
 {
     int argc = 0;
@@ -404,6 +451,7 @@ int lua_register_DecalsFactory_DecalsFactory(lua_State* tolua_S)
 
     tolua_beginmodule(tolua_S,"DecalsFactory");
         tolua_function(tolua_S,"getDecalsMaxIndexWithPath",lua_DecalsFactory_DecalsFactory_getDecalsMaxIndexWithPath);
+        tolua_function(tolua_S,"createCharactorNextDecal",lua_DecalsFactory_DecalsFactory_createCharactorNextDecal);
         tolua_function(tolua_S,"convertDecalNumbleToIndex",lua_DecalsFactory_DecalsFactory_convertDecalNumbleToIndex);
         tolua_function(tolua_S,"getDecalsCharactorData",lua_DecalsFactory_DecalsFactory_getDecalsCharactorData);
         tolua_function(tolua_S,"createDecal",lua_DecalsFactory_DecalsFactory_createDecal);

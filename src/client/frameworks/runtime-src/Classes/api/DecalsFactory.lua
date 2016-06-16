@@ -12,6 +12,12 @@
         
 --------------------------------
 -- 
+-- @function [parent=#DecalsFactory] createCharactorNextDecal 
+-- @param self
+-- @return Sprite#Sprite ret (return value: cc.Sprite)
+        
+--------------------------------
+-- 
 -- @function [parent=#DecalsFactory] convertDecalNumbleToIndex 
 -- @param self
 -- @param #int numble

@@ -21,4 +21,5 @@ int register_all_DecalsFactory(lua_State* tolua_S);
 
 
 
+
 #endif // __DecalsFactory_h__

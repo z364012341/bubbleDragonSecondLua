@@ -98,6 +98,10 @@ const std::string WEAPON_STAVES_NAME = "props_staves"; //—°‘Ò≈›≈› ±∫Ú…œ√Êµƒ∑®’»Õ
 const std::string PROPS_WOODEN_HAMMER_NAME = "props_maces"; //µ• ÷¥∏
 const std::string WEAPON_WOODEN_HAMMER_NAME = "props_maces"; //—°‘Ò≈›≈› ±∫Ú…œ√Êµƒµ• ÷¥∏
 const std::string PROPS_WOODEN_HAMMER_PATH = "daojumuchui.PNG";
+const std::string PUZZLE_SEARCH_PROP_PATH = "daoju1.PNG";   //∆¥ÕºµƒÀ—À˜æµµ¿æﬂ
+const std::string PUZZLE_ADD_TIME_PROP_PATH = "daoju3.PNG";   //∆¥Õºº” ±µ¿æﬂ
+const std::string PUZZLE_BIG_EYES_PROP_PATH = "daoju2.PNG";   //∆¥Õº¥Û—€÷È◊”µ¿æﬂ
+
 //ƒæ¥∏∫Õ∑®’»µƒ—°‘Ò√Ê∞Â
 const std::string PROPS_SELECT_ALERT_BACKGROUND = "kuangshiyongdaoju.PNG";
 const std::string PROPS_SELECT_ALERT_CONFIRM = "anniuqueding.PNG";

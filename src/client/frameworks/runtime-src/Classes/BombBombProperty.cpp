@@ -6,12 +6,12 @@ namespace bubble_second {
 
     bool BombBombProperty::init()
     {
-        if (!BaseProperty::init())
+        if (!BaseProperty::initWithPropKey(BUBBLE_BIG_BOMB_BOMB_PROP_KEY))
         {
             return false;
         }
         this->setName(PROPS_BOMB_BOMB_NAME);
-        this->initIconWithPath(PROPS_BOMB_BOMB_PATH);
+        //this->initIconWithPath(PROPS_BOMB_BOMB_PATH);
         //cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_SHUTED_COLOR_BOMB_BUBBLE, CC_CALLBACK_1(ColorBombProperty::haveUsedColorBombBubble, this));
         return true;
     }

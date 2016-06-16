@@ -6,7 +6,7 @@ local PuzzleBigEyesProp = class("PuzzleBigEyesProp", function ()
     return cc.Node:create();
 end)
 local PuzzlePropsBackground = require(PUZZLE_PROPS_BACKGROUND_PATH);
-local PROP_BIG_EYES_PATH = "daoju2.PNG"
+-- local PROP_BIG_EYES_PATH = "daoju2.PNG"
 local USING_PARTICLE_PATH = "particle/daojuguang2.plist";
 function PuzzleBigEyesProp:ctor()
     local function onNodeEvent(event)
@@ -22,8 +22,9 @@ end
 function PuzzleBigEyesProp:init()
     self.isCooling_ = false;
     self:addChild(PuzzlePropsBackground:create(EVENT_TOUCH_BIG_EYES_PROP), -1);
-    self:addChild(GlobalFunction.createGameSpriteWithPath(PROP_BIG_EYES_PATH), 1);
+    self:addChild(bs.SpriteTextureController:getInstance():createPropSpriteWithKey(bs.UserDataManager:getPuzzleBigEyesPropKey()), 1);
     self.numble_show_ = bs.PropsNumbleShow:create(bs.UserDataManager:getPuzzleBigEyesPropKey());
+    self.numble_show_:setPosition(PUZZLE_PROPS_NUMBLE_LABEL_POSITION);
     self:addChild(self.numble_show_, 1);
 end
 

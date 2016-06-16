@@ -12,12 +12,12 @@ namespace bubble_second {
 
     bool WoodenHammerProperty::init()
     {
-        if (!BaseProperty::init())
+        if (!BaseProperty::initWithPropKey(BUBBLE_WOODEN_HAMMER_PROP_KEY))
         {
             return false;
         }
         this->setName(PROPS_WOODEN_HAMMER_NAME);
-        this->initIconWithPath(PROPS_WOODEN_HAMMER_PATH);
+        //this->initIconWithPath(PROPS_WOODEN_HAMMER_PATH);
         return true;
     }
 

@@ -24,12 +24,12 @@ namespace bubble_second {
         void setPropNumble(int numble);
         void onEnter() override;
         void onExit() override;
+        bool isNoneProp();
     private:
         PropsNumbleShow();
         bool init(const std::string& prop_key);
         
         void updateLabel();
-        bool isNoneProp();
     private:
         ExhibitionNumble* props_numble_label_ = nullptr;
         cocos2d::Sprite* plus_sprite_ = nullptr;

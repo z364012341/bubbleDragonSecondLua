@@ -11,7 +11,9 @@
 #define _BASE_PROPERTY_H_
 #include "cocos2d.h"
 #include "SpriteTextureController.h"
-#include "ui\UITextAtlas.h"
+#include "UserDataManager.h"
+//#include "ui\UIButton.h"
+//#include "ui\UITextAtlas.h"
 namespace bubble_second {
     enum PropsState
     {//道具的使用状态
@@ -21,25 +23,26 @@ namespace bubble_second {
     };
     typedef bool TouchEnabled;
     typedef bool isUsing;
+    class PropsNumbleShow;
     class BaseProperty  : public cocos2d::Sprite
     {
     public:
-        //static BaseProperty* createWithName(const std::string& name)
-        //{
-        //    BaseProperty *pRet = new(std::nothrow) BaseProperty();
-        //    if (pRet && pRet->initWithName(name))
-        //    {
-        //        pRet->autorelease();
-        //        return pRet;
-        //    }
-        //    else
-        //    {
-        //        delete pRet;
-        //        pRet = NULL;
-        //        return NULL;
-        //    }
-        //}
-        CREATE_FUNC(BaseProperty);
+        static BaseProperty* createWithPropKey(const std::string& key)
+        {
+            BaseProperty *pRet = new(std::nothrow) BaseProperty();
+            if (pRet && pRet->initWithPropKey(key))
+            {
+                pRet->autorelease();
+                return pRet;
+            }
+            else
+            {
+                delete pRet;
+                pRet = NULL;
+                return NULL;
+            }
+        }
+        //CREATE_FUNC(BaseProperty);
         virtual ~BaseProperty();
         void onExit() override;
     public:
@@ -52,29 +55,32 @@ namespace bubble_second {
         bool isPropertyEnabled();
     protected:
         BaseProperty();
-        bool init();
+        bool initWithPropKey(const std::string& key);
         virtual void useItem();
         //设置图标的状态, 是否被点击使用之类的
         void setPropsState(PropsState state);
         PropsState getPropsState();
-        //初始化道具的图标
-        void initIconWithPath(const std::string& path);
         //发射之后
         void haveUsedProperty(cocos2d::EventCustom*);
     private:
-        void addNumbleButton();
-        void addNumbleLabel(cocos2d::Sprite* bgSprite);
+        //void addNumbleButton();
+        void addNumbleLabel();
         void initHandle();
         void addTouchEventListener();
         void removeTouchEventListener();
+        //void setNumbleLabelStringWithNumble(int numble);
+        //void  updateNumbleLabel();
+        //初始化道具的图标
+        void initIcon();
     private:
-        cocos2d::MenuItem* button_;
+        //cocos2d::ui::Button* button_;
         std::map<PropsState, std::function<void()>> state_to_handle_;
         PropsState use_state_;
         TouchEnabled touch_flag_;
-        cocos2d::Menu* menu_;
+        //cocos2d::Menu* menu_;
         bool touch_enable_ = true;
-        cocos2d::ui::TextAtlas* props_numble_label_ = nullptr;
+        PropsNumbleShow* props_numble_label_ = nullptr;
+        std::string property_key_ = "";
     };
 }
 #endif //_BASE_PROPERTY_H_

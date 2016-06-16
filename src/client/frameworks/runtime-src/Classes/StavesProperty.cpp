@@ -8,12 +8,12 @@ namespace bubble_second {
 
     bool StavesProperty::init()
     {
-        if (!BaseProperty::init())
+        if (!BaseProperty::initWithPropKey(BUBBLE_STAVES_PROP_KEY))
         {
             return false;
         }
         this->setName(PROPS_STAVES_NAME);
-        this->initIconWithPath(PROPS_STAVES_PATH);
+        //this->initIconWithPath(PROPS_STAVES_PATH);
         return true;
     }
 

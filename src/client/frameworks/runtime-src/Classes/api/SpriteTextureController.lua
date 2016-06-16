@@ -20,14 +20,6 @@
         
 --------------------------------
 -- 
--- @function [parent=#SpriteTextureController] createMenuItemSprite 
--- @param self
--- @param #string path
--- @param #function callback
--- @return CenteredMenuItemSprite#CenteredMenuItemSprite ret (return value: bs.CenteredMenuItemSprite)
-        
---------------------------------
--- 
 -- @function [parent=#SpriteTextureController] createStageTypeSprite 
 -- @param self
 -- @param #int type
@@ -58,6 +50,13 @@
 -- @function [parent=#SpriteTextureController] createMenuStageTypeSprite 
 -- @param self
 -- @param #int type
+-- @return Sprite#Sprite ret (return value: cc.Sprite)
+        
+--------------------------------
+-- 
+-- @function [parent=#SpriteTextureController] createPropSpriteWithKey 
+-- @param self
+-- @param #string key
 -- @return Sprite#Sprite ret (return value: cc.Sprite)
         
 --------------------------------

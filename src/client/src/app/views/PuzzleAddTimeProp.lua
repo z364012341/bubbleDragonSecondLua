@@ -21,8 +21,9 @@ end
 function PuzzleAddTimeProp:init()
     --dump(PuzzlePropsBackground:create(EVENT_USE_ADD_TIME_PROP, ".,.", 0));
     self:addChild(PuzzlePropsBackground:create(EVENT_TOUCH_ADD_TIME_PROP));
-    self:addChild(GlobalFunction.createGameSpriteWithPath(PROP_ADD_TIME_PATH));
+    self:addChild(bs.SpriteTextureController:getInstance():createPropSpriteWithKey(bs.UserDataManager:getPuzzleAddTimePropKey()), 1);
     self.numble_show_ = bs.PropsNumbleShow:create(bs.UserDataManager:getPuzzleAddTimePropKey());
+    self.numble_show_:setPosition(PUZZLE_PROPS_NUMBLE_LABEL_POSITION);
     self:addChild(self.numble_show_, 1);
 end
 

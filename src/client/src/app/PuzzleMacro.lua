@@ -83,7 +83,7 @@ cc.exports.EVENT_POP_PUZZLE_STORE_ALERT = "event_pop_game_store";
 cc.exports.EVENT_DECALS_LOTTERY_SELECT_CARD = "event_decals_lottery_select_card";
 cc.exports.EVENT_DECALS_LOTTERY_AGAIN = "event_decals_lottery_again";
 cc.exports.EVENT_DECALS_LOTTERY_AGAIN_BEGIN = "event_decals_lottery_again_begin";
-cc.exports.EVENT_DECALS_LOTTERY_BEGIN = "event_decals_lottery_begin";
+-- cc.exports.EVENT_DECALS_LOTTERY_BEGIN = "event_decals_lottery_begin";
 cc.exports.EVENT_DECALS_LOTTERY_REMOVE_CARD = "event_decals_lottery_remove_card";
 -- cc.exports.EVENT_DECALS_LOTTERY_END = "event_decals_lottery_end";
 -- cc.exports.EVENT_ANSWER_ZOOM_IN_ACTION = "event_answer_zoom_in_action";
@@ -128,8 +128,9 @@ cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_MIN = 0.3;
 cc.exports.PUZZLE_PLAY_SCENE_ZOOM_SCALE_MAX = 1.7;
 cc.exports.PUZZLE_INITIAL_SIZE = cc.size(976, 1464);
 cc.exports.PUZZLE_SHOW_LAYER_COLOR_C4B = cc.c4b(70, 48, 61, 255);
+cc.exports.PUZZLE_PROPS_NUMBLE_LABEL_POSITION = cc.p(35, -35);
 
-cc.exports.DECALS_LOTTERY_CARD_FLIPX_DURATION = 1;
+cc.exports.DECALS_LOTTERY_CARD_FLIPX_DURATION = 0.75;
 cc.exports.CARDS_MOVETO_CENTER_DURATION = 0.3;
 
 

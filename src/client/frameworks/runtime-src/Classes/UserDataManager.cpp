@@ -71,7 +71,11 @@ namespace bubble_second {
     {
         std::string str = XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY)) +
             XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY)) +
-            XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY));
+            XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY))+
+            XMLTool::convertIntToString(this->getPropsNumbleWithKey(BUBBLE_WOODEN_HAMMER_PROP_KEY)) +
+            XMLTool::convertIntToString(this->getPropsNumbleWithKey(BUBBLE_COLOR_BOMB_PROP_KEY))+
+            XMLTool::convertIntToString(this->getPropsNumbleWithKey(BUBBLE_BIG_BOMB_BOMB_PROP_KEY)) +
+            XMLTool::convertIntToString(this->getPropsNumbleWithKey(BUBBLE_STAVES_PROP_KEY));
         return this->getMD5Str(PROP_MD5_SECRET_KEY+ str);
     }
     void UserDataManager::readDecalsData()

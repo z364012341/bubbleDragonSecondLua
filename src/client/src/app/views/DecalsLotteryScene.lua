@@ -10,11 +10,12 @@ local DECALS_LATTERY_SCENE_CSB_PATH = "DecalsLotteryLayer.csb";
 local CARDS_BACKGROUND_NAME = "Image_1";
 local BACKGROUND_TOP_UI_NAME = "lottery_top_4";
 local BUTTON_NODE_NAME = "buttonNode";
+
 function DecalsLotteryScene:createScene()
-    local scene = cc.Scene:create()
-    local layer = DecalsLotteryScene:create()
-    scene:addChild(layer)
-    return scene
+    local scene = cc.Scene:create();
+    local layer = DecalsLotteryScene:create();
+    scene:addChild(layer);
+    return scene;
 end
 function DecalsLotteryScene:ctor()
     local function onNodeEvent(event)
@@ -40,6 +41,8 @@ function DecalsLotteryScene:loadCSB()
 
     bs.ButtonEffectController:setButtonsZoomScale(csb_node);
     self:addChild(csb_node);
+
+    csb_node:getChildByName("lottery_label_1"):setPositionY(cc.Director:getInstance():getVisibleSize().height*0.9667);
 
     local return_button = csb_node:getChildByName("Button_1");
     -- return_button:setPosition(cc.p(cc.Director:getInstance():getVisibleSize().width*0.11, cc.Director:getInstance():getVisibleSize().height*0.06));
@@ -74,7 +77,8 @@ function DecalsLotteryScene:loadCSB()
     self.cards_background_ = cards_bg;
 end
 function DecalsLotteryScene:lotteryBegin()
-    self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_BEGIN);
+    --self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_BEGIN);
+    self.cards_show_:lotteryAgain();
     self.free_shuffle_button:setVisible(false);
     self.lottery_begin_button:setVisible(false);
 end
@@ -113,4 +117,5 @@ function DecalsLotteryScene:onExit()
         eventDispatcher:removeEventListener(listener);
     end
 end
+
 return DecalsLotteryScene

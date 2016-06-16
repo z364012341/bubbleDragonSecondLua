@@ -6,6 +6,7 @@ local DecalsLotteryCardsShow = class("DecalsLotteryCardsShow", function ()
     return cc.Node:create();
 end)
 local DecalsLotteryCard = require(DECALS_LOTTERY_CARD_PATH);
+local CARDS_SHUFFLE_RANGE_PERCENT = {[6] = 1, [4] = 0.8, [2] = 0.6};
 function DecalsLotteryCardsShow:ctor()
 	local function onNodeEvent(event)
 	    if event == "enter" then
@@ -34,6 +35,7 @@ function DecalsLotteryCardsShow:init()
 		self:addChild(card);
 		table.insert(self.cards_, card);
 	end
+	self.cards_[1]:addDecalItem();
 end
 -- function DecalsLotteryCardsShow:lotteryBegin( )
 -- 	for _,card in ipairs(self.cards_) do
@@ -43,6 +45,8 @@ end
 function DecalsLotteryCardsShow:lotteryAgain()
 	--self:removeSelectedCard();
 	--self:removeRandomCard();
+	GlobalFunction.shuffleTable(self.cards_);
+
 	for i,card in ipairs(self.cards_) do
 		card:selectBegin(CARDS_POINTS[#self.cards_][i]);
 	end
@@ -59,10 +63,10 @@ function DecalsLotteryCardsShow:removeTwoCards()
 	selected_card:runAction(cc.ScaleTo:create(0.75, 0.2));
 	selected_card:runAction(cc.Sequence:create(ease_bezier, cc.CallFunc:create(function (  )
 		selected_card:removeFromParent();
-		local rm_index = math.random(1, #self.cards_);
+		local rm_index = self:getRandomRemoveCardIndex();
 		local rm_card = self.cards_[rm_index];
 		table.remove(self.cards_, rm_index);
-		GlobalFunction.shuffleTable(self.cards_);
+		--GlobalFunction.shuffleTable(self.cards_);
 		for i,card in ipairs(self.cards_) do
 			card:runAction(cc.Sequence:create(cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, cc.p(0,0)), cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, CARDS_POINTS[#self.cards_][i]), nil));
 		end
@@ -74,8 +78,21 @@ function DecalsLotteryCardsShow:removeTwoCards()
 		end)));
 	end)));
 end
+function DecalsLotteryCardsShow:getRandomRemoveCardIndex()
+	local index = 0;
+	while true do
+		index = math.random(1, #self.cards_);
+		if not self.cards_[index]:isDecalCard() then
+			break;
+		end
+	end
+	return index;
+end
 function DecalsLotteryCardsShow:isLotteryEnd()
 	return #self.cards_ == 2;
+end
+function DecalsLotteryCardsShow:getCardsShuffleRangePercent()
+	return CARDS_SHUFFLE_RANGE_PERCENT[#self.cards_];
 end
 function DecalsLotteryCardsShow:findAndRemoveSelectedCard()
 	for i,card in ipairs(self.cards_) do

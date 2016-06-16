@@ -13,7 +13,13 @@
 const std::string PUZZLE_SEARCH_PROP_KEY = "search";
 const std::string PUZZLE_BIG_EYES_PROP_KEY = "bigEyes";
 const std::string PUZZLE_ADD_TIME_PROP_KEY = "addTime";
-
+const std::string BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY = "addBubbleNumble";
+const std::string BUBBLE_AIMING_LINE_PROP_KEY = "aimingLine";
+const std::string BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY = "addSpecialBubble";
+const std::string BUBBLE_WOODEN_HAMMER_PROP_KEY = "woodenHammer";
+const std::string BUBBLE_COLOR_BOMB_PROP_KEY = "colorBomb";
+const std::string BUBBLE_BIG_BOMB_BOMB_PROP_KEY = "bigBombBomb";
+const std::string BUBBLE_STAVES_PROP_KEY = "staves";
 namespace bubble_second {
     class UserDataManager
     {
@@ -50,14 +56,14 @@ namespace bubble_second {
         void savePuzzleStageData();
         void readPuzzleStageBestScore();
         int getPuzzleStageBestScoreWithKey(const std::string& key);
-
+        //道具数量
         int getPropsNumbleWithKey(const std::string& key);
         void setPropsNumbleWithKey(const std::string& key, int numble);
         void addPropsNumbleWithKey(const std::string& key, int numble);
         void cutPropsNumbleWithKey(const std::string& key);
 
         void setBuyPropsKeyAndNumble(cocos2d::ValueMap data);
-
+        //新手礼包
         void buyNewbieGift();
         bool canBuyNewbieGift();
         //获取人物解锁数量

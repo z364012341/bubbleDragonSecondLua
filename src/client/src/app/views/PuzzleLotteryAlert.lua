@@ -11,6 +11,7 @@ local PARTICLE_2_PATH = "particle/pintulibao2guang.plist";
 local PARTICLE_FLYING_PATH = "particle/daojulizi.plist";
 local GIFT_PROP_BACKGROUND_PATH = "libaoguang_0001_1.png";
 local GIFT_PROP_FLYING_TIME = 1;
+
 function PuzzleLotteryAlert:ctor()
     self:runAction(cc.Sequence:create(cc.DelayTime:create(0.5), cc.CallFunc:create(function (  )
         self:init();

@@ -107,7 +107,6 @@ int lua_SpriteTextureController_SpriteTextureController_setSpriteTexture(lua_Sta
 
     return 0;
 }
-
 int lua_SpriteTextureController_SpriteTextureController_createStageTypeSprite(lua_State* tolua_S)
 {
     int argc = 0;
@@ -355,6 +354,56 @@ int lua_SpriteTextureController_SpriteTextureController_createMenuStageTypeSprit
 
     return 0;
 }
+int lua_SpriteTextureController_SpriteTextureController_createPropSpriteWithKey(lua_State* tolua_S)
+{
+    int argc = 0;
+    bubble_second::SpriteTextureController* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"bs.SpriteTextureController",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (bubble_second::SpriteTextureController*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_SpriteTextureController_SpriteTextureController_createPropSpriteWithKey'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "bs.SpriteTextureController:createPropSpriteWithKey");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_SpriteTextureController_SpriteTextureController_createPropSpriteWithKey'", nullptr);
+            return 0;
+        }
+        cocos2d::Sprite* ret = cobj->createPropSpriteWithKey(arg0);
+        object_to_luaval<cocos2d::Sprite>(tolua_S, "cc.Sprite",(cocos2d::Sprite*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "bs.SpriteTextureController:createPropSpriteWithKey",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_SpriteTextureController_SpriteTextureController_createPropSpriteWithKey'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_SpriteTextureController_SpriteTextureController_getInstance(lua_State* tolua_S)
 {
     int argc = 0;
@@ -408,6 +457,7 @@ int lua_register_SpriteTextureController_SpriteTextureController(lua_State* tolu
         tolua_function(tolua_S,"createGameBackgroundSprite",lua_SpriteTextureController_SpriteTextureController_createGameBackgroundSprite);
         tolua_function(tolua_S,"createGameSpriteWithPath",lua_SpriteTextureController_SpriteTextureController_createGameSpriteWithPath);
         tolua_function(tolua_S,"createMenuStageTypeSprite",lua_SpriteTextureController_SpriteTextureController_createMenuStageTypeSprite);
+        tolua_function(tolua_S,"createPropSpriteWithKey",lua_SpriteTextureController_SpriteTextureController_createPropSpriteWithKey);
         tolua_function(tolua_S,"getInstance", lua_SpriteTextureController_SpriteTextureController_getInstance);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(bubble_second::SpriteTextureController).name();

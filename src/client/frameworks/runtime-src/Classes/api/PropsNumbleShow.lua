@@ -12,6 +12,12 @@
         
 --------------------------------
 -- 
+-- @function [parent=#PropsNumbleShow] isNoneProp 
+-- @param self
+-- @return bool#bool ret (return value: bool)
+        
+--------------------------------
+-- 
 -- @function [parent=#PropsNumbleShow] setPropNumble 
 -- @param self
 -- @param #int numble

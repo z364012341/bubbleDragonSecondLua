@@ -25,12 +25,12 @@ namespace bubble_second {
 
     bool ColorBombProperty::init()
     {
-        if (!BaseProperty::init())
+        if (!BaseProperty::initWithPropKey(BUBBLE_COLOR_BOMB_PROP_KEY))
         {
             return false;
         }
         this->setName(PROPS_COLOR_BOMB_NAME);
-        this->initIconWithPath(PROPS_COLOR_BOMB_PATH);    
+        //this->initIconWithPath(PROPS_COLOR_BOMB_PATH);    
         return true;
     }
 }
