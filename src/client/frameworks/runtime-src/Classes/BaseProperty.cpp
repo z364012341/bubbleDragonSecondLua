@@ -173,6 +173,7 @@ namespace bubble_second {
     void BaseProperty::haveUsedProperty(cocos2d::EventCustom*)
     {
         this->setPropsState(kNotUsed);
+        //UserDataManager::getInstance()->cutPropsNumbleWithKey(property_key_);
     }
 
     //void BaseProperty::setNumbleLabelStringWithNumble(int numble)

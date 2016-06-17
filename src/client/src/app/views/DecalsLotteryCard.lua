@@ -5,6 +5,7 @@
 local DecalsLotteryCard = class("DecalsLotteryCard", function ()
     return cc.Node:create();
 end)
+-- local DecalsLotteryScene = require(DECALS_LOTTERY_SCENE_PATH);
 local CARD_FRONT_PATH = "card_front.PNG";
 local CARD_BACK_PATH = "card_back.PNG";
 local CARD_SHUFFLE_MOVE_SPEED = 4000;
@@ -13,20 +14,36 @@ local SELECT_ANIMATION_1_NAME = "fanpai-01";
 local SELECT_ANIMATION_2_NAME = "fanpai-02";
 
 function DecalsLotteryCard:ctor()
-    --local function onNodeEvent(event)
-    --     if event == "enter" then
-    --         self:onEnter();
-    --     elseif event == "exit" then
-    --         self:onExit();
-    --     end
-    -- end
-    -- self:registerScriptHandler(onNodeEvent);
+    local function onNodeEvent(event)
+        if event == "enter" then
+            self:onEnter();
+        elseif event == "exit" then
+            self:onExit();
+        end
+    end
+    self:registerScriptHandler(onNodeEvent);
 
     self.touch_enabled_ = false;
     self.isSelectedCard_ = false;
     self.is_decal_card_ = false;
     self:init();
     self:addTouchEvent();
+end
+function DecalsLotteryCard:onEnter()
+    self.listener_ = {};
+    local function changeAward( event )
+        self:changeAward();
+    end
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_CHANGE_AWARD_CARD_BEGIN, changeAward));
+    for _, listener in ipairs(self.listener_) do
+        self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
+    end
+end
+function DecalsLotteryCard:onExit()
+    local eventDispatcher = self:getEventDispatcher();
+    for _, listener in ipairs(self.listener_) do
+        eventDispatcher:removeEventListener(listener);
+    end
 end
 function DecalsLotteryCard:init()
     self.card_front_ = GlobalFunction.createGameSpriteWithPath(CARD_FRONT_PATH);
@@ -85,7 +102,7 @@ function DecalsLotteryCard:selectCard()
     self.isSelectedCard_ = true;
     self:setCardState(true);
     self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_SELECT_CARD);
-
+    bs.UserDataManager:getInstance():addPropsNumbleWithKey(self.award_key_, self.award_numble_);
     -- armature_1:getAnimation():play(SELECT_ANIMATION_1_NAME);
 
 
@@ -192,8 +209,14 @@ end
 function DecalsLotteryCard:isSelectedCard()
     return self.isSelectedCard_;
 end
-function DecalsLotteryCard:addDecalItem()
-    local item = bs.DecalsFactory:getInstance():createCharactorNextDecal();
+function DecalsLotteryCard:addDecalItem(decals_type)
+    self:setLocalZOrder(1);
+    local item = nil;
+    if decals_type == DECALS_TYPE_CHARACTOR then
+        item = bs.DecalsFactory:getInstance():createCharactorNextDecal();
+    else
+        item = bs.DecalsFactory:getInstance():createTreasureNextDecal();
+    end
     item:setScale(self.card_front_:getContentSize().width/item:getContentSize().width*0.75*item:getScale());
     item:setPosition(cc.p(self.card_front_:getContentSize().width/2, self.card_front_:getContentSize().height/2));
     self.card_front_:addChild(item);
@@ -203,29 +226,39 @@ end
 function DecalsLotteryCard:addRandomAwardItem()
     local award_data = DECALS_LOTTERY_AWARDS[math.random(1, #DECALS_LOTTERY_AWARDS)];
     for key,numble in pairs(award_data) do
+        self.award_key_ = key;
+        self.award_numble_ = numble;
+        local node = cc.Node:create();
+        self.award_node_ = node;
+        node:setPosition(cc.p(self.card_front_:getContentSize().width/2, self.card_front_:getContentSize().height*0.45));
+        self.card_front_:addChild(node);
+
         local item = bs.SpriteTextureController:getInstance():createPropSpriteWithKey(key);
-        item:setScale(self.card_front_:getContentSize().width/item:getContentSize().width*0.75*item:getScale());
-        item:setPosition(cc.p(self.card_front_:getContentSize().width/2, self.card_front_:getContentSize().height/2));
-        self.card_front_:addChild(item);
+        item:setScale(self.card_front_:getContentSize().width/item:getContentSize().width*0.35);
+        item:setAnchorPoint(cc.p(0.5, 0));
+        --item:setPosition(cc.p(0, 50));
+        node:addChild(item);
+
+        local label = bs.SpriteTextureController:getInstance():createWhitePurpleFnt(tostring(numble));
+        label:setScale(0.6);
+        label:setPosition(cc.p(0, -25));
+        node:addChild(label);
     end
 end
 function DecalsLotteryCard:isDecalCard()
     return self.is_decal_card_;
 end
--- function DecalsLotteryCard:onEnter()
---     self.listener_ = {};
---     local function selectBegin( event )
---         self:selectBegin();
---     end
---     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_BEGIN, selectBegin));
---     for _, listener in ipairs(self.listener_) do
---         self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
---     end
--- end
--- function DecalsLotteryCard:onExit()
---     local eventDispatcher = self:getEventDispatcher();
---     for _, listener in ipairs(self.listener_) do
---         eventDispatcher:removeEventListener(listener);
---     end
--- end
+function DecalsLotteryCard:changeAward()
+    local point = cc.p(self:getPosition());
+    self:runAction(cc.Sequence:create(cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, cc.p(0,0)), cc.CallFunc:create(function (  )
+        if not self:isDecalCard() then
+            self.award_node_:removeFromParent();
+            self:addRandomAwardItem();
+        end
+    end), cc.DelayTime:create(0.5), cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, point), cc.CallFunc:create(function (  )
+        if self:isDecalCard() then
+            self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_CHANGE_AWARD_CARD_END);
+        end
+    end)));
+end
 return DecalsLotteryCard

@@ -5,6 +5,7 @@ const std::string DECALS_DATA_PATH = "res/decalsdata.plist";
 const std::string DECALS_CHARACTOR_DATA_KEY = "decals_charactor";
 const std::string DECALS_TREASURE_DATA_KEY = "decals_treasure";
 const std::string DECALS_DATA_PATH_KEY = "path";
+const std::string DECALS_DATA_GOOD_KEY = "goods";
 namespace bubble_second {
     DecalsFactory::DecalsFactory()
     {
@@ -156,7 +157,7 @@ namespace bubble_second {
     {
         return decals_data_[DECALS_CHARACTOR_DATA_KEY].asValueVector();
     }
-    cocos2d::ValueVector DecalsFactory::getTreasureCharactorData()
+    cocos2d::ValueVector DecalsFactory::getDecalsTreasureData()
     {
         return decals_data_[DECALS_TREASURE_DATA_KEY].asValueVector();
     }
@@ -177,20 +178,16 @@ namespace bubble_second {
     }
     cocos2d::Sprite * DecalsFactory::createCharactorNextDecal()
     {
-        //cocos2d::Sprite* result_sp = nullptr;
         cocos2d::ValueVector charactor_vector = UserDataManager::getInstance()->getCharactorDecalsData();
-        //cocos2d::Vec2 max_index;
-        //cocos2d::Vec2 decal_index;
         if (charactor_vector.empty())
         {
             auto path = this->getDecalsCharactorData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
             return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
-            //max_index = this->convertDecalNumbleToIndex(1, this->getDecalsCharactorData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString());
         }
         else
         {
             cocos2d::ValueMap charactor_user_data = charactor_vector.back().asValueMap();
-            cocos2d::ValueVector goods_data = charactor_user_data["goods"].asValueVector();
+            cocos2d::ValueVector goods_data = charactor_user_data[DECALS_DATA_GOOD_KEY].asValueVector();
             cocos2d::Vec2 max_index = this->getDecalsMaxIndexWithPath(charactor_user_data[DECALS_DATA_PATH_KEY].asString());
             if (goods_data.size() < max_index.x * max_index.y)
             {
@@ -201,6 +198,34 @@ namespace bubble_second {
             else if (goods_data.size() == max_index.x * max_index.y)
             {
                 auto path = this->getDecalsCharactorData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
+                return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
+            }
+        }
+        assert(false);
+        return nullptr;
+    }
+    cocos2d::Sprite * DecalsFactory::createTreasureNextDecal()
+    {//如有修改需提取方法
+        cocos2d::ValueVector charactor_vector = UserDataManager::getInstance()->getTreasureDecalsData();
+        if (charactor_vector.empty())
+        {
+            auto path = this->getDecalsTreasureData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
+            return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
+        }
+        else
+        {
+            cocos2d::ValueMap charactor_user_data = charactor_vector.back().asValueMap();
+            cocos2d::ValueVector goods_data = charactor_user_data[DECALS_DATA_GOOD_KEY].asValueVector();
+            cocos2d::Vec2 max_index = this->getDecalsMaxIndexWithPath(charactor_user_data[DECALS_DATA_PATH_KEY].asString());
+            if (goods_data.size() < max_index.x * max_index.y)
+            {
+                auto path = charactor_user_data[DECALS_DATA_PATH_KEY].asString();
+                int numble = goods_data.size() + 1;
+                return this->createDecalBackground(this->createDecalWithNumble(path, numble), path, numble);
+            }
+            else if (goods_data.size() == max_index.x * max_index.y)
+            {
+                auto path = this->getDecalsTreasureData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
                 return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
             }
         }

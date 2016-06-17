@@ -1,5 +1,5 @@
 #include "BombPropertyBubble.h"
-
+#include "UserDataManager.h"
 const std::string TWO_ROUND_BOMB_EFFECT_NAME = "zhadanTX"; //炸2圈特效的名字
 const std::string BOMB_BUBBLE_STANDBY_NAME = "ranshao";
 const std::string BOMB_BUBBLE_BOMB_BOMB_NAME = "baozhaTX";
@@ -15,6 +15,7 @@ namespace bubble_second {
     void BombPropertyBubble::dispatchEventAfterShooted()
     {
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_HAVE_USED_PROPS, this);
+        UserDataManager::getInstance()->cutPropsNumbleWithKey(BUBBLE_BIG_BOMB_BOMB_PROP_KEY);
     }
 
     void BombPropertyBubble::bubbleEliminate(int)

@@ -22,8 +22,8 @@ const std::string SETTING_BUTTON_LINE_NAME = "shengzi_3";
 const std::string PUZZLE_BUTTON_NAME = "Puzzle";
 const std::string DECALS_BUTTON_NAME = "Button_2_0";
 const std::string STRENGTH_INFO = "StrengthInfo";
-const std::string COIN_INFO = "CoinInfo";
-const std::string DIAMOND_INFO = "DiamondInfo";
+//const std::string COIN_INFO = "CoinInfo";
+//const std::string DIAMOND_INFO = "DiamondInfo";
 const std::string RANKINGLIST_BUTTON = "RankingList";
 const std::string GIFT_BUTTON = "Gift";
 const std::string CHECKIN_BUTTON = "CheckIn";
@@ -167,11 +167,12 @@ namespace bubble_second {
         float visibleHeight = cocos2d::Director::getInstance()->getVisibleSize().height;
         csb_node_->getChildByName(STRENGTH_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
 
-		csb_node_->getChildByName(COIN_INFO)->addChild(UserCoinInfoBoard::create());
-        csb_node_->getChildByName(COIN_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
-
-        csb_node_->getChildByName(DIAMOND_INFO)->addChild(UserDiamondInfoBoard::create());
-        csb_node_->getChildByName(DIAMOND_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
+		//csb_node_->getChildByName(COIN_INFO)->addChild(UserCoinInfoBoard::create());
+        //csb_node_->getChildByName(COIN_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
+        this->addChild(UserCoinInfoBoard::create());
+        this->addChild(UserDiamondInfoBoard::create());
+        //csb_node_->getChildByName(DIAMOND_INFO)->addChild(UserDiamondInfoBoard::create());
+        //csb_node_->getChildByName(DIAMOND_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
 
         csb_node_->getChildByName(RANKINGLIST_BUTTON)->setPositionY(visibleHeight*BUTTON_POS_Y_PERCENT_1);
         csb_node_->getChildByName(GIFT_BUTTON)->setPositionY(visibleHeight*BUTTON_POS_Y_PERCENT_1);

@@ -15,6 +15,7 @@ require "config"
 require "cocos.init"
 require("app.PuzzleMacro")
 require("app.PuzzleGlobalFunction")
+require("app.DecalsLotteryAward")
 local function main()
     --local sceneGame = require("app.views.PuzzlePlayScene"):create()
     --local hello = bs.LoadingScene:createScene()

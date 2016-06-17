@@ -58,7 +58,7 @@ const std::string PROPS_ITEM_BACKGROUND_PATH = "kuangdaoju.png";  //道具item的背
 //const std::string GUNSIGHT_SWIRL_GREEN_PATH = "X-lv.png";  //发射台上的旋风绿
 const std::string RAINBOW_CHARACTOR_PATH = "be_sealed_charactor.png"; //彩虹封印里面的人物
 const std::string ADD_BUBBLE_NUMBLE_BUBBLE_PATH = "addThreeBubble.png"; //+3特殊泡泡
-const std::string GAME_NUMBLE_FONT_PATH = "fonts/typeface-export.fnt";
+
 
 //瞄准线点path
 const std::string SIGHT_POINT_COLORFUL_PATH = "caisedian.png";  //彩色的
@@ -440,6 +440,7 @@ const std::string EVENT_MUTIPLE_SEAL_BUBBLE_FLY = "event_mutiple_seal_bubble_fly
 const std::string EVENT_TOP_ELIMINATE_BUBBLE_FLY = "event_top_eliminate_bubble_fly";
 const std::string EVENT_POP_GAME_STORE = "event_pop_game_store";
 const std::string EVENT_BUY_PROPS_PAY_SUCCESS = "event_buy_props_pay_success";
+const std::string EVENT_UPDATE_PROPS_NUMBLE_LABEL = "event_update_props_numble_label";
 const std::string EVENT_BUY_PROPS_PAY_FAIL = "event_buy_props_pay_fail";
 const std::string EVENT_END_ADD_BUBBLT_ANIMATION = "event_end_add_bubblt_animation";
 const std::string EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION = "event_end_add_special_bubblt_animation";
@@ -683,6 +684,8 @@ const std::string GAME_TEXT_SELECT_PROPS_LABEL_KEY = "choose_props";
 const float ENTER_PROPS_ACTION_DURATION = 0.5f; //进场道具的动画时间
 //EnterPropsViewManager
 const int ADD_BUBBLE_NUMBLE_PROPS_NUMBLE = 10;
+//UserDiamondInfoBoard
+const float USER_INFO_BOARD_POS_Y_PERCENT = 0.9564f;
 //zorder
 const int UI_ZORDER_MAP_BUBBLE = -2;  //小球地图 csb_node
 const int UI_ZORDER_DOWN_AIR_BUBBLE = UI_ZORDER_MAP_BUBBLE + 1;    //下落小球

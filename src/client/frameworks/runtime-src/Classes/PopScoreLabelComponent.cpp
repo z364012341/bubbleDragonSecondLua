@@ -1,7 +1,7 @@
 #include "PopScoreLabelComponent.h"
 #include "XMLTool.h"
 #include "BubbleSecondConstant.h"
-
+#include "SpriteTextureController.h"
 const float POP_SCORE_INITIAL_SCALE = 0.1f;  //弹出分数的初始缩放
 const float POP_SCORE_SCALETO_1_TIME = 0.3f;  //第一次缩放的时间
 const float POP_SCORE_SCALETO_1_NUMBLE = 0.5f;  //第一次缩放的比例
@@ -45,7 +45,7 @@ namespace bubble_second {
         }
         else
         {
-            score_label_ = cocos2d::ui::TextBMFont::create(XMLTool::convertIntToString(score), GAME_NUMBLE_FONT_PATH);
+            score_label_ = SpriteTextureController::getInstance()->createWhitePurpleFnt(XMLTool::convertIntToString(score));
             //score_label_->setScale(0.5f);
             score_label_->setOpacity(LABEL_OPACITY);
             this->addChild(score_label_);

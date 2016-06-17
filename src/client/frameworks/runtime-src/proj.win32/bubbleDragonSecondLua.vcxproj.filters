@@ -415,6 +415,12 @@
     <ClInclude Include="..\Classes\lua_DecalsFactory_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\lua_UserCoinInfoBoard_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_UserDiamondInfoBoard_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -800,6 +806,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\DecalsFactory.cpp" />
     <ClCompile Include="..\Classes\lua_DecalsFactory_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_UserCoinInfoBoard_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_UserDiamondInfoBoard_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
   </ItemGroup>

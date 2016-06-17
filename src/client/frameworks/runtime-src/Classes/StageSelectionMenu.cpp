@@ -143,7 +143,7 @@ namespace bubble_second {
     {
         char str[10];
         sprintf(str, "%d", stageData_.level_numble);
-        cocos2d::ui::TextBMFont* label = cocos2d::ui::TextBMFont::create(str, GAME_NUMBLE_FONT_PATH);
+        cocos2d::ui::TextBMFont* label = SpriteTextureController::getInstance()->createWhitePurpleFnt(str);
         label->setPosition(STAGE_SELECTION_MENU_STAGE_LABEL_POSITION);
         label->setScale(STAGE_LEVEL_LABEL_SCALE);
         this->addChild(label, UPPER_ZORDER);

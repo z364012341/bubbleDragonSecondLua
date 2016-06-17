@@ -10,7 +10,7 @@
 #ifndef _SPRITE_TEXTURE_CONTROLLER_H_
 #define _SPRITE_TEXTURE_CONTROLLER_H_
 #include "BubbleSecondConstant.h"
-const std::string GAME_COIN_PATH = "jinbi.PNG"; //½ð±Ò
+#include "ui\UITextBMFont.h"
 namespace bubble_second {
     class SpriteTextureController
     {
@@ -33,6 +33,8 @@ namespace bubble_second {
         //½ØÆÁ
         //cocos2d::Sprite* getScreenShot();
         cocos2d::Sprite* createPropSpriteWithKey(const std::string& key);
+
+        cocos2d::ui::TextBMFont* createWhitePurpleFnt(const std::string& str);
     private:
         SpriteTextureController();
         void readGameSceneBackgroundFile();

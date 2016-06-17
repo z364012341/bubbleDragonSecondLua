@@ -24,7 +24,7 @@ function DecalsExhibitionPageView:init()
 
     pageview:setContentSize(PAGEVIEW_CONTENT_SIZE);
     local decalsData = self.decals_type_ == DECALS_TYPE_CHARACTOR and bs.UserDataManager:getInstance():getCharactorDecalsData() or bs.UserDataManager:getInstance():getTreasureDecalsData();
-    local charactorData = self.decals_type_ == DECALS_TYPE_CHARACTOR and bs.DecalsFactory:getInstance():getDecalsCharactorData() or bs.DecalsFactory:getInstance():getTreasureCharactorData();
+    local charactorData = self.decals_type_ == DECALS_TYPE_CHARACTOR and bs.DecalsFactory:getInstance():getDecalsCharactorData() or bs.DecalsFactory:getInstance():getDecalsTreasureData();
     self:addPageViewPoints(#charactorData);
     for i,v in ipairs(charactorData) do
         pageview:addPage(self:createPageWithData(v.x, v.y, decalsData[i]));

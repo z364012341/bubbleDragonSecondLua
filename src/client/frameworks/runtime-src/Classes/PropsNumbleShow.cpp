@@ -89,7 +89,7 @@ namespace bubble_second {
     void PropsNumbleShow::onEnter()
     {
         cocos2d::Node::onEnter();
-        listener_ = cocos2d::EventListenerCustom::create(EVENT_BUY_PROPS_PAY_SUCCESS, [=](cocos2d::EventCustom* event) {
+        listener_ = cocos2d::EventListenerCustom::create(EVENT_UPDATE_PROPS_NUMBLE_LABEL, [=](cocos2d::EventCustom* event) {
             this->updateLabel();
         });
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 2);

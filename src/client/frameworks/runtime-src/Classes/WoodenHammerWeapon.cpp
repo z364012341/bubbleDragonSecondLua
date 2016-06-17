@@ -1,6 +1,7 @@
 #include "WoodenHammerWeapon.h"
 #include "SpriteTextureController.h"
 #include "GamePlayController.h"
+#include "UserDataManager.h"
 const std::string WOODEN_HAMMER_ANIMATION_NAME = "chuizi";
 const std::string WOODEN_HAMMER_ATTACK_ANIMATION_NAME = "shiyong";
 namespace bubble_second {
@@ -28,6 +29,7 @@ namespace bubble_second {
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.625f), cocos2d::CallFunc::create([=]() {
             GamePlayController::getInstance()->disposeUseWoodenHammer();
         })));
+        UserDataManager::getInstance()->cutPropsNumbleWithKey(BUBBLE_WOODEN_HAMMER_PROP_KEY);
     }
 
     bool WoodenHammerWeapon::init()

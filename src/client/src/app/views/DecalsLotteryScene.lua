@@ -2,7 +2,7 @@
 -- Author: 黄泽昊
 -- 作用: 贴纸的抽奖场景
 
-local DecalsLotteryScene = class("DecalsLotteryScene", function ()
+local DecalsLotteryScene = class("DecalsLotteryScene", function (decals_type)
     return cc.Layer:create();
 end)
 local DecalsLotteryCardsShow = require(DECALS_LOTTERY_CARDS_SHOW_PATH);
@@ -10,14 +10,13 @@ local DECALS_LATTERY_SCENE_CSB_PATH = "DecalsLotteryLayer.csb";
 local CARDS_BACKGROUND_NAME = "Image_1";
 local BACKGROUND_TOP_UI_NAME = "lottery_top_4";
 local BUTTON_NODE_NAME = "buttonNode";
-
-function DecalsLotteryScene:createScene()
+function DecalsLotteryScene:createScene(decals_type)
     local scene = cc.Scene:create();
-    local layer = DecalsLotteryScene:create();
+    local layer = DecalsLotteryScene:create(decals_type);
     scene:addChild(layer);
     return scene;
 end
-function DecalsLotteryScene:ctor()
+function DecalsLotteryScene:ctor(decals_type)
     local function onNodeEvent(event)
         if event == "enter" then
             self:onEnter();
@@ -26,23 +25,32 @@ function DecalsLotteryScene:ctor()
         end
     end
     self:registerScriptHandler(onNodeEvent);
+    self.decals_type_ = decals_type;
     self:init();
 end
+
 function DecalsLotteryScene:init()
     self.lottery_times_ = 1;
     self:loadCSB();
     self:addCards();
+    self:addUserInfoBoard();
     --self:setScaleX(bs.SmartScaleController:getInstance():getPlayAreaZoom());
+end
+function DecalsLotteryScene:addUserInfoBoard()
+    self:addChild(bs.UserCoinInfoBoard:create());
+    local node = bs.UserDiamondInfoBoard:create()
+    self:addChild(node);
+    self.cab_node_:getChildByName("lottery_label_1"):setPositionY(node:getPositionY());
 end
 function DecalsLotteryScene:loadCSB()
     local csb_node = cc.CSLoader:createNode(DECALS_LATTERY_SCENE_CSB_PATH);
     assert(csb_node);
-    --self.cab_node_ = csb_node;
+    self.cab_node_ = csb_node;
 
     bs.ButtonEffectController:setButtonsZoomScale(csb_node);
     self:addChild(csb_node);
 
-    csb_node:getChildByName("lottery_label_1"):setPositionY(cc.Director:getInstance():getVisibleSize().height*0.9667);
+
 
     local return_button = csb_node:getChildByName("Button_1");
     -- return_button:setPosition(cc.p(cc.Director:getInstance():getVisibleSize().width*0.11, cc.Director:getInstance():getVisibleSize().height*0.06));
@@ -52,6 +60,7 @@ function DecalsLotteryScene:loadCSB()
     end);
 
     local cards_bg = csb_node:getChildByName(CARDS_BACKGROUND_NAME);
+    self.cards_background_ = cards_bg;
     cards_bg:setPositionY(cc.Director:getInstance():getVisibleSize().height*0.3);
     local bg_height = cards_bg:getContentSize().height*bs.SmartScaleController:getInstance():getPlayAreaZoom();
     cards_bg:setContentSize(cc.size(cards_bg:getContentSize().width, bg_height));
@@ -74,7 +83,13 @@ function DecalsLotteryScene:loadCSB()
         self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_AGAIN);
         self.lottery_again_begain_button:setVisible(false);
     end);
-    self.cards_background_ = cards_bg;
+
+    self.free_change_award_button_ = button_node:getChildByName("Button_2_0");
+    self.free_change_award_button_:addClickEventListener(function (...)
+        self.lottery_begin_button:setEnabled(false);
+        self.free_change_award_button_:setEnabled(false);
+        self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_CHANGE_AWARD_CARD_BEGIN);
+    end);
 end
 function DecalsLotteryScene:lotteryBegin()
     --self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_BEGIN);
@@ -83,7 +98,7 @@ function DecalsLotteryScene:lotteryBegin()
     self.lottery_begin_button:setVisible(false);
 end
 function DecalsLotteryScene:addCards()
-    local cards_show = DecalsLotteryCardsShow:create();
+    local cards_show = DecalsLotteryCardsShow:create(self.decals_type_);
     cards_show:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     cards_show:setPosition(cc.p(self.cards_background_:getContentSize().width/2, self.cards_background_:getContentSize().height/2));
     self.cards_show_ = cards_show;
@@ -102,6 +117,10 @@ function DecalsLotteryScene:onEnter()
     end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_AGAIN_BEGIN, lotteryAgainBegin));
 
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_CHANGE_AWARD_CARD_END, function ( event )
+        self.lottery_begin_button:setEnabled(true);
+        self.free_change_award_button_:setEnabled(true);
+    end));
     -- local function lotteryEnd( event )
     --     self.button_node_:setVisible(false);
     -- end

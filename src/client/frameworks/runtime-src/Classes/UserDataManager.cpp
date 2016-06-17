@@ -113,12 +113,13 @@ namespace bubble_second {
         {
             return user_data_.at(key).asInt();
         }
-        return 0;
+        return 10;
     }
     void UserDataManager::setPropsNumbleWithKey(const std::string & key, int numble)
     {
         user_data_[key] = numble;
         this->saveUserData();
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_UPDATE_PROPS_NUMBLE_LABEL);
     }
     void UserDataManager::addPropsNumbleWithKey(const std::string & key, int numble)
     {

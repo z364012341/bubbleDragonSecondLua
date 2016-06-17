@@ -1,7 +1,8 @@
 #include "SpriteTextureController.h"
 #include "UserDataManager.h"
 #include "cocostudio\CocoStudio.h"
-
+const std::string GAME_COIN_PATH = "jinbi.PNG"; //金币
+const std::string GAME_NUMBLE_FONT_PATH = "fonts/typeface-export.fnt";
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_1_PATH = "laohu/laohu.ExportJson"; //老虎的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_2_PATH = "laohu2/laohu2.ExportJson"; //老虎2的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_3_PATH = "laohu3/laohu3.ExportJson"; //老虎3的动画
@@ -64,6 +65,7 @@ namespace bubble_second {
         prop_key_to_path_[BUBBLE_COLOR_BOMB_PROP_KEY] = PROPS_COLOR_BOMB_PATH;
         prop_key_to_path_[BUBBLE_BIG_BOMB_BOMB_PROP_KEY] = PROPS_BOMB_BOMB_PATH;
         prop_key_to_path_[BUBBLE_STAVES_PROP_KEY] = PROPS_STAVES_PATH;
+        prop_key_to_path_[GAME_COIN_KEY] = GAME_COIN_PATH;
 
 
         armature_path_.push_back(LIGHTNING_BUBBLE_EFFECT_PATH);
@@ -361,5 +363,9 @@ namespace bubble_second {
     {
         assert(prop_key_to_path_.find(key) != prop_key_to_path_.end());
         return this->createGameSpriteWithPath(prop_key_to_path_[key]);
+    }
+    cocos2d::ui::TextBMFont * SpriteTextureController::createWhitePurpleFnt(const std::string & str)
+    {
+        return cocos2d::ui::TextBMFont::create(str, GAME_NUMBLE_FONT_PATH);;
     }
 }

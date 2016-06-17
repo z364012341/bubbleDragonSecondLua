@@ -12,9 +12,21 @@
         
 --------------------------------
 -- 
+-- @function [parent=#DecalsFactory] createTreasureNextDecal 
+-- @param self
+-- @return Sprite#Sprite ret (return value: cc.Sprite)
+        
+--------------------------------
+-- 
 -- @function [parent=#DecalsFactory] createCharactorNextDecal 
 -- @param self
 -- @return Sprite#Sprite ret (return value: cc.Sprite)
+        
+--------------------------------
+-- 
+-- @function [parent=#DecalsFactory] getDecalsTreasureData 
+-- @param self
+-- @return array_table#array_table ret (return value: array_table)
         
 --------------------------------
 -- 
@@ -52,12 +64,6 @@
 -- @param #string path
 -- @param #int numble
 -- @return Sprite#Sprite ret (return value: cc.Sprite)
-        
---------------------------------
--- 
--- @function [parent=#DecalsFactory] getTreasureCharactorData 
--- @param self
--- @return array_table#array_table ret (return value: array_table)
         
 --------------------------------
 -- 

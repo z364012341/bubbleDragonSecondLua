@@ -1,6 +1,8 @@
 #include "UserCoinInfoBoard.h"
 #include "AddButton.h"
 #include "BubbleSecondConstant.h"
+#include "UserDataManager.h"
+#include "XMLTool.h"
 const std::string CSB_PATH = "UserCoinInfo.csb";
 const std::string COIN_NODE_NAME = "coinNode";
 namespace bubble_second {
@@ -21,10 +23,15 @@ namespace bubble_second {
 		}
 		cocos2d::Node* csb = cocos2d::CSLoader::createNode(CSB_PATH);
 		csb->getChildByName(ADD_BUTTON_NODE_NAME)->addChild(AddButton::create());
+        numble_label_ = dynamic_cast<cocos2d::ui::TextBMFont*>(csb->getChildByName("BitmapFontLabel_2"));
+        assert(numble_label_);
+        this->updateNumbleLabel();
 		this->addChild(csb);
 
         armature_ = dynamic_cast<cocostudio::Armature*>(csb->getChildByName(COIN_NODE_NAME));
         this->playRandomTimeAnimation();
+        cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
+        this->setPosition(cocos2d::Vec2(visible_size.width*0.512f, visible_size.height*USER_INFO_BOARD_POS_Y_PERCENT));
 		return true;
 	}
 
@@ -40,5 +47,22 @@ namespace bubble_second {
                 }
             });
         })));
+    }
+    void UserCoinInfoBoard::updateNumbleLabel()
+    {
+        numble_label_->setString(XMLTool::convertIntToString(UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY)));
+    }
+    void UserCoinInfoBoard::onEnter()
+    {
+        cocos2d::Node::onEnter();
+        listener_ = cocos2d::EventListenerCustom::create(EVENT_UPDATE_PROPS_NUMBLE_LABEL, [=](cocos2d::EventCustom* event) {
+            this->updateNumbleLabel();
+        });
+        cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 1);
+    }
+    void UserCoinInfoBoard::onExit()
+    {
+        cocos2d::Node::onExit();
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
     }
 }

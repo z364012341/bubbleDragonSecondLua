@@ -20,6 +20,13 @@
         
 --------------------------------
 -- 
+-- @function [parent=#SpriteTextureController] createWhitePurpleFnt 
+-- @param self
+-- @param #string str
+-- @return TextBMFont#TextBMFont ret (return value: ccui.TextBMFont)
+        
+--------------------------------
+-- 
 -- @function [parent=#SpriteTextureController] createStageTypeSprite 
 -- @param self
 -- @param #int type

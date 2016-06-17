@@ -2,12 +2,12 @@
 -- Author: 黄泽昊
 -- 作用: 贴纸的展示类
 
-local DecalsLotteryCardsShow = class("DecalsLotteryCardsShow", function ()
+local DecalsLotteryCardsShow = class("DecalsLotteryCardsShow", function (decals_type)
     return cc.Node:create();
 end)
 local DecalsLotteryCard = require(DECALS_LOTTERY_CARD_PATH);
 local CARDS_SHUFFLE_RANGE_PERCENT = {[6] = 1, [4] = 0.8, [2] = 0.6};
-function DecalsLotteryCardsShow:ctor()
+function DecalsLotteryCardsShow:ctor(decals_type)
 	local function onNodeEvent(event)
 	    if event == "enter" then
 	        self:onEnter();
@@ -16,6 +16,7 @@ function DecalsLotteryCardsShow:ctor()
 	    end
 	end
     self:registerScriptHandler(onNodeEvent);
+    self.decals_type_ = decals_type;
 	self.cards_ = {};
     self:init();
 end
@@ -27,15 +28,21 @@ local SIX_CARDS_POINTS = {cc.p(-CARD_SIX_POS_X, CARD_POS_Y),cc.p(0, CARD_POS_Y),
 local FOUR_CARDS_POINTS = {cc.p(-CARD_FOUR_POS_X, CARD_POS_Y),cc.p(CARD_FOUR_POS_X, CARD_POS_Y),
 							cc.p(-CARD_FOUR_POS_X, -CARD_POS_Y), cc.p(CARD_FOUR_POS_X, -CARD_POS_Y)};
 local TWO_CARDS_POINTS = {cc.p(-CARD_FOUR_POS_X, 0),cc.p(CARD_FOUR_POS_X, 0)};
-local CARDS_POINTS = {[6] = SIX_CARDS_POINTS, [4]=FOUR_CARDS_POINTS, [2] = TWO_CARDS_POINTS};
+local CARDS_POINTS = {[6] = SIX_CARDS_POINTS, [4] = FOUR_CARDS_POINTS, [2] = TWO_CARDS_POINTS};
 function DecalsLotteryCardsShow:init()
-	for _,point in ipairs(CARDS_POINTS[6]) do
+	local numble = math.random(1, #CARDS_POINTS[6]);
+	for i,point in ipairs(CARDS_POINTS[6]) do
 		local card = DecalsLotteryCard:create();
 		card:setPosition(point);
 		self:addChild(card);
 		table.insert(self.cards_, card);
+		if i == numble then
+			card:addDecalItem(self.decals_type_);
+		else
+			card:addRandomAwardItem();
+		end
 	end
-	self.cards_[1]:addDecalItem();
+
 end
 -- function DecalsLotteryCardsShow:lotteryBegin( )
 -- 	for _,card in ipairs(self.cards_) do
@@ -53,7 +60,7 @@ function DecalsLotteryCardsShow:lotteryAgain()
 end
 function DecalsLotteryCardsShow:removeTwoCards()
 	local selected_card = self:findAndRemoveSelectedCard();
-	selected_card:setLocalZOrder(1);
+	selected_card:setLocalZOrder(2);
 	selected_card:runAction(cc.RepeatForever:create(cc.RotateBy:create(0.5, 360)));
 
 	-- local end_point = GlobalFunction.getVisibleCenterPosition();

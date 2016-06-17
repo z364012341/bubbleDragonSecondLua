@@ -21,10 +21,11 @@ namespace bubble_second {
         cocos2d::Vec2 convertDecalNumbleToIndex(int numble, const std::string & path);
         void loadDecalsData();
         cocos2d::ValueVector getDecalsCharactorData();
-        cocos2d::ValueVector getTreasureCharactorData();
+        cocos2d::ValueVector getDecalsTreasureData();
         cocos2d::Vec2 getDecalsMaxIndexWithPath(const std::string& path);
 
         cocos2d::Sprite* createCharactorNextDecal();
+        cocos2d::Sprite* createTreasureNextDecal();
     private:
         DecalsFactory();
         cocos2d::Sprite* createDecalBackground(cocos2d::Sprite* decal, const std::string& path, int numble);

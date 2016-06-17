@@ -53,7 +53,10 @@ cc.exports.DECALS_LOTTERY_SCENE_PATH = "app.views.DecalsLotteryScene";
 cc.exports.DECALS_LOTTERY_CARD_PATH = "app.views.DecalsLotteryCard";
 --local DecalsLotteryCardsShow = require(DECALS_LOTTERY_CARDS_SHOW_PATH);
 cc.exports.DECALS_LOTTERY_CARDS_SHOW_PATH = "app.views.DecalsLotteryCardsShow";
-
+--local DecalsCharactorUnlockAlert = require(DECALS_CHARACTOR_UNLOCK_ALERT_PATH);
+cc.exports.DECALS_CHARACTOR_UNLOCK_ALERT_PATH = "app.views.DecalsCharactorUnlockAlert";
+--local DecalsTreasureUnlockAlert = require(DECALS_TREASURE_UNLOCK_ALERT_PATH);
+cc.exports.DECALS_TREASURE_UNLOCK_ALERT_PATH = "app.views.DecalsTreasureUnlockAlert";
 
 cc.exports.EVENT_PUZZLE_ANSWER_LOAD = "event_puzzle_answer_load";
 cc.exports.EVENT_PUSH_ANSWERS_THUMBNAIL = "event_push_answers_thumbnail";
@@ -85,6 +88,10 @@ cc.exports.EVENT_DECALS_LOTTERY_AGAIN = "event_decals_lottery_again";
 cc.exports.EVENT_DECALS_LOTTERY_AGAIN_BEGIN = "event_decals_lottery_again_begin";
 -- cc.exports.EVENT_DECALS_LOTTERY_BEGIN = "event_decals_lottery_begin";
 cc.exports.EVENT_DECALS_LOTTERY_REMOVE_CARD = "event_decals_lottery_remove_card";
+cc.exports.EVENT_DECALS_LOTTERY_CHANGE_AWARD_CARD_BEGIN = "event_decals_lottery_change_award_card_begin";
+cc.exports.EVENT_DECALS_LOTTERY_CHANGE_AWARD_CARD_END = "event_decals_lottery_change_award_card_end";
+cc.exports.POP_CHARACTOR_UNLOCK_ALERT = "pop_charactor_unlock_alert";
+cc.exports.POP_TREASURE_UNLOCK_ALERT = "pop_treasure_unlock_alert";
 -- cc.exports.EVENT_DECALS_LOTTERY_END = "event_decals_lottery_end";
 -- cc.exports.EVENT_ANSWER_ZOOM_IN_ACTION = "event_answer_zoom_in_action";
 

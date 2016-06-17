@@ -277,7 +277,9 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\lua_PuzzleStoreItemFactory_auto.hpp" />
     <ClInclude Include="..\Classes\lua_SmartScaleController_auto.hpp" />
     <ClInclude Include="..\Classes\lua_SpriteTextureController_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_UserCoinInfoBoard_auto.hpp" />
     <ClInclude Include="..\Classes\lua_UserDataManager_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_UserDiamondInfoBoard_auto.hpp" />
     <ClInclude Include="..\Classes\md5.h" />
     <ClInclude Include="..\Classes\MutipleSealBubble.h" />
     <ClInclude Include="..\Classes\NullBubble.h" />
@@ -412,7 +414,9 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\lua_PuzzleStoreItemFactory_auto.cpp" />
     <ClCompile Include="..\Classes\lua_SmartScaleController_auto.cpp" />
     <ClCompile Include="..\Classes\lua_SpriteTextureController_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_UserCoinInfoBoard_auto.cpp" />
     <ClCompile Include="..\Classes\lua_UserDataManager_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_UserDiamondInfoBoard_auto.cpp" />
     <ClCompile Include="..\Classes\md5.cpp" />
     <ClCompile Include="..\Classes\MutipleSealBubble.cpp" />
     <ClCompile Include="..\Classes\NullBubble.cpp" />

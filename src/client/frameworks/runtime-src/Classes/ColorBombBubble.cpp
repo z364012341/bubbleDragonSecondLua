@@ -1,6 +1,6 @@
 #include "ColorBombBubble.h"
 #include "cocostudio\CocoStudio.h"
-
+#include "UserDataManager.h"
 namespace bubble_second {
     ColorBombBubble::ColorBombBubble()
     {
@@ -14,6 +14,7 @@ namespace bubble_second {
     void ColorBombBubble::dispatchEventAfterShooted()
     {
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_HAVE_USED_PROPS, this);
+        UserDataManager::getInstance()->cutPropsNumbleWithKey(BUBBLE_COLOR_BOMB_PROP_KEY);
     }
 
     void ColorBombBubble::bubbleEliminate(int)
