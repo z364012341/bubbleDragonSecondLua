@@ -27,6 +27,6 @@ namespace bubble_second {
         bool init(const std::string& logo_name);
     private:
         cocos2d::ui::Button* button_ = nullptr;
-    };
+    };   
 }
 #endif //_GAME_START_BUTTON_H_

@@ -1,4 +1,4 @@
-
+package.path = package.path .. ";src/?.lua";
 cc.FileUtils:getInstance():setPopupNotify(false)
 cc.FileUtils:getInstance():addSearchPath("src/")
 cc.FileUtils:getInstance():addSearchPath("res/")
