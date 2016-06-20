@@ -40,6 +40,7 @@
 #include "GameBubbleMapImple.h"
 #include "BubbleMainSightingDevice.h"
 #include "GameAlertMask.h"
+#include "SkillDyeingBubble.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -341,10 +342,17 @@ namespace bubble_second {
             });
             //技能秃瓢
             {
-                cocos2d::Sprite* skillSprite = SpriteTextureController::getInstance()->createGameSpriteWithPath("jineng.PNG");
-                skillSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
-                skillSprite->setScale(zoom);
-                this->addChild(skillSprite, UI_ZORDER_MENU_INFO);
+                //cocos2d::Sprite* skillSprite = SpriteTextureController::getInstance()->createGameSpriteWithPath("jineng.PNG");
+                //skillSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
+                //skillSprite->setScale(zoom);
+                //this->addChild(skillSprite, UI_ZORDER_MENU_INFO);
+                cocos2d::ui::Button* skillButton = cocos2d::ui::Button::create("jineng.PNG");
+                this->addChild(skillButton, UI_ZORDER_MENU_INFO);
+                skillButton->setScale(zoom);
+                skillButton->setPosition(cocos2d::Vec2(visible_size.width* 0.1, visible_size.height* 0.06));
+                skillButton->addClickEventListener([=](cocos2d::Ref*) {
+                    this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
+                });
             }
         }
         //{   //发射台上的漩涡
@@ -375,7 +383,8 @@ namespace bubble_second {
 
     void GameScene::initHandle()
     {
-        props_name_to_handle_[COLOR_BOMB_BUBBLE_NAME] = [=](BaseProperty* property) {this->haveShootPropsBubble(property); };
+        //props_name_to_handle_[COLOR_BOMB_BUBBLE_NAME] = [=](BaseProperty* property) {this->haveShootPropsBubble(property); };
+        //props_name_to_handle_[PROPS_BOMB_BOMB_NAME] = [=](BaseProperty* property) {this->haveShootPropsBubble(property); };
         props_name_to_color_[PROPS_COLOR_BOMB_NAME] = kBubbleColorBomb;
         props_name_to_color_[PROPS_BOMB_BOMB_NAME] = kBubbleBombBombProperty;
         //bubblecolor_to_swirl_[kBubbleTransparent] = "";
@@ -789,6 +798,18 @@ namespace bubble_second {
             this->popDefeatAlert();
         });
         dispatcher->addCustomEventListener(EVENT_END_CHARACTOR_BUY_CONTINUE, CC_CALLBACK_1(GameScene::gameDefeatBuyContinue, this));
+        dispatcher->addCustomEventListener(EVENT_USE_DYEING_BUBBLE_SKILL, [=](cocos2d::EventCustom * event) {
+            auto bubble = dynamic_cast<SkillDyeingBubble*>(BubbleFactory::getInstance()->createBubbleWithType(kBubbleSkillDyeingBubble));
+            bubble->setDyeingColor(this->getPrepareBubble()->getBubbleType());
+            this->useCharactorSkill(bubble);
+        });
+        //dispatcher->addCustomEventListener(EVENT_DYEING_BUBBLE_COLOR, [=](cocos2d::EventCustom * event) {
+        //    BubbleVector vector = *static_cast<BubbleVector*>(event->getUserData());
+        //    for (auto bubble : vector)
+        //    {
+
+        //    }
+        //});
     }
 
     void GameScene::removeEventListenerCustom()
@@ -1349,7 +1370,8 @@ namespace bubble_second {
         this->removeExchangeBubbleListener();
         BaseProperty* property = static_cast<BaseProperty*>(event->getUserData());
         auto controller = GamePlayController::getInstance();
-        if (color_bomb_property_->itemIsUsing() && bomb_bomb_property_->itemIsUsing())
+        //if (color_bomb_property_->itemIsUsing() && bomb_bomb_property_->itemIsUsing())
+        if (property_bubble_ != nullptr)
         {
             property_bubble_->removeFromParent();
             property_bubble_ = BubbleFactory::getInstance()->createBubbleWithType(props_name_to_color_[property->getName()]);
@@ -1358,7 +1380,7 @@ namespace bubble_second {
             controller->setBubbleShootEnabled(true);
             controller->setPrepareBubble(property_bubble_);
             this->changeSightingDeviceColor();
-            property->actionEnded();
+            //property->actionEnded();
             if (property->getName() != PROPS_COLOR_BOMB_NAME)
             {
                 dynamic_cast<BaseProperty*>(this->getChildByName(PROPS_COLOR_BOMB_NAME))->BaseProperty::cancelUseItem();
@@ -1367,43 +1389,73 @@ namespace bubble_second {
             {
                 dynamic_cast<BaseProperty*>(this->getChildByName(PROPS_BOMB_BOMB_NAME))->BaseProperty::cancelUseItem();
             }
+            this->playPrepareBubbleStanbyAction();
         }
         else
         {
+            //property->actionBegan();
             property_bubble_ = BubbleFactory::getInstance()->createBubbleWithType(props_name_to_color_[property->getName()]);
-            property_bubble_->setPosition(this->getGunsightPosition());
-            csb_node_->addChild(property_bubble_);
-            property->actionBegan();
-            controller->setBubbleShootEnabled(false);
-            if (BaseBubble* bubble = this->getSecondPrepareBubble())
-            {
-                bubble->setVisible(false);
-            }
-            cocos2d::MoveTo* move = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getSecondBubbleStoreNodePosition());
-            cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move, cocos2d::CallFunc::create([=]() {
-                controller->setBubbleShootEnabled(true);
-                controller->setPrepareBubble(property_bubble_);
-                this->changeSightingDeviceColor();
-                property->actionEnded();
-            }));
-            this->getPrepareBubble()->runAction(seq);   
+            this->pushBubbleToPrepare(property_bubble_);
+            //property_bubble_->setPosition(this->getGunsightPosition());
+            //csb_node_->addChild(property_bubble_);
+            //controller->setBubbleShootEnabled(false);
+            //if (BaseBubble* bubble = this->getSecondPrepareBubble())
+            //{
+            //    bubble->setVisible(false);
+            //}
+            //cocos2d::MoveTo* move = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getSecondBubbleStoreNodePosition());
+            //cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(move, cocos2d::CallFunc::create([=]() {
+            //    controller->setBubbleShootEnabled(true);
+            //    controller->setPrepareBubble(property_bubble_);
+            //    this->changeSightingDeviceColor();
+            //    property->actionEnded();
+            //}));
+            //this->getPrepareBubble()->runAction(seq);   
         }
+    }
+
+    void bubble_second::GameScene::pushBubbleToPrepare(BaseBubble * bubble/*, cocos2d::CallFunc* callfunc*/)
+    {
+        this->setPropertyTouchEnabled(false);
+        bubble->setPosition(this->getGunsightPosition());
+        csb_node_->addChild(bubble);
+        GamePlayController::getInstance()->setBubbleShootEnabled(false);
+        if (BaseBubble* bubble = this->getSecondPrepareBubble())
+        {
+            bubble->setVisible(false);
+        }
+        cocos2d::MoveTo* move = cocos2d::MoveTo::create(PREPARE_RELOAD_MOVE_TIME, this->getSecondBubbleStoreNodePosition());
+        cocos2d::Sequence* seq = cocos2d::Sequence::create(move, cocos2d::CallFunc::create([=]() {
+            GamePlayController::getInstance()->setBubbleShootEnabled(true);
+            GamePlayController::getInstance()->setPrepareBubble(bubble);
+            this->changeSightingDeviceColor();
+            this->playPrepareBubbleStanbyAction();
+            this->setPropertyTouchEnabled(true);
+        }), nullptr);
+        this->getPrepareBubble()->runAction(seq);   
+    }
+
+    void GameScene::useCharactorSkill(BaseBubble * bubble)
+    {
+        property_bubble_ = bubble;
+        this->pushBubbleToPrepare(property_bubble_);
     }
 
     void GameScene::cancelUsedBubbleBombProps(cocos2d::EventCustom* event)
     {
         property_bubble_->removeFromParent();
         property_bubble_ = nullptr;
-        this->haveShootPropsBubble(static_cast<BaseProperty*>(event->getUserData()));
+        this->haveShootPropsBubble();
     }
 
-    void GameScene::haveShootPropsBubble(BaseProperty* property)
+    void GameScene::haveShootPropsBubble()
     {
         if (nullptr == this->getPrepareBubble())
         {
             return;
         }
-        property->actionBegan();
+        //property->actionBegan();
+        this->setPropertyTouchEnabled(false);
         auto controller = GamePlayController::getInstance();
         controller->setBubbleShootEnabled(false);
         BaseBubble* pre_bubble = this->getPrepareBubble();
@@ -1416,8 +1468,10 @@ namespace bubble_second {
             }
             this->addExchangeBubbleListener();
             controller->setPrepareBubble(pre_bubble);
-            property->actionEnded();
+            //property->actionEnded();
             this->changeSightingDeviceColor();
+            this->playPrepareBubbleStanbyAction();
+            this->setPropertyTouchEnabled(true);
         }));
         pre_bubble->runAction(seq);
     }
@@ -1440,11 +1494,13 @@ namespace bubble_second {
 
     void GameScene::haveUsedProps(cocos2d::EventCustom* event)
     {
-        BaseProperty* property = static_cast<BaseProperty*>(event->getUserData());
-        if (property)
-        {
-            props_name_to_handle_[property->getName()](property);
-        }
+        //BaseProperty* property = static_cast<BaseProperty*>(event->getUserData());
+        //if (property)
+        //{
+        //    props_name_to_handle_[property->getName()](property);
+        //}
+        property_bubble_ = nullptr;
+        this->haveShootPropsBubble();
     }
 
     void GameScene::addPropsSelectAlert(cocos2d::EventCustom* event)
@@ -1691,7 +1747,11 @@ namespace bubble_second {
 
 	void GameScene::playPrepareBubbleStanbyAction()
 	{
-		dynamic_cast<ColorBubble*>(GamePlayController::getInstance()->getPrepareBubble())->playStanbyAnimation();
+        dynamic_cast<ColorBubble*>(GamePlayController::getInstance()->getPrepareBubble())->playStanbyAnimation();
+        if (property_bubble_ != nullptr)
+        {
+            dynamic_cast<ColorBubble*>(this->getPrepareBubble())->stopStanbyAnimation();
+        }
         if (ColorBubble* bubble = dynamic_cast<ColorBubble*>(this->getSecondPrepareBubble()))
         {
             bubble->stopStanbyAnimation();

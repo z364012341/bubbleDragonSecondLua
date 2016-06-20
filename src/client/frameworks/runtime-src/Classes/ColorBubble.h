@@ -58,6 +58,8 @@ namespace bubble_second {
         void delayNotCollision();
         //变成随机特殊泡泡
         void changeRandomSpecialBubble(const cocos2d::Vec2& point, StageType stage_type);
+        //被染色
+        void dyeingBubbleColor(BubbleType to_color);
 		//待机动画
 		void playStanbyAnimation();
 		void stopStanbyAnimation();
@@ -74,13 +76,13 @@ namespace bubble_second {
         BubbleType getBubbleType() override;
     protected:
         ColorBubble();
+        bool init();
         bool initWithTypeAndCloud(int type, int cloud = kBubbleNoCloud);
         virtual ~ColorBubble();
         //从空中掉落
 		void dispatchCustomAddAirBubbleNumbleEvent();
         void downFromAir() override;
     private:
-        bool init();
         bool initWithType(int type);
         void initHandleEffect();
         void runPreBubbleContactEffect(const cocos2d::Vec2& contact_point);

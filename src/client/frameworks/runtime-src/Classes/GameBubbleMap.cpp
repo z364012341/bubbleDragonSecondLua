@@ -10,6 +10,7 @@
 #include "BubbleColorRender.h"
 #include "GameScoreController.h"
 #include "StartNumbleModule.h"
+#include "SkillDyeingBubble.h"
 const float BUBBLE_ELIMINATE_DELAY_TIME = 0.06f;  //小球消除的延迟
 namespace bubble_second {
     GameBubbleMap::GameBubbleMap()
@@ -88,12 +89,12 @@ namespace bubble_second {
 
     void GameBubbleMap::disposeContactBubble(BaseBubble* prepare_bubble, const cocos2d::Vec2& contact_index)
     {
-
-        this->disposePreclingBubble(prepare_bubble, game_bubble_map_impl_->preclingBubble(prepare_bubble, contact_index));
-        this->runBubbleEffect(prepare_bubble, contact_index);
-        this->disposeWindmillRotation(prepare_bubble);
-        //先粘附上去, 然后再进行消除判断
-        BaseBubble* prepare_after_cling_bubble = game_bubble_map_impl_->clingBubble(prepare_bubble, contact_index);
+        //this->disposePreclingBubble(prepare_bubble, game_bubble_map_impl_->preclingBubble(prepare_bubble, contact_index));
+        //this->runBubbleEffect(prepare_bubble, contact_index);
+        //this->disposeWindmillRotation(prepare_bubble);
+        ////先粘附上去, 然后再进行消除判断
+        //BaseBubble* prepare_after_cling_bubble = game_bubble_map_impl_->clingBubble(prepare_bubble, contact_index);
+        BaseBubble* prepare_after_cling_bubble = this->getPreClingBubble(prepare_bubble, contact_index);
         this->disposeDarkCloudBubble(prepare_after_cling_bubble->getBubbleIndex());
         BubbleVector same_bubble_map = game_bubble_map_impl_->getSametypeBubbleWithIndex(prepare_after_cling_bubble->getBubbleIndex());
         if (this->canEliminate(same_bubble_map))
@@ -410,10 +411,11 @@ namespace bubble_second {
 
     void GameBubbleMap::disposeUsedPropertyBubble(BaseBubble* property_bubble, const cocos2d::Vec2& contact_index)
     {
-        this->disposePreclingBubble(property_bubble, game_bubble_map_impl_->preclingBubble(property_bubble, contact_index));
-        this->runBubbleEffect(property_bubble, contact_index);
-        this->disposeWindmillRotation(property_bubble);
-        BaseBubble* bubble = game_bubble_map_impl_->clingBubble(property_bubble, contact_index);
+        //this->disposePreclingBubble(property_bubble, game_bubble_map_impl_->preclingBubble(property_bubble, contact_index));
+        //this->runBubbleEffect(property_bubble, contact_index);
+        //this->disposeWindmillRotation(property_bubble);
+        //BaseBubble* bubble = game_bubble_map_impl_->clingBubble(property_bubble, contact_index);
+        BaseBubble* bubble = this->getPreClingBubble(property_bubble, contact_index);
         auto handle = type_to_disposed_[bubble->getBubbleType()];
         if (!handle)
         {
@@ -427,6 +429,14 @@ namespace bubble_second {
         game_bubble_map_impl_->removeSpriteFromeMapWithIndex(cling_index);
         this->eliminateBubbles(after_buff_bubbles, property_bubble, BUBBLE_ELIMINATE_DELAY_TIME);
         this->dispatchAddEliminateComboEvent(cling_point);
+    }
+
+    BaseBubble* GameBubbleMap::getPreClingBubble(BaseBubble * property_bubble, const cocos2d::Vec2 & contact_index)
+    {
+        this->disposePreclingBubble(property_bubble, game_bubble_map_impl_->preclingBubble(property_bubble, contact_index));
+        this->runBubbleEffect(property_bubble, contact_index);
+        this->disposeWindmillRotation(property_bubble);
+        return game_bubble_map_impl_->clingBubble(property_bubble, contact_index);
     }
 
     BubbleVector GameBubbleMap::disposeBombPropertyBubble(const cocos2d::Vec2& bomb_index)
@@ -607,6 +617,21 @@ namespace bubble_second {
         BaseBubble* bubble = game_bubble_map_impl_->getBubbleMinCenter();
         GamePlayController::getInstance()->setSelectBubble(bubble);
         this->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, bubble);
+    }
+
+    void GameBubbleMap::disposeSkillDyeingBubble(BaseBubble * dyeing_bubble, const cocos2d::Vec2 & contact_index)
+    {
+        BaseBubble* bubble = this->getPreClingBubble(dyeing_bubble, contact_index);
+        auto vector = game_bubble_map_impl_->getTwoAroundBubbleWithIndex(contact_index);
+        BubbleType dyeing_color = dynamic_cast<SkillDyeingBubble*>(dyeing_bubble)->getDyeingColor();
+        for (auto bubble : vector)
+        {
+            if (bubble->isColorBubbleType())
+            {
+                dynamic_cast<ColorBubble*>(bubble)->dyeingBubbleColor(dyeing_color);
+            }
+        }
+
     }
 
 }

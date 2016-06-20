@@ -14,7 +14,7 @@ namespace bubble_second {
 
     void BombPropertyBubble::dispatchEventAfterShooted()
     {
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_HAVE_USED_PROPS, this);
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_HAVE_USED_PROPS);
         UserDataManager::getInstance()->cutPropsNumbleWithKey(BUBBLE_BIG_BOMB_BOMB_PROP_KEY);
     }
 
@@ -29,7 +29,7 @@ namespace bubble_second {
         {
             return false;
         }
-        this->setName(COLOR_BOMB_BUBBLE_NAME);
+        this->setName(PROPS_BOMB_BOMB_NAME);
         this->addBubblePrepareBody();
         return true;
     }

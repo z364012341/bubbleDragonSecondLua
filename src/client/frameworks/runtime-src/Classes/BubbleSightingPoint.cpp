@@ -108,6 +108,9 @@ namespace bubble_second {
         case kBubbleColorBomb:
             controller->setSpriteTexture(SIGHT_POINT_COLORFUL_PATH, sprite_);
             break;
+        case kBubbleSkillDyeingBubble:
+            controller->setSpriteTexture(BUBBLE_SIGHTING_POINT_PATH, sprite_);
+            break;
         default:
             assert(false);
             break;

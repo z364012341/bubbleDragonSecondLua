@@ -11,6 +11,7 @@
 #include "MutipleSealBubble.h"
 #include "WindmillBubble.h"
 #include "AddBubbleNumbleBubble.h"
+#include "SkillDyeingBubble.h"
 namespace bubble_second {
     BubbleFactory::BubbleFactory()
     {
@@ -43,6 +44,7 @@ namespace bubble_second {
         key_to_handle_map_[kBubbleMutipleSeal7] = [=](int, int) {return MutipleSealBubble::createWithComponentNumble(BUBBLE_MUTIPLE_SEAL_COMPONENT_NUMBLE_7); };
         key_to_handle_map_[kBubbleWindmill] = [=](int, int) {return  WindmillBubble::create(); };
         key_to_handle_map_[kBubbleAddNumbleBubble] = [=](int, int) {return  AddBubbleNumbleBubble::create(); };
+        key_to_handle_map_[kBubbleSkillDyeingBubble] = [=](int, int) {return  SkillDyeingBubble::create(); };
     }
 
     void bubble_second::BubbleFactory::initBubblePath()

@@ -81,15 +81,15 @@ namespace bubble_second {
         return true;
     }
 
-    void BaseProperty::actionBegan()
-    {
-        touch_flag_ = false;
-    }
+    //void BaseProperty::actionBegan()
+    //{
+    //    touch_flag_ = false;
+    //}
 
-    void BaseProperty::actionEnded()
-    {
-        touch_flag_ = true;
-    }
+    //void BaseProperty::actionEnded()
+    //{
+    //    touch_flag_ = true;
+    //}
 
     isUsing BaseProperty::itemIsUsing()
     {

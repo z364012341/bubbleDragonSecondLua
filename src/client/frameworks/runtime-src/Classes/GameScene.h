@@ -180,7 +180,7 @@ namespace bubble_second {
         void addExchangeBubbleListener();
         void removeExchangeBubbleListener();
         //发射了道具小球之后事件响应
-        void haveShootPropsBubble(BaseProperty* property);
+        void haveShootPropsBubble();
         //设置道具图标是否能点击
         void setPropertyTouchEnabled(bool flag);
         //设置包括菜单都不能点
@@ -248,7 +248,10 @@ namespace bubble_second {
         //cocos2d::MoveBy* getMapFallingAction();
         //移动地图
         void moveMapWithDistance(float moveby_distance);
-        //计算移动距离
+        //push泡泡到发射架
+        void pushBubbleToPrepare(BaseBubble* bubble/*, cocos2d::CallFunc* callfunc = nullptr*/);
+        //使用人物技能
+        void useCharactorSkill(BaseBubble* bubble);
     private:
         //添加自定义事件监听
         void addEventListenerCustom();
@@ -347,7 +350,7 @@ namespace bubble_second {
         cocos2d::Node* csb_node_;
         cocos2d::Node* bubble_map_node_;
         BaseBubble* property_bubble_;
-        std::map<std::string, std::function<void(BaseProperty* property)>> props_name_to_handle_;
+        //std::map<std::string, std::function<void(BaseProperty* property)>> props_name_to_handle_;
         std::map<std::string, BubbleType> props_name_to_color_;
         BaseProperty* color_bomb_property_;
         BaseProperty* bomb_bomb_property_;

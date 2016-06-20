@@ -421,6 +421,7 @@
     <ClInclude Include="..\Classes\lua_UserDiamondInfoBoard_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\SkillDyeingBubble.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -814,6 +815,7 @@
     <ClCompile Include="..\Classes\lua_UserDiamondInfoBoard_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\SkillDyeingBubble.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

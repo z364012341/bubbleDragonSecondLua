@@ -47,9 +47,9 @@ namespace bubble_second {
         void onExit() override;
     public:
         virtual void touchItem();
-        void actionBegan();
+        //void actionBegan();
         virtual void cancelUseItem();
-        void actionEnded();
+        //void actionEnded();
         isUsing itemIsUsing();
         void setPropertyEnabled(bool flag);
         bool isPropertyEnabled();

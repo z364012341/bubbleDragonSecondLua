@@ -207,6 +207,13 @@ namespace bubble_second {
         bubble->runAction(cocos2d::Sequence::createWithTwoActions(move, callfunc));
     }
 
+    void ColorBubble::dyeingBubbleColor(BubbleType to_color)
+    {
+        GamePlayController::getInstance()->subtractPrepareColor(this->getBubbleType());
+        this->setBubbleType(to_color);
+        GamePlayController::getInstance()->addPrepareColor(to_color);
+    }
+
     void ColorBubble::onEnter()
     {
         BaseBubble::onEnter();

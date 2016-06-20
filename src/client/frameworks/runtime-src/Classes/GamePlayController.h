@@ -176,6 +176,8 @@ namespace bubble_second {
         void disposeContactWindmillBorder(cocos2d::Node* node_1, cocos2d::Node* node_2);
         //处理下落模式碰到边界
         void disposeFallBubbleBorder(cocos2d::Node* border_node, cocos2d::Node* other_node);
+        //处理染色球
+        void disposeUsingDyeingBubble(BaseBubble* dyeing_bubble, BaseBubble* bubble);
     private:
         enum Direction
         {

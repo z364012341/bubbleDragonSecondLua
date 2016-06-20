@@ -450,6 +450,9 @@ const std::string EVENT_GAME_DEFEAT_RETURN = "event_game_defeat_return";
 const std::string EVENT_GAME_DEFEAT_BUY_ALERT_RETURN = "event_game_defeat_buy_alert_return";
 const std::string EVENT_DEFEAT_BUY_CONTINUE_PLAY = "event_defeat_buy_continue_play";
 const std::string EVENT_END_CHARACTOR_BUY_CONTINUE = "event_end_charactor_buy_continue";
+const std::string EVENT_USE_CHARACTOR_SKILL = "event_use_charactor_skill";
+const std::string EVENT_USE_DYEING_BUBBLE_SKILL = "event_use_dyeing_bubble_skill";
+//const std::string EVENT_DYEING_BUBBLE_COLOR = "event_dyeing_bubble_color";
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效
@@ -459,6 +462,7 @@ const std::string BUBBLE_MAP_NODE_NAME = "bubble_map_node";  //地图node
 const std::string SCORE_WIDGET_NODE_NAME = "ProjectNode_1";  //得分挂件的node名字
 const std::string PREPARE_BUBBLE_NAME = "prepare_bubble";  //准备小球
 const std::string COLOR_BOMB_BUBBLE_NAME = "color_bomb_bubble";  //道具彩球
+const std::string DYEING_BUBBLE_NAME = "dyeing_bubble_name";  //技能染色球
 //const std::string SECOND_PREPARE_BUBBLE_NAME = "second_bubble";  //备选小球
 const std::string BARREL_BOTTOM_NAME = "BARREL_BOTTOM_NAME";//桶底
 const std::string SCORE_WIDGET_NAME = "SCORE_WIDGET";    //得分撞击配件
@@ -795,7 +799,8 @@ enum BubbleType
     kBubbleComponentLast = kBubbleMutipleSeal7,
     kBubbleRandomColor,
     kBubbleWindmill,
-    kBubbleAddNumbleBubble
+    kBubbleAddNumbleBubble,
+    kBubbleSkillDyeingBubble
 };
 
 enum ScoreWidgetType

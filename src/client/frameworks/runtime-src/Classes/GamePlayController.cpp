@@ -57,6 +57,7 @@ namespace bubble_second {
         key_to_handle_map_[kBubbleRainbowSeal] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleMutipleSeal] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleWindmill] = &GamePlayController::disposeContactWithColorBubble;
+        props_to_handle_[kBubbleSkillDyeingBubble] = &GamePlayController::disposeUsingDyeingBubble;
 
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, PREPARE_BUBBLE_NAME, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBarrelBottom, BARREL_BOTTOM_NAME, MAP_BUBBLE_NAME);
@@ -70,6 +71,7 @@ namespace bubble_second {
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWindmillBorder, UI_NAME_WINDMILL_BORDER, PROPS_BOMB_BOMB_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWindmillBorder, UI_NAME_WINDMILL_BORDER, COLOR_BOMB_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeFallBubbleBorder, UI_NAME_FALL_BOTTOM_BORDER, MAP_BUBBLE_NAME);
+        this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, DYEING_BUBBLE_NAME, MAP_BUBBLE_NAME);
     }
 
     void bubble_second::GamePlayController::addContactHandleWithTwoNames(contactHandle handle, const std::string& name_1, const std::string& name_2)
@@ -433,6 +435,12 @@ namespace bubble_second {
     void GamePlayController::disposeFallBubbleBorder(cocos2d::Node * border_node, cocos2d::Node * other_node)
     {
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_GAME_DEFEAT);
+    }
+
+    void GamePlayController::disposeUsingDyeingBubble(BaseBubble* dyeing_bubble, BaseBubble* bubble)
+    {
+        bubble_map_->disposeSkillDyeingBubble(dyeing_bubble, bubble->getBubbleIndex());
+        dyeing_bubble->bubbleEliminate();
     }
 
     cocos2d::Vec2 GamePlayController::convertGLToNodeSpace(const cocos2d::Vec2& touch_location, cocos2d::Node* node)

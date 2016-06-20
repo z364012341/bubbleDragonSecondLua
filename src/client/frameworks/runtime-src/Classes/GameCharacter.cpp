@@ -72,6 +72,7 @@ namespace bubble_second {
         dispatcher->addCustomEventListener(EVENT_ROTATE_SIGHTING_DEVICE, CC_CALLBACK_1(GameCharacter::changeCharacterAngle, this));
         dispatcher->addCustomEventListener(EVENT_EXCHANGE_BUBBLE, [=](cocos2d::EventCustom* event) {this->playExchangeBubbleAnimation(); });
         dispatcher->addCustomEventListener(EVENT_DEFEAT_BUY_CONTINUE_PLAY, [=](cocos2d::EventCustom* event) {this->playDefeatContinuePlayAnimation(); });
+        dispatcher->addCustomEventListener(EVENT_USE_CHARACTOR_SKILL, [=](cocos2d::EventCustom* event) {this->useCharactorSkill(); });
 	}
 
 	void GameCharacter::removeEventListenerCustom()
@@ -80,6 +81,7 @@ namespace bubble_second {
 		dispatcher->removeCustomEventListeners(EVENT_SHOOT_PREPARE_BUBBLE);
         dispatcher->removeCustomEventListeners(EVENT_ROTATE_SIGHTING_DEVICE);
         dispatcher->removeCustomEventListeners(EVENT_DEFEAT_BUY_CONTINUE_PLAY);
+        dispatcher->removeCustomEventListeners(EVENT_USE_CHARACTOR_SKILL);
 	}
 
 	void GameCharacter::addCharacterArmature()
@@ -422,6 +424,11 @@ namespace bubble_second {
 			var.second->setVisible(var.second == armature);
 		}
 	}
+
+    void GameCharacter::useCharactorSkill()
+    {
+        this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_DYEING_BUBBLE_SKILL);
+    }
 
     void GameCharacter::setDefeatFlag(bool flag)
     {

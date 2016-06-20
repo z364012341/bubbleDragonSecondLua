@@ -13,7 +13,7 @@ namespace bubble_second {
 
     void ColorBombBubble::dispatchEventAfterShooted()
     {
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_HAVE_USED_PROPS, this);
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_HAVE_USED_PROPS);
         UserDataManager::getInstance()->cutPropsNumbleWithKey(BUBBLE_COLOR_BOMB_PROP_KEY);
     }
 

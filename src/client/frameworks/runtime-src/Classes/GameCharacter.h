@@ -76,6 +76,8 @@ namespace bubble_second {
         void changeCharacterAngle(cocos2d::EventCustom* event);
 		//设置其他动画不可见
 		void setOtherArmatureInvisible(cocostudio::Armature* armature);
+        //使用角色技能
+        void useCharactorSkill();
     private:
 		cocos2d::Map<std::string, cocostudio::Armature*> armature_vector_;
         bool defeat_flag_ = false;

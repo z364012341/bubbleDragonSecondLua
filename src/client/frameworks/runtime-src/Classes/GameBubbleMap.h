@@ -39,6 +39,8 @@ namespace bubble_second {
         BubbleVector disposeColorBombBubble(const cocos2d::Vec2& colorbomb_index);
         //处理使用道具球
         void disposeUsedPropertyBubble(BaseBubble* property_bubble, const cocos2d::Vec2& contact_index);
+        //消除前获取cling球
+        BaseBubble*  getPreClingBubble(BaseBubble* property_bubble, const cocos2d::Vec2& contact_index);
         //处理炸两圈炸弹
         BubbleVector disposeBombPropertyBubble(const cocos2d::Vec2& bomb_index);
         //进行泡泡掉落检测
@@ -67,6 +69,8 @@ namespace bubble_second {
         //处理最下中心小球
         void disposePhysicsCaseMinYCenterBubble(BaseBubble* contact_bubble);
         void disposeMinYCenterBubble();
+        //处理染色泡泡
+        void disposeSkillDyeingBubble(BaseBubble* dyeing_bubble, const cocos2d::Vec2& contact_index);
     private:
         GameBubbleMap();
         bool init();
