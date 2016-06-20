@@ -622,7 +622,7 @@ namespace bubble_second {
     void GameBubbleMap::disposeSkillDyeingBubble(BaseBubble * dyeing_bubble, const cocos2d::Vec2 & contact_index)
     {
         BaseBubble* bubble = this->getPreClingBubble(dyeing_bubble, contact_index);
-        auto vector = game_bubble_map_impl_->getTwoAroundBubbleWithIndex(contact_index);
+        auto vector = game_bubble_map_impl_->getTwoAroundBubbleWithIndex(dyeing_bubble->getBubbleIndex());
         BubbleType dyeing_color = dynamic_cast<SkillDyeingBubble*>(dyeing_bubble)->getDyeingColor();
         for (auto bubble : vector)
         {
@@ -631,7 +631,7 @@ namespace bubble_second {
                 dynamic_cast<ColorBubble*>(bubble)->dyeingBubbleColor(dyeing_color);
             }
         }
-
+        dyeing_bubble->bubbleEliminate();
     }
 
 }

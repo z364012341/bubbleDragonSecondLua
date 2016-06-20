@@ -799,9 +799,12 @@ namespace bubble_second {
         });
         dispatcher->addCustomEventListener(EVENT_END_CHARACTOR_BUY_CONTINUE, CC_CALLBACK_1(GameScene::gameDefeatBuyContinue, this));
         dispatcher->addCustomEventListener(EVENT_USE_DYEING_BUBBLE_SKILL, [=](cocos2d::EventCustom * event) {
-            auto bubble = dynamic_cast<SkillDyeingBubble*>(BubbleFactory::getInstance()->createBubbleWithType(kBubbleSkillDyeingBubble));
-            bubble->setDyeingColor(this->getPrepareBubble()->getBubbleType());
-            this->useCharactorSkill(bubble);
+            if (BaseBubble* prepare_bubble = this->getPrepareBubble())
+            {
+                auto bubble = dynamic_cast<SkillDyeingBubble*>(BubbleFactory::getInstance()->createBubbleWithType(kBubbleSkillDyeingBubble));
+                bubble->setDyeingColor(prepare_bubble->getBubbleType());
+                this->useCharactorSkill(bubble);
+            }
         });
         //dispatcher->addCustomEventListener(EVENT_DYEING_BUBBLE_COLOR, [=](cocos2d::EventCustom * event) {
         //    BubbleVector vector = *static_cast<BubbleVector*>(event->getUserData());

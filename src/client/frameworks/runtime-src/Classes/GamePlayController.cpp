@@ -440,7 +440,6 @@ namespace bubble_second {
     void GamePlayController::disposeUsingDyeingBubble(BaseBubble* dyeing_bubble, BaseBubble* bubble)
     {
         bubble_map_->disposeSkillDyeingBubble(dyeing_bubble, bubble->getBubbleIndex());
-        dyeing_bubble->bubbleEliminate();
     }
 
     cocos2d::Vec2 GamePlayController::convertGLToNodeSpace(const cocos2d::Vec2& touch_location, cocos2d::Node* node)
