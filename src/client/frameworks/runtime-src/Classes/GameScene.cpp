@@ -41,6 +41,7 @@
 #include "BubbleMainSightingDevice.h"
 #include "GameAlertMask.h"
 #include "SkillDyeingBubble.h"
+#include "GameCharactorSkillButton.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -346,13 +347,14 @@ namespace bubble_second {
                 //skillSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
                 //skillSprite->setScale(zoom);
                 //this->addChild(skillSprite, UI_ZORDER_MENU_INFO);
-                cocos2d::ui::Button* skillButton = cocos2d::ui::Button::create("jineng.PNG");
+                GameCharactorSkillButton* skillButton = GameCharactorSkillButton::create();
                 this->addChild(skillButton, UI_ZORDER_MENU_INFO);
                 skillButton->setScale(zoom);
                 skillButton->setPosition(cocos2d::Vec2(visible_size.width* 0.1, visible_size.height* 0.06));
-                skillButton->addClickEventListener([=](cocos2d::Ref*) {
-                    this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
-                });
+                //skillButton->addClickEventListener([=](cocos2d::Ref*) {
+                //    this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
+                //});
+
             }
         }
         //{   //发射台上的漩涡

@@ -22,6 +22,7 @@ namespace bubble_second {
         bool init();
     private:
         std::map<std::string, std::map<std::string, std::string>> charactor_to_path_;
+        cocos2d::Sprite* progress_sprite_ = nullptr;
     };
 }
 #endif

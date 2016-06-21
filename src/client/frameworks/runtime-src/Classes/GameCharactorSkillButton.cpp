@@ -30,8 +30,22 @@ namespace bubble_second {
         {
             return false;
         }
-        auto data = charactor_to_path_[GameCharactorNameManager::getInstance()->getCurrentArmatureName()];
+        auto data = charactor_to_path_[GameCharactorNameManager::getInstance()->getCurrentArmatureName()];  
         this->addChild(SpriteTextureController::getInstance()->createGameSpriteWithPath(data[SKILL_BUTTON_BACKGROUND_PATH_KEY]));
+        progress_sprite_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(data[SKILL_BUTTON_PROGRESS_PATH_KEY]);
+        progress_sprite_->setPositionY(-50.0f);
+        cocos2d::ClippingNode* clippingnode = cocos2d::ClippingNode::create(progress_sprite_);
+        clippingnode->setAlphaThreshold(0);
+        clippingnode->addChild(progress_sprite_);
+        clippingnode->addChild(SpriteTextureController::getInstance()->createGameSpriteWithPath(data[SKILL_BUTTON_LOGO_PATH_KEY]));
+
+        //cocos2d::Sprite* top_sp = SpriteTextureController::getInstance()->createGameSpriteWithPath("skill_button_top.png");
+        cocos2d::ClippingNode* top_clippingnode = cocos2d::ClippingNode::create(SpriteTextureController::getInstance()->createGameSpriteWithPath(data[SKILL_BUTTON_PROGRESS_PATH_KEY]));
+        top_clippingnode->setAlphaThreshold(0);
+        top_clippingnode->addChild(clippingnode);
+        this->addChild(top_clippingnode);
+        this->addChild(SpriteTextureController::getInstance()->createGameSpriteWithPath("skill_button_edge.png"));
+        this->addChild(SpriteTextureController::getInstance()->createGameSpriteWithPath("skill_button_top.png"));
         return true;
     }
 
