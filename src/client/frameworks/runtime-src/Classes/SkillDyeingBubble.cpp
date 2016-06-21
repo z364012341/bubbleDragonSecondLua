@@ -63,4 +63,8 @@ namespace bubble_second {
     {
         return dyeing_color_;
     }
+    std::string SkillDyeingBubble::getBubbleSightingDevicePointPath()
+    {
+        return BUBBLE_SIGHTING_POINT_PATH;
+    }
 }

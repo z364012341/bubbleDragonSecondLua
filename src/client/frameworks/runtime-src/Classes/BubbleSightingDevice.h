@@ -27,7 +27,7 @@ namespace bubble_second {
         //打开设备
         //virtual void turnOnDeviceOnce(int device_numble = 0);
         //改变颜色
-        void changePointsColor(BubbleType color);
+        void changePointsColor(const std::string& path);
         //是否碰到顶部边界
         //bool isContactTopBorder(const float& max_pos_y);
         //是否是第一台设备

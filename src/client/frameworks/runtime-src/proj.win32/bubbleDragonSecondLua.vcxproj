@@ -234,6 +234,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GameBuyStoreMannager.h" />
     <ClInclude Include="..\Classes\GameCharacter.h" />
     <ClInclude Include="..\Classes\GameCharactorNameManager.h" />
+    <ClInclude Include="..\Classes\GameCharactorSkillButton.h" />
     <ClInclude Include="..\Classes\GameClingAnimationComponent.h" />
     <ClInclude Include="..\Classes\GameDefeatAlert.h" />
     <ClInclude Include="..\Classes\GameDefeatAnimationComponent.h" />
@@ -300,7 +301,10 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\ScoreWidget.h" />
     <ClInclude Include="..\Classes\ScoreWidgetManager.h" />
     <ClInclude Include="..\Classes\SimpleControlSwitch.h" />
+    <ClInclude Include="..\Classes\SkillBigBombBubble.h" />
+    <ClInclude Include="..\Classes\SkillColorBombBubble.h" />
     <ClInclude Include="..\Classes\SkillDyeingBubble.h" />
+    <ClInclude Include="..\Classes\SkillStavesBubble.h" />
     <ClInclude Include="..\Classes\SmartScaleController.h" />
     <ClInclude Include="..\Classes\SpriteBlur.h" />
     <ClInclude Include="..\Classes\SpriteTextureController.h" />
@@ -374,6 +378,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GameBuyStoreMannager.cpp" />
     <ClCompile Include="..\Classes\GameCharacter.cpp" />
     <ClCompile Include="..\Classes\GameCharactorNameManager.cpp" />
+    <ClCompile Include="..\Classes\GameCharactorSkillButton.cpp" />
     <ClCompile Include="..\Classes\GameClingAnimationComponent.cpp" />
     <ClCompile Include="..\Classes\GameDefeatAlert.cpp" />
     <ClCompile Include="..\Classes\GameDefeatAnimationComponent.cpp" />
@@ -438,7 +443,10 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\ScoreWidget.cpp" />
     <ClCompile Include="..\Classes\ScoreWidgetManager.cpp" />
     <ClCompile Include="..\Classes\SimpleControlSwitch.cpp" />
+    <ClCompile Include="..\Classes\SkillBigBombBubble.cpp" />
+    <ClCompile Include="..\Classes\SkillColorBombBubble.cpp" />
     <ClCompile Include="..\Classes\SkillDyeingBubble.cpp" />
+    <ClCompile Include="..\Classes\SkillStavesBubble.cpp" />
     <ClCompile Include="..\Classes\SmartScaleController.cpp" />
     <ClCompile Include="..\Classes\SpriteBlur.cpp" />
     <ClCompile Include="..\Classes\SpriteTextureController.cpp" />

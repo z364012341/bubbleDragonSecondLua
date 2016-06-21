@@ -60,4 +60,8 @@ namespace bubble_second {
     {
         this->bubbleEliminate();
     }
+    std::string ColorBombBubble::getBubbleSightingDevicePointPath()
+    {
+        return SIGHT_POINT_COLORFUL_PATH;
+    }
 }

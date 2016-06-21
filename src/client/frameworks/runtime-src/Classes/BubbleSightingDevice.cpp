@@ -378,16 +378,16 @@ namespace bubble_second {
         return sight_device_;
     }
 
-    void BubbleSightingDevice::changePointsColor(BubbleType color)
+    void BubbleSightingDevice::changePointsColor(const std::string& path)
     {
         sighting_points_;
         for (auto var : sighting_points_)
         {
-            var->changeSelfColor(color);
+            var->changeSelfColor(path);
         }
         if (sight_device_)
         {
-            sight_device_->changePointsColor(color);
+            sight_device_->changePointsColor(path);
         }
     }
 

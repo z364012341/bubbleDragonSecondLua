@@ -12,6 +12,9 @@
 #include "WindmillBubble.h"
 #include "AddBubbleNumbleBubble.h"
 #include "SkillDyeingBubble.h"
+#include "SkillColorBombBubble.h"
+#include "SkillBigBombBubble.h"
+#include "SkillStavesBubble.h"
 namespace bubble_second {
     BubbleFactory::BubbleFactory()
     {
@@ -31,7 +34,7 @@ namespace bubble_second {
         key_to_handle_map_[kBubbleRed] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
         key_to_handle_map_[kBubbleGreen] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
         key_to_handle_map_[kBubbleOrange] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
-        key_to_handle_map_[kBubblePink] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
+        key_to_handle_map_[kBubblePinkDeprecated] = [=](int type, int cloud) {return ColorBubble::createWithType(type, cloud); };
         key_to_handle_map_[kBubbleLightning] = [=](int, int) {return LightningBubble::create(); };
         key_to_handle_map_[kBubbleDarkCloud] = [=](int, int) {return DarkCloudBubble::create(); };
         key_to_handle_map_[kBubbleBlackHole] = [=](int, int) {return BlackHoleBubble::create(); };
@@ -45,6 +48,9 @@ namespace bubble_second {
         key_to_handle_map_[kBubbleWindmill] = [=](int, int) {return  WindmillBubble::create(); };
         key_to_handle_map_[kBubbleAddNumbleBubble] = [=](int, int) {return  AddBubbleNumbleBubble::create(); };
         key_to_handle_map_[kBubbleSkillDyeingBubble] = [=](int, int) {return  SkillDyeingBubble::create(); };
+        key_to_handle_map_[kBubbleSkillColorBombBubble] = [=](int, int) {return  SkillColorBombBubble::create(); };
+        key_to_handle_map_[kBubbleSkillBigBombBubble] = [=](int, int) {return  SkillBigBombBubble::create(); };
+        key_to_handle_map_[kBubbleSkillStavesBubble] = [=](int, int) {return  SkillStavesBubble::create(); };
     }
 
     void bubble_second::BubbleFactory::initBubblePath()
@@ -56,7 +62,7 @@ namespace bubble_second {
         key_to_path[kBubbleRed] = BUBBLE_RED_PATH;
         key_to_path[kBubbleGreen] = BUBBLE_GREEN_PATH;
         key_to_path[kBubbleOrange] = BUBBLE_ORANGE_PATH;
-        key_to_path[kBubblePink] = BUBBLE_PINK_PATH;
+        key_to_path[kBubblePinkDeprecated] = BUBBLE_PINK_PATH;
         key_to_path[kBubbleLightning] = BUBBLE_LIGHTNING_PATH;
         key_to_path[kBubbleDarkCloud] = BUBBLE_DARKCLOUD_PATH;
         key_to_path[kBubbleBlackHole] = BUBBLE_BLACKHOLE_PATH;

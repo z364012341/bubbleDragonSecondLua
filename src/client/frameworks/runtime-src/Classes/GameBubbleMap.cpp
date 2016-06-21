@@ -631,7 +631,16 @@ namespace bubble_second {
                 dynamic_cast<ColorBubble*>(bubble)->dyeingBubbleColor(dyeing_color);
             }
         }
+        game_bubble_map_impl_->removeSpriteFromeMapWithIndex(bubble->getBubbleIndex());
         dyeing_bubble->bubbleEliminate();
     }
-
+    void GameBubbleMap::disposeUseStavesBubble(BaseBubble* staves_bubble, BaseBubble* contect_bubble)
+    {
+        BaseBubble* bubble = this->getPreClingBubble(staves_bubble, contect_bubble->getBubbleIndex());
+        //this->disposeUseStaves(contect_bubble);
+        this->eliminateBubbles(game_bubble_map_impl_->getSameBubblesInVisibleSize(contect_bubble->getBubbleType()), staves_bubble);
+        game_bubble_map_impl_->removeSpriteFromeMapWithIndex(bubble->getBubbleIndex());
+        this->dispatchAddEliminateComboEvent(bubble->getPosition());
+        //staves_bubble->bubbleEliminate();
+    }
 }

@@ -12,6 +12,10 @@
 #define _GAME_CHARACTOR_NAME_MANAGER_H_
 #include "cocos2d.h"
 #include "BubbleSecondConstant.h"
+const std::string CHARCTOR_LAOHU_ARMATURE_KEY = "aoao";
+const std::string CHARCTOR_MIAO_ARMATURE_KEY = "miaopass";
+const std::string CHARCTOR_LAOSHU_ARMATURE_KEY = "zhizhi";
+const std::string CHARCTOR_TUZI_ARMATURE_KEY = "tutu";
 namespace bubble_second {
     class GameCharactorNameManager
     {
@@ -23,8 +27,10 @@ namespace bubble_second {
         std::string getCurrentArmatureName2();
         std::string getCurrentArmatureName3();
         std::string getCurrentArmatureNameVictory();
-        void readNamesData();
+        std::string getCurrentArmatureSkillEvent();
+        //void readNamesData();
         void setCurrentArmatureNameWithIndex(int index);
+        void dispatchUseCurrentArmatureSkill();
     private:
         GameCharactorNameManager();
     private:

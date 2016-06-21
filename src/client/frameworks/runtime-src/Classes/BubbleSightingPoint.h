@@ -29,7 +29,7 @@ namespace bubble_second {
         //是否正在碰撞
         bool isContacting();
         //改变颜色
-        void changeSelfColor(BubbleType color);
+        void changeSelfColor(const std::string& path);
         //设置是否碰到顶部边界
         //void setContactTopBorder();
         //停下

@@ -798,7 +798,7 @@ namespace bubble_second {
             this->popDefeatAlert();
         });
         dispatcher->addCustomEventListener(EVENT_END_CHARACTOR_BUY_CONTINUE, CC_CALLBACK_1(GameScene::gameDefeatBuyContinue, this));
-        dispatcher->addCustomEventListener(EVENT_USE_DYEING_BUBBLE_SKILL, [=](cocos2d::EventCustom * event) {
+        dispatcher->addCustomEventListener(EVENT_USE_DYEING_BUBBLE_SKILL, [=](cocos2d::EventCustom *) {
             if (BaseBubble* prepare_bubble = this->getPrepareBubble())
             {
                 auto bubble = dynamic_cast<SkillDyeingBubble*>(BubbleFactory::getInstance()->createBubbleWithType(kBubbleSkillDyeingBubble));
@@ -806,13 +806,15 @@ namespace bubble_second {
                 this->useCharactorSkill(bubble);
             }
         });
-        //dispatcher->addCustomEventListener(EVENT_DYEING_BUBBLE_COLOR, [=](cocos2d::EventCustom * event) {
-        //    BubbleVector vector = *static_cast<BubbleVector*>(event->getUserData());
-        //    for (auto bubble : vector)
-        //    {
-
-        //    }
-        //});
+        dispatcher->addCustomEventListener(EVENT_USE_COLOR_BOMB_BUBBLE_SKILL, [=](cocos2d::EventCustom *) {
+            this->useCharactorSkill(BubbleFactory::getInstance()->createBubbleWithType(kBubbleSkillColorBombBubble));
+        });
+        dispatcher->addCustomEventListener(EVENT_USE_BIG_BOMB_BUBBLE_SKILL, [=](cocos2d::EventCustom *) {
+            this->useCharactorSkill(BubbleFactory::getInstance()->createBubbleWithType(kBubbleSkillBigBombBubble));
+        });
+        dispatcher->addCustomEventListener(EVENT_USE_STAVES_BUBBLE_SKILL, [=](cocos2d::EventCustom *) {
+            this->useCharactorSkill(BubbleFactory::getInstance()->createBubbleWithType(kBubbleSkillStavesBubble));
+        });
     }
 
     void GameScene::removeEventListenerCustom()
@@ -871,6 +873,10 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_GAME_DEFEAT_RETURN);
         dispatcher->removeCustomEventListeners(EVENT_GAME_DEFEAT_BUY_ALERT_RETURN);
         dispatcher->removeCustomEventListeners(EVENT_END_CHARACTOR_BUY_CONTINUE);
+        dispatcher->removeCustomEventListeners(EVENT_USE_DYEING_BUBBLE_SKILL);
+        dispatcher->removeCustomEventListeners(EVENT_USE_COLOR_BOMB_BUBBLE_SKILL);
+        dispatcher->removeCustomEventListeners(EVENT_USE_BIG_BOMB_BUBBLE_SKILL);
+        dispatcher->removeCustomEventListeners(EVENT_USE_STAVES_BUBBLE_SKILL);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1441,6 +1447,7 @@ namespace bubble_second {
     void GameScene::useCharactorSkill(BaseBubble * bubble)
     {
         property_bubble_ = bubble;
+        this->removeExchangeBubbleListener();
         this->pushBubbleToPrepare(property_bubble_);
     }
 
@@ -1865,7 +1872,7 @@ namespace bubble_second {
     {
 		if (BaseBubble* bubble = GamePlayController::getInstance()->getPrepareBubble())
 		{
-            this->getBubbleSightingDevice()->changePointsColor(bubble->getBubbleType());
+            this->getBubbleSightingDevice()->changePointsColor(bubble->getBubbleSightingDevicePointPath());
 		}
     }
 

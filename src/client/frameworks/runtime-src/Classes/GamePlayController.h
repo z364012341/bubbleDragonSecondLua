@@ -178,6 +178,8 @@ namespace bubble_second {
         void disposeFallBubbleBorder(cocos2d::Node* border_node, cocos2d::Node* other_node);
         //处理染色球
         void disposeUsingDyeingBubble(BaseBubble* dyeing_bubble, BaseBubble* bubble);
+        //处理法杖球
+        void disposeUsingStavesBubble(BaseBubble* staves_bubble, BaseBubble* bubble);
     private:
         enum Direction
         {

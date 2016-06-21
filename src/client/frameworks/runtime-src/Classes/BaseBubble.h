@@ -91,6 +91,8 @@ namespace bubble_second {
         bool isHadContacted();
         //是否可以被道具消除
         virtual bool isEliminateByProperty();
+        //获取瞄准线的图片的路径
+        virtual std::string getBubbleSightingDevicePointPath();
     protected:
         //重载比较运算符以便使用std::find
         //bool operator==(const BaseBubble& bubble);

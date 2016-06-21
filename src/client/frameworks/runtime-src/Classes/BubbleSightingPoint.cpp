@@ -76,45 +76,9 @@ namespace bubble_second {
         return false;
     }
 
-    void BubbleSightingPoint::changeSelfColor(BubbleType color)
+    void BubbleSightingPoint::changeSelfColor(const std::string& path)
     {
-        auto controller = SpriteTextureController::getInstance();
-        switch (color)
-        {   
-        case kBubbleYellow:
-            controller->setSpriteTexture(SIGHT_POINT_YELLOW_PATH, sprite_);
-            break;
-        case kBubblePurple:
-            controller->setSpriteTexture(SIGHT_POINT_PURPLE_PATH, sprite_);
-            break;
-        case kBubbleBlue:
-            controller->setSpriteTexture(SIGHT_POINT_BLUE_PATH, sprite_);
-            break;
-        case kBubbleRed:
-            controller->setSpriteTexture(SIGHT_POINT_RED_PATH, sprite_);
-            break;
-        case kBubbleGreen:
-            controller->setSpriteTexture(SIGHT_POINT_GREEN_PATH, sprite_);
-            break;
-        case kBubbleOrange:
-            controller->setSpriteTexture(SIGHT_POINT_ORANGE_PATH, sprite_);
-            break;
-        case kBubblePink:
-            controller->setSpriteTexture(SIGHT_POINT_PINK_PATH, sprite_);
-            break;
-        case kBubbleBombBombProperty:
-            controller->setSpriteTexture(BUBBLE_SIGHTING_POINT_PATH, sprite_);
-            break;
-        case kBubbleColorBomb:
-            controller->setSpriteTexture(SIGHT_POINT_COLORFUL_PATH, sprite_);
-            break;
-        case kBubbleSkillDyeingBubble:
-            controller->setSpriteTexture(BUBBLE_SIGHTING_POINT_PATH, sprite_);
-            break;
-        default:
-            assert(false);
-            break;
-        }
+        SpriteTextureController::getInstance()->setSpriteTexture(path, sprite_);
     }
 
 }

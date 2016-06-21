@@ -368,6 +368,36 @@ namespace bubble_second {
         return this->isDarkCloudBubble()? kBubbleDarkCloud : BaseBubble::getBubbleType();
     }
 
+    std::string ColorBubble::getBubbleSightingDevicePointPath()
+    {
+        std::string path = "";
+        switch (this->getBubbleType())
+        {
+        case kBubbleYellow:
+            path = SIGHT_POINT_YELLOW_PATH;
+            break;
+        case kBubblePurple:
+            path = SIGHT_POINT_PURPLE_PATH;
+            break;
+        case kBubbleBlue:
+            path = SIGHT_POINT_BLUE_PATH;
+            break;
+        case kBubbleRed:
+            path = SIGHT_POINT_RED_PATH;
+            break;
+        case kBubbleGreen:
+            path = SIGHT_POINT_GREEN_PATH;
+            break;
+        case kBubbleOrange:
+            path = SIGHT_POINT_ORANGE_PATH;
+            break;
+        default:
+            assert(false);
+            break;
+        }
+        return path;
+    }
+
     cocos2d::Vec2 ColorBubble::getImpulseByTouchlocation(cocos2d::Vec2 touch_location)
     {
         //cocos2d::Vec2 bubble_point = this->getPosition();

@@ -74,6 +74,8 @@ namespace bubble_second {
         cocos2d::Vec2 getSpeedNormalized();
         cocos2d::Vec2 getBubbleSpeed();
         BubbleType getBubbleType() override;
+
+        std::string getBubbleSightingDevicePointPath() override;
     protected:
         ColorBubble();
         bool init();

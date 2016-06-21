@@ -422,6 +422,10 @@
       <Filter>Classes\lua</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SkillDyeingBubble.h" />
+    <ClInclude Include="..\Classes\SkillColorBombBubble.h" />
+    <ClInclude Include="..\Classes\SkillBigBombBubble.h" />
+    <ClInclude Include="..\Classes\SkillStavesBubble.h" />
+    <ClInclude Include="..\Classes\GameCharactorSkillButton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -816,6 +820,10 @@
       <Filter>Classes\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SkillDyeingBubble.cpp" />
+    <ClCompile Include="..\Classes\SkillColorBombBubble.cpp" />
+    <ClCompile Include="..\Classes\SkillBigBombBubble.cpp" />
+    <ClCompile Include="..\Classes\SkillStavesBubble.cpp" />
+    <ClCompile Include="..\Classes\GameCharactorSkillButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

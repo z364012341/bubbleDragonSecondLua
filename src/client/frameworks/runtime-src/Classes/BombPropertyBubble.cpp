@@ -1,8 +1,7 @@
 #include "BombPropertyBubble.h"
 #include "UserDataManager.h"
-const std::string TWO_ROUND_BOMB_EFFECT_NAME = "zhadanTX"; //炸2圈特效的名字
+
 const std::string BOMB_BUBBLE_STANDBY_NAME = "ranshao";
-const std::string BOMB_BUBBLE_BOMB_BOMB_NAME = "baozhaTX";
 namespace bubble_second {
     BombPropertyBubble::BombPropertyBubble()
     {
@@ -84,5 +83,9 @@ namespace bubble_second {
         armature_ = Armature::create(TWO_ROUND_BOMB_EFFECT_NAME);
         armature_->getAnimation()->play(BOMB_BUBBLE_STANDBY_NAME);
         this->addChild(armature_, 1);
+    }
+    std::string BombPropertyBubble::getBubbleSightingDevicePointPath()
+    {
+        return BUBBLE_SIGHTING_POINT_PATH;
     }
 }

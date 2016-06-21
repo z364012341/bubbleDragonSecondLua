@@ -16,14 +16,15 @@ namespace bubble_second {
     {
     public:
         CREATE_FUNC(ColorBombBubble);
+        ColorBombBubble();
         virtual ~ColorBombBubble();
     public:
         void dispatchEventAfterShooted() override;
         void bubbleEliminate(int = 0) override;
         float playTheSpecialEffects() override;
         void downFromAir() override;
-    private:
-        ColorBombBubble();
+        std::string getBubbleSightingDevicePointPath() override;
+    protected:
         bool init();
     };
 }

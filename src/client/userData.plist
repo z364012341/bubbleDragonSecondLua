@@ -4,14 +4,14 @@
 <plist version="1.0">
     <dict>
         <key>bigBombBomb</key>
-        <integer>8</integer>
+        <integer>-5</integer>
         <key>staves</key>
         <integer>9</integer>
         <key>woodenHammer</key>
         <integer>8</integer>
         <key>md5</key>
-        <string>afb689f9896c94841aaa22e81b2c54a9</string>
+        <string>e0f692f11b00362fe05d62ae3dc0dbb3</string>
         <key>colorBomb</key>
-        <integer>4</integer>
+        <integer>-1</integer>
     </dict>
 </plist>

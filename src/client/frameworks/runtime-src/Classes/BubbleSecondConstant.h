@@ -452,7 +452,9 @@ const std::string EVENT_DEFEAT_BUY_CONTINUE_PLAY = "event_defeat_buy_continue_pl
 const std::string EVENT_END_CHARACTOR_BUY_CONTINUE = "event_end_charactor_buy_continue";
 const std::string EVENT_USE_CHARACTOR_SKILL = "event_use_charactor_skill";
 const std::string EVENT_USE_DYEING_BUBBLE_SKILL = "event_use_dyeing_bubble_skill";
-//const std::string EVENT_DYEING_BUBBLE_COLOR = "event_dyeing_bubble_color";
+const std::string EVENT_USE_COLOR_BOMB_BUBBLE_SKILL = "event_use_color_bomb_bubble_skill";
+const std::string EVENT_USE_BIG_BOMB_BUBBLE_SKILL = "event_use_big_bomb_bubble_skill";
+const std::string EVENT_USE_STAVES_BUBBLE_SKILL = "event_use_staves_bubble_skill";
 //Ñ¡ÔñÌØÐ§µÄkey
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //´ó·ù¶ÈÌØÐ§
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //Ð¡·ù¶ÈÌØÐ§
@@ -463,7 +465,7 @@ const std::string SCORE_WIDGET_NODE_NAME = "ProjectNode_1";  //µÃ·Ö¹Ò¼þµÄnodeÃû×
 const std::string PREPARE_BUBBLE_NAME = "prepare_bubble";  //×¼±¸Ð¡Çò
 const std::string COLOR_BOMB_BUBBLE_NAME = "color_bomb_bubble";  //µÀ¾ß²ÊÇò
 const std::string DYEING_BUBBLE_NAME = "dyeing_bubble_name";  //¼¼ÄÜÈ¾É«Çò
-//const std::string SECOND_PREPARE_BUBBLE_NAME = "second_bubble";  //±¸Ñ¡Ð¡Çò
+const std::string STAVES_BUBBLE_NAME = "staves_bubble";  //¼¼ÄÜ·¨ÕÈÐ¡Çò
 const std::string BARREL_BOTTOM_NAME = "BARREL_BOTTOM_NAME";//Í°µ×
 const std::string SCORE_WIDGET_NAME = "SCORE_WIDGET";    //µÃ·Ö×²»÷Åä¼þ
 const std::string MAP_BUBBLE_NAME = ""; //µØÍ¼ÉÏµÄÐ¡ÇòÃû×Ö
@@ -480,6 +482,8 @@ const std::string SCORE_PROGRESS_START_3_KEY = STAGE_XML_FIELDS_START3; //Â¥ÉÏµÄ
 //const std::string SCORE_PROGRESS_BORDER_NAME = "Image_2"; //Â¥ÉÏµÄ·ÖÊý½ø¶ÈÌìÉËµÄ±ß¿ò
 
 const std::string ADD_BUTTON_NODE_NAME = "addButtonNode";
+const std::string SKILL_BOMB_BUBBLE_PARTICLE = "particle/huangseTX.plist";
+const int SKILL_BUBBLE_PARTICLE_ZORDER = 1;
 //shader
 const std::string GREY_SCALE_FSH_PATH = "shaders/example_GreyScale.fsh";
 const std::string NORMAL_FSH_PATH = "shaders/example_Normal.fsh";
@@ -781,8 +785,8 @@ enum BubbleType
     kBubbleRed,
     kBubbleGreen,
     kBubbleOrange,
-    kBubblePink = 6,
-    kNormalColorLast = kBubblePink,
+    kBubblePinkDeprecated = 6,
+    kNormalColorLast = kBubblePinkDeprecated,
     kBubbleLightning = 7,
     kBubbleDarkCloud = 8,
     kBubbleBlackHole = 9,
@@ -800,7 +804,10 @@ enum BubbleType
     kBubbleRandomColor,
     kBubbleWindmill,
     kBubbleAddNumbleBubble,
-    kBubbleSkillDyeingBubble
+    kBubbleSkillDyeingBubble,
+    kBubbleSkillColorBombBubble,
+    kBubbleSkillBigBombBubble,
+    kBubbleSkillStavesBubble
 };
 
 enum ScoreWidgetType

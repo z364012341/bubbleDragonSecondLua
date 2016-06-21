@@ -20,6 +20,7 @@ namespace bubble_second {
         void bubbleEliminate(int = 0) override;
         void setDyeingColor(BubbleType type);
         BubbleType getDyeingColor();
+        std::string getBubbleSightingDevicePointPath() override;
     private:
         SkillDyeingBubble();
         bool init();

@@ -38,6 +38,11 @@ namespace bubble_second {
 
     void GamePlayController::initHandleMap()
     {
+        props_to_handle_[kBubbleColorBomb] = &GamePlayController::disposeUsingPropertyBubble;
+        props_to_handle_[kBubbleBombBombProperty] = &GamePlayController::disposeUsingPropertyBubble;
+        props_to_handle_[kBubbleSkillDyeingBubble] = &GamePlayController::disposeUsingDyeingBubble;
+        props_to_handle_[kBubbleSkillStavesBubble] = &GamePlayController::disposeUsingStavesBubble;
+
         key_to_handle_map_[kBubbleTransparent] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleYellow] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubblePurple] = &GamePlayController::disposeContactWithColorBubble;
@@ -45,19 +50,17 @@ namespace bubble_second {
         key_to_handle_map_[kBubbleRed] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleGreen] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleOrange] = &GamePlayController::disposeContactWithColorBubble;
-        key_to_handle_map_[kBubblePink] = &GamePlayController::disposeContactWithColorBubble;
+        key_to_handle_map_[kBubblePinkDeprecated] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleLightning] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleDarkCloud] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleAddNumbleBubble] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleBlackHole] = &GamePlayController::disposeContactWithBlackHoleBubble;
         key_to_handle_map_[kBubbleBombBomb] = &GamePlayController::disposeContactWithColorBubble;
-        props_to_handle_[kBubbleColorBomb] = &GamePlayController::disposeUsingPropertyBubble;
-        props_to_handle_[kBubbleBombBombProperty] = &GamePlayController::disposeUsingPropertyBubble;
         key_to_handle_map_[kBubbleComponent] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleRainbowSeal] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleMutipleSeal] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleWindmill] = &GamePlayController::disposeContactWithColorBubble;
-        props_to_handle_[kBubbleSkillDyeingBubble] = &GamePlayController::disposeUsingDyeingBubble;
+
 
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, PREPARE_BUBBLE_NAME, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBarrelBottom, BARREL_BOTTOM_NAME, MAP_BUBBLE_NAME);
@@ -72,6 +75,7 @@ namespace bubble_second {
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWindmillBorder, UI_NAME_WINDMILL_BORDER, COLOR_BOMB_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeFallBubbleBorder, UI_NAME_FALL_BOTTOM_BORDER, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, DYEING_BUBBLE_NAME, MAP_BUBBLE_NAME);
+        this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, STAVES_BUBBLE_NAME, MAP_BUBBLE_NAME);
     }
 
     void bubble_second::GamePlayController::addContactHandleWithTwoNames(contactHandle handle, const std::string& name_1, const std::string& name_2)
@@ -440,6 +444,11 @@ namespace bubble_second {
     void GamePlayController::disposeUsingDyeingBubble(BaseBubble* dyeing_bubble, BaseBubble* bubble)
     {
         bubble_map_->disposeSkillDyeingBubble(dyeing_bubble, bubble->getBubbleIndex());
+    }
+
+    void GamePlayController::disposeUsingStavesBubble(BaseBubble * staves_bubble, BaseBubble * bubble)
+    {
+        bubble_map_->disposeUseStavesBubble(staves_bubble, bubble);
     }
 
     cocos2d::Vec2 GamePlayController::convertGLToNodeSpace(const cocos2d::Vec2& touch_location, cocos2d::Node* node)

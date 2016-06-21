@@ -20,16 +20,17 @@ const std::string GAME_CHARACTER_ARMATURE_TUZI_2_NAME = "tuzi2";
 const std::string GAME_CHARACTER_ARMATURE_TUZI_3_NAME = "tuzi3";
 const std::string GAME_CHARACTER_ARMATURE_TUZI_VICTORY_NAME = "tuzishengli";
 
+
+
 const std::string CHARCTOR_ARMATURE_KEY_1 = "armature_1";
 const std::string CHARCTOR_ARMATURE_KEY_2 = "armature_2";
 const std::string CHARCTOR_ARMATURE_KEY_3 = "armature_3";
 const std::string CHARCTOR_ARMATURE_KEY_VICTORY = "armature_victory";
 const std::string CHARCTOR_ARMATURE_KEY_INDEX = "armature_index";
-const std::string CHARCTOR_LAOHU_ARMATURE_KEY = "aoao";
-const std::string CHARCTOR_MIAO_ARMATURE_KEY = "miaopass";
-const std::string CHARCTOR_LAOSHU_ARMATURE_KEY = "zhizhi";
-const std::string CHARCTOR_TUZI_ARMATURE_KEY = "tutu";
-const std::string NAMES_DATA_PATH = "res/charactorNamesData.plist";
+const std::string CHARCTOR_SKILL_USE_EVENT_KEY = "charctor_skill";
+
+
+//const std::string NAMES_DATA_PATH = "res/charactorNamesData.plist";
 namespace bubble_second {
     GameCharactorNameManager::GameCharactorNameManager()
     {
@@ -41,6 +42,7 @@ namespace bubble_second {
             names_map[CHARCTOR_ARMATURE_KEY_3] = GAME_CHARACTER_ARMATURE_LAOHU3_NAME;
             names_map[CHARCTOR_ARMATURE_KEY_VICTORY] = GAME_CHARACTER_ARMATURE_LAOHU_VICTORY_NAME;
             names_map[CHARCTOR_ARMATURE_KEY_INDEX] = 0;
+            names_map[CHARCTOR_SKILL_USE_EVENT_KEY] = EVENT_USE_DYEING_BUBBLE_SKILL;
             charactor_armature_names_[CHARCTOR_LAOHU_ARMATURE_KEY] = names_map;
         }
         {               
@@ -50,6 +52,7 @@ namespace bubble_second {
             names_map[CHARCTOR_ARMATURE_KEY_3] = GAME_CHARACTER_ARMATURE_MIAO_3_NAME;
             names_map[CHARCTOR_ARMATURE_KEY_VICTORY] = GAME_CHARACTER_ARMATURE_MIAO_VICTORY_NAME;
             names_map[CHARCTOR_ARMATURE_KEY_INDEX] = 1;
+            names_map[CHARCTOR_SKILL_USE_EVENT_KEY] = EVENT_USE_COLOR_BOMB_BUBBLE_SKILL;
             charactor_armature_names_[CHARCTOR_MIAO_ARMATURE_KEY] = names_map;
         }
         {
@@ -59,6 +62,7 @@ namespace bubble_second {
             names_map[CHARCTOR_ARMATURE_KEY_3] = GAME_CHARACTER_ARMATURE_LAOSHU_3_NAME;
             names_map[CHARCTOR_ARMATURE_KEY_VICTORY] = GAME_CHARACTER_ARMATURE_LAOSHU_VICTORY_NAME;
             names_map[CHARCTOR_ARMATURE_KEY_INDEX] = 3;
+            names_map[CHARCTOR_SKILL_USE_EVENT_KEY] = EVENT_USE_STAVES_BUBBLE_SKILL;
             charactor_armature_names_[CHARCTOR_LAOSHU_ARMATURE_KEY] = names_map;
         }
         {
@@ -68,6 +72,7 @@ namespace bubble_second {
             names_map[CHARCTOR_ARMATURE_KEY_3] = GAME_CHARACTER_ARMATURE_TUZI_3_NAME;
             names_map[CHARCTOR_ARMATURE_KEY_VICTORY] = GAME_CHARACTER_ARMATURE_TUZI_VICTORY_NAME;
             names_map[CHARCTOR_ARMATURE_KEY_INDEX] = 2;
+            names_map[CHARCTOR_SKILL_USE_EVENT_KEY] = EVENT_USE_BIG_BOMB_BUBBLE_SKILL;
             charactor_armature_names_[CHARCTOR_TUZI_ARMATURE_KEY] = names_map;
         }
         //cocos2d::FileUtils::getInstance()->writeValueMapToFile(charactor_armature_names_, cocos2d::FileUtils::getInstance()->getWritablePath()+"charactorNamesData.plist");
@@ -97,10 +102,14 @@ namespace bubble_second {
     {
         return charactor_armature_names_[this->getCurrentArmatureName()].asValueMap()[CHARCTOR_ARMATURE_KEY_VICTORY].asString();
     }
-    void GameCharactorNameManager::readNamesData()
+    std::string GameCharactorNameManager::getCurrentArmatureSkillEvent()
     {
-        charactor_armature_names_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(NAMES_DATA_PATH);
+        return charactor_armature_names_[this->getCurrentArmatureName()].asValueMap()[CHARCTOR_SKILL_USE_EVENT_KEY].asString();;
     }
+    //void GameCharactorNameManager::readNamesData()
+    //{
+    //    charactor_armature_names_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(NAMES_DATA_PATH);
+    //}
     void GameCharactorNameManager::setCurrentArmatureNameWithIndex(int index)
     {
         assert(index >= 0);
@@ -125,5 +134,9 @@ namespace bubble_second {
             }
         }
         assert(false);
+    }
+    void GameCharactorNameManager::dispatchUseCurrentArmatureSkill()
+    {
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(this->getCurrentArmatureSkillEvent());
     }
 }

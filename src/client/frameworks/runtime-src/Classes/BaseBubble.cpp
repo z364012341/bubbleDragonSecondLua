@@ -344,6 +344,11 @@ namespace bubble_second {
         return true;
     }
 
+    std::string BaseBubble::getBubbleSightingDevicePointPath()
+    {
+        return "";
+    }
+
     bool BaseBubble::needRemoveFromBubbleMap()
     {
         return true;

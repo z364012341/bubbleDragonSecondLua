@@ -11,7 +11,7 @@ namespace bubble_second {
         bubblecolor_to_color3b_[kBubbleRed] = cocos2d::Color3B(167, 6, 3);
         bubblecolor_to_color3b_[kBubbleGreen] = cocos2d::Color3B(36, 131, 2);
         bubblecolor_to_color3b_[kBubbleOrange] = cocos2d::Color3B(222, 78, 0);
-        bubblecolor_to_color3b_[kBubblePink] = cocos2d::Color3B(253, 123, 234);
+        bubblecolor_to_color3b_[kBubblePinkDeprecated] = cocos2d::Color3B(253, 123, 234);
         bubblecolor_to_color3b_[kBubbleTransparent] = cocos2d::Color3B::WHITE;
 
     }

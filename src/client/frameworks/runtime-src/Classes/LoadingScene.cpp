@@ -9,6 +9,7 @@
 #include "PuzzleStageDataManager.h"
 #include "PuzzleStoreItemFactory.h"
 #include "DecalsFactory.h"
+#include "GameCharactorNameManager.h"
 namespace bubble_second {
     cocos2d::Scene * LoadingScene::createScene()
     {
@@ -49,6 +50,7 @@ namespace bubble_second {
         PuzzleStageDataManager::getInstance()->loadPuzzleStageData();
         PuzzleStoreItemFactory::getInstance()->loadItemData();
         DecalsFactory::getInstance()->loadDecalsData();
+        GameCharactorNameManager::getInstance();
         cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
     }
 

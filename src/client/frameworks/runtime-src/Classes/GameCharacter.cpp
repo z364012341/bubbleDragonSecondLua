@@ -427,7 +427,11 @@ namespace bubble_second {
 
     void GameCharacter::useCharactorSkill()
     {
-        this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_DYEING_BUBBLE_SKILL);
+//this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_DYEING_BUBBLE_SKILL);
+//this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_COLOR_BOMB_BUBBLE_SKILL);
+//this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_BIG_BOMB_BUBBLE_SKILL);
+//this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_STAVES_BUBBLE_SKILL);
+        GameCharactorNameManager::getInstance()->dispatchUseCurrentArmatureSkill();
     }
 
     void GameCharacter::setDefeatFlag(bool flag)

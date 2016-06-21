@@ -12,6 +12,8 @@
 #include "cocos2d.h"
 #include "ColorBubble.h"
 #include "cocostudio/CocoStudio.h"
+const std::string TWO_ROUND_BOMB_EFFECT_NAME = "zhadanTX"; //炸2圈特效的名字
+const std::string BOMB_BUBBLE_BOMB_BOMB_NAME = "baozhaTX";
 namespace bubble_second {
     class BombPropertyBubble : public ColorBubble
     {
@@ -24,8 +26,9 @@ namespace bubble_second {
         float playTheSpecialEffects() override;
         void downFromAir() override;
         void setBubbleTexture(BubbleType) override;
-    private:
+        std::string getBubbleSightingDevicePointPath() override;
         BombPropertyBubble();
+    protected:
         bool init();
     private:
         cocostudio::Armature *armature_ = nullptr;

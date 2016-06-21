@@ -23,7 +23,7 @@ namespace bubble_second {
         color_picker_[kBubbleRed] = 0;
         color_picker_[kBubbleGreen] = 0;
         color_picker_[kBubbleOrange] = 0;
-        color_picker_[kBubblePink] = 0;
+        color_picker_[kBubblePinkDeprecated] = 0;
         color_total_ = 0;
     }
 
