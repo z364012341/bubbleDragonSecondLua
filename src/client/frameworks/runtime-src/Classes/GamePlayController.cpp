@@ -14,7 +14,9 @@
 #include "GameScene.h"
 #include "BubbleSightingDevice.h"
 #include "BubbleSightingPoint.h"
+
 namespace bubble_second {
+
     GamePlayController::GamePlayController()
     {
         this->initHandleMap();
@@ -38,10 +40,10 @@ namespace bubble_second {
 
     void GamePlayController::initHandleMap()
     {
-        props_to_handle_[kBubbleColorBomb] = &GamePlayController::disposeUsingPropertyBubble;
-        props_to_handle_[kBubbleBombBombProperty] = &GamePlayController::disposeUsingPropertyBubble;
-        props_to_handle_[kBubbleSkillDyeingBubble] = &GamePlayController::disposeUsingDyeingBubble;
-        props_to_handle_[kBubbleSkillStavesBubble] = &GamePlayController::disposeUsingStavesBubble;
+        //PROPS_TO_HANDLE[kBubbleColorBomb] = &GamePlayController::disposeUsingPropertyBubble;
+        //PROPS_TO_HANDLE[kBubbleBombBombProperty] = &GamePlayController::disposeUsingPropertyBubble;
+        //PROPS_TO_HANDLE[kBubbleSkillDyeingBubble] = &GamePlayController::disposeUsingDyeingBubble;
+        //PROPS_TO_HANDLE[kBubbleSkillStavesBubble] = &GamePlayController::disposeUsingStavesBubble;
 
         key_to_handle_map_[kBubbleTransparent] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleYellow] = &GamePlayController::disposeContactWithColorBubble;
@@ -203,9 +205,10 @@ namespace bubble_second {
         flying_bubble->hadContacted();
         flying_bubble->stopAllActions();
         BaseBubble* contact_bubble = dynamic_cast<BaseBubble*>(contact_node);
-        if (auto props_handle = props_to_handle_[flying_bubble->getBubbleType()])
+        if (PROPS_TO_HANDLE.find(flying_bubble->getBubbleType())!= PROPS_TO_HANDLE.end())
         {//优先处理道具的球
-            (this->*props_handle)(flying_bubble, contact_bubble);
+            auto handle = PROPS_TO_HANDLE.at(flying_bubble->getBubbleType());
+            (this->*handle)(flying_bubble, contact_bubble);
         }
         else if (auto bubble_handle = key_to_handle_map_[contact_bubble->getBubbleType()])
         {

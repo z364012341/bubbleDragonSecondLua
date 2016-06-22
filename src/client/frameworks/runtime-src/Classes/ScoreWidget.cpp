@@ -14,16 +14,25 @@ const std::string BUBBLE_ANIMATION_LOOK_NAME_2 = "zuoyoukan";
 const float SCOREWIDGET_ARMATURE_SCALE = 0.5;
 //const std::string SCORE_WIDGET_UPDATE_ANIMATION_NAME = "yun3";
 const float SCORE_WIDGET_BEZIER_FLYING_DURATION = 0.8f; //得分挂件的赛贝尔运动时间
-
+const std::map<ScoreWidgetType, ScoreWidgetType>TYPE_UPDATE_TO_TYPE = {
+    { kScoreWidgetLow , kScoreWidgetMiddle },
+    { kScoreWidgetMiddle , kScoreWidgetHigh },
+    { kScoreWidgetHigh , kScoreWidgetHigh }
+};
+const std::map<ScoreWidgetType, int> TYPE_TO_SCORE = {
+    { kScoreWidgetLow , SCORE_WIDGET_BLUE_SCORE },
+    { kScoreWidgetMiddle , SCORE_WIDGET_YELLOW_SCORE },
+    { kScoreWidgetHigh , SCORE_WIDGET_GREEN_SCORE }
+};
 namespace bubble_second {
     ScoreWidget::ScoreWidget() :widget_combo_(0), armature_(nullptr)
     {
-        type_update_to_type_[kScoreWidgetLow] = kScoreWidgetMiddle;
-        type_update_to_type_[kScoreWidgetMiddle] = kScoreWidgetHigh;
-        type_update_to_type_[kScoreWidgetHigh] = kScoreWidgetHigh;
-        type_to_score_[kScoreWidgetLow] = SCORE_WIDGET_BLUE_SCORE;
-        type_to_score_[kScoreWidgetMiddle] = SCORE_WIDGET_YELLOW_SCORE;
-        type_to_score_[kScoreWidgetHigh] = SCORE_WIDGET_GREEN_SCORE;
+        //type_update_to_type_[kScoreWidgetLow] = kScoreWidgetMiddle;
+        //type_update_to_type_[kScoreWidgetMiddle] = kScoreWidgetHigh;
+        //type_update_to_type_[kScoreWidgetHigh] = kScoreWidgetHigh;
+        //type_to_score_[kScoreWidgetLow] = SCORE_WIDGET_BLUE_SCORE;
+        //type_to_score_[kScoreWidgetMiddle] = SCORE_WIDGET_YELLOW_SCORE;
+        //type_to_score_[kScoreWidgetHigh] = SCORE_WIDGET_GREEN_SCORE;
     }
 
     ScoreWidget::~ScoreWidget()
@@ -111,13 +120,13 @@ namespace bubble_second {
         {
             return;
         }
-        cocostudio::Armature* armature = ScoreWidgetManager::getInstance()->getWidgetUpdateArmature(type_update_to_type_[type_]);
+        cocostudio::Armature* armature = ScoreWidgetManager::getInstance()->getWidgetUpdateArmature(TYPE_UPDATE_TO_TYPE.at(type_));
         this->addChild(armature);
         armature->getAnimation()->playWithIndex(0);
         armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
             if (movementType == cocostudio::COMPLETE)
             {
-                this->setType(type_update_to_type_[type_]);
+                this->setType(TYPE_UPDATE_TO_TYPE.at(type_));
                 this->comboClear();
                 armature->removeFromParent();
             }
@@ -169,7 +178,7 @@ namespace bubble_second {
 
     int ScoreWidget::getContactScore()
     {
-        return type_to_score_[type_]*widget_combo_;
+        return TYPE_TO_SCORE.at(type_)*widget_combo_;
     }
 
     void ScoreWidget::playContactAnimation(int score)

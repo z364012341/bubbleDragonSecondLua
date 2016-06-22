@@ -12,28 +12,54 @@ const float PROGRESS_SPRITE_INITAIL_POS_Y = -145.0f;
 const float PROGRESS_MOVE_SPEED = 500.0f;
 const int SKILL_ENERGY_NUMBLE_MAX = 6;
 const float PROGRESS_POS_Y_DELTA = PROGRESS_SPRITE_INITAIL_POS_Y / SKILL_ENERGY_NUMBLE_MAX;
+const std::map<std::string, std::map<std::string, std::string>> CHARACTOR_TO_PATH = {
+    { CHARCTOR_LAOHU_ARMATURE_KEY ,{
+        {SKILL_BUTTON_BACKGROUND_PATH_KEY ,  std::string("skill_dyeing_button.png") },
+        { SKILL_BUTTON_PROGRESS_PATH_KEY ,  std::string("skill_dyeing_bg.png") },
+        { SKILL_BUTTON_LOGO_PATH_KEY ,  std::string("skill_logo_dyeing.png") },
+        { SKILL_PROGRESS_HEAD_PATH_KEY ,  std::string("skill_dyeing_head.png") }
+    }},
+    { CHARCTOR_MIAO_ARMATURE_KEY ,{
+        { SKILL_BUTTON_BACKGROUND_PATH_KEY ,  std::string("skill_color_bomb_button.png") },
+        { SKILL_BUTTON_PROGRESS_PATH_KEY ,  std::string("skill_color_bomb_bg.png") },
+        { SKILL_BUTTON_LOGO_PATH_KEY ,  std::string("skill_logo_color_bomb.png") },
+        { SKILL_PROGRESS_HEAD_PATH_KEY ,  std::string("skill_color_bomb_head.png") }
+    } },
+    { CHARCTOR_LAOSHU_ARMATURE_KEY ,{
+        { SKILL_BUTTON_BACKGROUND_PATH_KEY ,  std::string("skill_staves_button.png") },
+        { SKILL_BUTTON_PROGRESS_PATH_KEY ,  std::string("skill_staves_bg.png") },
+        { SKILL_BUTTON_LOGO_PATH_KEY ,  std::string("skill_logo_staves.png") },
+        { SKILL_PROGRESS_HEAD_PATH_KEY ,  std::string("skill_staves_head.png") }
+    } },
+    { CHARCTOR_TUZI_ARMATURE_KEY ,{
+        { SKILL_BUTTON_BACKGROUND_PATH_KEY ,  std::string("skill_big_bomb_button.png") },
+        { SKILL_BUTTON_PROGRESS_PATH_KEY ,  std::string("skill_big_bomb_bg.png") },
+        { SKILL_BUTTON_LOGO_PATH_KEY ,  std::string("skill_big_bomb_logo.png") },
+        { SKILL_PROGRESS_HEAD_PATH_KEY ,  std::string("skill_big_bomb_head.png") }
+    } },
+};
 namespace bubble_second {
     GameCharactorSkillButton::GameCharactorSkillButton()
     {
-        charactor_to_path_[CHARCTOR_LAOHU_ARMATURE_KEY][SKILL_BUTTON_BACKGROUND_PATH_KEY] = "skill_dyeing_button.png";
-        charactor_to_path_[CHARCTOR_LAOHU_ARMATURE_KEY][SKILL_BUTTON_PROGRESS_PATH_KEY] = "skill_dyeing_bg.png";
-        charactor_to_path_[CHARCTOR_LAOHU_ARMATURE_KEY][SKILL_BUTTON_LOGO_PATH_KEY] = "skill_logo_dyeing.png";
-        charactor_to_path_[CHARCTOR_LAOHU_ARMATURE_KEY][SKILL_PROGRESS_HEAD_PATH_KEY] = "skill_dyeing_head.png";
+        //charactor_to_path_[CHARCTOR_LAOHU_ARMATURE_KEY][SKILL_BUTTON_BACKGROUND_PATH_KEY] = "skill_dyeing_button.png";
+        //charactor_to_path_[CHARCTOR_LAOHU_ARMATURE_KEY][SKILL_BUTTON_PROGRESS_PATH_KEY] = "skill_dyeing_bg.png";
+        //charactor_to_path_[CHARCTOR_LAOHU_ARMATURE_KEY][SKILL_BUTTON_LOGO_PATH_KEY] = "skill_logo_dyeing.png";
+        //charactor_to_path_[CHARCTOR_LAOHU_ARMATURE_KEY][SKILL_PROGRESS_HEAD_PATH_KEY] = "skill_dyeing_head.png";
 
-        charactor_to_path_[CHARCTOR_MIAO_ARMATURE_KEY][SKILL_BUTTON_BACKGROUND_PATH_KEY] = "skill_color_bomb_button.png";
-        charactor_to_path_[CHARCTOR_MIAO_ARMATURE_KEY][SKILL_BUTTON_PROGRESS_PATH_KEY] = "skill_color_bomb_bg.png";
-        charactor_to_path_[CHARCTOR_MIAO_ARMATURE_KEY][SKILL_BUTTON_LOGO_PATH_KEY] = "skill_logo_color_bomb.png";
-        charactor_to_path_[CHARCTOR_MIAO_ARMATURE_KEY][SKILL_PROGRESS_HEAD_PATH_KEY] = "skill_color_bomb_head.png";
+        //charactor_to_path_[CHARCTOR_MIAO_ARMATURE_KEY][SKILL_BUTTON_BACKGROUND_PATH_KEY] = "skill_color_bomb_button.png";
+        //charactor_to_path_[CHARCTOR_MIAO_ARMATURE_KEY][SKILL_BUTTON_PROGRESS_PATH_KEY] = "skill_color_bomb_bg.png";
+        //charactor_to_path_[CHARCTOR_MIAO_ARMATURE_KEY][SKILL_BUTTON_LOGO_PATH_KEY] = "skill_logo_color_bomb.png";
+        //charactor_to_path_[CHARCTOR_MIAO_ARMATURE_KEY][SKILL_PROGRESS_HEAD_PATH_KEY] = "skill_color_bomb_head.png";
 
-        charactor_to_path_[CHARCTOR_LAOSHU_ARMATURE_KEY][SKILL_BUTTON_BACKGROUND_PATH_KEY] = "skill_staves_button.png";
-        charactor_to_path_[CHARCTOR_LAOSHU_ARMATURE_KEY][SKILL_BUTTON_PROGRESS_PATH_KEY] = "skill_staves_bg.png";
-        charactor_to_path_[CHARCTOR_LAOSHU_ARMATURE_KEY][SKILL_BUTTON_LOGO_PATH_KEY] = "skill_logo_staves.png";
-        charactor_to_path_[CHARCTOR_LAOSHU_ARMATURE_KEY][SKILL_PROGRESS_HEAD_PATH_KEY] = "skill_staves_head.png";
+        //charactor_to_path_[CHARCTOR_LAOSHU_ARMATURE_KEY][SKILL_BUTTON_BACKGROUND_PATH_KEY] = "skill_staves_button.png";
+        //charactor_to_path_[CHARCTOR_LAOSHU_ARMATURE_KEY][SKILL_BUTTON_PROGRESS_PATH_KEY] = "skill_staves_bg.png";
+        //charactor_to_path_[CHARCTOR_LAOSHU_ARMATURE_KEY][SKILL_BUTTON_LOGO_PATH_KEY] = "skill_logo_staves.png";
+        //charactor_to_path_[CHARCTOR_LAOSHU_ARMATURE_KEY][SKILL_PROGRESS_HEAD_PATH_KEY] = "skill_staves_head.png";
 
-        charactor_to_path_[CHARCTOR_TUZI_ARMATURE_KEY][SKILL_BUTTON_BACKGROUND_PATH_KEY] = "skill_big_bomb_button.png";
-        charactor_to_path_[CHARCTOR_TUZI_ARMATURE_KEY][SKILL_BUTTON_PROGRESS_PATH_KEY] = "skill_big_bomb_bg.png";
-        charactor_to_path_[CHARCTOR_TUZI_ARMATURE_KEY][SKILL_BUTTON_LOGO_PATH_KEY] = "skill_big_bomb_logo.png";
-        charactor_to_path_[CHARCTOR_TUZI_ARMATURE_KEY][SKILL_PROGRESS_HEAD_PATH_KEY] = "skill_big_bomb_head.png";
+        //charactor_to_path_[CHARCTOR_TUZI_ARMATURE_KEY][SKILL_BUTTON_BACKGROUND_PATH_KEY] = "skill_big_bomb_button.png";
+        //charactor_to_path_[CHARCTOR_TUZI_ARMATURE_KEY][SKILL_BUTTON_PROGRESS_PATH_KEY] = "skill_big_bomb_bg.png";
+        //charactor_to_path_[CHARCTOR_TUZI_ARMATURE_KEY][SKILL_BUTTON_LOGO_PATH_KEY] = "skill_big_bomb_logo.png";
+        //charactor_to_path_[CHARCTOR_TUZI_ARMATURE_KEY][SKILL_PROGRESS_HEAD_PATH_KEY] = "skill_big_bomb_head.png";
     }
 
     bool bubble_second::GameCharactorSkillButton::init()
@@ -42,7 +68,7 @@ namespace bubble_second {
         {
             return false;
         }
-        auto data = charactor_to_path_[GameCharactorNameManager::getInstance()->getCurrentArmatureName()];  
+        auto data = CHARACTOR_TO_PATH.at(GameCharactorNameManager::getInstance()->getCurrentArmatureName());
         cocos2d::ui::Button* button = cocos2d::ui::Button::create(data[SKILL_BUTTON_BACKGROUND_PATH_KEY], data[SKILL_BUTTON_BACKGROUND_PATH_KEY]);
         button->addClickEventListener(CC_CALLBACK_1(GameCharactorSkillButton::skillButtonClickCallBack, this));
         this->addChild(button);

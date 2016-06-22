@@ -34,7 +34,7 @@ namespace bubble_second {
         bool isSkillEnergyFull();
         void skillButtonClickCallBack(cocos2d::Ref*);
     private:
-        std::map<std::string, std::map<std::string, std::string>> charactor_to_path_;
+        //std::map<std::string, std::map<std::string, std::string>> charactor_to_path_;
         cocos2d::Sprite* progress_sprite_ = nullptr;
         cocos2d::Sprite* progress_head_ = nullptr;
         int current_energy_nunble_ = 0;

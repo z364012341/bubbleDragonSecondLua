@@ -193,11 +193,18 @@ namespace bubble_second {
         std::map<BubbleType, pHandle> key_to_handle_map_;
         bool shoot_bubble_enabled_;
         //std::map<std::string, float> name_to_exchange_distance_;
-        std::map<BubbleType, pHandle> props_to_handle_;
+        //std::map<BubbleType, pHandle> PROPS_TO_HANDLE;
         WeaponBox* select_bubble_;
         TouchDirection direction_;
         std::map<std::string, std::map<std::string, std::function<void(cocos2d::Node*, cocos2d::Node*)>>> name_to_contact_handle_;
         GameScene* game_scene_delegate_ = nullptr;
+
+        const std::map<BubbleType, pHandle> PROPS_TO_HANDLE = {
+            { kBubbleColorBomb , &bubble_second::GamePlayController::disposeUsingPropertyBubble },
+            { kBubbleBombBombProperty , &bubble_second::GamePlayController::disposeUsingPropertyBubble },
+            { kBubbleSkillDyeingBubble , &bubble_second::GamePlayController::disposeUsingDyeingBubble },
+            { kBubbleSkillStavesBubble , &bubble_second::GamePlayController::disposeUsingStavesBubble }
+        };
     };
 }
 #endif //_GAME_PLAY_CONTROLLER_H_

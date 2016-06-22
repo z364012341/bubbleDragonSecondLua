@@ -82,8 +82,8 @@ namespace bubble_second {
         bool action_flag_ = true;
         //std::map<ScoreWidgetType, std::string> type_to_path_;
         //std::map<ScoreWidgetType, std::string> type_to_armature_name_;
-        std::map<ScoreWidgetType, ScoreWidgetType> type_update_to_type_;
-        std::map<ScoreWidgetType, int> type_to_score_;
+        //std::map<ScoreWidgetType, ScoreWidgetType> type_update_to_type_;
+        //std::map<ScoreWidgetType, int> type_to_score_;
         int widget_combo_;
         bool combo_flag_;
         //cocos2d::LabelAtlas* pop_score_label_;
