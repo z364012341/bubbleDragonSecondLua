@@ -19,6 +19,7 @@ namespace bubble_second {
         void setBubbleTexture(BubbleType) override;
         std::string getBubbleSightingDevicePointPath() override;
         void bubbleEliminate(int = 0) override;
+        float playTheSpecialEffects() override;
     private:
         bool init();
         SkillColorBombBubble();

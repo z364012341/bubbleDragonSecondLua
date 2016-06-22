@@ -40,4 +40,8 @@ namespace bubble_second {
         })));
         ColorBombBubble::bubbleEliminate();
     }
+    float SkillColorBombBubble::playTheSpecialEffects()
+    {
+        return 0.0f;
+    }
 }

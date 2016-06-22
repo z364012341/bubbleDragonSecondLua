@@ -23,15 +23,23 @@ function DecalsExhibitionPageView:init()
     local pageview= ccui.PageView:create();
 
     pageview:setContentSize(PAGEVIEW_CONTENT_SIZE);
-    local decalsData = self.decals_type_ == DECALS_TYPE_CHARACTOR and bs.UserDataManager:getInstance():getCharactorDecalsData() or bs.UserDataManager:getInstance():getTreasureDecalsData();
-    local charactorData = self.decals_type_ == DECALS_TYPE_CHARACTOR and bs.DecalsFactory:getInstance():getDecalsCharactorData() or bs.DecalsFactory:getInstance():getDecalsTreasureData();
+    local decalsData = nil;
+    local charactorData = nil;
+    if self.decals_type_ == DECALS_TYPE_CHARACTOR then
+        decalsData = bs.UserDataManager:getInstance():getCharactorDecalsData();
+        charactorData = bs.DecalsFactory:getInstance():getDecalsCharactorData();
+    else
+        decalsData = bs.UserDataManager:getInstance():getTreasureDecalsData();
+        charactorData = bs.DecalsFactory:getInstance():getDecalsTreasureData();
+    end
+
+
     self:addPageViewPoints(#charactorData);
     for i,v in ipairs(charactorData) do
         pageview:addPage(self:createPageWithData(v.x, v.y, decalsData[i]));
     end
     pageview:setCurrentPageIndex(0);
     pageview:setPosition(cc.p(pageview:getContentSize().width/-2, pageview:getContentSize().height/-3));
-    --pageview:setTouchEnabled(false);
     self.pageview_ = pageview;
     self:addChild(self.pageview_);
 end

@@ -30,6 +30,7 @@ end
 function DecalsExhibitionAlert:init()
     self:addChild(bs.GameAlertMask:create(), -1);
     self:loadCSB();
+
 end
 function DecalsExhibitionAlert:loadCSB()
     local csb_node = cc.CSLoader:createNode(DECALS_EXHIBITION_ALERT_CSB_PATH);
@@ -145,7 +146,7 @@ function DecalsExhibitionAlert:onEnter()
     --     self.button_node_:setVisible(false);
     -- end
     -- table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_END, lotteryEnd));
-    
+
     for _, listener in ipairs(self.listener_) do
         self:getEventDispatcher():addEventListenerWithFixedPriority(listener, 1);
     end
