@@ -44,4 +44,8 @@ namespace bubble_second {
     {
         return 0.0f;
     }
+    void SkillColorBombBubble::dispatchEventAfterShooted()
+    {
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_HAVE_USED_SKILL);
+    }
 }

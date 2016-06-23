@@ -23,6 +23,7 @@ namespace bubble_second {
     class ScoreProgressMenu;
     class BarrelScoreLabelNode;
     class GameAlertMask;
+    class GameCharactorSkillButton;
     //struct StageData
     //{
     //    int cell_numble = 0;
@@ -252,6 +253,8 @@ namespace bubble_second {
         void pushBubbleToPrepare(BaseBubble* bubble/*, cocos2d::CallFunc* callfunc = nullptr*/);
         //使用人物技能
         void useCharactorSkill(BaseBubble* bubble);
+        //正在使用技能
+        bool isUsingSkill();
     private:
         //添加自定义事件监听
         void addEventListenerCustom();
@@ -378,6 +381,8 @@ namespace bubble_second {
         GameAlertMask* props_touch_mask_ = nullptr;
         cocos2d::EventListenerTouchOneByOne* touch_listener_ = nullptr;
         cocos2d::Vector<cocos2d::Sprite*> top_eliminate_logos_;
+        GameCharactorSkillButton* skill_button_ = nullptr;
+        bool charactor_skill_using_ = false;
     };
 }
 #endif //_GAME_SCENE_H_

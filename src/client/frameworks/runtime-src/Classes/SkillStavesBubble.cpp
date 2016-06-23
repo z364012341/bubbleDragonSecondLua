@@ -29,7 +29,7 @@ namespace bubble_second {
 
     void SkillStavesBubble::dispatchEventAfterShooted()
     {
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_HAVE_USED_PROPS);
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_HAVE_USED_SKILL);
     }
 
 

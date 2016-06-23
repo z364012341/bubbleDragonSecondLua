@@ -102,12 +102,11 @@ function DecalsLotteryCard:selectCard()
     self.isSelectedCard_ = true;
     self:setCardState(true);
     self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_SELECT_CARD);
-    bs.UserDataManager:getInstance():addPropsNumbleWithKey(self.award_key_, self.award_numble_);
-    -- armature_1:getAnimation():play(SELECT_ANIMATION_1_NAME);
-
-
-    -- armature_2:getAnimation():play(SELECT_ANIMATION_2_NAME);
-
+    if self:isDecalCard() then
+        bs.DecalsFactory:getInstance():saveNextDecal(self.decals_type_);
+    else
+        bs.UserDataManager:getInstance():addPropsNumbleWithKey(self.award_key_, self.award_numble_);
+    end
     self:runAction(cc.Sequence:create(cc.DelayTime:create(DECALS_LOTTERY_CARD_FLIPX_DURATION), cc.CallFunc:create(function ()
         local armature_1 = ccs.Armature:create(SELECT_ARMATURE_NAME);
         self:addChild(armature_1, 1);
@@ -116,10 +115,6 @@ function DecalsLotteryCard:selectCard()
         self:addChild(armature_2, -1);
         armature_2:getAnimation():play(SELECT_ANIMATION_2_NAME);
     end)));
-
-    -- self.select_armatures_ = {};
-    -- table.insert(self.select_armatures_, armature_1);
-    -- table.insert(self.select_armatures_, armature_2);
 end
 function DecalsLotteryCard:turnOverFrontDelay()
     local duration = DECALS_LOTTERY_CARD_FLIPX_DURATION*1.5
@@ -211,12 +206,14 @@ function DecalsLotteryCard:isSelectedCard()
 end
 function DecalsLotteryCard:addDecalItem(decals_type)
     self:setLocalZOrder(1);
-    local item = nil;
-    if decals_type == DECALS_TYPE_CHARACTOR then
-        item = bs.DecalsFactory:getInstance():createCharactorNextDecal();
-    else
-        item = bs.DecalsFactory:getInstance():createTreasureNextDecal();
-    end
+--    local item = nil;
+--    if decals_type == DECALS_TYPE_CHARACTOR then
+--        item = bs.DecalsFactory:getInstance():createCharactorNextDecal();
+--    else
+--        item = bs.DecalsFactory:getInstance():createTreasureNextDecal();
+--    end
+    self.decals_type_ = decals_type;
+    local item = bs.DecalsFactory:getInstance():createNextDecalWithType(decals_type);
     item:setScale(self.card_front_:getContentSize().width/item:getContentSize().width*0.75*item:getScale());
     item:setPosition(cc.p(self.card_front_:getContentSize().width/2, self.card_front_:getContentSize().height/2));
     self.card_front_:addChild(item);

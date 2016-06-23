@@ -12,20 +12,9 @@
         
 --------------------------------
 -- 
--- @function [parent=#DecalsFactory] createTreasureNextDecal 
+-- @function [parent=#DecalsFactory] getDecalsDataWithType 
 -- @param self
--- @return Sprite#Sprite ret (return value: cc.Sprite)
-        
---------------------------------
--- 
--- @function [parent=#DecalsFactory] createCharactorNextDecal 
--- @param self
--- @return Sprite#Sprite ret (return value: cc.Sprite)
-        
---------------------------------
--- 
--- @function [parent=#DecalsFactory] getDecalsTreasureData 
--- @param self
+-- @param #string decals_type
 -- @return array_table#array_table ret (return value: array_table)
         
 --------------------------------
@@ -38,12 +27,6 @@
         
 --------------------------------
 -- 
--- @function [parent=#DecalsFactory] getDecalsCharactorData 
--- @param self
--- @return array_table#array_table ret (return value: array_table)
-        
---------------------------------
--- 
 -- @function [parent=#DecalsFactory] createDecal 
 -- @param self
 -- @param #string path
@@ -53,9 +36,23 @@
         
 --------------------------------
 -- 
+-- @function [parent=#DecalsFactory] saveNextDecal 
+-- @param self
+-- @param #string decals_type
+-- @return DecalsFactory#DecalsFactory self (return value: bs.DecalsFactory)
+        
+--------------------------------
+-- 
 -- @function [parent=#DecalsFactory] loadDecalsData 
 -- @param self
 -- @return DecalsFactory#DecalsFactory self (return value: bs.DecalsFactory)
+        
+--------------------------------
+-- 
+-- @function [parent=#DecalsFactory] createNextDecalWithType 
+-- @param self
+-- @param #string decals_type
+-- @return Sprite#Sprite ret (return value: cc.Sprite)
         
 --------------------------------
 -- 

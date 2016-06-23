@@ -141,8 +141,8 @@ cc.exports.DECALS_LOTTERY_CARD_FLIPX_DURATION = 0.75;
 cc.exports.CARDS_MOVETO_CENTER_DURATION = 0.3;
 
 
-cc.exports.DECALS_TYPE_CHARACTOR = "charactor_decals";
-cc.exports.DECALS_TYPE_TREASEURE = "charactor_treasure";
+cc.exports.DECALS_TYPE_CHARACTOR = bs.UserDataManager:getDecalsCharactorKey();
+cc.exports.DECALS_TYPE_TREASEURE = bs.UserDataManager:getDecalsTreasureKey();
 
 cc.exports.puzzle = {
 	PUZZLE_DIRECTIOIN_RANDOM = {

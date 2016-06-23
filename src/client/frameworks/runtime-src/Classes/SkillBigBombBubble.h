@@ -19,6 +19,7 @@ namespace bubble_second {
         void setBubbleTexture(BubbleType) override;
         std::string getBubbleSightingDevicePointPath() override;
         float playTheSpecialEffects() override;
+        void dispatchEventAfterShooted() override;
         void bubbleEliminate(int = 0) override;
     private:
         SkillBigBombBubble();

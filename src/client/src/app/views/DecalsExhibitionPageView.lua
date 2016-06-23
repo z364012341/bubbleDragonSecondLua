@@ -23,15 +23,15 @@ function DecalsExhibitionPageView:init()
     local pageview= ccui.PageView:create();
 
     pageview:setContentSize(PAGEVIEW_CONTENT_SIZE);
-    local decalsData = nil;
-    local charactorData = nil;
-    if self.decals_type_ == DECALS_TYPE_CHARACTOR then
-        decalsData = bs.UserDataManager:getInstance():getCharactorDecalsData();
-        charactorData = bs.DecalsFactory:getInstance():getDecalsCharactorData();
-    else
-        decalsData = bs.UserDataManager:getInstance():getTreasureDecalsData();
-        charactorData = bs.DecalsFactory:getInstance():getDecalsTreasureData();
-    end
+    local decalsData = bs.UserDataManager:getInstance():getDecalsData(self.decals_type_);
+    local charactorData = bs.DecalsFactory:getInstance():getDecalsDataWithType(self.decals_type_);
+    -- if self.decals_type_ == DECALS_TYPE_CHARACTOR then
+    --     decalsData = bs.UserDataManager:getInstance():getCharactorDecalsData();
+    --     charactorData = bs.DecalsFactory:getInstance():getDecalsCharactorData();
+    -- else
+    --     decalsData = bs.UserDataManager:getInstance():getTreasureDecalsData();
+    --     charactorData = bs.DecalsFactory:getInstance():getDecalsTreasureData();
+    -- end
 
 
     self:addPageViewPoints(#charactorData);

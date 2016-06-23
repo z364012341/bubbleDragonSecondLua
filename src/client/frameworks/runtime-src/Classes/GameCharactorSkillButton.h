@@ -12,6 +12,7 @@
 #define _GAME_CHARACTOR_SKILL_BUTTON_H_
 #include "cocos2d.h"
 #include "cocostudio\CocoStudio.h"
+#include "ui\UIButton.h"
 namespace bubble_second {
     class GameCharactorSkillButton : public cocos2d::Node
     {
@@ -20,6 +21,7 @@ namespace bubble_second {
         ~GameCharactorSkillButton();
         void onEnter() override;
         void onExit() override;
+        void setSkillButtonEnabled(bool enabled);
     private:
         GameCharactorSkillButton();
         bool init();
@@ -40,6 +42,7 @@ namespace bubble_second {
         int current_energy_nunble_ = 0;
         cocostudio::Armature* energy_full_armature_ = nullptr;
         cocos2d::EventListenerCustom* listerner_ = nullptr;
+        cocos2d::ui::Button* skill_button_ = nullptr;
     };
 }
 #endif

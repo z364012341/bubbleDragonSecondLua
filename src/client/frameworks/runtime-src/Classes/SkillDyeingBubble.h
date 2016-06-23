@@ -29,8 +29,8 @@ namespace bubble_second {
     private:
         cocostudio::Armature* armature_ = nullptr;
         BubbleType dyeing_color_;
-        std::map<BubbleType, int> type_to_skin_numble_1_;
-        std::map<BubbleType, int> type_to_skin_numble_2_;
+        //std::map<BubbleType, int> type_to_skin_numble_1_;
+        //std::map<BubbleType, int> type_to_skin_numble_2_;
     };
 }
 #endif //_SKILL_DYEING_BUBBLE_H_

@@ -62,4 +62,8 @@ namespace bubble_second {
         })));
         BombPropertyBubble::bubbleEliminate();
     }
+    void SkillBigBombBubble::dispatchEventAfterShooted()
+    {
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_HAVE_USED_SKILL);
+    }
 }

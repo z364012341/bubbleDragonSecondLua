@@ -56,12 +56,6 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] getCharactorDecalsData 
--- @param self
--- @return array_table#array_table ret (return value: array_table)
-        
---------------------------------
--- 
 -- @function [parent=#UserDataManager] isUnlockWithStageNumble 
 -- @param self
 -- @param #int stage_numble
@@ -72,6 +66,13 @@
 -- @function [parent=#UserDataManager] readDataFile 
 -- @param self
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] getDecalsData 
+-- @param self
+-- @param #string decals_type
+-- @return array_table#array_table ret (return value: array_table)
         
 --------------------------------
 -- 
@@ -104,6 +105,14 @@
 -- 
 -- @function [parent=#UserDataManager] saveUserData 
 -- @param self
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] setDecalsUserData 
+-- @param self
+-- @param #array_table data
+-- @param #string decals_type
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
@@ -178,12 +187,6 @@
         
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] getTreasureDecalsData 
--- @param self
--- @return array_table#array_table ret (return value: array_table)
-        
---------------------------------
--- 
 -- @function [parent=#UserDataManager] getGameCharactorUnlockNumble 
 -- @param self
 -- @return int#int ret (return value: int)
@@ -215,6 +218,24 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] getDecalsTreasureKey 
+-- @param self
+-- @return string#string ret (return value: string)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] getDecalsCharactorKey 
+-- @param self
+-- @return string#string ret (return value: string)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] getInstance 
+-- @param self
+-- @return UserDataManager#UserDataManager ret (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] getPuzzleSearchPropKey 
 -- @param self
 -- @return string#string ret (return value: string)
@@ -224,12 +245,6 @@
 -- @function [parent=#UserDataManager] getPuzzleBigEyesPropKey 
 -- @param self
 -- @return string#string ret (return value: string)
-        
---------------------------------
--- 
--- @function [parent=#UserDataManager] getInstance 
--- @param self
--- @return UserDataManager#UserDataManager ret (return value: bs.UserDataManager)
         
 --------------------------------
 -- 

@@ -22,6 +22,8 @@ const std::string BUBBLE_BIG_BOMB_BOMB_PROP_KEY = "bigBombBomb";
 const std::string BUBBLE_STAVES_PROP_KEY = "staves";
 const std::string GAME_COIN_KEY = "coin";
 const std::string GAME_DIAMOND_KEY = "diamond";
+const std::string DECALS_CHARACTOR_KEY = "decals_charactor";
+const std::string DECALS_TREASURE_KEY = "decals_treasure";
 namespace bubble_second {
     class UserDataManager
     {
@@ -30,6 +32,8 @@ namespace bubble_second {
         static const std::string getPuzzleSearchPropKey();
         static const std::string getPuzzleBigEyesPropKey();
         static const std::string getPuzzleAddTimePropKey();
+        static const std::string getDecalsCharactorKey();
+        static const std::string getDecalsTreasureKey();
         UserDataManager();
         //获取已通过关卡的数量
         int getStagePassCount();
@@ -75,8 +79,10 @@ namespace bubble_second {
         void setLastGameCharactorIndex(int index);
         //读取贴纸用户数据
         void readDecalsData();
-        cocos2d::ValueVector getCharactorDecalsData();
-        cocos2d::ValueVector getTreasureDecalsData();
+        //cocos2d::ValueVector getCharactorDecalsData();
+        //cocos2d::ValueVector getTreasureDecalsData();
+        cocos2d::ValueVector getDecalsData(const std::string& decals_type);
+        void setDecalsUserData(const cocos2d::ValueVector& data, const std::string& decals_type);
     private:
         ~UserDataManager();
         void writeStageDataToFile();
@@ -87,8 +93,10 @@ namespace bubble_second {
         void readUserDataFile();
         std::string getMD5Str(const std::string& input_str);
         std::string encryptionPropsNumble();
+        void saveDecalsUserData();
 
         std::string getDecalsDataPath() const;
+
     private:
         cocos2d::ValueMap stage_data_;
         int present_cell_ = 0;

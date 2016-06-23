@@ -2,8 +2,8 @@
 #include "UserDataManager.h"
 #include "SpriteTextureController.h"
 const std::string DECALS_DATA_PATH = "res/decalsData.plist";
-const std::string DECALS_CHARACTOR_DATA_KEY = "decals_charactor";
-const std::string DECALS_TREASURE_DATA_KEY = "decals_treasure";
+//const std::string DECALS_CHARACTOR_KEY = "decals_charactor";
+//const std::string DECALS_TREASURE_DATA_KEY = "decals_treasure";
 const std::string DECALS_DATA_PATH_KEY = "path";
 const std::string DECALS_DATA_GOOD_KEY = "goods";
 namespace bubble_second {
@@ -153,14 +153,18 @@ namespace bubble_second {
         assert(cocos2d::FileUtils::getInstance()->isFileExist(DECALS_DATA_PATH));
         decals_data_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(DECALS_DATA_PATH);
     }
-    cocos2d::ValueVector DecalsFactory::getDecalsCharactorData()
+    //cocos2d::ValueVector DecalsFactory::getDecalsCharactorData()
+    //{
+    //    return decals_data_[DECALS_CHARACTOR_KEY].asValueVector();
+    //}
+    //cocos2d::ValueVector DecalsFactory::getDecalsTreasureData()
+    //{
+    //    return decals_data_[DECALS_TREASURE_DATA_KEY].asValueVector();
+    //    //return decals_data_[DECALS_TREASURE_DATA_KEY].asValueVector();
+    //}
+    cocos2d::ValueVector DecalsFactory::getDecalsDataWithType(const std::string & decals_type)
     {
-        return decals_data_[DECALS_CHARACTOR_DATA_KEY].asValueVector();
-    }
-    cocos2d::ValueVector DecalsFactory::getDecalsTreasureData()
-    {
-        return decals_data_[DECALS_TREASURE_DATA_KEY].asValueVector();
-        //return decals_data_[DECALS_TREASURE_DATA_KEY].asValueVector();
+        return decals_data_.at(decals_type).asValueVector();
     }
     cocos2d::Vec2 DecalsFactory::getDecalsMaxIndexWithPath(const std::string & path)
     {
@@ -177,40 +181,70 @@ namespace bubble_second {
         assert(false);
         return cocos2d::Vec2(-1, -1);
     }
-    cocos2d::Sprite * DecalsFactory::createCharactorNextDecal()
+    //cocos2d::Sprite * DecalsFactory::createCharactorNextDecal()
+    //{
+    //    //cocos2d::ValueVector charactor_vector = UserDataManager::getInstance()->getCharactorDecalsData();
+    //    //if (charactor_vector.empty())
+    //    //{
+    //    //    auto path = this->getDecalsCharactorData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
+    //    //    return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
+    //    //}
+    //    //else
+    //    //{
+    //    //    cocos2d::ValueMap charactor_user_data = charactor_vector.back().asValueMap();
+    //    //    cocos2d::ValueVector goods_data = charactor_user_data[DECALS_DATA_GOOD_KEY].asValueVector();
+    //    //    cocos2d::Vec2 max_index = this->getDecalsMaxIndexWithPath(charactor_user_data[DECALS_DATA_PATH_KEY].asString());
+    //    //    if (goods_data.size() < max_index.x * max_index.y)
+    //    //    {
+    //    //        auto path = charactor_user_data[DECALS_DATA_PATH_KEY].asString();
+    //    //        int numble = goods_data.size() + 1;
+    //    //        return this->createDecalBackground(this->createDecalWithNumble(path, numble), path, numble);
+    //    //    }      
+    //    //    else if (goods_data.size() == max_index.x * max_index.y)
+    //    //    {
+    //    //        auto path = this->getDecalsCharactorData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
+    //    //        return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
+    //    //    }
+    //    //}
+    //    //assert(false);
+    //    //return nullptr;
+    //    return this->createNextDecalWithType(DECALS_CHARACTOR_KEY);
+    //}
+    //cocos2d::Sprite * DecalsFactory::createTreasureNextDecal()
+    //{//如有修改需提取方法
+    //    //cocos2d::ValueVector charactor_vector = UserDataManager::getInstance()->getTreasureDecalsData();
+    //    //if (charactor_vector.empty())
+    //    //{
+    //    //    auto path = this->getDecalsTreasureData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
+    //    //    return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
+    //    //}
+    //    //else
+    //    //{
+    //    //    cocos2d::ValueMap charactor_user_data = charactor_vector.back().asValueMap();
+    //    //    cocos2d::ValueVector goods_data = charactor_user_data[DECALS_DATA_GOOD_KEY].asValueVector();
+    //    //    cocos2d::Vec2 max_index = this->getDecalsMaxIndexWithPath(charactor_user_data[DECALS_DATA_PATH_KEY].asString());
+    //    //    if (goods_data.size() < max_index.x * max_index.y)
+    //    //    {
+    //    //        auto path = charactor_user_data[DECALS_DATA_PATH_KEY].asString();
+    //    //        int numble = goods_data.size() + 1;
+    //    //        return this->createDecalBackground(this->createDecalWithNumble(path, numble), path, numble);
+    //    //    }
+    //    //    else if (goods_data.size() == max_index.x * max_index.y)
+    //    //    {
+    //    //        auto path = this->getDecalsTreasureData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
+    //    //        return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
+    //    //    }
+    //    //}
+    //    //assert(false);
+    //    //return nullptr;
+    //    return this->createNextDecalWithType(DECALS_TREASURE_KEY);
+    //}
+    cocos2d::Sprite * DecalsFactory::createNextDecalWithType(const std::string & decals_type)
     {
-        cocos2d::ValueVector charactor_vector = UserDataManager::getInstance()->getCharactorDecalsData();
+        cocos2d::ValueVector charactor_vector = UserDataManager::getInstance()->getDecalsData(decals_type);
         if (charactor_vector.empty())
         {
-            auto path = this->getDecalsCharactorData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
-            return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
-        }
-        else
-        {
-            cocos2d::ValueMap charactor_user_data = charactor_vector.back().asValueMap();
-            cocos2d::ValueVector goods_data = charactor_user_data[DECALS_DATA_GOOD_KEY].asValueVector();
-            cocos2d::Vec2 max_index = this->getDecalsMaxIndexWithPath(charactor_user_data[DECALS_DATA_PATH_KEY].asString());
-            if (goods_data.size() < max_index.x * max_index.y)
-            {
-                auto path = charactor_user_data[DECALS_DATA_PATH_KEY].asString();
-                int numble = goods_data.size() + 1;
-                return this->createDecalBackground(this->createDecalWithNumble(path, numble), path, numble);
-            }      
-            else if (goods_data.size() == max_index.x * max_index.y)
-            {
-                auto path = this->getDecalsCharactorData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
-                return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
-            }
-        }
-        assert(false);
-        return nullptr;
-    }
-    cocos2d::Sprite * DecalsFactory::createTreasureNextDecal()
-    {//如有修改需提取方法
-        cocos2d::ValueVector charactor_vector = UserDataManager::getInstance()->getTreasureDecalsData();
-        if (charactor_vector.empty())
-        {
-            auto path = this->getDecalsTreasureData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
+            auto path = this->getDecalsDataWithType(decals_type)[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
             return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
         }
         else
@@ -226,11 +260,55 @@ namespace bubble_second {
             }
             else if (goods_data.size() == max_index.x * max_index.y)
             {
-                auto path = this->getDecalsTreasureData()[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
+                auto path = this->getDecalsDataWithType(decals_type)[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
                 return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
             }
         }
         assert(false);
         return nullptr;
     }
+    void DecalsFactory::saveNextDecal(const std::string& decals_type)
+    {
+        cocos2d::ValueVector charactor_vector = UserDataManager::getInstance()->getDecalsData(decals_type);
+        if (charactor_vector.empty())
+        {
+            cocos2d::ValueMap new_map;
+            new_map[DECALS_DATA_PATH_KEY] = this->getDecalsDataWithType(decals_type).at(0).asValueMap().at(DECALS_DATA_PATH_KEY).asString();
+            cocos2d::ValueVector goods = cocos2d::ValueVector();
+            goods.push_back(cocos2d::Value(1));
+            new_map[DECALS_DATA_GOOD_KEY] = goods;
+            charactor_vector.push_back(cocos2d::Value(new_map));
+        }
+        else
+        {
+            cocos2d::ValueMap& decals_map = charactor_vector.back().asValueMap();
+            cocos2d::Vec2 max_index = this->getDecalsMaxIndexWithPath(decals_map.at(DECALS_DATA_PATH_KEY).asString());
+            cocos2d::ValueVector& goods_vector = decals_map.at(DECALS_DATA_GOOD_KEY).asValueVector();
+            if (goods_vector.size() < max_index.x*max_index.y)
+            {
+                goods_vector.push_back(cocos2d::Value((int)goods_vector.size()+1));
+            }
+            else
+            {
+                if (goods_vector.size() < this->getDecalsDataWithType(decals_type).size())
+                {
+                    cocos2d::ValueMap new_map;
+                    new_map[DECALS_DATA_PATH_KEY] = this->getDecalsDataWithType(decals_type).at(goods_vector.size()).asValueMap().at(DECALS_DATA_PATH_KEY).asString();
+                    cocos2d::ValueVector goods = cocos2d::ValueVector();
+                    goods.push_back(cocos2d::Value(1));
+                    new_map[DECALS_DATA_GOOD_KEY] = goods;
+                    charactor_vector.push_back(cocos2d::Value(new_map));
+                }
+            }
+        }
+        UserDataManager::getInstance()->setDecalsUserData(charactor_vector, decals_type);
+    }
+    //void DecalsFactory::saveCharactorNextDecal()
+    //{
+    //    this->getDecalsDataWithType(DECALS_CHARACTOR_KEY);
+    //}
+    //void DecalsFactory::saveTreasureNextDecal()
+    //{
+    //    this->getDecalsDataWithType(DECALS_TREASURE_KEY);
+    //}
 }

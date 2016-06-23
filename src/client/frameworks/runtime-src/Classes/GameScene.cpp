@@ -299,6 +299,22 @@ namespace bubble_second {
             staves_property_->setPosition(visible_size.width * PROPS_BACKGROUND_PERCENT_X_FOURTH, visible_size.height * GAME_PROPS_BACKGROUND_PERCENT_Y);
             this->addChild(staves_property_, UI_ZORDER_MENU_INFO);
         }
+        //技能秃瓢
+        {
+            //cocos2d::Sprite* skillSprite = SpriteTextureController::getInstance()->createGameSpriteWithPath("jineng.PNG");
+            //skillSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
+            //skillSprite->setScale(zoom);
+            //this->addChild(skillSprite, UI_ZORDER_MENU_INFO);
+            GameCharactorSkillButton* skillButton = GameCharactorSkillButton::create();
+            this->addChild(skillButton, UI_ZORDER_MENU_INFO);
+            skillButton->setScale(zoom);
+            skillButton->setPosition(cocos2d::Vec2(visible_size.width* 0.1, visible_size.height* 0.06));
+            skill_button_ = skillButton;
+            //skillButton->addClickEventListener([=](cocos2d::Ref*) {
+            //    this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
+            //});
+
+        }
         this->setPropertyTouchEnabled(false);
         {//顶部横条的背景
             cocos2d::Sprite* top_ui_bg = SpriteTextureController::getInstance()->createGameSpriteWithPath(TOP_UI_BACKGROUND_PATH);
@@ -341,21 +357,6 @@ namespace bubble_second {
                     this->popPauseAlert();
                 }
             });
-            //技能秃瓢
-            {
-                //cocos2d::Sprite* skillSprite = SpriteTextureController::getInstance()->createGameSpriteWithPath("jineng.PNG");
-                //skillSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
-                //skillSprite->setScale(zoom);
-                //this->addChild(skillSprite, UI_ZORDER_MENU_INFO);
-                GameCharactorSkillButton* skillButton = GameCharactorSkillButton::create();
-                this->addChild(skillButton, UI_ZORDER_MENU_INFO);
-                skillButton->setScale(zoom);
-                skillButton->setPosition(cocos2d::Vec2(visible_size.width* 0.1, visible_size.height* 0.06));
-                //skillButton->addClickEventListener([=](cocos2d::Ref*) {
-                //    this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
-                //});
-
-            }
         }
         //{   //发射台上的漩涡
         //    cocos2d::Sprite* swirl = SpriteTextureController::getInstance()->createGameSpriteWithPath(GUNSIGHT_SWIRL_RED_PATH);
@@ -817,6 +818,10 @@ namespace bubble_second {
         dispatcher->addCustomEventListener(EVENT_USE_STAVES_BUBBLE_SKILL, [=](cocos2d::EventCustom *) {
             this->useCharactorSkill(BubbleFactory::getInstance()->createBubbleWithType(kBubbleSkillStavesBubble));
         });
+        dispatcher->addCustomEventListener(EVENT_HAVE_USED_SKILL, [=](cocos2d::EventCustom *) {
+            charactor_skill_using_ = false;
+            this->haveUsedProps(nullptr);
+        });
     }
 
     void GameScene::removeEventListenerCustom()
@@ -879,6 +884,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_USE_COLOR_BOMB_BUBBLE_SKILL);
         dispatcher->removeCustomEventListeners(EVENT_USE_BIG_BOMB_BUBBLE_SKILL);
         dispatcher->removeCustomEventListeners(EVENT_USE_STAVES_BUBBLE_SKILL);
+        dispatcher->removeCustomEventListeners(EVENT_HAVE_USED_SKILL);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1377,7 +1383,7 @@ namespace bubble_second {
         //{
         //    return;
         //}
-        
+        skill_button_->setSkillButtonEnabled(false);
         this->removeExchangeBubbleListener();
         BaseProperty* property = static_cast<BaseProperty*>(event->getUserData());
         auto controller = GamePlayController::getInstance();
@@ -1448,9 +1454,19 @@ namespace bubble_second {
 
     void GameScene::useCharactorSkill(BaseBubble * bubble)
     {
-        property_bubble_ = bubble;
-        this->removeExchangeBubbleListener();
-        this->pushBubbleToPrepare(property_bubble_);
+        if (property_bubble_ == nullptr)
+        {
+            charactor_skill_using_ = true;
+            property_bubble_ = bubble;
+            this->removeExchangeBubbleListener();
+            this->pushBubbleToPrepare(property_bubble_);
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_CLEAR_SKILL_ENERGY);
+        }
+    }
+
+    bool GameScene::isUsingSkill()
+    {
+        return charactor_skill_using_;
     }
 
     void GameScene::cancelUsedBubbleBombProps(cocos2d::EventCustom* event)
@@ -1491,11 +1507,12 @@ namespace bubble_second {
     void GameScene::setPropertyTouchEnabled(bool flag)
     {
         bool game_result = GameScoreController::getInstance()->gameVictory() || GameScoreController::getInstance()->gameDefeat();
-        bool enabledFlag = !game_result && flag;
+        bool enabledFlag = !game_result && flag && !this->isUsingSkill();
         color_bomb_property_->setPropertyEnabled(enabledFlag);
         bomb_bomb_property_->setPropertyEnabled(enabledFlag);
         wooden_hammer_property_->setPropertyEnabled(enabledFlag);
         staves_property_->setPropertyEnabled(enabledFlag);
+        skill_button_->setSkillButtonEnabled(enabledFlag);
     }
 
     void GameScene::setMenuTouchEnabled(bool flag)

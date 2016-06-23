@@ -402,6 +402,7 @@ const std::string EVENT_FALL_STAGE_ADJUST_MAP_POSITION = "event_fall_stage_adjus
 const std::string EVENT_ADD_ELIMINATE_COMBO = "add_eliminate_combo"; //增加消除连击
 const std::string EVENT_CUT_ELIMINATE_COMBO = "cut_eliminate_combo"; //清除消除连击
 const std::string EVENT_HAVE_USED_PROPS = "hanve_used_props"; //使用完道具
+const std::string EVENT_HAVE_USED_SKILL = "hanve_used_skill"; //使用完技能
 const std::string EVENT_USE_BUBBLE_BOMB_PROPS = "use_props_bomb"; //点击使用彩球道具
 const std::string EVENT_CANCEL_BUBBLE_BOMB_PROPS = "cancel_use_colorbomb"; //点击取消使用彩球道具
 const std::string EVENT_PROPS_SELECT_ALERT_CANCEL = "props_alert_cancel"; //道具选择面板取消
@@ -455,6 +456,7 @@ const std::string EVENT_USE_DYEING_BUBBLE_SKILL = "event_use_dyeing_bubble_skill
 const std::string EVENT_USE_COLOR_BOMB_BUBBLE_SKILL = "event_use_color_bomb_bubble_skill";
 const std::string EVENT_USE_BIG_BOMB_BUBBLE_SKILL = "event_use_big_bomb_bubble_skill";
 const std::string EVENT_USE_STAVES_BUBBLE_SKILL = "event_use_staves_bubble_skill";
+const std::string EVENT_CLEAR_SKILL_ENERGY = "event_clear_skill_energy";
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效

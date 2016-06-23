@@ -15,8 +15,6 @@ const std::string GAME_CHARACTOR_UNLOCK_NUMBLE_KEY = "unlockCharactorNumble";
 const std::string LAST_GAME_CHARACTOR_INDEX_KEY = "lastCharactor";
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
-const std::string DECALS_CHARACTOR_KEY = "decals_charactor";
-const std::string DECALS_TREASURE_KEY = "decals_treasure";
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
@@ -87,22 +85,36 @@ namespace bubble_second {
             decals_data_ = file_utils->getValueMapFromFile(path);
         }
     }
-    cocos2d::ValueVector UserDataManager::getCharactorDecalsData()
+    //cocos2d::ValueVector UserDataManager::getCharactorDecalsData()
+    //{
+    //    return this->getDecalsData(DECALS_CHARACTOR_KEY);
+    //    //return decals_data_[DECALS_CHARACTOR_KEY].asValueVector();
+    //}
+    //cocos2d::ValueVector UserDataManager::getTreasureDecalsData()
+    //{
+    //    return this->getDecalsData(DECALS_TREASURE_KEY);
+    //    //return decals_data_[DECALS_TREASURE_KEY].asValueVector();
+    //}
+    cocos2d::ValueVector UserDataManager::getDecalsData(const std::string & decals_type)
     {
-        if (decals_data_.find(DECALS_CHARACTOR_KEY) == decals_data_.end())
+        if (decals_data_.find(decals_type) == decals_data_.end())
         {
             return cocos2d::ValueVector(0);
         }
-        return decals_data_[DECALS_CHARACTOR_KEY].asValueVector();
+        return decals_data_[decals_type].asValueVector();
     }
-    cocos2d::ValueVector UserDataManager::getTreasureDecalsData()
+
+    void UserDataManager::setDecalsUserData(const cocos2d::ValueVector& data, const std::string & decals_type)
     {
-        if (decals_data_.find(DECALS_TREASURE_KEY) == decals_data_.end())
-        {
-            return cocos2d::ValueVector(0);
-        }
-        return decals_data_[DECALS_TREASURE_KEY].asValueVector();
+        decals_data_[decals_type] = data;
+        this->saveDecalsUserData();
     }
+
+    void UserDataManager::saveDecalsUserData()
+    {
+        cocos2d::FileUtils::getInstance()->writeValueMapToFile(decals_data_, this->getDecalsDataPath());
+    }
+
     std::string UserDataManager::getDecalsDataPath() const
     {
         return cocos2d::FileUtils::getInstance()->getWritablePath() + DECALS_USER_DATA_PATH;
@@ -113,7 +125,7 @@ namespace bubble_second {
         {
             return user_data_.at(key).asInt();
         }
-        return 10;
+        return 100;
     }
     void UserDataManager::setPropsNumbleWithKey(const std::string & key, int numble)
     {
@@ -311,6 +323,16 @@ namespace bubble_second {
     const std::string UserDataManager::getPuzzleAddTimePropKey()
     {
         return PUZZLE_ADD_TIME_PROP_KEY;
+    }
+
+    const std::string UserDataManager::getDecalsCharactorKey()
+    {
+        return DECALS_CHARACTOR_KEY;
+    }
+
+    const std::string UserDataManager::getDecalsTreasureKey()
+    {
+        return DECALS_TREASURE_KEY;
     }
     
 }
