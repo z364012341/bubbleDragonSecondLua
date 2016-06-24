@@ -26,6 +26,11 @@ namespace bubble_second {
         void initTopLabel(int level);
         void initScoreLabel(int score);  
         void initStart(int start_numble);
+        void addLotteryStarts();
+        void playStartPopAction(cocos2d::Node* start, float delay);
+        void playStart1PopAction();
+        void playStart2PopAction();
+        void playStart3PopAction();
     private:
         cocos2d::Node* csb_node_ = nullptr;
     };

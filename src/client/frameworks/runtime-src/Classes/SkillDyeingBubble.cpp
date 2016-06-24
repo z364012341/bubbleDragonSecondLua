@@ -81,6 +81,6 @@ namespace bubble_second {
     }
     std::string SkillDyeingBubble::getBubbleSightingDevicePointPath()
     {
-        return BUBBLE_SIGHTING_POINT_PATH;
+        return "skill_dyeing.png";
     }
 }

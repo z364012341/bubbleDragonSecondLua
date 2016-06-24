@@ -129,6 +129,8 @@ namespace bubble_second {
         armature_path_.push_back("juesejinengTX4/juesejinengTX4.ExportJson");
         armature_path_.push_back("juesejinengTX1/juesejinengTX1.ExportJson");
         armature_path_.push_back("jinengkuang/jinengkuang.ExportJson");
+        armature_path_.push_back("choujiangkapianguang/choujiangkapianguang.ExportJson");
+        armature_path_.push_back("baoshi TX/baoshi TX.ExportJson");
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()
@@ -212,6 +214,16 @@ namespace bubble_second {
     {
         auto fileUtiles = cocos2d::FileUtils::getInstance();
         std::string fragmentFullPath = fileUtiles->fullPathForFilename(GREY_SCALE_FSH_PATH.c_str());
+        std::string fragSource = fileUtiles->getStringFromFile(fragmentFullPath);
+        cocos2d::GLProgram* shader_program = cocos2d::GLProgram::createWithByteArrays(cocos2d::ccPositionTextureColor_noMVP_vert, fragSource.c_str());
+        cocos2d::GLProgramState* program_state = cocos2d::GLProgramState::getOrCreateWithGLProgram(shader_program);
+        sprite->setGLProgramState(program_state);
+    }
+
+    void SpriteTextureController::setNormalShader(cocos2d::Sprite * sprite)
+    {
+        auto fileUtiles = cocos2d::FileUtils::getInstance();
+        std::string fragmentFullPath = fileUtiles->fullPathForFilename(NORMAL_FSH_PATH.c_str());
         std::string fragSource = fileUtiles->getStringFromFile(fragmentFullPath);
         cocos2d::GLProgram* shader_program = cocos2d::GLProgram::createWithByteArrays(cocos2d::ccPositionTextureColor_noMVP_vert, fragSource.c_str());
         cocos2d::GLProgramState* program_state = cocos2d::GLProgramState::getOrCreateWithGLProgram(shader_program);

@@ -2456,7 +2456,6 @@ namespace bubble_second {
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(POP_VICTORY_ALERT_DELAYTIME), cocos2d::CallFunc::create([=]() {
             GameVictoryAlert* alert = GameVictoryAlert::create(present_stage_numble, GameScoreController::getInstance()->getTotalScore(), start_numble);
             alert->setName(UI_NAME_GAME_VICTORY_ALERT);
-            alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
             cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
             alert->setPosition(visible_size.width / 2, visible_size.height / 2);
             this->addChild(alert, UI_ZORDER_ALERT);

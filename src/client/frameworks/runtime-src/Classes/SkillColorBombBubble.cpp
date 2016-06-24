@@ -1,6 +1,7 @@
 #include "SkillColorBombBubble.h"
 #include "cocostudio\CocoStudio.h"
 const std::string SKILL_COLOR_BOMB_ARMATURE_NAME = "juesejinengTX2";
+const std::string SKILL_ELIMINATE_ARMATURE_NAME = "baoshi TX";
 namespace bubble_second {
     bool SkillColorBombBubble::init()
     {
@@ -28,7 +29,7 @@ namespace bubble_second {
     }
     std::string SkillColorBombBubble::getBubbleSightingDevicePointPath()
     {
-        return BUBBLE_SIGHTING_POINT_PATH;
+        return "skill_color.png";
     }
     void SkillColorBombBubble::bubbleEliminate(int)
     {
@@ -42,6 +43,24 @@ namespace bubble_second {
     }
     float SkillColorBombBubble::playTheSpecialEffects()
     {
+        cocos2d::Node* parent_node = this->getParent();
+        if (!parent_node)
+        {
+            return 0.0;
+        }
+        using cocostudio::ArmatureDataManager;
+        using cocostudio::Armature;
+        this->setVisible(false);
+        Armature *armature = Armature::create(SKILL_ELIMINATE_ARMATURE_NAME);
+        armature->setPosition(this->getPosition());
+        armature->getAnimation()->play(SKILL_ELIMINATE_ARMATURE_NAME);
+        armature->getAnimation()->setMovementEventCallFunc([=](Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+            if (movementType == cocostudio::COMPLETE)
+            {
+                armature->removeFromParent();
+            }
+        });
+        parent_node->addChild(armature);
         return 0.0f;
     }
     void SkillColorBombBubble::dispatchEventAfterShooted()

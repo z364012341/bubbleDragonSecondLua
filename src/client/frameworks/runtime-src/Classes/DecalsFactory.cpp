@@ -290,10 +290,10 @@ namespace bubble_second {
             }
             else
             {
-                if (goods_vector.size() < this->getDecalsDataWithType(decals_type).size())
+                if (charactor_vector.size() < this->getDecalsDataWithType(decals_type).size())
                 {
                     cocos2d::ValueMap new_map;
-                    new_map[DECALS_DATA_PATH_KEY] = this->getDecalsDataWithType(decals_type).at(goods_vector.size()).asValueMap().at(DECALS_DATA_PATH_KEY).asString();
+                    new_map[DECALS_DATA_PATH_KEY] = this->getDecalsDataWithType(decals_type).at(charactor_vector.size()).asValueMap().at(DECALS_DATA_PATH_KEY).asString();
                     cocos2d::ValueVector goods = cocos2d::ValueVector();
                     goods.push_back(cocos2d::Value(1));
                     new_map[DECALS_DATA_GOOD_KEY] = goods;

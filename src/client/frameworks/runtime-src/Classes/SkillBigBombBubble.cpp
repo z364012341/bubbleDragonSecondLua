@@ -28,7 +28,7 @@ namespace bubble_second {
     }
     std::string SkillBigBombBubble::getBubbleSightingDevicePointPath()
     {
-        return BUBBLE_SIGHTING_POINT_PATH;
+        return "skill_big.png";
     }
     float SkillBigBombBubble::playTheSpecialEffects()
     {

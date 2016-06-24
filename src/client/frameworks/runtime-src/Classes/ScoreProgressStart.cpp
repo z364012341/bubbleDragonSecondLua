@@ -77,8 +77,8 @@ namespace bubble_second {
         {
             return;
         }
-        this->setStartSpriteShader(NORMAL_FSH_PATH);
-        //SpriteTextureController::getInstance()->setSpriteTexture(SCORE_PROGRESS_START_PATH, this);
+        //this->setStartSpriteShader(NORMAL_FSH_PATH);
+        SpriteTextureController::getInstance()->setNormalShader(this);
         start_on_flag_ = true;
         this->playTurnOnAnimation();
     }
@@ -89,8 +89,8 @@ namespace bubble_second {
         {
             return;
         }
-        this->setStartSpriteShader(GREY_SCALE_FSH_PATH);
-        //SpriteTextureController::getInstance()->setSpriteTexture(SCORE_PROGRESS_START_DARK_PATH, this);
+        //this->setStartSpriteShader(GREY_SCALE_FSH_PATH);
+        SpriteTextureController::getInstance()->setGrayShader(this);
         start_on_flag_ = false;
     }
 

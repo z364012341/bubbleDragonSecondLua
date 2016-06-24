@@ -112,7 +112,7 @@ namespace bubble_second {
 
     void GameCharactorSkillButton::setSkillEnergy(int numble)
     {
-        if (numble > SKILL_ENERGY_NUMBLE_MAX)
+        if (numble > SKILL_ENERGY_NUMBLE_MAX || current_energy_nunble_ == numble)
         {
             return;
         }
@@ -193,6 +193,10 @@ namespace bubble_second {
 
     void GameCharactorSkillButton::skillButtonClickCallBack(cocos2d::Ref *)
     {
+        if (!button_enabled_)
+        {
+            return;
+        }
         if (this->isSkillEnergyFull() && !GameScoreController::getInstance()->noUseBubbleCount())
         {
             this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
@@ -202,7 +206,7 @@ namespace bubble_second {
 
     void GameCharactorSkillButton::setSkillButtonEnabled(bool enabled)
     {
-        skill_button_->setEnabled(enabled);
+        button_enabled_ = enabled;
     }
 
 
@@ -214,11 +218,13 @@ namespace bubble_second {
         cocos2d::Node::onEnter();
         listerner_ = this->getEventDispatcher()->addCustomEventListener(EVENT_ADD_ELIMINATE_COMBO, [=](cocos2d::EventCustom* event) {this->addOneSkillEnergy(); });
         this->getEventDispatcher()->addCustomEventListener(EVENT_CLEAR_SKILL_ENERGY, [=](cocos2d::EventCustom* event) {this->setSkillEnergy(0); });
+        this->getEventDispatcher()->addCustomEventListener(EVENT_CUT_ELIMINATE_COMBO, [=](cocos2d::EventCustom* event) {this->setSkillEnergy(0); });
     }
     void GameCharactorSkillButton::onExit()
     {
         cocos2d::Node::onExit();
         this->getEventDispatcher()->removeEventListener(listerner_);
         this->getEventDispatcher()->removeCustomEventListeners(EVENT_CLEAR_SKILL_ENERGY);
+        this->getEventDispatcher()->removeCustomEventListeners(EVENT_CUT_ELIMINATE_COMBO);
     }
 }

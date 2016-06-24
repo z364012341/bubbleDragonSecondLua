@@ -426,6 +426,7 @@
     <ClInclude Include="..\Classes\SkillBigBombBubble.h" />
     <ClInclude Include="..\Classes\SkillStavesBubble.h" />
     <ClInclude Include="..\Classes\GameCharactorSkillButton.h" />
+    <ClInclude Include="..\Classes\GameVictoryLotteryStarts.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -824,6 +825,7 @@
     <ClCompile Include="..\Classes\SkillBigBombBubble.cpp" />
     <ClCompile Include="..\Classes\SkillStavesBubble.cpp" />
     <ClCompile Include="..\Classes\GameCharactorSkillButton.cpp" />
+    <ClCompile Include="..\Classes\GameVictoryLotteryStarts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

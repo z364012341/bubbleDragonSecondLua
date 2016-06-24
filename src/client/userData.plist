@@ -4,22 +4,22 @@
 <plist version="1.0">
     <dict>
         <key>search</key>
-        <integer>101</integer>
-        <key>bigBombBomb</key>
         <integer>102</integer>
+        <key>bigBombBomb</key>
+        <integer>94</integer>
         <key>staves</key>
         <integer>103</integer>
         <key>woodenHammer</key>
-        <integer>51</integer>
+        <integer>21</integer>
         <key>md5</key>
-        <string>e526c94b25cd7cd2b4ddce1506fca30f</string>
+        <string>914ff7b43a5343f8e91578f5ea800b4c</string>
         <key>bigEyes</key>
-        <integer>102</integer>
+        <integer>103</integer>
         <key>coin</key>
-        <integer>4600</integer>
+        <integer>8100</integer>
         <key>addTime</key>
         <integer>102</integer>
         <key>colorBomb</key>
-        <integer>99</integer>
+        <integer>98</integer>
     </dict>
 </plist>

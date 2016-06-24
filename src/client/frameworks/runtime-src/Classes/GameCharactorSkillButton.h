@@ -43,6 +43,7 @@ namespace bubble_second {
         cocostudio::Armature* energy_full_armature_ = nullptr;
         cocos2d::EventListenerCustom* listerner_ = nullptr;
         cocos2d::ui::Button* skill_button_ = nullptr;
+        bool button_enabled_ = true;
     };
 }
 #endif

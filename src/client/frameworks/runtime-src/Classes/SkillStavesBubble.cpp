@@ -48,6 +48,6 @@ namespace bubble_second {
     }
     std::string SkillStavesBubble::getBubbleSightingDevicePointPath()
     {
-        return BUBBLE_SIGHTING_POINT_PATH;
+        return "skill_staves.png";
     }
 }

@@ -28,6 +28,7 @@ namespace bubble_second {
         void addResourcesTexture();
         //±ä»Ò
         void setGrayShader(cocos2d::Sprite* sprite);
+        void setNormalShader(cocos2d::Sprite* sprite);
         //void addGameBackgroundTexture(int cell_numble);
         //cocos2d::Sprite* createGameBlurBackground();
         //½ØÆÁ
