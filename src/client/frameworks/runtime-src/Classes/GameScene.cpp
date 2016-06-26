@@ -2452,7 +2452,6 @@ namespace bubble_second {
         bubble_map_node_->stopAllActions();
         int start_numble = this->getScoreProgressMenu()->getStartOnNumble();
         int present_stage_numble = this->getPresentStageNumble();
-        UserDataManager::getInstance()->updateStageData(present_stage_numble, start_numble);
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(POP_VICTORY_ALERT_DELAYTIME), cocos2d::CallFunc::create([=]() {
             GameVictoryAlert* alert = GameVictoryAlert::create(present_stage_numble, GameScoreController::getInstance()->getTotalScore(), start_numble);
             alert->setName(UI_NAME_GAME_VICTORY_ALERT);

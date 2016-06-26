@@ -1,8 +1,8 @@
 #include "ScoreProgressStar.h"
 #include "SpriteTextureController.h"
 const float STAR_PERCENT_ZOOM_SCALE = 0.90f;
-const float STAR_TEXTURE_SCALE = 0.35f;
 const std::string SCORE_PROGRESS_START_PATH = "xingxing.png"; //¡¡–«–«
+const float STAR_TEXTURE_SCALE = 0.35f;
 //const std::string SCORE_PROGRESS_START_DARK_PATH = "xingxinghui.png"; //¡¡–«–«
 namespace bubble_second {
     ScoreProgressStar::ScoreProgressStar()

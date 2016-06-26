@@ -142,7 +142,7 @@ namespace bubble_second {
         cocos2d::ParticleSystemQuad* particle = cocos2d::ParticleSystemQuad::create(SKILL_ENERGY_ADD_PARTICLE_PATH);
         particle->setScaleX(1.5f);
         particle->setPositionType(cocos2d::ParticleSystem::PositionType::RELATIVE);
-        particle->setTexture(cocos2d::TextureCache::getInstance()->addImage(CHARACTOR_TO_PATH.at(GameCharactorNameManager::getInstance()->getCurrentArmatureName()).at(SKILL_ENERGY_ADD_PARTICLE_PATH_KEY)));
+        particle->setTexture(cocos2d::Director::getInstance()->getTextureCache()->addImage(CHARACTOR_TO_PATH.at(GameCharactorNameManager::getInstance()->getCurrentArmatureName()).at(SKILL_ENERGY_ADD_PARTICLE_PATH_KEY)));
         particle->setPosition(progress_head_->getContentSize().width/2, 100.0f);
         progress_head_->addChild(particle);
         progress_head_->runAction(cocos2d::Sequence::createWithTwoActions(moveto->clone(), cocos2d::CallFunc::create([=]() {

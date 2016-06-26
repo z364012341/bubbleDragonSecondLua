@@ -10,6 +10,7 @@
 #include "XMLTool.h"
 #include "StageNumbleBoardController.h"
 #include "GameVictoryLotteryStarts.h"
+#include "UserDataManager.h"
 const std::string GAME_VICTORY_ALERT_CSB_PATH = "GameVictoryAlert.csb";
 const std::string GAME_VICTORY_ALERT_SCORE_LABEL_NAME = "BitmapFontLabel_10_0";
 const std::string GAME_VICTORY_ALERT_STAGE_LABEL_NODE_NAME = "FileNode_4";
@@ -59,6 +60,8 @@ namespace bubble_second {
         this->initStart(start_numble);
         this->addLotteryStarts();
         this->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+        this->flyStartToLottery(level, start_numble);
+        UserDataManager::getInstance()->updateStageData(level, start_numble);
         return true;
     }
 
@@ -75,17 +78,21 @@ namespace bubble_second {
 
     void GameVictoryAlert::initStart(int start_numble)
     {
-        if (start_numble < 3)
+        //if (start_numble < 3)
+        //{
+        //    start_3_->setVisible(false);
+        //} 
+        //if (start_numble < 2)
+        //{
+        //    start_2_->setVisible(false);
+        //}
+        //if (start_numble < 1)
+        //{
+        //    start_1_->setVisible(false);
+        //}
+        for (int i = start_numble; i < starts_.size(); i++)
         {
-            csb_node_->getChildByName(ALERT_STAR_NODE_3_NAME)->setVisible(false);
-        } 
-        if (start_numble < 2)
-        {
-            csb_node_->getChildByName(ALERT_STAR_NODE_2_NAME)->setVisible(false);
-        }
-        if (start_numble < 1)
-        {
-            csb_node_->getChildByName(ALERT_STAR_NODE_1_NAME)->setVisible(false);
+            starts_.at(i)->setVisible(false);
         }
         this->playStart1PopAction();
         this->playStart2PopAction();
@@ -94,9 +101,26 @@ namespace bubble_second {
 
     void GameVictoryAlert::addLotteryStarts()
     {
-        auto lottery = GameVictoryLotteryStarts::create();
-        lottery->setScale(1/SmartScaleController::getInstance()->getPlayAreaZoom());
-        this->addChild(lottery);
+        lottery_starts_ = GameVictoryLotteryStarts::create();
+        lottery_starts_->setScale(1/SmartScaleController::getInstance()->getPlayAreaZoom());
+        this->addChild(lottery_starts_);
+    }
+
+    void GameVictoryAlert::flyStartToLottery(int level, int start_numble)
+    {
+        int best_start_numble = UserDataManager::getInstance()->getStageStartNumbleWithLevel(level);
+        if (start_numble <= best_start_numble)
+        {
+            return;
+        }
+        std::deque<cocos2d::Vec2> points;
+        int start_numble_delta = start_numble - best_start_numble;
+        for (int i = starts_.size() - 1; i > starts_.size() - start_numble_delta -1; i--)
+        {
+            points.insert(points.begin(), starts_.at(i)->getParent()->convertToWorldSpace(starts_.at(i)->getPosition()));
+        }
+
+        lottery_starts_->flyStartsToLotteryBegin(points);
     }
 
     void GameVictoryAlert::playStartPopAction(cocos2d::Node * start, float delay)
@@ -107,18 +131,18 @@ namespace bubble_second {
 
     void GameVictoryAlert::playStart1PopAction()
     {
-        cocos2d::Node* start = csb_node_->getChildByName(ALERT_STAR_NODE_1_NAME);
-        this->playStartPopAction(start, 0.1f);
+        //cocos2d::Node* start = csb_node_->getChildByName(ALERT_STAR_NODE_1_NAME);
+        this->playStartPopAction(start_1_, START_POP_DURATION/2);
     }
 
     void GameVictoryAlert::playStart2PopAction()
     {
-        this->playStartPopAction(csb_node_->getChildByName(ALERT_STAR_NODE_2_NAME), START_POP_DURATION);
+        this->playStartPopAction(start_2_, START_POP_DURATION);
     }
 
     void GameVictoryAlert::playStart3PopAction()
     {
-        this->playStartPopAction(csb_node_->getChildByName(ALERT_STAR_NODE_3_NAME), START_POP_DURATION*2);
+        this->playStartPopAction(start_3_, START_POP_DURATION*2);
     }
 
     void GameVictoryAlert::loadView()
@@ -129,6 +153,13 @@ namespace bubble_second {
         dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName("Button_1"))->addClickEventListener([=](cocos2d::Ref*) {
             this->getEventDispatcher()->dispatchCustomEvent(EVENT_GAME_DEFEAT_RETURN);
         });
+        start_1_ = csb_node_->getChildByName(ALERT_STAR_NODE_1_NAME);
+        starts_.pushBack(start_1_);
+        start_2_ = csb_node_->getChildByName(ALERT_STAR_NODE_2_NAME);
+        starts_.pushBack(start_2_);
+        start_3_ = csb_node_->getChildByName(ALERT_STAR_NODE_3_NAME);
+        starts_.pushBack(start_3_);
+
     }
 
     void GameVictoryAlert::setNextCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback)

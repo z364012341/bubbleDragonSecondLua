@@ -15,6 +15,7 @@ const std::string GAME_CHARACTOR_UNLOCK_NUMBLE_KEY = "unlockCharactorNumble";
 const std::string LAST_GAME_CHARACTOR_INDEX_KEY = "lastCharactor";
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
+const std::string STAGE_TOTAL_STARTS_KEY = "total_starts";
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
@@ -237,17 +238,35 @@ namespace bubble_second {
     }
     void UserDataManager::updateStageData(int level, int start_numble)
     {
-        char levelStr[10];
-        sprintf(levelStr, "%d", level);
+        std::string  levelStr = XMLTool::convertIntToString(level);
         if (stage_data_.find(levelStr) != stage_data_.end() && stage_data_[levelStr].asInt() >= start_numble)
         {
             return;
         }
-        if (level-1 == stage_data_.size())
-        {
+        //if (level-1 == stage_data_.size())
+        //{
             stage_data_[levelStr] = cocos2d::Value(start_numble);
             this->writeStageDataToFile();
+            this->updateStageTotalStartScore();
+        //}
+    }
+    void UserDataManager::updateStageTotalStartScore()
+    {
+        int total = 0;
+        for (auto var : stage_data_)
+        {
+            total += var.second.asInt();
         }
+        cocos2d::UserDefault::getInstance()->setIntegerForKey(STAGE_TOTAL_STARTS_KEY.c_str(), total);
+        cocos2d::UserDefault::getInstance()->flush();
+    }
+    int UserDataManager::getStageTotalStartScore()
+    {
+        return cocos2d::UserDefault::getInstance()->getIntegerForKey(STAGE_TOTAL_STARTS_KEY.c_str());;
+    }
+    int UserDataManager::getStageStartNumbleWithLevel(int level)
+    {
+        return stage_data_[XMLTool::convertIntToString(level)].asInt();
     }
     void UserDataManager::readDataFile()
     {

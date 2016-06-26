@@ -38,6 +38,9 @@ namespace bubble_second {
         //获取已通过关卡的数量
         int getStagePassCount();
         void updateStageData(int level, int start_numble);
+        void updateStageTotalStartScore();
+        int getStageTotalStartScore();
+        int getStageStartNumbleWithLevel(int level);
         void readDataFile();
         int getStartNumbleWithLevel(int level);
         void setPresentCell(int cell_numble);
