@@ -41,7 +41,7 @@ namespace bubble_second {
     }
     cocos2d::ValueMap GameBuyStoreMannager::getRandomLotteryAward()
     {
-        int numble = cocos2d::random(0, (int)GAME_LOTTERY_AWARD.size());
+        int numble = cocos2d::random(0, (int)GAME_LOTTERY_AWARD.size()-1);
         auto data = GAME_LOTTERY_AWARD.at(numble);
         cocos2d::ValueMap map;
         map[data.begin()->first] = data.begin()->second;

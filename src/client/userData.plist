@@ -3,13 +3,21 @@
 
 <plist version="1.0">
     <dict>
+        <key>staves</key>
+        <integer>101</integer>
+        <key>search</key>
+        <integer>101</integer>
         <key>bigBombBomb</key>
         <integer>97</integer>
         <key>woodenHammer</key>
-        <integer>62</integer>
+        <integer>59</integer>
         <key>md5</key>
-        <string>d9d840018e3f2e95580f11bf445e52e6</string>
+        <string>de9208f0ae61d93a467329c516d7d8a4</string>
         <key>colorBomb</key>
         <integer>99</integer>
+        <key>bigEyes</key>
+        <integer>101</integer>
+        <key>coin</key>
+        <integer>1100</integer>
     </dict>
 </plist>

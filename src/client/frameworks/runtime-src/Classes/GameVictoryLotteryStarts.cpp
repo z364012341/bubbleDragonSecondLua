@@ -6,6 +6,8 @@
 #include "GameVictoryLotteryStartItem.h"
 #include "cocostudio\CocoStudio.h"
 #include "GameAlertMask.h"
+#include "GameBuyStoreMannager.h"
+#include "ui\UITextBMFont.h"
 //const float STARTS_CIRCLE_RADIUS = 500.0f;
 //const float START_ANGLE_DELTA = 11.0f;
 const std::string GIFT_ARMATURE_NAME = "pintulibao2";
@@ -187,14 +189,41 @@ namespace bubble_second {
         node->addChild(armature);
         node->addChild(GameAlertMask::create(), -1);
         armature->getAnimation()->playWithIndex(0);
-        armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
-            if (movementType == cocostudio::MovementEventType::COMPLETE)
-            {
-                this->getEventDispatcher()->dispatchCustomEvent(EVENT_VICTORY_GIFT_ARMATURE_END);
-                node->removeFromParent();
-            }
-        });
+        //armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+        //    if (movementType == cocostudio::MovementEventType::COMPLETE)
+        //    {
+        //        this->getEventDispatcher()->dispatchCustomEvent(EVENT_VICTORY_GIFT_ARMATURE_END);
+        //        node->removeFromParent();
+        //    }
+        //});
 
+        auto award_data = GameBuyStoreMannager::getRandomLotteryAward();
+        UserDataManager::getInstance()->addPropsNumbleWithKey(award_data.begin()->first, award_data.begin()->second.asInt());
+        cocos2d::Node* award_node = cocos2d::Node::create();
+        cocos2d::Sprite* award_sp = SpriteTextureController::getInstance()->createPropSpriteWithKey(award_data.begin()->first);
+        award_sp->setPositionY(50.0f);
+        award_node->addChild(award_sp);
+        this->addChild(award_node);
+        cocos2d::ui::TextBMFont* numble_label = SpriteTextureController::getInstance()->createWhitePurpleFnt(award_data.begin()->second.asString());
+        numble_label->setPositionY(-50.0f);
+        award_node->addChild(numble_label);
+        award_node->setPosition(node->getPosition());
+        //award_node->setOpacity(0);
+        award_node->setVisible(false);
+        award_node->setScale(0.1);
+        award_node->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(0.79f),
+            cocos2d::CallFunc::create([=]() {award_node->setVisible(true); }),
+            cocos2d::ScaleTo::create(0.2f, 1.2f),
+            cocos2d::DelayTime::create(0.02),
+            cocos2d::ScaleTo::create(0.05f, 1.0f),
+            cocos2d::DelayTime::create(1.0f),
+                cocos2d::CallFunc::create([=]() {
+                    award_node->removeFromParent();
+                    this->getEventDispatcher()->dispatchCustomEvent(EVENT_VICTORY_GIFT_ARMATURE_END);
+                    node->removeFromParent();
+                }), 
+                nullptr)
+        );
     }
 
     void GameVictoryLotteryStarts::flyStartsToLottery()
@@ -213,6 +242,7 @@ namespace bubble_second {
             sp->removeFromParent();
             item->lightenItem();
         }), nullptr));
+
     }
 
     void GameVictoryLotteryStarts::lightenStart()
@@ -223,7 +253,7 @@ namespace bubble_second {
     {
         fly_points_ = points;
         //this->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(2.0f), cocos2d::CallFunc::create([=]() {
-            this->flyStartsToLottery();
+        this->flyStartsToLottery();
         //}), nullptr));
     }
     void GameVictoryLotteryStarts::onEnter()
