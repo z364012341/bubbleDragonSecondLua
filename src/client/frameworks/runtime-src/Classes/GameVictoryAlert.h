@@ -40,6 +40,7 @@ namespace bubble_second {
         cocos2d::Node* start_3_ = nullptr;
         cocos2d::Vector<cocos2d::Node*> starts_;
         GameVictoryLotteryStarts* lottery_starts_ = nullptr;
+        float pop_start_total_time_ = 0.0f;
     };
 }
 #endif //_GAME_VICTORY_ALERT_H_

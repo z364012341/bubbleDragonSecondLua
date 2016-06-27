@@ -19,7 +19,8 @@
 #include "lua_PuzzleLoadingScene_auto.hpp"
 #include "lua_DecalsFactory_auto.hpp"
 #include "lua_UserCoinInfoBoard_auto.hpp"
-#include "lua_UserDiamondInfoBoard_auto.hpp"
+#include "lua_UserDiamondInfoBoard_auto.hpp" 
+#include "lua_GameBuyStoreMannager_auto.hpp"
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
 #include "ide-support/CodeIDESupport.h"
 #endif
@@ -110,6 +111,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     register_all_DecalsFactory(engine->getLuaStack()->getLuaState());
     register_all_UserCoinInfoBoard(engine->getLuaStack()->getLuaState());
     register_all_UserDiamondInfoBoard(engine->getLuaStack()->getLuaState());
+    register_all_GameBuyStoreMannager(engine->getLuaStack()->getLuaState());
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
     auto runtimeEngine = RuntimeEngine::getInstance();

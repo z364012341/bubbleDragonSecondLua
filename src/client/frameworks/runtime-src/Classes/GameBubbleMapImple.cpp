@@ -738,14 +738,15 @@ namespace bubble_second{
 
     int GameBubbleMapImple::getBubblesMinIndexY()
     {
-        for (int i = bubble_sprite_map_.size() + MAP_TOP_ROW_INDEX - 1; i != MAP_TOP_ROW_INDEX; i--)
+        int min_y = MAP_TOP_ROW_INDEX;
+        for (auto  var : bubble_sprite_map_)
         {
-            if (bubble_sprite_map_[i].size() != 0)
+            if (var.second.size() != 0 && var.first > min_y)
             {
-                return i;
+                min_y = var.first;
             }
         }
-        return MAP_TOP_ROW_INDEX;
+        return min_y;
     }
 
     BaseBubble * GameBubbleMapImple::getBubbleMinCenter()

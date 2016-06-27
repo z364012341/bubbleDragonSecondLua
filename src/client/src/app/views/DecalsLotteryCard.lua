@@ -9,7 +9,7 @@ end)
 local CARD_FRONT_PATH = "card_front.PNG";
 local CARD_BACK_PATH = "card_back.PNG";
 local CARD_SHUFFLE_MOVE_SPEED = 4000;
-local SELECT_ARMATURE_NAME = "choujiangkapianguang";
+local SELECT_ARMATURE_NAME = "c";
 local SELECT_ANIMATION_1_NAME = "fanpai-01";
 local SELECT_ANIMATION_2_NAME = "fanpai-02";
 
@@ -221,7 +221,8 @@ function DecalsLotteryCard:addDecalItem(decals_type)
     self.is_decal_card_ = true;
 end
 function DecalsLotteryCard:addRandomAwardItem()
-    local award_data = DECALS_LOTTERY_AWARDS[math.random(1, #DECALS_LOTTERY_AWARDS)];
+    local award_data = bs.GameBuyStoreMannager:getRandomLotteryAward();
+    -- local award_data = DECALS_LOTTERY_AWARDS[math.random(1, #DECALS_LOTTERY_AWARDS)];
     for key,numble in pairs(award_data) do
         self.award_key_ = key;
         self.award_numble_ = numble;

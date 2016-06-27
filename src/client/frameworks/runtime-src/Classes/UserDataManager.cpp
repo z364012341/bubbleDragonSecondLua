@@ -275,6 +275,7 @@ namespace bubble_second {
         this->readPuzzleStageBestScore();
         this->readDecalsData();
         unlock_stage_numble_ = this->getStagePassCount();
+        this->updateStageTotalStartScore();
     }
     std::string UserDataManager::getStageDataPath() const
     {

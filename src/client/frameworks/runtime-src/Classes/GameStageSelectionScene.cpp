@@ -49,8 +49,12 @@ namespace bubble_second {
     cocos2d::Vec2 GameStageSelectionScene::getScorllViewOffset(int cell_numble)
     {
         //float pos_y = (-cell_vector_.at(cell_numble)->getPositionY() + GAME_STAGE_SCROLLVIEW_CELL_OFFSET_OFFSET)/*scale_zoom_*/;
-        //cocos2d::Vec2 point = cocos2d::Vec2(0.0f, pos_y);
-        return cell_position_vector_.at(cell_numble);
+        StageSelectionMenu* current_menu = StageMenuManager::getInstance()->getCurentStagemenu();
+        cocos2d::Vec2 world_pos = current_menu->getParent()->convertToWorldSpace(current_menu->getPosition());
+        float pos_y = MAX(0.0f, cell_vector_.at(cell_numble)->getPositionY() + cell_vector_.at(cell_numble)->convertToNodeSpace(world_pos).y - cocos2d::Director::getInstance()->getVisibleSize().height/2);
+        cocos2d::Vec2 point = cocos2d::Vec2(0.0f, -pos_y);
+        return point;
+        //return cell_position_vector_.at(cell_numble);
     }
 
     void GameStageSelectionScene::onEnter()
@@ -200,7 +204,7 @@ namespace bubble_second {
                 break;
             }
             cell->setPosition(cell_x, cell_y);
-            cell_position_vector_.push_back(cocos2d::Vec2(0.0f, cell_y));
+            //cell_position_vector_.push_back(cocos2d::Vec2(0.0f, cell_y));
             scrollview_->addChild(cell);
             cell_y += cell->getBackgroundHeight();
             scrollview_height += cell->getBackgroundHeight();

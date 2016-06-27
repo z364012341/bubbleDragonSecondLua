@@ -457,6 +457,9 @@ const std::string EVENT_USE_COLOR_BOMB_BUBBLE_SKILL = "event_use_color_bomb_bubb
 const std::string EVENT_USE_BIG_BOMB_BUBBLE_SKILL = "event_use_big_bomb_bubble_skill";
 const std::string EVENT_USE_STAVES_BUBBLE_SKILL = "event_use_staves_bubble_skill";
 const std::string EVENT_CLEAR_SKILL_ENERGY = "event_clear_skill_energy";
+const std::string EVENT_GAME_VICTORY_LETTERY_ITEM_LIGHTEN = "event_game_victory_lettery_item_lighten";
+const std::string EVENT_POP_VICTORY_GIFT_ARMATURE = "event_pop_victory_gift_armature";
+const std::string EVENT_VICTORY_GIFT_ARMATURE_END = "event_victory_gift_armature_end";
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效

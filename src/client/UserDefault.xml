@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <userDefaultRoot>
-    <lastCharactor>1</lastCharactor>
-    <GAME_MUSIC>false</GAME_MUSIC>
-    <SOUND_EFFECT>true</SOUND_EFFECT>
-    <total_starts>6</total_starts>
+    <total_starts>8</total_starts>
+    <lastCharactor>0</lastCharactor>
 </userDefaultRoot>

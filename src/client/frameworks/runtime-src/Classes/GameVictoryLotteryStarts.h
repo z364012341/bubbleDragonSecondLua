@@ -12,28 +12,34 @@
 #define _GAME_VICTORY_LOTTERY_STARTS_H_
 #include "cocos2d.h"
 namespace bubble_second {
+    class  GameVictoryLotteryItemBase;
     class GameVictoryLotteryStarts : public cocos2d::Node
     {
     public:
         CREATE_FUNC(GameVictoryLotteryStarts);
         ~GameVictoryLotteryStarts();
         void flyStartsToLotteryBegin(std::deque<cocos2d::Vec2> points);
+        void onEnter() override;
+        void onExit() override;
     private:
         GameVictoryLotteryStarts();
         bool init();
         void initStarts();
-        void initStartsColor();
+        void initItemsColor();
         void initStartVisible();
-        void initGift();
+        //void initGift();
         int getGrayBeginIndex();
-        void setGiftTextureWithIndex(int index);
-        void addStartWithIndex(int index);
+        //void setGiftTextureWithIndex(int index);
+        void addItemWithIndex(int index);
+        GameVictoryLotteryItemBase* createStartWithIndex(int index);
         void contrarotateStarts();
-        void setStartPosAndRotationAndScaleWithIndex(cocos2d::Sprite* start, int index);
+        void setStartPosAndRotationAndScaleWithIndex(cocos2d::Node* start, int index);
         void flyStartsToLottery();
+        void lightenStart();
         cocos2d::Vec2 getStartPositionWithIndex(int index);
+        void popGiftArmature(cocos2d::EventCustom* event);
     private:
-        cocos2d::Map<int, cocos2d::Sprite*> starts_container_;
+        cocos2d::Map<int, GameVictoryLotteryItemBase*> starts_container_;
         std::deque<cocos2d::Vec2> fly_points_;
         int total_start_numble_ = 0;
     };

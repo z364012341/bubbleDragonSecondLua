@@ -71,7 +71,7 @@ namespace bubble_second {
     private:
         float scrollview_bottom_height_ = 0.0f;
         cocos2d::Vector<GameStageSelectionCell*> cell_vector_;
-        std::vector<cocos2d::Vec2> cell_position_vector_;
+        //std::vector<cocos2d::Vec2> cell_position_vector_;
         //记录滚动条的位置
         static cocos2d::Vec2 scrollview_offset_;
         //float scale_zoom_;

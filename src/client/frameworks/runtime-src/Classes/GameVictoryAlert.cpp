@@ -117,14 +117,17 @@ namespace bubble_second {
         int start_numble_delta = start_numble - best_start_numble;
         for (int i = starts_.size() - 1; i > starts_.size() - start_numble_delta -1; i--)
         {
-            points.insert(points.begin(), starts_.at(i)->getParent()->convertToWorldSpace(starts_.at(i)->getPosition()));
+            points.insert(points.begin(), starts_.at(i)->getPosition());
+            //points.insert(points.begin(), starts_.at(i)->getParent()->convertToWorldSpace(starts_.at(i)->getPosition()));
         }
-
-        lottery_starts_->flyStartsToLotteryBegin(points);
+        this->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(pop_start_total_time_), cocos2d::CallFunc::create([=]() {
+            lottery_starts_->flyStartsToLotteryBegin(points);
+        }), nullptr));
     }
 
     void GameVictoryAlert::playStartPopAction(cocos2d::Node * start, float delay)
     {
+        pop_start_total_time_ += delay;
         start->setScale(0.1f);
         start->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(delay), cocos2d::ScaleTo::create(START_POP_DURATION, 1.2f), cocos2d::ScaleTo::create(0.1f, 1.0f), nullptr));
     }

@@ -189,9 +189,6 @@
     <ClInclude Include="..\Classes\RainbowSealManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SceneReplaceController.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ScoreProgressMenu.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -427,6 +424,12 @@
     <ClInclude Include="..\Classes\SkillStavesBubble.h" />
     <ClInclude Include="..\Classes\GameCharactorSkillButton.h" />
     <ClInclude Include="..\Classes\GameVictoryLotteryStarts.h" />
+    <ClInclude Include="..\Classes\GameVictoryLotteryItemBase.h" />
+    <ClInclude Include="..\Classes\GameVictoryLotteryStartItem.h" />
+    <ClInclude Include="..\Classes\GameVictoryLotteryGiftItem.h" />
+    <ClInclude Include="..\Classes\lua_GameBuyStoreMannager_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -592,9 +595,6 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\RainbowSealManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SceneReplaceController.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ScoreProgressMenu.cpp">
@@ -826,6 +826,12 @@
     <ClCompile Include="..\Classes\SkillStavesBubble.cpp" />
     <ClCompile Include="..\Classes\GameCharactorSkillButton.cpp" />
     <ClCompile Include="..\Classes\GameVictoryLotteryStarts.cpp" />
+    <ClCompile Include="..\Classes\GameVictoryLotteryItemBase.cpp" />
+    <ClCompile Include="..\Classes\GameVictoryLotteryStartItem.cpp" />
+    <ClCompile Include="..\Classes\GameVictoryLotteryGiftItem.cpp" />
+    <ClCompile Include="..\Classes\lua_GameBuyStoreMannager_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

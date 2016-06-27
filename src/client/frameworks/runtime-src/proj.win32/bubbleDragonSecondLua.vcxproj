@@ -258,6 +258,9 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GameStartButton.h" />
     <ClInclude Include="..\Classes\GameTextInfo.h" />
     <ClInclude Include="..\Classes\GameVictoryAlert.h" />
+    <ClInclude Include="..\Classes\GameVictoryLotteryGiftItem.h" />
+    <ClInclude Include="..\Classes\GameVictoryLotteryItemBase.h" />
+    <ClInclude Include="..\Classes\GameVictoryLotteryStartItem.h" />
     <ClInclude Include="..\Classes\GameVictoryLotteryStarts.h" />
     <ClInclude Include="..\Classes\ide-support\CodeIDESupport.h" />
     <ClInclude Include="..\Classes\ide-support\lua_debugger.h" />
@@ -268,6 +271,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\lua_DecalsFactory_auto.hpp" />
     <ClInclude Include="..\Classes\lua_ExhibitionNumble_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameAlertMask_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_GameBuyStoreMannager_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameShareButton_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameStageSelectionScene_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameStartButton_auto.hpp" />
@@ -295,7 +299,6 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\RainbowCharactor.h" />
     <ClInclude Include="..\Classes\RainbowSealBubble.h" />
     <ClInclude Include="..\Classes\RainbowSealManager.h" />
-    <ClInclude Include="..\Classes\SceneReplaceController.h" />
     <ClInclude Include="..\Classes\ScoreProgressMenu.h" />
     <ClInclude Include="..\Classes\ScoreProgressStar.h" />
     <ClInclude Include="..\Classes\ScoreProgressStart.h" />
@@ -403,6 +406,9 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GameStartButton.cpp" />
     <ClCompile Include="..\Classes\GameTextInfo.cpp" />
     <ClCompile Include="..\Classes\GameVictoryAlert.cpp" />
+    <ClCompile Include="..\Classes\GameVictoryLotteryGiftItem.cpp" />
+    <ClCompile Include="..\Classes\GameVictoryLotteryItemBase.cpp" />
+    <ClCompile Include="..\Classes\GameVictoryLotteryStartItem.cpp" />
     <ClCompile Include="..\Classes\GameVictoryLotteryStarts.cpp" />
     <ClCompile Include="..\Classes\ide-support\lua_debugger.c" />
     <ClCompile Include="..\Classes\ide-support\RuntimeLuaImpl.cpp" />
@@ -412,6 +418,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\lua_DecalsFactory_auto.cpp" />
     <ClCompile Include="..\Classes\lua_ExhibitionNumble_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameAlertMask_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_GameBuyStoreMannager_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameShareButton_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameStageSelectionScene_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameStartButton_auto.cpp" />
@@ -438,7 +445,6 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\RainbowCharactor.cpp" />
     <ClCompile Include="..\Classes\RainbowSealBubble.cpp" />
     <ClCompile Include="..\Classes\RainbowSealManager.cpp" />
-    <ClCompile Include="..\Classes\SceneReplaceController.cpp" />
     <ClCompile Include="..\Classes\ScoreProgressMenu.cpp" />
     <ClCompile Include="..\Classes\ScoreProgressStar.cpp" />
     <ClCompile Include="..\Classes\ScoreProgressStart.cpp" />

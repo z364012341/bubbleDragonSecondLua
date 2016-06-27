@@ -10,6 +10,7 @@ namespace bubble_second {
         ~GameBuyStoreMannager(); 
         void buyProps(int target);
         bool isBuyPuzzleNewbiwGift();
+        static cocos2d::ValueMap getRandomLotteryAward();
     private:
         GameBuyStoreMannager();
         void setCurrentPropsTarget(int target);
