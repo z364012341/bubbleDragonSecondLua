@@ -105,7 +105,7 @@ namespace bubble_second {
     {
         if (this->getName() != PREPARE_BUBBLE_NAME)
         {
-            GamePlayController::getInstance()->subtractPrepareColor(this->getBubbleType());
+            GamePlayController::getInstance()->subtractPrepareColor(this);
         }
         //GamePlayController::getInstance()->subtractPrepareColor(this->getBubbleType());
         this->disposeAirShootBubble();

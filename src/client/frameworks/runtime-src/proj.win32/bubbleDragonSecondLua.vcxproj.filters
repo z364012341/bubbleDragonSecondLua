@@ -430,6 +430,11 @@
     <ClInclude Include="..\Classes\lua_GameBuyStoreMannager_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\GameLotteryAwardItem.h" />
+    <ClInclude Include="..\Classes\lua_GameLotteryAwardItem_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UserStengthInfoBoard.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -832,6 +837,11 @@
     <ClCompile Include="..\Classes\lua_GameBuyStoreMannager_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameLotteryAwardItem.cpp" />
+    <ClCompile Include="..\Classes\lua_GameLotteryAwardItem_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UserStengthInfoBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

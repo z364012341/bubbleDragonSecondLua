@@ -164,7 +164,8 @@ namespace bubble_second {
 
     void ScoreWidget::comboClear()
     {
-        widget_combo_ = ScoreWidgetManager::getInstance()->getScoreWidgetTotalWithType(type_);
+        widget_combo_ = MAX(1, ScoreWidgetManager::getInstance()->getScoreWidgetTotalWithType(type_));
+        assert(widget_combo_>0);
         combo_flag_ = false;
     }
 
@@ -178,6 +179,7 @@ namespace bubble_second {
 
     int ScoreWidget::getContactScore()
     {
+        assert(widget_combo_>0);
         return TYPE_TO_SCORE.at(type_)*widget_combo_;
     }
 

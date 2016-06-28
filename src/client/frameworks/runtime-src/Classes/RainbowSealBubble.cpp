@@ -133,8 +133,8 @@ namespace bubble_second {
 
     void RainbowSealBubble::setRainbowColor(BubbleType color)
     {
-        GamePlayController::getInstance()->addPrepareColor(color);
-        GamePlayController::getInstance()->subtractPrepareColor(this->getRainbowColor());
+        GamePlayController::getInstance()->addPrepareColorWithType(color);
+        GamePlayController::getInstance()->subtractPrepareColorWithType(this->getRainbowColor());
         rainbow_color_ = color;
         if (this->isCharactorExist())
         {

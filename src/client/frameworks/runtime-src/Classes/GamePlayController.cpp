@@ -351,14 +351,24 @@ namespace bubble_second {
         return node_vector;
     }
 
-    void GamePlayController::addPrepareColor(BubbleType color)
+    void GamePlayController::addPrepareColor(BaseBubble* bubble)
     {
-        color_picker_->addColorWithBubbleColor(color);
+        color_picker_->addColorWithBubbleColor(bubble->BaseBubble::getBubbleType());
     }
 
-    void GamePlayController::subtractPrepareColor(BubbleType color)
+    void GamePlayController::addPrepareColorWithType(BubbleType type)
     {
-        color_picker_->subtractColorWithBubbleColor(color);
+        color_picker_->addColorWithBubbleColor(type);
+    }
+
+    void GamePlayController::subtractPrepareColor(BaseBubble* bubble)
+    {
+        color_picker_->subtractColorWithBubbleColor(bubble->BaseBubble::getBubbleType());
+    }
+
+    void GamePlayController::subtractPrepareColorWithType(BubbleType type)
+    {
+        color_picker_->subtractColorWithBubbleColor(type);
     }
 
     BubbleType GamePlayController::getBubbleColorFromPicker()

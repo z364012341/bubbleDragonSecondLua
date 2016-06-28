@@ -221,26 +221,26 @@ function DecalsLotteryCard:addDecalItem(decals_type)
     self.is_decal_card_ = true;
 end
 function DecalsLotteryCard:addRandomAwardItem()
-    local award_data = bs.GameBuyStoreMannager:getRandomLotteryAward();
+    local award_data = bs.GameBuyStoreMannager:getRandomLotteryAwardWihtoutDecals();
     -- local award_data = DECALS_LOTTERY_AWARDS[math.random(1, #DECALS_LOTTERY_AWARDS)];
     for key,numble in pairs(award_data) do
         self.award_key_ = key;
         self.award_numble_ = numble;
-        local node = cc.Node:create();
+        local node = bs.GameLotteryAwardItem:create(key, numble);
         self.award_node_ = node;
-        node:setPosition(cc.p(self.card_front_:getContentSize().width/2, self.card_front_:getContentSize().height*0.45));
+        node:setPosition(cc.p(self.card_front_:getContentSize().width/2, self.card_front_:getContentSize().height*0.55));
         self.card_front_:addChild(node);
 
-        local item = bs.SpriteTextureController:getInstance():createPropSpriteWithKey(key);
+        local item = node:getAwardSprite();
         item:setScale(self.card_front_:getContentSize().width/item:getContentSize().width*0.35);
-        item:setAnchorPoint(cc.p(0.5, 0));
+        --item:setAnchorPoint(cc.p(0.5, 0));
         --item:setPosition(cc.p(0, 50));
-        node:addChild(item);
+        --node:addChild(item);
 
-        local label = bs.SpriteTextureController:getInstance():createWhitePurpleFnt(tostring(numble));
-        label:setScale(0.6);
-        label:setPosition(cc.p(0, -25));
-        node:addChild(label);
+        -- local label = bs.SpriteTextureController:getInstance():createWhitePurpleFnt(tostring(numble));
+        -- label:setScale(0.6);
+        -- label:setPosition(cc.p(0, -25));
+        -- node:addChild(label);
     end
 end
 function DecalsLotteryCard:isDecalCard()

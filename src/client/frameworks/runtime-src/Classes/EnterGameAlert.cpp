@@ -14,11 +14,7 @@
 #include "StageDataManager.h"
 #include "UserDataManager.h"
 const std::string ENTER_GAME_ALERT_CSB = "EnterGameAlert.csb";
-//const std::string START_BUTTON_TOP_CSB = "GameStartMenuTop.csb";
-//const std::string START_BUTTON_BOTTOM_CSB = "GameStartMenuBottom.csb";
-//const std::string START_BUTTON_CLIPPINT_STENCIL_PATH = "startBubbleBG1.png";
 const std::string ENTER_GAME_ALERT_START_NODE_NAME = "startMenuNode";
-//const std::string ENTER_GAME_ALERT_START_BUTTON_NAME = "startButton";
 const std::string ENTER_GAME_ALERT_CLOSE_BUTTON_NAME = "closeButton";
 const std::string ENTER_GAME_ALERT_STAGE_NUMBLE_BOARD_NAME = "stageNumbleBoard";
 const std::string ENTER_GAME_ALERT_STAGE_TYPE_LABEL_NAME = "stageTypeLabel";
@@ -28,21 +24,6 @@ const std::string PAGEVIEW_TURN_LEFT_BUTTON_NAME = "turnLeft";
 const std::string PAGEVIEW_TURN_RIGHT_BUTTON_NAME = "turnRight";
 const cocos2d::Vec2 COMMODITY_NODE_POS(-5.0f, -238.7f);
 namespace bubble_second {
-    //EnterGameAlert * EnterGameAlert::create(int cell_numble, int level, const StageType & type)
-    //{
-    //    EnterGameAlert *pRet = new(std::nothrow) EnterGameAlert();
-    //    if (pRet && pRet->init())
-    //    {
-    //        pRet->autorelease();
-    //        return pRet;
-    //    }
-    //    else
-    //    {
-    //        delete pRet;
-    //        pRet = NULL;
-    //        return NULL;
-    //    }
-    //}
     EnterGameAlert::EnterGameAlert()
     {
     }
@@ -51,16 +32,6 @@ namespace bubble_second {
     {
     }
 
-    //void EnterGameAlert::onExit()
-    //{
-    //    GameBaseAlert::onExit();
-    //    cocos2d::Director::getInstance()->getTextureCache()->removeUnusedTextures();
-    //}
-
-    //void EnterGameAlert::setBeginCallback(const cocos2d::ccMenuCallback & callback)
-    //{
-    //    begin_item_->setCallback(callback);
-    //}
     bool EnterGameAlert::init()
     {
         if (!cocos2d::Node::init())
@@ -111,6 +82,7 @@ namespace bubble_second {
             GameCharactorNameManager::getInstance()->setCurrentArmatureNameWithIndex(charactor_pageview_->getCurrentPageIndex());
 		    cocos2d::Scene* scene = GameScene::createScene();
 		    cocos2d::Director::getInstance()->replaceScene(scene);
+            UserDataManager::getInstance()->cutPropsNumbleWithKey(GAME_STENGTH_KEY);
 		});
     }
 

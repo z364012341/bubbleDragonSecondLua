@@ -17,4 +17,5 @@ int register_all_GameBuyStoreMannager(lua_State* tolua_S);
 
 
 
+
 #endif // __GameBuyStoreMannager_h__

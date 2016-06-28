@@ -24,7 +24,7 @@ namespace bubble_second {
         color_picker_[kBubbleGreen] = 0;
         color_picker_[kBubbleOrange] = 0;
         color_picker_[kBubblePinkDeprecated] = 0;
-        color_total_ = 0;
+        //color_total_ = 0;
     }
 
     void BubbleColorPicker::addColorWithBubbleColor(BubbleType color)
@@ -32,7 +32,7 @@ namespace bubble_second {
         if (isColorBubbleType(color))
         {
             color_picker_[color] = color_picker_[color] + 1;
-            ++color_total_;
+            //++color_total_;
         } 
     }
 
@@ -41,8 +41,9 @@ namespace bubble_second {
         if (isColorBubbleType(color))
         {
             color_picker_[color] = color_picker_[color] - 1;
-            --color_total_;
+            //--color_total_;
         }
+        assert(color_picker_[color]>=0);
     }
 
     bool BubbleColorPicker::isColorBubbleType(BubbleType color)

@@ -6,11 +6,14 @@
 		<data type="19" row="3" col="4" cloud="0" path="" />
 		<data type="19" row="4" col="1" cloud="0" path="" />
 		<data type="1" row="8" col="10" cloud="0" path="" />
+		<data type="19" row="1" col="3" cloud="8" path="" />
+		<data type="19" row="6" col="3" cloud="8" path="" />
 		<data type="19" row="7" col="6" cloud="0" path="" />
 		<data type="19" row="8" col="1" cloud="0" path="" />
 		<data type="19" row="2" col="1" cloud="0" path="" />
 		<data type="19" row="1" col="8" cloud="0" path="" />
 		<data type="19" row="7" col="0" cloud="0" path="" />
+		<data type="19" row="1" col="6" cloud="8" path="" />
 		<data type="19" row="3" col="1" cloud="0" path="" />
 		<data type="19" row="3" col="2" cloud="0" path="" />
 		<data type="19" row="2" col="10" cloud="0" path="" />
@@ -44,6 +47,7 @@
 		<data type="19" row="6" col="5" cloud="0" path="" />
 		<data type="2" row="9" col="0" cloud="0" path="" />
 		<data type="19" row="7" col="8" cloud="0" path="" />
+		<data type="19" row="4" col="6" cloud="8" path="" />
 		<data type="19" row="4" col="5" cloud="0" path="" />
 		<data type="2" row="10" col="0" cloud="0" path="" />
 		<data type="19" row="2" col="5" cloud="0" path="" />
@@ -54,7 +58,9 @@
 		<data type="19" row="8" col="4" cloud="0" path="" />
 		<data type="19" row="0" col="10" cloud="0" path="" />
 		<data type="1" row="1" col="4" cloud="8" path="" />
+		<data type="19" row="4" col="7" cloud="8" path="" />
 		<data type="1" row="0" col="4" cloud="0" path="" />
+		<data type="19" row="6" col="4" cloud="8" path="" />
 		<data type="3" row="10" col="1" cloud="8" path="" />
 		<data type="19" row="5" col="3" cloud="0" path="" />
 		<data type="19" row="0" col="9" cloud="0" path="" />
@@ -78,6 +84,7 @@
 		<data type="19" row="8" col="0" cloud="0" path="" />
 		<data type="1" row="0" col="3" cloud="0" path="" />
 		<data type="19" row="8" col="5" cloud="0" path="" />
+		<data type="19" row="8" col="7" cloud="8" path="" />
 		<data type="19" row="5" col="1" cloud="0" path="" />
 		<data type="19" row="2" col="6" cloud="0" path="" />
 		<data type="19" row="0" col="0" cloud="0" path="" />

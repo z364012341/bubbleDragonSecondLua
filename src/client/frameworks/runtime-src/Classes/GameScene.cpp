@@ -1091,7 +1091,7 @@ namespace bubble_second {
             for (auto var : iter.second)
             {
                 this->addBubblePhysicsBodyToMap(var.second);
-                controller->addPrepareColor(var.second->getBubbleType());
+                controller->addPrepareColor(var.second);
             }
         }
         controller->setBubbleColorRange();
@@ -1284,7 +1284,7 @@ namespace bubble_second {
         //}
         BaseBubble* bubble = bubble_vector->at(1);
         //auto controller = GamePlayController::getInstance();
-        GamePlayController::getInstance()->addPrepareColor(bubble->getBubbleType());
+        GamePlayController::getInstance()->addPrepareColor(bubble);
         dynamic_cast<ColorBubble*>(bubble)->runBubbleEffect(LONG_EFFECT_BUBBLE_KEY,
             bubble_map_node_->convertToNodeSpaceAR(sprite->getPosition()));
         sprite->removeFromParent();
@@ -1959,7 +1959,7 @@ namespace bubble_second {
                 {
                     continue;
                 }
-                controller->subtractPrepareColor(var->getBubbleType());
+                controller->subtractPrepareColor(var);
                 //var->retain();
 
                 //var->setPosition(this->convertMapToCsbSpace(var->getPosition()));

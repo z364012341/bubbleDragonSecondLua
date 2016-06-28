@@ -200,7 +200,7 @@ namespace bubble_second {
 
         cocos2d::MoveTo* move = cocos2d::MoveTo::create(ENTER_PROPS_ACTION_DURATION, this->getPosition());
         cocos2d::CallFunc* callfunc = cocos2d::CallFunc::create([=]() {
-            GamePlayController::getInstance()->subtractPrepareColor(this->getBubbleType());
+            GamePlayController::getInstance()->subtractPrepareColor(this);
             this->setBubbleType(color);
             bubble->removeFromParent();
         });
@@ -209,9 +209,13 @@ namespace bubble_second {
 
     void ColorBubble::dyeingBubbleColor(BubbleType to_color)
     {
-        GamePlayController::getInstance()->subtractPrepareColor(this->getBubbleType());
+        if (to_color == this->getBubbleType())
+        {
+            return;
+        }
+        GamePlayController::getInstance()->subtractPrepareColor(this);
         this->setBubbleType(to_color);
-        GamePlayController::getInstance()->addPrepareColor(to_color);
+        GamePlayController::getInstance()->addPrepareColor(this);
     }
 
     void ColorBubble::onEnter()

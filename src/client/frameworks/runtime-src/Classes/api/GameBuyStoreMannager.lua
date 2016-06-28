@@ -18,7 +18,13 @@
         
 --------------------------------
 -- 
--- @function [parent=#GameBuyStoreMannager] getRandomLotteryAward 
+-- @function [parent=#GameBuyStoreMannager] getRandomLotteryAwardWihtoutDecals 
+-- @param self
+-- @return map_table#map_table ret (return value: map_table)
+        
+--------------------------------
+-- 
+-- @function [parent=#GameBuyStoreMannager] getRandomLotteryAwardIncludeCharactorDecals 
 -- @param self
 -- @return map_table#map_table ret (return value: map_table)
         

@@ -101,7 +101,7 @@ int lua_GameBuyStoreMannager_GameBuyStoreMannager_isBuyPuzzleNewbiwGift(lua_Stat
 
     return 0;
 }
-int lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAward(lua_State* tolua_S)
+int lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAwardWihtoutDecals(lua_State* tolua_S)
 {
     int argc = 0;
     bool ok  = true;
@@ -120,18 +120,52 @@ int lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAward(lua_Stat
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAward'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAwardWihtoutDecals'", nullptr);
             return 0;
         }
-        cocos2d::ValueMap ret = bubble_second::GameBuyStoreMannager::getRandomLotteryAward();
+        cocos2d::ValueMap ret = bubble_second::GameBuyStoreMannager::getRandomLotteryAwardWihtoutDecals();
         ccvaluemap_to_luaval(tolua_S, ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "bs.GameBuyStoreMannager:getRandomLotteryAward",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "bs.GameBuyStoreMannager:getRandomLotteryAwardWihtoutDecals",argc, 0);
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAward'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAwardWihtoutDecals'.",&tolua_err);
+#endif
+    return 0;
+}
+int lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAwardIncludeCharactorDecals(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"bs.GameBuyStoreMannager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 0)
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAwardIncludeCharactorDecals'", nullptr);
+            return 0;
+        }
+        cocos2d::ValueMap ret = bubble_second::GameBuyStoreMannager::getRandomLotteryAwardIncludeCharactorDecals();
+        ccvaluemap_to_luaval(tolua_S, ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "bs.GameBuyStoreMannager:getRandomLotteryAwardIncludeCharactorDecals",argc, 0);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAwardIncludeCharactorDecals'.",&tolua_err);
 #endif
     return 0;
 }
@@ -183,7 +217,8 @@ int lua_register_GameBuyStoreMannager_GameBuyStoreMannager(lua_State* tolua_S)
     tolua_beginmodule(tolua_S,"GameBuyStoreMannager");
         tolua_function(tolua_S,"buyProps",lua_GameBuyStoreMannager_GameBuyStoreMannager_buyProps);
         tolua_function(tolua_S,"isBuyPuzzleNewbiwGift",lua_GameBuyStoreMannager_GameBuyStoreMannager_isBuyPuzzleNewbiwGift);
-        tolua_function(tolua_S,"getRandomLotteryAward", lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAward);
+        tolua_function(tolua_S,"getRandomLotteryAwardWihtoutDecals", lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAwardWihtoutDecals);
+        tolua_function(tolua_S,"getRandomLotteryAwardIncludeCharactorDecals", lua_GameBuyStoreMannager_GameBuyStoreMannager_getRandomLotteryAwardIncludeCharactorDecals);
         tolua_function(tolua_S,"getInstance", lua_GameBuyStoreMannager_GameBuyStoreMannager_getInstance);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(bubble_second::GameBuyStoreMannager).name();

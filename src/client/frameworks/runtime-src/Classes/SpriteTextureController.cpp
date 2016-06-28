@@ -1,6 +1,7 @@
 #include "SpriteTextureController.h"
 #include "UserDataManager.h"
 #include "cocostudio\CocoStudio.h"
+#include "DecalsFactory.h"
 const std::string GAME_COIN_PATH = "jinbi.PNG"; //金币
 const std::string GAME_NUMBLE_FONT_PATH = "fonts/typeface-export.fnt";
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_1_PATH = "laohu/laohu.ExportJson"; //老虎的动画
@@ -378,7 +379,10 @@ namespace bubble_second {
     //}
     cocos2d::Sprite* SpriteTextureController::createPropSpriteWithKey(const std::string& key)
     {
-        assert(prop_key_to_path_.find(key) != prop_key_to_path_.end());
+        if (prop_key_to_path_.find(key) == prop_key_to_path_.end())
+        {
+            return  DecalsFactory::getInstance()->createNextDecalWithType(key);
+        }
         return this->createGameSpriteWithPath(prop_key_to_path_[key]);
     }
     cocos2d::ui::TextBMFont * SpriteTextureController::createWhitePurpleFnt(const std::string & str)

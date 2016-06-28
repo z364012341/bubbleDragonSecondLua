@@ -38,7 +38,7 @@ namespace bubble_second {
     private:
         std::map<BubbleType, int> color_picker_;
         std::vector<BubbleType> color_range_;
-        int color_total_;
+        //int color_total_;
     };
 }
 #endif //_BUBBLE_COLOR_PICKER_H_

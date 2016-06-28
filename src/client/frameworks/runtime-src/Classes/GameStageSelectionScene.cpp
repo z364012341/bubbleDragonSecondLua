@@ -13,6 +13,7 @@
 #include "StageMenuManager.h"
 #include "UserCoinInfoBoard.h"
 #include "UserDiamondInfoBoard.h"
+#include "UserStengthInfoBoard.h"
 #include "GameAlertMask.h"
 #include "StageSelectionMenu.h"
 const std::string GAME_STAGE_SELECTION_CSB_PATH = "GameStageSelectionLayer.csb";
@@ -169,12 +170,13 @@ namespace bubble_second {
     void GameStageSelectionScene::layout()
     {
         float visibleHeight = cocos2d::Director::getInstance()->getVisibleSize().height;
-        csb_node_->getChildByName(STRENGTH_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
+        //csb_node_->getChildByName(STRENGTH_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
 
 		//csb_node_->getChildByName(COIN_INFO)->addChild(UserCoinInfoBoard::create());
         //csb_node_->getChildByName(COIN_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
         this->addChild(UserCoinInfoBoard::create());
         this->addChild(UserDiamondInfoBoard::create());
+        this->addChild(UserStengthInfoBoard::create());
         //csb_node_->getChildByName(DIAMOND_INFO)->addChild(UserDiamondInfoBoard::create());
         //csb_node_->getChildByName(DIAMOND_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
 

@@ -55,9 +55,11 @@ namespace bubble_second {
         //获取是否能点击发射小球
         bool getBubbleShootEnabled();
         //添加取色
-        void addPrepareColor(BubbleType color);
+        void addPrepareColor(BaseBubble* bubble);
+        void addPrepareColorWithType(BubbleType type);
         //减少一个取色
-        void subtractPrepareColor(BubbleType color);
+        void subtractPrepareColor(BaseBubble* bubble);
+        void subtractPrepareColorWithType(BubbleType type);
         //取色
         BubbleType getBubbleColorFromPicker();
         //BubbleType getBubbleColorInRange();

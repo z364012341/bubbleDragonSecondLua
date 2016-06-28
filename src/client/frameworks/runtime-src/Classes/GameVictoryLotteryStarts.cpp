@@ -8,6 +8,7 @@
 #include "GameAlertMask.h"
 #include "GameBuyStoreMannager.h"
 #include "ui\UITextBMFont.h"
+#include "GameLotteryAwardItem.h"
 //const float STARTS_CIRCLE_RADIUS = 500.0f;
 //const float START_ANGLE_DELTA = 11.0f;
 const std::string GIFT_ARMATURE_NAME = "pintulibao2";
@@ -197,18 +198,19 @@ namespace bubble_second {
         //    }
         //});
 
-        auto award_data = GameBuyStoreMannager::getRandomLotteryAward();
+        auto award_data = GameBuyStoreMannager::getRandomLotteryAwardIncludeCharactorDecals();
         UserDataManager::getInstance()->addPropsNumbleWithKey(award_data.begin()->first, award_data.begin()->second.asInt());
-        cocos2d::Node* award_node = cocos2d::Node::create();
-        cocos2d::Sprite* award_sp = SpriteTextureController::getInstance()->createPropSpriteWithKey(award_data.begin()->first);
-        award_sp->setPositionY(50.0f);
-        award_node->addChild(award_sp);
+        GameLotteryAwardItem* award_node = GameLotteryAwardItem::create(award_data.begin()->first, award_data.begin()->second.asInt());
+        //cocos2d::Sprite* award_sp = SpriteTextureController::getInstance()->createPropSpriteWithKey(award_data.begin()->first);
+        //award_sp->setPositionY(75.0f);
+        //award_node->addChild(award_sp);
         this->addChild(award_node);
-        cocos2d::ui::TextBMFont* numble_label = SpriteTextureController::getInstance()->createWhitePurpleFnt(award_data.begin()->second.asString());
-        numble_label->setPositionY(-50.0f);
-        award_node->addChild(numble_label);
+        //cocos2d::ui::TextBMFont* numble_label = SpriteTextureController::getInstance()->createWhitePurpleFnt(award_data.begin()->second.asString());
+        //numble_label->setScale(0.75f);
+        //numble_label->setPositionY(-80.0f);
+        //award_node->addChild(numble_label);
         award_node->setPosition(node->getPosition());
-        //award_node->setOpacity(0);
+        ////award_node->setOpacity(0);
         award_node->setVisible(false);
         award_node->setScale(0.1);
         award_node->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(0.79f),
@@ -216,7 +218,7 @@ namespace bubble_second {
             cocos2d::ScaleTo::create(0.2f, 1.2f),
             cocos2d::DelayTime::create(0.02),
             cocos2d::ScaleTo::create(0.05f, 1.0f),
-            cocos2d::DelayTime::create(1.0f),
+            cocos2d::DelayTime::create(1.5f),
                 cocos2d::CallFunc::create([=]() {
                     award_node->removeFromParent();
                     this->getEventDispatcher()->dispatchCustomEvent(EVENT_VICTORY_GIFT_ARMATURE_END);

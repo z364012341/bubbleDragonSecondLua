@@ -3,6 +3,7 @@
 #include "md5.h"
 #include "XMLTool.h"
 #include "GameBuyStoreMannager.h"
+#include "DecalsFactory.h"
 const std::string GAME_STAGE_DATA_PATH = "stageData.plist";
 const std::string GAME_USER_DATA_PATH = "userData.plist";
 const std::string DECALS_USER_DATA_PATH = "decalsUserData.plist";
@@ -16,6 +17,20 @@ const std::string LAST_GAME_CHARACTOR_INDEX_KEY = "lastCharactor";
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
 const std::string STAGE_TOTAL_STARTS_KEY = "total_starts";
+const int GAME_PROPS_DEFAULT_NUMBLE = 100;
+const int GAME_STRENGTH_DEFAULT_NUMBLE = 5;
+const std::map<std::string, int> PROPS_DEFAULT_NUMBLE_DATA = {
+    { PUZZLE_SEARCH_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
+    { PUZZLE_BIG_EYES_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
+    { PUZZLE_ADD_TIME_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
+    { BUBBLE_WOODEN_HAMMER_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
+    { BUBBLE_COLOR_BOMB_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
+    { BUBBLE_BIG_BOMB_BOMB_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
+    { BUBBLE_STAVES_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
+    { GAME_COIN_KEY , 0 },
+    { GAME_STENGTH_KEY , GAME_STRENGTH_DEFAULT_NUMBLE },
+    { GAME_DIAMOND_KEY , 0 }
+};
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
@@ -68,14 +83,12 @@ namespace bubble_second {
     }
     std::string UserDataManager::encryptionPropsNumble()
     {
-        std::string str = XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_SEARCH_PROP_KEY)) +
-            XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_BIG_EYES_PROP_KEY)) +
-            XMLTool::convertIntToString(this->getPropsNumbleWithKey(PUZZLE_ADD_TIME_PROP_KEY))+
-            XMLTool::convertIntToString(this->getPropsNumbleWithKey(BUBBLE_WOODEN_HAMMER_PROP_KEY)) +
-            XMLTool::convertIntToString(this->getPropsNumbleWithKey(BUBBLE_COLOR_BOMB_PROP_KEY))+
-            XMLTool::convertIntToString(this->getPropsNumbleWithKey(BUBBLE_BIG_BOMB_BOMB_PROP_KEY)) +
-            XMLTool::convertIntToString(this->getPropsNumbleWithKey(BUBBLE_STAVES_PROP_KEY));
-        return this->getMD5Str(PROP_MD5_SECRET_KEY+ str);
+        std::string str = PROP_MD5_SECRET_KEY;
+        for (auto var : PROPS_DEFAULT_NUMBLE_DATA)
+        {
+            str += XMLTool::convertIntToString(this->getPropsNumbleWithKey(var.first));
+        }
+        return this->getMD5Str(PROP_MD5_SECRET_KEY + str);
     }
     void UserDataManager::readDecalsData()
     {
@@ -126,7 +139,7 @@ namespace bubble_second {
         {
             return user_data_.at(key).asInt();
         }
-        return 100;
+        return PROPS_DEFAULT_NUMBLE_DATA.at(key);
     }
     void UserDataManager::setPropsNumbleWithKey(const std::string & key, int numble)
     {
@@ -136,6 +149,11 @@ namespace bubble_second {
     }
     void UserDataManager::addPropsNumbleWithKey(const std::string & key, int numble)
     {
+        if (key == DECALS_CHARACTOR_KEY || key == DECALS_TREASURE_KEY)
+        {
+            DecalsFactory::getInstance()->saveNextDecal(key);
+            return;
+        }
         this->setPropsNumbleWithKey(key, this->getPropsNumbleWithKey(key) + numble);
     }
     void UserDataManager::cutPropsNumbleWithKey(const std::string& key)
