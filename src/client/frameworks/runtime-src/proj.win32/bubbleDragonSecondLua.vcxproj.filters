@@ -434,7 +434,8 @@
     <ClInclude Include="..\Classes\lua_GameLotteryAwardItem_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UserStengthInfoBoard.h" />
+    <ClInclude Include="..\Classes\UserStrengthInfoBoard.h" />
+    <ClInclude Include="..\Classes\StrengthCountDownLabel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -841,7 +842,8 @@
     <ClCompile Include="..\Classes\lua_GameLotteryAwardItem_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UserStengthInfoBoard.cpp" />
+    <ClCompile Include="..\Classes\UserStrengthInfoBoard.cpp" />
+    <ClCompile Include="..\Classes\StrengthCountDownLabel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

@@ -37,7 +37,7 @@
 #include "GameStandbyTimer.h"
 #include "StageTypeLogo.h"
 #include "EnterGamePropsView.h"
-#include "GameBubbleMapImple.h"
+#include "GameBubbleMapImple.h"                    
 #include "BubbleMainSightingDevice.h"
 #include "GameAlertMask.h"
 #include "SkillDyeingBubble.h"

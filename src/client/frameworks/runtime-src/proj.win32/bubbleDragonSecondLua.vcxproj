@@ -326,10 +326,11 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\StartNumbleModule.h" />
     <ClInclude Include="..\Classes\StavesProperty.h" />
     <ClInclude Include="..\Classes\StavesWeapon.h" />
+    <ClInclude Include="..\Classes\StrengthCountDownLabel.h" />
     <ClInclude Include="..\Classes\UserCoinInfoBoard.h" />
     <ClInclude Include="..\Classes\UserDataManager.h" />
     <ClInclude Include="..\Classes\UserDiamondInfoBoard.h" />
-    <ClInclude Include="..\Classes\UserStengthInfoBoard.h" />
+    <ClInclude Include="..\Classes\UserStrengthInfoBoard.h" />
     <ClInclude Include="..\Classes\WindmillBubble.h" />
     <ClInclude Include="..\Classes\WoodenHammerProperty.h" />
     <ClInclude Include="..\Classes\WoodenHammerWeapon.h" />
@@ -475,10 +476,11 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\StartNumbleModule.cpp" />
     <ClCompile Include="..\Classes\StavesProperty.cpp" />
     <ClCompile Include="..\Classes\StavesWeapon.cpp" />
+    <ClCompile Include="..\Classes\StrengthCountDownLabel.cpp" />
     <ClCompile Include="..\Classes\UserCoinInfoBoard.cpp" />
     <ClCompile Include="..\Classes\UserDataManager.cpp" />
     <ClCompile Include="..\Classes\UserDiamondInfoBoard.cpp" />
-    <ClCompile Include="..\Classes\UserStengthInfoBoard.cpp" />
+    <ClCompile Include="..\Classes\UserStrengthInfoBoard.cpp" />
     <ClCompile Include="..\Classes\WindmillBubble.cpp" />
     <ClCompile Include="..\Classes\WoodenHammerProperty.cpp" />
     <ClCompile Include="..\Classes\WoodenHammerWeapon.cpp" />

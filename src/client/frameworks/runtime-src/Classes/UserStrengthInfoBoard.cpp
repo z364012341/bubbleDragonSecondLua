@@ -1,17 +1,19 @@
-#include "UserStengthInfoBoard.h"
+#include "UserStrengthInfoBoard.h"
 #include "UserDataManager.h"
 #include "AddButton.h"
+
 #include "XMLTool.h"
+#include "StrengthCountDownLabel.h"
 const std::string CSB_PATH = "UserStrengthInfo.csb";
 const std::string NUMBLE_LABEL_NAME = "BitmapFontLabel_1";
 const std::string COUNTDOWN_LABEL_NAME = "BitmapFontLabel_2";
 const std::string ARMATURE_NODE_NAME = "ArmatureNode_1";
 namespace bubble_second {
-    UserStengthInfoBoard::UserStengthInfoBoard()
+    UserStrengthInfoBoard::UserStrengthInfoBoard()
     {
     }
 
-    bool UserStengthInfoBoard::init()
+    bool UserStrengthInfoBoard::init()
     {
         if (!cocos2d::Node::init())
         {
@@ -22,8 +24,9 @@ namespace bubble_second {
         csb->getChildByName(ADD_BUTTON_NODE_NAME)->addChild(AddButton::create());
         numble_label_ = dynamic_cast<cocos2d::ui::TextBMFont*>(csb->getChildByName(NUMBLE_LABEL_NAME));
         assert(numble_label_);
-        countdown_label_ = dynamic_cast<cocos2d::ui::TextBMFont*>(csb->getChildByName(COUNTDOWN_LABEL_NAME));
-        assert(countdown_label_);
+        countdown_label_ = StrengthCountDownLabel::create();
+        this->addChild(countdown_label_);
+
         armature_ = dynamic_cast<cocostudio::Armature*>(csb->getChildByName(ARMATURE_NODE_NAME));
         assert(armature_);
 
@@ -36,30 +39,36 @@ namespace bubble_second {
         return true;
     }
 
-    void UserStengthInfoBoard::updateNumbleLabel()
+    void UserStrengthInfoBoard::updateNumbleLabel()
     {
-        numble_label_->setString(XMLTool::convertIntToString(UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_STENGTH_KEY)));
+        int numble = UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_STRENGTH_KEY);
+        //if (numble == STENGTH_NUMBLE_MAX)
+        //{
+        //    countdown_label_->setString(GameTextInfo::getInstance()->getTextInfoWithKey(GAME_STRENGTH_MAX_KEY));
+        //}
+        numble_label_->setString(XMLTool::convertIntToString(numble));
     }
 
-    UserStengthInfoBoard::~UserStengthInfoBoard()
+    UserStrengthInfoBoard::~UserStrengthInfoBoard()
     {
     }
 
-    void UserStengthInfoBoard::onEnter()
+    void UserStrengthInfoBoard::onEnter()
     {
         cocos2d::Node::onEnter();
         listener_ = cocos2d::EventListenerCustom::create(EVENT_UPDATE_PROPS_NUMBLE_LABEL, [=](cocos2d::EventCustom* event) {
             this->updateNumbleLabel();
         });
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 1);
+        countdown_label_->updateLabel();
     }
-    void UserStengthInfoBoard::onExit()
+    void UserStrengthInfoBoard::onExit()
     {
         cocos2d::Node::onExit();
         cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
     }
 
-    void UserStengthInfoBoard::playRandomTimeAnimation()
+    void UserStrengthInfoBoard::playRandomTimeAnimation()
     {
         int randomTime = cocos2d::random(1, 3);
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(randomTime), cocos2d::CallFunc::create([=]() {

@@ -80,9 +80,9 @@ namespace bubble_second {
 		alert_csb_node_->getChildByName(ENTER_GAME_ALERT_START_NODE_NAME)->addChild(button);
 		button->addButtonClickEventListener([=](Ref* target) {
             GameCharactorNameManager::getInstance()->setCurrentArmatureNameWithIndex(charactor_pageview_->getCurrentPageIndex());
-		    cocos2d::Scene* scene = GameScene::createScene();
-		    cocos2d::Director::getInstance()->replaceScene(scene);
-            UserDataManager::getInstance()->cutPropsNumbleWithKey(GAME_STENGTH_KEY);
+		    //cocos2d::Scene* scene = GameScene::createScene();
+		    //cocos2d::Director::getInstance()->replaceScene(scene);
+            UserDataManager::getInstance()->cutPropsNumbleWithKey(GAME_STRENGTH_KEY);
 		});
     }
 

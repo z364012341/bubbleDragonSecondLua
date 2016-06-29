@@ -21,7 +21,7 @@ const std::string BUBBLE_COLOR_BOMB_PROP_KEY = "colorBomb";
 const std::string BUBBLE_BIG_BOMB_BOMB_PROP_KEY = "bigBombBomb";
 const std::string BUBBLE_STAVES_PROP_KEY = "staves";
 const std::string GAME_COIN_KEY = "coin";
-const std::string GAME_STENGTH_KEY = "stength";
+const std::string GAME_STRENGTH_KEY = "strength";
 const std::string GAME_DIAMOND_KEY = "diamond";
 const std::string DECALS_CHARACTOR_KEY = "decals_charactor";
 const std::string DECALS_TREASURE_KEY = "decals_treasure";
@@ -87,6 +87,9 @@ namespace bubble_second {
         //cocos2d::ValueVector getTreasureDecalsData();
         cocos2d::ValueVector getDecalsData(const std::string& decals_type);
         void setDecalsUserData(const cocos2d::ValueVector& data, const std::string& decals_type);
+        //获取体力的上一次时间
+        time_t getStrengthLastTime();
+        void saveStrengthLastTime();
     private:
         ~UserDataManager();
         void writeStageDataToFile();

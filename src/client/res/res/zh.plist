@@ -34,5 +34,7 @@
     <string>昵称</string>
     <key>choose_props</key>
     <string>选择道具</string>
+    <key>strength_max</key>
+    <string>全满</string>
 	</dict>
 </plist>

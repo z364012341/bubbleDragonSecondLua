@@ -29,7 +29,7 @@ namespace bubble_second {
         this->addChild(sp);
         sp->setScale(0.1f);
         sp->runAction(cocos2d::Sequence::create(cocos2d::ScaleTo::create(0.2f, 1.2f),
-            cocos2d::DelayTime::create(0.02),
+            cocos2d::DelayTime::create(0.02f),
             cocos2d::ScaleTo::create(0.05f, 1.0f),
             cocos2d::CallFunc::create([=]() {
             sp->removeFromParent();

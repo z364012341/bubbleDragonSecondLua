@@ -17,6 +17,7 @@ const std::string LAST_GAME_CHARACTOR_INDEX_KEY = "lastCharactor";
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
 const std::string STAGE_TOTAL_STARTS_KEY = "total_starts";
+const std::string STRENGTH_COUNT_DOWN_TIME_KEY = "strength_count_down_time";
 const int GAME_PROPS_DEFAULT_NUMBLE = 100;
 const int GAME_STRENGTH_DEFAULT_NUMBLE = 5;
 const std::map<std::string, int> PROPS_DEFAULT_NUMBLE_DATA = {
@@ -28,7 +29,7 @@ const std::map<std::string, int> PROPS_DEFAULT_NUMBLE_DATA = {
     { BUBBLE_BIG_BOMB_BOMB_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
     { BUBBLE_STAVES_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
     { GAME_COIN_KEY , 0 },
-    { GAME_STENGTH_KEY , GAME_STRENGTH_DEFAULT_NUMBLE },
+    { GAME_STRENGTH_KEY , GAME_STRENGTH_DEFAULT_NUMBLE },
     { GAME_DIAMOND_KEY , 0 }
 };
 namespace bubble_second {
@@ -122,6 +123,31 @@ namespace bubble_second {
     {
         decals_data_[decals_type] = data;
         this->saveDecalsUserData();
+    }
+
+    time_t UserDataManager::getStrengthLastTime()
+    {
+        //if (user_data_.find(STRENGTH_COUNT_DOWN_TIME_KEY) != user_data_.end())
+        //{
+        //    return user_data_.at(STRENGTH_COUNT_DOWN_TIME_KEY).asInt();
+        //}
+        //return time(0);
+        cocos2d::Data d = cocos2d::UserDefault::getInstance()->getDataForKey(STRENGTH_COUNT_DOWN_TIME_KEY.c_str());
+        if (d.isNull())
+        {
+            return time(0);
+        }
+        time_t lastExitTime = *((time_t*)d.getBytes());
+        return lastExitTime;
+    }
+
+    void UserDataManager::saveStrengthLastTime()
+    {
+        time_t t = time(0);
+        cocos2d::Data data;
+        data.copy((unsigned char *)&t, sizeof(t));
+        cocos2d::UserDefault::getInstance()->setDataForKey(STRENGTH_COUNT_DOWN_TIME_KEY.c_str(), data);
+        cocos2d::UserDefault::getInstance()->flush();
     }
 
     void UserDataManager::saveDecalsUserData()

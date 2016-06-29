@@ -812,7 +812,8 @@ enum BubbleType
     kBubbleSkillDyeingBubble,
     kBubbleSkillColorBombBubble,
     kBubbleSkillBigBombBubble,
-    kBubbleSkillStavesBubble
+    kBubbleSkillStavesBubble,
+    kBubbleObstacle     //ºÚÇòÕÏ°­Îï
 };
 
 enum ScoreWidgetType

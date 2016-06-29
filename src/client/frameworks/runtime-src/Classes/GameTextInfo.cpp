@@ -1,11 +1,13 @@
 #include "GameTextInfo.h"
+const std::map<StageType, std::string> STAGE_TYPE_TO_KEY = {
+    { kTopEliminate , GAME_TEXT_TOP_ELIMINATE },
+    { kRescueAnimal , GAME_TEXT_RESCUE_ANIMAL },
+    { kDestroyRainbowSeal , GAME_TEXT_BEAT_THE_ROBBER },
+    { kWindmill , GAME_TEXT_RESCUE_GHOST }
+};
 namespace bubble_second {
     GameTextInfo::GameTextInfo()
     {
-        stagetype_to_key_[kTopEliminate] = GAME_TEXT_TOP_ELIMINATE;
-        stagetype_to_key_[kRescueAnimal] = GAME_TEXT_RESCUE_ANIMAL;
-        stagetype_to_key_[kDestroyRainbowSeal] = GAME_TEXT_BEAT_THE_ROBBER;
-        stagetype_to_key_[kWindmill] = GAME_TEXT_RESCUE_GHOST;
     }
 
     GameTextInfo::~GameTextInfo()
@@ -34,7 +36,7 @@ namespace bubble_second {
     }
     std::string GameTextInfo::getTextInfoWithStageType(const StageType & type)
     {
-        return getTextInfoWithKey(stagetype_to_key_[type]);
+        return getTextInfoWithKey(STAGE_TYPE_TO_KEY.at(type));
     }
     std::string GameTextInfo::getCommodityCoinNumbleWithKey(const std::string & key) const
     {
