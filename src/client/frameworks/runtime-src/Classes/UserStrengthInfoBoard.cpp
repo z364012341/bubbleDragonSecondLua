@@ -1,7 +1,7 @@
 #include "UserStrengthInfoBoard.h"
 #include "UserDataManager.h"
 #include "AddButton.h"
-
+#include "SpriteTextureController.h"
 #include "XMLTool.h"
 #include "StrengthCountDownLabel.h"
 const std::string CSB_PATH = "UserStrengthInfo.csb";
@@ -60,12 +60,14 @@ namespace bubble_second {
             this->updateNumbleLabel();
         });
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 1);
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CLICK_START_BUTTON, CC_CALLBACK_1(UserStrengthInfoBoard::runFlyStrengthToButtonAction, this));
         countdown_label_->updateLabel();
     }
     void UserStrengthInfoBoard::onExit()
     {
         cocos2d::Node::onExit();
         cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_CLICK_START_BUTTON);
     }
 
     void UserStrengthInfoBoard::playRandomTimeAnimation()
@@ -80,5 +82,22 @@ namespace bubble_second {
                 }
             });
         })));
+    }
+    void UserStrengthInfoBoard::runFlyStrengthToButtonAction(cocos2d::EventCustom * event)
+    {
+        cocos2d::Vec2 point = *static_cast<cocos2d::Vec2*>(event->getUserData());
+        cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(GAME_FATIGUE_PATH);
+        this->addChild(sp);
+        sp->setPosition(cocos2d::Vec2(-58.27f, -20.48f));
+        cocos2d::ccBezierConfig config;
+        config.endPosition = this->convertToNodeSpace(point);
+        config.controlPoint_1 = sp->getPosition();
+        config.controlPoint_2 = cocos2d::Vec2(0.0f, 200.0f);
+        cocos2d::BezierTo* bezier = cocos2d::BezierTo::create(1.0f, config);
+        sp->runAction(cocos2d::Sequence::create(bezier, cocos2d::FadeOut::create(0.1f), cocos2d::CallFunc::create([=]() {
+            //sp->removeFromParent();
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_CLICK_START_BUTTON_END);
+        }), nullptr));
+
     }
 }

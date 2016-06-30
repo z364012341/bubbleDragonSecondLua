@@ -204,6 +204,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\BaseWeapon.h" />
     <ClInclude Include="..\Classes\BigBackgroundEffect.h" />
     <ClInclude Include="..\Classes\BlackHoleBubble.h" />
+    <ClInclude Include="..\Classes\BlackObstacleBubble.h" />
     <ClInclude Include="..\Classes\BombBombBubble.h" />
     <ClInclude Include="..\Classes\BombBombProperty.h" />
     <ClInclude Include="..\Classes\BombPropertyBubble.h" />
@@ -357,6 +358,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\BaseWeapon.cpp" />
     <ClCompile Include="..\Classes\BigBackgroundEffect.cpp" />
     <ClCompile Include="..\Classes\BlackHoleBubble.cpp" />
+    <ClCompile Include="..\Classes\BlackObstacleBubble.cpp" />
     <ClCompile Include="..\Classes\BombBombBubble.cpp" />
     <ClCompile Include="..\Classes\BombBombProperty.cpp" />
     <ClCompile Include="..\Classes\BombPropertyBubble.cpp" />

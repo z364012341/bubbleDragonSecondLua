@@ -20,6 +20,8 @@ namespace bubble_second {
     public:
         CREATE_FUNC(EnterGameAlert);
         ~EnterGameAlert();
+        void onEnter() override;
+        void onExit() override;
     private:
         EnterGameAlert();
         bool init();

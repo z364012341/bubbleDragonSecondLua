@@ -26,6 +26,7 @@ namespace bubble_second {
         bool init();
         void updateNumbleLabel();
         void playRandomTimeAnimation();
+        void runFlyStrengthToButtonAction(cocos2d::EventCustom* event);
     private:
         cocos2d::ui::TextBMFont* numble_label_ = nullptr;
         StrengthCountDownLabel* countdown_label_ = nullptr;

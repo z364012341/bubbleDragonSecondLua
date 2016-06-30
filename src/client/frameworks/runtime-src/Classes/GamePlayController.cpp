@@ -53,6 +53,7 @@ namespace bubble_second {
         key_to_handle_map_[kBubbleGreen] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleOrange] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubblePinkDeprecated] = &GamePlayController::disposeContactWithColorBubble;
+        key_to_handle_map_[kBubbleBlackObstacle] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleLightning] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleDarkCloud] = &GamePlayController::disposeContactWithColorBubble;
         key_to_handle_map_[kBubbleAddNumbleBubble] = &GamePlayController::disposeContactWithColorBubble;

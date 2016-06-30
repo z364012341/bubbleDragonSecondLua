@@ -436,6 +436,7 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UserStrengthInfoBoard.h" />
     <ClInclude Include="..\Classes\StrengthCountDownLabel.h" />
+    <ClInclude Include="..\Classes\BlackObstacleBubble.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -844,6 +845,7 @@
     </ClCompile>
     <ClCompile Include="..\Classes\UserStrengthInfoBoard.cpp" />
     <ClCompile Include="..\Classes\StrengthCountDownLabel.cpp" />
+    <ClCompile Include="..\Classes\BlackObstacleBubble.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

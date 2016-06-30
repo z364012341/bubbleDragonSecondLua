@@ -61,7 +61,7 @@ namespace bubble_second {
         left_button_ = dynamic_cast<cocos2d::ui::Button*>(alert_csb_node_->getChildByName(CHARACTOR_SELECTED_ROOT_NAME)->getChildByName(PAGEVIEW_TURN_LEFT_BUTTON_NAME));
         assert(left_button_);
         left_button_->addClickEventListener([=](cocos2d::Ref*) {
-            charactor_pageview_->scrollToPage(charactor_pageview_->getCurrentPageIndex()-1);
+            charactor_pageview_->scrollToPage(charactor_pageview_->getCurrentPageIndex() - 1);
             this->setDirectionalButtonsEnable(charactor_pageview_->getCurrentPageIndex() - 1);
         });
 
@@ -77,13 +77,20 @@ namespace bubble_second {
     void EnterGameAlert::initStartButton(int cell_numble, int level)
     {
         GameStartButton* button = GameStartButton::createButtonStartForm();
-		alert_csb_node_->getChildByName(ENTER_GAME_ALERT_START_NODE_NAME)->addChild(button);
-		button->addButtonClickEventListener([=](Ref* target) {
+        alert_csb_node_->getChildByName(ENTER_GAME_ALERT_START_NODE_NAME)->addChild(button);
+        button->addButtonClickEventListener([=](Ref* target) {
             GameCharactorNameManager::getInstance()->setCurrentArmatureNameWithIndex(charactor_pageview_->getCurrentPageIndex());
-		    //cocos2d::Scene* scene = GameScene::createScene();
-		    //cocos2d::Director::getInstance()->replaceScene(scene);
-            UserDataManager::getInstance()->cutPropsNumbleWithKey(GAME_STRENGTH_KEY);
-		});
+            //cocos2d::Scene* scene = GameScene::createScene();
+            //cocos2d::Director::getInstance()->replaceScene(scene);
+            //UserDataManager::getInstance()->cutPropsNumbleWithKey(GAME_STRENGTH_KEY);
+            if (UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_STRENGTH_KEY)>0)
+            {
+                this->addChild(GameAlertMask::createTransparentMask(), 1);
+                cocos2d::Vec2 point = button->getParent()->convertToWorldSpace(button->getPosition());
+                this->getEventDispatcher()->dispatchCustomEvent(EVENT_CLICK_START_BUTTON, &point);
+                UserDataManager::getInstance()->cutPropsNumbleWithKey(GAME_STRENGTH_KEY);
+            }
+        });
     }
 
     void EnterGameAlert::initCharactorPageView()
@@ -140,5 +147,18 @@ namespace bubble_second {
     cocos2d::ui::TextBMFont * EnterGameAlert::getStageTypeLabel()
     {
         return dynamic_cast<cocos2d::ui::TextBMFont*>(alert_csb_node_->getChildByName(ENTER_GAME_ALERT_STAGE_TYPE_LABEL_NAME));
+    }
+    void EnterGameAlert::onEnter()
+    {
+        cocos2d::Node::onEnter();
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CLICK_START_BUTTON_END, [=](cocos2d::EventCustom*) {
+            cocos2d::Scene* scene = GameScene::createScene();
+            cocos2d::Director::getInstance()->replaceScene(scene);
+        });
+    }
+    void EnterGameAlert::onExit()
+    {
+        cocos2d::Node::onExit();
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_CLICK_START_BUTTON_END);
     }
 }

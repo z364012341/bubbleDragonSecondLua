@@ -15,11 +15,36 @@
 #include "SkillColorBombBubble.h"
 #include "SkillBigBombBubble.h"
 #include "SkillStavesBubble.h"
+#include "BlackObstacleBubble.h"
+const std::map<int, std::string> KEY_TO_PATH = {
+    {kBubbleTransparent, BUBBLE_NO_COLOR_PATH},
+    {kBubbleYellow, BUBBLE_YELLOW_PATH},
+    {kBubblePurple, BUBBLE_PURPLE_PATH},
+    {kBubbleBlue, BUBBLE_BLUE_PATH},
+    {kBubbleRed, BUBBLE_RED_PATH},
+    {kBubbleGreen, BUBBLE_GREEN_PATH},
+    {kBubbleOrange, BUBBLE_ORANGE_PATH},
+    {kBubblePinkDeprecated, BUBBLE_PINK_PATH},
+    {kBubbleLightning, BUBBLE_LIGHTNING_PATH},
+    {kBubbleDarkCloud, BUBBLE_DARKCLOUD_PATH},
+    {kBubbleBlackHole, BUBBLE_BLACKHOLE_PATH},
+    {kBubbleBombBomb, BUBBLE_BOMB_BOMB_PATH},
+    {kBubbleColorBomb, PROPS_COLOR_BOMB_PATH},
+    {kBubbleBombBombProperty, PROPS_BOMB_BOMB_PATH},
+    {kBubbleRainbowSeal, BUBBLE_RAINBOW_SEAL_PATH},
+    {kBubbleComponent, BUBBLE_NO_COLOR_PATH},
+    {kBubbleMutipleSeal1, BUBBLE_MUTIPLE_SEAL_1_PATH},
+    {kBubbleMutipleSeal3, BUBBLE_MUTIPLE_SEAL_3_PATH},
+    {kBubbleMutipleSeal7, BUBBLE_MUTIPLE_SEAL_7_PATH},
+    {kBubbleWindmill, ""},
+    {kBubbleAddNumbleBubble, ADD_BUBBLE_NUMBLE_BUBBLE_PATH} ,
+    { kBubbleBlackObstacle, BLACK_OBSTACLE_BUBBLE_PATH }
+};
 namespace bubble_second {
     BubbleFactory::BubbleFactory()
     {
         this->initHandleMap();
-        this->initBubblePath();
+        //this->initBubblePath();
     }
     BubbleFactory::~BubbleFactory()
     {
@@ -51,40 +76,41 @@ namespace bubble_second {
         key_to_handle_map_[kBubbleSkillColorBombBubble] = [=](int, int) {return  SkillColorBombBubble::create(); };
         key_to_handle_map_[kBubbleSkillBigBombBubble] = [=](int, int) {return  SkillBigBombBubble::create(); };
         key_to_handle_map_[kBubbleSkillStavesBubble] = [=](int, int) {return  SkillStavesBubble::create(); };
+        key_to_handle_map_[kBubbleBlackObstacle] = [=](int, int) {return  BlackObstacleBubble::create(); };
     }
 
-    void bubble_second::BubbleFactory::initBubblePath()
-    {
-        key_to_path[kBubbleTransparent] = BUBBLE_NO_COLOR_PATH;
-        key_to_path[kBubbleYellow] = BUBBLE_YELLOW_PATH;
-        key_to_path[kBubblePurple] = BUBBLE_PURPLE_PATH;
-        key_to_path[kBubbleBlue] = BUBBLE_BLUE_PATH;
-        key_to_path[kBubbleRed] = BUBBLE_RED_PATH;
-        key_to_path[kBubbleGreen] = BUBBLE_GREEN_PATH;
-        key_to_path[kBubbleOrange] = BUBBLE_ORANGE_PATH;
-        key_to_path[kBubblePinkDeprecated] = BUBBLE_PINK_PATH;
-        key_to_path[kBubbleLightning] = BUBBLE_LIGHTNING_PATH;
-        key_to_path[kBubbleDarkCloud] = BUBBLE_DARKCLOUD_PATH;
-        key_to_path[kBubbleBlackHole] = BUBBLE_BLACKHOLE_PATH;
-        key_to_path[kBubbleBombBomb] = BUBBLE_BOMB_BOMB_PATH;
-        key_to_path[kBubbleColorBomb] = PROPS_COLOR_BOMB_PATH;
-        key_to_path[kBubbleBombBombProperty] = PROPS_BOMB_BOMB_PATH;
-        key_to_path[kBubbleRainbowSeal] = BUBBLE_RAINBOW_SEAL_PATH;
-        key_to_path[kBubbleComponent] = BUBBLE_NO_COLOR_PATH;
-        key_to_path[kBubbleMutipleSeal1] = BUBBLE_MUTIPLE_SEAL_1_PATH;
-        key_to_path[kBubbleMutipleSeal3] = BUBBLE_MUTIPLE_SEAL_3_PATH;
-        key_to_path[kBubbleMutipleSeal7] = BUBBLE_MUTIPLE_SEAL_7_PATH;
-        key_to_path[kBubbleWindmill] = "";
-        key_to_path[kBubbleAddNumbleBubble] = ADD_BUBBLE_NUMBLE_BUBBLE_PATH;
+    //void bubble_second::BubbleFactory::initBubblePath()
+    //{
+    //    key_to_path[kBubbleTransparent] = BUBBLE_NO_COLOR_PATH;
+    //    key_to_path[kBubbleYellow] = BUBBLE_YELLOW_PATH;
+    //    key_to_path[kBubblePurple] = BUBBLE_PURPLE_PATH;
+    //    key_to_path[kBubbleBlue] = BUBBLE_BLUE_PATH;
+    //    key_to_path[kBubbleRed] = BUBBLE_RED_PATH;
+    //    key_to_path[kBubbleGreen] = BUBBLE_GREEN_PATH;
+    //    key_to_path[kBubbleOrange] = BUBBLE_ORANGE_PATH;
+    //    key_to_path[kBubblePinkDeprecated] = BUBBLE_PINK_PATH;
+    //    key_to_path[kBubbleLightning] = BUBBLE_LIGHTNING_PATH;
+    //    key_to_path[kBubbleDarkCloud] = BUBBLE_DARKCLOUD_PATH;
+    //    key_to_path[kBubbleBlackHole] = BUBBLE_BLACKHOLE_PATH;
+    //    key_to_path[kBubbleBombBomb] = BUBBLE_BOMB_BOMB_PATH;
+    //    key_to_path[kBubbleColorBomb] = PROPS_COLOR_BOMB_PATH;
+    //    key_to_path[kBubbleBombBombProperty] = PROPS_BOMB_BOMB_PATH;
+    //    key_to_path[kBubbleRainbowSeal] = BUBBLE_RAINBOW_SEAL_PATH;
+    //    key_to_path[kBubbleComponent] = BUBBLE_NO_COLOR_PATH;
+    //    key_to_path[kBubbleMutipleSeal1] = BUBBLE_MUTIPLE_SEAL_1_PATH;
+    //    key_to_path[kBubbleMutipleSeal3] = BUBBLE_MUTIPLE_SEAL_3_PATH;
+    //    key_to_path[kBubbleMutipleSeal7] = BUBBLE_MUTIPLE_SEAL_7_PATH;
+    //    key_to_path[kBubbleWindmill] = "";
+    //    key_to_path[kBubbleAddNumbleBubble] = ADD_BUBBLE_NUMBLE_BUBBLE_PATH;
 
-    }
+    //}
 
     BaseBubble* BubbleFactory::createBubbleWithType(int type, int cloud)
     {
         BaseBubble* bubble = nullptr;
-		if (auto create_handle = key_to_handle_map_[type])
+        if (auto create_handle = key_to_handle_map_[type])
         {
-			bubble = create_handle(type, cloud);
+            bubble = create_handle(type, cloud);
         }
         return bubble;
     }
@@ -103,6 +129,6 @@ namespace bubble_second {
 
     std::string BubbleFactory::getPathWithType(int type)
     {
-        return key_to_path[type];
+        return KEY_TO_PATH.at(type);
     }
 }

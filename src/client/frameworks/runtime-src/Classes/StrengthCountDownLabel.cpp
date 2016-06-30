@@ -3,7 +3,7 @@
 #include "GameTextInfo.h"
 #include "UserDataManager.h"
 const int STENGTH_NUMBLE_MAX = 5;
-const int PER_STENGTH_MINUTE = 1;
+const int PER_STENGTH_MINUTE = 6;
 const int PER_STENGTH_SECOND = PER_STENGTH_MINUTE * 60;
 
 namespace bubble_second {
@@ -29,9 +29,9 @@ namespace bubble_second {
             return;
         }
         is_begin_flag_ = true;
-        time_t last_time = UserDataManager::getInstance()->getStrengthLastTime();
+        //time_t last_time = last_tiem;
         time_t current_time = time(0);
-        time_t delta_time = current_time - last_time;
+        time_t delta_time = current_time - UserDataManager::getInstance()->getStrengthLastTime();
         if (delta_time >= (STENGTH_NUMBLE_MAX - strength_numble_)*PER_STENGTH_SECOND)
         {
             UserDataManager::getInstance()->setPropsNumbleWithKey(GAME_STRENGTH_KEY, STENGTH_NUMBLE_MAX);
@@ -43,7 +43,7 @@ namespace bubble_second {
             {
                 UserDataManager::getInstance()->addPropsNumbleWithKey(GAME_STRENGTH_KEY, delta_time / PER_STENGTH_SECOND);
             }
-            time_t count_down_time = delta_time % PER_STENGTH_SECOND;
+            time_t count_down_time = PER_STENGTH_SECOND - delta_time % PER_STENGTH_SECOND;
             this->countDownWithTime(count_down_time);
         }
 
@@ -96,23 +96,24 @@ namespace bubble_second {
     {
         cocos2d::Node::onExit();
         cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
-        UserDataManager::getInstance()->saveStrengthLastTime();
+        //UserDataManager::getInstance()->saveStrengthLastTime(time(0) - PER_STENGTH_SECOND + count_down_time_);
 
     }
     void StrengthCountDownLabel::updateLabel()
     {
         int last_numble = strength_numble_;
         strength_numble_ = UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_STRENGTH_KEY);
-        if (last_numble == STENGTH_NUMBLE_MAX && strength_numble_ == STENGTH_NUMBLE_MAX - 1)
-        {
-            UserDataManager::getInstance()->saveStrengthLastTime();
-        }
         if (strength_numble_ == STENGTH_NUMBLE_MAX)
         {
             label_->setString(GameTextInfo::getInstance()->getTextInfoWithKey(GAME_STRENGTH_MAX_KEY));
+            count_down_time_ = 0;
         }
         else
         {
+            if (last_numble == STENGTH_NUMBLE_MAX && strength_numble_ == STENGTH_NUMBLE_MAX - 1)
+            {
+                UserDataManager::getInstance()->saveStrengthLastTime();
+            }
             this->countDownBegin();
         }
     }

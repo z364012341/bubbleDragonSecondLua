@@ -58,6 +58,7 @@ const std::string PROPS_ITEM_BACKGROUND_PATH = "kuangdaoju.png";  //道具item的背
 //const std::string GUNSIGHT_SWIRL_GREEN_PATH = "X-lv.png";  //发射台上的旋风绿
 const std::string RAINBOW_CHARACTOR_PATH = "be_sealed_charactor.png"; //彩虹封印里面的人物
 const std::string ADD_BUBBLE_NUMBLE_BUBBLE_PATH = "addThreeBubble.png"; //+3特殊泡泡
+const std::string BLACK_OBSTACLE_BUBBLE_PATH = "heiqiu.png"; //障碍黑球
 
 
 //瞄准线点path
@@ -460,6 +461,8 @@ const std::string EVENT_CLEAR_SKILL_ENERGY = "event_clear_skill_energy";
 const std::string EVENT_GAME_VICTORY_LETTERY_ITEM_LIGHTEN = "event_game_victory_lettery_item_lighten";
 const std::string EVENT_POP_VICTORY_GIFT_ARMATURE = "event_pop_victory_gift_armature";
 const std::string EVENT_VICTORY_GIFT_ARMATURE_END = "event_victory_gift_armature_end";
+const std::string EVENT_CLICK_START_BUTTON = "event_click_start_button";
+const std::string EVENT_CLICK_START_BUTTON_END = "event_click_start_button_end";
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效
@@ -598,7 +601,7 @@ const cocos2d::Vec2 GAME_VICTORY_ALERT_REWARDS_BACKGROUND_POSITION(10.0f, -100.0
 const std::string GAME_COMMODITY_TEN_BUBBLE_PATH = "addBubbleNumble.png";
 const std::string GAME_ALERT_CONTINUE_BUTTON_PATH = "jixu1.png";
 const std::string GAME_ALERT_COMMODITY_TEN_BUBBLE_PRICE_BACKGROUND_PATH = GAME_PAUSE_ALERT_VOLUME_SWITCH_BACKGROUND_PATH; //价格下面的北京
-const std::string GAME_DIAMOND_PATH = "zuans.png"; //砖石
+//const std::string GAME_DIAMOND_PATH = "zuans.png"; //砖石
 const float GAME_VICTORY_ALERT_COIN_POSITION_PERCENT_X = 0.4f;
 const std::string GAME_FATIGUE_PATH = "xin.png"; //疲劳
 const float GAME_VICTORY_ALERT_FATIGUE_POSITION_PERCENT_X = 0.7f;
@@ -813,7 +816,7 @@ enum BubbleType
     kBubbleSkillColorBombBubble,
     kBubbleSkillBigBombBubble,
     kBubbleSkillStavesBubble,
-    kBubbleObstacle     //黑球障碍物
+    kBubbleBlackObstacle     //黑球障碍物
 };
 
 enum ScoreWidgetType
