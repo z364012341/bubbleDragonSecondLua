@@ -10,20 +10,20 @@
 #ifndef _USER_DATA_MANAGER_H_
 #define _USER_DATA_MANAGER_H_
 #include "BubbleSecondConstant.h"
-const std::string PUZZLE_SEARCH_PROP_KEY = "search";
-const std::string PUZZLE_BIG_EYES_PROP_KEY = "bigEyes";
-const std::string PUZZLE_ADD_TIME_PROP_KEY = "addTime";
+const std::string PUZZLE_SEARCH_PROP_KEY = "search"; //拼图放大镜
+const std::string PUZZLE_BIG_EYES_PROP_KEY = "bigEyes";  //拼图左上角眼睛
+const std::string PUZZLE_ADD_TIME_PROP_KEY = "addTime";  //拼图加时间
 const std::string BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY = "addBubbleNumble";
 const std::string BUBBLE_AIMING_LINE_PROP_KEY = "aimingLine";
 const std::string BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY = "addSpecialBubble";
-const std::string BUBBLE_WOODEN_HAMMER_PROP_KEY = "woodenHammer";
-const std::string BUBBLE_COLOR_BOMB_PROP_KEY = "colorBomb";
-const std::string BUBBLE_BIG_BOMB_BOMB_PROP_KEY = "bigBombBomb";
-const std::string BUBBLE_STAVES_PROP_KEY = "staves";
-const std::string GAME_COIN_KEY = "coin";
-const std::string GAME_STRENGTH_KEY = "strength";
-const std::string GAME_DIAMOND_KEY = "diamond";
-const std::string DECALS_CHARACTOR_KEY = "decals_charactor";
+const std::string BUBBLE_WOODEN_HAMMER_PROP_KEY = "woodenHammer";   //小木锤
+const std::string BUBBLE_COLOR_BOMB_PROP_KEY = "colorBomb";    //彩球
+const std::string BUBBLE_BIG_BOMB_BOMB_PROP_KEY = "bigBombBomb";   //两圈炸弹
+const std::string BUBBLE_STAVES_PROP_KEY = "staves";     //法杖
+const std::string GAME_COIN_KEY = "coin";                //金币
+const std::string GAME_STRENGTH_KEY = "strength";         //体力
+const std::string GAME_DIAMOND_KEY = "diamond";            //砖石
+const std::string DECALS_CHARACTOR_KEY = "decals_charactor";   
 const std::string DECALS_TREASURE_KEY = "decals_treasure";
 namespace bubble_second {
     class UserDataManager

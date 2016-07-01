@@ -113,16 +113,26 @@ namespace bubble_second {
         {
             return;
         }
-        std::deque<cocos2d::Vec2> points;
         int start_numble_delta = start_numble - best_start_numble;
         for (int i = starts_.size() - 1; i > starts_.size() - start_numble_delta -1; i--)
         {
-            points.insert(points.begin(), starts_.at(i)->getPosition());
+            fly_starts_points_.insert(fly_starts_points_.begin(), starts_.at(i)->getPosition());
             //points.insert(points.begin(), starts_.at(i)->getParent()->convertToWorldSpace(starts_.at(i)->getPosition()));
         }
         this->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(pop_start_total_time_), cocos2d::CallFunc::create([=]() {
-            lottery_starts_->flyStartsToLotteryBegin(points);
+            //lottery_starts_->flyStartsToLotteryBegin(points);
+            this->flyStartToLotteryBegin();
         }), nullptr));
+    }
+
+    void GameVictoryAlert::flyStartToLotteryBegin()
+    {
+        if (fly_starts_points_.empty())
+        {
+            return;
+        }
+        lottery_starts_->flyStartsToLotteryBegin(fly_starts_points_.front());
+        fly_starts_points_.pop_front();
     }
 
     void GameVictoryAlert::playStartPopAction(cocos2d::Node * start, float delay)
@@ -174,5 +184,16 @@ namespace bubble_second {
     {
         dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(ALERT_REPLAY_NODE_NAME))->addTouchEventListener(callback);
     }
-
+    void GameVictoryAlert::onEnter()
+    {
+        cocos2d::Node::onEnter();
+        this->getEventDispatcher()->addCustomEventListener(EVENT_CONTRAROTATE_STARTS_END, [=](cocos2d::EventCustom* event) {
+            this->flyStartToLotteryBegin();
+        });
+    }
+    void GameVictoryAlert::onExit()
+    {
+        cocos2d::Node::onExit();
+        this->getEventDispatcher()->removeCustomEventListeners(EVENT_CONTRAROTATE_STARTS_END);
+    }
 }

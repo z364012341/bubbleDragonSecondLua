@@ -46,7 +46,7 @@ namespace bubble_second {
     private:
         std::map<StageType, std::string> stagetype_to_path_;
         std::map<StageType, std::string> stage_menu_stagetype_to_path_;
-        std::map<std::string, std::string> prop_key_to_path_;
+        //std::map<std::string, std::string> prop_key_to_path_;
         cocos2d::ValueMap cell_to_path_;
         std::vector<std::string> armature_path_;
     };

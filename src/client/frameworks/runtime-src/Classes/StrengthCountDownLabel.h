@@ -27,6 +27,7 @@ namespace bubble_second {
         void countDownEnd();
         void countDownWithTime(time_t tiem);
         void setCountDownLabel(time_t tiem);
+        void clear();
     private:
         cocos2d::ui::TextBMFont* label_ = nullptr;
         cocos2d::EventListenerCustom * listener_ = nullptr;

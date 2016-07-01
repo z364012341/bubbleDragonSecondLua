@@ -29,9 +29,12 @@ namespace bubble_second {
             return;
         }
         is_begin_flag_ = true;
-        //time_t last_time = last_tiem;
         time_t current_time = time(0);
         time_t delta_time = current_time - UserDataManager::getInstance()->getStrengthLastTime();
+        if (delta_time< 0)
+        {
+            delta_time = 0;
+        }
         if (delta_time >= (STENGTH_NUMBLE_MAX - strength_numble_)*PER_STENGTH_SECOND)
         {
             UserDataManager::getInstance()->setPropsNumbleWithKey(GAME_STRENGTH_KEY, STENGTH_NUMBLE_MAX);
@@ -65,7 +68,6 @@ namespace bubble_second {
         this->runAction(cocos2d::Sequence::createWithTwoActions(repeat, cocos2d::CallFunc::create([=]() {
             this->countDownEnd();
             UserDataManager::getInstance()->addPropsNumbleWithKey(GAME_STRENGTH_KEY, 1);
-            //this->countDownWithTime(PER_STENGTH_SECOND);
         })));
     }
 
@@ -78,6 +80,13 @@ namespace bubble_second {
         label_->setString(str);
     }
 
+    void StrengthCountDownLabel::clear()
+    {
+        strength_numble_ = -1;
+        count_down_time_ = 0;
+        this->stopAllActions();
+        is_begin_flag_ = false;
+    }
 
     StrengthCountDownLabel::~StrengthCountDownLabel()
     {
@@ -90,6 +99,7 @@ namespace bubble_second {
         });
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 1);
         //this->updateLabel();
+        this->clear();
 
     }
     void StrengthCountDownLabel::onExit()
@@ -106,7 +116,10 @@ namespace bubble_second {
         if (strength_numble_ == STENGTH_NUMBLE_MAX)
         {
             label_->setString(GameTextInfo::getInstance()->getTextInfoWithKey(GAME_STRENGTH_MAX_KEY));
-            count_down_time_ = 0;
+            if (is_begin_flag_)
+            {
+                this->clear();
+            }
         }
         else
         {

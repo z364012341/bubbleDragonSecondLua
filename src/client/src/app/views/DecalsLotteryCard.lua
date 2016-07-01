@@ -9,7 +9,7 @@ end)
 local CARD_FRONT_PATH = "card_front.PNG";
 local CARD_BACK_PATH = "card_back.PNG";
 local CARD_SHUFFLE_MOVE_SPEED = 4000;
-local SELECT_ARMATURE_NAME = "c";
+local SELECT_ARMATURE_NAME = "choujiangkapianguang";
 local SELECT_ANIMATION_1_NAME = "fanpai-01";
 local SELECT_ANIMATION_2_NAME = "fanpai-02";
 

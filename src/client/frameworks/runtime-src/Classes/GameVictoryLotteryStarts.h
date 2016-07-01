@@ -18,7 +18,8 @@ namespace bubble_second {
     public:
         CREATE_FUNC(GameVictoryLotteryStarts);
         ~GameVictoryLotteryStarts();
-        void flyStartsToLotteryBegin(std::deque<cocos2d::Vec2> points);
+        //void flyStartsToLotteryBegin(std::deque<cocos2d::Vec2> points);
+        void flyStartsToLotteryBegin(cocos2d::Vec2 point);
         void onEnter() override;
         void onExit() override;
     private:
@@ -34,13 +35,13 @@ namespace bubble_second {
         GameVictoryLotteryItemBase* createStartWithIndex(int index);
         void contrarotateStarts();
         void setStartPosAndRotationAndScaleWithIndex(cocos2d::Node* start, int index);
-        void flyStartsToLottery();
+        //void flyStartsToLottery();
         void lightenStart();
         cocos2d::Vec2 getStartPositionWithIndex(int index);
         void popGiftArmature(cocos2d::EventCustom* event);
     private:
         cocos2d::Map<int, GameVictoryLotteryItemBase*> starts_container_;
-        std::deque<cocos2d::Vec2> fly_points_;
+        //std::deque<cocos2d::Vec2> fly_points_;
         int total_start_numble_ = 0;
     };
 }

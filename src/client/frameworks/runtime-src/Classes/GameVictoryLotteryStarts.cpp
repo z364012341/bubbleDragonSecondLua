@@ -166,7 +166,9 @@ namespace bubble_second {
         //this->initItemsColor();
         first_start->setGrayEnabled(true);
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(START_CONTRAROTATE_DURATION),
-            cocos2d::CallFunc::create(CC_CALLBACK_0(GameVictoryLotteryStarts::flyStartsToLottery, this))));
+            cocos2d::CallFunc::create([=]() {
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_CONTRAROTATE_STARTS_END);
+        })));
     }
 
     void GameVictoryLotteryStarts::setStartPosAndRotationAndScaleWithIndex(cocos2d::Node* start, int index)
@@ -228,15 +230,38 @@ namespace bubble_second {
         );
     }
 
-    void GameVictoryLotteryStarts::flyStartsToLottery()
+    //void GameVictoryLotteryStarts::flyStartsToLottery()
+    //{
+    //    //if (fly_points_.empty())
+    //    //{
+    //    //    return;
+    //    //}
+    //    //cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath("tubiao01.png");
+    //    //sp->setPosition(fly_points_.front());
+    //    //fly_points_.pop_front();
+    //    //this->addChild(sp);
+    //    //GameVictoryLotteryItemBase* item = starts_container_.at(this->getGrayBeginIndex());
+    //    //sp->runAction(cocos2d::Sequence::create(cocos2d::MoveTo::create(START_FLY_LOTTERY_DURATION, item->getPosition()),
+    //    //    cocos2d::CallFunc::create([=]() {
+    //    //    sp->removeFromParent();
+    //    //    item->lightenItem();
+    //    //}), nullptr));
+
+    //}
+
+    void GameVictoryLotteryStarts::lightenStart()
     {
-        if (fly_points_.empty())
-        {
-            return;
-        }
+    }
+
+    void GameVictoryLotteryStarts::flyStartsToLotteryBegin(cocos2d::Vec2 point)
+    {
+        //fly_points_ = points;
+        //this->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(2.0f), cocos2d::CallFunc::create([=]() {
+        //this->flyStartsToLottery();
+        //}), nullptr));
         cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath("tubiao01.png");
-        sp->setPosition(fly_points_.front());
-        fly_points_.pop_front();
+        sp->setPosition(point);
+        //fly_points_.pop_front();
         this->addChild(sp);
         GameVictoryLotteryItemBase* item = starts_container_.at(this->getGrayBeginIndex());
         sp->runAction(cocos2d::Sequence::create(cocos2d::MoveTo::create(START_FLY_LOTTERY_DURATION, item->getPosition()),
@@ -244,19 +269,6 @@ namespace bubble_second {
             sp->removeFromParent();
             item->lightenItem();
         }), nullptr));
-
-    }
-
-    void GameVictoryLotteryStarts::lightenStart()
-    {
-    }
-
-    void GameVictoryLotteryStarts::flyStartsToLotteryBegin(std::deque<cocos2d::Vec2> points)
-    {
-        fly_points_ = points;
-        //this->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(2.0f), cocos2d::CallFunc::create([=]() {
-        this->flyStartsToLottery();
-        //}), nullptr));
     }
     void GameVictoryLotteryStarts::onEnter()
     {
@@ -270,6 +282,7 @@ namespace bubble_second {
     {
         cocos2d::Node::onExit();
         this->getEventDispatcher()->removeCustomEventListeners(EVENT_GAME_VICTORY_LETTERY_ITEM_LIGHTEN);
+        this->getEventDispatcher()->removeCustomEventListeners(EVENT_POP_VICTORY_GIFT_ARMATURE);
     }
     GameVictoryLotteryStarts::~GameVictoryLotteryStarts()
     {

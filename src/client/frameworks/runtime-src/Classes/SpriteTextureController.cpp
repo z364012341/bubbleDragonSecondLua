@@ -43,6 +43,18 @@ const std::string SCORE_WIDGET_UPDATE_PATH = "yun3/yun3.ExportJson";
 const std::string PUZZLE_MOVE_ANSWER_PATH = "pintuTX3/pintuTX3.ExportJson";
 const std::string ADD_SPECIAL_PROP_ARMATURE_PATH = "pingzidaoju/pingzidaoju.ExportJson"; //+3特殊道具动画
 
+const std::map<std::string, std::string> PROP_KEY_TO_PATH = {
+    { PUZZLE_SEARCH_PROP_KEY, PUZZLE_SEARCH_PROP_PATH },
+    { PUZZLE_BIG_EYES_PROP_KEY, PUZZLE_BIG_EYES_PROP_PATH },
+    { PUZZLE_ADD_TIME_PROP_KEY, PUZZLE_ADD_TIME_PROP_PATH },
+    { BUBBLE_WOODEN_HAMMER_PROP_KEY, PROPS_WOODEN_HAMMER_PATH },
+    { BUBBLE_COLOR_BOMB_PROP_KEY, PROPS_COLOR_BOMB_PATH },
+    { BUBBLE_BIG_BOMB_BOMB_PROP_KEY, PROPS_BOMB_BOMB_PATH },
+    { BUBBLE_STAVES_PROP_KEY, PROPS_STAVES_PATH },
+    { GAME_COIN_KEY, GAME_COIN_PATH } ,
+    { GAME_STRENGTH_KEY, GAME_FATIGUE_PATH }
+};
+
 namespace bubble_second {
     SpriteTextureController::SpriteTextureController()
     {
@@ -56,17 +68,14 @@ namespace bubble_second {
         stage_menu_stagetype_to_path_[kDestroyRainbowSeal] = STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH;
         stage_menu_stagetype_to_path_[kWindmill] = STAGETYPE_TEXTURE_WINDMILL_PATH;
 
-        prop_key_to_path_[PUZZLE_SEARCH_PROP_KEY] = PUZZLE_SEARCH_PROP_PATH;
-        prop_key_to_path_[PUZZLE_BIG_EYES_PROP_KEY] = PUZZLE_BIG_EYES_PROP_PATH;
-        prop_key_to_path_[PUZZLE_ADD_TIME_PROP_KEY] = PUZZLE_ADD_TIME_PROP_PATH;
-        //prop_key_to_path_[BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY] = ;
-        //prop_key_to_path_[BUBBLE_AIMING_LINE_PROP_KEY] = ;
-        //prop_key_to_path_[BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY] = ;
-        prop_key_to_path_[BUBBLE_WOODEN_HAMMER_PROP_KEY] = PROPS_WOODEN_HAMMER_PATH;
-        prop_key_to_path_[BUBBLE_COLOR_BOMB_PROP_KEY] = PROPS_COLOR_BOMB_PATH;
-        prop_key_to_path_[BUBBLE_BIG_BOMB_BOMB_PROP_KEY] = PROPS_BOMB_BOMB_PATH;
-        prop_key_to_path_[BUBBLE_STAVES_PROP_KEY] = PROPS_STAVES_PATH;
-        prop_key_to_path_[GAME_COIN_KEY] = GAME_COIN_PATH;
+        //prop_key_to_path_[PUZZLE_SEARCH_PROP_KEY] = PUZZLE_SEARCH_PROP_PATH;
+        //prop_key_to_path_[PUZZLE_BIG_EYES_PROP_KEY] = PUZZLE_BIG_EYES_PROP_PATH;
+        //prop_key_to_path_[PUZZLE_ADD_TIME_PROP_KEY] = PUZZLE_ADD_TIME_PROP_PATH;
+        //prop_key_to_path_[BUBBLE_WOODEN_HAMMER_PROP_KEY] = PROPS_WOODEN_HAMMER_PATH;
+        //prop_key_to_path_[BUBBLE_COLOR_BOMB_PROP_KEY] = PROPS_COLOR_BOMB_PATH;
+        //prop_key_to_path_[BUBBLE_BIG_BOMB_BOMB_PROP_KEY] = PROPS_BOMB_BOMB_PATH;
+        //prop_key_to_path_[BUBBLE_STAVES_PROP_KEY] = PROPS_STAVES_PATH;
+        //prop_key_to_path_[GAME_COIN_KEY] = GAME_COIN_PATH;
 
 
         armature_path_.push_back(LIGHTNING_BUBBLE_EFFECT_PATH);
@@ -379,11 +388,11 @@ namespace bubble_second {
     //}
     cocos2d::Sprite* SpriteTextureController::createPropSpriteWithKey(const std::string& key)
     {
-        if (prop_key_to_path_.find(key) == prop_key_to_path_.end())
+        if (PROP_KEY_TO_PATH.find(key) == PROP_KEY_TO_PATH.end())
         {
             return  DecalsFactory::getInstance()->createNextDecalWithType(key);
         }
-        return this->createGameSpriteWithPath(prop_key_to_path_[key]);
+        return this->createGameSpriteWithPath(PROP_KEY_TO_PATH.at(key));
     }
     cocos2d::ui::TextBMFont * SpriteTextureController::createWhitePurpleFnt(const std::string & str)
     {

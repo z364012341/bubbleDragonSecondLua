@@ -4,8 +4,10 @@
 <plist version="1.0">
     <dict>
         <key>strength</key>
-        <integer>4</integer>
+        <integer>2</integer>
         <key>md5</key>
-        <string>5112fa22a2f079264fc3444e4f685e8f</string>
+        <string>9b310887f9ffac8486dc1ab8e135eced</string>
+        <key>woodenHammer</key>
+        <integer>97</integer>
     </dict>
 </plist>

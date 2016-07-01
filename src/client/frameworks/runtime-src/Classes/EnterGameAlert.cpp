@@ -89,6 +89,7 @@ namespace bubble_second {
                 cocos2d::Vec2 point = button->getParent()->convertToWorldSpace(button->getPosition());
                 this->getEventDispatcher()->dispatchCustomEvent(EVENT_CLICK_START_BUTTON, &point);
                 UserDataManager::getInstance()->cutPropsNumbleWithKey(GAME_STRENGTH_KEY);
+                //UserDataManager::getInstance()->saveStrengthLastTime();
             }
         });
     }

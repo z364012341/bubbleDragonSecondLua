@@ -20,6 +20,8 @@ namespace bubble_second {
         ~GameVictoryAlert();
         void setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
         void setNextCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
+        void onEnter() override;
+        void onExit() override;
     private:
         GameVictoryAlert();
         void loadView();
@@ -29,6 +31,7 @@ namespace bubble_second {
         void initStart(int start_numble);
         void addLotteryStarts();
         void flyStartToLottery(int level, int start_numble);
+        void flyStartToLotteryBegin();
         void playStartPopAction(cocos2d::Node* start, float delay);
         void playStart1PopAction();
         void playStart2PopAction();
@@ -41,6 +44,7 @@ namespace bubble_second {
         cocos2d::Vector<cocos2d::Node*> starts_;
         GameVictoryLotteryStarts* lottery_starts_ = nullptr;
         float pop_start_total_time_ = 0.0f;
+        std::deque<cocos2d::Vec2> fly_starts_points_;
     };
 }
 #endif //_GAME_VICTORY_ALERT_H_
