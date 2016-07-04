@@ -16,11 +16,11 @@ namespace bubble_second {
     public:
         CREATE_FUNC(StavesWeapon);
         virtual ~StavesWeapon();
-        void onEnter() override;
-        void onExit() override;
-        void attackBubble() override;
+        //void onEnter() override;
+        //void onExit() override;
+        void attackBubble(const cocos2d::Vec2& point) override;
         bool inAttackRange(BubbleType color);
-        void selectBubble(const cocos2d::Vec2& point) override;
+        //void selectBubble(const cocos2d::Vec2& point) override;
     private:
         StavesWeapon();
         bool init();

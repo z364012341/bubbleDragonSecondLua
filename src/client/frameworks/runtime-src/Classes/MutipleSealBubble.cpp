@@ -40,7 +40,7 @@ namespace bubble_second {
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         listener_ = cocos2d::EventListenerCustom::create(EVENT_GAME_DEFEAT, CC_CALLBACK_1(MutipleSealBubble::playDefeatAnimation, this));
         dispatcher->addEventListenerWithFixedPriority(listener_, 1);
-        }
+    }
 
     void MutipleSealBubble::onExit()
     {

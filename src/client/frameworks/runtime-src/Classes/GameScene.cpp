@@ -15,7 +15,7 @@
 #include "BaseProperty.h"
 #include "PropertiesFactory.h"
 #include "ZCGConfigDataDict.h"
-#include "PropsSelectAlert.h"
+//#include "PropsSelectAlert.h"
 #include "BaseWeapon.h"
 #include "StavesProperty.h"
 //#include "BubbleSightingDevice.h"
@@ -670,23 +670,23 @@ namespace bubble_second {
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_USE_SELECTION_PROPS, CC_CALLBACK_1(GameScene::addPropsSelectAlert, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        listener = cocos2d::EventListenerCustom::create(EVENT_PROPS_SELECT_ALERT_CANCEL, [=](cocos2d::EventCustom*) {
-            props_weapon_->removeFromParent();
-            this->removePropsSelectAlert(nullptr);
-            this->setMenuTouchEnabled(true);
-            dispatcher->dispatchCustomEvent(EVENT_BUBBLE_NO_FLASH);
-        });
-        dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        listener = cocos2d::EventListenerCustom::create(EVENT_SELECT_BUBBLE, CC_CALLBACK_1(GameScene::selectBubble, this));
-        dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        //listener = cocos2d::EventListenerCustom::create(EVENT_PROPS_SELECT_ALERT_CANCEL, [=](cocos2d::EventCustom*) {
+        //    props_weapon_->removeFromParent();
+        //    this->removePropsSelectAlert(nullptr);
+        //    this->setMenuTouchEnabled(true);
+        //    //dispatcher->dispatchCustomEvent(EVENT_BUBBLE_NO_FLASH);
+        //});
+        //dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        //listener = cocos2d::EventListenerCustom::create(EVENT_SELECT_BUBBLE, CC_CALLBACK_1(GameScene::selectBubble, this));
+        //dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_FIND_BUBBLES_IN_VISIBLESIZE, CC_CALLBACK_1(GameScene::addListenerForBubblesInVisibleSize, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_PROPS_SELECT_ALERT_CONFIRM, CC_CALLBACK_1(GameScene::removePropsSelectAlert, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 2);
         listener = cocos2d::EventListenerCustom::create(EVENT_PROPS_SELECT_ALERT_CONFIRM, CC_CALLBACK_1(GameScene::useSelectProperties, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        listener = cocos2d::EventListenerCustom::create(EVENT_RECENT_BUBBLE_CAST, CC_CALLBACK_1(GameScene::recentlyBubbleCast, this));
-        dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        //listener = cocos2d::EventListenerCustom::create(EVENT_RECENT_BUBBLE_CAST, CC_CALLBACK_1(GameScene::recentlyBubbleCast, this));
+        //dispatcher->addEventListenerWithFixedPriority(listener, 1);
         //listener = cocos2d::EventListenerCustom::create(EVENT_ROTATE_SIGHTING_DEVICE, CC_CALLBACK_1(GameScene::rotateSightingDevice, this));
         //dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(UI_NAME_BIG_COMBO_ELIMINATE, CC_CALLBACK_1(GameScene::playBigEliminateEffect, this));
@@ -822,6 +822,9 @@ namespace bubble_second {
             charactor_skill_using_ = false;
             this->haveUsedProps(nullptr);
         });
+        dispatcher->addCustomEventListener(EVENT_DEFEAT_BUY_CONTINUE_PLAY, [=](cocos2d::EventCustom* event) {this->setPropertyTouchEnabled(true); });
+        dispatcher->addCustomEventListener(EVENT_PLAY_SKILL_STAVES_ANIMATION, CC_CALLBACK_1(GameScene::playSkillStavesBubbleAnimation, this));
+
     }
 
     void GameScene::removeEventListenerCustom()
@@ -843,17 +846,17 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_CANCEL_BUBBLE_BOMB_PROPS);
         dispatcher->removeCustomEventListeners(EVENT_HAVE_USED_PROPS);
         dispatcher->removeCustomEventListeners(EVENT_USE_SELECTION_PROPS);
-        dispatcher->removeCustomEventListeners(EVENT_PROPS_SELECT_ALERT_CANCEL);
+        //dispatcher->removeCustomEventListeners(EVENT_PROPS_SELECT_ALERT_CANCEL);
         dispatcher->removeCustomEventListeners(EVENT_FIND_BUBBLES_IN_VISIBLESIZE);
         dispatcher->removeCustomEventListeners(EVENT_PROPS_SELECT_ALERT_CONFIRM);
-        dispatcher->removeCustomEventListeners(EVENT_RECENT_BUBBLE_CAST);
+        //dispatcher->removeCustomEventListeners(EVENT_RECENT_BUBBLE_CAST);
         //dispatcher->removeCustomEventListeners(EVENT_ROTATE_SIGHTING_DEVICE);
         dispatcher->removeCustomEventListeners(UI_NAME_BIG_COMBO_ELIMINATE);
         dispatcher->removeCustomEventListeners(EVENT_CUT_ELIMINATE_COMBO);
         //dispatcher->removeCustomEventListeners(EVENT_TURN_ON_SIGHTING_DEVICE);
         dispatcher->removeCustomEventListeners(EVENT_TURN_OFF_SIGHTING_DEVICE);
         dispatcher->removeCustomEventListeners(EVENT_UPDATE_COMPLETED_TASK_LABEL);
-        dispatcher->removeCustomEventListeners(EVENT_SELECT_BUBBLE);
+        //dispatcher->removeCustomEventListeners(EVENT_SELECT_BUBBLE);
         //dispatcher->removeCustomEventListeners(EVENT_SHOOT_PREPARE_BUBBLE);
         dispatcher->removeCustomEventListeners(EVENT_UPDATE_BUBBLE_USE_COUNT_LABEL);
         dispatcher->removeCustomEventListeners(EVENT_ADD_AIR_BUBBLE_NUMBLE);
@@ -885,6 +888,8 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_USE_BIG_BOMB_BUBBLE_SKILL);
         dispatcher->removeCustomEventListeners(EVENT_USE_STAVES_BUBBLE_SKILL);
         dispatcher->removeCustomEventListeners(EVENT_HAVE_USED_SKILL);
+        dispatcher->removeCustomEventListeners(EVENT_DEFEAT_BUY_CONTINUE_PLAY);
+        dispatcher->removeCustomEventListeners(EVENT_PLAY_SKILL_STAVES_ANIMATION);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1259,6 +1264,33 @@ namespace bubble_second {
         //this->addPrepareBubble();
     }
 
+    void GameScene::playSkillStavesBubbleAnimation(cocos2d::EventCustom * event)
+    {
+        BubbleVector bubbles = *static_cast<BubbleVector*>(event->getUserData());
+
+        sort(bubbles.begin(), bubbles.end(), [=](BaseBubble* bubble_1, BaseBubble* bubble_2) {
+            if (bubble_1->getBubbleIndex().y > bubble_2->getBubbleIndex().y)
+            {
+                return true;
+            }
+            else if (bubble_1->getBubbleIndex().y == bubble_2->getBubbleIndex().y)
+            {
+                if (bubble_1->getBubbleIndex().x < bubble_2->getBubbleIndex().x)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        });
+    }
+
     //void GameScene::mutipleSealBubbleFly(cocos2d::EventCustom * event)
     //{
     //    cocostudio::Armature* armature = static_cast<cocostudio::Armature*>(event->getUserData());
@@ -1327,7 +1359,7 @@ namespace bubble_second {
         float time = 0.7f;
         if (!this->isFirstHandle())
         {
-            time = abs(moveby_distance) / (MAP_MOVE_SPEED + 200.0);
+            time = abs(moveby_distance) / (MAP_MOVE_SPEED);
         }
         cocos2d::MoveBy* move = cocos2d::MoveBy::create(time, cocos2d::Vec2(0, moveby_distance));
         cocos2d::EaseIn* ease = cocos2d::EaseIn::create(move, 0.5f);
@@ -1535,11 +1567,11 @@ namespace bubble_second {
     void GameScene::addPropsSelectAlert(cocos2d::EventCustom* event)
     {
         props_weapon_ = static_cast<BaseWeapon*>(event->getUserData());
-        props_weapon_->setVisible(false);
+        //props_weapon_->setVisible(false);
         //props_weapon_->setRotation(-bubble_map_node_->getRotation());
         csb_node_->addChild(props_weapon_);
-        PropsSelectAlert* alert = PropsSelectAlert::create();
-        csb_node_->addChild(alert, UI_ZORDER_MENU);
+        //PropsSelectAlert* alert = PropsSelectAlert::create();
+        //csb_node_->addChild(alert, UI_ZORDER_MENU);
         cocos2d::LayerColor* layer = cocos2d::LayerColor::create(PROPS_SELECT_ALERT_LAYER_COLOR, GAME_DESIGN_RESOLUTION_WIDTH,
             GAME_DESIGN_RESOLUTION_HEIGHT);
         layer->setName(PROPS_SELECT_ALERT_LAYERCOLOR_NAME);
@@ -1552,69 +1584,72 @@ namespace bubble_second {
         dispatcher->addEventListenerWithSceneGraphPriority(listener, layer);
         csb_node_->addChild(layer, UI_ZORDER_PROPS_SELECT_ALERT);
         this->setMenuTouchEnabled(false);
+
         this->recentbubbleCast();
         bubble_map_node_->pause();
     }
 
     void GameScene::recentbubbleCast()
     {
-        if (StageDataManager::getInstance()->getCurrentStageType() != kWindmill)
-        {
-            GamePlayController::getInstance()->disposeMinYCenterBubble();
-        }
-        else
-        {
-            cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createPolygon(RECENT_BUBBLE_CAST_SHAPE, sizeof(RECENT_BUBBLE_CAST_SHAPE) / sizeof(RECENT_BUBBLE_CAST_SHAPE[0]),
-                cocos2d::PhysicsMaterial(CAST_BODY_DENSITY, BUBBLE_STATIC_BODY_RESTITUTION, BUBBLE_BODY_FRICTION));
-            body->setDynamic(true);
-            body->setGroup(-1);
-            body->setGravityEnable(false);
-            body->setCategoryBitmask(BITMASK_BUBBLE_PREPARE_CATEGORY);
-            body->setCollisionBitmask(0);
-            body->setContactTestBitmask(BITMASK_BUBBLE_PREPARE_CONTACTTEST);
-            cocos2d::Node* node = cocos2d::Node::create();
-            node->setPhysicsBody(body);
-            node->setName(WOODEN_HAMMER_CAST_NODE_NAME);
-            node->setPosition(this->getGunsightPosition());
-            csb_node_->addChild(node);
-            body->applyImpulse(cocos2d::Vec2(0, RECENT_BUBBLE_CAST_IMPULSE_Y));
-        }
+        //if (StageDataManager::getInstance()->getCurrentStageType() != kWindmill)
+        //{
+        //    GamePlayController::getInstance()->disposeMinYCenterBubble();
+        //}
+        //else
+        //{
+        //    cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createPolygon(RECENT_BUBBLE_CAST_SHAPE, sizeof(RECENT_BUBBLE_CAST_SHAPE) / sizeof(RECENT_BUBBLE_CAST_SHAPE[0]),
+        //        cocos2d::PhysicsMaterial(CAST_BODY_DENSITY, BUBBLE_STATIC_BODY_RESTITUTION, BUBBLE_BODY_FRICTION));
+        //    body->setDynamic(true);
+        //    body->setGroup(-1);
+        //    body->setGravityEnable(false);
+        //    body->setCategoryBitmask(BITMASK_BUBBLE_PREPARE_CATEGORY);
+        //    body->setCollisionBitmask(0);
+        //    body->setContactTestBitmask(BITMASK_BUBBLE_PREPARE_CONTACTTEST);
+        //    cocos2d::Node* node = cocos2d::Node::create();
+        //    node->setPhysicsBody(body);
+        //    node->setName(WOODEN_HAMMER_CAST_NODE_NAME);
+        //    node->setPosition(this->getGunsightPosition());
+        //    csb_node_->addChild(node);
+        //    body->applyImpulse(cocos2d::Vec2(0, RECENT_BUBBLE_CAST_IMPULSE_Y));    
+        //}
+        GamePlayController::getInstance()->findBubblesInVisibleSize();
     }
 
-    void GameScene::selectBubble(cocos2d::EventCustom* event)
-    {
-        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_BUBBLE_NO_FLASH);
-        BaseBubble* bubble = static_cast<BaseBubble*>(event->getUserData());
-        if (props_weapon_ && props_weapon_->inAttackRange(bubble->getBubbleType()))
-        {
-            this->setPropsWeaponPosition(bubble->getBubblePropsWeaponPosition());
-        }
-    }
+    //void GameScene::selectBubble(cocos2d::EventCustom* event)
+    //{
+    //    cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_BUBBLE_NO_FLASH);
+    //    BaseBubble* bubble = static_cast<BaseBubble*>(event->getUserData());
+    //    if (props_weapon_ && props_weapon_->inAttackRange(bubble->getBubbleType()))
+    //    {
+    //        this->setPropsWeaponPosition(bubble->getBubblePropsWeaponPosition());
+    //    }
+    //}
 
-    void GameScene::setPropsWeaponPosition(const cocos2d::Vec2& point)
-    {
-        //props_weapon_->selectBubble(point);
-        props_weapon_->selectBubble(this->convertMapToCsbSpace(point));
-    }
+    //void GameScene::setPropsWeaponPosition(const cocos2d::Vec2& point)
+    //{
+    //    //props_weapon_->selectBubble(point);
+    //    props_weapon_->selectBubble(this->convertMapToCsbSpace(point));
+    //}
 
-    void GameScene::useSelectProperties(cocos2d::EventCustom*)
-    {
-        props_weapon_->attackBubble();
-    }
-
-    void GameScene::recentlyBubbleCast(cocos2d::EventCustom* event)
+    void GameScene::useSelectProperties(cocos2d::EventCustom* event)
     {
         BaseBubble* bubble = static_cast<BaseBubble*>(event->getUserData());
-        if (props_weapon_->inAttackRange(bubble->getBubbleType()))
-        {
-            if (cocos2d::Node* node = csb_node_->getChildByName(WOODEN_HAMMER_CAST_NODE_NAME))
-            {
-                node->removeFromParent();
-            }
-            this->setPropsWeaponPosition(bubble->getBubblePropsWeaponPosition());
-            GamePlayController::getInstance()->findBubblesInVisibleSize();
-        }
+        props_weapon_->attackBubble(this->convertMapToCsbSpace(bubble->getBubblePropsWeaponPosition()));
     }
+
+    //void GameScene::recentlyBubbleCast(cocos2d::EventCustom* event)
+    //{
+    //    BaseBubble* bubble = static_cast<BaseBubble*>(event->getUserData());
+    //    if (props_weapon_->inAttackRange(bubble->getBubbleType()))
+    //    {
+    //        if (cocos2d::Node* node = csb_node_->getChildByName(WOODEN_HAMMER_CAST_NODE_NAME))
+    //        {
+    //            node->removeFromParent();
+    //        }
+    //        //this->setPropsWeaponPosition(bubble->getBubblePropsWeaponPosition());
+    //        GamePlayController::getInstance()->findBubblesInVisibleSize();
+    //    }
+    //}
 
     void GameScene::rotateSightingDevice(cocos2d::EventCustom* event)
     {
@@ -1744,6 +1779,7 @@ namespace bubble_second {
         props_weapon_ = nullptr;
         GamePlayController::getInstance()->findBubblesInVisibleSize();
         bubble_map_node_->resume();
+        //GamePlayController::getInstance()->setBubbleShootEnabled(true);
     }
 
     //void GameScene::changeSwirlColor()
@@ -1950,7 +1986,9 @@ namespace bubble_second {
         BubbleVector vector = *sprites;
         if (vector.empty())
         {
-            GamePlayController::getInstance()->disposeCheckGameDefeat();
+            this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.5f), cocos2d::CallFunc::create([=]() {
+                GamePlayController::getInstance()->disposeCheckGameDefeat();
+            })));
         }
         cocos2d::CallFunc* callfunc = cocos2d::CallFunc::create([=]() {
             for (auto var : vector)

@@ -195,7 +195,7 @@ namespace bubble_second {
         //播放泡泡的动画返回动画的最长时间
         float playBubblesEffects(BubbleVector bubbles);
         //设置武器的位置
-        void setPropsWeaponPosition(const cocos2d::Vec2& point);
+        //void setPropsWeaponPosition(const cocos2d::Vec2& point);
         //添加一个得分挂件
         void addScoreWidget(const cocos2d::Vec2& point);
         //抖动下面的锅
@@ -303,15 +303,15 @@ namespace bubble_second {
         //移除道具选择面板
         void removePropsSelectAlert(cocos2d::EventCustom*);
         //选中小球
-        void selectBubble(cocos2d::EventCustom* event);
+        //void selectBubble(cocos2d::EventCustom* event);
         //给屏幕中的小球加触摸事件
         void addListenerForBubblesInVisibleSize(cocos2d::EventCustom* event);
         //删除小球的触摸事件
         void removeListenerForBubblesInVisibleSize();
         //确认使用选择系道具
-        void useSelectProperties(cocos2d::EventCustom*);
+        void useSelectProperties(cocos2d::EventCustom* event);
         //判断检测的小球是否正确
-        void recentlyBubbleCast(cocos2d::EventCustom* event);
+        //void recentlyBubbleCast(cocos2d::EventCustom* event);
         //旋转炮台和喵准器
         void rotateSightingDevice(cocos2d::EventCustom* event);
         //播放六连消特效
@@ -340,6 +340,8 @@ namespace bubble_second {
         void addEliminateScoreLabel(cocos2d::EventCustom* event);
         //失败后购买+10步后继续游戏
         void gameDefeatBuyContinue(cocos2d::EventCustom*);
+        //法杖技能特效
+        void playSkillStavesBubbleAnimation(cocos2d::EventCustom*event);
     private:
         //防止刚体穿透
         //void updateStart(float delta);

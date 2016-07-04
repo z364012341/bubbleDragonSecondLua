@@ -22,14 +22,15 @@ namespace bubble_second {
         virtual ~BaseWeapon();
         //void setSelectBubble(BaseBubble* bubble);
         virtual bool inAttackRange(BubbleType color);
-        virtual void attackBubble();
-        virtual void selectBubble(const cocos2d::Vec2& point);
+        virtual void attackBubble(const cocos2d::Vec2& point);
+        //virtual void selectBubble(const cocos2d::Vec2& point);
     protected:
-        bool init(const std::string& armature_name);
-        cocostudio::Armature* getWeaponArmature();
+        bool init();
+        //bool init(const std::string& armature_name);
+        //cocostudio::Armature* getWeaponArmature();
     private:
         BaseBubble* select_bubble_ = nullptr;
-        cocostudio::Armature* armature_ = nullptr;
+        //cocostudio::Armature* armature_ = nullptr;
     };
 }
 #endif //_BASE_WEAPON_H_

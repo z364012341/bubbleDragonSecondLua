@@ -14,7 +14,7 @@ const int STANBY_ACTION_TAG = 121;
 const float STANBY_ACTION_TIME = 0.5f;
 const float STANBY_ACTION_RANGE = 3.0f;
 const float BUBBLE_MOVE_SPEED = 1414.0f;
-const std::string COLOR_BUBBLE_FLASH_PATH = "bai.png";
+//const std::string COLOR_BUBBLE_FLASH_PATH = "bai.png";
 const std::string COLOR_BUBBLE_ELIMINATE_PARTICLE_PATH = "particle/qipaotx.plist";
 namespace bubble_second {
     ColorBubble::~ColorBubble()
@@ -218,20 +218,20 @@ namespace bubble_second {
         GamePlayController::getInstance()->addPrepareColor(this);
     }
 
-    void ColorBubble::onEnter()
-    {
-        BaseBubble::onEnter();
-        listener_ = cocos2d::EventListenerCustom::create(EVENT_BUBBLE_NO_FLASH, [=](cocos2d::EventCustom*) {
-            this->removeBubbleFlash();
-        });
-        cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 1);
-    }
+    //void ColorBubble::onEnter()
+    //{
+    //    BaseBubble::onEnter();
+    //    listener_ = cocos2d::EventListenerCustom::create(EVENT_BUBBLE_NO_FLASH, [=](cocos2d::EventCustom*) {
+    //        this->removeBubbleFlash();
+    //    });
+    //    cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 1);
+    //}
 
-    void ColorBubble::onExit()
-    {
-        BaseBubble::onExit();
-        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
-    }
+    //void ColorBubble::onExit()
+    //{
+    //    BaseBubble::onExit();
+    //    cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
+    //}
 
     void ColorBubble::addBubblePrepareBody()
     {
@@ -335,27 +335,27 @@ namespace bubble_second {
         this->removeFromParent();
     }
 
-    void ColorBubble::bubbleFlash()
-    {
-        bubble_flash_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(COLOR_BUBBLE_FLASH_PATH);
-        bubble_flash_->setPosition(this->getContentSize().width/2, this->getContentSize().height/2);
-        cocos2d::BlendFunc bf = { GL_SRC_ALPHA , GL_ONE };
-        bubble_flash_->setBlendFunc(bf);
-        this->addChild(bubble_flash_);
-        cocos2d::FadeOut* fadeout = cocos2d::FadeOut::create(0.5f);
-        cocos2d::FadeIn* fadeIn = cocos2d::FadeIn::create(0.5f);
-        bubble_flash_->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::createWithTwoActions(fadeout, fadeIn)));
-    }
+    //void ColorBubble::bubbleFlash()
+    //{
+    //    bubble_flash_ = SpriteTextureController::getInstance()->createGameSpriteWithPath(COLOR_BUBBLE_FLASH_PATH);
+    //    bubble_flash_->setPosition(this->getContentSize().width/2, this->getContentSize().height/2);
+    //    cocos2d::BlendFunc bf = { GL_SRC_ALPHA , GL_ONE };
+    //    bubble_flash_->setBlendFunc(bf);
+    //    this->addChild(bubble_flash_);
+    //    cocos2d::FadeOut* fadeout = cocos2d::FadeOut::create(0.5f);
+    //    cocos2d::FadeIn* fadeIn = cocos2d::FadeIn::create(0.5f);
+    //    bubble_flash_->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::createWithTwoActions(fadeout, fadeIn)));
+    //}
 
-    void bubble_second::ColorBubble::removeBubbleFlash()
-    {
-        if (bubble_flash_ == nullptr)
-        {
-            return;
-        }
-        bubble_flash_->removeFromParent();
-        bubble_flash_ = nullptr;
-    }
+    //void bubble_second::ColorBubble::removeBubbleFlash()
+    //{
+    //    if (bubble_flash_ == nullptr)
+    //    {
+    //        return;
+    //    }
+    //    bubble_flash_->removeFromParent();
+    //    bubble_flash_ = nullptr;
+    //}
 
     cocos2d::Vec2 ColorBubble::getSpeedNormalized()
     {

@@ -53,7 +53,7 @@ namespace bubble_second {
         void disposeUseWoodenHammer(BaseBubble* bubble);
         //处理使用法杖
         void disposeUseStaves(BaseBubble* bubble);
-        void disposeStavesSelectBubble(BaseBubble* bubble);
+        //void disposeStavesSelectBubble(BaseBubble* bubble);
         //处理法杖技能小球
         void disposeUseStavesBubble(BaseBubble* staves_bubble, BaseBubble* bubble);
         //处理顶部消除玩法的胜利条件
@@ -69,8 +69,8 @@ namespace bubble_second {
         //处理+3特殊泡泡的道具
         void disposeUsedAddSpecialBubbleProps();
         //处理最下中心小球
-        void disposePhysicsCaseMinYCenterBubble(BaseBubble* contact_bubble);
-        void disposeMinYCenterBubble();
+        //void disposePhysicsCaseMinYCenterBubble(BaseBubble* contact_bubble);
+        //void disposeMinYCenterBubble();
         //处理染色泡泡
         void disposeSkillDyeingBubble(BaseBubble* dyeing_bubble, const cocos2d::Vec2& contact_index);
     private:

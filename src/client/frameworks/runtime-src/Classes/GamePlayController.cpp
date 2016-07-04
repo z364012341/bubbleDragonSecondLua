@@ -70,7 +70,7 @@ namespace bubble_second {
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithScoreWidget, SCORE_WIDGET_NAME, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, COLOR_BOMB_BUBBLE_NAME, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, PROPS_BOMB_BOMB_NAME, MAP_BUBBLE_NAME);
-        this->addContactHandleWithTwoNames(&GamePlayController::disposeBubbleCast, WOODEN_HAMMER_CAST_NODE_NAME, MAP_BUBBLE_NAME);
+        //this->addContactHandleWithTwoNames(&GamePlayController::disposeBubbleCast, WOODEN_HAMMER_CAST_NODE_NAME, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeSightingPointContactBubble, NAME_BUBBLE_SIGHTING_POINT, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWindmillBorder, UI_NAME_WINDMILL_BORDER, PREPARE_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeWindmillBubbleBorder, UI_NAME_WINDMILL_BORDER, MAP_BUBBLE_NAME);
@@ -547,7 +547,8 @@ namespace bubble_second {
                 bubble = dynamic_cast<BaseBubble*>(node->getParent());
             }
             this->setSelectBubble(bubble);
-            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SELECT_BUBBLE, bubble);
+            //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_SELECT_BUBBLE, bubble);
+            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_PROPS_SELECT_ALERT_CONFIRM, bubble);
             return true;
         }
         return false;
@@ -563,21 +564,21 @@ namespace bubble_second {
         return false;
     }
 
-    void GamePlayController::disposeBubbleCast(cocos2d::Node* cast_node, cocos2d::Node* bubble_node)
-    {
-        auto weapon_box = dynamic_cast<WeaponBox*>(bubble_node);
-        if (weapon_box && !(weapon_box->isEqualType(kBubbleTransparent) || weapon_box->isEqualType(kBubbleWindmill)))
-        {
-            //bubble_map_->disposePhysicsCaseMinYCenterBubble(dynamic_cast<BaseBubble*>(bubble_node));
-            this->setSelectBubble(weapon_box);
-            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, weapon_box);
-        }
-    }
+    //void GamePlayController::disposeBubbleCast(cocos2d::Node* cast_node, cocos2d::Node* bubble_node)
+    //{
+    //    auto weapon_box = dynamic_cast<WeaponBox*>(bubble_node);
+    //    if (weapon_box && !(weapon_box->isEqualType(kBubbleTransparent) || weapon_box->isEqualType(kBubbleWindmill)))
+    //    {
+    //        //bubble_map_->disposePhysicsCaseMinYCenterBubble(dynamic_cast<BaseBubble*>(bubble_node));
+    //        this->setSelectBubble(weapon_box);
+    //        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, weapon_box);
+    //    }
+    //}
 
-    void bubble_second::GamePlayController::disposeMinYCenterBubble()
-    {
-        bubble_map_->disposeMinYCenterBubble();
-    }
+    //void bubble_second::GamePlayController::disposeMinYCenterBubble()
+    //{
+    //    bubble_map_->disposeMinYCenterBubble();
+    //}
 
     void GamePlayController::disposeCheckGameDefeat()
     {
@@ -589,11 +590,11 @@ namespace bubble_second {
         bubble_map_->findBubblesInVisibleSize();
     }
 
-    void bubble_second::GamePlayController::disposeSelectSameBubbles()
-    {
-        assert(select_bubble_);
-        bubble_map_->disposeStavesSelectBubble(select_bubble_);
-    }
+    //void bubble_second::GamePlayController::disposeSelectSameBubbles()
+    //{
+    //    assert(select_bubble_);
+    //    bubble_map_->disposeStavesSelectBubble(select_bubble_);
+    //}
 
     void GamePlayController::disposeUseWoodenHammer()
     {

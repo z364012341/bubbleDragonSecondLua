@@ -33,8 +33,8 @@ namespace bubble_second {
                 return NULL;
             }
         }
-        void onEnter() override;
-        void onExit() override;
+        //void onEnter() override;
+        //void onExit() override;
     public:
         //播放撞击动画
         //void runBubbleEffect(const std::string& name, const cocos2d::Vec2& point);
@@ -68,8 +68,8 @@ namespace bubble_second {
         //碰到桶底部
         void contactBarrelBottom();
         //发出闪光
-        void bubbleFlash();
-        void removeBubbleFlash();
+        //void bubbleFlash();
+        //void removeBubbleFlash();
         //获取速度向量
         cocos2d::Vec2 getSpeedNormalized();
         cocos2d::Vec2 getBubbleSpeed();
@@ -98,7 +98,7 @@ namespace bubble_second {
 		//cocos2d::Vec2 shoot_impulse_;
         //cocos2d::Vec2 initial_position_;
         cocos2d::EventListenerCustom* listener_ = nullptr;
-        cocos2d::Sprite* bubble_flash_ = nullptr;
+        //cocos2d::Sprite* bubble_flash_ = nullptr;
         BubbleReflectionPointComponent* reflection_point_component_ = nullptr;
         //std::vector<cocos2d::Vec2> points_;
     };

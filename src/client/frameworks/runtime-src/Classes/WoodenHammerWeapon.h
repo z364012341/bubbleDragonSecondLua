@@ -17,7 +17,7 @@ namespace bubble_second {
     public:
         CREATE_FUNC(WoodenHammerWeapon);
         virtual ~WoodenHammerWeapon();
-        void attackBubble() override;
+        void attackBubble(const cocos2d::Vec2& point) override;
     private:
         WoodenHammerWeapon();
         bool init();

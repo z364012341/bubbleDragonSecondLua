@@ -3,7 +3,7 @@
 #include "GamePlayController.h"
 #include "ColorBubble.h"
 #include "UserDataManager.h"
-const std::string WOODEN_HAMMER_ANIMATION_NAME = "fazhang";
+//const std::string WOODEN_HAMMER_ANIMATION_NAME = "fazhang";
 namespace bubble_second {
     StavesWeapon::StavesWeapon()
     {
@@ -11,7 +11,7 @@ namespace bubble_second {
 
     bool bubble_second::StavesWeapon::init()
     {
-        if (!BaseWeapon::init(WOODEN_HAMMER_ANIMATION_NAME))
+        if (!BaseWeapon::init(/*WOODEN_HAMMER_ANIMATION_NAME*/))
         {
             return false;
         }
@@ -25,27 +25,27 @@ namespace bubble_second {
     {
     }
 
-    void StavesWeapon::onEnter()
-    {
-        BaseWeapon::onEnter();
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_STAVES_SELECT_BUBBLE, [=](cocos2d::EventCustom* event) {
-            BubbleVector bubbles = *static_cast<BubbleVector*>(event->getUserData());
-            for (auto var : bubbles)
-            {
-                dynamic_cast<ColorBubble*>(var)->bubbleFlash();
-            }
-        });
-    }
+    //void StavesWeapon::onEnter()
+    //{
+    //    BaseWeapon::onEnter();
+    //    cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_STAVES_SELECT_BUBBLE, [=](cocos2d::EventCustom* event) {
+    //        BubbleVector bubbles = *static_cast<BubbleVector*>(event->getUserData());
+    //        for (auto var : bubbles)
+    //        {
+    //            dynamic_cast<ColorBubble*>(var)->bubbleFlash();
+    //        }
+    //    });
+    //}
 
-    void StavesWeapon::onExit()
-    {
-        BaseWeapon::onExit();
-        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_STAVES_SELECT_BUBBLE);
-    }
+    //void StavesWeapon::onExit()
+    //{
+    //    BaseWeapon::onExit();
+    //    cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_STAVES_SELECT_BUBBLE);
+    //}
 
-    void bubble_second::StavesWeapon::attackBubble()
+    void bubble_second::StavesWeapon::attackBubble(const cocos2d::Vec2& point)
     {
-        BaseWeapon::attackBubble();
+        BaseWeapon::attackBubble(point);
         GamePlayController::getInstance()->disposeUseStaves();
         UserDataManager::getInstance()->cutPropsNumbleWithKey(BUBBLE_STAVES_PROP_KEY);
     }
@@ -55,9 +55,9 @@ namespace bubble_second {
         return color>=kNormalColorFirst && color <=kNormalColorLast;
     }
 
-    void StavesWeapon::selectBubble(const cocos2d::Vec2 & point)
-    {
-        BaseWeapon::selectBubble(point);
-        GamePlayController::getInstance()->disposeSelectSameBubbles();
-    }
+    //void StavesWeapon::selectBubble(const cocos2d::Vec2 & point)
+    //{
+    //    BaseWeapon::selectBubble(point);
+    //    GamePlayController::getInstance()->disposeSelectSameBubbles();
+    //}
 }

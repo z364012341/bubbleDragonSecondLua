@@ -473,12 +473,12 @@ namespace bubble_second {
         this->eliminateBubbles(game_bubble_map_impl_->getSameBubblesInVisibleSize(bubble->getBubbleType()));
     }
 
-    void GameBubbleMap::disposeStavesSelectBubble(BaseBubble * bubble)
-    {
-        BubbleVector vector = game_bubble_map_impl_->getSameBubblesInVisibleSize(bubble->getBubbleType());
-        vector.eraseObject(bubble);
-        this->dispatchCustomEvent(EVENT_STAVES_SELECT_BUBBLE, &vector);
-    }
+    //void GameBubbleMap::disposeStavesSelectBubble(BaseBubble * bubble)
+    //{
+    //    BubbleVector vector = game_bubble_map_impl_->getSameBubblesInVisibleSize(bubble->getBubbleType());
+    //    vector.eraseObject(bubble);
+    //    this->dispatchCustomEvent(EVENT_STAVES_SELECT_BUBBLE, &vector);
+    //}
 
     void GameBubbleMap::disposeCompletedTaskNumble()
     {
@@ -605,19 +605,19 @@ namespace bubble_second {
         this->dispatchCustomEvent(EVENT_FIND_THREE_BUBBLE, &three_bubble);
     }
 
-    void GameBubbleMap::disposePhysicsCaseMinYCenterBubble(BaseBubble* contact_bubble)
-    {
-        BaseBubble* bubble = game_bubble_map_impl_->isWindmillStage() ? contact_bubble: game_bubble_map_impl_->getBubbleMinCenter();
-        GamePlayController::getInstance()->setSelectBubble(bubble);
-        this->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, bubble);
-    }
+    //void GameBubbleMap::disposePhysicsCaseMinYCenterBubble(BaseBubble* contact_bubble)
+    //{
+    //    BaseBubble* bubble = game_bubble_map_impl_->isWindmillStage() ? contact_bubble: game_bubble_map_impl_->getBubbleMinCenter();
+    //    GamePlayController::getInstance()->setSelectBubble(bubble);
+    //    this->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, bubble);
+    //}
 
-    void GameBubbleMap::disposeMinYCenterBubble()
-    {
-        BaseBubble* bubble = game_bubble_map_impl_->getBubbleMinCenter();
-        GamePlayController::getInstance()->setSelectBubble(bubble);
-        this->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, bubble);
-    }
+    //void GameBubbleMap::disposeMinYCenterBubble()
+    //{
+    //    BaseBubble* bubble = game_bubble_map_impl_->getBubbleMinCenter();
+    //    GamePlayController::getInstance()->setSelectBubble(bubble);
+    //    this->dispatchCustomEvent(EVENT_RECENT_BUBBLE_CAST, bubble);
+    //}
 
     void GameBubbleMap::disposeSkillDyeingBubble(BaseBubble * dyeing_bubble, const cocos2d::Vec2 & contact_index)
     {
@@ -638,7 +638,9 @@ namespace bubble_second {
     {
         BaseBubble* bubble = this->getPreClingBubble(staves_bubble, contect_bubble->getBubbleIndex());
         //this->disposeUseStaves(contect_bubble);
-        this->eliminateBubbles(game_bubble_map_impl_->getSameBubblesInVisibleSize(contect_bubble->getBubbleType()), staves_bubble);
+        auto bubbles = game_bubble_map_impl_->getSameBubblesInVisibleSize(contect_bubble->getBubbleType());
+        this->dispatchCustomEvent(EVENT_PLAY_SKILL_STAVES_ANIMATION, &bubbles);
+        this->eliminateBubbles(bubbles, staves_bubble);
         game_bubble_map_impl_->removeSpriteFromeMapWithIndex(bubble->getBubbleIndex());
         this->dispatchAddEliminateComboEvent(bubble->getPosition());
         //staves_bubble->bubbleEliminate();

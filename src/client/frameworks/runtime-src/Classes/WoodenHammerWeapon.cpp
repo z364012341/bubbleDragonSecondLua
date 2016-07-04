@@ -13,16 +13,17 @@ namespace bubble_second {
     {
     }
 
-    void WoodenHammerWeapon::attackBubble()
+    void WoodenHammerWeapon::attackBubble(const cocos2d::Vec2& point)
     {
         GamePlayController::getInstance()->setBubbleShootEnabled(false);
-        this->getWeaponArmature()->getAnimation()->stop();
-        this->getWeaponArmature()->getAnimation()->play(WOODEN_HAMMER_ATTACK_ANIMATION_NAME);
-        this->getWeaponArmature()->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+        cocostudio::Armature* armature = cocostudio::Armature::create(WOODEN_HAMMER_ANIMATION_NAME);
+        this->addChild(armature);
+        armature->setPosition(point);
+        armature->getAnimation()->play(WOODEN_HAMMER_ATTACK_ANIMATION_NAME);
+        armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
             if (movementType == cocostudio::COMPLETE)
             {
-                BaseWeapon::attackBubble();
-
+                BaseWeapon::attackBubble(point);
                 GamePlayController::getInstance()->setBubbleShootEnabled(true);
             }
         });
@@ -34,7 +35,8 @@ namespace bubble_second {
 
     bool WoodenHammerWeapon::init()
     {
-        if (!BaseWeapon::init(WOODEN_HAMMER_ANIMATION_NAME))
+        if (!BaseWeapon::init())
+        //if (!BaseWeapon::init(WOODEN_HAMMER_ANIMATION_NAME))
         {
             return false;
         }

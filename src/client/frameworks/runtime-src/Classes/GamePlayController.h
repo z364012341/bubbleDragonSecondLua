@@ -78,7 +78,7 @@ namespace bubble_second {
         //检测屏幕内的泡泡
         void findBubblesInVisibleSize();
         //处理法杖选中的同色小球
-        void disposeSelectSameBubbles();
+        //void disposeSelectSameBubbles();
         //处理使用单手锤道具
         void disposeUseWoodenHammer();
         //设置武器选择的小球
@@ -109,7 +109,7 @@ namespace bubble_second {
         //射线检测
         //void gamePhysicsRayCast(cocos2d::PhysicsRayCastCallbackFunc func, const cocos2d::Vec2 & point1, const cocos2d::Vec2 & point2);
         //道具中心小球
-        void disposeMinYCenterBubble();
+        //void disposeMinYCenterBubble();
         //判断失败
         void disposeCheckGameDefeat();
     private:
@@ -165,7 +165,7 @@ namespace bubble_second {
         //处理使用彩色爆炸小球
         void disposeUsingPropertyBubble(BaseBubble* flying_node, BaseBubble* contact_node);
         //处理碰到检测刚体
-        void disposeBubbleCast(cocos2d::Node* cast_node, cocos2d::Node* bubble_node);
+        //void disposeBubbleCast(cocos2d::Node* cast_node, cocos2d::Node* bubble_node);
         //是否可以交换小球
         bool exchangePrepareEnabled(const cocos2d::Vec2& touch_point/*, cocos2d::Node* event_node*/);
         bool touchInGunsight(const cocos2d::Vec2& touch_point);
