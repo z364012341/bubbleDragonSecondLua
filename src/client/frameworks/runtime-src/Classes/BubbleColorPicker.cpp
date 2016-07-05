@@ -43,7 +43,7 @@ namespace bubble_second {
             color_picker_[color] = color_picker_[color] - 1;
             //--color_total_;
         }
-        assert(color_picker_[color]>=0);
+        //assert(color_picker_[color]>=0);
     }
 
     bool BubbleColorPicker::isColorBubbleType(BubbleType color)

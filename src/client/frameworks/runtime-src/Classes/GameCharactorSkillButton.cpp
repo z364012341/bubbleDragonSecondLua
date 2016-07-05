@@ -200,8 +200,8 @@ namespace bubble_second {
         if (this->isSkillEnergyFull() && !GameScoreController::getInstance()->noUseBubbleCount())
         {
             this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
-            //this->setSkillEnergy(0);
         }
+        //this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
     }
 
     void GameCharactorSkillButton::setSkillButtonEnabled(bool enabled)

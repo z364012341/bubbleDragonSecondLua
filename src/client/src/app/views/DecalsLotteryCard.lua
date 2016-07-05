@@ -214,10 +214,13 @@ function DecalsLotteryCard:addDecalItem(decals_type)
 --    end
     self.decals_type_ = decals_type;
     local item = bs.DecalsFactory:getInstance():createNextDecalWithType(decals_type);
-    item:setScale(self.card_front_:getContentSize().width/item:getContentSize().width*0.75*item:getScale());
-    item:setPosition(cc.p(self.card_front_:getContentSize().width/2, self.card_front_:getContentSize().height/2));
-    self.card_front_:addChild(item);
-
+    if item == nil then
+        self:addRandomAwardItem();
+    else
+        item:setScale(self.card_front_:getContentSize().width/item:getContentSize().width*0.75*item:getScale());
+        item:setPosition(cc.p(self.card_front_:getContentSize().width/2, self.card_front_:getContentSize().height/2));
+        self.card_front_:addChild(item);
+    end
     self.is_decal_card_ = true;
 end
 function DecalsLotteryCard:addRandomAwardItem()

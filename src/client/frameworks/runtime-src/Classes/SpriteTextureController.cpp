@@ -142,6 +142,8 @@ namespace bubble_second {
         armature_path_.push_back("choujiangkapianguang/choujiangkapianguang.ExportJson");
         armature_path_.push_back("baoshi TX/baoshi TX.ExportJson");
         armature_path_.push_back("pintulibao2/pintulibao2.ExportJson");
+        armature_path_.push_back("shandian/shandian.ExportJson");
+        armature_path_.push_back("shandian02/shandian02.ExportJson");
     }
 
     void SpriteTextureController::readGameSceneBackgroundFile()

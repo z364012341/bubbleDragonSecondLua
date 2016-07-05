@@ -1,6 +1,7 @@
 #include "DecalsFactory.h"
 #include "UserDataManager.h"
 #include "SpriteTextureController.h"
+#include "GameBuyStoreMannager.h"
 const std::string DECALS_DATA_PATH = "res/decalsData.plist";
 //const std::string DECALS_CHARACTOR_KEY = "decals_charactor";
 //const std::string DECALS_TREASURE_DATA_KEY = "decals_treasure";
@@ -56,34 +57,34 @@ namespace bubble_second {
         }
         bg->setTextureRect(cocos2d::Rect(x, y, width, height));
         float ar_x = 0.5;
-        if (index.x == max_index.x && max_index.x>1 && index.y == 1)
+        if (index.x == max_index.x && max_index.x > 1 && index.y == 1)
         {
             ar_x = 0.0f;
             decal->setPosition(cocos2d::Vec2::ZERO);
             decal->setAnchorPoint(cocos2d::Vec2(ar_x, ar_y));
             bg->addChild(decal);
         }
-        else if (index.x == 1 && max_index.x>1 && index.y == 1)
+        else if (index.x == 1 && max_index.x > 1 && index.y == 1)
         {
             ar_x = 1.0f;
             decal->setAnchorPoint(cocos2d::Vec2(ar_x, ar_y));
             decal->setPosition(cocos2d::Vec2(bg->getContentSize().width, 0.0f));
             bg->addChild(decal);
         }
-        else if (index.x == 1 && max_index.x==1 && index.y == 1)
+        else if (index.x == 1 && max_index.x == 1 && index.y == 1)
         {
             decal->setAnchorPoint(cocos2d::Vec2(ar_x, ar_y));
-            decal->setPosition(cocos2d::Vec2(bg->getContentSize().width/2, 0.0f));
+            decal->setPosition(cocos2d::Vec2(bg->getContentSize().width / 2, 0.0f));
             bg->addChild(decal);
         }
-        else if (index.x == max_index.x && max_index.x>1 && index.y == max_index.y)
+        else if (index.x == max_index.x && max_index.x > 1 && index.y == max_index.y)
         { //сроб╫г
             ar_x = 0.0f;
             decal->setPosition(cocos2d::Vec2(0.0f, bg->getContentSize().height));
             decal->setAnchorPoint(cocos2d::Vec2(ar_x, ar_y));
             bg->addChild(decal);
         }
-        else if (index.x == 1 && max_index.x>1 && index.y == max_index.y)
+        else if (index.x == 1 && max_index.x > 1 && index.y == max_index.y)
         {
             ar_x = 1.0f;
             decal->setAnchorPoint(cocos2d::Vec2(ar_x, ar_y));
@@ -100,19 +101,19 @@ namespace bubble_second {
         {
             ar_x = 1.0f;
             decal->setAnchorPoint(cocos2d::Vec2(ar_x, ar_y));
-            decal->setPosition(cocos2d::Vec2(bg->getContentSize().width, bg->getContentSize().height/2));
+            decal->setPosition(cocos2d::Vec2(bg->getContentSize().width, bg->getContentSize().height / 2));
             bg->addChild(decal);
         }
         else if (index.x == max_index.x && max_index.x > 1 && index.y < max_index.y && index.y > 1)
         {
             ar_x = 0.0f;
             decal->setAnchorPoint(cocos2d::Vec2(ar_x, ar_y));
-            decal->setPosition(cocos2d::Vec2(0, bg->getContentSize().height/2));
+            decal->setPosition(cocos2d::Vec2(0, bg->getContentSize().height / 2));
             bg->addChild(decal);
         }
         else
         {
-            decal->setPosition(cocos2d::Vec2(bg->getContentSize().width/2, bg->getContentSize().height / 2));
+            decal->setPosition(cocos2d::Vec2(bg->getContentSize().width / 2, bg->getContentSize().height / 2));
             bg->addChild(decal);
         }
         if (max_index.x > 1)
@@ -128,12 +129,12 @@ namespace bubble_second {
     }
     cocos2d::Sprite * DecalsFactory::createDecal(const std::string & path, int index_x, int index_y)
     {
-        assert(index_x>0 && index_y>0);
+        assert(index_x > 0 && index_y > 0);
         cocos2d::Sprite* sp = cocos2d::Sprite::create(path);
         cocos2d::Vec2 max_index = this->getDecalsMaxIndexWithPath(path);
         float x_offset = sp->getContentSize().width / max_index.x;
         float y_offset = sp->getContentSize().height / max_index.y;
-        sp->setTextureRect(cocos2d::Rect(x_offset*(index_x-1), y_offset*(index_y - 1), x_offset, y_offset));
+        sp->setTextureRect(cocos2d::Rect(x_offset*(index_x - 1), y_offset*(index_y - 1), x_offset, y_offset));
         return sp;
     }
     cocos2d::Sprite * DecalsFactory::createDecalWithNumble(const std::string & path, int numble)
@@ -145,7 +146,7 @@ namespace bubble_second {
         cocos2d::Vec2 max_index = this->getDecalsMaxIndexWithPath(path);
 
         int x = numble % (int)max_index.x == 0 ? max_index.x : numble % (int)max_index.x;
-        int y = ceil(numble/ max_index.x);
+        int y = ceil(numble / max_index.x);
         return cocos2d::Vec2(x, y);
     }
     void DecalsFactory::loadDecalsData()
@@ -242,9 +243,10 @@ namespace bubble_second {
     cocos2d::Sprite * DecalsFactory::createNextDecalWithType(const std::string & decals_type)
     {
         cocos2d::ValueVector charactor_vector = UserDataManager::getInstance()->getDecalsData(decals_type);
+        auto data = this->getDecalsDataWithType(decals_type);
         if (charactor_vector.empty())
         {
-            auto path = this->getDecalsDataWithType(decals_type)[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
+            auto path = data[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
             return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
         }
         else
@@ -260,7 +262,12 @@ namespace bubble_second {
             }
             else if (goods_data.size() == max_index.x * max_index.y)
             {
-                auto path = this->getDecalsDataWithType(decals_type)[charactor_vector.size()].asValueMap()[DECALS_DATA_PATH_KEY].asString();
+                int index = charactor_vector.size();
+                if (index == data.size())
+                {
+                    return nullptr;
+                }
+                auto path = data[index].asValueMap()[DECALS_DATA_PATH_KEY].asString();
                 return this->createDecalBackground(this->createDecalWithNumble(path, 1), path, 1);
             }
         }
@@ -286,7 +293,7 @@ namespace bubble_second {
             cocos2d::ValueVector& goods_vector = decals_map.at(DECALS_DATA_GOOD_KEY).asValueVector();
             if (goods_vector.size() < max_index.x*max_index.y)
             {
-                goods_vector.push_back(cocos2d::Value((int)goods_vector.size()+1));
+                goods_vector.push_back(cocos2d::Value((int)goods_vector.size() + 1));
             }
             else
             {

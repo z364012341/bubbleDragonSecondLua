@@ -640,9 +640,12 @@ namespace bubble_second {
         //this->disposeUseStaves(contect_bubble);
         auto bubbles = game_bubble_map_impl_->getSameBubblesInVisibleSize(contect_bubble->getBubbleType());
         this->dispatchCustomEvent(EVENT_PLAY_SKILL_STAVES_ANIMATION, &bubbles);
-        this->eliminateBubbles(bubbles, staves_bubble);
-        game_bubble_map_impl_->removeSpriteFromeMapWithIndex(bubble->getBubbleIndex());
-        this->dispatchAddEliminateComboEvent(bubble->getPosition());
+
+        staves_bubble->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(1.15f), cocos2d::CallFunc::create([=]() {
+            this->eliminateBubbles(bubbles, staves_bubble);
+            game_bubble_map_impl_->removeSpriteFromeMapWithIndex(bubble->getBubbleIndex());
+            this->dispatchAddEliminateComboEvent(bubble->getPosition());
+        })));
         //staves_bubble->bubbleEliminate();
     }
 }

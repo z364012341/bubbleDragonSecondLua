@@ -1,6 +1,6 @@
 #include "SkillStavesBubble.h"
 #include "cocostudio\CocoStudio.h"
-const std::string SKILL_STAVES_BUBBLE_ARMATURE_NAME = "juesejinengTX1";
+const std::string SKILL_STAVES_BUBBLE_ARMATURE_1_NAME = "juesejinengTX1";
 const std::string SKILL_STAVES_BUBBLE_PARTICLE_PATH = "particle/lanseTX.plist";
 namespace bubble_second {
     SkillStavesBubble::SkillStavesBubble()
@@ -22,7 +22,7 @@ namespace bubble_second {
     {
         using cocostudio::ArmatureDataManager;
         using cocostudio::Armature;
-        Armature* armature = Armature::create(SKILL_STAVES_BUBBLE_ARMATURE_NAME);
+        Armature* armature = Armature::create(SKILL_STAVES_BUBBLE_ARMATURE_1_NAME);
         armature->getAnimation()->playWithIndex(0);
         this->addChild(armature, 1);
     }
