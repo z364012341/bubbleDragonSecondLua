@@ -552,16 +552,27 @@ namespace bubble_second{
     void GameBubbleMapImple::traverseBubbles(BubbleVector* seed,
         std::function<BubbleVector(const cocos2d::Vec2& index)> func)
     {
-        int map_size = 0;
-        do
-        {//有配套流程图
-            map_size = seed->size();
-            BubbleVector map_clone = *seed;
-            for (auto iter_1 : map_clone)
+        //int map_size = 0;
+        //do
+        //{//有配套流程图
+        //    map_size = seed->size();
+        //    BubbleVector map_clone = *seed;
+        //    for (auto iter_1 : map_clone)
+        //    {
+        //        this->mergeTwoBubbleVector(seed, func(iter_1->getBubbleIndex()));
+        //    } //for (auto iter_1 : map_clone)
+        //} while (map_size != seed->size());
+        for (int i = 0; i < seed->size(); i++)
+        {
+            auto vector = func(seed->at(i)->getBubbleIndex());
+            for (auto var : vector)
             {
-                this->mergeTwoBubbleVector(seed, func(iter_1->getBubbleIndex()));
-            } //for (auto iter_1 : map_clone)
-        } while (map_size != seed->size());
+                if (std::find(seed->begin(), seed->end(), var) == seed->end())
+                {
+                    seed->pushBack(var);
+                }
+            }
+        }
     }
 
     bool GameBubbleMapImple::isExistInVector(const BubbleVector& vector, BaseBubble* bubble)
