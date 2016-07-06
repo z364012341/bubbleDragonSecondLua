@@ -2,8 +2,8 @@
 #include "GameScoreController.h"
 #include "GameAlertMask.h"
 #include "cocostudio\CocoStudio.h"
-const std::string ENTER_GAME_PROPS_VIEW_ADD_BUBBLE_PROPS_PATH = GAME_COMMODITY_TEN_BUBBLE_PATH;
-const std::string ADD_BUBBLE_NUMBLE_COMMODITY_CSB_PATH = "AddBubbleNumbleCommodity.csb";
+//const std::string ENTER_GAME_PROPS_VIEW_ADD_BUBBLE_PROPS_PATH = GAME_COMMODITY_TEN_BUBBLE_PATH;
+//const std::string ADD_BUBBLE_NUMBLE_COMMODITY_CSB_PATH = "AddBubbleNumbleCommodity.csb";
 
 
 namespace bubble_second {
@@ -39,11 +39,11 @@ namespace bubble_second {
 
     bool AddBubbleNumbleCommodity::init()
     {
-        if (!EnterGamePropsView::init(ADD_BUBBLE_NUMBLE_COMMODITY_CSB_PATH))
+        if (!EnterGamePropsView::init(COMMODITY_ADD_10_BUBBLE_KEY))
         {
             return false;
         }
-        this->setCostLabelStringWithKey(COMMODITY_ADD_10_BUBBLE_KEY);
+        //this->setCostLabelStringWithKey(COMMODITY_ADD_10_BUBBLE_KEY);
         this->setName(ADD_BUBBLE_NUMBLE_COMMODITY_NAME);
         return true;
     }

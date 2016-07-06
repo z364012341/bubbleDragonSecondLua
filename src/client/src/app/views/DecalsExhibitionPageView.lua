@@ -72,6 +72,9 @@ end
 function DecalsExhibitionPageView:updataPageViewPointsIndex()
     self.pageview_points:scrollToPage(self.pageview_);
 end
+function DecalsExhibitionPageView:getCurrentPageIndex()
+    return self.pageview_:getCurrentPageIndex();
+end
 -- function DecalsExhibitionPageView:onEnter()
 --     self.listener_ = {};
 --     local function scrollLeft( event )

@@ -3,6 +3,12 @@
 #include "EnterPropsViewManager.h"
 #include "cocostudio\CocoStudio.h"
 #include "GameTextInfo.h"
+#include "GamePropsCostTag.h"
+const std::map<std::string, std::string> COMMODITY_TO_CSB_PATH = {
+    { COMMODITY_ADD_10_BUBBLE_KEY , "AddBubbleNumbleCommodity.csb"},
+    { COMMODITY_AIMING_LINE_KEY , "AimingLineCommodity.csb" },
+    { COMMODITY_ADD_SPECIAL_KEY , "AddSpecialCommodity.csb"}
+};
 namespace bubble_second {
 
     EnterGamePropsView::EnterGamePropsView()
@@ -33,37 +39,43 @@ namespace bubble_second {
     {
     }
 
-    bool EnterGamePropsView::init(const std::string & csb_path)
+    bool EnterGamePropsView::init(const std::string & prop_key)
     {
         if (!cocos2d::Node::init())
         {
             return false;
         }
-        this->loadView(csb_path);
+        this->loadView(prop_key);
         return true;
     }
 
-    void EnterGamePropsView::setCostLabelStringWithKey(const std::string& key)
-    {
-        cost_label_->setString(GameTextInfo::getInstance()->getCommodityCoinValueWithKey(key).asString());
-    }
+    //void EnterGamePropsView::setCostLabelStringWithKey(const std::string& key)
+    //{
+    //    cost_label_->setString(GameTextInfo::getInstance()->getCommodityCoinValueWithKey(key).asString());
+    //}
 
-    void EnterGamePropsView::loadView(const std::string & csb_path)
+    void EnterGamePropsView::loadView(const std::string & prop_key)
     {
-        cocos2d::Node* csb_node = cocos2d::CSLoader::createNode(csb_path);
+        cocos2d::Node* csb_node = cocos2d::CSLoader::createNode(COMMODITY_TO_CSB_PATH.at(prop_key));
         this->addChild(csb_node);
-        cost_label_ = dynamic_cast<cocos2d::ui::TextBMFont*>(csb_node->getChildByName("cost_node")->getChildByName("cost_label"));
-        assert(cost_label_);
-        selected_sprite_ = dynamic_cast<cocos2d::Sprite*>(csb_node->getChildByName("cost_node")->getChildByName("selected_sprite"));
-        assert(selected_sprite_);
+
+        GamePropsCostTag* cost_tag = GamePropsCostTag::createWithKey(prop_key);
+        cost_tag->setPosition(cocos2d::Vec2(0.0, -37.93f));
+        csb_node->addChild(cost_tag);
+        //cost_label_ = dynamic_cast<cocos2d::ui::TextBMFont*>(csb_node->getChildByName("cost_node")->getChildByName("cost_label"));
+        //assert(cost_label_);
+        //selected_sprite_ = dynamic_cast<cocos2d::Sprite*>(csb_node->getChildByName("cost_node")->getChildByName("selected_sprite"));
+        //assert(selected_sprite_);
         button_ = dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName("background_node")->getChildByName("Button"));
         assert(button_);
         button_->addTouchEventListener([=](cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
             {
-                selected_sprite_->setVisible(!selected_sprite_->isVisible());
-                EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), selected_sprite_->isVisible());
+                cost_tag->changeSelectedState();
+                EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag->getSelectedState());
             }
         });
+
+
     }
 }

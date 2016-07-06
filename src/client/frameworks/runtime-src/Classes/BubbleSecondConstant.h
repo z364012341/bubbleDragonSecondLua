@@ -695,8 +695,8 @@ const std::string GAME_TEXT_TOP_ELIMINATE = "kTopEliminate";      //消除顶部泡泡
 const std::string GAME_TEXT_RESCUE_ANIMAL = "kRescueAnimal";                   //解救动物
 const std::string GAME_TEXT_BEAT_THE_ROBBER = "kDestroyRainbowSeal";                     //击败强盗
 const std::string GAME_TEXT_RESCUE_GHOST = "kWindmill";                                           //解救幽灵
-const std::string COMMODITY_COIN_KEY = "coin";
-const std::string COMMODITY_DIAMOND_KEY = "diamond";
+//const std::string COMMODITY_COIN_KEY = "coin";
+//const std::string COMMODITY_DIAMOND_KEY = "diamond";
 const std::string GAME_TEXT_SELECT_PROPS_LABEL_KEY = "choose_props";
 //ColorBubble
 const float ENTER_PROPS_ACTION_DURATION = 0.5f; //进场道具的动画时间
@@ -839,6 +839,6 @@ enum StageType
 };
 const std::string STAGETYPE_TEXTURE_TOPELIMINATE_PATH = "wanftb3.png";
 const std::string STAGETYPE_TEXTURE_RESCUEANIMAL_PATH = "wanftb2.png";
-const std::string STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH = "wanftb4.png";
-const std::string STAGETYPE_TEXTURE_WINDMILL_PATH = "wanftb1.png";
+const std::string STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH = "wanftb1.png";
+const std::string STAGETYPE_TEXTURE_WINDMILL_PATH = "wanftb4.png";
 #endif //_BUBBLE_SECOND_CONSTANT_H_

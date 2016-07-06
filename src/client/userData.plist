@@ -3,15 +3,19 @@
 
 <plist version="1.0">
     <dict>
-        <key>strength</key>
-        <integer>3</integer>
-        <key>md5</key>
-        <string>9d7062e9733232fe642f79a40f414cdf</string>
-        <key>staves</key>
+        <key>colorBomb</key>
         <integer>101</integer>
-        <key>woodenHammer</key>
-        <integer>97</integer>
+        <key>strength</key>
+        <integer>5</integer>
+        <key>md5</key>
+        <string>1c14a0113874cf6bfa486a4982c033e4</string>
+        <key>coin</key>
+        <integer>1999</integer>
         <key>addTime</key>
+        <integer>101</integer>
+        <key>staves</key>
+        <integer>102</integer>
+        <key>search</key>
         <integer>101</integer>
     </dict>
 </plist>

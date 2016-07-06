@@ -30,8 +30,6 @@
     <string>解救仓鼠</string>
     <key>setting</key>
     <string>设置</string>
-    <key>nickname</key>
-    <string>昵称</string>
     <key>choose_props</key>
     <string>选择道具</string>
     <key>strength_max</key>

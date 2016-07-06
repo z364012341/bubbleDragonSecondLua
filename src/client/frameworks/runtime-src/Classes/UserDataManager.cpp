@@ -12,7 +12,6 @@ const std::string GAME_PUZZLE_STAGE_DATA_PATH = "puzzleStageBestScore.plist";
 const std::string USER_DATA_MUSIC_KEY = "GAME_MUSIC";
 const std::string USER_DATA_SOUND_EFFECT_KEY = "SOUND_EFFECT";
 const std::string HAVED_BUY_NEWBIE_GIFT_KEY = "buyNewbieGift";
-const std::string GAME_CHARACTOR_UNLOCK_NUMBLE_KEY = "unlockCharactorNumble";
 const std::string LAST_GAME_CHARACTOR_INDEX_KEY = "lastCharactor";
 const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
@@ -30,7 +29,8 @@ const std::map<std::string, int> PROPS_DEFAULT_NUMBLE_DATA = {
     { BUBBLE_STAVES_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
     { GAME_COIN_KEY , 0 },
     { GAME_STRENGTH_KEY , GAME_STRENGTH_DEFAULT_NUMBLE },
-    { GAME_DIAMOND_KEY , 0 }
+    { GAME_DIAMOND_KEY , 0 },
+    { GAME_CHARACTOR_UNLOCK_NUMBLE_KEY , 1 }
 };
 namespace bubble_second {
     UserDataManager::UserDataManager()
@@ -182,9 +182,9 @@ namespace bubble_second {
         }
         this->setPropsNumbleWithKey(key, this->getPropsNumbleWithKey(key) + numble);
     }
-    void UserDataManager::cutPropsNumbleWithKey(const std::string& key)
+    void UserDataManager::cutPropsNumbleWithKey(const std::string& key, int numble)
     {
-        this->setPropsNumbleWithKey(key, this->getPropsNumbleWithKey(key)-1);
+        this->setPropsNumbleWithKey(key, this->getPropsNumbleWithKey(key) - numble);
     }
     void UserDataManager::setBuyPropsKeyAndNumble(cocos2d::ValueMap data)
     {
@@ -201,11 +201,12 @@ namespace bubble_second {
     }
     int UserDataManager::getGameCharactorUnlockNumble()
     {
-        if (user_data_.find(GAME_CHARACTOR_UNLOCK_NUMBLE_KEY) != user_data_.end())
-        {
-            return user_data_.at(GAME_CHARACTOR_UNLOCK_NUMBLE_KEY).asInt();
-        }
-        return 4; //先返回一个默认值, 增加解锁系统的时候在更改
+        //if (user_data_.find(GAME_CHARACTOR_UNLOCK_NUMBLE_KEY) != user_data_.end())
+        //{
+        //    return user_data_.at(GAME_CHARACTOR_UNLOCK_NUMBLE_KEY).asInt();
+        //}
+        //return 1; //先返回一个默认值, 增加解锁系统的时候在更改
+        return this->getPropsNumbleWithKey(GAME_CHARACTOR_UNLOCK_NUMBLE_KEY);
     }
     int UserDataManager::getLastGameCharactorIndex()
     {
@@ -289,9 +290,9 @@ namespace bubble_second {
         }
         //if (level-1 == stage_data_.size())
         //{
-            stage_data_[levelStr] = cocos2d::Value(start_numble);
-            this->writeStageDataToFile();
-            this->updateStageTotalStartScore();
+        stage_data_[levelStr] = cocos2d::Value(start_numble);
+        this->writeStageDataToFile();
+        this->updateStageTotalStartScore();
         //}
     }
     void UserDataManager::updateStageTotalStartScore()
@@ -347,7 +348,7 @@ namespace bubble_second {
     }
     void UserDataManager::insertPuzzleStageData(const std::string & key, int consumingTime)
     {
-        if (puzzle_stage_data_.find(key) == puzzle_stage_data_.end() || puzzle_stage_data_[key].asInt()>consumingTime)
+        if (puzzle_stage_data_.find(key) == puzzle_stage_data_.end() || puzzle_stage_data_[key].asInt() > consumingTime)
         {
             puzzle_stage_data_[key] = cocos2d::Value(consumingTime);
             this->savePuzzleStageData();
@@ -371,7 +372,7 @@ namespace bubble_second {
     {
         //if (puzzle_stage_data_.find(key) != puzzle_stage_data_.end())
         //{
-            return puzzle_stage_data_.at(key).asInt();
+        return puzzle_stage_data_.at(key).asInt();
         //}
         //return 99999;
 
@@ -398,5 +399,5 @@ namespace bubble_second {
     {
         return DECALS_TREASURE_KEY;
     }
-    
+
 }

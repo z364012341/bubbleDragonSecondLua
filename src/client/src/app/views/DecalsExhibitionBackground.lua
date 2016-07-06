@@ -42,7 +42,6 @@ function DecalsExhibitionBackground:addBackground()
     self:addChild(bg);
 
     local color = self.decals_type_ == DECALS_TYPE_CHARACTOR and DECALS_CHARACTOR_BACKGROUND_COLOR or DECALS_TREASURE_BACKGROUND_COLOR;
-    dump(self.decals_type_);
     self.background_ = cc.LayerColor:create(color, DECALS_WIDTH, DECALS_HEIGHT);
     self.background_:setPosition(cc.p((bg:getContentSize().width-DECALS_WIDTH)/2, (bg:getContentSize().height-DECALS_HEIGHT)/2));
     bg:addChild(self.background_);

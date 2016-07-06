@@ -2,7 +2,7 @@
 #include "GameAlertMask.h"
 #include "GameTextInfo.h"
 #include "cocostudio\CocoStudio.h"
-const std::string ADD_SPECIAL_COMMODITY_CSB_PATH = "AddSpecialCommodity.csb";
+//const std::string ADD_SPECIAL_COMMODITY_CSB_PATH = "AddSpecialCommodity.csb";
 namespace bubble_second {
     //cocos2d::Node * AddSpecialCommodity::createCommodityArmature()
     //{
@@ -34,11 +34,11 @@ namespace bubble_second {
 
     bool AddSpecialCommodity::init()
     {
-        if (!EnterGamePropsView::init(ADD_SPECIAL_COMMODITY_CSB_PATH))
+        if (!EnterGamePropsView::init(COMMODITY_ADD_SPECIAL_KEY))
         {
             return false;
         }
-        this->setCostLabelStringWithKey(COMMODITY_ADD_SPECIAL_KEY);
+        //this->setCostLabelStringWithKey(COMMODITY_ADD_SPECIAL_KEY);
         this->setName(ADD_SPECIAL_COMMODITY_NAME);
         return true;
     }

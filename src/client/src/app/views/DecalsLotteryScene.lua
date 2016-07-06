@@ -75,14 +75,25 @@ function DecalsLotteryScene:loadCSB()
     self.button_node_ = button_node;
     self.free_shuffle_button = button_node:getChildByName("Button_2_0");
     self.lottery_begin_button = button_node:getChildByName("Button_2");
+    local begin_cost =  bs.GamePropsCostTag:createDecalsLotteryBeginTag();
     self.lottery_begin_button:addClickEventListener(function (...)
-        self:lotteryBegin();
+        if begin_cost:canPay() then
+            begin_cost:pay();
+            self:lotteryBegin();
+        end
     end);
+    self:addCostTag(self.lottery_begin_button, begin_cost);
+
     self.lottery_again_begain_button = button_node:getChildByName("Button_2_0_0");
+    local again_cost = bs.GamePropsCostTag:createDecalsLotteryContinueTag();
     self.lottery_again_begain_button:addClickEventListener(function (...)
-        self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_AGAIN);
-        self.lottery_again_begain_button:setVisible(false);
+        if again_cost:canPay() then
+            again_cost:pay();
+            self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_AGAIN);
+            self.lottery_again_begain_button:setVisible(false);
+        end
     end);
+    self:addCostTag(self.lottery_again_begain_button, again_cost);
 
     self.free_change_award_button_ = button_node:getChildByName("Button_2_0");
     self.free_change_award_button_:addClickEventListener(function (...)
@@ -136,5 +147,9 @@ function DecalsLotteryScene:onExit()
         eventDispatcher:removeEventListener(listener);
     end
 end
-
+function DecalsLotteryScene:addCostTag(button, cost_tag)
+    local sp = button:getRendererNormal();
+    cost_tag:setPosition(cc.p(sp:getContentSize().width/2, 50));
+    sp:addChild(cost_tag);
+end
 return DecalsLotteryScene

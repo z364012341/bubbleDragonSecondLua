@@ -54,19 +54,32 @@ const std::map<std::string, std::string> PROP_KEY_TO_PATH = {
     { GAME_COIN_KEY, GAME_COIN_PATH } ,
     { GAME_STRENGTH_KEY, GAME_FATIGUE_PATH }
 };
-
+const std::map<StageType, std::string> STAGETYPE_TO_GAME_PATH = {
+//游戏右上角的logo的path
+    { kTopEliminate, STAGETYPE_TEXTURE_TOPELIMINATE_PATH },
+    { kRescueAnimal, STAGETYPE_TEXTURE_RESCUEANIMAL_PATH },
+    { kDestroyRainbowSeal, STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH },
+    { kWindmill, STAGETYPE_TEXTURE_WINDMILL_PATH }
+};
+const std::map<StageType, std::string> STAGE_MENU_STAGETYPE_TO_PATH = {
+    //游戏关卡选择按钮上的logo的path
+    { kTopEliminate, MENU_STAGETYPE_TEXTURE_TOPELIMINATE_PATH },
+    { kRescueAnimal, STAGETYPE_TO_GAME_PATH.at(kRescueAnimal) },
+    { kDestroyRainbowSeal, STAGETYPE_TO_GAME_PATH.at(kDestroyRainbowSeal) },
+    { kWindmill, STAGETYPE_TO_GAME_PATH.at(kWindmill) }
+};
 namespace bubble_second {
     SpriteTextureController::SpriteTextureController()
     {
-        stagetype_to_path_[kTopEliminate] = STAGETYPE_TEXTURE_TOPELIMINATE_PATH;
-        stagetype_to_path_[kRescueAnimal] = STAGETYPE_TEXTURE_RESCUEANIMAL_PATH;
-        stagetype_to_path_[kDestroyRainbowSeal] = STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH;
-        stagetype_to_path_[kWindmill] = STAGETYPE_TEXTURE_WINDMILL_PATH;
+        //stagetype_to_path_[kTopEliminate] = STAGETYPE_TEXTURE_TOPELIMINATE_PATH;
+        //stagetype_to_path_[kRescueAnimal] = STAGETYPE_TEXTURE_RESCUEANIMAL_PATH;
+        //stagetype_to_path_[kDestroyRainbowSeal] = STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH;
+        //stagetype_to_path_[kWindmill] = STAGETYPE_TEXTURE_WINDMILL_PATH;
 
-        stage_menu_stagetype_to_path_[kTopEliminate] = MENU_STAGETYPE_TEXTURE_TOPELIMINATE_PATH;
-        stage_menu_stagetype_to_path_[kRescueAnimal] = STAGETYPE_TEXTURE_RESCUEANIMAL_PATH;
-        stage_menu_stagetype_to_path_[kDestroyRainbowSeal] = STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH;
-        stage_menu_stagetype_to_path_[kWindmill] = STAGETYPE_TEXTURE_WINDMILL_PATH;
+        //stage_menu_stagetype_to_path_[kTopEliminate] = MENU_STAGETYPE_TEXTURE_TOPELIMINATE_PATH;
+        //stage_menu_stagetype_to_path_[kRescueAnimal] = STAGETYPE_TEXTURE_RESCUEANIMAL_PATH;
+        //stage_menu_stagetype_to_path_[kDestroyRainbowSeal] = STAGETYPE_TEXTURE_DESTROYRAINBOWSEAL_PATH;
+        //stage_menu_stagetype_to_path_[kWindmill] = STAGETYPE_TEXTURE_WINDMILL_PATH;
 
         //prop_key_to_path_[PUZZLE_SEARCH_PROP_KEY] = PUZZLE_SEARCH_PROP_PATH;
         //prop_key_to_path_[PUZZLE_BIG_EYES_PROP_KEY] = PUZZLE_BIG_EYES_PROP_PATH;
@@ -194,12 +207,12 @@ namespace bubble_second {
 
     cocos2d::Sprite * SpriteTextureController::createStageTypeSprite(const StageType & type)
     {
-        return this->createGameSpriteWithPath(stagetype_to_path_[type]);
+        return this->createGameSpriteWithPath(STAGETYPE_TO_GAME_PATH.at(type));
     }
 
     cocos2d::Sprite* SpriteTextureController::createMenuStageTypeSprite(const StageType& type)
     {
-        return this->createGameSpriteWithPath(stage_menu_stagetype_to_path_[type]);
+        return this->createGameSpriteWithPath(STAGE_MENU_STAGETYPE_TO_PATH.at(type));
     }
 
     //cocos2d::Sprite* SpriteTextureController::createStageTypeSprite(const StageType& type)

@@ -12,17 +12,7 @@
                 <array>
                     <integer>1</integer>
                     <integer>2</integer>
-                </array>
-            </dict>
-        </array>
-        <key>decals_treasure</key>
-        <array>
-            <dict>
-                <key>path</key>
-                <string>decals (2).png</string>
-                <key>goods</key>
-                <array>
-                    <integer>1</integer>
+                    <integer>3</integer>
                 </array>
             </dict>
         </array>

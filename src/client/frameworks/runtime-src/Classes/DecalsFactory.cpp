@@ -294,6 +294,10 @@ namespace bubble_second {
             if (goods_vector.size() < max_index.x*max_index.y)
             {
                 goods_vector.push_back(cocos2d::Value((int)goods_vector.size() + 1));
+                if (goods_vector.size() == max_index.x*max_index.y)
+                {
+                    UserDataManager::getInstance()->addPropsNumbleWithKey(GAME_CHARACTOR_UNLOCK_NUMBLE_KEY);
+                }
             }
             else
             {

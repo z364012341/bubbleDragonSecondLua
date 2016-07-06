@@ -25,6 +25,7 @@ const std::string GAME_STRENGTH_KEY = "strength";         //体力
 const std::string GAME_DIAMOND_KEY = "diamond";            //砖石
 const std::string DECALS_CHARACTOR_KEY = "decals_charactor";   
 const std::string DECALS_TREASURE_KEY = "decals_treasure";
+const std::string GAME_CHARACTOR_UNLOCK_NUMBLE_KEY = "unlockCharactorNumble";
 namespace bubble_second {
     class UserDataManager
     {
@@ -69,8 +70,8 @@ namespace bubble_second {
         //道具数量
         int getPropsNumbleWithKey(const std::string& key);
         void setPropsNumbleWithKey(const std::string& key, int numble);
-        void addPropsNumbleWithKey(const std::string& key, int numble);
-        void cutPropsNumbleWithKey(const std::string& key);
+        void addPropsNumbleWithKey(const std::string& key, int numble = 1);
+        void cutPropsNumbleWithKey(const std::string& key, int numble = 1);
 
         void setBuyPropsKeyAndNumble(cocos2d::ValueMap data);
         //新手礼包

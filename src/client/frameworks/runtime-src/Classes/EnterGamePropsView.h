@@ -25,14 +25,13 @@ namespace bubble_second {
         virtual ~EnterGamePropsView();
     protected:
         EnterGamePropsView();
-        bool init(const std::string& csb_path);
-        void setCostLabelStringWithKey(const std::string& key);
+        bool init(const std::string& prop_key);
+        //void setCostLabelStringWithKey(const std::string& key);
     private:
-        void loadView(const std::string& csb_path);
+        void loadView(const std::string& prop_key);
     private:
         cocos2d::ui::Button* button_ = nullptr;
-        cocos2d::ui::TextBMFont* cost_label_ = nullptr;
-        cocos2d::Sprite* selected_sprite_ = nullptr;
+        //cocos2d::ui::TextBMFont* cost_label_ = nullptr;
     };
 }
 #endif //_ENTER_GAME_PROPS_VIEW_H_

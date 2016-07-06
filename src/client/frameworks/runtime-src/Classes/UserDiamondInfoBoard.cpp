@@ -60,6 +60,7 @@ namespace bubble_second {
             this->updateNumbleLabel();
         });
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 1);
+        this->updateNumbleLabel();
     }
     void UserDiamondInfoBoard::onExit()
     {

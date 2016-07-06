@@ -38,16 +38,20 @@ namespace bubble_second {
     {
         return getTextInfoWithKey(STAGE_TYPE_TO_KEY.at(type));
     }
-    std::string GameTextInfo::getCommodityCoinNumbleWithKey(const std::string & key) const
+    //std::string GameTextInfo::getCommodityCoinNumbleWithKey(const std::string & key) const
+    //{
+    //    return getCommodityCoinValueWithKey(key).asString();
+    //}
+    //std::string GameTextInfo::getCommodityDiamondNumbleWithKey(const std::string & key) const
+    //{
+    //    return commodity_map_.at(key).asValueMap().at(COMMODITY_DIAMOND_KEY).asString();
+    //}
+    //cocos2d::Value GameTextInfo::getCommodityCoinValueWithKey(const std::string & key) const
+    //{
+    //    return this->getCommodityDataWithKey(key).at(COMMODITY_COIN_KEY);
+    //}
+    cocos2d::ValueMap GameTextInfo::getCommodityDataWithKey(const std::string & key) const
     {
-        return getCommodityCoinValueWithKey(key).asString();
-    }
-    std::string GameTextInfo::getCommodityDiamondNumbleWithKey(const std::string & key) const
-    {
-        return commodity_map_.at(key).asValueMap().at(COMMODITY_DIAMOND_KEY).asString();
-    }
-    cocos2d::Value GameTextInfo::getCommodityCoinValueWithKey(const std::string & key) const
-    {
-        return commodity_map_.at(key).asValueMap().at(COMMODITY_COIN_KEY);
+        return commodity_map_.at(key).asValueMap();
     }
 }

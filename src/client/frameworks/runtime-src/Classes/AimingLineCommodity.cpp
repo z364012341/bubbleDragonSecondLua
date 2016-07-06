@@ -3,7 +3,7 @@
 #include "GameTextInfo.h"
 #include "cocostudio\CocoStudio.h"
 #include "BubbleSightingDevice.h"
-const std::string AIMING_LIME_COMMODITY_CSB_PATH = "AimingLineCommodity.csb";
+//const std::string AIMING_LIME_COMMODITY_CSB_PATH = "AimingLineCommodity.csb";
 
 namespace bubble_second {
     AimingLineCommodity::AimingLineCommodity()
@@ -34,11 +34,11 @@ namespace bubble_second {
 
     bool AimingLineCommodity::init()
     {
-        if (!EnterGamePropsView::init(AIMING_LIME_COMMODITY_CSB_PATH))
+        if (!EnterGamePropsView::init(COMMODITY_AIMING_LINE_KEY))
         {
             return false;
         }
-        this->setCostLabelStringWithKey(COMMODITY_AIMING_LINE_KEY);
+        //this->setCostLabelStringWithKey(COMMODITY_AIMING_LINE_KEY);
         this->setName(AIMING_LINE_COMMODITY_NAME);
         return true;
     }

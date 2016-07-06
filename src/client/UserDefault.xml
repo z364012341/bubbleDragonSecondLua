@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <userDefaultRoot>
     <total_starts>5</total_starts>
-    <lastCharactor>3</lastCharactor>
-    <strength_count_down_time>F7x7VwAAAAA=</strength_count_down_time>
+    <lastCharactor>0</lastCharactor>
+    <strength_count_down_time>n9J8VwAAAAA=</strength_count_down_time>
+    <GAME_MUSIC>false</GAME_MUSIC>
+    <SOUND_EFFECT>false</SOUND_EFFECT>
 </userDefaultRoot>

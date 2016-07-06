@@ -27,6 +27,7 @@
 -- @function [parent=#UserDataManager] cutPropsNumbleWithKey 
 -- @param self
 -- @param #string key
+-- @param #int numble
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
@@ -35,6 +36,13 @@
 -- @param self
 -- @param #bool flag
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] getStageStartNumbleWithLevel 
+-- @param self
+-- @param #int level
+-- @return int#int ret (return value: int)
         
 --------------------------------
 -- 
@@ -56,10 +64,22 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] saveStrengthLastTime 
+-- @param self
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] isUnlockWithStageNumble 
 -- @param self
 -- @param #int stage_numble
 -- @return bool#bool ret (return value: bool)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] updateStageTotalStartScore 
+-- @param self
+-- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
         
 --------------------------------
 -- 
@@ -109,11 +129,23 @@
         
 --------------------------------
 -- 
+-- @function [parent=#UserDataManager] getStrengthLastTime 
+-- @param self
+-- @return long#long ret (return value: long)
+        
+--------------------------------
+-- 
 -- @function [parent=#UserDataManager] setDecalsUserData 
 -- @param self
 -- @param #array_table data
 -- @param #string decals_type
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
+        
+--------------------------------
+-- 
+-- @function [parent=#UserDataManager] getStageTotalStartScore 
+-- @param self
+-- @return int#int ret (return value: int)
         
 --------------------------------
 -- 

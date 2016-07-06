@@ -437,6 +437,10 @@
     <ClInclude Include="..\Classes\UserStrengthInfoBoard.h" />
     <ClInclude Include="..\Classes\StrengthCountDownLabel.h" />
     <ClInclude Include="..\Classes\BlackObstacleBubble.h" />
+    <ClInclude Include="..\Classes\GamePropsCostTag.h" />
+    <ClInclude Include="..\Classes\lua_GamePropsCostTag_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -846,6 +850,10 @@
     <ClCompile Include="..\Classes\UserStrengthInfoBoard.cpp" />
     <ClCompile Include="..\Classes\StrengthCountDownLabel.cpp" />
     <ClCompile Include="..\Classes\BlackObstacleBubble.cpp" />
+    <ClCompile Include="..\Classes\GamePropsCostTag.cpp" />
+    <ClCompile Include="..\Classes\lua_GamePropsCostTag_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
