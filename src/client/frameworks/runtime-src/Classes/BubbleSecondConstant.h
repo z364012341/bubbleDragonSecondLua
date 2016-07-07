@@ -23,6 +23,7 @@
 #define BUBBLE_ELIMINATE_FORMULA(_NUM_,_COMBO_) ((_NUM_)*SINGLE_BUBBLE_SCORE(_COMBO_))             //消除得分计算公式
 #define RANDOM_DECIMALS(_MIN_, _MAX_) (cocos2d::random(_MIN_, _MAX_) + cocos2d::rand_0_1()) //生成一个一位随机小数
 #define GAME_STAGE_NODE_CSB_FORMAT "StageNode%d.csb"
+#define GAME_VICTORY_ADD_COIN_FORMULA(_LEVEL_) (5*(_LEVEL_)+115)  //赢一把加的钱的公式
 //资源路径
 const std::string GAME_SCENE = "GameScene";
 const std::string GAME_LAYER_CSB = "GameLayer.csb";
@@ -225,7 +226,7 @@ const float WINDMILL_ROTATION_EASE_RATE = 2.0f; //EASE动作的系数
 const int WINDMILL_ROTATION_ACTION_TAG = 234;
 const float WINDMILL_ROTATION_SPEED_SPEED = 2.0f;
 const int COLOR_BUBBLE_TAG = 235; //彩色小球的tag
-const float AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME = 0.7f;
+const float AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME = 1.5f;
 //const float TEXTURE_SCALE = 0.4f;//精致贴图的缩放
 const std::string GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY = "GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY";
 //关卡xml解析
@@ -439,15 +440,15 @@ const std::string EVENT_BUBBLE_CONTACT_BLACKHOLE = "event_bubble_contact_blackho
 //const std::string EVENT_STAVES_SELECT_BUBBLE = "event_staves_select_bubble"; //法杖选择小球
 //const std::string EVENT_BUBBLE_NO_FLASH = "event_bubble_no_flash"; //小球不闪光
 const std::string EVENT_MUTIPLE_SEAL_BUBBLE_FLY = "event_mutiple_seal_bubble_fly"; //解救动物飞飞飞 
-const std::string EVENT_TOP_ELIMINATE_BUBBLE_FLY = "event_top_eliminate_bubble_fly";
-const std::string EVENT_POP_GAME_STORE = "event_pop_game_store";
-const std::string EVENT_BUY_PROPS_PAY_SUCCESS = "event_buy_props_pay_success";
-const std::string EVENT_UPDATE_PROPS_NUMBLE_LABEL = "event_update_props_numble_label";
-const std::string EVENT_BUY_PROPS_PAY_FAIL = "event_buy_props_pay_fail";
-const std::string EVENT_END_ADD_BUBBLT_ANIMATION = "event_end_add_bubblt_animation";
-const std::string EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION = "event_end_add_special_bubblt_animation";
-const std::string EVENT_END_AIMING_LINE_ANIMATION = "event_end_aiming_line_animation";
-const std::string EVENT_GAME_REPLAY = "event_game_replay";
+const std::string EVENT_TOP_ELIMINATE_BUBBLE_FLY = "event_top_eliminate_bubble_fly";  //顶部泡泡飞
+const std::string EVENT_POP_GAME_STORE = "event_pop_game_store";    //弹出游戏商店
+const std::string EVENT_BUY_PROPS_PAY_SUCCESS = "event_buy_props_pay_success";  //购买成功
+const std::string EVENT_UPDATE_PROPS_NUMBLE_LABEL = "event_update_props_numble_label";  //更新道具数量标签
+const std::string EVENT_BUY_PROPS_PAY_FAIL = "event_buy_props_pay_fail";   //支付失败
+const std::string EVENT_END_ADD_BUBBLE_ANIMATION = "event_end_add_bubble_animation"; //+10球动画结束
+const std::string EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION = "event_end_add_special_bubblt_animation"; //加特殊泡泡动画结束
+const std::string EVENT_END_AIMING_LINE_ANIMATION = "event_end_aiming_line_animation"; //瞄准线动画结束
+const std::string EVENT_GAME_REPLAY = "event_game_replay";  //重玩
 const std::string EVENT_GAME_DEFEAT_RETURN = "event_game_defeat_return";
 const std::string EVENT_GAME_DEFEAT_BUY_ALERT_RETURN = "event_game_defeat_buy_alert_return";
 const std::string EVENT_DEFEAT_BUY_CONTINUE_PLAY = "event_defeat_buy_continue_play";
@@ -463,8 +464,10 @@ const std::string EVENT_POP_VICTORY_GIFT_ARMATURE = "event_pop_victory_gift_arma
 const std::string EVENT_VICTORY_GIFT_ARMATURE_END = "event_victory_gift_armature_end";
 const std::string EVENT_CONTRAROTATE_STARTS_END = "event_contrarotate_starts_end";
 const std::string EVENT_CLICK_START_BUTTON = "event_click_start_button";
+const std::string EVENT_ENTER_PROPS_PAY = "event_enter_props_pay";
 const std::string EVENT_CLICK_START_BUTTON_END = "event_click_start_button_end";
 const std::string EVENT_PLAY_SKILL_STAVES_ANIMATION = "event_play_skill_staves_animation";
+const std::string EVENT_ROLL_COIN_BOARD_LABEL = "event_roll_coin_board_label";  //用户金币数量跳动变化
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
 const std::string SHORT_EFFECT_BUBBLE_KEY = "short_effect";    //小幅度特效

@@ -402,13 +402,9 @@
     <ClInclude Include="..\Classes\StageTypeLogo.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameHelpAlert.h" />
-    <ClInclude Include="..\Classes\GameAboutAlert.h" />
-    <ClInclude Include="..\Classes\ExhibitionNumble.h" />
     <ClInclude Include="..\Classes\lua_ExhibitionNumble_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\DecalsFactory.h" />
     <ClInclude Include="..\Classes\lua_DecalsFactory_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
@@ -418,28 +414,68 @@
     <ClInclude Include="..\Classes\lua_UserDiamondInfoBoard_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SkillDyeingBubble.h" />
-    <ClInclude Include="..\Classes\SkillColorBombBubble.h" />
-    <ClInclude Include="..\Classes\SkillBigBombBubble.h" />
-    <ClInclude Include="..\Classes\SkillStavesBubble.h" />
-    <ClInclude Include="..\Classes\GameCharactorSkillButton.h" />
-    <ClInclude Include="..\Classes\GameVictoryLotteryStarts.h" />
-    <ClInclude Include="..\Classes\GameVictoryLotteryItemBase.h" />
-    <ClInclude Include="..\Classes\GameVictoryLotteryStartItem.h" />
-    <ClInclude Include="..\Classes\GameVictoryLotteryGiftItem.h" />
     <ClInclude Include="..\Classes\lua_GameBuyStoreMannager_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameLotteryAwardItem.h" />
     <ClInclude Include="..\Classes\lua_GameLotteryAwardItem_auto.hpp">
       <Filter>Classes\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UserStrengthInfoBoard.h" />
-    <ClInclude Include="..\Classes\StrengthCountDownLabel.h" />
-    <ClInclude Include="..\Classes\BlackObstacleBubble.h" />
-    <ClInclude Include="..\Classes\GamePropsCostTag.h" />
     <ClInclude Include="..\Classes\lua_GamePropsCostTag_auto.hpp">
       <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BlackObstacleBubble.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DecalsFactory.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ExhibitionNumble.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameAboutAlert.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameCharactorSkillButton.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameHelpAlert.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameLotteryAwardItem.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GamePropsCostTag.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameVictoryLotteryGiftItem.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameVictoryLotteryItemBase.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameVictoryLotteryStartItem.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameVictoryLotteryStarts.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SkillBigBombBubble.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SkillColorBombBubble.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SkillDyeingBubble.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SkillStavesBubble.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StrengthCountDownLabel.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UserStrengthInfoBoard.h">
+      <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -815,13 +851,9 @@
     <ClCompile Include="..\Classes\StageTypeLogo.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameHelpAlert.cpp" />
-    <ClCompile Include="..\Classes\GameAboutAlert.cpp" />
-    <ClCompile Include="..\Classes\ExhibitionNumble.cpp" />
     <ClCompile Include="..\Classes\lua_ExhibitionNumble_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\DecalsFactory.cpp" />
     <ClCompile Include="..\Classes\lua_DecalsFactory_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
@@ -831,28 +863,68 @@
     <ClCompile Include="..\Classes\lua_UserDiamondInfoBoard_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\SkillDyeingBubble.cpp" />
-    <ClCompile Include="..\Classes\SkillColorBombBubble.cpp" />
-    <ClCompile Include="..\Classes\SkillBigBombBubble.cpp" />
-    <ClCompile Include="..\Classes\SkillStavesBubble.cpp" />
-    <ClCompile Include="..\Classes\GameCharactorSkillButton.cpp" />
-    <ClCompile Include="..\Classes\GameVictoryLotteryStarts.cpp" />
-    <ClCompile Include="..\Classes\GameVictoryLotteryItemBase.cpp" />
-    <ClCompile Include="..\Classes\GameVictoryLotteryStartItem.cpp" />
-    <ClCompile Include="..\Classes\GameVictoryLotteryGiftItem.cpp" />
     <ClCompile Include="..\Classes\lua_GameBuyStoreMannager_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameLotteryAwardItem.cpp" />
     <ClCompile Include="..\Classes\lua_GameLotteryAwardItem_auto.cpp">
       <Filter>Classes\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UserStrengthInfoBoard.cpp" />
-    <ClCompile Include="..\Classes\StrengthCountDownLabel.cpp" />
-    <ClCompile Include="..\Classes\BlackObstacleBubble.cpp" />
-    <ClCompile Include="..\Classes\GamePropsCostTag.cpp" />
     <ClCompile Include="..\Classes\lua_GamePropsCostTag_auto.cpp">
       <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BlackObstacleBubble.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DecalsFactory.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ExhibitionNumble.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameAboutAlert.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameCharactorSkillButton.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameHelpAlert.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameLotteryAwardItem.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GamePropsCostTag.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameVictoryLotteryGiftItem.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameVictoryLotteryItemBase.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameVictoryLotteryStartItem.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameVictoryLotteryStarts.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SkillBigBombBubble.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SkillColorBombBubble.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SkillDyeingBubble.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SkillStavesBubble.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StrengthCountDownLabel.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UserStrengthInfoBoard.cpp">
+      <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

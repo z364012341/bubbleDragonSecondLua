@@ -4,6 +4,7 @@
 #include "cocostudio\CocoStudio.h"
 #include "GameTextInfo.h"
 #include "GamePropsCostTag.h"
+#include "UserDataManager.h"
 const std::map<std::string, std::string> COMMODITY_TO_CSB_PATH = {
     { COMMODITY_ADD_10_BUBBLE_KEY , "AddBubbleNumbleCommodity.csb"},
     { COMMODITY_AIMING_LINE_KEY , "AimingLineCommodity.csb" },
@@ -71,8 +72,18 @@ namespace bubble_second {
         button_->addTouchEventListener([=](cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
             {
-                cost_tag->changeSelectedState();
-                EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag->getSelectedState());
+                if (cost_tag->getSelectedState())
+                {
+                    cost_tag->changeSelectedState();
+                    EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag->getSelectedState());
+                    EnterPropsViewManager::getInstance()->cutPrePropsCost(cost_tag->getCostNumble());
+                }
+                else if (UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY) - EnterPropsViewManager::getInstance()->getPrePropsCost() >= cost_tag->getCostNumble())
+                {
+                    cost_tag->changeSelectedState();
+                    EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag->getSelectedState());
+                    EnterPropsViewManager::getInstance()->addPrePropsCost(cost_tag->getCostNumble());
+                }
             }
         });
 

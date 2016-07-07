@@ -88,6 +88,7 @@ namespace bubble_second {
                 this->addChild(GameAlertMask::createTransparentMask(), 1);
                 cocos2d::Vec2 point = button->getParent()->convertToWorldSpace(button->getPosition());
                 this->getEventDispatcher()->dispatchCustomEvent(EVENT_CLICK_START_BUTTON, &point);
+                this->getEventDispatcher()->dispatchCustomEvent(EVENT_ENTER_PROPS_PAY);
                 UserDataManager::getInstance()->cutPropsNumbleWithKey(GAME_STRENGTH_KEY);
                 //UserDataManager::getInstance()->saveStrengthLastTime();
             }
@@ -161,5 +162,6 @@ namespace bubble_second {
     {
         cocos2d::Node::onExit();
         cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_CLICK_START_BUTTON_END);
+        this->getEventDispatcher()->dispatchCustomEvent(EVENT_UPDATE_PROPS_NUMBLE_LABEL);
     }
 }

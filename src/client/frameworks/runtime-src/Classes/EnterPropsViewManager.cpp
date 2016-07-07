@@ -18,6 +18,7 @@ namespace bubble_second {
 
     cocos2d::Node* EnterPropsViewManager::createEnterPropsAlert()
     {
+        pre_props_cost_ = 0;
         cocos2d::Node* node = cocos2d::Node::create();
         EnterGamePropsView* sight_props = AimingLineCommodity::create();
         sight_props->setPositionX(ENTER_GAME_PROPS_VIEW_LEFT_POS_X);
@@ -56,5 +57,17 @@ namespace bubble_second {
     int EnterPropsViewManager::getAddBubbleNumblePropsNumble()
     {
         return ADD_BUBBLE_NUMBLE_PROPS_NUMBLE;
+    }
+    void EnterPropsViewManager::addPrePropsCost(int numble)
+    {
+        pre_props_cost_ += numble;
+    }
+    void EnterPropsViewManager::cutPrePropsCost(int numble)
+    {
+        pre_props_cost_ -= numble;
+    }
+    int EnterPropsViewManager::getPrePropsCost()
+    {
+        return pre_props_cost_;
     }
 }

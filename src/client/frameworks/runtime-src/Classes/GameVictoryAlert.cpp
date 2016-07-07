@@ -13,6 +13,7 @@
 #include "UserDataManager.h"
 const std::string GAME_VICTORY_ALERT_CSB_PATH = "GameVictoryAlert.csb";
 const std::string GAME_VICTORY_ALERT_SCORE_LABEL_NAME = "BitmapFontLabel_10_0";
+const std::string GAME_VICTORY_ALERT_COIN_LABEL_NAME = "BitmapFontLabel_10";
 const std::string GAME_VICTORY_ALERT_STAGE_LABEL_NODE_NAME = "FileNode_4";
 const std::string ALERT_NEXT_NODE_NAME = "nextNode";
 const std::string ALERT_NEXT_BUTTON_NAME = "Button_1";
@@ -58,6 +59,7 @@ namespace bubble_second {
         this->initTopLabel(level);
         this->initScoreLabel(score);
         this->initStart(start_numble);
+        this->initCoinLabel(level);
         this->addLotteryStarts();
         this->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         this->flyStartToLottery(level, start_numble);
@@ -97,6 +99,13 @@ namespace bubble_second {
         this->playStart1PopAction();
         this->playStart2PopAction();
         this->playStart3PopAction();
+    }
+
+    void GameVictoryAlert::initCoinLabel(int level)
+    {
+        int add_coin = GAME_VICTORY_ADD_COIN_FORMULA(level);
+        UserDataManager::getInstance()->addPropsNumbleWithKey(GAME_COIN_KEY, add_coin);
+        dynamic_cast<cocos2d::ui::TextBMFont*>(csb_node_->getChildByName("zitiao_17")->getChildByName(GAME_VICTORY_ALERT_COIN_LABEL_NAME))->setString(XMLTool::convertIntToString(add_coin));
     }
 
     void GameVictoryAlert::addLotteryStarts()

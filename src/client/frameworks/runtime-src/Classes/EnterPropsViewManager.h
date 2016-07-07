@@ -23,9 +23,13 @@ namespace bubble_second {
         void setPropsSwitch(const std::string& props, bool pros_switch = false);
         bool getPropsSwitchEnable(const std::string& props);
         int getAddBubbleNumblePropsNumble();
+        void addPrePropsCost(int numble);
+        void cutPrePropsCost(int numble);
+        int getPrePropsCost();
     private:
         EnterPropsViewManager();
         std::map<std::string, bool> props_switch_;
+        int pre_props_cost_ = 0; //以选择的进场道具的预扣费
     };
 }
 #endif //_ENTER_PROPS_VIEW_MANAGER_H_

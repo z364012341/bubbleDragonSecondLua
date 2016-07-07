@@ -23,12 +23,20 @@ namespace bubble_second {
 	private:
 		UserCoinInfoBoard();
 		bool init();
+        //随机的流光动画
         void playRandomTimeAnimation();
         void updateNumbleLabel();
+        void setNumbleLabelString(int numble);
+        //金币label的数字滚动增加或者减少
+        void rollCoinLabelNumble(cocos2d::EventCustom* event);
+        //void rollCoinLabelNumbleBegin();
+        //void rollCoinLabelNumbleEnd();
     private:
         cocostudio::Armature* armature_ = nullptr;
         cocos2d::ui::TextBMFont* numble_label_ = nullptr;
+        //int coin_numble_ = 0;
         cocos2d::EventListenerCustom * listener_ = nullptr;
+        int coin_numble_offset_ = 0;
 	};
 }
 #endif //_USER_COIN_INFO_BOARD_H_

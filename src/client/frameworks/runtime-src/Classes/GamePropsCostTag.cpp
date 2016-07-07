@@ -20,6 +20,12 @@ namespace bubble_second {
     void GamePropsCostTag::changeSelectedState()
     {
         selected_sprite_->setVisible(!selected_sprite_->isVisible());
+        int numble = cost_numble_;
+        if (this->getSelectedState())
+        {
+            numble *= -1;
+        }
+        this->getEventDispatcher()->dispatchCustomEvent(EVENT_ROLL_COIN_BOARD_LABEL, &numble);
     }
     bool GamePropsCostTag::getSelectedState()
     {
@@ -32,6 +38,10 @@ namespace bubble_second {
     void GamePropsCostTag::pay()
     {
         UserDataManager::getInstance()->cutPropsNumbleWithKey(cost_key_, cost_numble_);
+    }
+    int GamePropsCostTag::getCostNumble()
+    {
+        return cost_numble_;
     }
     bool GamePropsCostTag::initWithKey(const std::string & prop_key)
     {
@@ -46,7 +56,7 @@ namespace bubble_second {
         cost_key_ = commodity_data.begin()->first;
         assert(cost_key_ == GAME_COIN_KEY || cost_key_ == GAME_DIAMOND_KEY);
         cost_numble_ = commodity_data.begin()->second.asInt();
-        assert(cost_numble_>=0);
+        assert(cost_numble_ >= 0);
         if (cost_key_ == GAME_DIAMOND_KEY)
         {
             csb_node->getChildByName(COIN_SPRITE_NAME)->setVisible(false);
@@ -80,5 +90,22 @@ namespace bubble_second {
     GamePropsCostTag * GamePropsCostTag::createDecalsLotteryContinueTag()
     {
         return GamePropsCostTag::createWithKey(COMMODITY_DECALS_LOTTERY_CONTINUE_KEY);
+    }
+    void GamePropsCostTag::onEnter()
+    {
+        cocos2d::Node::onEnter();
+        listener_ = cocos2d::EventListenerCustom::create(EVENT_ENTER_PROPS_PAY, [=](cocos2d::EventCustom* event) {
+            if (this->getSelectedState())
+            {
+                this->pay();
+            }
+        });
+        cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener_, 1);
+
+    }
+    void GamePropsCostTag::onExit()
+    {
+        cocos2d::Node::onExit();
+        cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener_);
     }
 }

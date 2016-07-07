@@ -780,7 +780,7 @@ namespace bubble_second {
         dispatcher->addCustomEventListener(EVENT_ESTIMATE_VICTORY, [=](cocos2d::EventCustom * event) {
             this->estimateVictory();
         });
-        dispatcher->addCustomEventListener(EVENT_END_ADD_BUBBLT_ANIMATION, [=](cocos2d::EventCustom * event) {
+        dispatcher->addCustomEventListener(EVENT_END_ADD_BUBBLE_ANIMATION, [=](cocos2d::EventCustom * event) {
             GameScoreController::getInstance()->addBubbleUseCount(EnterPropsViewManager::getInstance()->getAddBubbleNumblePropsNumble());
             this->usedAddSpecialBubbleProps();
         });
@@ -878,7 +878,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_BUBBLE_PRECLING);
         dispatcher->removeCustomEventListeners(EVENT_TOP_ELIMINATE_BUBBLE_LOGO_LOADED);
         dispatcher->removeCustomEventListeners(EVENT_ESTIMATE_VICTORY);
-        dispatcher->removeCustomEventListeners(EVENT_END_ADD_BUBBLT_ANIMATION);
+        dispatcher->removeCustomEventListeners(EVENT_END_ADD_BUBBLE_ANIMATION);
         dispatcher->removeCustomEventListeners(EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION);
         dispatcher->removeCustomEventListeners(EVENT_END_AIMING_LINE_ANIMATION);
         dispatcher->removeCustomEventListeners(EVENT_GAME_REPLAY);
@@ -1731,7 +1731,7 @@ namespace bubble_second {
     {
         if (EnterPropsViewManager::getInstance()->getPropsSwitchEnable(ADD_BUBBLE_NUMBLE_COMMODITY_NAME))
         {
-            this->addEnterPropsAnimation(ADD_BUBBLE_NUMBLE_ANIMATION_NAME, EVENT_END_ADD_BUBBLT_ANIMATION);
+            this->addEnterPropsAnimation(ADD_BUBBLE_NUMBLE_ANIMATION_NAME, EVENT_END_ADD_BUBBLE_ANIMATION);
         }
         else
         {
@@ -2368,7 +2368,7 @@ namespace bubble_second {
         this->removeBubbleMapLine();
         this->removeTopEliminateLogos();
         this->getBubbleSightingDevice()->turnOffSightingDevice();
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME * 2), cocos2d::CallFunc::create([=]() {
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME), cocos2d::CallFunc::create([=]() {
             this->shootBubblesAfterVictory();
         })));
         bubble_map_node_->stopAllActions();

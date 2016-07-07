@@ -19,18 +19,23 @@ namespace bubble_second {
         static GamePropsCostTag* createDecalsLotteryContinueTag();
         GamePropsCostTag();
         ~GamePropsCostTag();
+        void onEnter() override;
+        void onExit() override;
         void changeSelectedState();
         bool getSelectedState();
         //是否有足够的钱支付
         bool canPay();
         //扣费
         void pay();
+
+        int getCostNumble();
     private:
         bool initWithKey(const std::string& prop_key);
     private:
         cocos2d::Sprite* selected_sprite_ = nullptr;
         std::string cost_key_ = "";
         int cost_numble_ = 0;
+        cocos2d::EventListenerCustom * listener_ = nullptr;
     };
 }
 #endif

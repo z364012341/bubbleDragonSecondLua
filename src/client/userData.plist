@@ -8,11 +8,13 @@
         <key>strength</key>
         <integer>5</integer>
         <key>md5</key>
-        <string>1c14a0113874cf6bfa486a4982c033e4</string>
+        <string>fa5ad00039fe62eda44ea1a68c46f232</string>
         <key>coin</key>
-        <integer>1999</integer>
+        <integer>1118</integer>
         <key>addTime</key>
-        <integer>101</integer>
+        <integer>102</integer>
+        <key>woodenHammer</key>
+        <integer>97</integer>
         <key>staves</key>
         <integer>102</integer>
         <key>search</key>

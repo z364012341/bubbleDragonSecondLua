@@ -29,6 +29,7 @@ namespace bubble_second {
         void initTopLabel(int level);
         void initScoreLabel(int score);  
         void initStart(int start_numble);
+        void initCoinLabel(int level);
         void addLotteryStarts();
         void flyStartToLottery(int level, int start_numble);
         void flyStartToLotteryBegin();
