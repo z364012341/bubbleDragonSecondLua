@@ -250,6 +250,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GamePropsCostTag.h" />
     <ClInclude Include="..\Classes\GamePropsNumbleView.h" />
     <ClInclude Include="..\Classes\GameSamsung.h" />
+    <ClInclude Include="..\Classes\GameSartScene.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\GameScoreController.h" />
     <ClInclude Include="..\Classes\GameSettingAlert.h" />
@@ -405,6 +406,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GamePropsCostTag.cpp" />
     <ClCompile Include="..\Classes\GamePropsNumbleView.cpp" />
     <ClCompile Include="..\Classes\GameSamsung.cpp" />
+    <ClCompile Include="..\Classes\GameSartScene.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\GameScoreController.cpp" />
     <ClCompile Include="..\Classes\GameSettingAlert.cpp" />

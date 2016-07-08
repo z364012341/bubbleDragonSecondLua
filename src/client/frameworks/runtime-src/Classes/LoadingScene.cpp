@@ -10,6 +10,7 @@
 #include "PuzzleStoreItemFactory.h"
 #include "DecalsFactory.h"
 #include "GameCharactorNameManager.h"
+#include "GameSartScene.h"
 namespace bubble_second {
     cocos2d::Scene * LoadingScene::createScene()
     {
@@ -51,7 +52,9 @@ namespace bubble_second {
         PuzzleStoreItemFactory::getInstance()->loadItemData();
         DecalsFactory::getInstance()->loadDecalsData();
         GameCharactorNameManager::getInstance();
-        cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
+        cocos2d::Scene* scene = GameStageSelectionScene::createScene();
+        scene->addChild(GameSartScene::create());
+        cocos2d::Director::getInstance()->replaceScene(scene);
     }
 
     void LoadingScene::addBackground()

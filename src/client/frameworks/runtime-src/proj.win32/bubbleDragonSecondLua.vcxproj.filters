@@ -477,6 +477,7 @@
     <ClInclude Include="..\Classes\UserStrengthInfoBoard.h">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\GameSartScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -926,6 +927,7 @@
     <ClCompile Include="..\Classes\UserStrengthInfoBoard.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameSartScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
