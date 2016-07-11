@@ -5,13 +5,6 @@
 
 --------------------------------
 -- 
--- @function [parent=#UserDataManager] setBuyPropsKeyAndNumble 
--- @param self
--- @param #map_table data
--- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)
-        
---------------------------------
--- 
 -- @function [parent=#UserDataManager] buyNewbieGift 
 -- @param self
 -- @return UserDataManager#UserDataManager self (return value: bs.UserDataManager)

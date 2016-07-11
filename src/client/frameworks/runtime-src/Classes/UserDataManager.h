@@ -74,7 +74,6 @@ namespace bubble_second {
         void addPropsNumbleWithKey(const std::string& key, int numble = 1);
         void cutPropsNumbleWithKey(const std::string& key, int numble = 1);
 
-        void setBuyPropsKeyAndNumble(cocos2d::ValueMap data);
         //ÐÂÊÖÀñ°ü
         void buyNewbieGift();
         bool canBuyNewbieGift();
@@ -112,7 +111,7 @@ namespace bubble_second {
         cocos2d::ValueMap user_data_;
         int unlock_stage_numble_ = 0;
         cocos2d::ValueMap puzzle_stage_data_;
-        cocos2d::ValueMap buy_props_save_;
+        //cocos2d::ValueMap buy_props_save_;
         cocos2d::ValueMap decals_data_;
         
     };

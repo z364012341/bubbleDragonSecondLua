@@ -32,9 +32,9 @@ int lua_GameBuyStoreMannager_GameBuyStoreMannager_buyProps(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 1) 
     {
-        int arg0;
+        cocos2d::ValueMap arg0;
 
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "bs.GameBuyStoreMannager:buyProps");
+        ok &= luaval_to_ccvaluemap(tolua_S, 2, &arg0, "bs.GameBuyStoreMannager:buyProps");
         if(!ok)
         {
             tolua_error(tolua_S,"invalid arguments in function 'lua_GameBuyStoreMannager_GameBuyStoreMannager_buyProps'", nullptr);

@@ -36,26 +36,10 @@ const std::map<std::string, int> PROPS_DEFAULT_NUMBLE_DATA = {
 namespace bubble_second {
     UserDataManager::UserDataManager()
     {
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_BUY_PROPS_PAY_SUCCESS, [=](cocos2d::EventCustom* event) {
-            if (GameBuyStoreMannager::getInstance()->isBuyPuzzleNewbiwGift())
-            {
-                this->buyNewbieGift();
-            }
-            for (auto var : buy_props_save_)
-            {
-                this->addPropsNumbleWithKey(var.first, var.second.asInt());
-            }
-
-        });
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_BUY_PROPS_PAY_FAIL, [=](cocos2d::EventCustom* event) {
-            buy_props_save_.clear();
-        });
     }
 
     UserDataManager::~UserDataManager()
     {
-        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_BUY_PROPS_PAY_SUCCESS);
-        cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_BUY_PROPS_PAY_FAIL);
     }
     void UserDataManager::readStageFile()
     {
@@ -187,10 +171,7 @@ namespace bubble_second {
     {
         this->setPropsNumbleWithKey(key, this->getPropsNumbleWithKey(key) - numble);
     }
-    void UserDataManager::setBuyPropsKeyAndNumble(cocos2d::ValueMap data)
-    {
-        buy_props_save_ = data;
-    }
+
     void UserDataManager::buyNewbieGift()
     {
         cocos2d::UserDefault::getInstance()->setBoolForKey(HAVED_BUY_NEWBIE_GIFT_KEY.c_str(), true);

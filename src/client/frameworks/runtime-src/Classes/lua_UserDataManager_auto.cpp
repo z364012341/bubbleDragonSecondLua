@@ -4,56 +4,6 @@
 #include "LuaBasicConversions.h"
 
 
-int lua_UserDataManager_UserDataManager_setBuyPropsKeyAndNumble(lua_State* tolua_S)
-{
-    int argc = 0;
-    bubble_second::UserDataManager* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"bs.UserDataManager",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (bubble_second::UserDataManager*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_UserDataManager_UserDataManager_setBuyPropsKeyAndNumble'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        cocos2d::ValueMap arg0;
-
-        ok &= luaval_to_ccvaluemap(tolua_S, 2, &arg0, "bs.UserDataManager:setBuyPropsKeyAndNumble");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_UserDataManager_UserDataManager_setBuyPropsKeyAndNumble'", nullptr);
-            return 0;
-        }
-        cobj->setBuyPropsKeyAndNumble(arg0);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "bs.UserDataManager:setBuyPropsKeyAndNumble",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_UserDataManager_UserDataManager_setBuyPropsKeyAndNumble'.",&tolua_err);
-#endif
-
-    return 0;
-}
 int lua_UserDataManager_UserDataManager_buyNewbieGift(lua_State* tolua_S)
 {
     int argc = 0;
@@ -2045,7 +1995,6 @@ int lua_register_UserDataManager_UserDataManager(lua_State* tolua_S)
 
     tolua_beginmodule(tolua_S,"UserDataManager");
         tolua_function(tolua_S,"new",lua_UserDataManager_UserDataManager_constructor);
-        tolua_function(tolua_S,"setBuyPropsKeyAndNumble",lua_UserDataManager_UserDataManager_setBuyPropsKeyAndNumble);
         tolua_function(tolua_S,"buyNewbieGift",lua_UserDataManager_UserDataManager_buyNewbieGift);
         tolua_function(tolua_S,"savePuzzleStageData",lua_UserDataManager_UserDataManager_savePuzzleStageData);
         tolua_function(tolua_S,"cutPropsNumbleWithKey",lua_UserDataManager_UserDataManager_cutPropsNumbleWithKey);

@@ -7,7 +7,7 @@
 -- 
 -- @function [parent=#GameBuyStoreMannager] buyProps 
 -- @param self
--- @param #int target
+-- @param #map_table data
 -- @return GameBuyStoreMannager#GameBuyStoreMannager self (return value: bs.GameBuyStoreMannager)
         
 --------------------------------
