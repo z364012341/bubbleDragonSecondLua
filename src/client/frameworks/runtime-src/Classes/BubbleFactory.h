@@ -26,12 +26,12 @@ namespace bubble_second {
         BubbleFactory();
         ~BubbleFactory();
         //表驱动容器初始化
-        void initHandleMap();
+        //void initHandleMap();
         //void initBubblePath();
     private:
         //表驱动容器
         //typedef ColorBubble*(*pHandle)(int);
-        std::map<int, std::function<BaseBubble*(int, int)>> key_to_handle_map_;
+        //std::map<int, std::function<BaseBubble*(int, int)>> key_to_handle_map_;
         //std::map<int, std::string> key_to_path;
     };
 }

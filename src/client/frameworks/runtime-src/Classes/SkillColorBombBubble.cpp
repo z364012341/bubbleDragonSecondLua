@@ -2,6 +2,7 @@
 #include "cocostudio\CocoStudio.h"
 const std::string SKILL_COLOR_BOMB_ARMATURE_NAME = "juesejinengTX2";
 const std::string SKILL_ELIMINATE_ARMATURE_NAME = "baoshi TX";
+const std::string BUBBLE_SIGHTING_DEVICE_POINT_PATH = "skill_color.png";
 namespace bubble_second {
     bool SkillColorBombBubble::init()
     {
@@ -29,7 +30,7 @@ namespace bubble_second {
     }
     std::string SkillColorBombBubble::getBubbleSightingDevicePointPath()
     {
-        return "skill_color.png";
+        return BUBBLE_SIGHTING_DEVICE_POINT_PATH;
     }
     void SkillColorBombBubble::bubbleEliminate(int)
     {

@@ -4,6 +4,7 @@
 #include "XMLTool.h"
 #include "GameBuyStoreMannager.h"
 #include "DecalsFactory.h"
+#include "ui\UIText.h"
 const std::string GAME_STAGE_DATA_PATH = "stageData.plist";
 const std::string GAME_USER_DATA_PATH = "userData.plist";
 const std::string DECALS_USER_DATA_PATH = "decalsUserData.plist";
