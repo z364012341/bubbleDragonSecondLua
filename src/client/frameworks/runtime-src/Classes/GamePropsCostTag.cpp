@@ -3,6 +3,7 @@
 #include "GameTextInfo.h"
 #include "UserDataManager.h"
 #include "ui\UITextBMFont.h"
+#include "SpriteTextureController.h"
 const std::string TAG_CSB_PATH = "GamePropsCoinTag.csb";
 const std::string COIN_SPRITE_NAME = "jinbi_3";
 const std::string DIAMOND_SPRITE_NAME = "zuanshi_6";
@@ -55,16 +56,18 @@ namespace bubble_second {
     }
     bool GamePropsCostTag::initWithCostTypeAndNumble(const std::string & cost_type, cocos2d::Value numble)
     {
+        assert(cost_type == GAME_DIAMOND_KEY || cost_type == GAME_COIN_KEY);
         cocos2d::Node* csb_node = cocos2d::CSLoader::createNode(TAG_CSB_PATH);
         this->addChild(csb_node);
 
         cost_key_ = cost_type;
         cost_numble_ = numble.asInt();
-        if (cost_key_ == GAME_DIAMOND_KEY)
-        {
-            csb_node->getChildByName(COIN_SPRITE_NAME)->setVisible(false);
-            csb_node->getChildByName(DIAMOND_SPRITE_NAME)->setVisible(true);
-        }
+        //if (cost_key_ == GAME_DIAMOND_KEY)
+        //{
+        //    csb_node->getChildByName(COIN_SPRITE_NAME)->setVisible(false);
+        //    csb_node->getChildByName(DIAMOND_SPRITE_NAME)->setVisible(true);
+        //}
+        SpriteTextureController::getInstance()->setSpriteTexture(SpriteTextureController::getInstance()->getPropPathWithKey(cost_key_), dynamic_cast<cocos2d::Sprite*>(csb_node->getChildByName(COIN_SPRITE_NAME)));
 
         selected_sprite_ = dynamic_cast<cocos2d::Sprite*>(csb_node->getChildByName(SELECTED_SPRITE_NAME));
 

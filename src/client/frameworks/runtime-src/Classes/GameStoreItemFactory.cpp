@@ -19,7 +19,7 @@ const std::string GAME_STORE_DIAMOND_DATA_KEY = "game_store_diamond_data"; //×êÊ
 const std::string GAME_STORE_PROPS_DATA_KEY = "game_store_props_data"; //µÀ¾ß
 const std::string GAME_STORE_DIAMOND_DISCOUNT_KEY = "game_store_diamond_discount"; //×©Ê¯ÕÛ¿Û
 const std::string GAME_STORE_GIFT_ITEM_CSB_PATH = "GameStoreGiftItem.csb";
-const float GAME_STORE_GIFT_COMMODITY_POSITION_RANGE = 550.0f;
+const float GAME_STORE_GIFT_COMMODITY_POSITION_RANGE = 400.0f;
 namespace bubble_second {
 
     GameStoreItemFactory::GameStoreItemFactory()
