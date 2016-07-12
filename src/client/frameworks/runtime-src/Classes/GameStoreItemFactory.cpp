@@ -19,7 +19,7 @@ const std::string GAME_STORE_DIAMOND_DATA_KEY = "game_store_diamond_data"; //×êÊ
 const std::string GAME_STORE_PROPS_DATA_KEY = "game_store_props_data"; //µÀ¾ß
 const std::string GAME_STORE_DIAMOND_DISCOUNT_KEY = "game_store_diamond_discount"; //×©Ê¯ÕÛ¿Û
 const std::string GAME_STORE_GIFT_ITEM_CSB_PATH = "GameStoreGiftItem.csb";
-const float GAME_STORE_GIFT_COMMODITY_POSITION_RANGE = 400.0f;
+const float GAME_STORE_GIFT_COMMODITY_POSITION_RANGE = 550.0f;
 namespace bubble_second {
 
     GameStoreItemFactory::GameStoreItemFactory()
@@ -468,7 +468,7 @@ namespace bubble_second {
                 cocos2d::ValueMap data = commoditys_data.asValueMap();
                 GameStoreCommodity* commodity = GameStoreCommodity::createWithPropKeyAndNumble(data.begin()->first, data.begin()->second.asString());
                 commodity->setPosition(cocos2d::Vec2(commodity_x_origin, commodity_y));
-                commodity_x_origin += GAME_STORE_GIFT_COMMODITY_POSITION_RANGE / data.size();
+                commodity_x_origin += GAME_STORE_GIFT_COMMODITY_POSITION_RANGE / item_data.at(ITEM_PROPS_DATA_KEY).asValueVector().size();
                 commodity_bg->addChild(commodity);
             }
 
