@@ -260,6 +260,9 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GameStageVehicle.h" />
     <ClInclude Include="..\Classes\GameStandbyTimer.h" />
     <ClInclude Include="..\Classes\GameStartButton.h" />
+    <ClInclude Include="..\Classes\GameStoreAlert.h" />
+    <ClInclude Include="..\Classes\GameStoreCommodity.h" />
+    <ClInclude Include="..\Classes\GameStoreItemFactory.h" />
     <ClInclude Include="..\Classes\GameTextInfo.h" />
     <ClInclude Include="..\Classes\GameVictoryAlert.h" />
     <ClInclude Include="..\Classes\GameVictoryLotteryGiftItem.h" />
@@ -416,6 +419,9 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GameStageVehicle.cpp" />
     <ClCompile Include="..\Classes\GameStandbyTimer.cpp" />
     <ClCompile Include="..\Classes\GameStartButton.cpp" />
+    <ClCompile Include="..\Classes\GameStoreAlert.cpp" />
+    <ClCompile Include="..\Classes\GameStoreCommodity.cpp" />
+    <ClCompile Include="..\Classes\GameStoreItemFactory.cpp" />
     <ClCompile Include="..\Classes\GameTextInfo.cpp" />
     <ClCompile Include="..\Classes\GameVictoryAlert.cpp" />
     <ClCompile Include="..\Classes\GameVictoryLotteryGiftItem.cpp" />

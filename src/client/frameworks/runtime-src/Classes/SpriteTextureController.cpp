@@ -3,6 +3,7 @@
 #include "cocostudio\CocoStudio.h"
 #include "DecalsFactory.h"
 const std::string GAME_COIN_PATH = "jinbi.PNG"; //金币
+const std::string GAME_DIAMOND_PATH = "zuanshi.PNG"; //钻石
 const std::string GAME_NUMBLE_FONT_PATH = "fonts/typeface-export.fnt";
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_1_PATH = "laohu/laohu.ExportJson"; //老虎的动画
 const std::string GAME_CHARACTER_ARMATURE_LAOHU_2_PATH = "laohu2/laohu2.ExportJson"; //老虎2的动画
@@ -52,6 +53,7 @@ const std::map<std::string, std::string> PROP_KEY_TO_PATH = {
     { BUBBLE_BIG_BOMB_BOMB_PROP_KEY, PROPS_BOMB_BOMB_PATH },
     { BUBBLE_STAVES_PROP_KEY, PROPS_STAVES_PATH },
     { GAME_COIN_KEY, GAME_COIN_PATH } ,
+    { GAME_DIAMOND_KEY, GAME_DIAMOND_PATH } ,
     { GAME_STRENGTH_KEY, GAME_FATIGUE_PATH }
 };
 const std::map<StageType, std::string> STAGETYPE_TO_GAME_PATH = {
@@ -381,6 +383,11 @@ namespace bubble_second {
     //    cocos2d::Director::getInstance()->getRunningScene()->visit();
     //    //结束获取  
     //    textureScreen->end();
+
+    std::string SpriteTextureController::getPropPathWithKey(const std::string & key)
+    {
+        return std::string();
+    }
 
     //    if (bIsSave)
     //    {//保存为PNG图  

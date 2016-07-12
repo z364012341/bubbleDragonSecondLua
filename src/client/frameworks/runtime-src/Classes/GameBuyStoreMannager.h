@@ -3,6 +3,7 @@
 #include "BubbleSecondConstant.h"
 const int PUZZLE_NEWBIE_GIFT_TARGET_ID = 113;
 const std::string TARGET_ID_KEY = "targetID";
+const std::string ITEM_PROPS_DATA_KEY = "item_props_data";
 namespace bubble_second {
     class GameBuyStoreMannager
     {

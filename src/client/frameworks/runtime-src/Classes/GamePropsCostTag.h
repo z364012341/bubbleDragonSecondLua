@@ -15,6 +15,8 @@ namespace bubble_second {
     {
     public:
         static GamePropsCostTag* createWithKey(const std::string& prop_key);
+        //参数cost_type是货币类型, 钻石或者金币, numble是数量
+        static GamePropsCostTag* createWithCostTypeAndNumble(const std::string& cost_type, cocos2d::Value numble);
         static GamePropsCostTag* createDecalsLotteryBeginTag();
         static GamePropsCostTag* createDecalsLotteryContinueTag();
         GamePropsCostTag();
@@ -31,6 +33,7 @@ namespace bubble_second {
         int getCostNumble();
     private:
         bool initWithKey(const std::string& prop_key);
+        bool initWithCostTypeAndNumble(const std::string& cost_type, cocos2d::Value numble);
     private:
         cocos2d::Sprite* selected_sprite_ = nullptr;
         std::string cost_key_ = "";

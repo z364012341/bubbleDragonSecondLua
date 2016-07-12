@@ -11,8 +11,8 @@
 #define _USER_DATA_MANAGER_H_
 #include "BubbleSecondConstant.h"
 #include "ui\UIText.h"
-const std::string PUZZLE_SEARCH_PROP_KEY = "search"; //拼图放大镜
-const std::string PUZZLE_BIG_EYES_PROP_KEY = "bigEyes";  //拼图左上角眼睛
+const std::string PUZZLE_SEARCH_PROP_KEY = "search"; //拼图快速查找
+const std::string PUZZLE_BIG_EYES_PROP_KEY = "bigEyes";  //拼图中间眼睛
 const std::string PUZZLE_ADD_TIME_PROP_KEY = "addTime";  //拼图加时间
 const std::string BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY = "addBubbleNumble";
 const std::string BUBBLE_AIMING_LINE_PROP_KEY = "aimingLine";

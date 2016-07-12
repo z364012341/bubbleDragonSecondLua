@@ -33,6 +33,7 @@ namespace bubble_second {
         //cocos2d::Sprite* createGameBlurBackground();
         //½ØÆÁ
         //cocos2d::Sprite* getScreenShot();
+        std::string getPropPathWithKey(const std::string& key);
         cocos2d::Sprite* createPropSpriteWithKey(const std::string& key);
 
         cocos2d::ui::TextBMFont* createWhitePurpleFnt(const std::string& str);

@@ -27,7 +27,7 @@ namespace bubble_second {
             {
                 UserDataManager::getInstance()->buyNewbieGift();
             }
-            for (auto var : buy_props_save_)
+            for (auto var : buy_props_save_.at(ITEM_PROPS_DATA_KEY).asValueMap())
             {
                 UserDataManager::getInstance()->addPropsNumbleWithKey(var.first, var.second.asInt());
             }

@@ -478,6 +478,9 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameSartScene.h" />
+    <ClInclude Include="..\Classes\GameStoreItemFactory.h" />
+    <ClInclude Include="..\Classes\GameStoreCommodity.h" />
+    <ClInclude Include="..\Classes\GameStoreAlert.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -928,6 +931,9 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameSartScene.cpp" />
+    <ClCompile Include="..\Classes\GameStoreItemFactory.cpp" />
+    <ClCompile Include="..\Classes\GameStoreCommodity.cpp" />
+    <ClCompile Include="..\Classes\GameStoreAlert.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

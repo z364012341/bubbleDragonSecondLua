@@ -49,14 +49,17 @@ namespace bubble_second {
         {
             return false;
         }
+        cocos2d::ValueMap commodity_data = GameTextInfo::getInstance()->getCommodityDataWithKey(prop_key);
+        this->initWithCostTypeAndNumble(commodity_data.begin()->first, commodity_data.begin()->second);
+        return true;
+    }
+    bool GamePropsCostTag::initWithCostTypeAndNumble(const std::string & cost_type, cocos2d::Value numble)
+    {
         cocos2d::Node* csb_node = cocos2d::CSLoader::createNode(TAG_CSB_PATH);
         this->addChild(csb_node);
 
-        cocos2d::ValueMap commodity_data = GameTextInfo::getInstance()->getCommodityDataWithKey(prop_key);
-        cost_key_ = commodity_data.begin()->first;
-        assert(cost_key_ == GAME_COIN_KEY || cost_key_ == GAME_DIAMOND_KEY);
-        cost_numble_ = commodity_data.begin()->second.asInt();
-        assert(cost_numble_ >= 0);
+        cost_key_ = cost_type;
+        cost_numble_ = numble.asInt();
         if (cost_key_ == GAME_DIAMOND_KEY)
         {
             csb_node->getChildByName(COIN_SPRITE_NAME)->setVisible(false);
@@ -65,13 +68,28 @@ namespace bubble_second {
 
         selected_sprite_ = dynamic_cast<cocos2d::Sprite*>(csb_node->getChildByName(SELECTED_SPRITE_NAME));
 
-        dynamic_cast<cocos2d::ui::TextBMFont*>(csb_node->getChildByName(NUMBLE_LABEL_NAME))->setString(commodity_data.begin()->second.asString());
+        dynamic_cast<cocos2d::ui::TextBMFont*>(csb_node->getChildByName(NUMBLE_LABEL_NAME))->setString(numble.asString());
         return true;
     }
     GamePropsCostTag* GamePropsCostTag::createWithKey(const std::string& prop_key)
     {
         GamePropsCostTag *pRet = new(std::nothrow) GamePropsCostTag();
         if (pRet && pRet->initWithKey(prop_key))
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
+    }
+    GamePropsCostTag * GamePropsCostTag::createWithCostTypeAndNumble(const std::string & cost_type, cocos2d::Value numble)
+    {
+        GamePropsCostTag *pRet = new(std::nothrow) GamePropsCostTag();
+        if (pRet && pRet->initWithCostTypeAndNumble(cost_type, numble))
         {
             pRet->autorelease();
             return pRet;
