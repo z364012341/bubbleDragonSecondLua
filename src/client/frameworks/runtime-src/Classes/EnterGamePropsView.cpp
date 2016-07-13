@@ -61,6 +61,7 @@ namespace bubble_second {
         this->addChild(csb_node);
 
         GamePropsCostTag* cost_tag = GamePropsCostTag::createWithKey(prop_key);
+        cost_tag->setScale(0.6f);
         cost_tag->setPosition(cocos2d::Vec2(0.0, -37.93f));
         csb_node->addChild(cost_tag);
         //cost_label_ = dynamic_cast<cocos2d::ui::TextBMFont*>(csb_node->getChildByName("cost_node")->getChildByName("cost_label"));

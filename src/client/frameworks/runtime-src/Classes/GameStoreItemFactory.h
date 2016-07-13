@@ -17,6 +17,8 @@ namespace bubble_second {
         GETINSTANCE_FUNC(GameStoreItemFactory);
         ~GameStoreItemFactory();
         cocos2d::Vector<cocos2d::Node*> getGiftListViewItems();
+        cocos2d::Vector<cocos2d::Node*> getDiamondListViewItems();
+        cocos2d::Vector<cocos2d::Node*> getPropsListViewItems();
     private:
         GameStoreItemFactory();
     private:

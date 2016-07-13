@@ -28,6 +28,7 @@ namespace bubble_second {
         cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createPropSpriteWithKey(prop_key);
         this->addChild(sp);
         cocos2d::ui::TextBMFont* label = SpriteTextureController::getInstance()->createWhitePurpleFnt("*"+ numble);
+        label->setScale(0.6f);
         label->setPositionY(-20.0f);
         this->addChild(label);
         return true;

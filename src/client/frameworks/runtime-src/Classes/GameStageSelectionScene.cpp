@@ -383,6 +383,7 @@ namespace bubble_second {
     {
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+        alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         this->getAlertRenderNode()->addChild(alert);
     }
 

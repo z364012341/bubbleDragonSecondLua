@@ -5,8 +5,10 @@
 #include "GameStoreCommodity.h"
 #include "ui\UIButton.h"
 #include "ui\UIScale9Sprite.h"
+#include "ui\UITextField.h"
 #include "ButtonEffectController.h"
 #include "GameBuyStoreMannager.h"
+#include "GamePropsCostTag.h"
 const std::string BUY_BUTTON_LABEL_CAB_PATH = "PuzzleStoreItemBuyLabel.csb";
 const std::string GAME_STORE_GIFT_ITEM_BUY_COST_LABEL_NAME = "numbleLabel";
 const std::string GIFT_ITEM_TEXTURE_PATH_KEY = "gift_texture_path";
@@ -19,7 +21,11 @@ const std::string GAME_STORE_DIAMOND_DATA_KEY = "game_store_diamond_data"; //×êÊ
 const std::string GAME_STORE_PROPS_DATA_KEY = "game_store_props_data"; //µÀ¾ß
 const std::string GAME_STORE_DIAMOND_DISCOUNT_KEY = "game_store_diamond_discount"; //×©Ê¯ÕÛ¿Û
 const std::string GAME_STORE_GIFT_ITEM_CSB_PATH = "GameStoreGiftItem.csb";
-const float GAME_STORE_GIFT_COMMODITY_POSITION_RANGE = 550.0f;
+const std::string GAME_STORE_DIAMOND_ITEM_CSB_PATH = "GameStoreDiamondItem.csb";
+const std::string GAME_STORE_PROPS_ITEM_CSB_PATH = "GameStorePropsItem.csb";
+const float GAME_STORE_GIFT_COMMODITY_POSITION_RANGE = 400.0f;
+const float GAME_STORE_GIFT_COMMODITY_POSITION_X_ORIGIN = 130.0f;
+const int GAME_STORE_PROPS_ITEM_EACH_LINE_NUMBLE = 3;
 namespace bubble_second {
 
     GameStoreItemFactory::GameStoreItemFactory()
@@ -236,7 +242,7 @@ namespace bubble_second {
                 props_item_data[STORE_COST_TYPE_KEY] = GAME_DIAMOND_KEY;
                 props_item_data[STORE_COST_KEY] = 20;
                 props_item_data[TARGET_ID_KEY] = 0;
-
+                props_item_data[ITEM_PROPS_DATA_KEY] = prop_data;
 
                 props_data.push_back(cocos2d::Value(props_item_data));
             }
@@ -249,6 +255,7 @@ namespace bubble_second {
                 props_item_data[STORE_COST_TYPE_KEY] = GAME_DIAMOND_KEY;
                 props_item_data[STORE_COST_KEY] = 20;
                 props_item_data[TARGET_ID_KEY] = 0;
+                props_item_data[ITEM_PROPS_DATA_KEY] = prop_data;
                 props_data.push_back(cocos2d::Value(props_item_data));
             }
             {
@@ -260,6 +267,7 @@ namespace bubble_second {
                 props_item_data[STORE_COST_TYPE_KEY] = GAME_DIAMOND_KEY;
                 props_item_data[STORE_COST_KEY] = 15;
                 props_item_data[TARGET_ID_KEY] = 0;
+                props_item_data[ITEM_PROPS_DATA_KEY] = prop_data;
                 props_data.push_back(cocos2d::Value(props_item_data));
             }
             {
@@ -461,12 +469,13 @@ namespace bubble_second {
             cocos2d::Node* csb_node = cocos2d::CSLoader::createNode(GAME_STORE_GIFT_ITEM_CSB_PATH);
             SpriteTextureController::getInstance()->setSpriteTexture(item_data.at(GIFT_ITEM_TEXTURE_PATH_KEY).asString(), dynamic_cast<cocos2d::Sprite*>(csb_node->getChildByName("libaochangwan_15")));
             cocos2d::Node* commodity_bg = csb_node->getChildByName("shangchengkuang2_14");
-            float commodity_y = commodity_bg->getContentSize().width / 2;
-            float commodity_x_origin = 85.0f;
+            float commodity_y = commodity_bg->getContentSize().height * 0.6f;
+            float commodity_x_origin = GAME_STORE_GIFT_COMMODITY_POSITION_X_ORIGIN;
             for (auto commoditys_data : item_data.at(ITEM_PROPS_DATA_KEY).asValueVector())
             {
                 cocos2d::ValueMap data = commoditys_data.asValueMap();
                 GameStoreCommodity* commodity = GameStoreCommodity::createWithPropKeyAndNumble(data.begin()->first, data.begin()->second.asString());
+                commodity->setScale(0.75f);
                 commodity->setPosition(cocos2d::Vec2(commodity_x_origin, commodity_y));
                 commodity_x_origin += GAME_STORE_GIFT_COMMODITY_POSITION_RANGE / item_data.at(ITEM_PROPS_DATA_KEY).asValueVector().size();
                 commodity_bg->addChild(commodity);
@@ -474,7 +483,9 @@ namespace bubble_second {
 
             cocos2d::Node* button_label_node = cocos2d::CSLoader::createNode(BUY_BUTTON_LABEL_CAB_PATH);
 
-            dynamic_cast<cocos2d::ui::TextBMFont*>(button_label_node->getChildByName(GAME_STORE_GIFT_ITEM_BUY_COST_LABEL_NAME))->setString(item_data.at(STORE_COST_KEY).asString()+".00");
+            char numble_str[10];
+            sprintf(numble_str, "%.2f", item_data.at(STORE_COST_KEY).asFloat());
+            dynamic_cast<cocos2d::ui::TextBMFont*>(button_label_node->getChildByName(GAME_STORE_GIFT_ITEM_BUY_COST_LABEL_NAME))->setString(numble_str);
 
             cocos2d::ui::Button* button = dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName("Button_2"));
             ButtonEffectController::setButtonZoomScale(button);
@@ -492,6 +503,69 @@ namespace bubble_second {
                 GameBuyStoreMannager::getInstance()->buyProps(buy_data);
             });
             items.pushBack(csb_node);
+        }
+        return items;
+    }
+    cocos2d::Vector<cocos2d::Node*> GameStoreItemFactory::getDiamondListViewItems()
+    {
+        cocos2d::Vector<cocos2d::Node*> items;
+        for (auto var : store_items_data_.at(GAME_STORE_DIAMOND_DATA_KEY).asValueVector())
+        {
+            cocos2d::ValueMap item_data = var.asValueMap();
+            cocos2d::Node* csb_node = cocos2d::CSLoader::createNode(GAME_STORE_DIAMOND_ITEM_CSB_PATH);
+            dynamic_cast<cocos2d::ui::TextField*>(csb_node->getChildByName("discount_text"))->setString(item_data.at(GAME_STORE_DIAMOND_DISCOUNT_KEY).asString());
+            dynamic_cast<cocos2d::ui::TextBMFont*>(csb_node->getChildByName("cost_label"))->setString(item_data.at(ITEM_PROPS_DATA_KEY).asValueMap().begin()->second.asString());
+            char rmb_str[10];
+            sprintf(rmb_str, "%.2f", item_data.at(STORE_COST_KEY).asFloat());
+            dynamic_cast<cocos2d::ui::TextField*>(csb_node->getChildByName("rmb_text"))->setString(rmb_str);
+            cocos2d::ui::Button* button = dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName("Button_1"));
+            ButtonEffectController::setButtonZoomScale(button);
+            button->addClickEventListener([=](cocos2d::Ref*) {
+                cocos2d::ValueMap buy_data;
+                buy_data[TARGET_ID_KEY] = item_data.at(TARGET_ID_KEY);
+                buy_data[ITEM_PROPS_DATA_KEY] = item_data.at(ITEM_PROPS_DATA_KEY);
+                GameBuyStoreMannager::getInstance()->buyProps(buy_data);
+            });
+            items.pushBack(csb_node);
+        }
+        return items;
+    }
+    cocos2d::Vector<cocos2d::Node*> GameStoreItemFactory::getPropsListViewItems()
+    {
+        cocos2d::Layer* layer = nullptr;
+        cocos2d::Vector<cocos2d::Node*> items;
+        for (int i = 0; i < store_items_data_.at(GAME_STORE_PROPS_DATA_KEY).asValueVector().size(); i++)
+        {
+            cocos2d::ValueMap item_data = store_items_data_.at(GAME_STORE_PROPS_DATA_KEY).asValueVector().at(i).asValueMap();
+            cocos2d::Node* csb_node = cocos2d::CSLoader::createNode(GAME_STORE_PROPS_ITEM_CSB_PATH);
+            cocos2d::ValueMap commodity_data = item_data.at(ITEM_PROPS_DATA_KEY).asValueMap();
+            GameStoreCommodity* commodity = GameStoreCommodity::createWithPropKeyAndNumble(commodity_data.begin()->first, commodity_data.begin()->second.asString());
+            commodity->setScale(0.75f);
+            cocos2d::Node* commodity_bg = csb_node->getChildByName("shangchengdaojukuang_1");
+            commodity->setPosition(cocos2d::Vec2(commodity_bg->getContentSize().width*0.5f, commodity_bg->getContentSize().height*0.65f));
+            commodity_bg->addChild(commodity);
+
+            GamePropsCostTag* cost_tag = GamePropsCostTag::createWithCostTypeAndNumble(item_data.at(STORE_COST_TYPE_KEY).asString(), item_data.at(STORE_COST_KEY));
+            cost_tag->setScale(0.6f);
+            cocos2d::ui::Button* button = dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName("Button_1"));
+            ButtonEffectController::setButtonZoomScale(button);
+            button->getRendererNormal()->addChild(cost_tag);
+            cost_tag->setPosition(cocos2d::Vec2(button->getRendererNormal()->getContentSize().width / 2, button->getRendererNormal()->getContentSize().height / 1.9f));
+            button->addClickEventListener([=](cocos2d::Ref*) {
+                cocos2d::ValueMap buy_data;
+                buy_data[TARGET_ID_KEY] = item_data.at(TARGET_ID_KEY);
+                buy_data[ITEM_PROPS_DATA_KEY] = item_data.at(ITEM_PROPS_DATA_KEY);
+                GameBuyStoreMannager::getInstance()->buyProps(buy_data);
+            });
+
+            if (i%GAME_STORE_PROPS_ITEM_EACH_LINE_NUMBLE == 0)
+            {
+                layer = cocos2d::Layer::create();
+                layer->setContentSize(cocos2d::Size(csb_node->getContentSize().width*GAME_STORE_PROPS_ITEM_EACH_LINE_NUMBLE, csb_node->getContentSize().height));
+                items.pushBack(layer);
+            }
+            csb_node->setPositionX(csb_node->getContentSize().width*(i%GAME_STORE_PROPS_ITEM_EACH_LINE_NUMBLE));
+            layer->addChild(csb_node);
         }
         return items;
     }

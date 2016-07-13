@@ -10,6 +10,11 @@
                 <integer>0</integer>
                 <key>cost_type</key>
                 <string>diamond</string>
+                <key>item_props_data</key>
+                <dict>
+                    <key>colorBomb</key>
+                    <integer>1</integer>
+                </dict>
                 <key>cost</key>
                 <integer>20</integer>
             </dict>
@@ -18,6 +23,11 @@
                 <integer>0</integer>
                 <key>cost_type</key>
                 <string>diamond</string>
+                <key>item_props_data</key>
+                <dict>
+                    <key>bigBombBomb</key>
+                    <integer>1</integer>
+                </dict>
                 <key>cost</key>
                 <integer>20</integer>
             </dict>
@@ -26,6 +36,11 @@
                 <integer>0</integer>
                 <key>cost_type</key>
                 <string>diamond</string>
+                <key>item_props_data</key>
+                <dict>
+                    <key>woodenHammer</key>
+                    <integer>1</integer>
+                </dict>
                 <key>cost</key>
                 <integer>15</integer>
             </dict>

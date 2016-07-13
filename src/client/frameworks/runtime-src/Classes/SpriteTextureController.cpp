@@ -386,7 +386,7 @@ namespace bubble_second {
 
     std::string SpriteTextureController::getPropPathWithKey(const std::string & key)
     {
-        return std::string();
+        return PROP_KEY_TO_PATH.at(key);
     }
 
     //    if (bIsSave)
@@ -414,7 +414,7 @@ namespace bubble_second {
         {
             return  DecalsFactory::getInstance()->createNextDecalWithType(key);
         }
-        return this->createGameSpriteWithPath(PROP_KEY_TO_PATH.at(key));
+        return this->createGameSpriteWithPath(this->getPropPathWithKey(key));
     }
     cocos2d::ui::TextBMFont * SpriteTextureController::createWhitePurpleFnt(const std::string & str)
     {
