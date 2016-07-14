@@ -27,6 +27,7 @@ const std::string GAME_DIAMOND_KEY = "diamond";            //砖石
 const std::string DECALS_CHARACTOR_KEY = "decals_charactor";   
 const std::string DECALS_TREASURE_KEY = "decals_treasure";
 const std::string GAME_CHARACTOR_UNLOCK_NUMBLE_KEY = "unlockCharactorNumble";
+const std::string GAME_SIGN_DAY_NUMBLE_KEY = "game_sign_day_numble"; //签到天数
 namespace bubble_second {
     class UserDataManager
     {
@@ -93,6 +94,8 @@ namespace bubble_second {
         void saveStrengthLastTime();
         //获取上一次登陆游戏的时间(天)
         time_t getGameSignLastDay();
+        void saveGameSignLastDay();
+        time_t calculateTimeDay(time_t time);
     private:
         ~UserDataManager();
         void writeStageDataToFile();

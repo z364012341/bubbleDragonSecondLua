@@ -18,6 +18,7 @@ const std::string PROP_MD5_KEY = "md5";
 const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
 const std::string STAGE_TOTAL_STARTS_KEY = "total_starts";
 const std::string STRENGTH_COUNT_DOWN_TIME_KEY = "strength_count_down_time";
+const std::string GAME_SIGN_LAST_DAY_KEY = "game_sign_last_day";
 const int GAME_PROPS_DEFAULT_NUMBLE = 100;
 const int GAME_STRENGTH_DEFAULT_NUMBLE = 5;
 const std::map<std::string, int> PROPS_DEFAULT_NUMBLE_DATA = {
@@ -31,7 +32,8 @@ const std::map<std::string, int> PROPS_DEFAULT_NUMBLE_DATA = {
     { GAME_COIN_KEY , 10000 },
     { GAME_STRENGTH_KEY , GAME_STRENGTH_DEFAULT_NUMBLE },
     { GAME_DIAMOND_KEY , 0 },
-    { GAME_CHARACTOR_UNLOCK_NUMBLE_KEY , 1 }
+    { GAME_CHARACTOR_UNLOCK_NUMBLE_KEY , 1 },
+    { GAME_SIGN_DAY_NUMBLE_KEY , 0}
 };
 namespace bubble_second {
     UserDataManager::UserDataManager()
@@ -137,7 +139,27 @@ namespace bubble_second {
 
     time_t UserDataManager::getGameSignLastDay()
     {
-        return time_t();
+        cocos2d::Data d = cocos2d::UserDefault::getInstance()->getDataForKey(GAME_SIGN_LAST_DAY_KEY.c_str());
+        if (d.isNull())
+        {
+            return this->calculateTimeDay(time(0))-1;
+        }
+        time_t lastDay = *((time_t*)d.getBytes());
+        return lastDay;
+    }
+
+    void UserDataManager::saveGameSignLastDay()
+    {
+        time_t day = this->calculateTimeDay(time(0));
+        cocos2d::Data data;
+        data.copy((unsigned char *)&day, sizeof(day));
+        cocos2d::UserDefault::getInstance()->setDataForKey(GAME_SIGN_LAST_DAY_KEY.c_str(), data);
+        cocos2d::UserDefault::getInstance()->flush();
+    }
+
+    time_t UserDataManager::calculateTimeDay(time_t time)
+    {
+        return time / 86400;
     }
 
     void UserDataManager::saveDecalsUserData()
