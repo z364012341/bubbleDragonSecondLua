@@ -481,6 +481,7 @@
     <ClInclude Include="..\Classes\GameStoreItemFactory.h" />
     <ClInclude Include="..\Classes\GameStoreCommodity.h" />
     <ClInclude Include="..\Classes\GameStoreAlert.h" />
+    <ClInclude Include="..\Classes\GameSignBoardAlert.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -934,6 +935,7 @@
     <ClCompile Include="..\Classes\GameStoreItemFactory.cpp" />
     <ClCompile Include="..\Classes\GameStoreCommodity.cpp" />
     <ClCompile Include="..\Classes\GameStoreAlert.cpp" />
+    <ClCompile Include="..\Classes\GameSignBoardAlert.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

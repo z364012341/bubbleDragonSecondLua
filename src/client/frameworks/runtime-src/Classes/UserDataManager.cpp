@@ -135,6 +135,11 @@ namespace bubble_second {
         cocos2d::UserDefault::getInstance()->flush();
     }
 
+    time_t UserDataManager::getGameSignLastDay()
+    {
+        return time_t();
+    }
+
     void UserDataManager::saveDecalsUserData()
     {
         cocos2d::FileUtils::getInstance()->writeValueMapToFile(decals_data_, this->getDecalsDataPath());

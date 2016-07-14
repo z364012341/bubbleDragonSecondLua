@@ -58,9 +58,10 @@ namespace bubble_second {
         void popDecalsBookAlert();
         //弹出商城GameStoreAlert
         void popStoreAlert();
-
+        //弹出面板
         void popAlert(cocos2d::Node* alert);
-
+        //弹出签到面板
+        void popSignBoardAlert();
         cocos2d::Node* getAlertRenderNode();
         //进入场景调整滚动视图位置
         void adjustingScrollviewPosition();

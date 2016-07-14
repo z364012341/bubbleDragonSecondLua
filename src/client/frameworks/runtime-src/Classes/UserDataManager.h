@@ -91,6 +91,8 @@ namespace bubble_second {
         //获取体力的上一次时间
         time_t getStrengthLastTime();
         void saveStrengthLastTime();
+        //获取上一次登陆游戏的时间(天)
+        time_t getGameSignLastDay();
     private:
         ~UserDataManager();
         void writeStageDataToFile();

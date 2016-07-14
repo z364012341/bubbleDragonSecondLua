@@ -8,7 +8,7 @@
         <key>strength</key>
         <integer>5</integer>
         <key>md5</key>
-        <string>fa5ad00039fe62eda44ea1a68c46f232</string>
+        <string>4dbf96a9c410bbd3582e1495c72b33d8</string>
         <key>coin</key>
         <integer>1118</integer>
         <key>addTime</key>
@@ -16,7 +16,7 @@
         <key>woodenHammer</key>
         <integer>97</integer>
         <key>staves</key>
-        <integer>102</integer>
+        <integer>101</integer>
         <key>search</key>
         <integer>101</integer>
     </dict>

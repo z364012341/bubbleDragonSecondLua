@@ -17,6 +17,7 @@
 #include "GameAlertMask.h"
 #include "StageSelectionMenu.h"
 #include "GameStoreAlert.h"
+#include "GameSignBoardAlert.h"
 const std::string GAME_STAGE_SELECTION_CSB_PATH = "GameStageSelectionLayer.csb";
 const std::string STAGE_SCROLLVIEW_NAME = "StageScrollView";
 const std::string SETTING_BUTTON_NAME = "SettingButton";
@@ -24,6 +25,7 @@ const std::string SETTING_BUTTON_LINE_NAME = "shengzi_3";
 const std::string PUZZLE_BUTTON_NAME = "Puzzle";
 const std::string DECALS_BUTTON_NAME = "Button_2_0";
 const std::string STORE_BUTTON_NAME = "Button_2_1";
+const std::string SIGN_BUTTON_NAME = "CheckIn";
 const std::string STRENGTH_INFO = "StrengthInfo";
 //const std::string COIN_INFO = "CoinInfo";
 //const std::string DIAMOND_INFO = "DiamondInfo";
@@ -165,6 +167,11 @@ namespace bubble_second {
         assert(storeButton);
         storeButton->addClickEventListener([=](Ref*) {
             this->popStoreAlert();
+        });
+        Button* signButton = dynamic_cast<Button*>(csb_node_->getChildByName(SIGN_BUTTON_NAME));
+        assert(signButton);
+        signButton->addClickEventListener([=](Ref*) {
+            this->popSignBoardAlert();
         });
 
         this->layout();
@@ -385,6 +392,15 @@ namespace bubble_second {
         alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
         alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         this->getAlertRenderNode()->addChild(alert);
+    }
+
+    void GameStageSelectionScene::popSignBoardAlert()
+    {
+        GameSignBoardAlert* alert = GameSignBoardAlert::create();
+        cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+        alert->setPosition(visibleSize.width / 2, visibleSize.height);
+        alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+        this->addChild(alert);
     }
 
     cocos2d::Node * GameStageSelectionScene::getAlertRenderNode()

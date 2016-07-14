@@ -2,6 +2,7 @@
 #include "cocostudio\CocoStudio.h"
 #include "GameStartButton.h"
 #include "GameStageSelectionScene.h"
+#include "SmartScaleController.h"
 const std::string  GAME_SART_SCENE_CSB_PATH = "GameStartLayer.csb";
 const std::string  GAME_LOGO_NAME = "logopaopaolong_1";
 namespace bubble_second {
@@ -30,6 +31,7 @@ namespace bubble_second {
         this->addChild(csb_node);
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         csb_node->getChildByName(GAME_LOGO_NAME)->setPositionY(visibleSize.height*0.8352f);
+        csb_node->getChildByName("Sprite_2")->setScale(1/SmartScaleController::getInstance()->getPlayAreaZoom());
 
         GameStartButton* button = GameStartButton::createButtonPinkForm();
         button->setPosition(visibleSize.width*0.5f, visibleSize.height*0.3f);
