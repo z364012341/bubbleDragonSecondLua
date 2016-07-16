@@ -59,6 +59,18 @@ namespace bubble_second {
         int target = data.at(TARGET_ID_KEY).asInt();
         GameJNIHelper::getInstance()->payWithTargetID(target);
         //this->setCurrentPropsTarget(target);
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_BUY_PROPS_PAY_SUCCESS);
+    }
+    void GameBuyStoreMannager::buyPropsWithTokens(cocos2d::ValueMap data)
+    {
+        if (data.at(STORE_COST_KEY).asInt() <= UserDataManager::getInstance()->getPropsNumbleWithKey(data.at(STORE_COST_TYPE_KEY).asString()))
+        {
+            for (auto var : data.at(ITEM_PROPS_DATA_KEY).asValueMap())
+            {
+                UserDataManager::getInstance()->addPropsNumbleWithKey(var.first, var.second.asInt());
+            }
+            UserDataManager::getInstance()->cutPropsNumbleWithKey(data.at(STORE_COST_TYPE_KEY).asString(), data.at(STORE_COST_KEY).asInt());
+        }
     }
     bool GameBuyStoreMannager::isBuyPuzzleNewbiwGift()
     {

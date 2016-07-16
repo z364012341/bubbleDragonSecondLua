@@ -28,7 +28,7 @@ namespace bubble_second {
         std::string getCurrentArmatureName3();
         std::string getCurrentArmatureNameVictory();
         std::string getCurrentArmatureSkillEvent();
-        //void readNamesData();
+        void initNamesData();
         void setCurrentArmatureNameWithIndex(int index);
         void dispatchUseCurrentArmatureSkill();
     private:

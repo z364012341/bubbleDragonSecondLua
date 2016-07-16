@@ -530,7 +530,7 @@ namespace bubble_second {
     void GamePlayController::touchPropertyEnded(cocos2d::Touch *touch, cocos2d::Event *event)
     {
         auto sprite = dynamic_cast<BaseProperty*>(event->getCurrentTarget());
-        if (this->touchOnIt(touch->getLocation(), sprite) && sprite->isPropertyEnabled() && prepare_bubble_!=nullptr)
+        if (this->touchOnIt(touch->getLocation(), sprite) /*&& sprite->isPropertyEnabled()*/ && prepare_bubble_!=nullptr)
         {
             sprite->touchItem();
         }

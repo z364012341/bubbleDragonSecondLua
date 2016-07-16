@@ -19,7 +19,7 @@ const std::string PROP_MD5_SECRET_KEY = "*miaopass*";
 const std::string STAGE_TOTAL_STARTS_KEY = "total_starts";
 const std::string STRENGTH_COUNT_DOWN_TIME_KEY = "strength_count_down_time";
 const std::string GAME_SIGN_LAST_DAY_KEY = "game_sign_last_day";
-const int GAME_PROPS_DEFAULT_NUMBLE = 100;
+const int GAME_PROPS_DEFAULT_NUMBLE = 1;
 const int GAME_STRENGTH_DEFAULT_NUMBLE = 5;
 const std::map<std::string, int> PROPS_DEFAULT_NUMBLE_DATA = {
     { PUZZLE_SEARCH_PROP_KEY , GAME_PROPS_DEFAULT_NUMBLE },
@@ -33,7 +33,7 @@ const std::map<std::string, int> PROPS_DEFAULT_NUMBLE_DATA = {
     { GAME_STRENGTH_KEY , GAME_STRENGTH_DEFAULT_NUMBLE },
     { GAME_DIAMOND_KEY , 0 },
     { GAME_CHARACTOR_UNLOCK_NUMBLE_KEY , 1 },
-    { GAME_SIGN_DAY_NUMBLE_KEY , 0}
+    { GAME_SIGN_DAY_NUMBLE_KEY , 1}
 };
 namespace bubble_second {
     UserDataManager::UserDataManager()
@@ -160,6 +160,11 @@ namespace bubble_second {
     time_t UserDataManager::calculateTimeDay(time_t time)
     {
         return time / 86400;
+    }
+
+    bool UserDataManager::isLaterTheLastSignInDay()
+    {
+        return this->calculateTimeDay(time(0)) > this->getGameSignLastDay();
     }
 
     void UserDataManager::saveDecalsUserData()

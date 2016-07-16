@@ -11,6 +11,7 @@
 #include "DecalsFactory.h"
 #include "GameCharactorNameManager.h"
 #include "GameSartScene.h"
+#include "GameStoreItemFactory.h"
 namespace bubble_second {
     cocos2d::Scene * LoadingScene::createScene()
     {
@@ -51,7 +52,8 @@ namespace bubble_second {
         PuzzleStageDataManager::getInstance()->loadPuzzleStageData();
         PuzzleStoreItemFactory::getInstance()->loadItemData();
         DecalsFactory::getInstance()->loadDecalsData();
-        GameCharactorNameManager::getInstance();
+        GameCharactorNameManager::getInstance()->initNamesData();
+        GameStoreItemFactory::getInstance()->loadItemsData();
         cocos2d::Scene* scene = GameStageSelectionScene::createScene();
         scene->addChild(GameSartScene::create());
         cocos2d::Director::getInstance()->replaceScene(scene);

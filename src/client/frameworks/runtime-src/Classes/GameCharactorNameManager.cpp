@@ -35,6 +35,11 @@ namespace bubble_second {
     GameCharactorNameManager::GameCharactorNameManager()
     {
         //current_name_ = CHARCTOR_TUZI_ARMATURE_KEY;
+        
+        //cocos2d::FileUtils::getInstance()->writeValueMapToFile(charactor_armature_names_, cocos2d::FileUtils::getInstance()->getWritablePath()+"charactorNamesData.plist");
+    }
+    void GameCharactorNameManager::initNamesData()
+    {
         {
             cocos2d::ValueMap names_map;
             names_map[CHARCTOR_ARMATURE_KEY_1] = GAME_CHARACTER_ARMATURE_LAOHU_NAME;
@@ -45,7 +50,7 @@ namespace bubble_second {
             names_map[CHARCTOR_SKILL_USE_EVENT_KEY] = EVENT_USE_DYEING_BUBBLE_SKILL;
             charactor_armature_names_[CHARCTOR_LAOHU_ARMATURE_KEY] = names_map;
         }
-        {               
+        {
             cocos2d::ValueMap names_map;
             names_map[CHARCTOR_ARMATURE_KEY_1] = GAME_CHARACTER_ARMATURE_MIAO_1_NAME;
             names_map[CHARCTOR_ARMATURE_KEY_2] = GAME_CHARACTER_ARMATURE_MIAO_2_NAME;
@@ -75,9 +80,7 @@ namespace bubble_second {
             names_map[CHARCTOR_SKILL_USE_EVENT_KEY] = EVENT_USE_BIG_BOMB_BUBBLE_SKILL;
             charactor_armature_names_[CHARCTOR_TUZI_ARMATURE_KEY] = names_map;
         }
-        //cocos2d::FileUtils::getInstance()->writeValueMapToFile(charactor_armature_names_, cocos2d::FileUtils::getInstance()->getWritablePath()+"charactorNamesData.plist");
     }
-
 
     GameCharactorNameManager::~GameCharactorNameManager()
     {
@@ -106,10 +109,7 @@ namespace bubble_second {
     {
         return charactor_armature_names_[this->getCurrentArmatureName()].asValueMap()[CHARCTOR_SKILL_USE_EVENT_KEY].asString();;
     }
-    //void GameCharactorNameManager::readNamesData()
-    //{
-    //    charactor_armature_names_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(NAMES_DATA_PATH);
-    //}
+
     void GameCharactorNameManager::setCurrentArmatureNameWithIndex(int index)
     {
         assert(index >= 0);

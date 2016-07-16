@@ -19,6 +19,12 @@ namespace bubble_second {
     private:
         GameSignBoardAlert();
         bool init();
+        void initTodayBoard();
+        bool isNeedSignIn();
+        void addSignInReward();
+    private:
+        cocos2d::Node* csb_node_ = nullptr;
+        int sign_day_ = 0;
     };
 }
 #endif 

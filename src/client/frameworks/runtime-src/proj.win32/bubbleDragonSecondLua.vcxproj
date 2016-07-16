@@ -256,6 +256,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GameSettingAlert.h" />
     <ClInclude Include="..\Classes\GameShareButton.h" />
     <ClInclude Include="..\Classes\GameSignBoardAlert.h" />
+    <ClInclude Include="..\Classes\GameSinglePropBuyAlert.h" />
     <ClInclude Include="..\Classes\GameStageSelectionCell.h" />
     <ClInclude Include="..\Classes\GameStageSelectionScene.h" />
     <ClInclude Include="..\Classes\GameStageVehicle.h" />
@@ -416,6 +417,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GameSettingAlert.cpp" />
     <ClCompile Include="..\Classes\GameShareButton.cpp" />
     <ClCompile Include="..\Classes\GameSignBoardAlert.cpp" />
+    <ClCompile Include="..\Classes\GameSinglePropBuyAlert.cpp" />
     <ClCompile Include="..\Classes\GameStageSelectionCell.cpp" />
     <ClCompile Include="..\Classes\GameStageSelectionScene.cpp" />
     <ClCompile Include="..\Classes\GameStageVehicle.cpp" />

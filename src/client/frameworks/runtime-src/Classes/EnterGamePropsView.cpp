@@ -5,6 +5,7 @@
 #include "GameTextInfo.h"
 #include "GamePropsCostTag.h"
 #include "UserDataManager.h"
+
 const std::map<std::string, std::string> COMMODITY_TO_CSB_PATH = {
     { COMMODITY_ADD_10_BUBBLE_KEY , "AddBubbleNumbleCommodity.csb"},
     { COMMODITY_AIMING_LINE_KEY , "AimingLineCommodity.csb" },
@@ -85,6 +86,13 @@ namespace bubble_second {
                     EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag->getSelectedState());
                     EnterPropsViewManager::getInstance()->addPrePropsCost(cost_tag->getCostNumble());
                 }
+                //else
+                //{
+                //    GameSinglePropBuyAlert* alert = GameSinglePropBuyAlert::createWithPropKey(prop_key);
+                //    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+                //    alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+                //    cocos2d::Director::getInstance()->getRunningScene()->addChild(alert);
+                //}
             }
         });
 

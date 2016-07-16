@@ -482,6 +482,7 @@
     <ClInclude Include="..\Classes\GameStoreCommodity.h" />
     <ClInclude Include="..\Classes\GameStoreAlert.h" />
     <ClInclude Include="..\Classes\GameSignBoardAlert.h" />
+    <ClInclude Include="..\Classes\GameSinglePropBuyAlert.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -936,6 +937,7 @@
     <ClCompile Include="..\Classes\GameStoreCommodity.cpp" />
     <ClCompile Include="..\Classes\GameStoreAlert.cpp" />
     <ClCompile Include="..\Classes\GameSignBoardAlert.cpp" />
+    <ClCompile Include="..\Classes\GameSinglePropBuyAlert.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

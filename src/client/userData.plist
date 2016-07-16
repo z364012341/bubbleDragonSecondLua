@@ -3,21 +3,15 @@
 
 <plist version="1.0">
     <dict>
-        <key>colorBomb</key>
-        <integer>101</integer>
         <key>strength</key>
-        <integer>5</integer>
+        <integer>3</integer>
+        <key>game_sign_day_numble</key>
+        <integer>2</integer>
         <key>md5</key>
-        <string>4dbf96a9c410bbd3582e1495c72b33d8</string>
+        <string>54b1b947a194b6eea4a925a859733e45</string>
         <key>coin</key>
-        <integer>1118</integer>
-        <key>addTime</key>
-        <integer>102</integer>
+        <integer>10888</integer>
         <key>woodenHammer</key>
-        <integer>97</integer>
-        <key>staves</key>
-        <integer>101</integer>
-        <key>search</key>
-        <integer>101</integer>
+        <integer>0</integer>
     </dict>
 </plist>

@@ -96,6 +96,7 @@ namespace bubble_second {
         time_t getGameSignLastDay();
         void saveGameSignLastDay();
         time_t calculateTimeDay(time_t time);
+        bool isLaterTheLastSignInDay();
     private:
         ~UserDataManager();
         void writeStageDataToFile();

@@ -4,6 +4,7 @@
 #include "ButtonEffectController.h"
 #include "ui\UIScale9Sprite.h"
 #include "PropsNumbleShow.h"
+#include "GameSinglePropBuyAlert.h"
 const float PROPS_BUTTON_POS_X = 100.0f;
 const float PROPS_BUTTON_POS_Y = 35.0f;
 
@@ -54,6 +55,14 @@ namespace bubble_second {
 
     void BaseProperty::touchItem()
     {
+        if (!this->isPropertyEnabled())
+        {
+            GameSinglePropBuyAlert* alert = GameSinglePropBuyAlert::createWithPropKey(property_key_);
+            cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+            alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+            cocos2d::Director::getInstance()->getRunningScene()->addChild(alert);
+            return;
+        }
         auto handle = state_to_handle_[this->getPropsState()];
         if (handle && touch_flag_)
         {

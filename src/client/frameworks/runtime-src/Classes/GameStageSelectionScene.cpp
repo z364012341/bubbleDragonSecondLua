@@ -25,7 +25,7 @@ const std::string SETTING_BUTTON_LINE_NAME = "shengzi_3";
 const std::string PUZZLE_BUTTON_NAME = "Puzzle";
 const std::string DECALS_BUTTON_NAME = "Button_2_0";
 const std::string STORE_BUTTON_NAME = "Button_2_1";
-const std::string SIGN_BUTTON_NAME = "CheckIn";
+//const std::string SIGN_BUTTON_NAME = "CheckIn";
 const std::string STRENGTH_INFO = "StrengthInfo";
 //const std::string COIN_INFO = "CoinInfo";
 //const std::string DIAMOND_INFO = "DiamondInfo";
@@ -56,7 +56,7 @@ namespace bubble_second {
         //float pos_y = (-cell_vector_.at(cell_numble)->getPositionY() + GAME_STAGE_SCROLLVIEW_CELL_OFFSET_OFFSET)/*scale_zoom_*/;
         StageSelectionMenu* current_menu = StageMenuManager::getInstance()->getCurentStagemenu();
         cocos2d::Vec2 world_pos = current_menu->getParent()->convertToWorldSpace(current_menu->getPosition());
-        float pos_y = MAX(0.0f, cell_vector_.at(cell_numble)->getPositionY() + cell_vector_.at(cell_numble)->convertToNodeSpace(world_pos).y - cocos2d::Director::getInstance()->getVisibleSize().height/2);
+        float pos_y = MAX(0.0f, cell_vector_.at(cell_numble)->getPositionY() + cell_vector_.at(cell_numble)->convertToNodeSpace(world_pos).y - cocos2d::Director::getInstance()->getVisibleSize().height / 2);
         cocos2d::Vec2 point = cocos2d::Vec2(0.0f, -pos_y);
         return point;
         //return cell_position_vector_.at(cell_numble);
@@ -130,12 +130,12 @@ namespace bubble_second {
         this->setName(GAME_STAGE_SELECTION_SCENE_NAME);
         this->loadView();
         this->addStageCell();
-		this->addStageVehicle();
+        this->addStageVehicle();
         cocos2d::Director::getInstance()->setDisplayStats(true);
-
-		//stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
-		//cocos2d::MoveBy * move = cocos2d::MoveBy::create(2.0f, StageMenuManager::getInstance()->getCurrentStagePositionDelta());
-	 //   stage_vehicle_->runAction(move);
+        this->popSignBoardAlert();
+        //stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getLastStageWorldPosition());
+        //cocos2d::MoveBy * move = cocos2d::MoveBy::create(2.0f, StageMenuManager::getInstance()->getCurrentStagePositionDelta());
+     //   stage_vehicle_->runAction(move);
 
 
 
@@ -168,11 +168,11 @@ namespace bubble_second {
         storeButton->addClickEventListener([=](Ref*) {
             this->popStoreAlert();
         });
-        Button* signButton = dynamic_cast<Button*>(csb_node_->getChildByName(SIGN_BUTTON_NAME));
-        assert(signButton);
-        signButton->addClickEventListener([=](Ref*) {
-            this->popSignBoardAlert();
-        });
+        //Button* signButton = dynamic_cast<Button*>(csb_node_->getChildByName(SIGN_BUTTON_NAME));
+        //assert(signButton);
+        //signButton->addClickEventListener([=](Ref*) {
+            //this->popSignBoardAlert();
+        //});
 
         this->layout();
     }
@@ -187,7 +187,7 @@ namespace bubble_second {
         float visibleHeight = cocos2d::Director::getInstance()->getVisibleSize().height;
         //csb_node_->getChildByName(STRENGTH_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
 
-		//csb_node_->getChildByName(COIN_INFO)->addChild(UserCoinInfoBoard::create());
+        //csb_node_->getChildByName(COIN_INFO)->addChild(UserCoinInfoBoard::create());
         //csb_node_->getChildByName(COIN_INFO)->setPositionY(visibleHeight*TOP_INFO_POS_Y_PERCENT);
         this->addChild(UserCoinInfoBoard::create());
         this->addChild(UserDiamondInfoBoard::create());
@@ -329,10 +329,10 @@ namespace bubble_second {
 
     void GameStageSelectionScene::enterNextStage()
     {
-		if (UserDataManager::getInstance()->isUnlockWithStageNumble(StageDataManager::getInstance()->getCurrentLevel()))
-		{
-			return;
-		}
+        if (UserDataManager::getInstance()->isUnlockWithStageNumble(StageDataManager::getInstance()->getCurrentLevel()))
+        {
+            return;
+        }
         UserDataManager::getInstance()->addUnlockStageNumble();
         StageMenuManager::getInstance()->getCurentStagemenu()->preUnlockStage();
 
@@ -343,22 +343,22 @@ namespace bubble_second {
             }
             else
             {
-                StageDataManager::getInstance()->setCurrentCell(StageDataManager::getInstance()->getCurrentCell()+1);
+                StageDataManager::getInstance()->setCurrentCell(StageDataManager::getInstance()->getCurrentCell() + 1);
             }
             StageDataManager::getInstance()->setCurrentLevel(StageDataManager::getInstance()->getCurrentLevel() + 1);
             StageMenuManager::getInstance()->getCurentStagemenu()->unlockStage();
-    }));
+        }));
     }
 
     void bubble_second::GameStageSelectionScene::gotoPuzzleGame()
     {
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
-            // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
-            auto runtimeEngine = RuntimeEngine::getInstance();
-            runtimeEngine->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
-            runtimeEngine->start();
+        // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
+        auto runtimeEngine = RuntimeEngine::getInstance();
+        runtimeEngine->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
+        runtimeEngine->start();
 #else
-			//cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua");
+        //cocos2d::LuaEngine::getInstance()->executeScriptFile("src/ReplacePuzzlePlayScene.lua");
         cocos2d::LuaEngine::getInstance()->executeString("cc.Director:getInstance():replaceScene(require(PUZZLE_SELECTED_SCENE_PATH):createScene());");
 #endif
     }
@@ -397,6 +397,10 @@ namespace bubble_second {
     void GameStageSelectionScene::popSignBoardAlert()
     {
         GameSignBoardAlert* alert = GameSignBoardAlert::create();
+        if (alert == nullptr)
+        {
+            return;
+        }
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         alert->setPosition(visibleSize.width / 2, visibleSize.height);
         alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
@@ -414,23 +418,23 @@ namespace bubble_second {
         if (fire_flag)
         {//第一次要移动到最新的关卡
             //auto p = this->getScorllViewOffset(UserDataManager::getInstance()->getPresentCell());
-			scrollview_->setInnerContainerPosition(this->getScorllViewOffset(UserDataManager::getInstance()->getPresentCell()));
+            scrollview_->setInnerContainerPosition(this->getScorllViewOffset(UserDataManager::getInstance()->getPresentCell()));
             //scrollview_->setInnerContainerPosition(cocos2d::Vec2::ZERO);
             fire_flag = false;
             StageMenuManager::getInstance()->getCurentStagemenu()->turnOnBlink();
         }
         else
         {
-			scrollview_->setInnerContainerPosition(scrollview_offset_);
+            scrollview_->setInnerContainerPosition(scrollview_offset_);
         }
     }
 
-	void GameStageSelectionScene::addStageVehicle()
-	{
-		stage_vehicle_ = GameStageVehicle::create();
-		scrollview_->addChild(stage_vehicle_);
-		stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getCurrentStageWorldPosition());
-	}
+    void GameStageSelectionScene::addStageVehicle()
+    {
+        stage_vehicle_ = GameStageVehicle::create();
+        scrollview_->addChild(stage_vehicle_);
+        stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getCurrentStageWorldPosition());
+    }
 
     void GameStageSelectionScene::settingButtonFunc(cocos2d::Ref * target, cocos2d::ui::Widget::TouchEventType type)
     {

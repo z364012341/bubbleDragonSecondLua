@@ -18,7 +18,7 @@ const std::string SHOWNAME_KEY = "showName";
 const std::string STORE_NUMBLE_KEY = "numble";
 const std::string STORE_NAME_KEY = "storeName";
 const std::string STORE_DESCRIPTION_KEY = "description";
-const std::string STORE_COST_KEY = "cost";
+const std::string PUZZLE_STORE_COST_KEY = "cost";
 const std::string STORE_NUMBLE_NAME = "BitmapFontLabel_2_0";
 const std::string STORE_NAME_LABEL_NAME = "BitmapFontLabel_1";
 const std::string STORE_DESCRIPTION_LABEL_NAME = "BitmapFontLabel_1_0";
@@ -52,7 +52,7 @@ namespace bubble_second {
 
         cocos2d::Node* button_label_node = cocos2d::CSLoader::createNode(BUY_BUTTON_CAB_PATH);
         assert(dynamic_cast<cocos2d::ui::TextBMFont*>(button_label_node->getChildByName(BUY_COST_LABEL_NAME)));
-        dynamic_cast<cocos2d::ui::TextBMFont*>(button_label_node->getChildByName(BUY_COST_LABEL_NAME))->setString(data.at(STORE_COST_KEY).asString());
+        dynamic_cast<cocos2d::ui::TextBMFont*>(button_label_node->getChildByName(BUY_COST_LABEL_NAME))->setString(data.at(PUZZLE_STORE_COST_KEY).asString());
 
         assert(dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName(BUY_BUTTON_NAME)));
         cocos2d::ui::Button* button = dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName(BUY_BUTTON_NAME));
@@ -89,7 +89,7 @@ namespace bubble_second {
 
         cocos2d::Node* button_label_node = cocos2d::CSLoader::createNode(BUY_BUTTON_CAB_PATH);
         assert(dynamic_cast<cocos2d::ui::TextBMFont*>(button_label_node->getChildByName(BUY_COST_LABEL_NAME)));
-        dynamic_cast<cocos2d::ui::TextBMFont*>(button_label_node->getChildByName(BUY_COST_LABEL_NAME))->setString(data.at(STORE_COST_KEY).asString());
+        dynamic_cast<cocos2d::ui::TextBMFont*>(button_label_node->getChildByName(BUY_COST_LABEL_NAME))->setString(data.at(PUZZLE_STORE_COST_KEY).asString());
 
         cocos2d::ui::Button* button = dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName("libaokuang_1")->getChildByName(BUY_BUTTON_NAME));
         assert(button);
