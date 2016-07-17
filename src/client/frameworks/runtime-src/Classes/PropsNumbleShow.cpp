@@ -5,6 +5,8 @@
 #include "UserDataManager.h"
 //#include "cocostudio\CocoStudio.h"
 #include "ExhibitionNumble.h"
+#include "GameSinglePropBuyAlert.h"
+#include "SmartScaleController.h"
 const std::string PLUS_SPRITE_PATH = "plus.png";
 //const cocos2d::Vec2 PROPS_NUMBLE_SHOW_POSITION = cocos2d::Vec2(35.0f, -35.0f);
 namespace bubble_second {
@@ -13,19 +15,19 @@ namespace bubble_second {
     }
 
     PropsNumbleShow* bubble_second::PropsNumbleShow::create(const std::string& prop_key)
-    {  
+    {
         PropsNumbleShow *pRet = new(std::nothrow) PropsNumbleShow();
         if (pRet && pRet->init(prop_key))
-        {  
-            pRet->autorelease();  
-            return pRet;  
-        }  
-        else  
-        {  
-            delete pRet;  
-            pRet = nullptr;  
-            return nullptr;  
-        }  
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = nullptr;
+            return nullptr;
+        }
     }
 
     bool PropsNumbleShow::init(const std::string& prop_key)
@@ -74,7 +76,12 @@ namespace bubble_second {
         if (this->isNoneProp())
         {
             //this->addPropNumble(3);
-            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_GAME_STORE);
+            //std::string key = prop_key_;
+            //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_GAME_STORE, &prop_key_);
+            GameSinglePropBuyAlert* alert = GameSinglePropBuyAlert::createWithPropKey(prop_key_);
+            alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+            alert->setPosition(cocos2d::Director::getInstance()->getVisibleSize().width / 2, cocos2d::Director::getInstance()->getVisibleSize().height / 2);
+            cocos2d::Director::getInstance()->getRunningScene()->addChild(alert);
             return false;
         }
         UserDataManager::getInstance()->cutPropsNumbleWithKey(prop_key_);

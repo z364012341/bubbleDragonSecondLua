@@ -461,6 +461,17 @@ namespace bubble_second {
     void GameStoreItemFactory::loadItemsData()
     {
         store_items_data_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(GAME_STORE_ITEM_DATA_PATH);
+        for (auto var : store_items_data_.at(GAME_STORE_PROPS_DATA_KEY).asValueVector())
+        {
+            cocos2d::ValueMap data = var.asValueMap().at(ITEM_PROPS_DATA_KEY).asValueMap();
+            assert(data.size() == 1);
+            if (data.begin()->second.asInt() == 1)
+            {
+                cocos2d::ValueMap price_data;
+                price_data[var.asValueMap().at(STORE_COST_TYPE_KEY).asString()] = var.asValueMap().at(STORE_COST_KEY);
+                store_unit_price_data_[data.begin()->first] = price_data;
+            }
+        }
     }
 
     cocos2d::Vector<cocos2d::Node*> GameStoreItemFactory::getGiftListViewItems()
@@ -571,5 +582,9 @@ namespace bubble_second {
             layer->addChild(csb_node);
         }
         return items;
+    }
+    cocos2d::ValueMap GameStoreItemFactory::getPropUnitPriceData(const std::string& prop_key)
+    {
+        return store_unit_price_data_.at(prop_key).asValueMap();
     }
 }

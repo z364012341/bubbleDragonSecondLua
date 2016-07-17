@@ -29,7 +29,7 @@ namespace bubble_second {
         bool canPay();
         //ฟÛทั
         void pay();
-
+        //get
         int getCostNumble();
     private:
         bool initWithKey(const std::string& prop_key);

@@ -20,10 +20,12 @@ namespace bubble_second {
         cocos2d::Vector<cocos2d::Node*> getGiftListViewItems();
         cocos2d::Vector<cocos2d::Node*> getDiamondListViewItems();
         cocos2d::Vector<cocos2d::Node*> getPropsListViewItems();
+        cocos2d::ValueMap getPropUnitPriceData(const std::string& prop_key);
     private:
         GameStoreItemFactory();
     private:
         cocos2d::ValueMap store_items_data_;
+        cocos2d::ValueMap store_unit_price_data_;
     };
 }
 #endif //_GAME_STORE_ITEM_FACTORY_H_

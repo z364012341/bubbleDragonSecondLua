@@ -25,6 +25,9 @@ namespace bubble_second {
         button_ = cocos2d::ui::Button::create(ADD_BUTTON_PATH);
         ButtonEffectController::setButtonZoomScale(button_);
         this->addChild(button_);
+        button_->addClickEventListener([=](cocos2d::Ref*) {
+            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_GAME_STORE);
+        });
 
 		csb_node_ = cocos2d::CSLoader::createNode(CSB_PATH);
 		this->playButtonAction();

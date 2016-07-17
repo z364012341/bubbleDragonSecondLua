@@ -20,6 +20,7 @@
 #include "GameSignBoardAlert.h"
 const std::string GAME_STAGE_SELECTION_CSB_PATH = "GameStageSelectionLayer.csb";
 const std::string STAGE_SCROLLVIEW_NAME = "StageScrollView";
+const std::string STORE_ALERT_NAME = "STORE_ALERT_NAME";
 const std::string SETTING_BUTTON_NAME = "SettingButton";
 const std::string SETTING_BUTTON_LINE_NAME = "shengzi_3";
 const std::string PUZZLE_BUTTON_NAME = "Puzzle";
@@ -273,6 +274,9 @@ namespace bubble_second {
         dispatcher->addCustomEventListener(EVENT_UNLOCK_STAGE_MENU, [=](cocos2d::EventCustom* event) {
             this->popEnterGameAlert();
         });
+        dispatcher->addCustomEventListener(EVENT_POP_GAME_STORE, [=](cocos2d::EventCustom* event) {
+            this->popStoreAlert();
+        });
     }
 
     void GameStageSelectionScene::removeEventListenerCustom()
@@ -281,6 +285,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_POP_ENTER_GAME_ALERT);
         dispatcher->removeCustomEventListeners(EVENT_SETTING_ALERT_CLOSE);
         dispatcher->removeCustomEventListeners(EVENT_UNLOCK_STAGE_MENU);
+        dispatcher->removeCustomEventListeners(EVENT_POP_GAME_STORE);
     }
 
     void GameStageSelectionScene::addMouseEventListener()
@@ -383,7 +388,12 @@ namespace bubble_second {
 
     void GameStageSelectionScene::popStoreAlert()
     {
-        this->popAlert(GameStoreAlert::create());
+        if (this->getAlertRenderNode()->getChildByName(STORE_ALERT_NAME) == nullptr)
+        {
+            GameStoreAlert* store_alert = GameStoreAlert::create();
+            store_alert->setName(STORE_ALERT_NAME);
+            this->popAlert(store_alert);
+        }
     }
 
     void GameStageSelectionScene::popAlert(cocos2d::Node * alert)

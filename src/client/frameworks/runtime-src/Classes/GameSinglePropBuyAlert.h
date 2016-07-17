@@ -22,10 +22,19 @@ namespace bubble_second {
         bool initWithPropKey(const std::string& prop_key);
         void loadView();
         void updataNumbleLabel();
+        void updataCostLabel();
+        int getTotalCost();
+        int calculateBuyCost(int numble);
+        //+°´Å¥
+        void addBuyNumble();
+        void cutBuyNumble();
+
     private:
         std::string prop_key_ = "";
         int buy_numble_ = 0;
         cocos2d::ui::TextBMFont* numble_label_ = nullptr;
+        cocos2d::ui::TextBMFont* cost_label_ = nullptr;
+        cocos2d::ValueMap cost_data_;
     };
 }
 #endif

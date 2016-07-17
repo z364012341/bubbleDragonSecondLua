@@ -4,14 +4,16 @@
 <plist version="1.0">
     <dict>
         <key>strength</key>
-        <integer>3</integer>
+        <integer>5</integer>
         <key>game_sign_day_numble</key>
         <integer>2</integer>
         <key>md5</key>
-        <string>54b1b947a194b6eea4a925a859733e45</string>
+        <string>c6848f846376ad2857b5f6d47cf343a0</string>
         <key>coin</key>
-        <integer>10888</integer>
-        <key>woodenHammer</key>
+        <integer>5888</integer>
+        <key>bigEyes</key>
         <integer>0</integer>
+        <key>search</key>
+        <integer>1</integer>
     </dict>
 </plist>

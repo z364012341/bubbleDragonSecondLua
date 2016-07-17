@@ -45,6 +45,7 @@ namespace bubble_second {
     {
         return cost_numble_;
     }
+
     bool GamePropsCostTag::initWithKey(const std::string & prop_key)
     {
         if (!cocos2d::Node::init())
