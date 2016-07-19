@@ -23,6 +23,9 @@
 #include "lua_GameBuyStoreMannager_auto.hpp"
 #include "lua_GameLotteryAwardItem_auto.hpp"
 #include "lua_GamePropsCostTag_auto.hpp"
+#include "lua_GameSinglePropBuyAlertFactory_auto.hpp"
+#include "lua_GameSinglePropBuyAlert_auto.hpp"
+
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
 #include "ide-support/CodeIDESupport.h"
 #endif
@@ -116,6 +119,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     register_all_GameBuyStoreMannager(engine->getLuaStack()->getLuaState());
     register_all_GameLotteryAwardItem(engine->getLuaStack()->getLuaState());
     register_all_GamePropsCostTag(engine->getLuaStack()->getLuaState());
+    register_all_GameSinglePropBuyAlertFactory(engine->getLuaStack()->getLuaState());
+    register_all_GameSinglePropBuyAlert(engine->getLuaStack()->getLuaState());
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
     auto runtimeEngine = RuntimeEngine::getInstance();

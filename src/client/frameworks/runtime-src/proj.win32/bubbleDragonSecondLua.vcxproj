@@ -245,6 +245,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GameLotteryAwardItem.h" />
     <ClInclude Include="..\Classes\GameNoneBubbleDownAnimationComponent.h" />
     <ClInclude Include="..\Classes\GameNoopAnimationComponent.h" />
+    <ClInclude Include="..\Classes\GameNoviceGuideFactory.h" />
     <ClInclude Include="..\Classes\GamePauseAlert.h" />
     <ClInclude Include="..\Classes\GamePlayController.h" />
     <ClInclude Include="..\Classes\GamePropsCostTag.h" />
@@ -257,6 +258,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\GameShareButton.h" />
     <ClInclude Include="..\Classes\GameSignBoardAlert.h" />
     <ClInclude Include="..\Classes\GameSinglePropBuyAlert.h" />
+    <ClInclude Include="..\Classes\GameSinglePropBuyAlertFactory.h" />
     <ClInclude Include="..\Classes\GameStageSelectionCell.h" />
     <ClInclude Include="..\Classes\GameStageSelectionScene.h" />
     <ClInclude Include="..\Classes\GameStageVehicle.h" />
@@ -284,6 +286,8 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\lua_GameLotteryAwardItem_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GamePropsCostTag_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameShareButton_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_GameSinglePropBuyAlertFactory_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_GameSinglePropBuyAlert_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameStageSelectionScene_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameStartButton_auto.hpp" />
     <ClInclude Include="..\Classes\lua_LoadingScene_auto.hpp" />
@@ -406,6 +410,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GameLotteryAwardItem.cpp" />
     <ClCompile Include="..\Classes\GameNoneBubbleDownAnimationComponent.cpp" />
     <ClCompile Include="..\Classes\GameNoopAnimationComponent.cpp" />
+    <ClCompile Include="..\Classes\GameNoviceGuideFactory.cpp" />
     <ClCompile Include="..\Classes\GamePauseAlert.cpp" />
     <ClCompile Include="..\Classes\GamePlayController.cpp" />
     <ClCompile Include="..\Classes\GamePropsCostTag.cpp" />
@@ -418,6 +423,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\GameShareButton.cpp" />
     <ClCompile Include="..\Classes\GameSignBoardAlert.cpp" />
     <ClCompile Include="..\Classes\GameSinglePropBuyAlert.cpp" />
+    <ClCompile Include="..\Classes\GameSinglePropBuyAlertFactory.cpp" />
     <ClCompile Include="..\Classes\GameStageSelectionCell.cpp" />
     <ClCompile Include="..\Classes\GameStageSelectionScene.cpp" />
     <ClCompile Include="..\Classes\GameStageVehicle.cpp" />
@@ -444,6 +450,8 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\lua_GameLotteryAwardItem_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GamePropsCostTag_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameShareButton_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_GameSinglePropBuyAlertFactory_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_GameSinglePropBuyAlert_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameStageSelectionScene_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameStartButton_auto.cpp" />
     <ClCompile Include="..\Classes\lua_LoadingScene_auto.cpp" />

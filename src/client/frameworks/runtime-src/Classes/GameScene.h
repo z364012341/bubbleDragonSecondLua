@@ -255,6 +255,12 @@ namespace bubble_second {
         void useCharactorSkill(BaseBubble* bubble);
         //正在使用技能
         bool isUsingSkill();
+        //弹出开始的新手教程
+        void popNoviceGuideAlert();
+        //弹出面板
+        void popAlert(cocos2d::Node* alert);
+        //移除面板
+        void removeAlert();
     private:
         //添加自定义事件监听
         void addEventListenerCustom();
@@ -385,6 +391,7 @@ namespace bubble_second {
         cocos2d::Vector<cocos2d::Sprite*> top_eliminate_logos_;
         GameCharactorSkillButton* skill_button_ = nullptr;
         bool charactor_skill_using_ = false;
+        cocos2d::Node* alert_ = nullptr;
     };
 }
 #endif //_GAME_SCENE_H_

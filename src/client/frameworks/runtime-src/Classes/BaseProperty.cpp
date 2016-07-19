@@ -4,7 +4,8 @@
 #include "ButtonEffectController.h"
 #include "ui\UIScale9Sprite.h"
 #include "PropsNumbleShow.h"
-#include "GameSinglePropBuyAlert.h"
+#include "GameSinglePropBuyAlertFactory.h"
+//#include "GameSinglePropBuyAlert.h"
 const float PROPS_BUTTON_POS_X = 100.0f;
 const float PROPS_BUTTON_POS_Y = 35.0f;
 
@@ -57,10 +58,16 @@ namespace bubble_second {
     {
         if (!this->isPropertyEnabled())
         {
-            GameSinglePropBuyAlert* alert = GameSinglePropBuyAlert::createWithPropKey(property_key_);
-            cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-            alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-            cocos2d::Director::getInstance()->getRunningScene()->addChild(alert);
+            //GameSinglePropBuyAlert* alert = GameSinglePropBuyAlert::createWithPropKey(property_key_);
+            //cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+            //alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+            //cocos2d::Director::getInstance()->getRunningScene()->addChild(alert);
+            //std::string str = property_key_;
+            //this->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_GAME_STORE, &str);
+            if (props_numble_label_->isNoneProp())
+            {
+                GameSinglePropBuyAlertFactory::getInstance()->popGameSinglePropBuyAlertWithKey(property_key_);
+            }
             return;
         }
         auto handle = state_to_handle_[this->getPropsState()];
@@ -115,13 +122,13 @@ namespace bubble_second {
         //{
         //    this->removeTouchEventListener();
         //}
-        touch_enable_ = flag && !props_numble_label_->isNoneProp();
+        touch_enable_ = flag;
         //button_->setEnabled(flag);
     }
 
     bool BaseProperty::isPropertyEnabled()
     {
-        return touch_enable_;
+        return touch_enable_ && !props_numble_label_->isNoneProp();
     }
 
     void BaseProperty::removeTouchEventListener()

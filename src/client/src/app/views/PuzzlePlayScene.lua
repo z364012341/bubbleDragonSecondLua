@@ -305,7 +305,8 @@ function PuzzlePlayScene:popAlert( alert_class , params)
 end
 function PuzzlePlayScene:popStoreAlert()
     self:gamePause();
-    self.alert_ = PuzzleStoreAlert:create();
+    self.alert_ = bs.GameSinglePropBuyAlertFactory:getInstance():createGameSinglePropBuyAlert();
+    self.alert_:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     self.alert_:setPosition(GlobalFunction.getVisibleCenterPosition());
     self:addChild(self.alert_);
 end

@@ -82,6 +82,8 @@ namespace bubble_second {
                 }
                 else if (UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY) - EnterPropsViewManager::getInstance()->getPrePropsCost() >= cost_tag->getCostNumble())
                 {
+                    auto a = EnterPropsViewManager::getInstance()->getPrePropsCost();
+                    auto b = UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY);
                     cost_tag->changeSelectedState();
                     EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag->getSelectedState());
                     EnterPropsViewManager::getInstance()->addPrePropsCost(cost_tag->getCostNumble());

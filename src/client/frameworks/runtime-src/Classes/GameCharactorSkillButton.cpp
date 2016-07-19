@@ -193,15 +193,15 @@ namespace bubble_second {
 
     void GameCharactorSkillButton::skillButtonClickCallBack(cocos2d::Ref *)
     {
-        //if (!button_enabled_)
-        //{
-        //    return;
-        //}
-        //if (this->isSkillEnergyFull() && !GameScoreController::getInstance()->noUseBubbleCount())
-        //{
-        //    this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
-        //}
-        this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
+        if (!button_enabled_)
+        {
+            return;
+        }
+        if (this->isSkillEnergyFull() && !GameScoreController::getInstance()->noUseBubbleCount())
+        {
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
+        }
+        //this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
     }
 
     void GameCharactorSkillButton::setSkillButtonEnabled(bool enabled)

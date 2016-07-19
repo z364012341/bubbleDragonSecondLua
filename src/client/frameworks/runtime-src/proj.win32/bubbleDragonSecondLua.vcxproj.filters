@@ -483,6 +483,14 @@
     <ClInclude Include="..\Classes\GameStoreAlert.h" />
     <ClInclude Include="..\Classes\GameSignBoardAlert.h" />
     <ClInclude Include="..\Classes\GameSinglePropBuyAlert.h" />
+    <ClInclude Include="..\Classes\GameSinglePropBuyAlertFactory.h" />
+    <ClInclude Include="..\Classes\lua_GameSinglePropBuyAlertFactory_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_GameSinglePropBuyAlert_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameNoviceGuideFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -938,6 +946,14 @@
     <ClCompile Include="..\Classes\GameStoreAlert.cpp" />
     <ClCompile Include="..\Classes\GameSignBoardAlert.cpp" />
     <ClCompile Include="..\Classes\GameSinglePropBuyAlert.cpp" />
+    <ClCompile Include="..\Classes\GameSinglePropBuyAlertFactory.cpp" />
+    <ClCompile Include="..\Classes\lua_GameSinglePropBuyAlertFactory_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_GameSinglePropBuyAlert_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameNoviceGuideFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

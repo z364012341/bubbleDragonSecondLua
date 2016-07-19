@@ -46,7 +46,7 @@ namespace bubble_second {
 
         cocos2d::ui::Button* close_button = dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName("Button_1_1"));
         close_button->addClickEventListener([=](cocos2d::Ref*) {
-            this->removeFromParent();
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_CONTINUE);
         });
 
         cocos2d::Sprite* prop_sp = SpriteTextureController::getInstance()->createPropSpriteWithKey(prop_key_);
@@ -89,7 +89,7 @@ namespace bubble_second {
                 buy_data[STORE_COST_KEY] = this->getTotalCost();
                 GameBuyStoreMannager::getInstance()->buyPropsWithTokens(buy_data);
             }
-            this->removeFromParent();
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_CONTINUE);
         });
     }
 

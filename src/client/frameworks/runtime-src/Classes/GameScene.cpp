@@ -42,6 +42,9 @@
 #include "GameAlertMask.h"
 #include "SkillDyeingBubble.h"
 #include "GameCharactorSkillButton.h"
+//#include "GameSinglePropBuyAlert.h"
+#include "GameSinglePropBuyAlertFactory.h"
+#include "GameNoviceGuideFactory.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -826,7 +829,17 @@ namespace bubble_second {
         });
         dispatcher->addCustomEventListener(EVENT_DEFEAT_BUY_CONTINUE_PLAY, [=](cocos2d::EventCustom* event) {this->setPropertyTouchEnabled(true); });
         dispatcher->addCustomEventListener(EVENT_PLAY_SKILL_STAVES_ANIMATION, CC_CALLBACK_1(GameScene::playSkillStavesBubbleAnimation, this));
-
+        dispatcher->addCustomEventListener(EVENT_POP_GAME_STORE, [=](cocos2d::EventCustom * event) {
+            //alert_ = GameSinglePropBuyAlertFactory::getInstance()->createGameSinglePropBuyAlert();
+            //cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+            //alert_->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+            //csb_node_->addChild(alert_);
+            this->popAlert(GameSinglePropBuyAlertFactory::getInstance()->createGameSinglePropBuyAlert());
+            
+        });
+        dispatcher->addCustomEventListener(EVENT_CONTINUE, [=](cocos2d::EventCustom * event) {
+            this->removeAlert();
+        });
     }
 
     void GameScene::removeEventListenerCustom()
@@ -892,6 +905,8 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_HAVE_USED_SKILL);
         dispatcher->removeCustomEventListeners(EVENT_DEFEAT_BUY_CONTINUE_PLAY);
         dispatcher->removeCustomEventListeners(EVENT_PLAY_SKILL_STAVES_ANIMATION);
+        dispatcher->removeCustomEventListeners(EVENT_POP_GAME_STORE);
+        dispatcher->removeCustomEventListeners(EVENT_CONTINUE);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1549,6 +1564,51 @@ namespace bubble_second {
         return charactor_skill_using_;
     }
 
+    void GameScene::popNoviceGuideAlert()
+    {
+        //cocos2d::Node* node = GameNoviceGuideFactory::getInstance()->createGameBeginNoviceGuide(this->getPresentStageNumble());
+        this->setMenuTouchEnabled(false);
+        GamePlayController::getInstance()->setBubbleShootEnabled(false);
+        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.5f), cocos2d::CallFunc::create([=]() {
+            this->setMenuTouchEnabled(true);
+            GamePlayController::getInstance()->setBubbleShootEnabled(true);
+            alert_ = GameNoviceGuideFactory::getInstance()->createGameBeginNoviceGuide(this->getPresentStageNumble());
+            cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+            alert_->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+            alert_->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+            this->addChild(alert_, UI_ZORDER_NOVICE_GUIDE_ALERT);
+        })));
+
+
+    }
+
+    void GameScene::popAlert(cocos2d::Node * alert)
+    {
+        if (alert == nullptr)
+        {
+            return;
+        }
+        if (alert_ != nullptr)
+        {
+            alert_->removeFromParent();
+        }
+        alert_ = alert;
+        cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+        alert_->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+        csb_node_->addChild(alert_);
+        this->gamePause();
+    }
+
+    void GameScene::removeAlert()
+    {
+        this->gameResume();
+        if (alert_ != nullptr)
+        {
+            alert_->removeFromParent();
+            alert_ = nullptr;
+        }
+    }
+
     void GameScene::cancelUsedBubbleBombProps(cocos2d::EventCustom* event)
     {
         property_bubble_->removeFromParent();
@@ -1759,6 +1819,7 @@ namespace bubble_second {
         else
         {
             this->removeEnterPropsMask();
+            this->popNoviceGuideAlert();
         }
     }
     void bubble_second::GameScene::performBubbltSightingDevice()
@@ -2013,6 +2074,10 @@ namespace bubble_second {
     BaseBubble* GameScene::getPrepareBubble()
     {
         //return dynamic_cast<BaseBubble*>(csb_node_->getChildByName(PREPARE_BUBBLE_NAME));
+        if (GameScoreController::getInstance()->getBubbleUseCount() == 0)
+        {
+            return nullptr;
+        }
         return prepare_bubble_;
     }
 
@@ -2560,7 +2625,7 @@ namespace bubble_second {
     }
 
     void GameScene::popPauseAlert()
-    {
+    {//一开始写的接口, 后面使用自定义事件, 暂时没有进行重构
         GamePauseAlert* alert = GamePauseAlert::create();
         alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
         cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
@@ -2584,7 +2649,6 @@ namespace bubble_second {
             this->gameResume();
             alert->removeFromParent();
         });
-        bubble_map_node_->pause();
         this->gamePause();
     }
 

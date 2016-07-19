@@ -7,6 +7,7 @@
 #include "ExhibitionNumble.h"
 #include "GameSinglePropBuyAlert.h"
 #include "SmartScaleController.h"
+#include "GameSinglePropBuyAlertFactory.h"
 const std::string PLUS_SPRITE_PATH = "plus.png";
 //const cocos2d::Vec2 PROPS_NUMBLE_SHOW_POSITION = cocos2d::Vec2(35.0f, -35.0f);
 namespace bubble_second {
@@ -77,11 +78,13 @@ namespace bubble_second {
         {
             //this->addPropNumble(3);
             //std::string key = prop_key_;
-            //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_GAME_STORE, &prop_key_);
-            GameSinglePropBuyAlert* alert = GameSinglePropBuyAlert::createWithPropKey(prop_key_);
-            alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
-            alert->setPosition(cocos2d::Director::getInstance()->getVisibleSize().width / 2, cocos2d::Director::getInstance()->getVisibleSize().height / 2);
-            cocos2d::Director::getInstance()->getRunningScene()->addChild(alert);
+            //cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_GAME_STORE, &key);
+            //GameSinglePropBuyAlert* alert = GameSinglePropBuyAlert::createWithPropKey(prop_key_);
+            //alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+            //alert->setPosition(cocos2d::Director::getInstance()->getVisibleSize().width / 2, cocos2d::Director::getInstance()->getVisibleSize().height / 2);
+            //cocos2d::Scene* running_scene = cocos2d::Director::getInstance()->getRunningScene();
+            //running_scene->addChild(alert);
+            GameSinglePropBuyAlertFactory::getInstance()->popGameSinglePropBuyAlertWithKey(prop_key_);
             return false;
         }
         UserDataManager::getInstance()->cutPropsNumbleWithKey(prop_key_);

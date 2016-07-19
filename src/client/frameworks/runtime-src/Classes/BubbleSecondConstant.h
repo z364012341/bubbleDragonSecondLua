@@ -452,6 +452,7 @@ const std::string EVENT_GAME_REPLAY = "event_game_replay";  //重玩
 const std::string EVENT_GAME_DEFEAT_RETURN = "event_game_defeat_return";
 const std::string EVENT_GAME_DEFEAT_BUY_ALERT_RETURN = "event_game_defeat_buy_alert_return";
 const std::string EVENT_DEFEAT_BUY_CONTINUE_PLAY = "event_defeat_buy_continue_play";
+const std::string EVENT_CONTINUE = "event_continue";  //关闭弹窗, 继续游戏
 const std::string EVENT_END_CHARACTOR_BUY_CONTINUE = "event_end_charactor_buy_continue";
 const std::string EVENT_USE_CHARACTOR_SKILL = "event_use_charactor_skill";
 const std::string EVENT_USE_DYEING_BUBBLE_SKILL = "event_use_dyeing_bubble_skill";
@@ -732,6 +733,7 @@ const int UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_ONCE = UI_ZORDER_BACKGROUND; 
 const int UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_REPEAT = UI_ZORDER_MENU; //六连消时候后面的连续播放的特效
 const int UI_ZORDER_MENU_INFO = 1;    //分数信息之类的
 const int UI_ZORDER_ALERT = UI_ZORDER_MENU_INFO + 1;    //分数信息之类的
+const int UI_ZORDER_NOVICE_GUIDE_ALERT = UI_ZORDER_ALERT + 1;    //新手引导面板
 
 //const float UI_GLOBALZORDER_LIGHTING_EFFECT_BACKGROUND = 1.1f; //闪电特效的黑色背景
 //const float UI_GLOBALZORDER_LIGHTING_EFFECT = 10.5f; //闪电特效

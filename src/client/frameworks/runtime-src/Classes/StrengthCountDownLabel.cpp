@@ -37,6 +37,10 @@ namespace bubble_second {
         }
         if (delta_time >= (STENGTH_NUMBLE_MAX - strength_numble_)*PER_STENGTH_SECOND)
         {
+            if (UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_STRENGTH_KEY) > STENGTH_NUMBLE_MAX)
+            {
+                return;
+            }
             UserDataManager::getInstance()->setPropsNumbleWithKey(GAME_STRENGTH_KEY, STENGTH_NUMBLE_MAX);
             this->countDownEnd();
         }

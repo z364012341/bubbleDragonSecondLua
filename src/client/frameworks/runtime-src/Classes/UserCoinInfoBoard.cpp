@@ -52,6 +52,7 @@ namespace bubble_second {
     void UserCoinInfoBoard::updateNumbleLabel()
     {
         //this->rollCoinLabelNumbleEnd();
+        coin_numble_offset_ = 0;
         this->setNumbleLabelString(UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY));
     }
     void UserCoinInfoBoard::setNumbleLabelString(int numble)
