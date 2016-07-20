@@ -18,6 +18,7 @@
 #include "StageSelectionMenu.h"
 #include "GameStoreAlert.h"
 #include "GameSignBoardAlert.h"
+#include "GameNoviceGuideFactory.h"
 const std::string GAME_STAGE_SELECTION_CSB_PATH = "GameStageSelectionLayer.csb";
 const std::string STAGE_SCROLLVIEW_NAME = "StageScrollView";
 const std::string STORE_ALERT_NAME = "STORE_ALERT_NAME";
@@ -474,5 +475,21 @@ namespace bubble_second {
     {
         this->getSettingButton()->setVisible(enabled);
         csb_node_->getChildByName(SETTING_BUTTON_LINE_NAME)->setVisible(enabled);
+    }
+    void GameStageSelectionScene::popEnterPropsNoviceGuideAlert(cocos2d::Node * alert)
+    {
+        if (alert == nullptr)
+        {
+            return;
+        }
+        if (alert_ != nullptr)
+        {
+            alert_->removeFromParent();
+        }
+        alert_ = alert;
+        cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+        alert_->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+        alert_->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+        this->addChild(alert_);
     }
 }

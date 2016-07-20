@@ -4,12 +4,18 @@
 #include "cocostudio\CocoStudio.h"
 #include "GameTextInfo.h"
 #include "GamePropsCostTag.h"
-#include "UserDataManager.h"
 
+#include "StageDataManager.h"
+#include "GameStoreItemFactory.h"
 const std::map<std::string, std::string> COMMODITY_TO_CSB_PATH = {
-    { COMMODITY_ADD_10_BUBBLE_KEY , "AddBubbleNumbleCommodity.csb"},
-    { COMMODITY_AIMING_LINE_KEY , "AimingLineCommodity.csb" },
-    { COMMODITY_ADD_SPECIAL_KEY , "AddSpecialCommodity.csb"}
+    { BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY , "AddBubbleNumbleCommodity.csb" },
+    { BUBBLE_AIMING_LINE_PROP_KEY , "AimingLineCommodity.csb" },
+    { BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY , "AddSpecialCommodity.csb" }
+};
+const std::map<std::string, int> COMMODITY_TO_UNLOCK_STAGE_INDEX = {
+    { BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY , 20 },
+    { BUBBLE_AIMING_LINE_PROP_KEY , 10 },
+    { BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY , 15 }
 };
 namespace bubble_second {
 
@@ -47,57 +53,57 @@ namespace bubble_second {
         {
             return false;
         }
-        this->loadView(prop_key);
+        prop_key_ = prop_key;
+        this->loadView();
+        this->disposedEnterPropsUnlock();
         return true;
     }
 
-    //void EnterGamePropsView::setCostLabelStringWithKey(const std::string& key)
-    //{
-    //    cost_label_->setString(GameTextInfo::getInstance()->getCommodityCoinValueWithKey(key).asString());
-    //}
-
-    void EnterGamePropsView::loadView(const std::string & prop_key)
+    void EnterGamePropsView::buttonClickCallfunc(cocos2d::Ref *)
     {
-        cocos2d::Node* csb_node = cocos2d::CSLoader::createNode(COMMODITY_TO_CSB_PATH.at(prop_key));
+        if (cost_tag_->getSelectedState())
+        {
+            cost_tag_->changeSelectedState();
+            EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag_->getSelectedState());
+            EnterPropsViewManager::getInstance()->cutPrePropsCost(cost_tag_->getCostNumble());
+        }
+        else if (UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY) - EnterPropsViewManager::getInstance()->getPrePropsCost() >= cost_tag_->getCostNumble())
+        {
+            auto a = EnterPropsViewManager::getInstance()->getPrePropsCost();
+            auto b = UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY);
+            cost_tag_->changeSelectedState();
+            EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag_->getSelectedState());
+            EnterPropsViewManager::getInstance()->addPrePropsCost(cost_tag_->getCostNumble());
+        }
+    }
+
+    void EnterGamePropsView::disposedEnterPropsUnlock()
+    {
+        if (!UserDataManager::getInstance()->isSkillAndPropsUnlocked(prop_key_) && StageDataManager::getInstance()->getCurrentLevel() == COMMODITY_TO_UNLOCK_STAGE_INDEX.at(prop_key_))
+        {
+            UserDataManager::getInstance()->changeSkillAndPropsFirstUnlockFlag(prop_key_);
+            auto data = GameStoreItemFactory::getInstance()->getPropUnitPriceData(prop_key_);
+            UserDataManager::getInstance()->addPropsNumbleWithKey(data.begin()->first, data.begin()->second.asInt());
+            this->buttonClickCallfunc(nullptr);
+        }
+    }
+
+    void EnterGamePropsView::loadView()
+    {
+        cocos2d::Node* csb_node = cocos2d::CSLoader::createNode(COMMODITY_TO_CSB_PATH.at(prop_key_));
         this->addChild(csb_node);
 
-        GamePropsCostTag* cost_tag = GamePropsCostTag::createWithKey(prop_key);
+        GamePropsCostTag* cost_tag = GamePropsCostTag::createWithKey(prop_key_);
         cost_tag->setScale(0.6f);
         cost_tag->setPosition(cocos2d::Vec2(0.0, -37.93f));
         csb_node->addChild(cost_tag);
-        //cost_label_ = dynamic_cast<cocos2d::ui::TextBMFont*>(csb_node->getChildByName("cost_node")->getChildByName("cost_label"));
-        //assert(cost_label_);
-        //selected_sprite_ = dynamic_cast<cocos2d::Sprite*>(csb_node->getChildByName("cost_node")->getChildByName("selected_sprite"));
-        //assert(selected_sprite_);
+        cost_tag_ = cost_tag;
+
         button_ = dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName("background_node")->getChildByName("Button"));
         assert(button_);
-        button_->addTouchEventListener([=](cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType type) {
-            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-            {
-                if (cost_tag->getSelectedState())
-                {
-                    cost_tag->changeSelectedState();
-                    EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag->getSelectedState());
-                    EnterPropsViewManager::getInstance()->cutPrePropsCost(cost_tag->getCostNumble());
-                }
-                else if (UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY) - EnterPropsViewManager::getInstance()->getPrePropsCost() >= cost_tag->getCostNumble())
-                {
-                    auto a = EnterPropsViewManager::getInstance()->getPrePropsCost();
-                    auto b = UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY);
-                    cost_tag->changeSelectedState();
-                    EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag->getSelectedState());
-                    EnterPropsViewManager::getInstance()->addPrePropsCost(cost_tag->getCostNumble());
-                }
-                //else
-                //{
-                //    GameSinglePropBuyAlert* alert = GameSinglePropBuyAlert::createWithPropKey(prop_key);
-                //    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-                //    alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-                //    cocos2d::Director::getInstance()->getRunningScene()->addChild(alert);
-                //}
-            }
-        });
-
-
+        if (StageDataManager::getInstance()->getCurrentLevel() >= COMMODITY_TO_UNLOCK_STAGE_INDEX.at(prop_key_))
+        {
+            button_->addClickEventListener(CC_CALLBACK_1(EnterGamePropsView::buttonClickCallfunc, this));
+        }
     }
 }

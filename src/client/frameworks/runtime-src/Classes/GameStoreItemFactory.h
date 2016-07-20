@@ -10,6 +10,8 @@
 #ifndef _GAME_STORE_ITEM_FACTORY_H_
 #define _GAME_STORE_ITEM_FACTORY_H_
 #include "BubbleSecondConstant.h"
+const std::string COMMODITY_DECALS_LOTTERY_BEGIN_KEY = "decals_lottery_begin"; //贴纸抽奖开始花费
+const std::string COMMODITY_DECALS_LOTTERY_CONTINUE_KEY = "decals_lottery_continue"; //贴纸继续抽奖花费
 namespace bubble_second {
     class GameStoreItemFactory
     {

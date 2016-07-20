@@ -39,11 +39,11 @@ namespace bubble_second {
 
     bool AddBubbleNumbleCommodity::init()
     {
-        if (!EnterGamePropsView::init(COMMODITY_ADD_10_BUBBLE_KEY))
+        if (!EnterGamePropsView::init(BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY))
         {
             return false;
         }
-        //this->setCostLabelStringWithKey(COMMODITY_ADD_10_BUBBLE_KEY);
+        //this->setCostLabelStringWithKey(BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY);
         this->setName(ADD_BUBBLE_NUMBLE_COMMODITY_NAME);
         return true;
     }

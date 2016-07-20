@@ -34,11 +34,11 @@ namespace bubble_second {
 
     bool AddSpecialCommodity::init()
     {
-        if (!EnterGamePropsView::init(COMMODITY_ADD_SPECIAL_KEY))
+        if (!EnterGamePropsView::init(BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY))
         {
             return false;
         }
-        //this->setCostLabelStringWithKey(COMMODITY_ADD_SPECIAL_KEY);
+        //this->setCostLabelStringWithKey(BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY);
         this->setName(ADD_SPECIAL_COMMODITY_NAME);
         return true;
     }

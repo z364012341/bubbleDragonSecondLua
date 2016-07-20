@@ -4,7 +4,8 @@
 #include "XMLTool.h"
 #include "GameBuyStoreMannager.h"
 #include "DecalsFactory.h"
-#include "ui\UIText.h"
+//#include "ui\UIText.h"
+#include "GameCharactorNameManager.h"
 const std::string GAME_STAGE_DATA_PATH = "stageData.plist";
 const std::string GAME_USER_DATA_PATH = "userData.plist";
 const std::string DECALS_USER_DATA_PATH = "decalsUserData.plist";
@@ -165,6 +166,17 @@ namespace bubble_second {
     bool UserDataManager::isLaterTheLastSignInDay()
     {
         return this->calculateTimeDay(time(0)) > this->getGameSignLastDay();
+    }
+
+    void UserDataManager::changeSkillAndPropsFirstUnlockFlag(const std::string& key)
+    {
+        cocos2d::UserDefault::getInstance()->setBoolForKey(key.c_str(), true);
+        cocos2d::UserDefault::getInstance()->flush();
+    }
+
+    bool UserDataManager::isSkillAndPropsUnlocked(const std::string& key)
+    {
+        return cocos2d::UserDefault::getInstance()->getBoolForKey(key.c_str());
     }
 
     void UserDataManager::saveDecalsUserData()

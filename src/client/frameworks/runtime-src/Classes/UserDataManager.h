@@ -14,9 +14,9 @@
 const std::string PUZZLE_SEARCH_PROP_KEY = "search"; //拼图快速查找
 const std::string PUZZLE_BIG_EYES_PROP_KEY = "bigEyes";  //拼图中间眼睛
 const std::string PUZZLE_ADD_TIME_PROP_KEY = "addTime";  //拼图加时间
-const std::string BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY = "addBubbleNumble";
-const std::string BUBBLE_AIMING_LINE_PROP_KEY = "aimingLine";
-const std::string BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY = "addSpecialBubble";
+const std::string BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY = "addBubbleNumble"; //+10球
+const std::string BUBBLE_AIMING_LINE_PROP_KEY = "aimingLine"; //瞄准线
+const std::string BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY = "addSpecialBubble"; //+特殊球
 const std::string BUBBLE_WOODEN_HAMMER_PROP_KEY = "woodenHammer";   //小木锤
 const std::string BUBBLE_COLOR_BOMB_PROP_KEY = "colorBomb";    //彩球
 const std::string BUBBLE_BIG_BOMB_BOMB_PROP_KEY = "bigBombBomb";   //两圈炸弹
@@ -41,6 +41,7 @@ namespace bubble_second {
         UserDataManager();
         //获取已通过关卡的数量
         int getStagePassCount();
+
         void updateStageData(int level, int start_numble);
         void updateStageTotalStartScore();
         int getStageTotalStartScore();
@@ -97,6 +98,10 @@ namespace bubble_second {
         void saveGameSignLastDay();
         time_t calculateTimeDay(time_t time);
         bool isLaterTheLastSignInDay();
+        //设置角色技能是否第一次可以使用
+        void changeSkillAndPropsFirstUnlockFlag(const std::string& key);
+        //没用过技能会返回false
+        bool isSkillAndPropsUnlocked(const std::string& key);
     private:
         ~UserDataManager();
         void writeStageDataToFile();

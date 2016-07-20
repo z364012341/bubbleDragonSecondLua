@@ -2,7 +2,7 @@
 #include "GameCharactorNameManager.h"
 #include "SpriteTextureController.h"
 #include "GameScoreController.h"
-
+#include "UserDataManager.h"
 const std::string SKILL_BUTTON_BACKGROUND_PATH_KEY = "skill_bg_key";
 const std::string SKILL_BUTTON_PROGRESS_PATH_KEY = "skill_progress_key";
 const std::string SKILL_BUTTON_LOGO_PATH_KEY = "skill_logo_key";
@@ -160,6 +160,7 @@ namespace bubble_second {
         if (this->isSkillEnergyFull())
         {
             this->addSkillEnergyFullArmature();
+            this->disposedSkillNoviceGuide();
         }
         else
         {
@@ -202,6 +203,15 @@ namespace bubble_second {
             this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
         }
         //this->getEventDispatcher()->dispatchCustomEvent(EVENT_USE_CHARACTOR_SKILL);
+    }
+
+    void GameCharactorSkillButton::disposedSkillNoviceGuide()
+    {
+        if (UserDataManager::getInstance()->isSkillAndPropsUnlocked(GameCharactorNameManager::getInstance()->getCurrentArmatureName()) == false)
+        {
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_CHARACTOR_SKILL_NOVICE_GUIDE_ALERT);
+            UserDataManager::getInstance()->changeSkillAndPropsFirstUnlockFlag(GameCharactorNameManager::getInstance()->getCurrentArmatureName());
+        }
     }
 
     void GameCharactorSkillButton::setSkillButtonEnabled(bool enabled)

@@ -255,8 +255,10 @@ namespace bubble_second {
         void useCharactorSkill(BaseBubble* bubble);
         //正在使用技能
         bool isUsingSkill();
-        //弹出开始的新手教程
-        void popNoviceGuideAlert();
+        //弹出新手教程
+        void popBeginNoviceGuideAlert();
+        void popEndNoviceGuideAlert();
+        void popNoviceGuideAlertWithAlert(cocos2d::Node* alert);
         //弹出面板
         void popAlert(cocos2d::Node* alert);
         //移除面板

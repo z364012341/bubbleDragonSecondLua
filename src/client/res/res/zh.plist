@@ -12,7 +12,7 @@
     <string>第</string>
     <key>alert_level_2</key>
     <string>关</string>
-    <key>add_ten_bubble</key>
+    <key>addBubbleNumble</key>
     <string>+10个泡泡</string>
     <key>buy_ten_bubble_label</key>
     <string>泡泡用完了, 加10个泡泡接着玩儿好不?</string>

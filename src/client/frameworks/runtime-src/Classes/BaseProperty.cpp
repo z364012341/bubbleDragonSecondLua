@@ -8,7 +8,12 @@
 //#include "GameSinglePropBuyAlert.h"
 const float PROPS_BUTTON_POS_X = 100.0f;
 const float PROPS_BUTTON_POS_Y = 35.0f;
-
+const std::map<std::string, int> GAME_PROPS_UNLOCK_STAGE_INDEX = {
+    { BUBBLE_WOODEN_HAMMER_PROP_KEY , 8 },
+    { BUBBLE_COLOR_BOMB_PROP_KEY , 6 },
+    { BUBBLE_BIG_BOMB_BOMB_PROP_KEY , 13 },
+    { BUBBLE_STAVES_PROP_KEY , 16},
+};
 namespace bubble_second {
     BaseProperty::BaseProperty()
     {
@@ -168,6 +173,10 @@ namespace bubble_second {
 
     void BaseProperty::addTouchEventListener()
     {
+        if (UserDataManager::getInstance()->getStagePassCount() < GAME_PROPS_UNLOCK_STAGE_INDEX.at(property_key_))
+        {
+            return;
+        }
         auto listener = cocos2d::EventListenerTouchOneByOne::create();
         listener->setSwallowTouches(true);
         GamePlayController* game_controller = GamePlayController::getInstance();

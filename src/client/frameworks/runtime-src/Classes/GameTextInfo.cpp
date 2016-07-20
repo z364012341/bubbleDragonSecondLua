@@ -16,18 +16,18 @@ namespace bubble_second {
 
     void GameTextInfo::plistToMap()
     {
-        cocos2d::LanguageType type = cocos2d::Application::getInstance()->getCurrentLanguage();
-        switch (type)
-        {
-        case cocos2d::LanguageType::CHINESE:
+        //cocos2d::LanguageType type = cocos2d::Application::getInstance()->getCurrentLanguage();
+        //switch (type)
+        //{
+        //case cocos2d::LanguageType::CHINESE:
             plist_map_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(GAME_TEXT_INFO_PLIST_CHINESE_PATH);
-            //plist_map_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(GAME_TEXT_INFO_PLIST_ENGLISH_PATH);
-            break;
-        default:
-            plist_map_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(GAME_TEXT_INFO_PLIST_ENGLISH_PATH);
-            break;
-        }
-        commodity_map_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(GAME_COMMODITY_PLIST_PATH);
+        //    //plist_map_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(GAME_TEXT_INFO_PLIST_ENGLISH_PATH);
+        //    break;
+        //default:
+        //    plist_map_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(GAME_TEXT_INFO_PLIST_ENGLISH_PATH);
+        //    break;
+        //}
+        //commodity_map_ = cocos2d::FileUtils::getInstance()->getValueMapFromFile(GAME_COMMODITY_PLIST_PATH);
     }
 
     std::string GameTextInfo::getTextInfoWithKey(const std::string& key) const
@@ -50,8 +50,8 @@ namespace bubble_second {
     //{
     //    return this->getCommodityDataWithKey(key).at(COMMODITY_COIN_KEY);
     //}
-    cocos2d::ValueMap GameTextInfo::getCommodityDataWithKey(const std::string & key) const
-    {
-        return commodity_map_.at(key).asValueMap();
-    }
+    //cocos2d::ValueMap GameTextInfo::getCommodityDataWithKey(const std::string & key) const
+    //{
+    //    return commodity_map_.at(key).asValueMap();
+    //}
 }

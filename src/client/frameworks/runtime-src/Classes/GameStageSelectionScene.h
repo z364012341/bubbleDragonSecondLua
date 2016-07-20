@@ -73,6 +73,8 @@ namespace bubble_second {
         //设置按钮回调
         void settingButtonFunc(cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType type);
         void setSettingButtonEnabled(bool enabled);
+        //弹出进场道具新手引导
+        void popEnterPropsNoviceGuideAlert(cocos2d::Node* alert);
     private:
         float scrollview_bottom_height_ = 0.0f;
         cocos2d::Vector<GameStageSelectionCell*> cell_vector_;
@@ -84,6 +86,7 @@ namespace bubble_second {
         cocos2d::Node* csb_node_ = nullptr;
 		GameStageVehicle* stage_vehicle_ = nullptr;
         cocostudio::Armature* setting_armature_ = nullptr;
+        cocos2d::Node* alert_ = nullptr;
     };
 }
 #endif //_GAME_STAGE_SELECTION_SCENE_H_

@@ -840,6 +840,9 @@ namespace bubble_second {
         dispatcher->addCustomEventListener(EVENT_CONTINUE, [=](cocos2d::EventCustom * event) {
             this->removeAlert();
         });
+        dispatcher->addCustomEventListener(EVENT_POP_CHARACTOR_SKILL_NOVICE_GUIDE_ALERT, [=](cocos2d::EventCustom * event) {
+            this->popNoviceGuideAlertWithAlert(GameNoviceGuideFactory::getInstance()->createGameCharactorSkillNoviceGuide());
+        });
     }
 
     void GameScene::removeEventListenerCustom()
@@ -907,6 +910,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_PLAY_SKILL_STAVES_ANIMATION);
         dispatcher->removeCustomEventListeners(EVENT_POP_GAME_STORE);
         dispatcher->removeCustomEventListeners(EVENT_CONTINUE);
+        dispatcher->removeCustomEventListeners(EVENT_POP_CHARACTOR_SKILL_NOVICE_GUIDE_ALERT);
     }
 
     //void GameScene::addExchangeBubbleListener()
@@ -1564,22 +1568,49 @@ namespace bubble_second {
         return charactor_skill_using_;
     }
 
-    void GameScene::popNoviceGuideAlert()
+    void GameScene::popBeginNoviceGuideAlert()
     {
-        //cocos2d::Node* node = GameNoviceGuideFactory::getInstance()->createGameBeginNoviceGuide(this->getPresentStageNumble());
+        //this->setMenuTouchEnabled(false);
+        //GamePlayController::getInstance()->setBubbleShootEnabled(false);
+        //this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.5f), cocos2d::CallFunc::create([=]() {
+        //    this->setMenuTouchEnabled(true);
+        //    GamePlayController::getInstance()->setBubbleShootEnabled(true);
+        //    alert_ = GameNoviceGuideFactory::getInstance()->createGameBeginNoviceGuide(this->getPresentStageNumble());
+        //    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+        //    alert_->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+        //    alert_->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+        //    this->addChild(alert_, UI_ZORDER_NOVICE_GUIDE_ALERT);
+        //})));
+
+        this->popNoviceGuideAlertWithAlert(GameNoviceGuideFactory::getInstance()->createGameBeginNoviceGuide());
+    }
+
+    void GameScene::popEndNoviceGuideAlert()
+    {
+        this->popNoviceGuideAlertWithAlert(GameNoviceGuideFactory::getInstance()->createGameEndNoviceGuide());
+    }
+
+    void GameScene::popNoviceGuideAlertWithAlert(cocos2d::Node* alert)
+    {
+        if (alert == nullptr)
+        {
+            return;
+        }
         this->setMenuTouchEnabled(false);
         GamePlayController::getInstance()->setBubbleShootEnabled(false);
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.5f), cocos2d::CallFunc::create([=]() {
+        this->gamePause();
+
+        alert_ = alert;
+        cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+        alert_->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+        alert_->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+        this->addChild(alert_, UI_ZORDER_NOVICE_GUIDE_ALERT);
+        alert_->setVisible(false);
+        alert_->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.5f), cocos2d::CallFunc::create([=]() {
             this->setMenuTouchEnabled(true);
             GamePlayController::getInstance()->setBubbleShootEnabled(true);
-            alert_ = GameNoviceGuideFactory::getInstance()->createGameBeginNoviceGuide(this->getPresentStageNumble());
-            cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-            alert_->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-            alert_->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
-            this->addChild(alert_, UI_ZORDER_NOVICE_GUIDE_ALERT);
+            alert_->setVisible(true);
         })));
-
-
     }
 
     void GameScene::popAlert(cocos2d::Node * alert)
@@ -1819,7 +1850,7 @@ namespace bubble_second {
         else
         {
             this->removeEnterPropsMask();
-            this->popNoviceGuideAlert();
+            this->popBeginNoviceGuideAlert();
         }
     }
     void bubble_second::GameScene::performBubbltSightingDevice()
@@ -2600,6 +2631,7 @@ namespace bubble_second {
         {
             return;
         }
+        
         bubble_map_node_->stopAllActions();
         int start_numble = this->getScoreProgressMenu()->getStartOnNumble();
         int present_stage_numble = this->getPresentStageNumble();
@@ -2622,6 +2654,8 @@ namespace bubble_second {
                 }
             });
         })));
+
+        this->popEndNoviceGuideAlert();
     }
 
     void GameScene::popPauseAlert()

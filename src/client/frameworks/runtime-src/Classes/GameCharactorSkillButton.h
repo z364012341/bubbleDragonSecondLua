@@ -35,6 +35,8 @@ namespace bubble_second {
         void removeSkillEnergyFullArmature();
         bool isSkillEnergyFull();
         void skillButtonClickCallBack(cocos2d::Ref*);
+        //弹出技能新手教程
+        void disposedSkillNoviceGuide();
     private:
         //std::map<std::string, std::map<std::string, std::string>> charactor_to_path_;
         cocos2d::Sprite* progress_sprite_ = nullptr;

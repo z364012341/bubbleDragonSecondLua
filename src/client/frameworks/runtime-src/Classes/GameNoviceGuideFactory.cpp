@@ -3,49 +3,57 @@
 #include "SpriteTextureController.h"
 #include "GameStartButton.h"
 #include "GameAlertMask.h"
+#include "StageDataManager.h"
+#include "GameCharactorNameManager.h"
+#include "UserDataManager.h"
+const std::map<int, std::string> BEGIN_GUIDE_DATA = {
+    { 1 , "xsydyx01.png" },
+    { 2 , "xsydyx02.png" },
+    { 3 , "xsydyx03.png" },
+    { 4 , "xsydyx04.png" },
+    { 5 , "xsydyx05.png" },
+    { 6 , "xsydyx06.png" },
+    { 7 , "xsydyx07.png" },
+    { 8 , "xsydyx08.png" },
+    { 9 , "xsydyx09.png" },
+    { 10 , "xsydyx10.png" },
+    { 11 , "xsydyx11.png" },
+    { 12 , "xsydyx12.png" },
+    { 14 , "xsydyx14.png" },
+    { 16 , "xsydyx06.png" },
+    { 17 , "xsydyx17.png" },
+    { 18 , "xsydyx18.png" },
+    { 21 , "xsydyx21.png" },
+    { 22 , "xsydyx22.png" },
+    { 27 , "xsydyx27.png" },
+    { 42 , "xsydyx47.png" },
+    { 57 , "xsydyx57.png" },
+    { 72 , "xsydyx71.png" },
+    { 132 , "xsydyx132.png" },
+};
+const std::map<int, std::string> END_GUIDE_DATA = {
+    { 6,"xsydyx06sl.png" },
+    { 8,"xsydyx08sl.png" },
+    { 10,"xsydyx10sl.png" },
+    { 13,"xsydyx13sl.png" },
+    { 15,"xsydyx15sl.png" },
+    { 16,"xsydyx16sl.png" },
+    { 20,"xsydyx20sl.png" },
+};
+const std::map<std::string, std::string> CHARACTOR_SKILL_GUIDE_DATA = {
+    { CHARCTOR_LAOHU_ARMATURE_KEY , "xsydjs1.png" },
+    { CHARCTOR_MIAO_ARMATURE_KEY , "xsydjs2.png" },
+    { CHARCTOR_TUZI_ARMATURE_KEY , "xsydjs3.png" },
+    { CHARCTOR_LAOSHU_ARMATURE_KEY , "xsydjs4.png"},
+};
 namespace bubble_second {
     GameNoviceGuideFactory::GameNoviceGuideFactory()
     {
-        begin_guide_data_vm_["1"] = "xsydyx01.png";
-        begin_guide_data_vm_["2"] = "xsydyx02.png";
-        begin_guide_data_vm_["3"] = "xsydyx03.png";
-        begin_guide_data_vm_["4"] = "xsydyx04.png";
-        begin_guide_data_vm_["5"] = "xsydyx05.png";
-        begin_guide_data_vm_["6"] = "xsydyx06.png";
-        begin_guide_data_vm_["7"] = "xsydyx07.png";
-        begin_guide_data_vm_["8"] = "xsydyx08.png";
-        begin_guide_data_vm_["9"] = "xsydyx09.png";
-        begin_guide_data_vm_["10"] = "xsydyx10.png";
-        begin_guide_data_vm_["11"] = "xsydyx11.png";
-        begin_guide_data_vm_["12"] = "xsydyx12.png";
-        begin_guide_data_vm_["14"] = "xsydyx14.png";
-        begin_guide_data_vm_["16"] = "xsydyx06.png";
-        begin_guide_data_vm_["17"] = "xsydyx17.png";
-        begin_guide_data_vm_["18"] = "xsydyx18.png";
-        begin_guide_data_vm_["21"] = "xsydyx21.png";
-        begin_guide_data_vm_["22"] = "xsydyx22.png";
-        begin_guide_data_vm_["27"] = "xsydyx27.png";
-        begin_guide_data_vm_["42"] = "xsydyx47.png";
-        begin_guide_data_vm_["57"] = "xsydyx57.png";
-        begin_guide_data_vm_["72"] = "xsydyx71.png";
-        begin_guide_data_vm_["132"] = "xsydyx132.png";
-        for (auto var : begin_guide_data_vm_)
-        {
-            begin_guide_data_[XMLTool::convertStringToInt(var.first)] = var.second.asString();
-        }
     }
 
-
-    GameNoviceGuideFactory::~GameNoviceGuideFactory()
+    cocos2d::Node * GameNoviceGuideFactory::createNoviceGuideAlertWithPath(const std::string & path)
     {
-    }
-    cocos2d::Node * GameNoviceGuideFactory::createGameBeginNoviceGuide(int stage_index)
-    {
-        if (begin_guide_data_.find(stage_index) == begin_guide_data_.end())
-        {
-            return nullptr;
-        }
-        cocos2d::Sprite* bg = SpriteTextureController::getInstance()->createGameSpriteWithPath(begin_guide_data_[stage_index]);
+        cocos2d::Sprite* bg = SpriteTextureController::getInstance()->createGameSpriteWithPath(path);
         GameStartButton* button = GameStartButton::createButtonStartForm();
         button->addButtonClickEventListener([=](cocos2d::Ref*) {cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CONTINUE); });
         cocos2d::Node* node = cocos2d::Node::create();
@@ -54,5 +62,30 @@ namespace bubble_second {
         node->addChild(button);
         node->addChild(GameAlertMask::create(), -1);
         return node;
+    }
+    template<typename T>
+    cocos2d::Node * GameNoviceGuideFactory::createNoviceGuideAlertWithDataAndIndex(const std::map<T, std::string>& data, T key)
+    {
+        if (data.find(key) == data.end())
+        {
+            return nullptr;
+        }
+        return this->createNoviceGuideAlertWithPath(data.at(key));
+    }
+
+    GameNoviceGuideFactory::~GameNoviceGuideFactory()
+    {
+    }
+    cocos2d::Node * GameNoviceGuideFactory::createGameBeginNoviceGuide()
+    {
+        return this->createNoviceGuideAlertWithDataAndIndex(BEGIN_GUIDE_DATA, StageDataManager::getInstance()->getCurrentLevel());
+    }
+    cocos2d::Node * GameNoviceGuideFactory::createGameEndNoviceGuide()
+    {
+        return this->createNoviceGuideAlertWithDataAndIndex(END_GUIDE_DATA, StageDataManager::getInstance()->getCurrentLevel());
+    }
+    cocos2d::Node * GameNoviceGuideFactory::createGameCharactorSkillNoviceGuide()
+    {
+        return this->createNoviceGuideAlertWithDataAndIndex(CHARACTOR_SKILL_GUIDE_DATA, GameCharactorNameManager::getInstance()->getCurrentArmatureName());
     }
 }

@@ -34,11 +34,11 @@ namespace bubble_second {
 
     bool AimingLineCommodity::init()
     {
-        if (!EnterGamePropsView::init(COMMODITY_AIMING_LINE_KEY))
+        if (!EnterGamePropsView::init(BUBBLE_AIMING_LINE_PROP_KEY))
         {
             return false;
         }
-        //this->setCostLabelStringWithKey(COMMODITY_AIMING_LINE_KEY);
+        //this->setCostLabelStringWithKey(BUBBLE_AIMING_LINE_PROP_KEY);
         this->setName(AIMING_LINE_COMMODITY_NAME);
         return true;
     }
