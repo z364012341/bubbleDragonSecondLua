@@ -1,6 +1,6 @@
 #include "GameStartButton.h"
 #include "cocostudio\CocoStudio.h"
-#include "ButtonEffectController.h"
+#include "GameButtonFactory.h"
 #include "SpriteTextureController.h"
 #include "ui\UIScale9Sprite.h"
 const std::string START_BUTTON_TOP_CSB = "GameStartMenuTop.csb";
@@ -97,11 +97,11 @@ namespace bubble_second {
         //cocos2d::Node* start_node = cocos2d::CSLoader::createNode(START_BUTTON_BOTTOM_CSB);
         //this->addChild(start_node);
         //button_ = dynamic_cast<cocos2d::ui::Button*>(start_node->getChildByName(ENTER_GAME_ALERT_START_BUTTON_NAME));
-        button_ = cocos2d::ui::Button::create("startBubbleBG2.png");
+        button_ = GameButtonFactory::getInstance()->createGameButton("startBubbleBG2.png");
         this->addChild(button_);
         clipping->setPosition(button_->getContentSize().width / 2, button_->getContentSize().height / 2);
         button_->getRendererNormal()->addChild(clipping);
-        ButtonEffectController::setButtonZoomScale(button_);
+        //ButtonEffectController::setButtonZoomScale(button_);
         return true;
     }
     bool GameStartButton::initPinkForm()

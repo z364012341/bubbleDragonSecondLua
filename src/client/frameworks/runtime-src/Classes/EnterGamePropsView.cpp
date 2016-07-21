@@ -4,7 +4,7 @@
 #include "cocostudio\CocoStudio.h"
 #include "GameTextInfo.h"
 #include "GamePropsCostTag.h"
-
+#include "GameButtonFactory.h"
 #include "StageDataManager.h"
 #include "GameStoreItemFactory.h"
 const std::map<std::string, std::string> COMMODITY_TO_CSB_PATH = {
@@ -104,6 +104,10 @@ namespace bubble_second {
         if (StageDataManager::getInstance()->getCurrentLevel() >= COMMODITY_TO_UNLOCK_STAGE_INDEX.at(prop_key_))
         {
             button_->addClickEventListener(CC_CALLBACK_1(EnterGamePropsView::buttonClickCallfunc, this));
+        }
+        else
+        {
+            this->addChild(GameButtonFactory::getInstance()->createUnlockButton());
         }
     }
 }

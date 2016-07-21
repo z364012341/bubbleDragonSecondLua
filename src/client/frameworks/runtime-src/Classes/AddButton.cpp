@@ -1,7 +1,7 @@
 #include "AddButton.h"
 #include "cocostudio\CocoStudio.h"
 #include "ui\UIScale9Sprite.h"
-#include "ButtonEffectController.h"
+#include "GameButtonFactory.h"
 const std::string CSB_PATH = "AddButton.csb";
 //const std::string ADD_BUTTON_NAME = "addButton";
 const std::string ADD_BUTTON_PATH = "anniutianjia.PNG";
@@ -22,8 +22,7 @@ namespace bubble_second {
 		{
 			return false;
 		}
-        button_ = cocos2d::ui::Button::create(ADD_BUTTON_PATH);
-        ButtonEffectController::setButtonZoomScale(button_);
+        button_ = GameButtonFactory::getInstance()->createGameButton(ADD_BUTTON_PATH);
         this->addChild(button_);
         button_->addClickEventListener([=](cocos2d::Ref*) {
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_GAME_STORE);

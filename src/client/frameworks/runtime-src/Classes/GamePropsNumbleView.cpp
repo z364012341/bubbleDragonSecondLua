@@ -1,6 +1,6 @@
 #include "GamePropsNumbleView.h"
 #include "SpriteTextureController.h"
-#include "ButtonEffectController.h"
+#include "GameButtonFactory.h"
 namespace bubble_second {
     GamePropsNumbleView::GamePropsNumbleView()
     {
@@ -53,8 +53,7 @@ namespace bubble_second {
     void GamePropsNumbleView::addAdditionButton()
     {
         //addition_Button_ = SpriteTextureController::getInstance()->createMenuItemSprite(PROPS_NUMBLE_ENABLED_PATH);
-        addition_Button_ = cocos2d::ui::Button::create(PROPS_NUMBLE_ENABLED_PATH);
-        ButtonEffectController::setButtonZoomScale(addition_Button_);
+        addition_Button_ = GameButtonFactory::getInstance()->createGameButton(PROPS_NUMBLE_ENABLED_PATH);
         addition_Button_->setScale(GAME_PROPS_NUMBLE_VIEW_BACKGROUND_SCALE);
         //addition_item_->setCallback([=](cocos2d::Ref*) {
         //    CCLOG("!!!!!!!!!!!!!!!!!!!!!!");

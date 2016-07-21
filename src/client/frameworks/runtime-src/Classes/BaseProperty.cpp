@@ -5,6 +5,7 @@
 #include "ui\UIScale9Sprite.h"
 #include "PropsNumbleShow.h"
 #include "GameSinglePropBuyAlertFactory.h"
+#include "GameButtonFactory.h"
 //#include "GameSinglePropBuyAlert.h"
 const float PROPS_BUTTON_POS_X = 100.0f;
 const float PROPS_BUTTON_POS_Y = 35.0f;
@@ -161,7 +162,7 @@ namespace bubble_second {
         props_numble_label_ = PropsNumbleShow::create(property_key_);
         //props_numble_label_->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
         props_numble_label_->setPosition(cocos2d::Vec2(PROPS_BUTTON_POS_X, PROPS_BUTTON_POS_Y));
-        this->addChild(props_numble_label_, UI_ZORDER_MENU_INFO+1);
+        this->addChild(props_numble_label_, UI_ZORDER_ALERT);
         //this->updateNumbleLabel();
     }
 
@@ -175,6 +176,10 @@ namespace bubble_second {
     {
         if (UserDataManager::getInstance()->getStagePassCount() < GAME_PROPS_UNLOCK_STAGE_INDEX.at(property_key_))
         {
+            cocos2d::ui::Button* unlock_button = GameButtonFactory::getInstance()->createUnlockButton();
+            this->addChild(unlock_button, UI_ZORDER_NOVICE_GUIDE_ALERT);
+            cocos2d::Size size = this->getContentSize();
+            unlock_button->setPosition(cocos2d::Vec2(size.width / 2, size.height / 2));
             return;
         }
         auto listener = cocos2d::EventListenerTouchOneByOne::create();

@@ -3,6 +3,7 @@
 #include "SpriteTextureController.h"
 #include "GameScoreController.h"
 #include "UserDataManager.h"
+#include "GameButtonFactory.h"
 const std::string SKILL_BUTTON_BACKGROUND_PATH_KEY = "skill_bg_key";
 const std::string SKILL_BUTTON_PROGRESS_PATH_KEY = "skill_progress_key";
 const std::string SKILL_BUTTON_LOGO_PATH_KEY = "skill_logo_key";
@@ -75,7 +76,7 @@ namespace bubble_second {
             return false;
         }
         auto data = CHARACTOR_TO_PATH.at(GameCharactorNameManager::getInstance()->getCurrentArmatureName());
-        cocos2d::ui::Button* button = cocos2d::ui::Button::create(data[SKILL_BUTTON_BACKGROUND_PATH_KEY], data[SKILL_BUTTON_BACKGROUND_PATH_KEY], data[SKILL_BUTTON_BACKGROUND_PATH_KEY]);
+        cocos2d::ui::Button* button = GameButtonFactory::getInstance()->createGameButton(data[SKILL_BUTTON_BACKGROUND_PATH_KEY], data[SKILL_BUTTON_BACKGROUND_PATH_KEY], data[SKILL_BUTTON_BACKGROUND_PATH_KEY]);
         button->addClickEventListener(CC_CALLBACK_1(GameCharactorSkillButton::skillButtonClickCallBack, this));
         this->addChild(button);
         skill_button_ = button;

@@ -10,6 +10,7 @@ local DECALS_LATTERY_SCENE_CSB_PATH = "DecalsLotteryLayer.csb";
 local CARDS_BACKGROUND_NAME = "Image_1";
 local BACKGROUND_TOP_UI_NAME = "lottery_top_4";
 local BUTTON_NODE_NAME = "buttonNode";
+local BUTTON_COST_TAG_SCALE = 0.7;
 function DecalsLotteryScene:createScene(decals_type)
     local scene = cc.Scene:create();
     local layer = DecalsLotteryScene:create(decals_type);
@@ -76,6 +77,7 @@ function DecalsLotteryScene:loadCSB()
     self.free_shuffle_button = button_node:getChildByName("Button_2_0");
     self.lottery_begin_button = button_node:getChildByName("Button_2");
     local begin_cost =  bs.GamePropsCostTag:createDecalsLotteryBeginTag();
+    begin_cost:setScale(BUTTON_COST_TAG_SCALE);
     self.lottery_begin_button:addClickEventListener(function (...)
         if begin_cost:canPay() then
             begin_cost:pay();
@@ -86,6 +88,7 @@ function DecalsLotteryScene:loadCSB()
 
     self.lottery_again_begain_button = button_node:getChildByName("Button_2_0_0");
     local again_cost = bs.GamePropsCostTag:createDecalsLotteryContinueTag();
+    again_cost:setScale(BUTTON_COST_TAG_SCALE);
     self.lottery_again_begain_button:addClickEventListener(function (...)
         if again_cost:canPay() then
             again_cost:pay();

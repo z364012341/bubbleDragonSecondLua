@@ -37,6 +37,7 @@ namespace bubble_second {
         cocos2d::Sprite* createPropSpriteWithKey(const std::string& key);
 
         cocos2d::ui::TextBMFont* createWhitePurpleFnt(const std::string& str);
+
     private:
         SpriteTextureController();
         void readGameSceneBackgroundFile();
