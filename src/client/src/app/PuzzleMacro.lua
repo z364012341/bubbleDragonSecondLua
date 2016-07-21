@@ -92,7 +92,7 @@ cc.exports.EVENT_DECALS_LOTTERY_CHANGE_AWARD_CARD_BEGIN = "event_decals_lottery_
 cc.exports.EVENT_DECALS_LOTTERY_CHANGE_AWARD_CARD_END = "event_decals_lottery_change_award_card_end";
 cc.exports.POP_CHARACTOR_UNLOCK_ALERT = "pop_charactor_unlock_alert";
 cc.exports.POP_TREASURE_UNLOCK_ALERT = "pop_treasure_unlock_alert";
--- cc.exports.EVENT_DECALS_LOTTERY_END = "event_decals_lottery_end";
+cc.exports.EVENT_DECALS_LOTTERY_END = "event_decals_lottery_end"; -- 贴纸抽奖结束
 -- cc.exports.EVENT_ANSWER_ZOOM_IN_ACTION = "event_answer_zoom_in_action";
 
 cc.exports.PUZZLE_STENCIL_MAINBODY_PATH = "puzzleStencil_1.png";

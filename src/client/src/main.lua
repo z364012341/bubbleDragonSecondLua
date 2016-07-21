@@ -3,6 +3,7 @@ cc.FileUtils:getInstance():setPopupNotify(false)
 cc.FileUtils:getInstance():addSearchPath("src/")
 cc.FileUtils:getInstance():addSearchPath("res/")
 cc.FileUtils:getInstance():addSearchPath("res/ui/", false);
+cc.FileUtils:getInstance():addSearchPath("res/audio/", false);
 cc.FileUtils:getInstance():addSearchPath("res/fonts/", false);
 cc.FileUtils:getInstance():addSearchPath("res/ui/gameRes/", false);
 cc.FileUtils:getInstance():addSearchPath("res/ui/menuRes/", false);

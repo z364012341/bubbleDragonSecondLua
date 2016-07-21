@@ -22,7 +22,7 @@ const std::string SELECTED_CHARACTOR_PAGEVIEW_NAME = "charactorPageView";
 const std::string CHARACTOR_SELECTED_ROOT_NAME = "FileNode_3";
 const std::string PAGEVIEW_TURN_LEFT_BUTTON_NAME = "turnLeft";
 const std::string PAGEVIEW_TURN_RIGHT_BUTTON_NAME = "turnRight";
-const cocos2d::Vec2 COMMODITY_NODE_POS(-5.0f, -238.7f);
+const std::string COMMODITY_BACKGROUND_NAME = "tanchuang2_1";
 namespace bubble_second {
     EnterGameAlert::EnterGameAlert()
     {
@@ -45,8 +45,8 @@ namespace bubble_second {
         this->initStageNumbleLabel(StageDataManager::getInstance()->getCurrentLevel());
         this->initStageTypeLabel(StageDataManager::getInstance()->getCurrentStageType());
         cocos2d::Node* node = EnterPropsViewManager::getInstance()->createEnterPropsAlert();
-        node->setPosition(COMMODITY_NODE_POS);
-        this->addChild(node);
+        node->setPosition(alert_csb_node_->getChildByName(COMMODITY_BACKGROUND_NAME)->getPosition());
+        alert_csb_node_->addChild(node);
         return true;
     }
 

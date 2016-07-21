@@ -117,7 +117,7 @@ namespace bubble_second {
     {
         int last_numble = strength_numble_;
         strength_numble_ = UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_STRENGTH_KEY);
-        if (strength_numble_ == STENGTH_NUMBLE_MAX)
+        if (strength_numble_ >= STENGTH_NUMBLE_MAX)
         {
             label_->setString(GameTextInfo::getInstance()->getTextInfoWithKey(GAME_STRENGTH_MAX_KEY));
             if (is_begin_flag_)

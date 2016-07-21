@@ -27,6 +27,7 @@ function DecalsLotteryScene:ctor(decals_type)
     end
     self:registerScriptHandler(onNodeEvent);
     self.decals_type_ = decals_type;
+    self.cards_show_ = nil;
     self:init();
 end
 
@@ -86,23 +87,31 @@ function DecalsLotteryScene:loadCSB()
     end);
     self:addCostTag(self.lottery_begin_button, begin_cost);
 
-    self.lottery_again_begain_button = button_node:getChildByName("Button_2_0_0");
+    self.lottery_again_begain_button_ = button_node:getChildByName("Button_2_0_0");
     local again_cost = bs.GamePropsCostTag:createDecalsLotteryContinueTag();
     again_cost:setScale(BUTTON_COST_TAG_SCALE);
-    self.lottery_again_begain_button:addClickEventListener(function (...)
+    self.lottery_again_begain_button_:addClickEventListener(function (...)
         if again_cost:canPay() then
             again_cost:pay();
             self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_AGAIN);
-            self.lottery_again_begain_button:setVisible(false);
+            self.lottery_again_begain_button_:setVisible(false);
         end
     end);
-    self:addCostTag(self.lottery_again_begain_button, again_cost);
+    self:addCostTag(self.lottery_again_begain_button_, again_cost);
 
     self.free_change_award_button_ = button_node:getChildByName("Button_2_0");
     self.free_change_award_button_:addClickEventListener(function (...)
         self.lottery_begin_button:setEnabled(false);
         self.free_change_award_button_:setEnabled(false);
         self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_CHANGE_AWARD_CARD_BEGIN);
+    end);
+
+    self.lottery_end_button_ =  button_node:getChildByName("Button_2_0_0_0");
+    self.lottery_end_button_:addClickEventListener(function (...)
+        self:addCards();
+        self.lottery_end_button_:setVisible(false);
+        self.free_shuffle_button:setVisible(true);
+        self.lottery_begin_button:setVisible(true);
     end);
 end
 function DecalsLotteryScene:lotteryBegin()
@@ -112,6 +121,9 @@ function DecalsLotteryScene:lotteryBegin()
     self.lottery_begin_button:setVisible(false);
 end
 function DecalsLotteryScene:addCards()
+    if self.cards_show_ ~= nil then
+        self.cards_show_:removeFromParent();
+    end
     local cards_show = DecalsLotteryCardsShow:create(self.decals_type_);
     cards_show:setScale(bs.SmartScaleController:getInstance():getPlayAreaZoom());
     cards_show:setPosition(cc.p(self.cards_background_:getContentSize().width/2, self.cards_background_:getContentSize().height/2));
@@ -127,13 +139,17 @@ function DecalsLotteryScene:onEnter()
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_AGAIN, updateTimesLabel));
 
     local function lotteryAgainBegin( event )
-        self.lottery_again_begain_button:setVisible(true);
+        self.lottery_again_begain_button_:setVisible(true);
     end
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_AGAIN_BEGIN, lotteryAgainBegin));
 
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_CHANGE_AWARD_CARD_END, function ( event )
         self.lottery_begin_button:setEnabled(true);
         self.free_change_award_button_:setEnabled(true);
+    end));
+
+    table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_DECALS_LOTTERY_END, function ( event )
+        self.lottery_end_button_:setVisible(true);
     end));
     -- local function lotteryEnd( event )
     --     self.button_node_:setVisible(false);

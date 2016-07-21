@@ -12,6 +12,7 @@
 #include "GameCharactorNameManager.h"
 #include "GameSartScene.h"
 #include "GameStoreItemFactory.h"
+#include "GameAudioController.h"
 namespace bubble_second {
     cocos2d::Scene * LoadingScene::createScene()
     {
@@ -54,6 +55,8 @@ namespace bubble_second {
         DecalsFactory::getInstance()->loadDecalsData();
         GameCharactorNameManager::getInstance()->initNamesData();
         GameStoreItemFactory::getInstance()->loadItemsData();
+        GameAudioController::getInstance()->loadAudioFile();
+
         cocos2d::Scene* scene = GameStageSelectionScene::createScene();
         scene->addChild(GameSartScene::create());
         cocos2d::Director::getInstance()->replaceScene(scene);

@@ -492,6 +492,7 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameNoviceGuideFactory.h" />
     <ClInclude Include="..\Classes\GameButtonFactory.h" />
+    <ClInclude Include="..\Classes\GameAudioController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -956,6 +957,7 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameNoviceGuideFactory.cpp" />
     <ClCompile Include="..\Classes\GameButtonFactory.cpp" />
+    <ClCompile Include="..\Classes\GameAudioController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

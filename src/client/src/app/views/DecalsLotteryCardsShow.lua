@@ -77,7 +77,7 @@ function DecalsLotteryCardsShow:removeTwoCards()
         local rm_index = self:getRandomRemoveCardIndex();
         local rm_card = self.cards_[rm_index];
         table.remove(self.cards_, rm_index);
-        -- GlobalFunction.shuffleTable(self.cards_);
+        --GlobalFunction.shuffleTable(self.cards_);
         for i, card in ipairs(self.cards_) do
             card:runAction(cc.Sequence:create(cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, cc.p(0, 0)), cc.MoveTo:create(CARDS_MOVETO_CENTER_DURATION, CARDS_POINTS[#self.cards_][i]), nil));
         end
@@ -135,6 +135,7 @@ function DecalsLotteryCardsShow:onEnter()
 
     local function lotteryRemoveTwoCard(event)
         if self:isLotteryEnd() then
+            self:getEventDispatcher():dispatchCustomEvent(EVENT_DECALS_LOTTERY_END);
             return;
         end
         self:removeTwoCards();
