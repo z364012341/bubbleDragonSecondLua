@@ -11,6 +11,7 @@
 #include "StageNumbleBoardController.h"
 #include "GameVictoryLotteryStarts.h"
 #include "UserDataManager.h"
+#include "GameAudioController.h"
 const std::string GAME_VICTORY_ALERT_CSB_PATH = "GameVictoryAlert.csb";
 const std::string GAME_VICTORY_ALERT_SCORE_LABEL_NAME = "BitmapFontLabel_10_0";
 const std::string GAME_VICTORY_ALERT_COIN_LABEL_NAME = "BitmapFontLabel_10";
@@ -148,7 +149,17 @@ namespace bubble_second {
     {
         pop_start_total_time_ += delay;
         start->setScale(0.1f);
-        start->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(delay), cocos2d::ScaleTo::create(START_POP_DURATION, 1.2f), cocos2d::ScaleTo::create(0.1f, 1.0f), nullptr));
+        start->runAction(cocos2d::Sequence::create(
+            cocos2d::DelayTime::create(delay), 
+            cocos2d::CallFunc::create([=]() {
+                if (start->isVisible())
+                {
+                    GameAudioController::getInstance()->playGameVictoryStartTurnOnEffect();
+                }
+            }),
+            cocos2d::ScaleTo::create(START_POP_DURATION, 1.2f), 
+            cocos2d::ScaleTo::create(0.1f, 1.0f), nullptr)
+        );
     }
 
     void GameVictoryAlert::playStart1PopAction()

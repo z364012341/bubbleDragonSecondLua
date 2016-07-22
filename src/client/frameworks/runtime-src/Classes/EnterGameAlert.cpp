@@ -13,6 +13,7 @@
 #include "StageNumbleBoardController.h"
 #include "StageDataManager.h"
 #include "UserDataManager.h"
+#include "GameAudioController.h"
 const std::string ENTER_GAME_ALERT_CSB = "EnterGameAlert.csb";
 const std::string ENTER_GAME_ALERT_START_NODE_NAME = "startMenuNode";
 const std::string ENTER_GAME_ALERT_CLOSE_BUTTON_NAME = "closeButton";
@@ -90,6 +91,7 @@ namespace bubble_second {
                 this->getEventDispatcher()->dispatchCustomEvent(EVENT_CLICK_START_BUTTON, &point);
                 this->getEventDispatcher()->dispatchCustomEvent(EVENT_ENTER_PROPS_PAY);
                 UserDataManager::getInstance()->cutPropsNumbleWithKey(GAME_STRENGTH_KEY);
+                GameAudioController::getInstance()->playGameStartEffect();
                 //UserDataManager::getInstance()->saveStrengthLastTime();
             }
         });
@@ -154,6 +156,7 @@ namespace bubble_second {
     {
         cocos2d::Node::onEnter();
         cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CLICK_START_BUTTON_END, [=](cocos2d::EventCustom*) {
+            
             cocos2d::Scene* scene = GameScene::createScene();
             cocos2d::Director::getInstance()->replaceScene(scene);
         });

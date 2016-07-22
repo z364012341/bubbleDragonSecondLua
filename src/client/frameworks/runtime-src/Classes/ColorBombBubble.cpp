@@ -1,6 +1,7 @@
 #include "ColorBombBubble.h"
 #include "cocostudio\CocoStudio.h"
 #include "UserDataManager.h"
+#include "GameAudioController.h"
 namespace bubble_second {
     ColorBombBubble::ColorBombBubble()
     {
@@ -54,6 +55,7 @@ namespace bubble_second {
             }
         });
         parent_node->addChild(armature);
+        GameAudioController::getInstance()->playColorBubbleEliminatedEffect();
         return ONE_ROUND_BOMB_EFFECT_DELAY_TIME;
     }
     void ColorBombBubble::downFromAir()

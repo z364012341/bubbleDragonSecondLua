@@ -17,12 +17,13 @@ namespace bubble_second {
         GETINSTANCE_FUNC(GameAudioController);
         ~GameAudioController();
         void loadAudioFile();
+        void setBackgroundMusicEnabled(bool enabled);
 
         void playBombBombBubbleEliminatedEffect();
         void playColorBubbleEliminatedEffect();
         void playContactBarrelBottomEffect();
         void playContactBarrelHeadEffect();
-        void playContactMutiplesealButtleEffect();
+        void playContactMutiplesealBubbleEliminatedEffect();
         void playContactRainbowsealBubbleEffect();
         void playContactScoreWidgetEffect();
         void playDarkCloudBubbleEliminatedEffect();
@@ -40,9 +41,28 @@ namespace bubble_second {
         void playSkillStavesBubbleEliminatedEffect();
         void playStageButtonEffect();
         void playStageUnlockEffect();
+
+        void playGameLaunchMusic();
+
+
+        void playStageCellBackgroundMusic(int cell_numble);
+        void playStageTypeBackgroundMusic(StageType type);
     private:
         GameAudioController();
         void playEffectWithKey(const std::string& key);
+        void playBackgroundMusicWithKey(const std::string& key);
+
+        void playGameStageCellFirstMusic();
+        void playGameStageCellFourthMusic();
+        void playGameStageCellSecondMusic();
+        void playGameStageCellThirdMusic();
+
+        void playGameRescueAnimalMusic();
+        void playGameTopEliminateMusic();
+        void playGameDestroyRainbowsealMusic();
+        void playGameWindmillMusic();
+    private:
+        std::string current_music_key_ = "";
     };
 }
 #endif

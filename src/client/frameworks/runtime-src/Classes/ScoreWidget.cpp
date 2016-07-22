@@ -4,6 +4,7 @@
 #include "SmartScaleController.h"
 #include "GameNoneBubbleDownAnimationComponent.h"
 #include "PopScoreLabelComponent.h"
+#include "GameAudioController.h"
 const std::string SCOREWIDGET_ARMATURE_NAME = "mifeng";
 const std::string SCOREWIDGET_ANIMATION_FLYING_NAME = "daiji"; //·ÉµÄ¶¯»­
 const std::string BUBBLE_ANIMATION_STANDBY_NAME = "daiji-zhayan";
@@ -175,6 +176,7 @@ namespace bubble_second {
         int score = this->getContactScore();
         GameScoreController::getInstance()->addScoreWithNumble(score);
         this->playContactAnimation(score);
+        GameAudioController::getInstance()->playContactScoreWidgetEffect();
     }
 
     int ScoreWidget::getContactScore()

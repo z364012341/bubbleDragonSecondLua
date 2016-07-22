@@ -9,6 +9,7 @@
 #include "StageDataManager.h"
 #include "ui\UITextBMFont.h"
 #include "cocostudio\CocoStudio.h"
+#include "GameAudioController.h"
 const cocos2d::Vec2 STAGE_SELECTION_MENU_STAGETYPE_TEXTURE_POSITION(-2.0f, 10.0f);
 //¹Ø¿¨°´Å¥
 const std::string GAME_STAGE_SELECTION_MENU_BLUE_PATH = "anniu (1).png";
@@ -120,16 +121,18 @@ namespace bubble_second {
             {
                 this->setCurrentStageData();
                 cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_ENTER_GAME_ALERT);
+                GameAudioController::getInstance()->playStageButtonEffect();
+                this->playBackgroundMusic();
             }
         };
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         dispatcher->addEventListenerWithSceneGraphPriority(listener, button_sp_);
     }
 
-    StageData StageSelectionMenu::getStageData()
-    {
-        return StageData();
-    }
+    //StageData StageSelectionMenu::getStageData()
+    //{
+    //    return StageData();
+    //}
 
     void StageSelectionMenu::addSamsung(int start_numble)
     {
@@ -206,6 +209,7 @@ namespace bubble_second {
         this->setSelectionMenuEnable(true);
         this->addStandbyParticle();
         this->addStandbyHaloAnimation();
+        this->playBackgroundMusic();
     }
 
     void StageSelectionMenu::addStandbyParticle()
@@ -228,6 +232,11 @@ namespace bubble_second {
         halo_armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, true);
     }
 
+    void StageSelectionMenu::playBackgroundMusic()
+    {
+        GameAudioController::getInstance()->playStageCellBackgroundMusic(stageData_.cell_numble);
+    }
+
     void StageSelectionMenu::setSelectionMenuEnable(bool flag)
     {
         menu_enable_ = flag;
@@ -246,6 +255,7 @@ namespace bubble_second {
     void StageSelectionMenu::unlockStage()
     {
         this->playUnlockStageAnimation();
+        GameAudioController::getInstance()->playStageUnlockEffect();
     }
 
     void StageSelectionMenu::preUnlockStage()

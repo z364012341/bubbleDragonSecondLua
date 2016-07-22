@@ -2,6 +2,7 @@
 #include "SpriteTextureController.h"
 #include "GameScoreController.h"
 #include "GameScoreController.h"
+#include "GameAudioController.h"
 const std::string STAGE_LOGO_FLASH_PATH = "wsparticle_star02.png";
 const float BEZIER_FLYING_DURATION = 1.5f; //得分挂件的赛贝尔运动时间
 const float LOGO_FLASH_DURATION = 0.83f; 
@@ -72,27 +73,31 @@ namespace bubble_second {
         config.controlPoint_2 = this->getPosition();
         cocos2d::BezierTo* bezier = cocos2d::BezierTo::create(BEZIER_FLYING_DURATION, config);
         cocos2d::ScaleTo* scale = cocos2d::ScaleTo::create(BEZIER_FLYING_DURATION, 0.2f);
-        cocos2d::Sequence* seq = cocos2d::Sequence::create(cocos2d::Spawn::createWithTwoActions(bezier, scale)/*, cocos2d::DelayTime::create(0.1f)*/,
+        cocos2d::Sequence* seq = cocos2d::Sequence::create(
+            cocos2d::Spawn::createWithTwoActions(bezier, scale),
             cocos2d::CallFunc::create([=]() {
-            this->playLogoFlash();
-        }),/* cocos2d::DelayTime::create(LOGO_FLASH_DURATION), */cocos2d::CallFunc::create([=]() {
-            node->removeFromParent();
-            if (event_name == EVENT_MUTIPLE_SEAL_BUBBLE_FLY)
-            {
-                GameScoreController::getInstance()->addCompletedTaskNumble();
-            }
-            else
-            {
-                GameScoreController::getInstance()->dispatchUpdateCompletedTaskEvent();
-            }
-        }), nullptr);
+                this->playLogoFlash();
+            }),
+            cocos2d::CallFunc::create([=]() {
+                node->removeFromParent();
+                if (event_name == EVENT_MUTIPLE_SEAL_BUBBLE_FLY)
+                {
+                    GameScoreController::getInstance()->addCompletedTaskNumble();
+                }
+                else
+                {
+                    GameScoreController::getInstance()->dispatchUpdateCompletedTaskEvent();
+                }
+                GameAudioController::getInstance()->playGameCompletedTaskFlyEndEffect();
+            }),
+        nullptr);
         node->runAction(seq);
     }
 
-    void StageTypeLogo::bubbleNodeFlyFlyFly(cocos2d::Node* node, bool update_immediately)
-    {
+    //void StageTypeLogo::bubbleNodeFlyFlyFly(cocos2d::Node* node, bool update_immediately)
+    //{
 
-    }
+    //}
 
     void StageTypeLogo::playLogoFlash()
     {

@@ -364,7 +364,7 @@ namespace bubble_second {
         cocos2d::Node* bubble_map_node_;
         BaseBubble* property_bubble_;
         //std::map<std::string, std::function<void(BaseProperty* property)>> props_name_to_handle_;
-        std::map<std::string, BubbleType> props_name_to_color_;
+        //std::map<std::string, BubbleType> props_name_to_color_;
         BaseProperty* color_bomb_property_;
         BaseProperty* bomb_bomb_property_;
         BaseProperty* wooden_hammer_property_;

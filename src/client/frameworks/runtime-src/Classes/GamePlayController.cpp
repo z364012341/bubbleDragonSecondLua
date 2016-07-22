@@ -14,7 +14,7 @@
 #include "GameScene.h"
 #include "BubbleSightingDevice.h"
 #include "BubbleSightingPoint.h"
-
+#include "BarrelHead.h"
 namespace bubble_second {
 
     GamePlayController::GamePlayController()
@@ -79,6 +79,7 @@ namespace bubble_second {
         this->addContactHandleWithTwoNames(&GamePlayController::disposeFallBubbleBorder, UI_NAME_FALL_BOTTOM_BORDER, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, DYEING_BUBBLE_NAME, MAP_BUBBLE_NAME);
         this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBubble, STAVES_BUBBLE_NAME, MAP_BUBBLE_NAME);
+        this->addContactHandleWithTwoNames(&GamePlayController::disposeContactWithBarrelHead, BARREL_HEAD_NAME, MAP_BUBBLE_NAME);
     }
 
     void bubble_second::GamePlayController::addContactHandleWithTwoNames(contactHandle handle, const std::string& name_1, const std::string& name_2)
@@ -229,6 +230,11 @@ namespace bubble_second {
             dynamic_cast<ColorBubble*>(bubble_node)->contactBarrelBottom();
 			dynamic_cast<BarrelBottom*>(barrel_node)->contactOnce();
         }
+    }
+
+    void GamePlayController::disposeContactWithBarrelHead(cocos2d::Node * barrel_node, cocos2d::Node *)
+    {
+        dynamic_cast<BarrelHead*>(barrel_node)->contactOnce();
     }
 
     void GamePlayController::disposeContactWithScoreWidget(cocos2d::Node * widget_node, cocos2d::Node * bubble_node)

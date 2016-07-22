@@ -280,7 +280,7 @@ namespace bubble_second {
     }
     bool UserDataManager::isGameMusicEnable()
     {
-        return cocos2d::UserDefault::getInstance()->getBoolForKey(USER_DATA_MUSIC_KEY.c_str());
+        return cocos2d::UserDefault::getInstance()->getBoolForKey(USER_DATA_MUSIC_KEY.c_str(), true);
     }
     void UserDataManager::setSoundEffectEnable(bool flag)
     {

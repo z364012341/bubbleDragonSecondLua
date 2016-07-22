@@ -156,6 +156,8 @@ namespace bubble_second {
         void disposeContactWithBubble(cocos2d::Node* flying_node, cocos2d::Node* contact_node);
         //处理碰撞到桶底的事件
         void disposeContactWithBarrelBottom(cocos2d::Node* barrel_node, cocos2d::Node* bubble_node);
+        //处理碰到桶盖
+        void disposeContactWithBarrelHead(cocos2d::Node* barrel_node, cocos2d::Node* bubble_node);
         //处理碰到得分挂件
         void disposeContactWithScoreWidget(cocos2d::Node* widget_node, cocos2d::Node* bubble_node);
         //处理碰到闪电小球
@@ -182,6 +184,7 @@ namespace bubble_second {
         void disposeUsingDyeingBubble(BaseBubble* dyeing_bubble, BaseBubble* bubble);
         //处理法杖球
         void disposeUsingStavesBubble(BaseBubble* staves_bubble, BaseBubble* bubble);
+
     private:
         enum Direction
         {

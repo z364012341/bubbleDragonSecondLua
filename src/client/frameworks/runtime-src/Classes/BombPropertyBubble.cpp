@@ -1,6 +1,6 @@
 #include "BombPropertyBubble.h"
 #include "UserDataManager.h"
-
+#include "GameAudioController.h"
 const std::string BOMB_BUBBLE_STANDBY_NAME = "ranshao";
 namespace bubble_second {
     BombPropertyBubble::BombPropertyBubble()
@@ -70,6 +70,7 @@ namespace bubble_second {
         //auto action1 = cocos2d::Ripple3D::create(0, ACTION_3DGRID, point, 0, 0, 0);
         //cocos2d::Sequence* seq = cocos2d::Sequence::create(action, action1, cocos2d::CallFunc::create([=]() {node->removeFromParent(); }), nullptr);
         //node->runAction(seq);
+        GameAudioController::getInstance()->playPropBigBombBombBubbleEliminatedEffect();
         return TWO_ROUND_BOMB_EFFECT_DELAY_TIME;
     }
     void BombPropertyBubble::downFromAir()

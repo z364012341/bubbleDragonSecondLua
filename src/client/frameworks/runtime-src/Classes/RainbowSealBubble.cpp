@@ -5,6 +5,7 @@
 #include "BubbleFactory.h"
 #include "RainbowCharactor.h"
 #include "SpriteTextureController.h"
+#include "GameAudioController.h"
 const std::string RAINBOW_SEAL_BUBBLE_COVER_CSB = "RainbowSealBubbleCover.csb";
 const std::string BUBBLE_COVER_NAME = "kuangliubianxing_1";
 namespace bubble_second {
@@ -128,6 +129,7 @@ namespace bubble_second {
                 color = GamePlayController::getInstance()->getBubbleColorFromPicker();
             } while (color == this->getRainbowColor());
             this->setRainbowColor(color);
+            GameAudioController::getInstance()->playContactRainbowsealBubbleEffect();
         }
     }
 
@@ -171,6 +173,7 @@ namespace bubble_second {
             }
         });
         this->playCharactorDefeatAnimation();
+        GameAudioController::getInstance()->playRainbowsealBubbleEliminatedEffect();
     }
 
     bool RainbowSealBubble::isCharactorExist()

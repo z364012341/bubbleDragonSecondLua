@@ -2,6 +2,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "GameScoreController.h"
 #include "cocostudio\CocoStudio.h"
+#include "GameAudioController.h"
 const std::string BOMB_BOMB_BUBBLE_CENTER_FIRE_NAME = "huoqiuTX";
 const std::string BOMB_BOMB_BUBBLE_PARTICLE_PATH = "particle/huoqiulizi.plist";
 namespace bubble_second {
@@ -52,5 +53,6 @@ namespace bubble_second {
         particle->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.5f), cocos2d::CallFunc::create([=]() {
             particle->removeFromParent();
         })));
+        GameAudioController::getInstance()->playBombBombBubbleEliminatedEffect();
     }
 }

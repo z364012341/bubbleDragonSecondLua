@@ -6,19 +6,19 @@
         <key>game_sign_day_numble</key>
         <integer>6</integer>
         <key>strength</key>
-        <integer>5</integer>
+        <integer>4</integer>
         <key>md5</key>
-        <string>6ed754a2200f9b4018644f8372acc05b</string>
+        <string>6ffa3043f32c135248324e0dc3bd77a0</string>
         <key>coin</key>
-        <integer>8995</integer>
+        <integer>12595</integer>
         <key>bigEyes</key>
         <integer>4</integer>
         <key>diamond</key>
-        <integer>8990</integer>
+        <integer>8825</integer>
         <key>search</key>
         <integer>6</integer>
         <key>woodenHammer</key>
-        <integer>7</integer>
+        <integer>6</integer>
         <key>bigBombBomb</key>
         <integer>1</integer>
         <key>addTime</key>

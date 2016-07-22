@@ -1,4 +1,5 @@
 #include "SkillDyeingBubble.h"
+#include "GameAudioController.h"
 const std::string DYEING_BUBBLE_ARMATURE_NAME = "ranseqiu";
 const std::string ARMATURE_BONE_1_NAME = "Layer2";
 const std::string ARMATURE_BONE_2_NAME = "Layer13";
@@ -68,6 +69,7 @@ namespace bubble_second {
     void SkillDyeingBubble::bubbleEliminate(int)
     {
         this->removeFromParent();
+        GameAudioController::getInstance()->playSkillDyingBubbleEliminatedEffect();
     }
     void SkillDyeingBubble::setDyeingColor(BubbleType type)
     {//×ÏºìÀ¶³ÈÂÌ»Æ

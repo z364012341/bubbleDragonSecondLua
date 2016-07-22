@@ -493,6 +493,8 @@
     <ClInclude Include="..\Classes\GameNoviceGuideFactory.h" />
     <ClInclude Include="..\Classes\GameButtonFactory.h" />
     <ClInclude Include="..\Classes\GameAudioController.h" />
+    <ClInclude Include="..\Classes\BarrelHead.h" />
+    <ClInclude Include="..\Classes\GameAirBubbleManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -958,6 +960,8 @@
     <ClCompile Include="..\Classes\GameNoviceGuideFactory.cpp" />
     <ClCompile Include="..\Classes\GameButtonFactory.cpp" />
     <ClCompile Include="..\Classes\GameAudioController.cpp" />
+    <ClCompile Include="..\Classes\BarrelHead.cpp" />
+    <ClCompile Include="..\Classes\GameAirBubbleManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

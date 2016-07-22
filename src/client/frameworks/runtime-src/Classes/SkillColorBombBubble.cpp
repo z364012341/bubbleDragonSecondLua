@@ -1,5 +1,6 @@
 #include "SkillColorBombBubble.h"
 #include "cocostudio\CocoStudio.h"
+#include "GameAudioController.h"
 const std::string SKILL_COLOR_BOMB_ARMATURE_NAME = "juesejinengTX2";
 const std::string SKILL_ELIMINATE_ARMATURE_NAME = "baoshi TX";
 const std::string BUBBLE_SIGHTING_DEVICE_POINT_PATH = "skill_color.png";

@@ -2,6 +2,7 @@
 #include "SpriteTextureController.h"
 #include "GamePlayController.h"
 #include "UserDataManager.h"
+#include "GameAudioController.h"
 const std::string WOODEN_HAMMER_ANIMATION_NAME = "chuizi";
 const std::string WOODEN_HAMMER_ATTACK_ANIMATION_NAME = "shiyong";
 namespace bubble_second {
@@ -31,6 +32,7 @@ namespace bubble_second {
             GamePlayController::getInstance()->disposeUseWoodenHammer();
         })));
         UserDataManager::getInstance()->cutPropsNumbleWithKey(BUBBLE_WOODEN_HAMMER_PROP_KEY);
+        GameAudioController::getInstance()->playGameWoodenhammerAttackEffect();
     }
 
     bool WoodenHammerWeapon::init()

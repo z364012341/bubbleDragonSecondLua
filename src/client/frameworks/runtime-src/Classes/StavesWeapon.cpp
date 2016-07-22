@@ -4,6 +4,7 @@
 #include "ColorBubble.h"
 #include "UserDataManager.h"
 //const std::string WOODEN_HAMMER_ANIMATION_NAME = "fazhang";
+
 namespace bubble_second {
     StavesWeapon::StavesWeapon()
     {
@@ -48,6 +49,7 @@ namespace bubble_second {
         BaseWeapon::attackBubble(point);
         GamePlayController::getInstance()->disposeUseStaves();
         UserDataManager::getInstance()->cutPropsNumbleWithKey(BUBBLE_STAVES_PROP_KEY);
+
     }
 
     bool StavesWeapon::inAttackRange(BubbleType color)

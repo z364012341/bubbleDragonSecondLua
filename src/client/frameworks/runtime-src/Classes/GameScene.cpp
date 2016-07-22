@@ -42,9 +42,11 @@
 #include "GameAlertMask.h"
 #include "SkillDyeingBubble.h"
 #include "GameCharactorSkillButton.h"
-//#include "GameSinglePropBuyAlert.h"
+#include "BarrelHead.h"
 #include "GameSinglePropBuyAlertFactory.h"
 #include "GameNoviceGuideFactory.h"
+#include "GameAirBubbleManager.h"
+#include "GameAudioController.h"
 const std::string GAME_RIGHT_INFO_CSB = "GameTaskNumble.csb";
 const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
@@ -70,12 +72,16 @@ const std::string UI_NAME_BARRELHEAD_NODE = "barrelhead";        //桶盖
 const std::string UI_NAME_BARREL_NODE = "barrel_body"; //桶身体
 const std::string UI_NAME_BUBBLE_USE_COUNT = "bubble_numble_label";//小球使用数的label
 const std::string UI_NAME_SECOND_BUBBLE_STORE = "second_bubble_store";        //喵准器旁边的小草
-const int BARRELHEADEDGE_BODY_RADIUS = 20;  //桶边刚体半径
+//const int BARRELHEADEDGE_BODY_RADIUS = 20;  //桶边刚体半径
 const float POP_VICTORY_ALERT_DELAYTIME = 1.5f;
 const std::string BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY = "bubble_sighting_device_perform_schedule_key"; //喵准器表演的定时器的key
 const std::string GAME_DEFEAT_BUY_PROPS_ALERT_NAME = "game_defeat_buy_props_alert_name";
 const std::string SKILL_STAVES_BUBBLE_ARMATURE_1_NAME = "shandian";
 const std::string SKILL_STAVES_BUBBLE_ARMATURE_2_NAME = "shandian02";
+const std::map<std::string, BubbleType> PROPS_NAME_TO_COLOR = {
+    { PROPS_COLOR_BOMB_NAME, kBubbleColorBomb },
+    { PROPS_BOMB_BOMB_NAME , kBubbleBombBombProperty },
+};
 namespace bubble_second {
     cocos2d::Scene* GameScene::createScene()
     {
@@ -92,7 +98,7 @@ namespace bubble_second {
         return scene;
     }
 
-    GameScene * bubble_second::GameScene::create()
+    GameScene * GameScene::create()
     {
         GameScene *pRet = new(std::nothrow) GameScene();
         if (pRet && pRet->init())
@@ -133,7 +139,7 @@ namespace bubble_second {
         this->initHandle();
         this->addKeyboardEventListener();
 
-
+        GameAudioController::getInstance()->playStageTypeBackgroundMusic(StageDataManager::getInstance()->getCurrentStageType());
 
         //char a[8][16];
         //int e1 = &a[4][1] - &a[3][4];
@@ -186,6 +192,7 @@ namespace bubble_second {
         this->setPhysicsWorldBody();
         //this->scheduleOnce(CC_SCHEDULE_SELECTOR(GameScene::updateStart), 1);
         GamePlayController::getInstance()->setGameSceneDelegate(this);
+        this->setMenuTouchEnabled(false);
     }
 
     void GameScene::onExit()
@@ -373,7 +380,7 @@ namespace bubble_second {
         this->addStandbyTimer();
     }
 
-    void bubble_second::GameScene::addGameBackground(int cell_numble)
+    void GameScene::addGameBackground(int cell_numble)
     {
         cocos2d::Sprite* game_bg = SpriteTextureController::getInstance()->createGameBackgroundSprite(cell_numble);
         game_bg->setScale(SmartScaleController::getInstance()->getFixedHeightZoom());
@@ -393,8 +400,8 @@ namespace bubble_second {
     {
         //props_name_to_handle_[COLOR_BOMB_BUBBLE_NAME] = [=](BaseProperty* property) {this->haveShootPropsBubble(property); };
         //props_name_to_handle_[PROPS_BOMB_BOMB_NAME] = [=](BaseProperty* property) {this->haveShootPropsBubble(property); };
-        props_name_to_color_[PROPS_COLOR_BOMB_NAME] = kBubbleColorBomb;
-        props_name_to_color_[PROPS_BOMB_BOMB_NAME] = kBubbleBombBombProperty;
+        //props_name_to_color_[PROPS_COLOR_BOMB_NAME] = kBubbleColorBomb;
+        //props_name_to_color_[PROPS_BOMB_BOMB_NAME] = kBubbleBombBombProperty;
         //bubblecolor_to_swirl_[kBubbleTransparent] = "";
         //bubblecolor_to_swirl_[kBubbleRed] = GUNSIGHT_SWIRL_RED_PATH;
         //bubblecolor_to_swirl_[kBubbleYellow] = GUNSIGHT_SWIRL_YELLOW_PATH;
@@ -559,15 +566,16 @@ namespace bubble_second {
     void GameScene::addBarrelheadPhysicsBodyWithName(const std::string & child_name)
     {
         cocos2d::Node* node = csb_node_->getChildByName(child_name);
-        cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createCircle(BARRELHEADEDGE_BODY_RADIUS,
-            cocos2d::PhysicsMaterial(PHYSICS_BARRELHEADEDGE_BODY_DENSITY,
-                PHYSICS_BARRELHEADEDGE_BODY_RESTITUTION, PHYSICS_BARRELHEADEDGE_BODY_FRICTION));//密度, 恢复,摩擦力
-        body->setDynamic(false);
-        body->setGravityEnable(false);
-        body->setCategoryBitmask(BITMASK_BARRELHEADEDGE_CATEGORY);
-        body->setCollisionBitmask(BITMASK_BARRELHEADEDGE_COLLISION);
-        body->setContactTestBitmask(BITMASK_BARRELHEADEDGE_CONTACTTEST);
-        node->setPhysicsBody(body);
+        node->addChild(BarrelHead::create());
+        //cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createCircle(BARRELHEADEDGE_BODY_RADIUS,
+        //    cocos2d::PhysicsMaterial(PHYSICS_BARRELHEADEDGE_BODY_DENSITY,
+        //        PHYSICS_BARRELHEADEDGE_BODY_RESTITUTION, PHYSICS_BARRELHEADEDGE_BODY_FRICTION));//密度, 恢复,摩擦力
+        //body->setDynamic(false);
+        //body->setGravityEnable(false);
+        //body->setCategoryBitmask(BITMASK_BARRELHEADEDGE_CATEGORY);
+        //body->setCollisionBitmask(BITMASK_BARRELHEADEDGE_COLLISION);
+        //body->setContactTestBitmask(BITMASK_BARRELHEADEDGE_CONTACTTEST);
+        //node->setPhysicsBody(body);
     }
 
     void GameScene::addBubblePhysicsBodyToMap(BaseBubble* bubble)
@@ -1192,7 +1200,7 @@ namespace bubble_second {
         }));
 
     }
-    void bubble_second::GameScene::addWindmillBorderFunc(cocos2d::Size size, cocos2d::Vec2 point, int test_bitmask)
+    void GameScene::addWindmillBorderFunc(cocos2d::Size size, cocos2d::Vec2 point, int test_bitmask)
     {
         auto body = cocos2d::PhysicsBody::createBox(size,
             cocos2d::PhysicsMaterial(PHYSICS_WORLD_BODY_DENSITY, PHYSICS_WORLD_BODY_RESTITUTION, PHYSICS_WORLD_FRICTION));
@@ -1490,7 +1498,7 @@ namespace bubble_second {
         if (property_bubble_ != nullptr)
         {
             property_bubble_->removeFromParent();
-            property_bubble_ = BubbleFactory::getInstance()->createBubbleWithType(props_name_to_color_[property->getName()]);
+            property_bubble_ = BubbleFactory::getInstance()->createBubbleWithType(PROPS_NAME_TO_COLOR.at(property->getName()));
             property_bubble_->setPosition(this->getGunsightPosition());
             csb_node_->addChild(property_bubble_);
             controller->setBubbleShootEnabled(true);
@@ -1510,7 +1518,7 @@ namespace bubble_second {
         else
         {
             //property->actionBegan();
-            property_bubble_ = BubbleFactory::getInstance()->createBubbleWithType(props_name_to_color_[property->getName()]);
+            property_bubble_ = BubbleFactory::getInstance()->createBubbleWithType(PROPS_NAME_TO_COLOR.at(property->getName()));
             this->pushBubbleToPrepare(property_bubble_);
             //property_bubble_->setPosition(this->getGunsightPosition());
             //csb_node_->addChild(property_bubble_);
@@ -1530,7 +1538,7 @@ namespace bubble_second {
         }
     }
 
-    void bubble_second::GameScene::pushBubbleToPrepare(BaseBubble * bubble/*, cocos2d::CallFunc* callfunc*/)
+    void GameScene::pushBubbleToPrepare(BaseBubble * bubble/*, cocos2d::CallFunc* callfunc*/)
     {
         this->setPropertyTouchEnabled(false);
         bubble->setPosition(this->getGunsightPosition());
@@ -1594,10 +1602,12 @@ namespace bubble_second {
     {
         if (alert == nullptr)
         {
+            this->setMenuTouchEnabled(true);
             return;
         }
         this->setMenuTouchEnabled(false);
         GamePlayController::getInstance()->setBubbleShootEnabled(false);
+        //GameAlertMask* mask = GameAlertMask::createTransparentMask();
         this->gamePause();
 
         alert_ = alert;
@@ -1810,7 +1820,7 @@ namespace bubble_second {
         return  GAME_PLAY_HEIGHT;
     }
 
-    void bubble_second::GameScene::addEnterPropsAnimation(const std::string & animation_name, const std::string & end_event_name)
+    void GameScene::addEnterPropsAnimation(const std::string & animation_name, const std::string & end_event_name)
     {
         cocos2d::Node* node = EnterGamePropsView::createCommodityArmature(animation_name, end_event_name);
         auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -1830,7 +1840,7 @@ namespace bubble_second {
         }
     }
 
-    void bubble_second::GameScene::usedAddSpecialBubbleProps()
+    void GameScene::usedAddSpecialBubbleProps()
     {
         if (EnterPropsViewManager::getInstance()->getPropsSwitchEnable(ADD_SPECIAL_COMMODITY_NAME))
         {
@@ -1841,7 +1851,7 @@ namespace bubble_second {
             this->usedAimingLineProps();
         }
     }
-    void bubble_second::GameScene::usedAimingLineProps()
+    void GameScene::usedAimingLineProps()
     {
         if (EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME))
         {
@@ -1853,7 +1863,7 @@ namespace bubble_second {
             this->popBeginNoviceGuideAlert();
         }
     }
-    void bubble_second::GameScene::performBubbltSightingDevice()
+    void GameScene::performBubbltSightingDevice()
     {
         static float angle = 0;
         static float angle_delta = 0.1f;
@@ -2524,10 +2534,10 @@ namespace bubble_second {
         this->runAction(cocos2d::Repeat::create(seq, count));
         //开个定时器预防万一不弹出胜利面板
         //cocos2d::Director::getInstance()->getScheduler()->pauseTarget
-        this->schedule([=](float) {
-            this->popVictoryAlert();
-            this->unschedule(GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY);
-        }, 15.0f, GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY);
+        //this->schedule([=](float) {
+        //    this->popVictoryAlert();
+        //    this->unschedule(GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY);
+        //}, 15.0f, GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY);
     }
 
     void GameScene::replayGame()
@@ -2552,7 +2562,7 @@ namespace bubble_second {
 
     }
 
-    void bubble_second::GameScene::removeEnterPropsMask()
+    void GameScene::removeEnterPropsMask()
     {
         props_touch_mask_->removeFromParent();
     }
@@ -2731,6 +2741,9 @@ namespace bubble_second {
             //};
             //this->handleBarrelScoreLabel(func);
             barrel_score_node_->displayBarrelScoreLabel();
+            this->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(5.0), cocos2d::CallFunc::create([=]() {
+                GameAirBubbleManager::getInstance()->checkAirBubblesOutOfRange();
+            }))));
         }
     }
 
@@ -2757,6 +2770,7 @@ namespace bubble_second {
             //};
             //this->handleBarrelScoreLabel(func);
             barrel_score_node_->notDisplayedBarrelScoreLabel();
+            GameAirBubbleManager::getInstance()->clear();
             if (GameScoreController::getInstance()->gameVictory())
             {
                 this->popVictoryAlert();

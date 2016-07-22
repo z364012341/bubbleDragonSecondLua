@@ -1,7 +1,17 @@
 #include "GameAudioController.h"
 #include "SimpleAudioEngine.h"
-//const std::map<std::string, std::string> GAME_BACKGROUND_MUSIC_PATH = {
-//};
+#include "UserDataManager.h"
+const std::map<std::string, std::string> GAME_BACKGROUND_MUSIC_PATH = {
+    { "GAME_LAUNCH_MUSIC", "Accomplish.mp3" },
+    { "GAME_STAGE_CELL_FIRST_MUSIC", "Accomplish.mp3" },
+    { "GAME_STAGE_CELL_SECOND_MUSIC", "bgm_game_puzzle.mp3" },
+    { "GAME_STAGE_CELL_THIRD_MUSIC", "bg_menu.mp3" },
+    { "GAME_STAGE_CELL_FOURTH_MUSIC", "game_music_1.mp3" },
+    { "GAME_TOP_ELIMINATE_MUSIC", "game_xg.mp3" },
+    { "GAME_RESCUE_ANIMAL_MUSIC", "music_battle2.mp3" },
+    { "GAME_DESTROY_RAINBOWSEAL_MUSIC", "music_comgame.mp3" },
+    { "GAME_WINDMILL_MUSIC", "music_boss.mp3" },
+};
 const std::string COLOR_BOMB_BUBBLE_ELIMINATED_PATH = "triggers.ogg";
 const std::map<std::string, std::string> GAME_EFFECT_PATH = {
     { "STAGE_BUTTON_EFFECT", "waterhit.ogg" }, //点击按钮时播放
@@ -9,7 +19,7 @@ const std::map<std::string, std::string> GAME_EFFECT_PATH = {
     { "GAME_START_EFFECT", "tilixiafei.ogg" },  //点击开始游戏按钮，心飞至开始按钮
     { "CONTACT_RAINBOWSEAL_BUBBLE_EFFECT", "coin_add.ogg" },  //击中小狼泡泡（小狼泡泡变色）
     { "RAINBOWSEAL_BUBBLE_ELIMINATED_EFFECT", "sound_smash_ice.ogg" },  //小狼泡泡裂开
-    { "CONTACT_MUTIPLESEAL_BUTTLE_EFFECT", "ballblast.ogg" },  //动物泡泡爆炸
+    { "MUTIPLESEAL_BUBBLE_ELIMINATED_EFFECT", "ballblast.ogg" },  //动物泡泡爆炸
     { "CONTACT_SCORE_WIDGET_EFFECT", "sound_rebound.ogg" },  //撞击蜜蜂
     { "CONTACT_BARREL_HEAD_EFFECT", "sound_donut_bounce_1.ogg" },  //撞击木桶头部边缘
     { "CONTACT_BARREL_BOTTOM_EFFECT", "sound_special_liuxing_2.ogg" },  //撞击木桶头部边缘
@@ -65,30 +75,61 @@ namespace bubble_second {
         result += transform(tempStr);
         return result;
     }
+
     GameAudioController::GameAudioController()
     {
-        //{//打印音效的声明和实现
-        //    using std::string;
-        //    string declaration = "";
-        //    for (auto var : GAME_EFFECT_PATH)
-        //    {
-        //        declaration += "void play" + specialSplit(var.first, '_') + "();\n";
-        //    }
-        //    CCLOG("%s", declaration.c_str());
+        {//打印音效的声明和实现
+            using std::string;
+            string declaration = "";
+            for (auto var : GAME_EFFECT_PATH)
+            {
+                declaration += "void play" + specialSplit(var.first, '_') + "();\n";
+            }
+            CCLOG("%s", declaration.c_str());
 
-        //    string implement = "";
-        //    for (auto var : GAME_EFFECT_PATH)
-        //    {
-        //        implement += "void GameAudioController::play" + specialSplit(var.first, '_') +
-        //            "()\n{\n    this->playEffectWithKey(\"" + var.first + "\");\n}\n";
-        //    }
-        //    CCLOG("%s", implement.c_str());
-        //}
+            string implement = "";
+            for (auto var : GAME_EFFECT_PATH)
+            {
+                implement += "void GameAudioController::play" + specialSplit(var.first, '_') +
+                    "()\n{\n    this->playEffectWithKey(\"" + var.first + "\");\n}\n";
+            }
+            CCLOG("%s", implement.c_str());
+        }
+        {//打印背景音乐的声明和实现
+            CCLOG("-------------------------MUSIC--------------------------");
+            using std::string;
+            string declaration = "";
+            for (auto var : GAME_BACKGROUND_MUSIC_PATH)
+            {
+                declaration += "void play" + specialSplit(var.first, '_') + "();\n";
+            }
+            CCLOG("%s", declaration.c_str());
+
+            string implement = "";
+            for (auto var : GAME_BACKGROUND_MUSIC_PATH)
+            {
+                implement += "void GameAudioController::play" + specialSplit(var.first, '_') +
+                    "()\n{\n    this->playBackgroundMusicWithKey(\"" + var.first + "\");\n}\n";
+            }
+            CCLOG("%s", implement.c_str());
+        }
     }
 
     void GameAudioController::playEffectWithKey(const std::string & key)
     {
-        SimpleAudioEngine::getInstance()->playEffect(GAME_EFFECT_PATH.at(key).c_str());
+        if (UserDataManager::getInstance()->isSoundEffectEnable())
+        {
+            SimpleAudioEngine::getInstance()->playEffect(GAME_EFFECT_PATH.at(key).c_str());
+        }
+    }
+
+    void GameAudioController::playBackgroundMusicWithKey(const std::string & key)
+    {
+        if (UserDataManager::getInstance()->isGameMusicEnable() && (!SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying() || current_music_key_ != key))
+        {
+            SimpleAudioEngine::getInstance()->playBackgroundMusic(GAME_BACKGROUND_MUSIC_PATH.at(key).c_str(), true);
+        }
+        current_music_key_ = key;
     }
 
 
@@ -97,12 +138,26 @@ namespace bubble_second {
     }
     void GameAudioController::loadAudioFile()
     {
-        //SimpleAudioEngine::getInstance()->preloadBackgroundMusic();
         for (auto var : GAME_EFFECT_PATH)
         {
             SimpleAudioEngine::getInstance()->preloadEffect(var.second.c_str());
         }
-
+        for (auto var : GAME_BACKGROUND_MUSIC_PATH)
+        {
+            SimpleAudioEngine::getInstance()->preloadBackgroundMusic(var.second.c_str());
+        }
+    }
+    void GameAudioController::setBackgroundMusicEnabled(bool enabled)
+    {
+        UserDataManager::getInstance()->setGameMusicEnable(enabled);
+        if (enabled)
+        {
+            this->playBackgroundMusicWithKey(current_music_key_);
+        }
+        else
+        {
+            SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+        }
     }
     void GameAudioController::playBombBombBubbleEliminatedEffect()
     {
@@ -120,9 +175,9 @@ namespace bubble_second {
     {
         this->playEffectWithKey("CONTACT_BARREL_HEAD_EFFECT");
     }
-    void GameAudioController::playContactMutiplesealButtleEffect()
+    void GameAudioController::playContactMutiplesealBubbleEliminatedEffect()
     {
-        this->playEffectWithKey("CONTACT_MUTIPLESEAL_BUTTLE_EFFECT");
+        this->playEffectWithKey("MUTIPLESEAL_BUTTLE_ELIMINATED_EFFECT");
     }
     void GameAudioController::playContactRainbowsealBubbleEffect()
     {
@@ -191,5 +246,84 @@ namespace bubble_second {
     void GameAudioController::playStageUnlockEffect()
     {
         this->playEffectWithKey("STAGE_UNLOCK_EFFECT");
+    }
+
+
+
+    void GameAudioController::playGameDestroyRainbowsealMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_DESTROY_RAINBOWSEAL_MUSIC");
+    }
+    void GameAudioController::playGameLaunchMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_LAUNCH_MUSIC");
+    }
+    void GameAudioController::playGameRescueAnimalMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_RESCUE_ANIMAL_MUSIC");
+    }
+    void GameAudioController::playGameStageCellFirstMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_STAGE_CELL_FIRST_MUSIC");
+    }
+    void GameAudioController::playGameStageCellFourthMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_STAGE_CELL_FOURTH_MUSIC");
+    }
+    void GameAudioController::playGameStageCellSecondMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_STAGE_CELL_SECOND_MUSIC");
+    }
+    void GameAudioController::playGameStageCellThirdMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_STAGE_CELL_THIRD_MUSIC");
+    }
+    void GameAudioController::playGameTopEliminateMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_TOP_ELIMINATE_MUSIC");
+    }
+    void GameAudioController::playGameWindmillMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_WINDMILL_MUSIC");
+    }
+    void GameAudioController::playStageCellBackgroundMusic(int cell_numble)
+    {
+        switch (cell_numble)
+        {
+        case 0:
+            this->playGameStageCellFirstMusic();
+            break;
+        case 1:
+            this->playGameStageCellSecondMusic();
+            break;
+        case 2:
+            this->playGameStageCellThirdMusic();
+            break;
+        case 3:
+            this->playGameStageCellFourthMusic();
+            break;
+        default:
+            break;
+        }
+    }
+    void GameAudioController::playStageTypeBackgroundMusic(StageType type)
+    {
+        switch (type)
+        {
+        case kTopEliminate:
+            this->playGameTopEliminateMusic();
+            break;
+        case kRescueAnimal:
+            this->playGameRescueAnimalMusic();
+            break;
+        case kDestroyRainbowSeal:
+            this->playGameDestroyRainbowsealMusic();
+            break;
+        case kWindmill:
+            this->playGameWindmillMusic();
+            break;
+        default:
+            break;
+        }
     }
 }

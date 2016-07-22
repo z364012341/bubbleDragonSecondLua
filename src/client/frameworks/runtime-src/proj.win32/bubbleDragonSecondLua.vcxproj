@@ -197,6 +197,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\AimingLineCommodity.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BarrelBottom.h" />
+    <ClInclude Include="..\Classes\BarrelHead.h" />
     <ClInclude Include="..\Classes\BarrelScoreLabelNode.h" />
     <ClInclude Include="..\Classes\BaseBubble.h" />
     <ClInclude Include="..\Classes\BaseComponentBubble.h" />
@@ -229,6 +230,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\EnterPropsViewManager.h" />
     <ClInclude Include="..\Classes\ExhibitionNumble.h" />
     <ClInclude Include="..\Classes\GameAboutAlert.h" />
+    <ClInclude Include="..\Classes\GameAirBubbleManager.h" />
     <ClInclude Include="..\Classes\GameAlertMask.h" />
     <ClInclude Include="..\Classes\GameAudioController.h" />
     <ClInclude Include="..\Classes\GameBubbleMap.h" />
@@ -365,6 +367,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\AimingLineCommodity.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BarrelBottom.cpp" />
+    <ClCompile Include="..\Classes\BarrelHead.cpp" />
     <ClCompile Include="..\Classes\BarrelScoreLabelNode.cpp" />
     <ClCompile Include="..\Classes\BaseBubble.cpp" />
     <ClCompile Include="..\Classes\BaseComponentBubble.cpp" />
@@ -396,6 +399,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\EnterPropsViewManager.cpp" />
     <ClCompile Include="..\Classes\ExhibitionNumble.cpp" />
     <ClCompile Include="..\Classes\GameAboutAlert.cpp" />
+    <ClCompile Include="..\Classes\GameAirBubbleManager.cpp" />
     <ClCompile Include="..\Classes\GameAlertMask.cpp" />
     <ClCompile Include="..\Classes\GameAudioController.cpp" />
     <ClCompile Include="..\Classes\GameBubbleMap.cpp" />

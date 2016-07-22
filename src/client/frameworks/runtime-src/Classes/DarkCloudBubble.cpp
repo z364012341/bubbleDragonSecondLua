@@ -1,6 +1,7 @@
 #include "DarkCloudBubble.h"
 #include "SpriteTextureController.h"
 #include "BubbleFactory.h"
+#include "GameAudioController.h"
 const std::string DARK_CLOUD_PATH = "yinyunshang.png";
 const float DARK_CLOUD_MOVE_X = -120.0f;
 const float DARK_CLOUD_MOVE_X_FIRST = DARK_CLOUD_MOVE_X/-2;
@@ -63,6 +64,7 @@ namespace bubble_second {
         particle->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.5f), cocos2d::CallFunc::create([=]() {
             particle->removeFromParent();
         })));
+        GameAudioController::getInstance()->playDarkCloudBubbleEliminatedEffect();
     }
 
     void DarkCloudBubble::downFromAir()

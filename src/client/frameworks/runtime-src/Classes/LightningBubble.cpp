@@ -2,6 +2,7 @@
 #include "GamePlayController.h"
 #include "cocostudio/CocoStudio.h"
 #include "GameScene.h"
+#include "GameAudioController.h"
 namespace bubble_second {
     LightningBubble::LightningBubble()
     {
@@ -84,7 +85,7 @@ namespace bubble_second {
             });
             parent->getParent()->addChild(armature);
         }
-
+        GameAudioController::getInstance()->playLightningBubbleEliminatedEffect();
         return LIGHTNING_BUBBLE_EFFECT_DELAY_TIME;
     }
 }

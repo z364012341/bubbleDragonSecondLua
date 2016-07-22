@@ -228,7 +228,7 @@ const float WINDMILL_ROTATION_SPEED_SPEED = 2.0f;
 const int COLOR_BUBBLE_TAG = 235; //彩色小球的tag
 const float AFTER_VICTORY_SHOOT_BUBBLE_DELAYTIME = 1.5f;
 //const float TEXTURE_SCALE = 0.4f;//精致贴图的缩放
-const std::string GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY = "GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY";
+//const std::string GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY = "GAME_SCENE_SHOOT_BUBBLES_AFTER_VICTORY_SCHEDULE_KEY";
 //关卡xml解析
 const char BUBBLE_COLOR_IN_RANGE = '1';
 const std::string STAGE_XML_FIELDS_FIRST_ELEMENT = "bubbles";
@@ -468,7 +468,7 @@ const std::string EVENT_CLICK_START_BUTTON = "event_click_start_button";
 const std::string EVENT_ENTER_PROPS_PAY = "event_enter_props_pay";
 const std::string EVENT_CLICK_START_BUTTON_END = "event_click_start_button_end";
 const std::string EVENT_PLAY_SKILL_STAVES_ANIMATION = "event_play_skill_staves_animation";
-const std::string EVENT_ROLL_COIN_BOARD_LABEL = "event_roll_coin_board_label";  //用户金币数量跳动变化
+const std::string EVENT_ROLL_COIN_BOARD_LABEL = "event_roll_coin_board_label";  //用户金币数量变化
 const std::string EVENT_POP_CHARACTOR_SKILL_NOVICE_GUIDE_ALERT = "event_pop_charactor_skill_novice_guide_alert";  //弹技能新手教程
 //选择特效的key
 const std::string LONG_EFFECT_BUBBLE_KEY = "long_effect";     //大幅度特效
@@ -482,6 +482,7 @@ const std::string COLOR_BOMB_BUBBLE_NAME = "color_bomb_bubble";  //道具彩球
 const std::string DYEING_BUBBLE_NAME = "dyeing_bubble_name";  //技能染色球
 const std::string STAVES_BUBBLE_NAME = "staves_bubble";  //技能法杖小球
 const std::string BARREL_BOTTOM_NAME = "BARREL_BOTTOM_NAME";//桶底
+const std::string BARREL_HEAD_NAME = "barrel_head_name"; // 桶盖
 const std::string SCORE_WIDGET_NAME = "SCORE_WIDGET";    //得分撞击配件
 const std::string MAP_BUBBLE_NAME = ""; //地图上的小球名字
 const std::string MAP_PHYSICS_BORDER_NAME = "map_physics_border_name"; //地图上边界body名字
@@ -753,7 +754,7 @@ const int BITMASK_BUBBLE_PREPARE_CONTACTTEST = 0x10001; //准备小球刚体的事件掩码
 
 const int BITMASK_BARRELHEADEDGE_CATEGORY = 0x0100; //桶盖边刚体的种类掩码
 const int BITMASK_BARRELHEADEDGE_COLLISION = 0x0010; //桶盖边刚体的碰撞掩码
-const int BITMASK_BARRELHEADEDGE_CONTACTTEST = 0x0001; //桶盖边刚体的事件掩码
+const int BITMASK_BARRELHEADEDGE_CONTACTTEST = 0x0010; //桶盖边刚体的事件掩码
 
 const int BITMASK_BARRELBOTTOM_CATEGORY = 0x0100;//桶底刚体的种类掩码
 const int BITMASK_BARRELBOTTOM_COLLISION = 0x0000; //桶底刚体的碰撞掩码

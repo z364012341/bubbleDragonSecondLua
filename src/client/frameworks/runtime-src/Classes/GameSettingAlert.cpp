@@ -6,6 +6,7 @@
 #include "ButtonEffectController.h"
 #include "GameHelpAlert.h"
 #include "GameAboutAlert.h"
+#include "GameAudioController.h"
 const std::string GAME_SETTING_ALERT_CSB_PATH = "GameSettingAlert.csb";
 const std::string MUSIC_CHECK_BOX_NAME = "CheckBox_1";
 const std::string EFFECT_CHECK_BOX_NAME = "CheckBox_2";
@@ -22,13 +23,13 @@ namespace bubble_second {
     {
     }
 
-    void GameSettingAlert::onExit()
-    {
-        cocos2d::Node::onExit();
-        UserDataManager::getInstance()->setGameMusicEnable(music_checkbox_->isSelected());
-        UserDataManager::getInstance()->setSoundEffectEnable(effect_checkbox->isSelected());
-        UserDataManager::getInstance()->saveUserData();
-    }
+    //void GameSettingAlert::onExit()
+    //{
+    //    cocos2d::Node::onExit();
+    //    GameAudioController::getInstance()->setBackgroundMusicEnabled(music_checkbox_->isSelected());
+    //    UserDataManager::getInstance()->setSoundEffectEnable(effect_checkbox->isSelected());
+    //    //UserDataManager::getInstance()->saveUserData();
+    //}
 
     bool GameSettingAlert::init()
     {
@@ -50,9 +51,14 @@ namespace bubble_second {
         music_checkbox_ = dynamic_cast<cocos2d::ui::CheckBox*>(csb_node->getChildByName(MUSIC_CHECK_BOX_NAME));
         assert(music_checkbox_);
         music_checkbox_->setSelected(UserDataManager::getInstance()->isGameMusicEnable());
+        music_checkbox_->addClickEventListener([=](cocos2d::Ref*) {GameAudioController::getInstance()->setBackgroundMusicEnabled(music_checkbox_->isSelected()); });
+
         effect_checkbox = dynamic_cast<cocos2d::ui::CheckBox*>(csb_node->getChildByName(EFFECT_CHECK_BOX_NAME));
         assert(effect_checkbox);
         effect_checkbox->setSelected(UserDataManager::getInstance()->isSoundEffectEnable());
+        effect_checkbox->addClickEventListener([=](cocos2d::Ref*) {UserDataManager::getInstance()->setSoundEffectEnable(effect_checkbox->isSelected()); });
+
+
         cocos2d::ui::Button* return_button = dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName(RETURN_BUTTON_NAME));
         assert(return_button);
         return_button->addClickEventListener([=](cocos2d::Ref*) {

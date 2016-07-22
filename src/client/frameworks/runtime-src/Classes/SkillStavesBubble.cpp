@@ -1,5 +1,6 @@
 #include "SkillStavesBubble.h"
 #include "cocostudio\CocoStudio.h"
+#include "GameAudioController.h"
 const std::string SKILL_STAVES_BUBBLE_ARMATURE_1_NAME = "juesejinengTX1";
 const std::string SKILL_STAVES_BUBBLE_PARTICLE_PATH = "particle/lanseTX.plist";
 namespace bubble_second {
@@ -45,6 +46,7 @@ namespace bubble_second {
             particle->removeFromParent();
         })));
         this->removeFromParent();
+        GameAudioController::getInstance()->playSkillStavesBubbleEliminatedEffect();
     }
     std::string SkillStavesBubble::getBubbleSightingDevicePointPath()
     {

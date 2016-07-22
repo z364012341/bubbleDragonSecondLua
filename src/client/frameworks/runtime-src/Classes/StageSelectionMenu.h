@@ -36,7 +36,7 @@ namespace bubble_second {
         StageSelectionMenu();
         bool init(int cell_numble, int level, const StageType& type);
         void addButton(const StageType& type);
-        StageData getStageData();
+        //StageData getStageData();
         //…Ë÷√◊¥Ã¨
         void setMenuState();
         void setButtonEnable(bool flag);
@@ -51,6 +51,8 @@ namespace bubble_second {
         //¡£◊”
         void addStandbyParticle();
         void addStandbyHaloAnimation();
+        //∑≈±≥æ∞“Ù¿÷
+        void playBackgroundMusic();
     private:
         GameSamsung* samsung_ = nullptr;
         cocos2d::Sprite* button_sp_ = nullptr;

@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "GameScoreController.h"
 #include "PopScoreLabelComponent.h"
+#include "GameAudioController.h"
 //Í°µ×²¿¸ÕÌå
 const cocos2d::Size PHYSICS_BARREL_BOTTOM_BODY_SIZE = cocos2d::Size(120, 50);
 const int PHYSICS_BARREL_BOTTOM_BORDER = 2;
@@ -187,5 +188,6 @@ namespace bubble_second {
         GameScoreController::getInstance()->addScoreWithNumble(score_);
         label_component_->popLabelWithScore(score_);
         this->playEffect();
+        GameAudioController::getInstance()->playContactBarrelBottomEffect();
     }
 }

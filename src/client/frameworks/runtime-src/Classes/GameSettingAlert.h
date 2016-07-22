@@ -17,7 +17,7 @@ namespace bubble_second {
     public:
         CREATE_FUNC(GameSettingAlert);
         virtual ~GameSettingAlert();
-        void onExit() override;
+        //void onExit() override;
     private:
         GameSettingAlert();
         bool init();

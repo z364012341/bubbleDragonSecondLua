@@ -2,7 +2,7 @@
 #include "SpriteTextureController.h"
 #include "BubbleFactory.h"
 #include "GameNoopAnimationComponent.h"
-//#include "GameScoreController.h"
+#include "GameAudioController.h"
 const std::string MUTIPLE_SEAL_3_BUBBLE_ARMATURE_NAME = "wa";
 const std::string MUTIPLE_SEAL_7_BUBBLE_ARMATURE_NAME = "xiongda";
 const std::string MUTIPLE_SEAL_1_BUBBLE_ARMATURE_NAME = "1gebianfu";
@@ -74,6 +74,7 @@ namespace bubble_second {
         //});
         //this->setVisible(false);
         this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.8f), cocos2d::CallFunc::create([=]() {
+            GameAudioController::getInstance()->playContactMutiplesealBubbleEliminatedEffect();
             SpriteTextureController::getInstance()->setSpriteTexture("", this);
             armature_->setPosition(cocos2d::Vec2::ZERO);
             armature_->getAnimation()->play(BUBBLE_ANIMATION_VICTORY_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);

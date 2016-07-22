@@ -7,6 +7,8 @@
 #include "GameScoreController.h"
 #include "SpriteTextureController.h"
 #include "BubbleReflectionPointComponent.h"
+#include "GameAudioController.h"
+#include "GameAirBubbleManager.h"
 //#include "StageDataManager.h"
 //#include "GameScene.h"
 //#include "AirBubbleManager.h"
@@ -95,6 +97,14 @@ namespace bubble_second {
         body->applyImpulse(impulse*zoom);
         body->setAngularVelocity(angular_v);
 		this->dispatchCustomAddAirBubbleNumbleEvent();
+
+        //this->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(cocos2d::random(5, 10)), cocos2d::CallFunc::create([=]() {
+        //    if (this->getPositionY()< 0.0f)
+        //    {
+        //        this->contactBarrelBottom();
+        //    }
+        //}))));
+        GameAirBubbleManager::getInstance()->addAirBubble(this);
     }
 
 	void ColorBubble::dispatchCustomAddAirBubbleNumbleEvent()
@@ -141,6 +151,8 @@ namespace bubble_second {
         //    this->removeFromParent();
         //}));
         //this->runAction(seq);
+        GameAudioController::getInstance()->playColorBubbleEliminatedEffect();
+
         cocos2d::ParticleSystemQuad* particle = cocos2d::ParticleSystemQuad::create(COLOR_BUBBLE_ELIMINATE_PARTICLE_PATH);
         particle->setTexture(this->getTexture());
         particle->setPosition(this->getPosition());
@@ -275,6 +287,7 @@ namespace bubble_second {
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_ADD_ELIMINATE_SCORE_LABEL,&data_map);
         this->destroyDarkCloud();
         this->playEliminateEffect();
+        
     }
 
     bool ColorBubble::isDarkCloudBubble()
@@ -332,6 +345,7 @@ namespace bubble_second {
     {
         //AirBubbleManager::getInstance()->cutAirBubble(this);
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CUT_AIR_BUBBLE_NUMBLE);
+        GameAirBubbleManager::getInstance()->eraseAirBubble(this);
         this->removeFromParent();
     }
 

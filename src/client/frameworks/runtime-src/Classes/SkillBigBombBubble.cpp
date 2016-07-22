@@ -1,4 +1,5 @@
 #include "SkillBigBombBubble.h"
+#include "GameAudioController.h"
 const std::string SKILL_BIG_BOMB_ARMATURE_NAME = "juesejinengTX4";
 namespace bubble_second {
     SkillBigBombBubble::SkillBigBombBubble()
@@ -50,6 +51,7 @@ namespace bubble_second {
             }
         });
         parent_node->addChild(armature);
+        GameAudioController::getInstance()->playSkillBigBombBombBubbleEliminatedEffect();
         return 0.0f;
     }
     void SkillBigBombBubble::bubbleEliminate(int)
