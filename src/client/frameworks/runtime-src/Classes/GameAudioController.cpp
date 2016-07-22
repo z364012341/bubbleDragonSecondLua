@@ -3,7 +3,7 @@
 #include "UserDataManager.h"
 const std::map<std::string, std::string> GAME_BACKGROUND_MUSIC_PATH = {
     { "GAME_LAUNCH_MUSIC", "Accomplish.mp3" },
-    { "GAME_STAGE_CELL_FIRST_MUSIC", "Accomplish.mp3" },
+    { "GAME_STAGE_CELL_FIRST_MUSIC", "music_bground.mp3" },
     { "GAME_STAGE_CELL_SECOND_MUSIC", "bgm_game_puzzle.mp3" },
     { "GAME_STAGE_CELL_THIRD_MUSIC", "bg_menu.mp3" },
     { "GAME_STAGE_CELL_FOURTH_MUSIC", "game_music_1.mp3" },

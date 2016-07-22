@@ -289,7 +289,7 @@ namespace bubble_second {
     }
     bool UserDataManager::isSoundEffectEnable()
     {
-        return cocos2d::UserDefault::getInstance()->getBoolForKey(USER_DATA_SOUND_EFFECT_KEY.c_str());
+        return cocos2d::UserDefault::getInstance()->getBoolForKey(USER_DATA_SOUND_EFFECT_KEY.c_str(), true);
     }
     void UserDataManager::saveUserData()
     {

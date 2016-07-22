@@ -71,7 +71,7 @@ namespace bubble_second {
 		//添加载具
 		void addStageVehicle();
         //设置按钮回调
-        void settingButtonFunc(cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType type);
+        void settingButtonFunc(cocos2d::Ref* target);
         void setSettingButtonEnabled(bool enabled);
         //弹出进场道具新手引导
         void popEnterPropsNoviceGuideAlert(cocos2d::Node* alert);

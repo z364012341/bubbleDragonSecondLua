@@ -151,9 +151,7 @@ namespace bubble_second {
         this->addChild(csb_node_);
         scrollview_ = dynamic_cast<ScrollView*>(csb_node_->getChildByName(STAGE_SCROLLVIEW_NAME));
 
-        this->getSettingButton()->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
-            this->settingButtonFunc(target, type);
-        });
+        this->getSettingButton()->addClickEventListener(CC_CALLBACK_1(GameStageSelectionScene::settingButtonFunc, this));
 
         Button* puzzleButton = dynamic_cast<Button*>(csb_node_->getChildByName(PUZZLE_BUTTON_NAME));
         assert(puzzleButton);
@@ -447,10 +445,10 @@ namespace bubble_second {
         stage_vehicle_->setPositionWithWorldPosition(StageMenuManager::getInstance()->getCurrentStageWorldPosition());
     }
 
-    void GameStageSelectionScene::settingButtonFunc(cocos2d::Ref * target, cocos2d::ui::Widget::TouchEventType type)
+    void GameStageSelectionScene::settingButtonFunc(cocos2d::Ref * target)
     {
-        if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-        {
+        //if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+        //{
             GameAlertMask* mask = GameAlertMask::createTransparentMask();
             this->getAlertRenderNode()->addChild(mask);
             this->setSettingButtonEnabled(false);
@@ -468,7 +466,7 @@ namespace bubble_second {
             //        mask->removeFromParent();
             //    }
             //});
-        }
+        //}
     }
 
     void GameStageSelectionScene::setSettingButtonEnabled(bool enabled)

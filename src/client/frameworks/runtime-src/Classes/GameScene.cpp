@@ -363,11 +363,8 @@ namespace bubble_second {
             //菜单按钮
             pause_menu_ = dynamic_cast<cocos2d::ui::Button*>(top_right_ui->getChildByName(UI_NAME_GAME_PLAYING_MENU));
             ButtonEffectController::setButtonZoomScale(pause_menu_);
-            pause_menu_->addTouchEventListener([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
-                if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-                {
-                    this->popPauseAlert();
-                }
+            pause_menu_->addClickEventListener([=](cocos2d::Ref*) {
+                this->popPauseAlert();
             });
         }
         //{   //发射台上的漩涡
@@ -843,7 +840,7 @@ namespace bubble_second {
             //alert_->setPosition(visibleSize.width / 2, visibleSize.height / 2);
             //csb_node_->addChild(alert_);
             this->popAlert(GameSinglePropBuyAlertFactory::getInstance()->createGameSinglePropBuyAlert());
-            
+
         });
         dispatcher->addCustomEventListener(EVENT_CONTINUE, [=](cocos2d::EventCustom * event) {
             this->removeAlert();
@@ -2641,7 +2638,7 @@ namespace bubble_second {
         {
             return;
         }
-        
+
         bubble_map_node_->stopAllActions();
         int start_numble = this->getScoreProgressMenu()->getStartOnNumble();
         int present_stage_numble = this->getPresentStageNumble();
