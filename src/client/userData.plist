@@ -3,24 +3,24 @@
 
 <plist version="1.0">
     <dict>
+        <key>strength</key>
+        <integer>5</integer>
         <key>game_sign_day_numble</key>
         <integer>6</integer>
-        <key>strength</key>
-        <integer>4</integer>
         <key>md5</key>
-        <string>6ffa3043f32c135248324e0dc3bd77a0</string>
+        <string>281d1db33e47c492fb919cf54af484a2</string>
         <key>coin</key>
         <integer>12595</integer>
-        <key>bigEyes</key>
-        <integer>4</integer>
         <key>diamond</key>
         <integer>8825</integer>
-        <key>search</key>
-        <integer>6</integer>
-        <key>woodenHammer</key>
-        <integer>6</integer>
+        <key>bigEyes</key>
+        <integer>4</integer>
         <key>bigBombBomb</key>
         <integer>1</integer>
+        <key>woodenHammer</key>
+        <integer>6</integer>
+        <key>search</key>
+        <integer>6</integer>
         <key>addTime</key>
         <integer>5</integer>
         <key>staves</key>
