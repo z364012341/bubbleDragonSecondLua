@@ -78,6 +78,7 @@ const std::string BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY = "bubble_sighting
 const std::string GAME_DEFEAT_BUY_PROPS_ALERT_NAME = "game_defeat_buy_props_alert_name";
 const std::string SKILL_STAVES_BUBBLE_ARMATURE_1_NAME = "shandian";
 const std::string SKILL_STAVES_BUBBLE_ARMATURE_2_NAME = "shandian02";
+const std::string UI_NAME_GAME_VICTORY_ALERT = "UI_NAME_GAME_VICTORY_ALERT"; //胜利面板的名字
 const std::map<std::string, BubbleType> PROPS_NAME_TO_COLOR = {
     { PROPS_COLOR_BOMB_NAME, kBubbleColorBomb },
     { PROPS_BOMB_BOMB_NAME , kBubbleBombBombProperty },
@@ -845,6 +846,16 @@ namespace bubble_second {
         dispatcher->addCustomEventListener(EVENT_CONTINUE, [=](cocos2d::EventCustom * event) {
             this->removeAlert();
         });
+        dispatcher->addCustomEventListener(EVENT_REPLAY, [=](cocos2d::EventCustom * event) {
+            this->replayGame();
+            this->gameResume();
+        });
+        dispatcher->addCustomEventListener(EVENT_RETURN, [=](cocos2d::EventCustom * event) {
+            cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
+        });
+        dispatcher->addCustomEventListener(EVENT_GOTO_NEXT_STAGE, [=](cocos2d::EventCustom * event) {
+            cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createSceneNextStage());
+        });
         dispatcher->addCustomEventListener(EVENT_POP_CHARACTOR_SKILL_NOVICE_GUIDE_ALERT, [=](cocos2d::EventCustom * event) {
             this->popNoviceGuideAlertWithAlert(GameNoviceGuideFactory::getInstance()->createGameCharactorSkillNoviceGuide());
         });
@@ -915,6 +926,9 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_PLAY_SKILL_STAVES_ANIMATION);
         dispatcher->removeCustomEventListeners(EVENT_POP_GAME_STORE);
         dispatcher->removeCustomEventListeners(EVENT_CONTINUE);
+        dispatcher->removeCustomEventListeners(EVENT_REPLAY);
+        dispatcher->removeCustomEventListeners(EVENT_RETURN);
+        dispatcher->removeCustomEventListeners(EVENT_GOTO_NEXT_STAGE);
         dispatcher->removeCustomEventListeners(EVENT_POP_CHARACTOR_SKILL_NOVICE_GUIDE_ALERT);
     }
 
@@ -2648,49 +2662,38 @@ namespace bubble_second {
             cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
             alert->setPosition(visible_size.width / 2, visible_size.height / 2);
             this->addChild(alert, UI_ZORDER_ALERT);
-            alert->setReplayCallback([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
-                if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-                {
-                    this->replayGame();
-                }
-            });
-            alert->setNextCallback([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
-                if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-                {
-                    cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createSceneNextStage());
-                }
-            });
         })));
 
         this->popEndNoviceGuideAlert();
     }
 
     void GameScene::popPauseAlert()
-    {//一开始写的接口, 后面使用自定义事件, 暂时没有进行重构
+    {
         GamePauseAlert* alert = GamePauseAlert::create();
-        alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
-        cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
-        alert->setPosition(visible_size.width / 2, visible_size.height / 2);
-        this->addChild(alert, UI_ZORDER_ALERT);
-        alert->setReturnCallback([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
-            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-            {
-                cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
-                this->gameResume();
-            }
-        });
-        alert->setReplayCallback([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
-            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-            {
-                this->replayGame();
-                this->gameResume();
-            }
-        });
-        alert->setContinueCallback([=](cocos2d::Ref*) {
-            this->gameResume();
-            alert->removeFromParent();
-        });
-        this->gamePause();
+        this->popAlert(alert);
+        //alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+        //cocos2d::Size visible_size = cocos2d::Director::getInstance()->getVisibleSize();
+        //alert->setPosition(visible_size.width / 2, visible_size.height / 2);
+        //this->addChild(alert, UI_ZORDER_ALERT);
+        //alert->setReturnCallback([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
+        //    if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+        //    {
+        //        cocos2d::Director::getInstance()->replaceScene(GameStageSelectionScene::createScene());
+        //        this->gameResume();
+        //    }
+        //});
+        //alert->setReplayCallback([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
+        //    if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+        //    {
+        //        this->replayGame();
+        //        this->gameResume();
+        //    }
+        //});
+        //alert->setContinueCallback([=](cocos2d::Ref*) {
+        //    this->gameResume();
+        //    alert->removeFromParent();
+        //});
+        //this->gamePause();
     }
 
     void GameScene::gamePause()

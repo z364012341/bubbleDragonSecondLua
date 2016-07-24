@@ -453,6 +453,9 @@ const std::string EVENT_GAME_DEFEAT_RETURN = "event_game_defeat_return";
 const std::string EVENT_GAME_DEFEAT_BUY_ALERT_RETURN = "event_game_defeat_buy_alert_return";
 const std::string EVENT_DEFEAT_BUY_CONTINUE_PLAY = "event_defeat_buy_continue_play";
 const std::string EVENT_CONTINUE = "event_continue";  //关闭弹窗, 继续游戏
+const std::string EVENT_REPLAY = "event_replay";  //重新游戏游戏
+const std::string EVENT_RETURN = "event_return";  //返回退出
+const std::string EVENT_GOTO_NEXT_STAGE = "event_goto_next_stage";  //下一关
 const std::string EVENT_END_CHARACTOR_BUY_CONTINUE = "event_end_charactor_buy_continue";
 const std::string EVENT_USE_CHARACTOR_SKILL = "event_use_charactor_skill";
 const std::string EVENT_USE_DYEING_BUBBLE_SKILL = "event_use_dyeing_bubble_skill";
@@ -533,7 +536,6 @@ const std::string UI_NAME_PROPS_BACKGROUND_FOURTH = "props_4_bg";      //道具4的
 const std::string UI_NAME_GUNSIGHT_SWIRL = "gunsight_swirl";      //发射台上的旋风
 const std::string UI_NAME_BIG_COMBO_ELIMINATE = "big_combo_eliminate";      //六连消
 const std::string UI_NAME_WINDMILL_PIN_NODE = "windmill_pin_node"; //风车的关节pin的node
-const std::string UI_NAME_GAME_VICTORY_ALERT = "UI_NAME_GAME_VICTORY_ALERT"; //胜利面板的名字
 //下面部分的ui名字
 const std::string UI_NAME_BARRELHEAD_BORDER_FIRST = "Node_7";       //从左数第1个桶边节点
 const std::string UI_NAME_BARRELHEAD_BORDER_SECOND = "Node_8";        //从左数第2个桶边节点

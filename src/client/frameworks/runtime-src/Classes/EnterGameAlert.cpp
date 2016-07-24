@@ -118,11 +118,8 @@ namespace bubble_second {
     void bubble_second::EnterGameAlert::initCloseButton()
     {
         cocos2d::ui::Button* button = this->getCloseButton();
-        button->addTouchEventListener([=](Ref* target, cocos2d::ui::Widget::TouchEventType type) {
-            if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-            {
-                this->removeFromParent();
-            }
+        button->addClickEventListener([=](Ref* target) {
+            this->removeFromParent();
         });
     }
 

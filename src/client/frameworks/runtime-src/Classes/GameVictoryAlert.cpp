@@ -193,17 +193,23 @@ namespace bubble_second {
         start_3_ = csb_node_->getChildByName(ALERT_STAR_NODE_3_NAME);
         starts_.pushBack(start_3_);
 
+        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(ALERT_NEXT_NODE_NAME)->getChildByName(ALERT_NEXT_BUTTON_NAME))->addClickEventListener([=](cocos2d::Ref*) {
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_GOTO_NEXT_STAGE);
+        });
+        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(ALERT_REPLAY_NODE_NAME))->addClickEventListener([=](cocos2d::Ref*) {
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_REPLAY);
+        });
     }
 
-    void GameVictoryAlert::setNextCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback)
-    {
-        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(ALERT_NEXT_NODE_NAME)->getChildByName(ALERT_NEXT_BUTTON_NAME))->addTouchEventListener(callback);
-    }
+    //void GameVictoryAlert::setNextCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback)
+    //{
+    //    dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(ALERT_NEXT_NODE_NAME)->getChildByName(ALERT_NEXT_BUTTON_NAME))->addTouchEventListener(callback);
+    //}
 
-    void GameVictoryAlert::setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback)
-    {
-        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(ALERT_REPLAY_NODE_NAME))->addTouchEventListener(callback);
-    }
+    //void GameVictoryAlert::setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback)
+    //{
+    //    dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(ALERT_REPLAY_NODE_NAME))->addTouchEventListener(callback);
+    //}
     void GameVictoryAlert::onEnter()
     {
         cocos2d::Node::onEnter();

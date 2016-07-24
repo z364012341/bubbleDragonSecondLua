@@ -18,8 +18,8 @@ namespace bubble_second {
     public:
         static GameVictoryAlert* create(int level, int score, int start_numble);
         ~GameVictoryAlert();
-        void setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
-        void setNextCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
+        //void setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
+        //void setNextCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
         void onEnter() override;
         void onExit() override;
     private:

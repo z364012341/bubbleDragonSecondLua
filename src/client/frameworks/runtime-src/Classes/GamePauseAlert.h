@@ -18,9 +18,9 @@ namespace bubble_second {
     public:
         CREATE_FUNC(GamePauseAlert);
         ~GamePauseAlert();
-        void setReturnCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
-        void setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
-        void setContinueCallback(const cocos2d::ui::Widget::ccWidgetClickCallback& callback);
+        //void setReturnCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
+        //void setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback);
+        //void setContinueCallback(const cocos2d::ui::Widget::ccWidgetClickCallback& callback);
     private:
         GamePauseAlert();
         bool init();

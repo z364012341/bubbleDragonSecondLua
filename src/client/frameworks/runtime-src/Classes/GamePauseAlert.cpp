@@ -19,10 +19,10 @@ namespace bubble_second {
     {
     }
 
-    void GamePauseAlert::setReturnCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback & callback)
-    {
-        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_RETUREN_NODE))->addTouchEventListener(callback);
-    }
+    //void GamePauseAlert::setReturnCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback & callback)
+    //{
+    //    dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_RETUREN_NODE))->addTouchEventListener(callback);
+    //}
 
     bool GamePauseAlert::init()
     {
@@ -41,17 +41,27 @@ namespace bubble_second {
         this->addChild(csb_node_);
         continue_button_ = GameStartButton::createButtonContinueForm();
         csb_node_->addChild(continue_button_);
+        continue_button_->addButtonClickEventListener([=](cocos2d::Ref*) {
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_CONTINUE);
+        });
         ButtonEffectController::setButtonsZoomScale(csb_node_);
+
+        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_RETUREN_NODE))->addClickEventListener([=](cocos2d::Ref*) {
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_RETURN);
+        });
+        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_REPALY_NODE))->addClickEventListener([=](cocos2d::Ref*) {
+            this->getEventDispatcher()->dispatchCustomEvent(EVENT_REPLAY);
+        });
     }
 
-    void GamePauseAlert::setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback)
-    {
-        dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_REPALY_NODE))->addTouchEventListener(callback);
-    }
+    //void GamePauseAlert::setReplayCallback(const cocos2d::ui::Widget::ccWidgetTouchCallback& callback)
+    //{
+    //    dynamic_cast<cocos2d::ui::Button*>(csb_node_->getChildByName(GAME_PAUSE_ALERT_REPALY_NODE))->addTouchEventListener(callback);
+    //}
 
-    void GamePauseAlert::setContinueCallback(const cocos2d::ui::Widget::ccWidgetClickCallback & callback)
-    {
-        continue_button_->addButtonClickEventListener(callback);
-    }
+    //void GamePauseAlert::setContinueCallback(const cocos2d::ui::Widget::ccWidgetClickCallback & callback)
+    //{
+    //    continue_button_->addButtonClickEventListener(callback);
+    //}
 
 }
