@@ -9,6 +9,7 @@
 #include "GameBuyStoreMannager.h"
 #include "ui\UITextBMFont.h"
 #include "GameLotteryAwardItem.h"
+#include "GameAudioController.h"
 //const float STARTS_CIRCLE_RADIUS = 500.0f;
 //const float START_ANGLE_DELTA = 11.0f;
 const std::string GIFT_ARMATURE_NAME = "pintulibao2";
@@ -264,6 +265,7 @@ namespace bubble_second {
         //fly_points_.pop_front();
         this->addChild(sp);
         GameVictoryLotteryItemBase* item = starts_container_.at(this->getGrayBeginIndex());
+        GameAudioController::getInstance()->playGameVictoryLotteryStartFlyEffect();
         sp->runAction(cocos2d::Sequence::create(cocos2d::MoveTo::create(START_FLY_LOTTERY_DURATION, item->getPosition()),
             cocos2d::CallFunc::create([=]() {
             sp->removeFromParent();

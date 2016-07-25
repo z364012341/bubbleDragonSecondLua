@@ -289,6 +289,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClInclude Include="..\Classes\lua_DecalsFactory_auto.hpp" />
     <ClInclude Include="..\Classes\lua_ExhibitionNumble_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameAlertMask_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_GameAudioController_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameBuyStoreMannager_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GameLotteryAwardItem_auto.hpp" />
     <ClInclude Include="..\Classes\lua_GamePropsCostTag_auto.hpp" />
@@ -457,6 +458,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\lua_DecalsFactory_auto.cpp" />
     <ClCompile Include="..\Classes\lua_ExhibitionNumble_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameAlertMask_auto.cpp" />
+    <ClCompile Include="..\Classes\lua_GameAudioController_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameBuyStoreMannager_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GameLotteryAwardItem_auto.cpp" />
     <ClCompile Include="..\Classes\lua_GamePropsCostTag_auto.cpp" />

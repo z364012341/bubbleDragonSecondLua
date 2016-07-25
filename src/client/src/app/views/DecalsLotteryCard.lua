@@ -62,6 +62,7 @@ function DecalsLotteryCard:setCardState(front_flag, touch_enabled)
     end
     self.isFront_ = front_flag;
     self:runSelectEffect(not self.isFront_ and touch_enabled);
+    
 end
 function DecalsLotteryCard:runSelectEffect(touch_enabled)
     local callfunc = cc.CallFunc:create(function ()
@@ -114,7 +115,9 @@ function DecalsLotteryCard:selectCard()
         local armature_2 = ccs.Armature:create(SELECT_ARMATURE_NAME);
         self:addChild(armature_2, -1);
         armature_2:getAnimation():play(SELECT_ANIMATION_2_NAME);
-    end)));
+        bs.GameAudioController:getInstance():playDecalsSelectedCardEndEffect();
+    end)));  
+    bs.GameAudioController:getInstance():playDecalsChangeCardStateEffect();
 end
 function DecalsLotteryCard:turnOverFrontDelay()
     local duration = DECALS_LOTTERY_CARD_FLIPX_DURATION*1.5
@@ -181,6 +184,7 @@ function DecalsLotteryCard:playShuffleEffect(end_point)
         self:runAction(shuffle_move_seq);
     end
     move_func();
+    --卡牌随机跳动的时间..................................\|/
     self:runAction(cc.Sequence:create(cc.DelayTime:create(1),
         cc.CallFunc:create(function ()
             self:stopAction(shuffle_move_seq);
@@ -191,6 +195,7 @@ function DecalsLotteryCard:playShuffleEffect(end_point)
             self:setCardTouchEnabled(true);
         end))
     );
+    bs.GameAudioController:getInstance():playDecalsShuffleContactBorderEffect();
 end
 -- function DecalsLotteryCard:calculateNextPointDuration(next_point)
 --     return cc.pGetDistance(cc.p(self:getPosition()), next_point)/CARD_SHUFFLE_MOVE_SPEED

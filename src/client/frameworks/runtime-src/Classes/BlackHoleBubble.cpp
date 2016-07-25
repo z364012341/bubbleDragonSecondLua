@@ -3,6 +3,7 @@
 #include "GamePlayController.h"
 #include "SpriteTextureController.h"
 #include "BubbleFactory.h"
+#include "GameAudioController.h"
 const std::string BLACK_HOLE_BUBBLE_LOGO_PATH = "heidongxuanwo.png"; //黑洞上面转的
 const std::string BLACK_HOLE_BUBBLE_EFFECT_NAME = "heidongpaopao"; //黑洞特效的名字
 const std::string BLACK_HOLE_BUBBLE_ANIMATION_ELIMANATE_NAME = "heidongTX"; 
@@ -43,7 +44,7 @@ namespace bubble_second {
         swallow_vector_.pushBack(swallow_bubble);
 
         this->playAchimedeanSpiralAction(swallow_bubble);
-
+        GameAudioController::getInstance()->playContactBlackHoleBubbleEffect();
     }
 
     void bubble_second::BlackHoleBubble::playAchimedeanSpiralAction(BaseBubble* bubble)

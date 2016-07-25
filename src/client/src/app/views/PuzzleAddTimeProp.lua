@@ -1,6 +1,6 @@
 --
 -- Author: 黄泽昊
--- 功能: 增加时间道具
+-- 功能: 增加时间道具(时间倒流)
 
 local PuzzleAddTimeProp = class("PuzzleAddTimeProp", function ()
     return cc.Node:create();
@@ -32,6 +32,7 @@ function PuzzleAddTimeProp:onEnter()
 
     table.insert(self.listener_, cc.EventListenerCustom:create(EVENT_TOUCH_ADD_TIME_PROP, function ( event )
         if self.numble_show_:cutPropNumble() then
+            bs.GameAudioController:getInstance():playPuzzleUsedAddTimePropEffect();
             self:getEventDispatcher():dispatchCustomEvent(EVENT_USE_ADD_TIME_PROP);
         end
     end));

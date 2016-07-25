@@ -28,7 +28,9 @@ function DecalsExhibitionAlert:ctor()
     self:init();
 end
 function DecalsExhibitionAlert:init()
-    self:addChild(bs.GameAlertMask:create(), -1);
+    local mask = bs.GameAlertMask:create();
+    mask:setPosition(GlobalFunction.getVisibleCenterPosition());
+    self:addChild(mask, -1);
     self:loadCSB();
 
 end

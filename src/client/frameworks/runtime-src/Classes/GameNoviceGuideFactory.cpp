@@ -58,7 +58,7 @@ namespace bubble_second {
         button->addButtonClickEventListener([=](cocos2d::Ref*) {cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CONTINUE); });
         cocos2d::Node* node = cocos2d::Node::create();
         node->addChild(bg);
-        button->setPositionY(-200.0f);
+        button->setPositionY(-250.0f);
         node->addChild(button);
         node->addChild(GameAlertMask::create(), -1);
         return node;

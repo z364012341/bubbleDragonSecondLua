@@ -185,6 +185,8 @@ function PuzzlePiece:playMoveAnswerAnimation()
     armature:getAnimation():setMovementEventCallFunc(function ( armature, movementType, movementID)
         armature:removeFromParent();
     end);
+    bs.GameAudioController:getInstance():playPuzzleFindAnswerEffect();
+
 end
 
 function PuzzlePiece:setPuzzlePieceAnswer(answer)

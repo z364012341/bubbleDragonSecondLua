@@ -58,6 +58,8 @@ function PuzzleLotteryAlert:popGiftProp()
     bg:runAction(cc.FadeIn:create(2));
     bg:runAction(cc.RepeatForever:create(cc.RotateBy:create(4, 360)));
     self.prop_background_ = bg;
+
+    bs.GameAudioController:getInstance():playPuzzleVictoryGiftPopEffect();
 end
 function PuzzleLotteryAlert:propFly()
     --道具往右下角飞

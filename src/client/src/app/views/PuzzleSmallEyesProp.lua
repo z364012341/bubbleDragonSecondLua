@@ -1,6 +1,6 @@
 --
 -- Author: 黄泽昊
--- 功能: 小眼睛道具
+-- 功能: 小眼睛道具(影眼)
 
 local PuzzleSmallEyesProp = class("PuzzleSmallEyesProp", function ()
     return cc.Node:create();

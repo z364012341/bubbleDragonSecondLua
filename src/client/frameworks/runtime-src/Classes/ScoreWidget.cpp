@@ -51,7 +51,7 @@ namespace bubble_second {
         this->setType(type);
         this->setName(SCORE_WIDGET_NAME);
         this->initPopScoreLabel();
-        armature_->setScale(SCOREWIDGET_ARMATURE_SCALE);
+        
         return true;
     }
 
@@ -74,24 +74,34 @@ namespace bubble_second {
 
     void ScoreWidget::removeScoreWidget()
     {
-        auto body = this->getPhysicsBody();
-        if (body)
-        {
-            body->removeFromWorld();
-        }
-        //armature_->getAnimation()->stop();
-        none_bubble_component_->removeFromParent();
-        armature_->getAnimation()->play(SCOREWIDGET_ANIMATION_REMOVE_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
-        armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+        //auto body = this->getPhysicsBody();
+        //if (body)
+        //{
+        //    body->removeFromWorld();
+        //}
+        //none_bubble_component_->removeFromParent();
+        //this->stopAllActions();
+        //armature_->getAnimation()->play(SCOREWIDGET_ANIMATION_REMOVE_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        //armature_->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
+        //    if (movementType == cocostudio::COMPLETE)
+        //    {
+        //        this->removeFromParent();
+        //    }
+        //});
+
+        cocostudio::Armature* armature = cocostudio::Armature::create(SCOREWIDGET_ARMATURE_NAME);
+        armature->setPosition(this->getPosition());
+        this->getParent()->addChild(armature);
+        this->removeFromParent();
+        armature->getAnimation()->play(SCOREWIDGET_ANIMATION_REMOVE_NAME, SPECIAL_BUBBLE_EFFECT_DURATION, false);
+        armature->getAnimation()->setMovementEventCallFunc([=](cocostudio::Armature *armature, cocostudio::MovementEventType movementType, const std::string& movementID) {
             if (movementType == cocostudio::COMPLETE)
             {
-                this->removeFromParent();
+                armature->removeFromParent();
             }
         });
-        //armature_->getAnimation()->setMovementEventCallFunc(nullptr);
-        //this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(1.67f), cocos2d::CallFunc::create([=]() {
-        //    this->removeFromParent();
-        //})));
+        armature->setScale(SCOREWIDGET_ARMATURE_SCALE);
+
     }
     void ScoreWidget::setType(const ScoreWidgetType& type)
     {
@@ -221,6 +231,7 @@ namespace bubble_second {
     {
         armature_ = cocostudio::Armature::create(SCOREWIDGET_ARMATURE_NAME);
         this->addChild(armature_);
+        armature_->setScale(SCOREWIDGET_ARMATURE_SCALE);
         this->addAnimationComponent();
     }
 

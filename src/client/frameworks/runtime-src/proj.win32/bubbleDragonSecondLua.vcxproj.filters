@@ -495,6 +495,9 @@
     <ClInclude Include="..\Classes\GameAudioController.h" />
     <ClInclude Include="..\Classes\BarrelHead.h" />
     <ClInclude Include="..\Classes\GameAirBubbleManager.h" />
+    <ClInclude Include="..\Classes\lua_GameAudioController_auto.hpp">
+      <Filter>Classes\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -962,6 +965,9 @@
     <ClCompile Include="..\Classes\GameAudioController.cpp" />
     <ClCompile Include="..\Classes\BarrelHead.cpp" />
     <ClCompile Include="..\Classes\GameAirBubbleManager.cpp" />
+    <ClCompile Include="..\Classes\lua_GameAudioController_auto.cpp">
+      <Filter>Classes\lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

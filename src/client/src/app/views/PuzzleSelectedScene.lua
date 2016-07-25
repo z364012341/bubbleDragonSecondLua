@@ -56,7 +56,8 @@ function PuzzleSelectedScene:init()
     self:addPageView();
     self:addStartButton();
     self:initSelectedTypeButton();
-    self:initScrollPageButton()
+    self:initScrollPageButton();
+    bs.GameAudioController:getInstance():playGamePuzzleSelectedSceneMusic();
 end
 
 function PuzzleSelectedScene:addPageView()

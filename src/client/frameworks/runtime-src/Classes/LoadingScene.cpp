@@ -45,6 +45,8 @@ namespace bubble_second {
 
     void LoadingScene::beginLoading()
     {
+        GameAudioController::getInstance()->loadAudioFile();
+        GameAudioController::getInstance()->playGameLaunchMusic();
         StageDataManager::getInstance()->initStageData();
         GameTextInfo::getInstance()->plistToMap();
         UserDataManager::getInstance()->readDataFile();
@@ -55,7 +57,6 @@ namespace bubble_second {
         DecalsFactory::getInstance()->loadDecalsData();
         GameCharactorNameManager::getInstance()->initNamesData();
         GameStoreItemFactory::getInstance()->loadItemsData();
-        GameAudioController::getInstance()->loadAudioFile();
 
         cocos2d::Scene* scene = GameStageSelectionScene::createScene();
         scene->addChild(GameSartScene::create());

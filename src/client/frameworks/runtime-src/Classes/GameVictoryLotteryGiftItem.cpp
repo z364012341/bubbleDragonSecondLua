@@ -1,6 +1,7 @@
 #include "GameVictoryLotteryGiftItem.h"
 #include "BubbleSecondConstant.h"
 #include "SpriteTextureController.h"
+#include "GameAudioController.h"
 const std::string LOTTERY_GIFT_PATH = "faguang6xinglibao.PNG";
 namespace bubble_second {
     GameVictoryLotteryGiftItem::GameVictoryLotteryGiftItem()
@@ -15,7 +16,6 @@ namespace bubble_second {
         }
         return true;
     }
-
 
     GameVictoryLotteryGiftItem::~GameVictoryLotteryGiftItem()
     {
@@ -36,6 +36,7 @@ namespace bubble_second {
             this->setGrayEnabled(false);
             this->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_VICTORY_GIFT_ARMATURE);
         }),nullptr));
+        GameAudioController::getInstance()->playGameVictoryLotteryGiftPopEffect();
     }
     void GameVictoryLotteryGiftItem::onEnter()
     {

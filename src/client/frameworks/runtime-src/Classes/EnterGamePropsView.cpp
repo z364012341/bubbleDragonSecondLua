@@ -7,6 +7,7 @@
 #include "GameButtonFactory.h"
 #include "StageDataManager.h"
 #include "GameStoreItemFactory.h"
+#include "GameAudioController.h"
 const std::map<std::string, std::string> COMMODITY_TO_CSB_PATH = {
     { BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY , "AddBubbleNumbleCommodity.csb" },
     { BUBBLE_AIMING_LINE_PROP_KEY , "AimingLineCommodity.csb" },
@@ -16,6 +17,11 @@ const std::map<std::string, int> COMMODITY_TO_UNLOCK_STAGE_INDEX = {
     { BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY , 20 },
     { BUBBLE_AIMING_LINE_PROP_KEY , 10 },
     { BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY , 15 }
+};
+const std::map<std::string, float> COMMODITY_TO_ANIMATION_END_TIME = {
+    { BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY , 0.92f },
+    { BUBBLE_AIMING_LINE_PROP_KEY , 1.625f },
+    { BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY , 1.58f }
 };
 namespace bubble_second {
 
@@ -40,6 +46,11 @@ namespace bubble_second {
             }
         });
         node->addChild(armature);
+        node->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(COMMODITY_TO_ANIMATION_END_TIME.at(animation_name)), 
+            cocos2d::CallFunc::create([=]() {
+                GameAudioController::getInstance()->playEnterPropsAnimationEndEffect();
+            })
+        ));
         return node;
     }
 

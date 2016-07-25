@@ -19,21 +19,40 @@ namespace bubble_second {
         void loadAudioFile();
         void setBackgroundMusicEnabled(bool enabled);
 
+        void playAddSpecialPropUsedEffect();
+        void playAddTenBubblePropUsedEffect();
+        void playAimingLinePropUsedEffect();
         void playBombBombBubbleEliminatedEffect();
         void playColorBubbleEliminatedEffect();
+        void playContactAddBubbleNumbleBubbleEffect();
         void playContactBarrelBottomEffect();
         void playContactBarrelHeadEffect();
-        void playContactMutiplesealBubbleEliminatedEffect();
+        void playContactBlackHoleBubbleEffect();
         void playContactRainbowsealBubbleEffect();
         void playContactScoreWidgetEffect();
         void playDarkCloudBubbleEliminatedEffect();
+        void playDecalsChangeCardStateEffect();
+        void playDecalsSelectedCardEndEffect();
+        void playDecalsShuffleContactBorderEffect();
+        void playEnterPropsAnimationEndEffect();
         void playGameCompletedTaskFlyEndEffect();
         void playGameStartEffect();
+        void playGameVictoryLotteryEffect();
+        void playGameVictoryLotteryGiftPopEffect();
+        void playGameVictoryLotteryStartFlyEffect();
+        void playGameVictoryLotteryStartPopEffect();
         void playGameVictoryStartTurnOnEffect();
         void playGameWoodenhammerAttackEffect();
         void playLightningBubbleEliminatedEffect();
+        void playMutiplesealBubbleEliminatedEffect();
         void playPropBigBombBombBubbleEliminatedEffect();
         void playPropColorBombBubbleEliminatedEffect();
+        void playPuzzleFindAnswerEffect();
+        void playPuzzleUsedAddTimePropEffect();
+        void playPuzzleUsedBigEyesPropEffect();
+        void playPuzzleUsedSearchPropEffect();
+        void playPuzzleVictoryEffect();
+        void playPuzzleVictoryGiftPopEffect();
         void playRainbowsealBubbleEliminatedEffect();
         void playSkillBigBombBombBubbleEliminatedEffect();
         void playSkillColorBombBubbleEliminatedEffect();
@@ -42,7 +61,19 @@ namespace bubble_second {
         void playStageButtonEffect();
         void playStageUnlockEffect();
 
+
+        void playGameDestroyRainbowsealMusic();
         void playGameLaunchMusic();
+        void playGamePuzzlePlaySceneMusic();
+        void playGamePuzzleSelectedSceneMusic();
+        void playGameRescueAnimalMusic();
+        void playGameStageCellFirstMusic();
+        void playGameStageCellFourthMusic();
+        void playGameStageCellSecondMusic();
+        void playGameStageCellThirdMusic();
+        void playGameTopEliminateMusic();
+        void playGameWindmillMusic();
+
 
 
         void playStageCellBackgroundMusic(int cell_numble);
@@ -52,15 +83,15 @@ namespace bubble_second {
         void playEffectWithKey(const std::string& key);
         void playBackgroundMusicWithKey(const std::string& key);
 
-        void playGameStageCellFirstMusic();
-        void playGameStageCellFourthMusic();
-        void playGameStageCellSecondMusic();
-        void playGameStageCellThirdMusic();
+        //void playGameStageCellFirstMusic();
+        //void playGameStageCellFourthMusic();
+        //void playGameStageCellSecondMusic();
+        //void playGameStageCellThirdMusic();
 
-        void playGameRescueAnimalMusic();
-        void playGameTopEliminateMusic();
-        void playGameDestroyRainbowsealMusic();
-        void playGameWindmillMusic();
+        //void playGameRescueAnimalMusic();
+        //void playGameTopEliminateMusic();
+        //void playGameDestroyRainbowsealMusic();
+        //void playGameWindmillMusic();
     private:
         std::string current_music_key_ = "";
     };

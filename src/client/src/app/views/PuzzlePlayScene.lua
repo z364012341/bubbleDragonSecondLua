@@ -66,6 +66,8 @@ function PuzzlePlayScene:init()
     self:addSmallEyesButton();
 	self:initZOrder();
     self:addChild(PuzzleVictoryCountdownComponent:create());
+    bs.GameAudioController:getInstance():playGamePuzzlePlaySceneMusic();
+
 end
 function PuzzlePlayScene:addPuzzleProps(class, pos_name)
     local search_node = self.csb_node_:getChildByName(pos_name);
@@ -280,6 +282,7 @@ function PuzzlePlayScene:popVictoryAlert()
             end));
         end), nil));
     flash_bg:runAction(cc.ScaleBy:create(0.5, 1.05));
+    bs.GameAudioController:getInstance():playPuzzleVictoryEffect();
 end
 function PuzzlePlayScene:popAlert( alert_class , params)
     local size = cc.Director:getInstance():getVisibleSize();

@@ -1,6 +1,6 @@
 --
 -- Author: 黄泽昊
--- 功能: 答案搜索道具
+-- 功能: 答案搜索道具(快速提示)
 
 local PuzzleSearchProp = class("PuzzleSearchProp", function ()
     return cc.Node:create();
@@ -39,6 +39,7 @@ function PuzzleSearchProp:propCoolDown()
     self.isCooling_ = true;
     self:runAction(cc.Sequence:create(cc.DelayTime:create(PROP_SEARCH_TIME), cc.CallFunc:create(function ()
         self.isCooling_ = false;
+        bs.GameAudioController:getInstance():playPuzzleUsedSearchPropEffect();
         cc.Director:getInstance():getEventDispatcher():dispatchCustomEvent(EVENT_END_SEARCH_PROP);
     end), nil));
 

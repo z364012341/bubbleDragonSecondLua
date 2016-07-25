@@ -1,6 +1,6 @@
 #include "GameVictoryLotteryStartItem.h"
 #include "SpriteTextureController.h"
-
+#include "GameAudioController.h"
 const std::string LOTTERY_START_PATH = "faguangxingxing.PNG";
 
 namespace bubble_second {
@@ -22,6 +22,7 @@ namespace bubble_second {
     }
     void GameVictoryLotteryStartItem::lightenItem()
     {
+        GameAudioController::getInstance()->playGameVictoryLotteryStartPopEffect();
         cocos2d::Sprite* sp = SpriteTextureController::getInstance()->createGameSpriteWithPath(LOTTERY_START_PATH);
         this->addChild(sp);
         sp->setScale(0.1f);

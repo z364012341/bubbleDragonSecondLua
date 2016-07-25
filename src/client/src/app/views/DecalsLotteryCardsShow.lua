@@ -57,7 +57,7 @@ function DecalsLotteryCardsShow:lotteryAgain()
     -- self:removeSelectedCard();
     -- self:removeRandomCard();
     GlobalFunction.shuffleTable(self.cards_);
-
+    bs.GameAudioController:getInstance():playDecalsChangeCardStateEffect(); 
     for i, card in ipairs(self.cards_) do
         card:selectBegin(CARDS_POINTS[#self.cards_][i]);
     end

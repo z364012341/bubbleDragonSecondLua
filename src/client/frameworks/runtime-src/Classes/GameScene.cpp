@@ -764,13 +764,6 @@ namespace bubble_second {
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_FALL_MAP_BORDER_LOADED, CC_CALLBACK_1(GameScene::addFallBorder, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        //listener = cocos2d::EventListenerCustom::create(EVENT_DEFEAT, [=](cocos2d::EventCustom*) {
-        //if (!GameScoreController::getInstance()->gameVictory())
-        //{
-        //    this->defeat();
-        //}
-        //});
-        //dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_ADD_ELIMINATE_SCORE_LABEL, CC_CALLBACK_1(GameScene::addEliminateScoreLabel, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         dispatcher->addCustomEventListener(EVENT_BUBBLE_CONTACT_BLACKHOLE, [=](cocos2d::EventCustom * event) {
@@ -1844,6 +1837,7 @@ namespace bubble_second {
         if (EnterPropsViewManager::getInstance()->getPropsSwitchEnable(ADD_BUBBLE_NUMBLE_COMMODITY_NAME))
         {
             this->addEnterPropsAnimation(ADD_BUBBLE_NUMBLE_ANIMATION_NAME, EVENT_END_ADD_BUBBLE_ANIMATION);
+            GameAudioController::getInstance()->playAddTenBubblePropUsedEffect();
         }
         else
         {
@@ -1856,6 +1850,7 @@ namespace bubble_second {
         if (EnterPropsViewManager::getInstance()->getPropsSwitchEnable(ADD_SPECIAL_COMMODITY_NAME))
         {
             this->addEnterPropsAnimation(ADD_SPECIAL_ANIMATION_NAME, EVENT_END_ADD_SPECIAL_BUBBLT_ANIMATION);
+            GameAudioController::getInstance()->playAddSpecialPropUsedEffect();
         }
         else
         {
@@ -1867,6 +1862,7 @@ namespace bubble_second {
         if (EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME))
         {
             this->addEnterPropsAnimation(AIMING_LINE_COMMODITY_ANIMATION_NAME, EVENT_END_AIMING_LINE_ANIMATION);
+            GameAudioController::getInstance()->playAimingLinePropUsedEffect();
         }
         else
         {
@@ -2830,14 +2826,14 @@ namespace bubble_second {
         //static int numble = 0;
         //++numble;
         //CCLOG("total: %d", numble);
-        CCLOG("++%d", total_air_bubbles_numble_);
+        //CCLOG("++%d", total_air_bubbles_numble_);
         this->displayBarrelScoreLabel();
     }
 
     void GameScene::cutOneAirBubblesNumble(cocos2d::EventCustom*)
     {
         --total_air_bubbles_numble_;
-        CCLOG("--%d", total_air_bubbles_numble_);
+        //CCLOG("--%d", total_air_bubbles_numble_);
         if (this->isNeedNotDisplayedBarrelScoreLabel())
         {
             this->notDisplayedBarrelScoreLabel();

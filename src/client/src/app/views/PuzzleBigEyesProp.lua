@@ -1,6 +1,6 @@
 --
 -- Author: 黄泽昊
--- 功能: 大眼睛道具
+-- 功能: 大眼睛道具(天空之眼)
 
 local PuzzleBigEyesProp = class("PuzzleBigEyesProp", function ()
     return cc.Node:create();
@@ -44,6 +44,7 @@ function PuzzleBigEyesProp:onEnter()
         end
         if self.numble_show_:cutPropNumble() then
             self.isCooling_ = true;
+            bs.GameAudioController:getInstance():playPuzzleUsedBigEyesPropEffect();
             self:getEventDispatcher():dispatchCustomEvent(EVENT_USE_BIG_EYES_PROP);
         end
     end));

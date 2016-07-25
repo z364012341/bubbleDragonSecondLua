@@ -2,6 +2,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "GameScoreController.h"
 #include "GamePlayController.h"
+#include "GameAudioController.h"
 namespace bubble_second {
     AddBubbleNumbleBubble::AddBubbleNumbleBubble()
     {
@@ -36,6 +37,7 @@ namespace bubble_second {
 
     float AddBubbleNumbleBubble::playTheSpecialEffects()
     {
+        GameAudioController::getInstance()->playContactAddBubbleNumbleBubbleEffect();
         cocostudio::Armature* armature = cocostudio::Armature::create(COLOR_BUBBLE_ELIMINATE_EFFECT_NAME);
         armature->setPosition(this->getPosition());
         armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);

@@ -11,9 +11,12 @@ const std::map<std::string, std::string> GAME_BACKGROUND_MUSIC_PATH = {
     { "GAME_RESCUE_ANIMAL_MUSIC", "music_battle2.mp3" },
     { "GAME_DESTROY_RAINBOWSEAL_MUSIC", "music_comgame.mp3" },
     { "GAME_WINDMILL_MUSIC", "music_boss.mp3" },
+    { "GAME_PUZZLE_SELECTED_SCENE_MUSIC", "soundpintu.mp3" },  //拼图选择界面播放
+    { "GAME_PUZZLE_PLAY_SCENE_MUSIC", "bgmusic_5.mp3" },  // 拼图游戏界面播放
 };
 const std::string COLOR_BOMB_BUBBLE_ELIMINATED_PATH = "triggers.ogg";
 const std::map<std::string, std::string> GAME_EFFECT_PATH = {
+    //0701
     { "STAGE_BUTTON_EFFECT", "waterhit.ogg" }, //点击按钮时播放
     { "STAGE_UNLOCK_EFFECT", "stage_clear.ogg" },  //新关卡开启时播放
     { "GAME_START_EFFECT", "tilixiafei.ogg" },  //点击开始游戏按钮，心飞至开始按钮
@@ -36,6 +39,26 @@ const std::map<std::string, std::string> GAME_EFFECT_PATH = {
     { "LIGHTNING_BUBBLE_ELIMINATED_EFFECT", "bubble_pop1.ogg" },  //闪电泡泡
     { "BOMB_BOMB_BUBBLE_ELIMINATED_EFFECT", "stage_boss0skill.ogg" },  //炸弹泡泡
     { "DARK_CLOUD_BUBBLE_ELIMINATED_EFFECT", "stage_gem_destory.ogg" },  //阴云泡泡
+    //0722
+    { "AIMING_LINE_PROP_USED_EFFECT", "yinxiaofzx.mp3" },  //辅助线使用
+    { "ADD_SPECIAL_PROP_USED_EFFECT", "yinxiaomofaping.mp3" },  //魔法瓶使用
+    { "ADD_TEN_BUBBLE_PROP_USED_EFFECT", "sfx_potion_appear.ogg" },  //+10球
+    { "ENTER_PROPS_ANIMATION_END_EFFECT", "stage_star_goal.ogg" },  //游戏中进场道具动画最后烟雾炸开
+    { "GAME_VICTORY_LOTTERY_START_FLY_EFFECT", "stage_star_goal.ogg" },  //胜利抽奖星星上飞
+    { "GAME_VICTORY_LOTTERY_GIFT_POP_EFFECT", "potion.ogg" },  //礼包弹出
+    { "GAME_VICTORY_LOTTERY_START_POP_EFFECT", "stage_colorgem.mp3" },  //胜利抽奖星星弹出
+    { "GAME_VICTORY_LOTTERY_EFFECT", "stage_star_goal.ogg" },  //抽奖
+    { "CONTACT_BLACK_HOLE_BUBBLE_EFFECT", "bubble_put.mp3" },  //击中黑洞泡泡
+    { "CONTACT_ADD_BUBBLE_NUMBLE_BUBBLE_EFFECT", "sfx_star_gui_counter_pling.ogg" },  //击中+3球泡泡
+    { "PUZZLE_VICTORY_GIFT_POP_EFFECT", "stage_star_goal.ogg" },  //拼图奖励弹出
+    { "PUZZLE_USED_SEARCH_PROP_EFFECT", "sound_items_rollend.mp3" },  //使用快速提示
+    { "PUZZLE_USED_BIG_EYES_PROP_EFFECT", "sound_material_compound.mp3" },  //使用天空之眼
+    { "PUZZLE_USED_ADD_TIME_PROP_EFFECT", "sound_item_use.mp3" },  //使用时间倒流
+    { "PUZZLE_VICTORY_EFFECT", "bubble_reward.mp3" },  //拼图完成
+    { "PUZZLE_FIND_ANSWER_EFFECT", "sound_pvpitem_boom_03.mp3" },  //拼图块嵌入
+    { "DECALS_SHUFFLE_CONTACT_BORDER_EFFECT", "sound_donut_bounce_3.mp3" },  //洗牌（碰撞边框）
+    { "DECALS_CHANGE_CARD_STATE_EFFECT", "sound_pvpitem_boom_03.mp3" },  //翻牌
+    { "DECALS_SELECTED_CARD_END_EFFECT", "stage_star_goal.ogg" },  //中奖(地面翻到正面朝上动作结束)
 };
 namespace bubble_second {
     using CocosDenshion::SimpleAudioEngine;
@@ -78,41 +101,41 @@ namespace bubble_second {
 
     GameAudioController::GameAudioController()
     {
-        {//打印音效的声明和实现
-            using std::string;
-            string declaration = "";
-            for (auto var : GAME_EFFECT_PATH)
-            {
-                declaration += "void play" + specialSplit(var.first, '_') + "();\n";
-            }
-            CCLOG("%s", declaration.c_str());
+        //{//打印音效的声明和实现
+        //    using std::string;
+        //    string declaration = "";
+        //    for (auto var : GAME_EFFECT_PATH)
+        //    {
+        //        declaration += "void play" + specialSplit(var.first, '_') + "();\n";
+        //    }
+        //    CCLOG("%s", declaration.c_str());
 
-            string implement = "";
-            for (auto var : GAME_EFFECT_PATH)
-            {
-                implement += "void GameAudioController::play" + specialSplit(var.first, '_') +
-                    "()\n{\n    this->playEffectWithKey(\"" + var.first + "\");\n}\n";
-            }
-            CCLOG("%s", implement.c_str());
-        }
-        {//打印背景音乐的声明和实现
-            CCLOG("-------------------------MUSIC--------------------------");
-            using std::string;
-            string declaration = "";
-            for (auto var : GAME_BACKGROUND_MUSIC_PATH)
-            {
-                declaration += "void play" + specialSplit(var.first, '_') + "();\n";
-            }
-            CCLOG("%s", declaration.c_str());
+        //    string implement = "";
+        //    for (auto var : GAME_EFFECT_PATH)
+        //    {
+        //        implement += "void GameAudioController::play" + specialSplit(var.first, '_') +
+        //            "()\n{\n    this->playEffectWithKey(\"" + var.first + "\");\n}\n";
+        //    }
+        //    CCLOG("%s", implement.c_str());
+        //}
+        //{//打印背景音乐的声明和实现
+        //    CCLOG("-------------------------MUSIC--------------------------");
+        //    using std::string;
+        //    string declaration = "";
+        //    for (auto var : GAME_BACKGROUND_MUSIC_PATH)
+        //    {
+        //        declaration += "void play" + specialSplit(var.first, '_') + "();\n";
+        //    }
+        //    CCLOG("%s", declaration.c_str());
 
-            string implement = "";
-            for (auto var : GAME_BACKGROUND_MUSIC_PATH)
-            {
-                implement += "void GameAudioController::play" + specialSplit(var.first, '_') +
-                    "()\n{\n    this->playBackgroundMusicWithKey(\"" + var.first + "\");\n}\n";
-            }
-            CCLOG("%s", implement.c_str());
-        }
+        //    string implement = "";
+        //    for (auto var : GAME_BACKGROUND_MUSIC_PATH)
+        //    {
+        //        implement += "void GameAudioController::play" + specialSplit(var.first, '_') +
+        //            "()\n{\n    this->playBackgroundMusicWithKey(\"" + var.first + "\");\n}\n";
+        //    }
+        //    CCLOG("%s", implement.c_str());
+        //}
     }
 
     void GameAudioController::playEffectWithKey(const std::string & key)
@@ -159,6 +182,18 @@ namespace bubble_second {
             SimpleAudioEngine::getInstance()->stopBackgroundMusic();
         }
     }
+    void GameAudioController::playAddSpecialPropUsedEffect()
+    {
+        this->playEffectWithKey("ADD_SPECIAL_PROP_USED_EFFECT");
+    }
+    void GameAudioController::playAddTenBubblePropUsedEffect()
+    {
+        this->playEffectWithKey("ADD_TEN_BUBBLE_PROP_USED_EFFECT");
+    }
+    void GameAudioController::playAimingLinePropUsedEffect()
+    {
+        this->playEffectWithKey("AIMING_LINE_PROP_USED_EFFECT");
+    }
     void GameAudioController::playBombBombBubbleEliminatedEffect()
     {
         this->playEffectWithKey("BOMB_BOMB_BUBBLE_ELIMINATED_EFFECT");
@@ -166,6 +201,10 @@ namespace bubble_second {
     void GameAudioController::playColorBubbleEliminatedEffect()
     {
         this->playEffectWithKey("COLOR_BUBBLE_ELIMINATED_EFFECT");
+    }
+    void GameAudioController::playContactAddBubbleNumbleBubbleEffect()
+    {
+        this->playEffectWithKey("CONTACT_ADD_BUBBLE_NUMBLE_BUBBLE_EFFECT");
     }
     void GameAudioController::playContactBarrelBottomEffect()
     {
@@ -175,9 +214,9 @@ namespace bubble_second {
     {
         this->playEffectWithKey("CONTACT_BARREL_HEAD_EFFECT");
     }
-    void GameAudioController::playContactMutiplesealBubbleEliminatedEffect()
+    void GameAudioController::playContactBlackHoleBubbleEffect()
     {
-        this->playEffectWithKey("MUTIPLESEAL_BUTTLE_ELIMINATED_EFFECT");
+        this->playEffectWithKey("CONTACT_BLACK_HOLE_BUBBLE_EFFECT");
     }
     void GameAudioController::playContactRainbowsealBubbleEffect()
     {
@@ -191,6 +230,22 @@ namespace bubble_second {
     {
         this->playEffectWithKey("DARK_CLOUD_BUBBLE_ELIMINATED_EFFECT");
     }
+    void GameAudioController::playDecalsChangeCardStateEffect()
+    {
+        this->playEffectWithKey("DECALS_CHANGE_CARD_STATE_EFFECT");
+    }
+    void GameAudioController::playDecalsSelectedCardEndEffect()
+    {
+        this->playEffectWithKey("DECALS_SELECTED_CARD_END_EFFECT");
+    }
+    void GameAudioController::playDecalsShuffleContactBorderEffect()
+    {
+        this->playEffectWithKey("DECALS_SHUFFLE_CONTACT_BORDER_EFFECT");
+    }
+    void GameAudioController::playEnterPropsAnimationEndEffect()
+    {
+        this->playEffectWithKey("ENTER_PROPS_ANIMATION_END_EFFECT");
+    }
     void GameAudioController::playGameCompletedTaskFlyEndEffect()
     {
         this->playEffectWithKey("GAME_COMPLETED_TASK_FLY_END_EFFECT");
@@ -198,6 +253,22 @@ namespace bubble_second {
     void GameAudioController::playGameStartEffect()
     {
         this->playEffectWithKey("GAME_START_EFFECT");
+    }
+    void GameAudioController::playGameVictoryLotteryEffect()
+    {
+        this->playEffectWithKey("GAME_VICTORY_LOTTERY_EFFECT");
+    }
+    void GameAudioController::playGameVictoryLotteryGiftPopEffect()
+    {
+        this->playEffectWithKey("GAME_VICTORY_LOTTERY_GIFT_POP_EFFECT");
+    }
+    void GameAudioController::playGameVictoryLotteryStartFlyEffect()
+    {
+        this->playEffectWithKey("GAME_VICTORY_LOTTERY_START_FLY_EFFECT");
+    }
+    void GameAudioController::playGameVictoryLotteryStartPopEffect()
+    {
+        this->playEffectWithKey("GAME_VICTORY_LOTTERY_START_POP_EFFECT");
     }
     void GameAudioController::playGameVictoryStartTurnOnEffect()
     {
@@ -211,6 +282,10 @@ namespace bubble_second {
     {
         this->playEffectWithKey("LIGHTNING_BUBBLE_ELIMINATED_EFFECT");
     }
+    void GameAudioController::playMutiplesealBubbleEliminatedEffect()
+    {
+        this->playEffectWithKey("MUTIPLESEAL_BUBBLE_ELIMINATED_EFFECT");
+    }
     void GameAudioController::playPropBigBombBombBubbleEliminatedEffect()
     {
         this->playEffectWithKey("PROP_BIG_BOMB_BOMB_BUBBLE_ELIMINATED_EFFECT");
@@ -218,6 +293,30 @@ namespace bubble_second {
     void GameAudioController::playPropColorBombBubbleEliminatedEffect()
     {
         this->playEffectWithKey("PROP_COLOR_BOMB_BUBBLE_ELIMINATED_EFFECT");
+    }
+    void GameAudioController::playPuzzleFindAnswerEffect()
+    {
+        this->playEffectWithKey("PUZZLE_FIND_ANSWER_EFFECT");
+    }
+    void GameAudioController::playPuzzleUsedAddTimePropEffect()
+    {
+        this->playEffectWithKey("PUZZLE_USED_ADD_TIME_PROP_EFFECT");
+    }
+    void GameAudioController::playPuzzleUsedBigEyesPropEffect()
+    {
+        this->playEffectWithKey("PUZZLE_USED_BIG_EYES_PROP_EFFECT");
+    }
+    void GameAudioController::playPuzzleUsedSearchPropEffect()
+    {
+        this->playEffectWithKey("PUZZLE_USED_SEARCH_PROP_EFFECT");
+    }
+    void GameAudioController::playPuzzleVictoryEffect()
+    {
+        this->playEffectWithKey("PUZZLE_VICTORY_EFFECT");
+    }
+    void GameAudioController::playPuzzleVictoryGiftPopEffect()
+    {
+        this->playEffectWithKey("PUZZLE_VICTORY_GIFT_POP_EFFECT");
     }
     void GameAudioController::playRainbowsealBubbleEliminatedEffect()
     {
@@ -257,6 +356,14 @@ namespace bubble_second {
     void GameAudioController::playGameLaunchMusic()
     {
         this->playBackgroundMusicWithKey("GAME_LAUNCH_MUSIC");
+    }
+    void GameAudioController::playGamePuzzlePlaySceneMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_PUZZLE_PLAY_SCENE_MUSIC");
+    }
+    void GameAudioController::playGamePuzzleSelectedSceneMusic()
+    {
+        this->playBackgroundMusicWithKey("GAME_PUZZLE_SELECTED_SCENE_MUSIC");
     }
     void GameAudioController::playGameRescueAnimalMusic()
     {
