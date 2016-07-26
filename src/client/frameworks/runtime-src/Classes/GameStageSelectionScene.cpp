@@ -423,13 +423,13 @@ namespace bubble_second {
 
     void GameStageSelectionScene::adjustingScrollviewPosition()
     {
-        static bool fire_flag = true;
-        if (fire_flag)
+        //static bool fire_flag = true;
+        if (first_flag_)
         {//第一次要移动到最新的关卡
             //auto p = this->getScorllViewOffset(UserDataManager::getInstance()->getPresentCell());
             scrollview_->setInnerContainerPosition(this->getScorllViewOffset(UserDataManager::getInstance()->getPresentCell()));
             //scrollview_->setInnerContainerPosition(cocos2d::Vec2::ZERO);
-            fire_flag = false;
+            first_flag_ = false;
             StageMenuManager::getInstance()->getCurentStagemenu()->turnOnBlink();
         }
         else

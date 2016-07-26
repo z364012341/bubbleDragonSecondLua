@@ -52,33 +52,33 @@ const std::string GAME_SCORE_INFO_CSB = "GameScoreNumble.csb";
 const std::string GAME_SCORE_LABEL_NAME = "gameScoreLabel";
 const std::string GAME_STAGE_TYPE_SPRITE_NAME = "stageTypeSprite";
 const std::string BARREL_SCORE_LABEL_NODE_NAME = "BarrelScoreLabelNode";
-const std::string UI_NAME_GAME_PLAYING_MENU = "gamePlayMenu";      //ÓÎÏ·³¡¾°µÄ²Ëµ¥
-const std::string UI_NAME_COMPLETED_TASK = "completedNumble";//ÒÑÍê³ÉÄ¿±êµÄlabel
-const std::string UI_NAME_GAME_TASK = "taskNumble";//Ê¤ÀûÈÎÎñÄ¿±êµÄlabel
-const std::string BUBBLE_MAP_LINE_PATH = "xian.PNG"; //¶¥²¿²¨ÀËÏß
-const std::string BUBBLE_MAP_LINE_NAME = "wavy_line"; //¶¥²¿²¨ÀËÏß
-const float GAME_SCORE_PERCENT_X = 0.1647f; //µÃ·ÖµÄlabelµÄx×ø±ê°Ù·Ö±È
-const float GAME_RIGHT_LABEL_PERCENT_X = 0.8353f; //ÓÒ±ßµÄÊ¤ÀûÌõ¼şµÄlabelµÄx×ø±ê°Ù·Ö±È
-const float GAME_TOP_INFO_POS_Y_PERCENT = 0.85f; //yµÄÎ»ÖÃ°Ù·Ö±È
-const float GAME_PLAY_HEIGHT = 1130.0f;//³ıÈ¥ÉÏÏÂ²Ëµ¥µÄ¸ß¶È
-const float BOTTOM_UI_BACKGROUND_HEIGHT = 90.0f; //ÓÎÏ·³¡¾°ÏÂÃæuiµÄ±³¾°Í¼ĞèÒªµÄ¸ß¶È
-const float GAME_PROPS_BACKGROUND_PERCENT_Y = 0.0525f;  //µÀ¾ßitem±³¾°µÄy×ø±ê°Ù·Ö±È                        
-const float PROPS_BACKGROUND_PERCENT_X_FIRST = 0.3468f;//µÀ¾ßitem_1±³¾°µÄX×ø±ê°Ù·Ö±È
-const float PROPS_BACKGROUND_PERCENT_X_FOURTH = 0.8931f; //µÀ¾ßitem_1±³¾°µÄX×ø±ê°Ù·Ö±È
+const std::string UI_NAME_GAME_PLAYING_MENU = "gamePlayMenu";      //å¨“å‘Šå™é¦çƒ˜æ«™é¨å‹®å½é—ï¿½
+const std::string UI_NAME_COMPLETED_TASK = "completedNumble";//å®¸æ’ç•¬é´æ„®æ´°éå›©æ®‘label
+const std::string UI_NAME_GAME_TASK = "taskNumble";//é‘³æ»ƒåŸ„æµ è¯²å§Ÿé©î†½çˆ£é¨åˆ²abel
+const std::string BUBBLE_MAP_LINE_PATH = "xian.PNG"; //æ¤¤å •å„´å¨‰ãˆ¡æ°®ç»¾ï¿½
+const std::string BUBBLE_MAP_LINE_NAME = "wavy_line"; //æ¤¤å •å„´å¨‰ãˆ¡æ°®ç»¾ï¿½
+const float GAME_SCORE_PERCENT_X = 0.1647f; //å¯°æ¥€åé¨åˆ²abelé¨å‰é§æ„­çˆ£é§æƒ§åå§£ï¿½
+const float GAME_RIGHT_LABEL_PERCENT_X = 0.8353f; //é™å® ç«Ÿé¨å‹®å„¨é’â•‚æ½¯æµ å‰æ®‘labelé¨å‰é§æ„­çˆ£é§æƒ§åå§£ï¿½
+const float GAME_TOP_INFO_POS_Y_PERCENT = 0.85f; //yé¨å‹ªç¶…ç¼ƒî†¾æ«¨é’å—˜ç˜®
+const float GAME_PLAY_HEIGHT = 1130.0f;//é—„ã‚…å¹“æ¶“å©ç¬…é‘¿æ»ƒå´Ÿé¨å‹¯ç®æ´ï¿½
+const float BOTTOM_UI_BACKGROUND_HEIGHT = 90.0f; //å¨“å‘Šå™é¦çƒ˜æ«™æ¶“å¬®æ½°uié¨å‹®å„—é…îˆšæµ˜é—‡â‚¬ç‘•ä½ºæ®‘æ¥‚æ¨ºå®³
+const float GAME_PROPS_BACKGROUND_PERCENT_Y = 0.0525f;  //é–¬æ’³å¿itemé‘³å±¾æ«™é¨å‰é§æ„­çˆ£é§æƒ§åå§£ï¿½                        
+const float PROPS_BACKGROUND_PERCENT_X_FIRST = 0.3468f;//é–¬æ’³å¿item_1é‘³å±¾æ«™é¨åˆ‹é§æ„­çˆ£é§æƒ§åå§£ï¿½
+const float PROPS_BACKGROUND_PERCENT_X_FOURTH = 0.8931f; //é–¬æ’³å¿item_1é‘³å±¾æ«™é¨åˆ‹é§æ„­çˆ£é§æƒ§åå§£ï¿½
 const float PROPS_BACKGROUND_PERCENT_PER_DISTANCE = (PROPS_BACKGROUND_PERCENT_X_FOURTH - PROPS_BACKGROUND_PERCENT_X_FIRST) / 3;
-const float PROPS_BACKGROUND_PERCENT_X_SECOND = PROPS_BACKGROUND_PERCENT_X_FIRST + PROPS_BACKGROUND_PERCENT_PER_DISTANCE; //µÀ¾ßitem_1±³¾°µÄX×ø±ê°Ù·Ö±È
-const float PROPS_BACKGROUND_PERCENT_X_THIRD = PROPS_BACKGROUND_PERCENT_X_FIRST + PROPS_BACKGROUND_PERCENT_PER_DISTANCE * 2; //µÀ¾ßitem_1±³¾°µÄX×ø±ê°Ù·Ö±È
-const std::string UI_NAME_BARRELHEAD_NODE = "barrelhead";        //Í°¸Ç
-const std::string UI_NAME_BARREL_NODE = "barrel_body"; //Í°ÉíÌå
-const std::string UI_NAME_BUBBLE_USE_COUNT = "bubble_numble_label";//Ğ¡ÇòÊ¹ÓÃÊıµÄlabel
-const std::string UI_NAME_SECOND_BUBBLE_STORE = "second_bubble_store";        //ß÷×¼Æ÷ÅÔ±ßµÄĞ¡²İ
-//const int BARRELHEADEDGE_BODY_RADIUS = 20;  //Í°±ß¸ÕÌå°ë¾¶
+const float PROPS_BACKGROUND_PERCENT_X_SECOND = PROPS_BACKGROUND_PERCENT_X_FIRST + PROPS_BACKGROUND_PERCENT_PER_DISTANCE; //é–¬æ’³å¿item_1é‘³å±¾æ«™é¨åˆ‹é§æ„­çˆ£é§æƒ§åå§£ï¿½
+const float PROPS_BACKGROUND_PERCENT_X_THIRD = PROPS_BACKGROUND_PERCENT_X_FIRST + PROPS_BACKGROUND_PERCENT_PER_DISTANCE * 2; //é–¬æ’³å¿item_1é‘³å±¾æ«™é¨åˆ‹é§æ„­çˆ£é§æƒ§åå§£ï¿½
+const std::string UI_NAME_BARRELHEAD_NODE = "barrelhead";        //å¦—å‰æ´Š
+const std::string UI_NAME_BARREL_NODE = "barrel_body"; //å¦—æƒ°éŸ©æµ£ï¿½
+const std::string UI_NAME_BUBBLE_USE_COUNT = "bubble_numble_label";//çå¿•æ‚†æµ£è·¨æ•¤éæ‰®æ®‘label
+const std::string UI_NAME_SECOND_BUBBLE_STORE = "second_bubble_store";        //é é›å™¯é£ã„¦æ¢ºæˆåœ­æ®‘çå¿šå´
+//const int BARRELHEADEDGE_BODY_RADIUS = 20;  //å¦—æƒ°ç«Ÿé’æ°«ç¶‹é—å©‚ç·
 const float POP_VICTORY_ALERT_DELAYTIME = 1.5f;
-const std::string BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY = "bubble_sighting_device_perform_schedule_key"; //ß÷×¼Æ÷±íÑİµÄ¶¨Ê±Æ÷µÄkey
+const std::string BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY = "bubble_sighting_device_perform_schedule_key"; //é é›å™¯é£ã„¨ã€ƒå©•æ—‚æ®‘ç€¹æ°­æ¤‚é£ã„§æ®‘key
 const std::string GAME_DEFEAT_BUY_PROPS_ALERT_NAME = "game_defeat_buy_props_alert_name";
 const std::string SKILL_STAVES_BUBBLE_ARMATURE_1_NAME = "shandian";
 const std::string SKILL_STAVES_BUBBLE_ARMATURE_2_NAME = "shandian02";
-const std::string UI_NAME_GAME_VICTORY_ALERT = "UI_NAME_GAME_VICTORY_ALERT"; //Ê¤ÀûÃæ°åµÄÃû×Ö
+const std::string UI_NAME_GAME_VICTORY_ALERT = "UI_NAME_GAME_VICTORY_ALERT"; //é‘³æ»ƒåŸ„é—ˆãˆ¡æ¾˜é¨å‹«æ‚•ç€›ï¿½
 const std::map<std::string, BubbleType> PROPS_NAME_TO_COLOR = {
     { PROPS_COLOR_BOMB_NAME, kBubbleColorBomb },
     { PROPS_BOMB_BOMB_NAME , kBubbleBombBombProperty },
@@ -88,7 +88,7 @@ namespace bubble_second {
     {
         cocos2d::Scene* scene = cocos2d::Scene::createWithPhysics();
 
-        //ÏÔÊ¾ÎïÀíÊÀ½çµ÷ÊÔ×´Ì¬, ÏÔÊ¾ºìÉ«µÄ¿ò, ·½±ãµ÷ÊÔ
+        //é„å‰§ãšé—â•ƒæ‚Šæ¶“æ «æ™«ç’‹å†­ç˜¯é˜èˆµâ‚¬ï¿½, é„å‰§ãšç»¾ãˆ£å£Šé¨å‹¬î”‹, é‚é€›ç©¶ç’‹å†­ç˜¯
         if (ZCGConfigDataDict::getInstance()->getIntData(KEY_PHYSICS_DEBUG_DRAW) == 1)
         {
             scene->getPhysicsWorld()->setDebugDrawMask(cocos2d::PhysicsWorld::DEBUGDRAW_ALL);
@@ -254,7 +254,7 @@ namespace bubble_second {
         main_sighting_device_->setPosition(this->getGunsightPosition());
         csb_node_->addChild(main_sighting_device_, UI_ZORDER_SIGHTING_DEVICE);
         //sight->turnOnDeviceOnce();
-        //sight->rotateSightingDevice(5, this->getMapMaxPositionY());//¸øÒ»¸ö³õÊ¼½Ç¶È..²»È»µşÔÚÒ»Æğ»á¿¨
+        //sight->rotateSightingDevice(5, this->getMapMaxPositionY());//ç¼æ¬ç«´æ¶“î„åµæ¿®å¬­î—æ´ï¿½..æ¶“å¶‡åŠ§é™çŠ²æ¹ªæ¶“â‚¬ç’§èœ‚ç´°é—ï¿½
     }
 
     void GameScene::initChildren()
@@ -286,33 +286,33 @@ namespace bubble_second {
             bottom_ui_bg->setScaleY(scale_y);
             this->addChild(bottom_ui_bg, UI_ZORDER_MENU);
         }
-        {//²ÊÇòµÀ¾ß
+        {//è¤°â•ƒæ‚†é–¬æ’³å¿
             color_bomb_property_ = PropertiesFactory::getInstance()->createPropertyWithName(PROPS_COLOR_BOMB_NAME);
             color_bomb_property_->setScale(zoom);
             color_bomb_property_->setPosition(visible_size.width * PROPS_BACKGROUND_PERCENT_X_FIRST,
                 visible_size.height * GAME_PROPS_BACKGROUND_PERCENT_Y);
             this->addChild(color_bomb_property_, UI_ZORDER_MENU_INFO);
         }
-        {//Ğ¡Ä¾´¸µÀ¾ß
+        {//çå¿”æ¹ªé–¿ã‚‰äº¾éï¿½
             wooden_hammer_property_ = PropertiesFactory::getInstance()->createPropertyWithName(PROPS_WOODEN_HAMMER_NAME);
             wooden_hammer_property_->setScale(zoom);
             wooden_hammer_property_->setPosition(visible_size.width * PROPS_BACKGROUND_PERCENT_X_SECOND,
                 visible_size.height * GAME_PROPS_BACKGROUND_PERCENT_Y);
             this->addChild(wooden_hammer_property_, UI_ZORDER_MENU_INFO);
         }
-        {//2È¦Õ¨µ¯µÀ¾ß
+        {//2é¦å ¢å¢å¯®å½’äº¾éï¿½
             bomb_bomb_property_ = PropertiesFactory::getInstance()->createPropertyWithName(PROPS_BOMB_BOMB_NAME);
             bomb_bomb_property_->setScale(zoom);
             bomb_bomb_property_->setPosition(visible_size.width * PROPS_BACKGROUND_PERCENT_X_THIRD, visible_size.height * GAME_PROPS_BACKGROUND_PERCENT_Y);
             this->addChild(bomb_bomb_property_, UI_ZORDER_MENU_INFO);
         }
-        {//Ñı¾«·¨ÕÈµÀ¾ß
+        {//æ¿¡æ «ç°¿å¨‰æ›Ÿæ½ é–¬æ’³å¿
             staves_property_ = PropertiesFactory::getInstance()->createPropertyWithName(PROPS_STAVES_NAME);
             staves_property_->setScale(zoom);
             staves_property_->setPosition(visible_size.width * PROPS_BACKGROUND_PERCENT_X_FOURTH, visible_size.height * GAME_PROPS_BACKGROUND_PERCENT_Y);
             this->addChild(staves_property_, UI_ZORDER_MENU_INFO);
         }
-        //¼¼ÄÜÍºÆ°
+        //é¶â‚¬é‘³ç•Œîˆé¡ï¿½
         {
             //cocos2d::Sprite* skillSprite = SpriteTextureController::getInstance()->createGameSpriteWithPath("jineng.PNG");
             //skillSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
@@ -329,7 +329,7 @@ namespace bubble_second {
 
         }
         this->setPropertyTouchEnabled(false);
-        {//¶¥²¿ºáÌõµÄ±³¾°
+        {//æ¤¤å •å„´å¦¯î…æ½¯é¨å‹®å„—é…ï¿½
             cocos2d::Sprite* top_ui_bg = SpriteTextureController::getInstance()->createGameSpriteWithPath(TOP_UI_BACKGROUND_PATH);
             top_ui_bg->setPosition(cocos2d::Vec2(0, visible_size.height));
             top_ui_bg->setName(UI_NAME_TOP_UI_BACKGROUND);
@@ -337,7 +337,7 @@ namespace bubble_second {
             this->addChild(top_ui_bg, UI_ZORDER_MENU_INFO);
         }
 
-        {//¶¥²¿ĞÇĞÇ½ø¶ÈÌõ
+        {//æ¤¤å •å„´é„ç†¸æ§¦æ©æ¶˜å®³é‰ï¿½
             cocos2d::Rect rect = this->getChildByName(UI_NAME_TOP_UI_BACKGROUND)->getBoundingBox();
             float pos_y = visible_size.height - rect.size.height*GAME_TOP_INFO_POS_Y_PERCENT / 2;
             score_progress_ = ScoreProgressMenu::create();
@@ -345,30 +345,30 @@ namespace bubble_second {
             score_progress_->setScale(zoom);
             this->addChild(score_progress_, UI_ZORDER_MENU_INFO);
 
-            //×ó±ß·ÖÊıµÄlabel
+            //å®¸ï¹ç«Ÿé’å—˜æšŸé¨åˆ²abel
             cocos2d::Node* score_node = cocos2d::CSLoader::createNode(GAME_SCORE_INFO_CSB);
             score_node->setName(UI_NAME_SCORE_TEXT);
             score_node->setPosition(cocos2d::Vec2(visible_size.width*GAME_SCORE_PERCENT_X, pos_y));
             this->addChild(score_node, UI_ZORDER_MENU_INFO);
-            //¶¥²¿ÓÒ±ßµÄÊ¤ÀûÌõ¼şÊı×Ö
+            //æ¤¤å •å„´é™å® ç«Ÿé¨å‹®å„¨é’â•‚æ½¯æµ èˆµæšŸç€›ï¿½
             cocos2d::Node* top_right_ui = cocos2d::CSLoader::createNode(GAME_RIGHT_INFO_CSB);
             top_right_ui->setName(GAME_RIGHT_INFO_NAME);
             top_right_ui->setPosition(cocos2d::Vec2(visible_size.width*GAME_RIGHT_LABEL_PERCENT_X, pos_y));
             this->addChild(top_right_ui, UI_ZORDER_MENU_INFO);
-            //¹Ø¿¨ÀàĞÍÍ¼±ê
+            //éå†²å´±ç»«è¯²ç€·é¥ç‚¬çˆ£
             //SpriteTextureController::getInstance()->setStageTypeSprite(
             //    dynamic_cast<cocos2d::Sprite*>(top_right_ui->getChildByName(GAME_STAGE_TYPE_SPRITE_NAME)), 
             //    this->getStageType());
             //StageTypeLogo* logo = StageTypeLogo::create(this->getStageType());
             top_right_ui->getChildByName(GAME_STAGE_TYPE_SPRITE_NAME)->addChild(StageTypeLogo::create(StageDataManager::getInstance()->getCurrentStageType()));
-            //²Ëµ¥°´Å¥
+            //é‘¿æ»ƒå´Ÿé¸å¤æŒ³
             pause_menu_ = dynamic_cast<cocos2d::ui::Button*>(top_right_ui->getChildByName(UI_NAME_GAME_PLAYING_MENU));
             ButtonEffectController::setButtonZoomScale(pause_menu_);
             pause_menu_->addClickEventListener([=](cocos2d::Ref*) {
                 this->popPauseAlert();
             });
         }
-        //{   //·¢ÉäÌ¨ÉÏµÄäöÎĞ
+        //{   //é™æˆçš é™é¢ç¬‚é¨å‹¬ç¼‰å¨‘ï¿½
         //    cocos2d::Sprite* swirl = SpriteTextureController::getInstance()->createGameSpriteWithPath(GUNSIGHT_SWIRL_RED_PATH);
         //    swirl->setPosition(this->getGunsightPosition());
         //    csb_node_->addChild(swirl, UI_ZORDER_GUNSIGHT_SWIRL);
@@ -466,12 +466,12 @@ namespace bubble_second {
     void GameScene::setPhysicsWorldBody()
     {
         cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-        //´´½¨Ò»¸öÎïÀíÊÀ½ç, ´óĞ¡ºÍÆÁÄ»µÄ³ß´çÏàÍ¬, Ê¹ÓÃÄ¬ÈÏ²ÄÖÊ, debug¿òµÄ¿í¶ÈÎª3¸öÏñËØ
+        //é’æ¶˜ç¼“æ¶“â‚¬æ¶“î†å¢¿éå—•ç¬˜é£ï¿½, æ¾¶Ñƒçš¬éœå±½ç†éªæ› æ®‘çå“„î‡­é©ç¨¿æ‚“, æµ£è·¨æ•¤æ¦›æ¨¿î…»é‰æ„¯å·, debugå¦—å—™æ®‘ç€¹è—‰å®³æ¶“ï¿½3æ¶“î„å„šç»±ï¿½
         float zoom = SmartScaleController::getInstance()->getPlayAreaZoom();
         cocos2d::Size world_size = cocos2d::Size(GAME_DESIGN_RESOLUTION_WIDTH + PHYSICS_WORLD_BODY_BORDER, bubble_map_node_->getPositionY() + BUBBLE_RADIUS + PHYSICS_WORLD_BODY_BORDER)*zoom;
         auto body = cocos2d::PhysicsBody::createEdgeBox(world_size,
             cocos2d::PhysicsMaterial(PHYSICS_WORLD_BODY_DENSITY, PHYSICS_WORLD_BODY_RESTITUTION, PHYSICS_WORLD_FRICTION), PHYSICS_WORLD_BODY_BORDER*zoom);
-        //½«Í¼ĞÎºÍ¸Õ¸Õ´´½¨µÄÊÀ½ç°ó¶¨
+        //çå——æµ˜è¤°ãˆ æ‹°é’æ°¬å°é’æ¶˜ç¼“é¨å‹ªç¬˜é£å²€ç²¦ç€¹ï¿½
         body->setContactTestBitmask(BITMASK_PHYSICS_WORLD_CONTACTTEST);
         body->setGroup(-2);
         if (cocos2d::PhysicsBody* body = edge_shape_node_->getPhysicsBody())
@@ -479,7 +479,7 @@ namespace bubble_second {
             edge_shape_node_->removeComponent(body);
         }
         edge_shape_node_->setPhysicsBody(body);
-        //ÉèÖÃÍ¼ĞÎµÄÎ»ÖÃÔÚÆÁÄ»ÕıÖĞ¼ä
+        //ç’å‰§ç–†é¥æƒ§èˆ°é¨å‹ªç¶…ç¼ƒî†¼æ¹ªçå¿“ç®·å§ï½„è…‘é—‚ï¿½
         edge_shape_node_->setPosition(visibleSize.width / 2, world_size.height / 2 + csb_node_->getPositionY());
     }
 
@@ -567,7 +567,7 @@ namespace bubble_second {
         node->addChild(BarrelHead::create());
         //cocos2d::PhysicsBody* body = cocos2d::PhysicsBody::createCircle(BARRELHEADEDGE_BODY_RADIUS,
         //    cocos2d::PhysicsMaterial(PHYSICS_BARRELHEADEDGE_BODY_DENSITY,
-        //        PHYSICS_BARRELHEADEDGE_BODY_RESTITUTION, PHYSICS_BARRELHEADEDGE_BODY_FRICTION));//ÃÜ¶È, »Ö¸´,Ä¦²ÁÁ¦
+        //        PHYSICS_BARRELHEADEDGE_BODY_RESTITUTION, PHYSICS_BARRELHEADEDGE_BODY_FRICTION));//ç€µå——å®³, é­ãˆ î˜²,é½â•‚æ‘é”ï¿½
         //body->setDynamic(false);
         //body->setGravityEnable(false);
         //body->setCategoryBitmask(BITMASK_BARRELHEADEDGE_CATEGORY);
@@ -609,12 +609,12 @@ namespace bubble_second {
         touch_listener_->onTouchEnded = CC_CALLBACK_2(GamePlayController::onTouchEnded, game_controller);
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         dispatcher->addEventListenerWithSceneGraphPriority(touch_listener_, this);
-        //ÉèÖÃÎïÀíÅö×²¼àÌıÆ÷
+        //ç’å‰§ç–†é—â•ƒæ‚Šçº°ç‰ˆæŒ’é©æˆæƒ‰é£ï¿½
         auto contactListener = cocos2d::EventListenerPhysicsContact::create();
-        //ÉèÖÃ¼àÌıÆ÷µÄÅö×²¿ªÊ¼º¯Êı  
+        //ç’å‰§ç–†é©æˆæƒ‰é£ã„§æ®‘çº°ç‰ˆæŒ’å¯®â‚¬æ¿®å¬ªåš±éï¿½  
         contactListener->onContactBegin = CC_CALLBACK_1(GamePlayController::onContactBegin, game_controller);
         contactListener->onContactSeparate = CC_CALLBACK_1(GamePlayController::onContactSeparate, game_controller);
-        //Ìí¼Óµ½ÊÂ¼ş·Ö·¢Æ÷ÖĞ  
+        //å¨£è¯²å§é’é¢ç°¨æµ è·ºåé™æˆæ«’æ¶“ï¿½  
         dispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 
@@ -681,13 +681,17 @@ namespace bubble_second {
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_USE_SELECTION_PROPS, CC_CALLBACK_1(GameScene::addPropsSelectAlert, this));
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
-        //listener = cocos2d::EventListenerCustom::create(EVENT_PROPS_SELECT_ALERT_CANCEL, [=](cocos2d::EventCustom*) {
-        //    props_weapon_->removeFromParent();
-        //    this->removePropsSelectAlert(nullptr);
-        //    this->setMenuTouchEnabled(true);
-        //    //dispatcher->dispatchCustomEvent(EVENT_BUBBLE_NO_FLASH);
-        //});
-        //dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        listener = cocos2d::EventListenerCustom::create(EVENT_PROPS_SELECT_ALERT_CANCEL, [=](cocos2d::EventCustom*) {
+            if (props_weapon_ == nullptr)
+            {
+                return;
+            }
+            props_weapon_->removeFromParent();
+            this->removePropsSelectAlert(nullptr);
+            this->setMenuTouchEnabled(true);
+            //dispatcher->dispatchCustomEvent(EVENT_BUBBLE_NO_FLASH);
+        });
+        dispatcher->addEventListenerWithFixedPriority(listener, 1);
         //listener = cocos2d::EventListenerCustom::create(EVENT_SELECT_BUBBLE, CC_CALLBACK_1(GameScene::selectBubble, this));
         //dispatcher->addEventListenerWithFixedPriority(listener, 1);
         listener = cocos2d::EventListenerCustom::create(EVENT_FIND_BUBBLES_IN_VISIBLESIZE, CC_CALLBACK_1(GameScene::addListenerForBubblesInVisibleSize, this));
@@ -873,7 +877,7 @@ namespace bubble_second {
         dispatcher->removeCustomEventListeners(EVENT_CANCEL_BUBBLE_BOMB_PROPS);
         dispatcher->removeCustomEventListeners(EVENT_HAVE_USED_PROPS);
         dispatcher->removeCustomEventListeners(EVENT_USE_SELECTION_PROPS);
-        //dispatcher->removeCustomEventListeners(EVENT_PROPS_SELECT_ALERT_CANCEL);
+        dispatcher->removeCustomEventListeners(EVENT_PROPS_SELECT_ALERT_CANCEL);
         dispatcher->removeCustomEventListeners(EVENT_FIND_BUBBLES_IN_VISIBLESIZE);
         dispatcher->removeCustomEventListeners(EVENT_PROPS_SELECT_ALERT_CONFIRM);
         //dispatcher->removeCustomEventListeners(EVENT_RECENT_BUBBLE_CAST);
@@ -937,7 +941,7 @@ namespace bubble_second {
 
     void GameScene::addPrepareBubble()
     {
-        BaseBubble* bubble = this->createPrepareBubble();//²âÊÔ,Ã»ÓĞÌîÈë²ÎÊı
+        BaseBubble* bubble = this->createPrepareBubble();//å¨´å¬­ç˜¯,å¨Œâ„ƒæ¹æ¿‰î‚¢å†é™å‚›æšŸ
         //bubble->setName(PREPARE_BUBBLE_NAME);
         bubble->setPosition(this->getGunsightPosition());
         auto controller = GamePlayController::getInstance();
@@ -1041,7 +1045,7 @@ namespace bubble_second {
     BaseBubble * GameScene::createPrepareBubble()
     {
         BubbleType color = GamePlayController::getInstance()->getBubbleColorFromPicker();
-        BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(color);//²âÊÔ,Ã»ÓĞÌîÈë²ÎÊı
+        BaseBubble* bubble = BubbleFactory::getInstance()->createBubbleWithType(color);//å¨´å¬­ç˜¯,å¨Œâ„ƒæ¹æ¿‰î‚¢å†é™å‚›æšŸ
         csb_node_->addChild(bubble, UI_ZORDER_PREPARE_BUBBLE);
         auto color_bubble = dynamic_cast<ColorBubble*>(bubble);
         if (color_bubble == nullptr)
@@ -1135,7 +1139,7 @@ namespace bubble_second {
         controller->setBubbleColorRange();
         this->initScoreWidget();
 
-        //Ìá¹©mapĞı×ªÌáÊ¾
+        //é»æ„ªç·µmapéƒå¬­æµ†é»æ„®ãš
         //****************************************************************
         /*auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(SIGHTING_POINT_BODY_RADIUS, SIGHTING_POINT_BODY_RADIUS),
             cocos2d::PhysicsMaterial(0.0, 0.0,
@@ -1930,12 +1934,16 @@ namespace bubble_second {
     //}
     void GameScene::removePropsSelectAlert(cocos2d::EventCustom*)
     {
-        csb_node_->getChildByName(PROPS_SELECT_ALERT_LAYERCOLOR_NAME)->removeFromParent();
-        wooden_hammer_property_->cancelUseItem();
-        staves_property_->cancelUseItem();
-        props_weapon_ = nullptr;
-        GamePlayController::getInstance()->findBubblesInVisibleSize();
-        bubble_map_node_->resume();
+        if (cocos2d::Node* alert = csb_node_->getChildByName(PROPS_SELECT_ALERT_LAYERCOLOR_NAME))
+        {
+            csb_node_->getChildByName(PROPS_SELECT_ALERT_LAYERCOLOR_NAME)->removeFromParent();
+            wooden_hammer_property_->BaseProperty::cancelUseItem();
+            staves_property_->BaseProperty::cancelUseItem();
+
+            props_weapon_ = nullptr;
+            GamePlayController::getInstance()->findBubblesInVisibleSize();
+            bubble_map_node_->resume();
+        }
         //GamePlayController::getInstance()->setBubbleShootEnabled(true);
     }
 
@@ -2288,7 +2296,7 @@ namespace bubble_second {
 
     void GameScene::playBigEliminateEffect(cocos2d::EventCustom*)
     {
-        {//ºóÃæµÄ´ó»ğ
+        {//éšåº¨æ½°é¨å‹«ã‡éï¿½
             cocostudio::Armature* armature = cocostudio::Armature::create(BIG_COMBO_EFFECT_FIRE_ONCE_NAME);
             armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, false);
             armature->setPosition(BIG_COMBO_EFFECT_FIRE_ONCE_POSITION);
@@ -2301,14 +2309,14 @@ namespace bubble_second {
             });
             csb_node_->addChild(armature, UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_ONCE);
         }
-        { //Ç°ÃæµÄĞ¡»ğ
+        { //é“å¶‰æ½°é¨å‹«çš¬éï¿½
             cocostudio::Armature* armature = cocostudio::Armature::create(BIG_COMBO_EFFECT_FIRE_REPEAT_NAME);
             armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, true);
             //armature->getAnimation()->setSpeedScale(0.1f);
             armature->setPosition(BIG_COMBO_EFFECT_FIRE_REPEAT_POSITION);
             csb_node_->addChild(armature, UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_REPEAT);
         }
-        { //»ğĞÇ
+        { //éî‚£æ§¦
             cocos2d::Node* node = cocos2d::Node::create();
             node->setName(BIG_COMBO_EFFECT_POINT_NAME);
             csb_node_->addChild(node, UI_ZORDER_BACKGROUND);
@@ -2328,21 +2336,21 @@ namespace bubble_second {
             }));
             node->runAction(cocos2d::RepeatForever::create(seq));
         }
-        {//µ×»ğ
+        {//æ´æ› ä¼€
             cocostudio::Armature* armature = cocostudio::Armature::create(BIG_COMBO_EFFECT_UNDER_FIRE_NAME);
             armature->getAnimation()->playWithIndex(0, SPECIAL_BUBBLE_EFFECT_DURATION, true);
             armature->setPosition(BIG_COMBO_EFFECT_UNDER_FIRE_POSITION);
             csb_node_->addChild(armature, UI_ZORDER_ANIMATION_BIG_ELIMINATE_EFFECT_REPEAT);
         }
-        {//Í°»Î¶¯
+        {//å¦—èˆµæª­é”ï¿½
             this->startShakeBarrel();
             BigBackgroundEffect* blue_effect = BigBackgroundEffect::create();
             this->addChild(blue_effect, -3);
         }
-        //{//ÈËÎïÌØĞ§
+        //{//æµœè™¹å¢¿é—è§„æ™¥
         //    this->getGameCharacter()->playLegendaryAnimation();
         //}
-        {//±êÇ©Ë«±¶
+        {//éå›©î„·é™å±½â‚¬ï¿½
             barrel_score_node_->doubleBarrelScoreLabel();
         }
     }
@@ -2539,7 +2547,7 @@ namespace bubble_second {
         cocos2d::Sequence* seq = cocos2d::Sequence::createWithTwoActions(call_func, cocos2d::DelayTime::create(AFTER_VECTORY_PREPARE_REPEAT_DELAY_TIME));
         int count = GameScoreController::getInstance()->getBubbleUseCount();
         this->runAction(cocos2d::Repeat::create(seq, count));
-        //¿ª¸ö¶¨Ê±Æ÷Ô¤·ÀÍòÒ»²»µ¯³öÊ¤ÀûÃæ°å
+        //å¯®â‚¬æ¶“î„ç•¾éƒè·ºæ«’æ£°å‹¯æ§»æ¶“å›¦ç«´æ¶“å¶…è„Šé‘é¸¿å„¨é’â•…æ½°é‰ï¿½
         //cocos2d::Director::getInstance()->getScheduler()->pauseTarget
         //this->schedule([=](float) {
         //    this->popVictoryAlert();

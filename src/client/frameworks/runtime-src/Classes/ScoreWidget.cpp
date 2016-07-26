@@ -6,15 +6,15 @@
 #include "PopScoreLabelComponent.h"
 #include "GameAudioController.h"
 const std::string SCOREWIDGET_ARMATURE_NAME = "mifeng";
-const std::string SCOREWIDGET_ANIMATION_FLYING_NAME = "daiji"; //·ÉµÄ¶¯»­
+const std::string SCOREWIDGET_ANIMATION_FLYING_NAME = "daiji"; //é£çš„åŠ¨ç”»
 const std::string BUBBLE_ANIMATION_STANDBY_NAME = "daiji-zhayan";
-const std::string SCOREWIDGET_ANIMATION_CONTACT_NAME = "shouji"; //Åöµ½µÄ¶¯»­
+const std::string SCOREWIDGET_ANIMATION_CONTACT_NAME = "shouji"; //ç¢°åˆ°çš„åŠ¨ç”»
 const std::string SCOREWIDGET_ANIMATION_REMOVE_NAME = "siwang";
 const std::string BUBBLE_ANIMATION_LOOK_NAME_1 = "shangxiakan";
 const std::string BUBBLE_ANIMATION_LOOK_NAME_2 = "zuoyoukan";
 const float SCOREWIDGET_ARMATURE_SCALE = 0.5;
 //const std::string SCORE_WIDGET_UPDATE_ANIMATION_NAME = "yun3";
-const float SCORE_WIDGET_BEZIER_FLYING_DURATION = 0.8f; //µÃ·Ö¹Ò¼şµÄÈü±´¶ûÔË¶¯Ê±¼ä
+const float SCORE_WIDGET_BEZIER_FLYING_DURATION = 0.8f; //å¾—åˆ†æŒ‚ä»¶çš„èµ›è´å°”è¿åŠ¨æ—¶é—´
 const std::map<ScoreWidgetType, ScoreWidgetType>TYPE_UPDATE_TO_TYPE = {
     { kScoreWidgetLow , kScoreWidgetMiddle },
     { kScoreWidgetMiddle , kScoreWidgetHigh },
@@ -101,6 +101,7 @@ namespace bubble_second {
             }
         });
         armature->setScale(SCOREWIDGET_ARMATURE_SCALE);
+        ScoreWidgetManager::getInstance()->changeScoreWidgetArmatureDisplay(armature, type_);
 
     }
     void ScoreWidget::setType(const ScoreWidgetType& type)

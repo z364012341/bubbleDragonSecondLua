@@ -30,7 +30,7 @@ namespace bubble_second {
 
     void WoodenHammerProperty::cancelUseItem()
     {
-        BaseProperty::cancelUseItem();
-        //::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_CANCEL_SELECTION_PROPS, this);
+            BaseProperty::cancelUseItem();
+            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_PROPS_SELECT_ALERT_CANCEL, this);
     }
 }

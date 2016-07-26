@@ -229,7 +229,13 @@ namespace bubble_second {
         cocos2d::Node::onEnter();
         listerner_ = this->getEventDispatcher()->addCustomEventListener(EVENT_ADD_ELIMINATE_COMBO, [=](cocos2d::EventCustom* event) {this->addOneSkillEnergy(); });
         this->getEventDispatcher()->addCustomEventListener(EVENT_CLEAR_SKILL_ENERGY, [=](cocos2d::EventCustom* event) {this->setSkillEnergy(0); });
-        this->getEventDispatcher()->addCustomEventListener(EVENT_CUT_ELIMINATE_COMBO, [=](cocos2d::EventCustom* event) {this->setSkillEnergy(0); });
+        this->getEventDispatcher()->addCustomEventListener(EVENT_CUT_ELIMINATE_COMBO, [=](cocos2d::EventCustom* event) {
+            if (this->isSkillEnergyFull())
+            {
+                return;
+            }
+            this->setSkillEnergy(0); 
+        });
     }
     void GameCharactorSkillButton::onExit()
     {

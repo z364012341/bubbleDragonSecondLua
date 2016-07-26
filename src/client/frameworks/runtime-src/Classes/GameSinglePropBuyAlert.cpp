@@ -8,7 +8,7 @@
 #include "GameAlertMask.h"
 #include "ButtonEffectController.h"
 #include "GameBuyStoreMannager.h"
-#include "GameStoreItemFactory.h"
+#include "GameUnitPriceManager.h"
 const std::string GAME_SINGLE_PROP_BUY_ALERT_CSB_PATH = "GameSinglePropBuyAlert.csb";
 const std::string GAME_SINGLE_PROP_BUY_BUTTON_ITEM_CSB_PATH = "PropBuyButtonItem.csb";
 const std::map<std::string, std::string> PROP_TO_TITLE_PATH = {
@@ -72,7 +72,7 @@ namespace bubble_second {
         });
 
         cocos2d::Node* button_label_node = cocos2d::CSLoader::createNode(GAME_SINGLE_PROP_BUY_BUTTON_ITEM_CSB_PATH);
-        cost_data_ = GameStoreItemFactory::getInstance()->getPropUnitPriceData(prop_key_);
+        cost_data_ = GameUnitPriceManager::getInstance()->getPropUnitPriceData(prop_key_);
         SpriteTextureController::getInstance()->setSpriteTexture(SpriteTextureController::getInstance()->getPropPathWithKey(cost_data_.begin()->first), dynamic_cast<cocos2d::Sprite*>(button_label_node->getChildByName("jinbi_1")));
         cost_label_ = dynamic_cast<cocos2d::ui::TextBMFont*>(button_label_node->getChildByName("numbleLabel"));
         cocos2d::ui::Button* buy_button = dynamic_cast<cocos2d::ui::Button*>(csb_node->getChildByName("Button_4"));

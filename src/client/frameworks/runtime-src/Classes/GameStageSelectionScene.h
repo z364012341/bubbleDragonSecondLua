@@ -87,6 +87,7 @@ namespace bubble_second {
 		GameStageVehicle* stage_vehicle_ = nullptr;
         cocostudio::Armature* setting_armature_ = nullptr;
         cocos2d::Node* alert_ = nullptr;
+        bool first_flag_ = true;
     };
 }
 #endif //_GAME_STAGE_SELECTION_SCENE_H_

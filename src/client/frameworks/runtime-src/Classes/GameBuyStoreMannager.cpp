@@ -3,21 +3,26 @@
 #include "UserDataManager.h"
 const float LOTTERY_CHARACTOR_DECALS_PROBABILITY = 0.2f;
 const std::vector<std::map<std::string, int>> GAME_LOTTERY_AWARD = {
-    { { PUZZLE_SEARCH_PROP_KEY , 1 } },
-    { { PUZZLE_BIG_EYES_PROP_KEY , 1 } },
-    { { PUZZLE_ADD_TIME_PROP_KEY , 1 } },
-    { { BUBBLE_WOODEN_HAMMER_PROP_KEY , 1 } },
-    { { BUBBLE_COLOR_BOMB_PROP_KEY , 1 } },
-    { { BUBBLE_BIG_BOMB_BOMB_PROP_KEY , 1 } },
-    { { BUBBLE_STAVES_PROP_KEY , 1 } },
-    { { PUZZLE_SEARCH_PROP_KEY , 1 } },
-    { { BUBBLE_STAVES_PROP_KEY , 1 } },
-    { { PUZZLE_SEARCH_PROP_KEY , 1 } },
-    { { BUBBLE_WOODEN_HAMMER_PROP_KEY , 1 } },
-    { { GAME_COIN_KEY , 1000 } },
-    { { GAME_COIN_KEY , 1500 } },
-    { { GAME_COIN_KEY , 500 } },
-    { { GAME_STRENGTH_KEY , 1 } }
+    { { PUZZLE_SEARCH_PROP_KEY , 1 } },//快速查找
+    { { PUZZLE_BIG_EYES_PROP_KEY , 1 } },//天空之眼
+    { { PUZZLE_ADD_TIME_PROP_KEY , 1 } },//时间倒流
+    { { BUBBLE_WOODEN_HAMMER_PROP_KEY , 1 } },//小木槌
+    { { BUBBLE_WOODEN_HAMMER_PROP_KEY , 1 } },//小木槌
+    { { BUBBLE_COLOR_BOMB_PROP_KEY , 1 } },//彩球
+    { { BUBBLE_BIG_BOMB_BOMB_PROP_KEY , 1 } },//炸弹
+    { { BUBBLE_STAVES_PROP_KEY , 1 } },//魔法棒
+    { { GAME_COIN_KEY , 300 } },//金币
+    { { GAME_COIN_KEY , 300 } },//金币
+    { { GAME_COIN_KEY , 500 } },//金币
+    { { GAME_COIN_KEY , 100 } },//金币
+    { { GAME_DIAMOND_KEY , 5 } },//钻石
+    { { GAME_DIAMOND_KEY , 5 } },//钻石
+    { { GAME_DIAMOND_KEY , 10 } },//钻石
+    { { GAME_DIAMOND_KEY , 15 } },//钻石
+    { { GAME_STRENGTH_KEY , 1 } },//体力
+    { { GAME_STRENGTH_KEY , 1 } },//体力
+    { { GAME_STRENGTH_KEY , 3 } },//体力
+    { { GAME_STRENGTH_KEY , 5 } },//体力
 };
 namespace bubble_second {
     GameBuyStoreMannager::GameBuyStoreMannager()

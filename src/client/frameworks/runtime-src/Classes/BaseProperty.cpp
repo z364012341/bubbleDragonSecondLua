@@ -38,16 +38,19 @@ namespace bubble_second {
     {
         Sprite::onExit();
         cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(EVENT_HAVE_USED_PROPS);
+        this->getEventDispatcher()->removeCustomEventListeners(EVENT_PROPS_SELECT_ALERT_CONFIRM);
     }
 
     void BaseProperty::useItem()
     {
         use_state_ = kUsing;
+        this->playUsingAction();
     }
 
     void BaseProperty::cancelUseItem()
     {
         use_state_ = kNotUsed;
+        this->stopUsingAction();
     }
 
     void BaseProperty::setPropsState(PropsState state)
@@ -62,7 +65,7 @@ namespace bubble_second {
 
     void BaseProperty::touchItem()
     {
-        if (!this->isPropertyEnabled())
+        if (!this->itemIsUsing() && !this->isPropertyEnabled())
         {
             //GameSinglePropBuyAlert* alert = GameSinglePropBuyAlert::createWithPropKey(property_key_);
             //cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -175,7 +178,7 @@ namespace bubble_second {
     void BaseProperty::addTouchEventListener()
     {
         if (UserDataManager::getInstance()->getStagePassCount() < GAME_PROPS_UNLOCK_STAGE_INDEX.at(property_key_))
-        {
+        {//µÀ¾ß¼ÓËø
             cocos2d::ui::Button* unlock_button = GameButtonFactory::getInstance()->createUnlockButton();
             this->addChild(unlock_button, UI_ZORDER_NOVICE_GUIDE_ALERT);
             cocos2d::Size size = this->getContentSize();
@@ -190,19 +193,33 @@ namespace bubble_second {
         listener->onTouchEnded = CC_CALLBACK_2(GamePlayController::touchPropertyEnded, game_controller);
         cocos2d::EventDispatcher* dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+        dispatcher->addCustomEventListener(EVENT_PROPS_SELECT_ALERT_CONFIRM, [=](cocos2d::EventCustom*) {this->stopUsingAction(); });
     }
 
     void BaseProperty::initIcon()
     {
-        cocos2d::Sprite* iter_sprite = SpriteTextureController::getInstance()->createPropSpriteWithKey(property_key_);
+        icon_sprite_ = SpriteTextureController::getInstance()->createPropSpriteWithKey(property_key_);
         cocos2d::Size size = this->getContentSize();
-        iter_sprite->setPosition(cocos2d::Vec2(size.width / 2, size.height / 2));
-        this->addChild(iter_sprite);
+        icon_sprite_->setPosition(cocos2d::Vec2(size.width / 2, size.height / 2));
+        this->addChild(icon_sprite_);
+    }
+
+    void BaseProperty::playUsingAction()
+    {
+        icon_sprite_->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::createWithTwoActions(cocos2d::ScaleTo::create(0.2f, 1.2f), cocos2d::ScaleTo::create(0.2f, 1.0f))));
+    }
+
+    void BaseProperty::stopUsingAction()
+    {
+        icon_sprite_->stopAllActions();
+        icon_sprite_->setScale(1.0);
     }
 
     void BaseProperty::haveUsedProperty(cocos2d::EventCustom*)
     {
         this->setPropsState(kNotUsed);
+        this->stopUsingAction();
         //UserDataManager::getInstance()->cutPropsNumbleWithKey(property_key_);
     }
 

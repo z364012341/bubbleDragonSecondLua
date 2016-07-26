@@ -31,6 +31,7 @@ namespace bubble_second {
         void initNamesData();
         void setCurrentArmatureNameWithIndex(int index);
         void dispatchUseCurrentArmatureSkill();
+        BubbleType getCurrentSkillType();
     private:
         GameCharactorNameManager();
     private:

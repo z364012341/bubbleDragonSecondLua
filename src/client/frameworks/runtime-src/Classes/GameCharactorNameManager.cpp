@@ -29,7 +29,12 @@ const std::string CHARCTOR_ARMATURE_KEY_VICTORY = "armature_victory";
 const std::string CHARCTOR_ARMATURE_KEY_INDEX = "armature_index";
 const std::string CHARCTOR_SKILL_USE_EVENT_KEY = "charctor_skill";
 
-
+const std::map<std::string, BubbleType> CHARACOTR_TO_SKILL_TYPE = {
+    { CHARCTOR_LAOHU_ARMATURE_KEY , kBubbleSkillDyeingBubble },
+    { CHARCTOR_MIAO_ARMATURE_KEY , kBubbleSkillColorBombBubble },
+    { CHARCTOR_LAOSHU_ARMATURE_KEY , kBubbleSkillStavesBubble },
+    { CHARCTOR_TUZI_ARMATURE_KEY , kBubbleSkillBigBombBubble},
+};
 //const std::string NAMES_DATA_PATH = "res/charactorNamesData.plist";
 namespace bubble_second {
     GameCharactorNameManager::GameCharactorNameManager()
@@ -138,5 +143,9 @@ namespace bubble_second {
     void GameCharactorNameManager::dispatchUseCurrentArmatureSkill()
     {
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(this->getCurrentArmatureSkillEvent());
+    }
+    BubbleType GameCharactorNameManager::getCurrentSkillType()
+    {
+        return CHARACOTR_TO_SKILL_TYPE.at(this->getCurrentArmatureName());
     }
 }

@@ -1,5 +1,5 @@
 #include "GameStoreItemFactory.h"
-#include "UserDataManager.h"
+//#include "UserDataManager.h"
 #include "cocostudio\CocoStudio.h"
 #include "SpriteTextureController.h"
 #include "GameStoreCommodity.h"
@@ -9,6 +9,7 @@
 #include "ButtonEffectController.h"
 #include "GameBuyStoreMannager.h"
 #include "GamePropsCostTag.h"
+#include "GameUnitPriceManager.h"
 const std::string BUY_BUTTON_LABEL_CAB_PATH = "PuzzleStoreItemBuyLabel.csb";
 const std::string GAME_STORE_GIFT_ITEM_BUY_COST_LABEL_NAME = "numbleLabel";
 const std::string GIFT_ITEM_TEXTURE_PATH_KEY = "gift_texture_path";
@@ -469,34 +470,10 @@ namespace bubble_second {
             {
                 cocos2d::ValueMap price_data;
                 price_data[var.asValueMap().at(STORE_COST_TYPE_KEY).asString()] = var.asValueMap().at(STORE_COST_KEY);
-                store_unit_price_data_[data.begin()->first] = price_data;
+                GameUnitPriceManager::getInstance()->addUnitPriceData(price_data, data.begin()->first);
             }
         }
-        {
-            cocos2d::ValueMap price_data_AL;
-            price_data_AL[GAME_COIN_KEY] = 2000;
-            store_unit_price_data_[BUBBLE_AIMING_LINE_PROP_KEY] = price_data_AL;
-        }
-        {
-            cocos2d::ValueMap price_data_ASB;
-            price_data_ASB[GAME_COIN_KEY] = 3000;
-            store_unit_price_data_[BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY] = price_data_ASB;
-        }
-        {
-            cocos2d::ValueMap price_data_ABN;
-            price_data_ABN[GAME_COIN_KEY] = 3000;
-            store_unit_price_data_[BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY] = price_data_ABN;
-        }
-        {
-            cocos2d::ValueMap price_data;
-            price_data[GAME_DIAMOND_KEY] = 1;
-            store_unit_price_data_[COMMODITY_DECALS_LOTTERY_BEGIN_KEY] = price_data;
-        }
-        {
-            cocos2d::ValueMap price_data;
-            price_data[GAME_DIAMOND_KEY] = 1;
-            store_unit_price_data_[COMMODITY_DECALS_LOTTERY_CONTINUE_KEY] = price_data;
-        }
+        
     }
 
     cocos2d::Vector<cocos2d::Node*> GameStoreItemFactory::getGiftListViewItems()
@@ -608,8 +585,5 @@ namespace bubble_second {
         }
         return items;
     }
-    cocos2d::ValueMap GameStoreItemFactory::getPropUnitPriceData(const std::string& prop_key)
-    {
-        return store_unit_price_data_.at(prop_key).asValueMap();
-    }
+
 }

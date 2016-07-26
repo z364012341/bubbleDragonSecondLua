@@ -1,6 +1,6 @@
 #include "GamePropsCostTag.h"
 #include "cocostudio\CocoStudio.h"
-#include "GameStoreItemFactory.h"
+#include "GameUnitPriceManager.h"
 #include "UserDataManager.h"
 #include "ui\UITextBMFont.h"
 #include "SpriteTextureController.h"
@@ -52,7 +52,7 @@ namespace bubble_second {
         {
             return false;
         }
-        cocos2d::ValueMap commodity_data = GameStoreItemFactory::getInstance()->getPropUnitPriceData(prop_key);
+        cocos2d::ValueMap commodity_data = GameUnitPriceManager::getInstance()->getPropUnitPriceData(prop_key);
         this->initWithCostTypeAndNumble(commodity_data.begin()->first, commodity_data.begin()->second);
         return true;
     }

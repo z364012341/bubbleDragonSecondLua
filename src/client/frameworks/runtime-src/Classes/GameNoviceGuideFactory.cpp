@@ -26,7 +26,7 @@ const std::map<int, std::string> BEGIN_GUIDE_DATA = {
     { 21 , "xsydyx21.png" },
     { 22 , "xsydyx22.png" },
     { 27 , "xsydyx27.png" },
-    { 42 , "xsydyx47.png" },
+    { 42 , "xsydyx42.png" },
     { 57 , "xsydyx57.png" },
     { 72 , "xsydyx71.png" },
     { 132 , "xsydyx132.png" },

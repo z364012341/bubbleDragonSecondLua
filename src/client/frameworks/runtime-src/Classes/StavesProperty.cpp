@@ -30,6 +30,9 @@ namespace bubble_second {
 
     void StavesProperty::cancelUseItem()
     {
-        BaseProperty::cancelUseItem();
+
+            BaseProperty::cancelUseItem();
+            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_PROPS_SELECT_ALERT_CANCEL, this);
+
     }
 }

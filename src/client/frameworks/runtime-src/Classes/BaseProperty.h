@@ -72,6 +72,9 @@ namespace bubble_second {
         //void  updateNumbleLabel();
         //初始化道具的图标
         void initIcon();
+        //使用道具的动画
+        void playUsingAction();
+        void stopUsingAction();
     private:
         //cocos2d::ui::Button* button_;
         std::map<PropsState, std::function<void()>> state_to_handle_;
@@ -81,6 +84,7 @@ namespace bubble_second {
         bool touch_enable_ = true;
         PropsNumbleShow* props_numble_label_ = nullptr;
         std::string property_key_ = "";
+        cocos2d::Sprite* icon_sprite_ = nullptr;
     };
 }
 #endif //_BASE_PROPERTY_H_
