@@ -346,6 +346,20 @@ namespace bubble_second{
         return this->getBubbleVectorWithIndexVector(this->getTwoAroundIndexWithIndex(index));
     }
 
+    BubbleVector GameBubbleMapImple::getSecondAroundBubbleWithIndex(const cocos2d::Vec2 & index)
+    {
+        BubbleVector result;
+        BubbleIndexVector vector = this->getSecondAroundIndexWithIndex(index);
+        for (auto var_index : vector)
+        {
+            if (this->isExistBubble(var_index))
+            {
+                result.pushBack(this->getSpriteWithIndex(var_index));
+            }  
+        }
+        return result;
+    }
+
     BubbleVector GameBubbleMapImple::getAroundColorBubblesWithIndex(const cocos2d::Vec2& index)
     {
         BubbleVector around_color_bubble;
@@ -384,6 +398,19 @@ namespace bubble_second{
     BaseBubble* GameBubbleMapImple::getSpriteWithIndex(const cocos2d::Vec2& index)
     {
         return bubble_sprite_map_[index.y].at(index.x);
+    }
+
+    bool GameBubbleMapImple::isExistBubble(const cocos2d::Vec2 & index)
+    {
+        if (bubble_sprite_map_.find(index.y) == bubble_sprite_map_.end())
+        {
+            return false;
+        }
+        if (bubble_sprite_map_[index.y].find(index.x) == bubble_sprite_map_[index.y].end())
+        {
+            return false;
+        }
+        return true;
     }
 
     BaseBubble* GameBubbleMapImple::clingBubble(BaseBubble* prepare_bubble, const cocos2d::Vec2& contact_index)

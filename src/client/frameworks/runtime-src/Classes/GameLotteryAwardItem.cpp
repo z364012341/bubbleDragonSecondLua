@@ -15,14 +15,16 @@ namespace bubble_second {
         }
         award_sprite_ = SpriteTextureController::getInstance()->createPropSpriteWithKey(key);
         //award_sp->setPositionY(75.0f);
+        auto scale = 300.0f / award_sprite_->getContentSize().width;
+        award_sprite_->setScale(scale);
         this->addChild(award_sprite_);
         if (numble<1)
         {
             return true;
         }
         cocos2d::ui::TextBMFont* numble_label = SpriteTextureController::getInstance()->createWhitePurpleFnt(XMLTool::convertIntToString(numble));
-        numble_label->setScale(0.6f);
-        numble_label->setPositionY(-80.0f);
+        numble_label->setScale(0.6f*scale);
+        numble_label->setPositionY(-180.0f);
         this->addChild(numble_label);
         return true;
     }

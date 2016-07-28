@@ -2,7 +2,7 @@
 #include "BubbleFactory.h"
 #include "SpriteTextureController.h"
 #include "GamePlayController.h"
-#include "GameScoreController.h"
+//#include "GameScoreController.h"
 namespace bubble_second {
     BaseBubble::BaseBubble()
     {
@@ -120,7 +120,7 @@ namespace bubble_second {
     {
         if (this->isShootBubble())
         {
-            GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
+            //GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
             this->setShootBubble(false);
         }
     }

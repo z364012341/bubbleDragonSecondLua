@@ -65,7 +65,11 @@ namespace bubble_second {
 
     void BaseProperty::touchItem()
     {
-        if (!this->itemIsUsing() && !this->isPropertyEnabled())
+        if (!this->isPropertyEnabled())
+        {
+            return;
+        }
+        if (!this->itemIsUsing() && props_numble_label_->isNoneProp())
         {
             //GameSinglePropBuyAlert* alert = GameSinglePropBuyAlert::createWithPropKey(property_key_);
             //cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -73,10 +77,7 @@ namespace bubble_second {
             //cocos2d::Director::getInstance()->getRunningScene()->addChild(alert);
             //std::string str = property_key_;
             //this->getEventDispatcher()->dispatchCustomEvent(EVENT_POP_GAME_STORE, &str);
-            if (props_numble_label_->isNoneProp())
-            {
-                GameSinglePropBuyAlertFactory::getInstance()->popGameSinglePropBuyAlertWithKey(property_key_);
-            }
+            GameSinglePropBuyAlertFactory::getInstance()->popGameSinglePropBuyAlertWithKey(property_key_);
             return;
         }
         auto handle = state_to_handle_[this->getPropsState()];
@@ -137,7 +138,7 @@ namespace bubble_second {
 
     bool BaseProperty::isPropertyEnabled()
     {
-        return touch_enable_ && !props_numble_label_->isNoneProp();
+        return touch_enable_;
     }
 
     void BaseProperty::removeTouchEventListener()

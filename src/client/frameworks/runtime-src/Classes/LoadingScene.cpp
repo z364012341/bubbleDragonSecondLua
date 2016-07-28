@@ -13,6 +13,8 @@
 #include "GameSartScene.h"
 #include "GameStoreItemFactory.h"
 #include "GameAudioController.h"
+//#include "json/rapidjson.h"
+//#include "json/document.h"
 namespace bubble_second {
     cocos2d::Scene * LoadingScene::createScene()
     {
@@ -24,6 +26,32 @@ namespace bubble_second {
 
     LoadingScene::LoadingScene()
     {
+        //cocos2d::Data data = cocos2d::CCFileUtils::getInstance()->getDataFromFile("tt.json");
+        //unsigned char *pBytes = data.getBytes();
+        //char *buf = new char[data.getSize() + 1];
+        //strncpy(buf, (char*)data.getBytes(), data.getSize());
+        //buf[data.getSize()] = 0;
+        //rapidjson::Document document;
+        //document.Parse<rapidjson::kParseDefaultFlags>(buf);    
+        //delete[] buf;
+        //if (document.HasParseError())
+        //    return;
+        //rapidjson::Value &optionValue = document["result_data"]["options"][0]["judge_opt_title"];
+        ////if (optionValue.IsArray())
+        //auto sssss = optionValue.GetString();
+        //CCLOG("---------------%s", optionValue.GetString());
+        ////for (int i = 0; i < optionValue.Size(); i++)
+        ////{
+        ////    std::string title = optionValue[i]["judge_opt_title"].GetString();
+
+        ////}
+        //rapidjson::Document document2;
+        //document2.Parse<rapidjson::kParseDefaultFlags>(optionValue.GetString());
+        //if (document2.HasParseError())
+        //    return;
+        //rapidjson::Value &optionValue2 = document2[0]["tpl_order"];
+        //auto s1 = optionValue2.GetString();
+        //CCLOG(s1);
     }
 
     LoadingScene::~LoadingScene()

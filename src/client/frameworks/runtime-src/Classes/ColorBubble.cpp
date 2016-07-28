@@ -328,7 +328,7 @@ namespace bubble_second {
         this->runAction(cocos2d::Sequence::create(actions));
 
 
-        GameScoreController::getInstance()->addPrepareBubbleAirNumble();
+        GameAirBubbleManager::getInstance()->addPrepareBubbleAirNumble();
 		GamePlayController::getInstance()->setPrepareBubble(nullptr);
         this->dispatchEventAfterShooted();
         this->setShootBubble(true);

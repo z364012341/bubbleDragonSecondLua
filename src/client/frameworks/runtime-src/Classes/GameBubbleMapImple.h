@@ -48,6 +48,8 @@ namespace bubble_second {
         cocos2d::Vector<ColorBubble*> getAroundDarkCloudBubbleWithIndex(const cocos2d::Vec2& index);
         //根据索引获取容器里的小球
         BaseBubble* getSpriteWithIndex(const cocos2d::Vec2& index);
+        //确认小球存在
+        bool isExistBubble(const cocos2d::Vec2& index);
         //获取四周6个小球
         BubbleVector getAroundBubbleWithIndex(const cocos2d::Vec2& index);
         //获取周围除了组件的小球
@@ -56,6 +58,8 @@ namespace bubble_second {
         BubbleVector getAroundComponentBubbleWithIndex(const cocos2d::Vec2& index);
         //获取周围两圈的18个位置的小球
         BubbleVector getTwoAroundBubbleWithIndex(const cocos2d::Vec2& index);
+        //获取周围第二两圈的12个位置的小球
+        BubbleVector getSecondAroundBubbleWithIndex(const cocos2d::Vec2& index);
         //获取四周的普通小球
         BubbleVector getAroundColorBubblesWithIndex(const cocos2d::Vec2& index);
         //获取最下面的泡泡的位置
@@ -100,6 +104,7 @@ namespace bubble_second {
         void setFallFlag(bool flag);
         bool isFallStage();
         std::vector<cocos2d::Vec2> getFirstRowPositions();
+
     private:
         static int getColFactorWithIndex(const cocos2d::Vec2& index);
         static cocos2d::Vec2 getUpLeftIndex(const cocos2d::Vec2& index);

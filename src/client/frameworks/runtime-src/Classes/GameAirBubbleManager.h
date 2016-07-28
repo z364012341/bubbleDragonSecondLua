@@ -19,12 +19,18 @@ namespace bubble_second {
         ~GameAirBubbleManager();
         void addAirBubble(ColorBubble* bubble);
         void eraseAirBubble(ColorBubble* bubble);
-        void clear();
+        void clearAirBubbles();
+        void clearPrepareAirNumble();
         void checkAirBubblesOutOfRange();
+        //发射小球在空中数
+        void addPrepareBubbleAirNumble();
+        void cutPrepareBubbleAirNumble();
+        bool isNoShootBubbleInAir();
     private:
         GameAirBubbleManager();
     private:
         std::set<ColorBubble*> air_bubbles_;
+        int prepare_bubble_in_air_numble_ = 0;
     };
 }
 #endif 

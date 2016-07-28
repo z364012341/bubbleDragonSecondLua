@@ -169,6 +169,7 @@ namespace bubble_second {
             if (movementType == cocostudio::COMPLETE)
             {
                 RainbowSealManager::getInstance()->moveSealedCharactor(this);
+                GamePlayController::getInstance()->disposeRainbowSealBubbleEliminate(this->getBubbleIndex());
                 this->removeFromParent();
             }
         });

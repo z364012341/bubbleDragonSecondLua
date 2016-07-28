@@ -1,5 +1,6 @@
  #include "GameScoreController.h"
 #include "BubbleSecondConstant.h"
+#include "GameAirBubbleManager.h"
 namespace bubble_second {
     GameScoreController::GameScoreController():bubble_use_count_(0)
     {
@@ -30,7 +31,7 @@ namespace bubble_second {
         this->totalScoreClear();
         this->gameTaskNumbleClear();
         this->completedTaskNumbleClear();
-        prepare_bubble_in_air_numble_ = 0;
+        //prepare_bubble_in_air_numble_ = 0;
     }
 
     void GameScoreController::eliminateComboClear()
@@ -120,10 +121,7 @@ namespace bubble_second {
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_UPDATE_BUBBLE_USE_COUNT_LABEL);
     }
 
-    bool GameScoreController::isNoShootBubbleInAir()
-    {
-        return prepare_bubble_in_air_numble_ <= 0;
-    }
+
 
     bool GameScoreController::gameVictory()
     {
@@ -133,7 +131,7 @@ namespace bubble_second {
     bool GameScoreController::gameDefeat()
     {
         //auto b = this->isNoShootBubbleInAir();
-        return noUseBubbleCount() && !this->gameVictory() && this->isNoShootBubbleInAir();
+        return noUseBubbleCount() && !this->gameVictory() && GameAirBubbleManager::getInstance()->isNoShootBubbleInAir();
     }
 
     bool GameScoreController::noUseBubbleCount()
@@ -191,15 +189,7 @@ namespace bubble_second {
         return total_score_;
     }
 
-    void GameScoreController::addPrepareBubbleAirNumble()
-    {
-        prepare_bubble_in_air_numble_++;
-    }
 
-    void GameScoreController::cutPrepareBubbleAirNumble()
-    {
-        prepare_bubble_in_air_numble_--;
-    }
 
     void GameScoreController::setGameTaskNumble(int numble)
     {

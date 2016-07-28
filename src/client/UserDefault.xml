@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <userDefaultRoot>
-    <total_starts>45</total_starts>
-    <game_sign_last_day>cEIAAAAAAAA=</game_sign_last_day>
+    <total_starts>30</total_starts>
+    <game_sign_last_day>ckIAAAAAAAA=</game_sign_last_day>
     <lastCharactor>0</lastCharactor>
-    <strength_count_down_time>Ez6XVwAAAAA=</strength_count_down_time>
-    <GAME_MUSIC>false</GAME_MUSIC>
-    <SOUND_EFFECT>true</SOUND_EFFECT>
+    <strength_count_down_time>692ZVwAAAAA=</strength_count_down_time>
     <aoao>true</aoao>
     <aimingLine>true</aimingLine>
-    <addBubbleNumble>true</addBubbleNumble>
-    <miaopass>true</miaopass>
 </userDefaultRoot>

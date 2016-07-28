@@ -100,10 +100,10 @@ namespace bubble_second {
     //}
     void BubbleMainSightingDevice::turnOffSightingDevice()
     {
-        this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.01f), cocos2d::CallFunc::create([=]() {
+        //this->runAction(cocos2d::Sequence::createWithTwoActions(cocos2d::DelayTime::create(0.01f), cocos2d::CallFunc::create([=]() {
             BubbleSightingDevice::turnOffSightingDevice();
             this->setVisible(false);
-        })));
+        //})));
     }
     void BubbleMainSightingDevice::performSightingDevice()
     {

@@ -240,6 +240,7 @@ namespace bubble_second {
         //使用瞄准线道具
         void usedAimingLineProps();
         void performBubbltSightingDevice();
+        void usedAimingLinePropsEnd();
         //是否是第一次
         bool isFirstHandle();
         void setFirstHandleFlag(bool flag);

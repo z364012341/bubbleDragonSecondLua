@@ -386,6 +386,14 @@ namespace bubble_second {
         this->eliminateBubbles(vector);
     }
 
+    void GameBubbleMap::disposeRainbowSealBubbleEliminate(const cocos2d::Vec2 & bubble_index)
+    {
+        BubbleVector vector = game_bubble_map_impl_->getSecondAroundBubbleWithIndex(bubble_index);
+        game_bubble_map_impl_->removeSpriteFromeMap(vector);
+        this->dispatchCustomEvent(EVENT_BUBBLE_AIR, &vector);
+        this->checkAirBubbles();
+    }
+
     void GameBubbleMap::disposeDarkCloudBubble(const cocos2d::Vec2& bubble_index)
     {
         cocos2d::Vector<ColorBubble*> vector = game_bubble_map_impl_->getAroundDarkCloudBubbleWithIndex(bubble_index);

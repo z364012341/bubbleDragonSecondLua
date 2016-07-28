@@ -120,6 +120,7 @@ namespace bubble_second {
         GameScoreController::getInstance()->clear();
         ScoreWidgetManager::getInstance()->clear();
         RainbowSealManager::getInstance()->clear();
+        GameAirBubbleManager::getInstance()->clearPrepareAirNumble();
     }
 
     bool GameScene::init()
@@ -1405,7 +1406,7 @@ namespace bubble_second {
         sprite->removeFromParent();
         this->addBubblePhysicsBodyToMap(bubble);
         this->setPropertyTouchEnabled(true);
-        GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
+        //GameScoreController::getInstance()->cutPrepareBubbleAirNumble();
         GamePlayController::getInstance()->disposeCheckGameDefeat();
     }
 
@@ -1656,6 +1657,7 @@ namespace bubble_second {
             alert_->removeFromParent();
             alert_ = nullptr;
         }
+        this->setMenuTouchEnabled(true);
     }
 
     void GameScene::cancelUsedBubbleBombProps(cocos2d::EventCustom* event)
@@ -1706,7 +1708,7 @@ namespace bubble_second {
 
     void GameScene::setMenuTouchEnabled(bool flag)
     {
-        setPropertyTouchEnabled(flag);
+        this->setPropertyTouchEnabled(flag);
         pause_menu_->setEnabled(flag);
     }
 
@@ -1870,8 +1872,8 @@ namespace bubble_second {
         }
         else
         {
-            this->removeEnterPropsMask();
-            this->popBeginNoviceGuideAlert();
+            this->usedAimingLinePropsEnd();
+            //this->popBeginNoviceGuideAlert();
         }
     }
     void GameScene::performBubbltSightingDevice()
@@ -1884,6 +1886,9 @@ namespace bubble_second {
         angle = 0;
         angle_delta = -1.6f;
         main_sighting_device_->turnOnMainSightingDevice(this->getPrepareBubbleOrigin() + cocos2d::Vec2(-0.1f, 10.0f));
+        GameAlertMask* mask = GameAlertMask::createTransparentMask();
+        mask->setPosition(cocos2d::Director::getInstance()->getVisibleSize().width / 2, cocos2d::Director::getInstance()->getVisibleSize().height / 2);
+        this->addChild(mask, UI_ZORDER_NOVICE_GUIDE_ALERT);
         this->schedule([=](float) {
             angle = angle - angle_delta;
             //CCLOG("%f", angle);
@@ -1903,9 +1908,16 @@ namespace bubble_second {
             {
                 this->unschedule(BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY);
                 main_sighting_device_->turnOffSightingDevice();
-                this->removeEnterPropsMask();
+                this->usedAimingLinePropsEnd();
+                mask->removeFromParent();
             }
         }, BUBBLE_SIGHTING_DEVICE_PERFORM_SCHEDULE_KEY);
+    }
+
+    void GameScene::usedAimingLinePropsEnd()
+    {
+        this->removeEnterPropsMask();
+        this->popBeginNoviceGuideAlert();
     }
 
     bool GameScene::isFirstHandle()
@@ -2774,7 +2786,7 @@ namespace bubble_second {
             //};
             //this->handleBarrelScoreLabel(func);
             barrel_score_node_->notDisplayedBarrelScoreLabel();
-            GameAirBubbleManager::getInstance()->clear();
+            GameAirBubbleManager::getInstance()->clearAirBubbles();
             if (GameScoreController::getInstance()->gameVictory())
             {
                 this->popVictoryAlert();

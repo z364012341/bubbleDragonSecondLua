@@ -15,6 +15,7 @@
 #include "BubbleSightingDevice.h"
 #include "BubbleSightingPoint.h"
 #include "BarrelHead.h"
+#include "GameAirBubbleManager.h"
 namespace bubble_second {
 
     GamePlayController::GamePlayController()
@@ -207,6 +208,7 @@ namespace bubble_second {
         flying_bubble->hadContacted();
         flying_bubble->stopAllActions();
         BaseBubble* contact_bubble = dynamic_cast<BaseBubble*>(contact_node);
+        GameAirBubbleManager::getInstance()->cutPrepareBubbleAirNumble();
         if (PROPS_TO_HANDLE.find(flying_bubble->getBubbleType())!= PROPS_TO_HANDLE.end())
         {//优先处理道具的球
             auto handle = PROPS_TO_HANDLE.at(flying_bubble->getBubbleType());
@@ -451,7 +453,14 @@ namespace bubble_second {
     void bubble_second::GamePlayController::disposeContactWindmillBorder(cocos2d::Node * border_node, cocos2d::Node * other_node)
     {
         assert(dynamic_cast<BaseBubble*>(other_node));
-        dynamic_cast<BaseBubble*>(other_node)->bubbleEliminate();
+        if (dynamic_cast<BaseBubble*>(other_node)->isShootBubble())
+        {
+            GameAirBubbleManager::getInstance()->cutPrepareBubbleAirNumble();
+        }
+        //dynamic_cast<BaseBubble*>(other_node)->bubbleEliminate();
+        BubbleVector bubbles;
+        bubbles.pushBack(dynamic_cast<BaseBubble*>(other_node));
+        cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_BUBBLE_ELIMINATED, &bubbles);
         //CCLOG("%d", GameScoreController::getInstance()->prepare_bubble_in_air_numble_);
         this->disposeCheckGameDefeat();
     }
@@ -506,6 +515,11 @@ namespace bubble_second {
     void GamePlayController::disposeBuffBubbleDown(BaseBubble* bubble)
     {
         bubble_map_->disposeBuffBubbleDown(bubble);
+    }
+
+    void GamePlayController::disposeRainbowSealBubbleEliminate(const cocos2d::Vec2& bubble_index)
+    {
+        bubble_map_->disposeRainbowSealBubbleEliminate(bubble_index);
     }
 
     void GamePlayController::disposeDarkCloudBubble(const cocos2d::Vec2& contact_index)

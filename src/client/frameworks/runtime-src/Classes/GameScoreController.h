@@ -52,12 +52,8 @@ namespace bubble_second {
         bool isBubbleUseCountEnable();
         //获取分数
         int getTotalScore();
-        //发射小球在空中数
-        void addPrepareBubbleAirNumble();
-        void cutPrepareBubbleAirNumble();
-        void dispatchUpdateCompletedTaskEvent();
 
-        int prepare_bubble_in_air_numble_;
+        void dispatchUpdateCompletedTaskEvent();
     private:
         //void addEventListenerCustom();
         //总得分初始化
@@ -72,7 +68,7 @@ namespace bubble_second {
         void dispatchUpdateScoreEvent();
         void dispatchUpdateBubbleUseCount();
 
-        bool isNoShootBubbleInAir();
+        
     private:
         GameScoreController();
     private:

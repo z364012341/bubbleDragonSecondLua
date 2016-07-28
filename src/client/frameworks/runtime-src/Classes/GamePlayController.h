@@ -69,6 +69,8 @@ namespace bubble_second {
         void prepareBubbleChangeType(BaseBubble* pre_second_bubble);
         //处理特殊泡泡的掉落
         void disposeBuffBubbleDown(BaseBubble* bubble);
+        //多重封印消除时会掉落周围一圈小球
+        void disposeRainbowSealBubbleEliminate(const cocos2d::Vec2& bubble_index);
         //处理周围的氤氲泡泡
         void disposeDarkCloudBubble(const cocos2d::Vec2& contact_index);
         //对空中泡泡进行检测

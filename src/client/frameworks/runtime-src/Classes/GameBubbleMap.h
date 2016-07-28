@@ -33,7 +33,9 @@ namespace bubble_second {
         BubbleVector disposeContactBombBombBubble(const cocos2d::Vec2& contact_index);
         //处理buff泡泡掉落
         void disposeBuffBubbleDown(BaseBubble* bubble);
-        //处理氤氲泡泡
+        //处理多重封印消除外圈掉落
+        void disposeRainbowSealBubbleEliminate(const cocos2d::Vec2& bubble_index);
+        //处理阴云泡泡
         void disposeDarkCloudBubble(const cocos2d::Vec2& contact_index);
         //处理使用彩球炸弹
         BubbleVector disposeColorBombBubble(const cocos2d::Vec2& colorbomb_index);

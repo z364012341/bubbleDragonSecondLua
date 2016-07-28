@@ -14,9 +14,9 @@ const std::map<std::string, std::string> COMMODITY_TO_CSB_PATH = {
     { BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY , "AddSpecialCommodity.csb" }
 };
 const std::map<std::string, int> COMMODITY_TO_UNLOCK_STAGE_INDEX = {
-    { BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY , 20 },
-    { BUBBLE_AIMING_LINE_PROP_KEY , 10 },
-    { BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY , 15 }
+    { BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY , 21 },
+    { BUBBLE_AIMING_LINE_PROP_KEY , 11 },
+    { BUBBLE_ADD_SPECIAL_BUBBLE_PROP_KEY , 16 }
 };
 const std::map<std::string, float> COMMODITY_TO_ANIMATION_END_TIME = {
     { ADD_BUBBLE_NUMBLE_ANIMATION_NAME , 0.92f },

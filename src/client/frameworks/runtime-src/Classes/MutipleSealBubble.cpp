@@ -3,6 +3,7 @@
 #include "BubbleFactory.h"
 #include "GameNoopAnimationComponent.h"
 #include "GameAudioController.h"
+#include "GamePlayController.h"
 const std::string MUTIPLE_SEAL_3_BUBBLE_ARMATURE_NAME = "wa";
 const std::string MUTIPLE_SEAL_7_BUBBLE_ARMATURE_NAME = "xiongda";
 const std::string MUTIPLE_SEAL_1_BUBBLE_ARMATURE_NAME = "1gebianfu";

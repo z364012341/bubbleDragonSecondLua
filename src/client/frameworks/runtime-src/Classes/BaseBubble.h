@@ -93,6 +93,8 @@ namespace bubble_second {
         virtual bool isEliminateByProperty();
         //获取瞄准线的图片的路径
         virtual std::string getBubbleSightingDevicePointPath();
+        //是否是发射小球
+        bool isShootBubble();
     protected:
         //重载比较运算符以便使用std::find
         //bool operator==(const BaseBubble& bubble);
@@ -108,7 +110,7 @@ namespace bubble_second {
         void setSupensionPoint(bool flag);
         //设置发射小球flag
         void setShootBubble(bool flag);
-        bool isShootBubble();
+
     protected:
         std::map<std::string, std::function<void(const cocos2d::Vec2& point)>> key_to_handle_effect_;
     private:
