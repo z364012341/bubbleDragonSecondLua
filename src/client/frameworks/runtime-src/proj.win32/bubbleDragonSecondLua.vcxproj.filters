@@ -499,6 +499,7 @@
       <Filter>Classes\lua</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameUnitPriceManager.h" />
+    <ClInclude Include="..\Classes\GameExitAlert.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -970,6 +971,7 @@
       <Filter>Classes\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameUnitPriceManager.cpp" />
+    <ClCompile Include="..\Classes\GameExitAlert.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

@@ -209,18 +209,19 @@ namespace bubble_second {
         //award_node->addChild(award_sp);
         this->addChild(award_node);
         //cocos2d::ui::TextBMFont* numble_label = SpriteTextureController::getInstance()->createWhitePurpleFnt(award_data.begin()->second.asString());
-        //numble_label->setScale(0.75f);
+        award_node->setScale(1.5f);
         //numble_label->setPositionY(-80.0f);
         //award_node->addChild(numble_label);
         award_node->setPosition(node->getPosition());
         ////award_node->setOpacity(0);
         award_node->setVisible(false);
+        float scale_save = award_node->getScale();
         award_node->setScale(0.1f);
         award_node->runAction(cocos2d::Sequence::create(cocos2d::DelayTime::create(0.79f),
             cocos2d::CallFunc::create([=]() {award_node->setVisible(true); }),
-            cocos2d::ScaleTo::create(0.2f, 1.2f),
+            cocos2d::ScaleTo::create(0.2f, 1.2f*scale_save),
             cocos2d::DelayTime::create(0.02f),
-            cocos2d::ScaleTo::create(0.05f, 1.0f),
+            cocos2d::ScaleTo::create(0.05f, scale_save),
             cocos2d::DelayTime::create(1.5f),
                 cocos2d::CallFunc::create([=]() {
                     award_node->removeFromParent();

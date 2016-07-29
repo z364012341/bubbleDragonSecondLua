@@ -3,6 +3,7 @@
 #include "EnterPropsViewManager.h"
 #include "GamePlayController.h" 
 #include "BubbleSecondConstant.h"
+#include "UserDataManager.h"
 const int MAIN_SIGHTING_DEVICE_TARGET_ID = 0;
 //const std::string SIGHTING_POINTS_VISIBLE_SCHEDULE_KEY = "sighting_points_visible_schedule_key";
 namespace bubble_second {
@@ -24,7 +25,7 @@ namespace bubble_second {
     {
         this->setTargetID(MAIN_SIGHTING_DEVICE_TARGET_ID);
         this->setVisible(false);
-        int device_numble_max = EnterPropsViewManager::getInstance()->getPropsSwitchEnable(AIMING_LINE_COMMODITY_NAME) ?
+        int device_numble_max = EnterPropsViewManager::getInstance()->getPropsSwitchEnable(BUBBLE_AIMING_LINE_PROP_KEY) ?
             BUBBLE_SIGHTING_DEVICE_TOTAL : BUBBLE_SIGHTING_DEVICE_UNUSED_PROPS_TOTAL;
         BubbleSightingDevice* last_device = this;
         for (int i = MAIN_SIGHTING_DEVICE_TARGET_ID+1; i <= device_numble_max; i++)

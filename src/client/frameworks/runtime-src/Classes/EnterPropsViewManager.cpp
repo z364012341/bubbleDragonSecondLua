@@ -22,7 +22,7 @@ namespace bubble_second {
         cocos2d::Node* node = cocos2d::Node::create();
         EnterGamePropsView* sight_props = AimingLineCommodity::create();
         sight_props->setPositionX(ENTER_GAME_PROPS_VIEW_LEFT_POS_X);
-        this->setPropsSwitch(sight_props->getName());
+        //this->setPropsSwitch(sight_props->getName());
         //sight_props->addMenuCallback([=](cocos2d::Ref*) {
         //    this->setPropsSwitch(sight_props->getName(), !this->getPropsSwitchEnable(sight_props->getName()));
         //});
@@ -31,7 +31,7 @@ namespace bubble_second {
         EnterGamePropsView* add_special_bubble_props = AddSpecialCommodity::create();
         //add_special_bubble_props->setPositionY(ENTER_GAME_PROPS_VIEW_LEFT_POS_Y);
         node->addChild(add_special_bubble_props);
-        this->setPropsSwitch(add_special_bubble_props->getName());
+        //this->setPropsSwitch(add_special_bubble_props->getName());
         //add_special_bubble_props->addMenuCallback([=](cocos2d::Ref*) {
         //    this->setPropsSwitch(add_special_bubble_props->getName(), !this->getPropsSwitchEnable(add_special_bubble_props->getName()));
         //});
@@ -39,7 +39,7 @@ namespace bubble_second {
         EnterGamePropsView* add_bubble_props = AddBubbleNumbleCommodity::create();
         add_bubble_props->setPositionX(-ENTER_GAME_PROPS_VIEW_LEFT_POS_X);
         node->addChild(add_bubble_props);
-        this->setPropsSwitch(add_bubble_props->getName());
+        //this->setPropsSwitch(add_bubble_props->getName());
         //add_bubble_props->addMenuCallback([=](cocos2d::Ref*) {
         //    this->setPropsSwitch(add_bubble_props->getName(), !this->getPropsSwitchEnable(add_bubble_props->getName()));
         //});
@@ -52,6 +52,10 @@ namespace bubble_second {
     }
     bool EnterPropsViewManager::getPropsSwitchEnable(const std::string & props)
     {
+        if (props_switch_.find(props) == props_switch_.end())
+        {
+            return false;
+        }
         return props_switch_.at(props);
     }
     int EnterPropsViewManager::getAddBubbleNumblePropsNumble()

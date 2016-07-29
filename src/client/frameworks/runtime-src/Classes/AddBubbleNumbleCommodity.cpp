@@ -44,7 +44,7 @@ namespace bubble_second {
             return false;
         }
         //this->setCostLabelStringWithKey(BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY);
-        this->setName(ADD_BUBBLE_NUMBLE_COMMODITY_NAME);
+        //this->setName(ADD_BUBBLE_NUMBLE_COMMODITY_NAME);
         return true;
     }
 }

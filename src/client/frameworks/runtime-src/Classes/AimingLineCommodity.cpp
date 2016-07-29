@@ -39,7 +39,7 @@ namespace bubble_second {
             return false;
         }
         //this->setCostLabelStringWithKey(BUBBLE_AIMING_LINE_PROP_KEY);
-        this->setName(AIMING_LINE_COMMODITY_NAME);
+        //this->setName(AIMING_LINE_COMMODITY_NAME);
         return true;
     }
 }

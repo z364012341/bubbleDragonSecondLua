@@ -19,6 +19,7 @@
 #include "GameStoreAlert.h"
 #include "GameSignBoardAlert.h"
 #include "GameNoviceGuideFactory.h"
+#include "GameExitAlert.h"
 const std::string GAME_STAGE_SELECTION_CSB_PATH = "GameStageSelectionLayer.csb";
 const std::string STAGE_SCROLLVIEW_NAME = "StageScrollView";
 const std::string STORE_ALERT_NAME = "STORE_ALERT_NAME";
@@ -305,14 +306,16 @@ namespace bubble_second {
         listener->onKeyPressed = [=](cocos2d::EventKeyboard::KeyCode code, cocos2d::Event*) {
             if (code == cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE)
             {
-                if (cocos2d::Node* alert = this->getChildByName(GAME_BASE_ALERT_NAME))
+                if (this->getChildByName("GameExitAlertName") != nullptr)
                 {
-                    alert->removeFromParent();
+                    return;
                 }
-                else
-                {
-                    cocos2d::Director::getInstance()->end();
-                }
+                    GameExitAlert* exit_alert = GameExitAlert::create();
+                    exit_alert->setName("GameExitAlertName");
+                    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+                    exit_alert->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+                    exit_alert->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+                    this->addChild(exit_alert);
             }
         };
         cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
@@ -474,20 +477,20 @@ namespace bubble_second {
         this->getSettingButton()->setVisible(enabled);
         csb_node_->getChildByName(SETTING_BUTTON_LINE_NAME)->setVisible(enabled);
     }
-    void GameStageSelectionScene::popEnterPropsNoviceGuideAlert(cocos2d::Node * alert)
-    {
-        if (alert == nullptr)
-        {
-            return;
-        }
-        if (alert_ != nullptr)
-        {
-            alert_->removeFromParent();
-        }
-        alert_ = alert;
-        cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-        alert_->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-        alert_->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
-        this->addChild(alert_);
-    }
+    //void GameStageSelectionScene::popEnterPropsNoviceGuideAlert(cocos2d::Node * alert)
+    //{
+    //    if (alert == nullptr)
+    //    {
+    //        return;
+    //    }
+    //    if (alert_ != nullptr)
+    //    {
+    //        alert_->removeFromParent();
+    //    }
+    //    alert_ = alert;
+    //    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+    //    alert_->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    //    alert_->setScale(SmartScaleController::getInstance()->getPlayAreaZoom());
+    //    this->addChild(alert_);
+    //}
 }

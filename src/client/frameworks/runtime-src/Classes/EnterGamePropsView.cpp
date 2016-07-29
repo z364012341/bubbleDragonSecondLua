@@ -8,6 +8,7 @@
 #include "StageDataManager.h"
 #include "GameUnitPriceManager.h"
 #include "GameAudioController.h"
+#include "SpriteTextureController.h"
 const std::map<std::string, std::string> COMMODITY_TO_CSB_PATH = {
     { BUBBLE_ADD_BUBBLE_NUMBLE_PROP_KEY , "AddBubbleNumbleCommodity.csb" },
     { BUBBLE_AIMING_LINE_PROP_KEY , "AimingLineCommodity.csb" },
@@ -75,7 +76,7 @@ namespace bubble_second {
         if (cost_tag_->getSelectedState())
         {
             cost_tag_->changeSelectedState();
-            EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag_->getSelectedState());
+            EnterPropsViewManager::getInstance()->setPropsSwitch(prop_key_, cost_tag_->getSelectedState());
             EnterPropsViewManager::getInstance()->cutPrePropsCost(cost_tag_->getCostNumble());
         }
         else if (UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY) - EnterPropsViewManager::getInstance()->getPrePropsCost() >= cost_tag_->getCostNumble())
@@ -83,7 +84,7 @@ namespace bubble_second {
             auto a = EnterPropsViewManager::getInstance()->getPrePropsCost();
             auto b = UserDataManager::getInstance()->getPropsNumbleWithKey(GAME_COIN_KEY);
             cost_tag_->changeSelectedState();
-            EnterPropsViewManager::getInstance()->setPropsSwitch(this->getName(), cost_tag_->getSelectedState());
+            EnterPropsViewManager::getInstance()->setPropsSwitch(prop_key_, cost_tag_->getSelectedState());
             EnterPropsViewManager::getInstance()->addPrePropsCost(cost_tag_->getCostNumble());
         }
     }
@@ -96,6 +97,7 @@ namespace bubble_second {
             auto data = GameUnitPriceManager::getInstance()->getPropUnitPriceData(prop_key_);
             UserDataManager::getInstance()->addPropsNumbleWithKey(data.begin()->first, data.begin()->second.asInt());
             this->buttonClickCallfunc(nullptr);
+            
         }
     }
 
@@ -103,7 +105,6 @@ namespace bubble_second {
     {
         cocos2d::Node* csb_node = cocos2d::CSLoader::createNode(COMMODITY_TO_CSB_PATH.at(prop_key_));
         this->addChild(csb_node);
-
         GamePropsCostTag* cost_tag = GamePropsCostTag::createWithKey(prop_key_);
         cost_tag->setScale(0.6f);
         cost_tag->setPosition(cocos2d::Vec2(0.0, -37.93f));
@@ -118,7 +119,9 @@ namespace bubble_second {
         }
         else
         {
-            this->addChild(GameButtonFactory::getInstance()->createUnlockButton());
+            csb_node->addChild(GameButtonFactory::getInstance()->createUnlockButton());
+            csb_node->getChildByName("prop_sp")->setVisible(false);
+            cost_tag->setVisible(false);
         }
     }
 }

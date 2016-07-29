@@ -236,6 +236,9 @@ namespace bubble_second {
             }
             this->setSkillEnergy(0); 
         });
+        this->getEventDispatcher()->addCustomEventListener(EVENT_END_CHARACTOR_BUY_CONTINUE, [=](cocos2d::EventCustom* event) {
+            this->setSkillEnergy(SKILL_ENERGY_NUMBLE_MAX);
+        });
     }
     void GameCharactorSkillButton::onExit()
     {
@@ -243,5 +246,6 @@ namespace bubble_second {
         this->getEventDispatcher()->removeEventListener(listerner_);
         this->getEventDispatcher()->removeCustomEventListeners(EVENT_CLEAR_SKILL_ENERGY);
         this->getEventDispatcher()->removeCustomEventListeners(EVENT_CUT_ELIMINATE_COMBO);
+        this->getEventDispatcher()->removeCustomEventListeners(EVENT_END_CHARACTOR_BUY_CONTINUE);
     }
 }

@@ -18,6 +18,12 @@ namespace bubble_second {
     public:
         CREATE_FUNC(GameStoreAlert);
         ~GameStoreAlert();
+        //切换到礼包
+        void selectedGiftItem();
+        //切换到砖石
+        void selectedDiamonItem();
+        //切换到道具
+        void selectedPropsItem();
     private:
         GameStoreAlert();
         bool init();
@@ -27,6 +33,7 @@ namespace bubble_second {
         void setSelectedItemVisibleFalse();
         //点击按钮切换显示的标签和listview
         void changeGoodsShelfDisplay(cocos2d::Node* tag_item, cocos2d::ui::Button* tag_button);
+
     private:
         cocos2d::Node* gift_item_ = nullptr;
         cocos2d::Node* diamond_item_ = nullptr;

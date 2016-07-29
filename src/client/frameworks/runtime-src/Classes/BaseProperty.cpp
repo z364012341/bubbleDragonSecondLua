@@ -65,7 +65,7 @@ namespace bubble_second {
 
     void BaseProperty::touchItem()
     {
-        if (!this->isPropertyEnabled())
+        if (!this->isPropertyEnabled() && !this->itemIsUsing())
         {
             return;
         }
@@ -181,9 +181,12 @@ namespace bubble_second {
         if (UserDataManager::getInstance()->getStagePassCount() < GAME_PROPS_UNLOCK_STAGE_INDEX.at(property_key_))
         {//µÀ¾ß¼ÓËø
             cocos2d::ui::Button* unlock_button = GameButtonFactory::getInstance()->createUnlockButton();
+            unlock_button->setScale(0.75f);
             this->addChild(unlock_button, UI_ZORDER_NOVICE_GUIDE_ALERT);
             cocos2d::Size size = this->getContentSize();
             unlock_button->setPosition(cocos2d::Vec2(size.width / 2, size.height / 2));
+            icon_sprite_->setVisible(false);
+            props_numble_label_->setVisible(false);
             return;
         }
         auto listener = cocos2d::EventListenerTouchOneByOne::create();

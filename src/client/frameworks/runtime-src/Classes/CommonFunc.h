@@ -13,6 +13,7 @@ public:
     static bool writeToNativePlace(char *pContent, const char * pFileName);
     static void split(std::vector<std::string>& array, std::string str, std::string pattern);
 	static std::string getCurTimeStr();
+    static cocos2d::Vec2 getVisibleSizeCenterPoint();
 };
 
 

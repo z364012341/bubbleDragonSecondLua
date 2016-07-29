@@ -14,6 +14,8 @@
 #include "StageDataManager.h"
 #include "UserDataManager.h"
 #include "GameAudioController.h"
+#include "GameStoreAlert.h"
+//#include "CommonFunc.h"
 const std::string ENTER_GAME_ALERT_CSB = "EnterGameAlert.csb";
 const std::string ENTER_GAME_ALERT_START_NODE_NAME = "startMenuNode";
 const std::string ENTER_GAME_ALERT_CLOSE_BUTTON_NAME = "closeButton";
@@ -94,6 +96,13 @@ namespace bubble_second {
                 GameAudioController::getInstance()->playGameStartEffect();
                 //UserDataManager::getInstance()->saveStrengthLastTime();
             }
+            else
+            {
+                GameStoreAlert* alert = GameStoreAlert::create();
+                this->addChild(alert);
+                //alert->setPosition(CommonFunc::getVisibleSizeCenterPoint());
+                alert->selectedPropsItem();
+            }
         });
     }
 
@@ -152,8 +161,7 @@ namespace bubble_second {
     void EnterGameAlert::onEnter()
     {
         cocos2d::Node::onEnter();
-        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CLICK_START_BUTTON_END, [=](cocos2d::EventCustom*) {
-            
+        cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_CLICK_START_BUTTON_END, [=](cocos2d::EventCustom*) {           
             cocos2d::Scene* scene = GameScene::createScene();
             cocos2d::Director::getInstance()->replaceScene(scene);
         });

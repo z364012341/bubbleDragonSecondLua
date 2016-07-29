@@ -4,20 +4,20 @@
 <plist version="1.0">
     <dict>
         <key>strength</key>
-        <integer>3</integer>
-        <key>game_sign_day_numble</key>
         <integer>2</integer>
+        <key>game_sign_day_numble</key>
+        <integer>3</integer>
         <key>md5</key>
-        <string>3f25283a19a4d8dc59034dde5f3a7b61</string>
+        <string>734cd64ae9650c53f0d8f7b37612ff32</string>
         <key>coin</key>
-        <integer>380848</integer>
+        <integer>356848</integer>
         <key>search</key>
         <integer>1</integer>
         <key>staves</key>
         <integer>1</integer>
         <key>woodenHammer</key>
-        <integer>2</integer>
+        <integer>1</integer>
         <key>diamond</key>
-        <integer>9400</integer>
+        <integer>9370</integer>
     </dict>
 </plist>

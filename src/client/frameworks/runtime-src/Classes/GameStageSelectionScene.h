@@ -74,7 +74,7 @@ namespace bubble_second {
         void settingButtonFunc(cocos2d::Ref* target);
         void setSettingButtonEnabled(bool enabled);
         //弹出进场道具新手引导
-        void popEnterPropsNoviceGuideAlert(cocos2d::Node* alert);
+        //void popEnterPropsNoviceGuideAlert(cocos2d::Node* alert);
     private:
         float scrollview_bottom_height_ = 0.0f;
         cocos2d::Vector<GameStageSelectionCell*> cell_vector_;

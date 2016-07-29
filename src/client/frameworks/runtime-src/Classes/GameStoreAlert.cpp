@@ -35,7 +35,7 @@ namespace bubble_second {
         gift_button_ = dynamic_cast<cocos2d::ui::Button *>(csb_node->getChildByName("gift_button"));
         assert(gift_button_);
         gift_button_->addClickEventListener([=](cocos2d::Ref*) {
-            this->changeGoodsShelfDisplay(gift_item_, gift_button_);
+            this->selectedGiftItem();
         });
 
         diamond_item_ = csb_node->getChildByName("diamond_item");
@@ -46,7 +46,7 @@ namespace bubble_second {
         diamond_button_ = dynamic_cast<cocos2d::ui::Button *>(csb_node->getChildByName("diamond_button"));
         assert(diamond_button_);
         diamond_button_->addClickEventListener([=](cocos2d::Ref*) {
-            this->changeGoodsShelfDisplay(diamond_item_, diamond_button_);
+            this->selectedDiamonItem();
         });
 
         props_item_ = csb_node->getChildByName("props_item");
@@ -57,7 +57,7 @@ namespace bubble_second {
         props_button_ = dynamic_cast<cocos2d::ui::Button *>(csb_node->getChildByName("props_button"));
         assert(props_button_);
         props_button_->addClickEventListener([=](cocos2d::Ref*) {
-            this->changeGoodsShelfDisplay(props_item_, props_button_);
+            this->selectedPropsItem();
         });
 
         cocos2d::ui::Button* close_button = dynamic_cast<cocos2d::ui::Button *>(csb_node->getChildByName("closeButton"));
@@ -101,6 +101,21 @@ namespace bubble_second {
         this->setSelectedItemVisibleFalse();
         tag_item->setVisible(true);
         tag_button->setVisible(false);
+    }
+
+    void GameStoreAlert::selectedGiftItem()
+    {
+        this->changeGoodsShelfDisplay(gift_item_, gift_button_);
+    }
+
+    void GameStoreAlert::selectedDiamonItem()
+    {
+        this->changeGoodsShelfDisplay(diamond_item_, diamond_button_);
+    }
+
+    void GameStoreAlert::selectedPropsItem()
+    {
+        this->changeGoodsShelfDisplay(props_item_, props_button_);
     }
 
 
